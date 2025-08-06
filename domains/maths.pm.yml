@@ -1,0 +1,159 @@
+domain_url: "https://maths.pm"
+
+domain_specific_metatags:
+  # ESSENTIAL META TAGS - GENERIC (same across all pages)
+  viewport: "width=device-width, initial-scale=1.0"
+  theme-color: "#FFFFFF"
+  charset: "UTF-8"
+  
+  # BUSINESS/SITE IDENTITY META TAGS - GENERIC
+  subject: "Enseignement des mathématiques et logiciels libres (Open Source)"
+  copyright: "SAS POINTCARRE.APP"
+  language: "FR"
+  Classification: "Education"
+  author: "Maths.pm, contact@pointcarre.app"
+  designer: "SAS POINTCARRE.APP"
+  reply-to: "contact@pointcarre.app"
+  owner: "SAS POINTCARRE.APP"
+  directory: "education"
+  coverage: "Europe"
+  distribution: "Europe"
+  rating: "General"
+  revisit-after: "7 days"
+  target: "all"
+  
+  # MOBILE & iOS TAGS - GENERIC
+  HandheldFriendly: "True"
+  MobileOptimized: "320"
+  mobile-web-app-capable: "yes"
+  apple-mobile-web-app-capable: "yes"
+  apple-touch-fullscreen: "yes"
+  apple-mobile-web-app-status-bar-style: "black"
+  format-detection: "telephone=no"
+  
+  # SITE METADATA - GENERIC
+  medium: "website"
+  syndication-source: "https://maths.pm"
+  original-source: "https://maths.pm"
+  
+  # VERIFICATION & ANALYTICS - GENERIC (add your actual codes)
+  # verify-v1: "your-verification-code"
+  # y_key: "your-bing-key"
+  # google-site-verification: "your-google-verification"
+  
+  # CACHE CONTROL - GENERIC
+  http-equiv-Expires: "0"
+  http-equiv-Pragma: "no-cache"
+  http-equiv-Cache-Control: "no-cache"
+  http-equiv-imagetoolbar: "no"
+  http-equiv-x-dns-prefetch-control: "off"
+  
+  # SOCIAL MEDIA META TAGS - GENERIC (site-wide)
+  og:site_name: "Maths.pm"
+  # fb:page_id: "your-facebook-page-id"
+  # application-name: "Maths.pm"
+  
+  # BUSINESS CONTACT INFO - GENERIC
+  og:email: "contact@pointcarre.app"
+  # og:phone_number: "+33-XXX-XXX-XXX"
+  
+  # BUSINESS LOCATION - GENERIC (update with actual coordinates)
+  og:latitude: "48.8566"
+  og:longitude: "2.3522"
+  og:street-address: "Your Address"
+  og:locality: "Paris"
+  og:region: "Île-de-France"
+  og:postal-code: "75001"
+  og:country-name: "France"
+  
+  # SOCIAL MEDIA ADMIN - GENERIC
+  # fb:admins: "your-facebook-admin-id"
+  
+  # TWITTER - GENERIC
+  twitter:site: "@mathspm"
+  twitter:site_name: "Maths.pm"
+  
+  # MOBILE APPS - GENERIC (if you have apps)
+  # twitter:app:id:iphone: "AppStoreID"
+  # twitter:app:id:ipad: "AppStoreID"
+  # twitter:app:id:googleplay: "GooglePlayID"
+  # twitter:app:name:iphone: "Maths.pm"
+  # twitter:app:name:ipad: "Maths.pm"
+  # twitter:app:name:googleplay: "Maths.pm"
+  
+  # GEOGRAPHIC - GENERIC
+  ICBM: "48.8566, 2.3522"
+  geo.region: "FR-IDF"
+  geo.placename: "Paris"
+  
+  # TECHNICAL - GENERIC
+  generator: "HTML5"
+  ResourceLoaderDynamicStyles: ""
+
+
+
+
+index_view_specific_metatags:
+
+  # PAGE-SPECIFIC META TAGS - UNIQUE per page
+  title: "Maths.pm - Logiciels libres pour les enseignants de mathématiques"
+  description: "Plateforme d'enseignement des mathématiques pour le secondaire avec des cours interactifs, exercices et ressources pédagogiques libres. Aucune donnée collectée."
+  keywords: "mathématiques, enseignement, collège, lycée, cours, exercices, pédagogie, open source"
+  
+  # SEO SPECIFIC - PAGE LEVEL
+  robots: "index, follow"
+  googlebot: "index, follow"
+  revised: "Jul. 17, 2025, 10:00 am"
+  abstract: "Plateforme éducative pour l'enseignement des mathématiques avec génération automatique d'exercices et de sujets d'examen."
+  topic: "Enseignement des mathématiques"
+  summary: "Ressources pédagogiques mathématiques pour professeurs : exercices, sujets d'examen et outils Open Source."
+  url: "https://maths.pm/"
+  identifier-URL: "https://maths.pm/"
+  pagename: "Accueil - Ressources mathématiques"
+  category: "Education"
+  date: "Jul. 17, 2025"
+  search_date: "2025-07-17"
+  subtitle: "Ressources pédagogiques mathématiques Open Source"
+  pageKey: "maths-pm-home"
+  
+  # DUBLIN CORE - PAGE SPECIFIC
+  DC.title: "Maths.pm - Ressources pédagogiques mathématiques Open Source"
+  DC.creator: "Maths.pm, contact@pointcarre.app"
+  DC.subject: "Enseignement, Mathématiques, Pédagogie, Open Source"
+  
+  # SCHEMA.ORG - PAGE SPECIFIC
+  itemprop-name: "Maths.pm - Ressources mathématiques"
+  
+  # SOCIAL MEDIA - PAGE SPECIFIC
+  og:title: "Maths.pm - Ressources pédagogiques mathématiques"
+  og:description: "Plateforme éducative pour professeurs de mathématiques. Exercices et sujets générés automatiquement avec des technologies Open Source."
+  og:image: "https://maths.pm/static/images/maths-pm-social-card.jpg"
+  og:type: "website"
+  og:url: "https://maths.pm/"
+  
+  # TWITTER CARDS - PAGE SPECIFIC
+  twitter:card: "summary_large_image"
+  twitter:creator: "@mathspm"
+  twitter:title: "Maths.pm - Ressources pédagogiques mathématiques"
+  twitter:description: "Plateforme éducative pour professeurs de mathématiques. Exercices et sujets générés automatiquement."
+  twitter:image: "https://maths.pm/static/images/maths-pm-twitter-card.jpg"
+  twitter:image:alt: "Logo Maths.pm avec formules mathématiques"
+  twitter:url: "https://maths.pm/"
+  
+  # MOBILE APPS - PAGE SPECIFIC (if you have deep linking)
+  # twitter:app:url:iphone: "mathspm://home"
+  # twitter:app:url:ipad: "mathspm://home"
+  # twitter:app:url:googleplay: "mathspm://home"
+
+
+templating:
+  base_template: "base/main-alt.html"
+  footer_template: "domains/maths-pm/footers.html"
+  navbar_title: "Maths.pm"
+  button_primary_text: "Ressources"
+  button_primary_href: "/"
+  button_ghost_text: "Contact"
+  button_ghost_href: "/contact"
+
+# Backend settings are now configured per product in /products/ directory
+# This keeps the domain configuration clean and allows for better organization 

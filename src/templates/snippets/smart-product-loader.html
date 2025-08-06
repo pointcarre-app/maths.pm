@@ -1,0 +1,46 @@
+{# 
+🎯 SMART PRODUCT DEPENDENCY LOADER
+Automatically loads JS/CSS dependencies for the current product based on route name.
+
+Usage: {% include "snippets/smart-product-loader.html" %}
+
+How it works:
+1. Extracts the first path segment from the current URL (e.g., "/nagini/something" → "nagini")
+2. Finds the product with that name
+3. Loads any js_url or css_url from that product's backend_settings
+4. Only loads if the product has backend_settings
+
+Examples:
+- /nagini → loads nagini.js if nagini product has backend_settings.nagini.js_url
+- /sujets0 → loads sujets0 dependencies if they exist
+- /jupyterlite/lab → loads jupyterlite dependencies if they exist
+- / → loads nothing (homepage is not a product route)
+#}
+
+{% set path_segments = request.url.path.strip('/').split('/') %}
+{% set current_route = path_segments[0] if path_segments and path_segments[0] else '' %}
+
+{% if current_route %}
+  {% set matched_product = none %}
+  {% for product in products %}
+    {% if product.name == current_route %}
+      {% set matched_product = product %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if matched_product and matched_product.backend_settings %}
+    <!-- 🎯 Smart Product Loader: {{ matched_product.name }} (route: /{{ current_route }}) -->
+    {% for setting_key, setting_value in matched_product.backend_settings.items() %}
+      {% if setting_value.js_url %}<script src="{{ setting_value.js_url }}"></script>{% endif %}
+      {% if setting_value.css_url %}
+        <link rel="stylesheet" href="{{ setting_value.css_url }}" />
+      {% endif %}
+    {% endfor %}
+    <!-- ✅ Loaded dependencies for {{ matched_product.name }} -->
+  {% else %}
+    <!-- ℹ️ No backend dependencies for route: /{{ current_route }} -->
+  {% endif %}
+{% else %}
+  <!-- ℹ️ Homepage route - no product dependencies loaded -->
+{% endif %}

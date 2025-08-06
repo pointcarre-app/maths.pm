@@ -1,0 +1,45 @@
+<header class="navbar bg-base-100 shadow-sm border-b border-base-200">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
+      </div>
+      <ul tabindex="0"
+          class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a href="{{ request.url_for('index') }}">Accueil</a></li>
+        <li><a href="{{ request.url_for('index') }}#apropos">À propos</a></li>
+        <li><a href="{{ request.url_for('index') }}#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+        <span class="text-primary-content font-bold text-sm">π</span>
+      </div>
+      <a href="{{ request.url_for('index') }}" class="text-xl font-bold">{{ site_name }}</a>
+    </div>
+  </div>
+
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      <li><a href="{{ request.url_for('index') }}">Accueil</a></li>
+      <li><a href="{{ request.url_for('index') }}#apropos">À propos</a></li>
+      <li><a href="{{ request.url_for('index') }}#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="navbar-end gap-2">
+    <button id="theme-toggle" class="btn btn-ghost btn-circle">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+      </svg>
+    </button>
+    <a href="{{ gitlab_url }}" target="_blank" class="btn btn-outline btn-sm">
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 01-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 014.82 2a.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0118.6 2a.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.51L23 13.45a.84.84 0 01-.35.94z" />
+      </svg>
+      GitLab
+    </a>
+  </div>
+</header>

@@ -1,0 +1,41 @@
+name: teachers
+title_html: Teachers
+# is_hidden: true
+is_beta: true
+subtitle_html: Moteur de calcul formel
+description: Un moteur de calcul formel qui permet de générer, résoudre, et corriger des exercices à forte composante mathématique.
+local_path: /teachers
+source_link: https://framagit.org/your-org/pca-teacher
+color: info
+figure_svg: teachers-figure-svg.html
+classes_formatted:
+  - "🇫🇷"
+tags:
+  - education
+  - maths
+  - symbolic
+  - calculus
+  - engine
+domains:
+  - maths.pm
+
+owner_rdb: "Your Organization"
+owner_url: "https://example.org"
+
+# Backend settings specific to Teachers
+backend_settings:
+  teachers:
+    endpoint: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/"
+    files_to_load:
+      - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/__init__.py"
+        path: "teachers/__init__.py"
+      - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/generator.py"
+        path: "teachers/generator.py"
+      - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/maths.py"
+        path: "teachers/maths.py"
+      - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/formatting.py"
+        path: "teachers/formatting.py"
+      - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/corrector.py"
+        path: "teachers/corrector.py"
+      - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/defaults.py"
+        path: "teachers/defaults.py" 

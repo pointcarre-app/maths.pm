@@ -1,0 +1,282 @@
+/* ============================== Main Component ============================== */
+pronoia-sujets-0-qcm-brick {
+  display: block;
+  display: flex;
+  flex-direction: column;
+  /* height: calc(100vh - 128px); */
+  border-radius: var(--radius-box);
+  background-color: var(--color-base-100) !important;
+}
+
+@media (max-width: 768px) {
+  pronoia-sujets-0-qcm-brick {
+    /* Navbar and dock*/
+    /* height: calc(100vh - 64px - 64px); */
+  
+    overflow: scroll;
+  }
+}
+
+@media (max-width: 640px) {
+  pronoia-sujets-0-qcm-brick {
+    position: relative;
+  }
+}
+
+/* ============================== Chat Section ============================== */
+pronoia-sujets-0-qcm-brick .chat-section {
+  /* Margin top of title, title, margin bottom of title, half of mathfield, keyboard */
+  height: calc(100vh - 1rem - 48px - 1rem - 55px / 2 - 252px);
+  overflow: scroll;
+  /* border: 2px solid var(--color-base-300); */
+  border-radius: var(--radius-box);
+}
+
+/* ============================== Main Card ============================== */
+pronoia-sujets-0-qcm-brick .main-card-header {
+}
+
+@media (max-width: 767px) {
+  pronoia-sujets-0-qcm-brick .main-card-header {
+    display: none;
+  }
+}
+
+@media (min-width: 640px) {
+  pronoia-sujets-0-qcm-brick .main-card {
+    border-radius: var(--radius-box);
+    /* border: 1px solid var(--color-base-200); */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    /* max-height: 550px; */
+    overflow: scroll;
+  }
+}
+
+@media (max-width: 640px) {
+  pronoia-sujets-0-qcm-brick .main-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+/* ============================== Exercise Container ============================== */
+@media (min-width: 640px) {
+  pronoia-sujets-0-qcm-brick .exercise-container {
+    height: auto;
+    /* padding-bottom: 5rem !important; */
+  }
+}
+
+/* ============================== Input Section ============================== */
+
+
+pronoia-sujets-0-qcm-brick .input-section {
+  /* margin-top: 3rem; */
+  position: fixed;
+  margin:auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  max-width: 580px;
+}
+@media (min-width: 640px) {
+  pronoia-sujets-0-qcm-brick .input-section {
+    /* padding-bottom: 1rem; */
+    /* padding-left: 1rem;
+    padding-right: 1rem; */
+    box-shadow: none;
+
+  }
+}
+
+@media (max-width: 640px) {
+  pronoia-sujets-0-qcm-brick .input-section {
+    position: fixed;
+    bottom: 64px;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    /* background-color: var(--color-base-100); */
+    /* border-top: 1px solid var(--color-base-200); */
+    /* box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1); */
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+  }
+}
+
+/* ============================== Chat Components ============================== */
+pronoia-sujets-0-qcm-brick .chat {
+  column-gap: 1.5rem;
+}
+
+pronoia-sujets-0-qcm-brick .chat-bubble {
+  max-width: 95%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+pronoia-sujets-0-qcm-brick .chat-bubble {
+  background-color: var(--color-base-200) !important; 
+}
+
+/* Enhanced chat bubble styling
+pronoia-sujets-0-qcm-brick .chat-bubble-success {
+  background-color: var(--color-success);
+  color: var(--color-success-content);
+}
+
+pronoia-sujets-0-qcm-brick .chat-bubble-error {
+  background-color: var(--color-error);
+  color: var(--color-error-content);
+} */
+
+/* Answer feedback animations */
+pronoia-sujets-0-qcm-brick .answer-feedback-bubble,
+pronoia-sujets-0-qcm-brick .feedback-message {
+  animation: slideInUp 0.5s ease forwards;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  pronoia-sujets-0-qcm-brick .chat {
+    column-gap: 0.05rem;
+  }
+}
+
+@media (min-width: 640px) {
+  pronoia-sujets-0-qcm-brick .chat-bubble {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+/* ============================== Action Buttons ============================== */
+/* Action buttons - thumb-friendly */
+pronoia-sujets-0-qcm-brick .action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+pronoia-sujets-0-qcm-brick .action-buttons .btn {
+  min-height: 44px;
+  flex: 1;
+  min-width: 100px;
+}
+
+@media (min-width: 640px) {
+  pronoia-sujets-0-qcm-brick .action-buttons .btn {
+    flex: none;
+    min-width: 120px;
+  }
+}
+
+/* ============================== Stats Badges ============================== */
+/* Stats badges in header */
+pronoia-sujets-0-qcm-brick .question-stats {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ============================== Math Field Components ============================== */
+pronoia-sujets-0-qcm-brick math-field::part(menu-toggle),
+pronoia-sujets-0-qcm-brick math-field::part(virtual-keyboard-toggle) {
+  display: none;
+}
+
+pronoia-sujets-0-qcm-brick .math-field-container {
+  position: relative;
+  min-height: 3.5rem;
+  max-height: 12rem;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+}
+
+pronoia-sujets-0-qcm-brick .math-field-buttons {
+  position: absolute;
+  right: 8px;
+  top: 12px;
+  z-index: 10;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+pronoia-sujets-0-qcm-brick .math-field-submit-btn,
+pronoia-sujets-0-qcm-brick .math-field-keyboard-btn {
+  /* Shared button styles */
+}
+
+pronoia-sujets-0-qcm-brick .math-field-keyboard-btn {
+  /* Specific styles for keyboard toggle button */
+  transition: all 0.2s ease;
+}
+
+pronoia-sujets-0-qcm-brick .math-field-keyboard-btn:hover {
+  transform: scale(1.05);
+}
+
+pronoia-sujets-0-qcm-brick .math-field-submit-btn {
+  /* Keep existing submit button styles */
+}
+
+pronoia-sujets-0-qcm-brick .math-field-with-button {
+  padding-right: 80px; /* Increased to accommodate both buttons */
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--color-base-200);
+  /* border-top: 2px solid var(--color-neutral);
+  border-left: 2px solid var(--color-neutral);
+  border-right: 2px solid var(--color-neutral);
+  border-bottom: 2px solid var(--color-neutral); */
+  border-width: 1px;
+  /* border-color: transparent; */
+  border-radius: var(--radius-selector) !important;
+  padding-left: 1rem;
+  border-color: var(--color-base-300) !important;
+  outline-color: var(--color-base-300) !important;
+  outline-width: 1px !important;
+}
+
+/* ============================== Focus Improvements ============================== */
+/* Focus & hover improvements */
+/* 
+pronoia-sujets-0-qcm-brick .math-field-with-button:hover,
+pronoia-sujets-0-qcm-brick .math-field-with-button:focus-visible,
+pronoia-sujets-0-qcm-brick .math-field-with-button:focus,
+pronoia-sujets-0-qcm-brick .math-input:focus-within {
+  border-color: var(--color-neutral) !important;
+  outline-color: var(--color-neutral) !important;
+  box-shadow: unset !important
+}  */
+
+
+pronoia-sujets-0-qcm-brick .math-field-with-button:hover,
+pronoia-sujets-0-qcm-brick .math-field-with-button:focus-visible,
+pronoia-sujets-0-qcm-brick .math-field-with-button:focus,
+pronoia-sujets-0-qcm-brick .math-input:focus-within {
+  border-color: var(--color-secondary) !important;
+  outline-color: var(--color-secondary) !important;
+  outline-width: 1px !important;
+  box-shadow: unset !important;
+  border-radius: var(--radius-selector) !important;
+  border-width: 1px !important;
+  /* border-top-left-radius: var(--radius-selector) !important;
+  border-top-right-radius: var(--radius-selector) !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important; */
+}  

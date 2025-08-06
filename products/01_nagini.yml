@@ -1,0 +1,32 @@
+name: nagini
+title_html: Nagini
+subtitle_html: Python dans le navigateur
+description: Exécuter des scripts Python dans le navigateur, installle des librairies, passer des arguments en JS, utiliser des inputs, etc.)
+local_path: /nagini
+source_link: https://github.com/your-org/nagini
+color: accent
+figure_svg: nagini-figure-svg.html
+classes_formatted:
+  - "🇫🇷"
+tags:
+  - python
+  - pyodide
+  - jupyter
+  - browser
+  - execution
+domains:
+  - maths.pm
+
+owner_rdb: "Your Organization"
+owner_url: "https://example.org"
+
+# Backend settings specific to Nagini
+# TODO : thinking about which ones you really need
+backend_settings:
+  nagini:
+    endpoint: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/"
+    js_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js"
+    pyodide_worker_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js" 
+
+
+

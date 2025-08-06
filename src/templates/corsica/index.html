@@ -1,0 +1,53 @@
+{% extends "base/main-alt.html" %}
+
+{% block view_specific_metatags %}
+  <title>python.corsica</title>
+{% endblock view_specific_metatags %}
+
+{% block modal_info_content %}
+  {% include "sujets0/modal-info-content.html" %}
+{% endblock modal_info_content %}
+
+
+{% block content %}
+  <div class="padding-alt-security max-w-4xl mx-auto mb-14 mt-8">
+    <div class="bg-base-200 grid grid-cols-1 md:grid-cols-[60%_40%] gap-0 py-8">
+      <div class="pl-0 md:pl-12  md:flex items-center text-center md:text-left">
+        <h1 style="font-family: var(--font-handwritten)">
+          <span class="text-2xl md:text-3xl text-base-content/60 mb-2 hidden md:block">Matematica in l'Isula di a Bellezza</span>
+          <hr class="mb-4 hidden md:block border-[0.1px] border-base-content/60" />
+          <span class="text-4xl md:text-5xl block mb-6 md:mb-0 text-primary font-semibold">Maths.Corsica</span>
+        </h1>
+      </div>
+      <div class="mx-auto max-h-[375px]">
+        {% set width = "122" %}
+        {% set height = "243" %}
+        {% include "corsica/corsica-wikimedia.html" %}
+      </div>
+      <div class="mt-4 text-2xl text-center md:text-3xl text-base-content/60 mb-2 block md:hidden"
+           style="font-family: var(--font-handwritten)">Matematica in l'Isula di a Bellezza</div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-4xl mx-auto mb-12 mt-8">
+      <button class="btn btn-outline">
+        {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
+          <rect x="14" y="2" width="8" height="8" rx="1" />
+        </svg> #}
+        <span style="font-weight: 400;">Python : statistiques & géographie corse</span>
+      </button>
+      <button class="btn btn-outline">
+        {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
+          <rect x="14" y="2" width="8" height="8" rx="1" />
+        </svg> #}
+        <span style="font-weight: 400;">Maths : trigonométrie & phares corses</span>
+      </button>
+
+    </div>
+
+    <div class="">
+      <div class="space-y-6"></div>
+    </div>
+  </div>
+{% endblock content %}

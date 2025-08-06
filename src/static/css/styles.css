@@ -1,0 +1,780 @@
+/* TODO : wtf ? */
+/* Import component styles */
+@import url('./components/pronoia-sujets-0-qcm-brick.css');
+
+/**************** HTML & Body ****************/
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/**************** Scrollbar ****************/
+*::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+/**************** Hide default number input spinners ****************/
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
+
+/**************** Fonts  ****************/
+.font-body {
+  font-family: var(--font-body);
+}
+.font-heading {
+  font-family: var(--font-heading);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+.font-accent {
+  font-family: var(--font-accent);
+}
+.font-handwritten {
+  font-family: var(--font-handwritten);
+}
+
+.font-strong {
+  font-family: var(--font-strong);
+}
+
+
+
+
+
+
+
+
+/**************** Titles ****************/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+.stroke-base-content {
+  stroke: var(--text-base-content);
+}
+
+
+
+/**************** bg.html ****************/
+
+
+/* Media query for wide screens */
+@media (min-width: 1078px) {
+  .special-vertical-line {
+      opacity: 0.35 !important;
+      /* Make the special vertical line visible */
+  }
+
+  .regular-vertical-line {
+      opacity: 0 !important;
+      /* Hide the regular vertical line pattern */
+  }
+}
+
+
+/**************** forge-figure ****************/
+
+.forge-figure > svg {
+  border-top-left-radius: var(--radius-box) !important;
+  border-top-right-radius: var(--radius-box) !important;
+}
+
+
+/* Overrides tailwind / daisyUI */
+
+
+.main-navbar {
+  height: 3.5rem !important;
+  padding-left: 0!important;
+  padding-right: 0!important;
+  min-height: unset !important;
+}
+
+
+
+
+@media screen and (max-width: 639px) {
+  .main-navbar {
+    height: 2rem !important;
+    min-height: unset !important;
+  }
+
+
+
+  
+
+}
+
+.card > figure {
+  margin: 0;
+  padding: 0;
+  border-radius: inherit;
+}
+.card > figure > svg {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border-radius: inherit;
+}
+
+
+@media (min-width: 640px) {
+  .dock {
+    display: none;
+  }
+}
+
+
+
+#left-sidebar {
+  padding-left: 0.5rem !important;
+}
+
+#left-sidebar li,
+#right-sidebar li {
+    margin-bottom: 0rem !important;   
+}
+
+#left-sidebar li ul,
+#right-sidebar li ul {
+    margin-top: 0rem !important;
+    margin-bottom: 2rem !important;
+    margin-left: 0rem !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    padding-left: 1rem !important;
+}
+
+
+
+
+#left-sidebar *::before {
+  display: none !important;
+}
+
+#left-sidebar li > a,
+#right-sidebar li > a {
+    font-family: var(--font-heading);
+    font-size: 1.1rem !important;
+    margin-bottom: 0rem !important;
+    font-weight: 200 !important;
+    background-color: var(--color-base-200);
+    /* height: 2rem !important; */
+    padding-top: 0.15rem !important;
+    padding-bottom: 0.15rem !important;
+
+}
+
+#left-sidebar li > a:hover,
+#right-sidebar li > a:hover {
+  background-color: var(--color-base-300) !important;
+  color: var(--color-base-content) !important;
+}
+
+
+
+
+
+#left-sidebar li ul li a,
+#right-sidebar li ul li a {
+    margin-bottom: 0.5rem !important;
+    /* height: 1.9rem !important; */
+    /* font-family: var(--font-mono); */
+    font-family: var(--font-body);
+    margin-left: -1rem !important;
+    background-color: transparent !important;
+}
+
+
+#left-sidebar li ul li a,
+#right-sidebar li ul li a {
+  font-size: 0.9rem !important;
+}
+
+
+
+
+
+
+/* Tricks Correct DaisyUI */
+
+.badge-no-gap-inside {
+  gap: 0 !important;
+}
+
+
+
+/**************** SVG colors (& Logo Zélie) ****************/
+
+
+/********* Primary *********/
+
+.stroke-primary {
+  stroke: var(--color-primary) !important;
+}
+
+.fill-primary {
+  fill: var(--color-primary) !important;
+}
+
+/********* Primary content *********/
+.stroke-primary-content {
+  stroke: var(--color-primary-content) !important;
+}
+
+.fill-primary-content {
+  fill: var(--color-primary-content) !important;
+}
+
+/********* Secondary *********/
+
+.stroke-secondary {
+  stroke: var(--color-secondary) !important;
+}
+
+.fill-secondary {
+  fill: var(--color-secondary) !important;
+}
+
+
+/********* Secondary content *********/
+
+.stroke-secondary-content {
+  stroke: var(--color-secondary-content) !important;
+}
+
+.fill-secondary-content {
+  fill: var(--color-secondary-content) !important;
+}
+
+
+
+
+
+/********* Primary ghost *********/
+.stroke-primary-ghost {
+  stroke: var(--color-primary-ghost) !important;
+}
+
+.fill-primary-ghost {
+  fill: var(--color-primary-ghost) !important;
+}
+
+
+
+
+/********* Secondary ghost *********/
+.stroke-secondary-ghost {
+  stroke: var(--color-secondary-ghost) !important;
+}
+.fill-secondary-ghost {
+  fill: var(--color-secondary-ghost) !important;
+}
+
+
+
+
+
+/********* Accent *********/
+
+
+.stroke-accent {
+  stroke: var(--color-accent) !important;
+}
+
+.fill-accent {
+  fill: var(--color-accent) !important;
+}
+
+/********* Accent content *********/
+
+
+.stroke-accent-content {
+  stroke: var(--color-accent-content) !important;
+}
+
+.fill-accent-content {
+  fill: var(--color-accent-content) !important;
+}
+
+/********* Base 100 *********/
+
+.stroke-base-100 {
+  stroke: var(--color-base-100) !important;
+}
+
+.fill-base-100 {
+  fill: var(--color-base-100) !important;
+}
+
+/********* Base 200 *********/
+
+.stroke-base-200 {
+  stroke: var(--color-base-200) !important;
+}
+
+.fill-base-200 {
+  fill: var(--color-base-200) !important;
+}
+
+/********* Base 300 *********/
+
+.stroke-base-300 {
+  stroke: var(--color-base-300) !important;
+}
+
+.fill-base-300 {
+  fill: var(--color-base-300) !important;
+}
+
+/********* Base content *********/
+
+.stroke-base-content {
+  stroke: var(--color-base-content) !important;
+}
+
+.fill-base-content {
+  fill: var(--color-base-content) !important;
+}
+
+/********* Backgrounds *********/
+/* TODO : no ... shouldbe fill so already exists or use above syntaxe for X50 */
+
+
+.bg-base-100 {
+  fill: var(--color-base-100) !important;
+}
+.bg-base-200 {
+  fill: var(--color-base-200) !important;
+}
+.bg-base-300 {
+  fill: var(--color-base-300) !important;
+}
+
+.bg-base-150 {
+  fill: color-mix(
+    in srgb,
+    var(--color-base-100) 50%,
+    var(--color-base-200) 50%
+  );
+}
+.bg-base-250 {
+  fill: color-mix(
+    in srgb,
+    var(--color-base-200) 50%,
+    var(--color-base-300) 50%
+  );
+}
+/* .troll {
+    font-family: var(--font-pathway);
+} */
+
+/* 
+strong {
+    font-weight: 400;
+} */
+
+
+
+
+
+
+/**************** Calvier du Tartare ****************/
+
+
+
+
+/* Ensure keyboard container is visible and positioned correctly */
+#math-field-virtual-keyboard-container {
+  bottom: 0 !important;
+  background-color: var(--color-base-100) !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 50 !important;
+  overflow: visible !important;
+  transition: all 0.3s ease-in-out !important;
+  transform-origin: bottom !important;
+  /* margin-top: 0.5rem !important; */
+}
+
+
+
+
+
+
+
+/* Fix the main culprits - override absolute positioning */
+.MLK__backdrop {
+  position: relative !important;
+  padding: 0 !important;
+}
+
+.MLK__plate {
+  position: relative !important;
+  top: 0 !important;
+}
+
+/* Remove the transform that moves keyboard out of view */
+.ML__keyboard.is-visible > .MLK__backdrop {
+  /* transform: none !important; */
+}
+
+
+
+/* Responsive: Desktop styling */
+@media (min-width: 640px) {
+  html body #math-field-virtual-keyboard-container {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    margin:  0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    min-height: 250px !important;
+    padding: 1rem !important;
+    border-radius: var(--radius-box) !important;
+  }
+}
+
+/* Ensure all MathLive keyboard elements are visible */
+.ML__keyboard,
+.MLK__keyboard {
+  display: block !important;
+  visibility: visible !important;
+}
+
+
+/***************************Math Keyboard**************************/
+/***************************Math Keyboard**************************/
+/***************************Math Keyboard**************************/
+
+
+.ML__focused {
+  border: none !important;
+}
+
+/* .MLK__plate {
+  background-color: var(--keyboard-background-color) !important;
+} */
+
+/* .MLK__plate svg:first-child, */
+.MLK__toolbar {
+  display: none !important;
+}
+
+/* .keyboard-toolbar {
+  display: none !important;
+} */
+
+.ML__keyboard--plate {
+  display: none !important;
+}
+
+.ML__keyboard {
+  z-index: 50 !important;
+  border-radius: 8px;
+  overflow-y: visible;
+  min-height: 200px !important;
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px !important; */
+
+  /* --_background: #cacfd7 !important; */
+  /* --_border: 1px solid #cacfd7 !important; */
+  /* --_background: var(--gray400) !important; */
+  --_background: transparent !important;
+  --_border: 1px solid var(--color-base-200) !important;
+  --_keycap-background: var(--color-base-100) !important;
+  --_keycap-background-active: var(--color-base-200) !important;
+  --_keycap-background-pressed: var(--color-base-100) !important;
+  /* --_keycap-background-hover: var(--color-base-300) !important; */
+  --_keycap-modifier-background: var(--color-base-200) !important;
+  --_keycap-font-size: 1rem !important;
+  /*************** Virtual Keyboard Variables ****************/
+
+  --keyboard-accent-color: var(--color-accent);
+  --keyboard-background: var(--color-base-100);
+  --keyboard-border: transparent;
+  --keyboard-toolbar-text: var(--color-base-content);
+  --keyboard-toolbar-background-hover: var(--color-base-200);
+  --keyboard-horizontal-rule: 1px solid var(--color-base-200);
+  --keycap-background: var(--color-base-100);
+  --keycap-background-hover: var(--color-base-200);
+
+  /* --_keycap-border: var(--color-primary)  !important; */
+  /* --_keycap-border-bottom: var(--color-primary) !important; */
+
+
+  --keycap-text: var(--color-base-content);
+  --keycap-font-size: var(--_keycap-font-size);
+  --keycap-secondary-background: var(--color-base-300);
+  --keycap-secondary-background-hover: var(--color-base-300);
+  --keycap-secondary-text: var(--color-base-content);
+  --keycap-secondary-border: var(--color-base-300);
+  --keycap-secondary-border-bottom: var(--color-base-300);
+  --variant-panel-background: var(--color-base-100);
+  --variant-keycap-text-active: var(--color-base-content);
+
+
+  /*************** Virtual Keyboard ****************/
+  --_accent-color: var(--keyboard-accent-color);
+  --_background: var(--keyboard-background);
+  /* --_border: var(--keyboard-border); */
+  --_toolbar-text: var(--keyboard-toolbar-text);
+  --_toolbar-background-hover: var(--keyboard-toolbar-background-hover);
+  /* --keyboard-toolbar-background-hover: #303030; */
+  --_horizontal-rule:   var(--keyboard-horizontal-rule);
+  --_keycap-background:   var(--keycap-background);
+  --_keycap-background-hover:   var(--keycap-background-hover);
+
+
+  border-radius: 4px !important;
+}
+
+
+
+.ML__keyboard :where(div) {
+  cursor: pointer !important;
+}
+
+/* ===== KEYCAP SHADOWS & DEPTH EFFECTS ===== */
+.ML__keyboard .MLK__keycap,
+.ML__keyboard [class*="keycap"],
+.MLK__rows > .row div:not(.separator):not(.keycap-small) {
+  box-shadow: 
+    0 1px 0 0 var(--color-base-300) !important;
+  border: 1px solid var(--color-base-300) !important;
+  transition: all 0.15s ease !important;
+}
+
+/* Exclude separators and small elements from shadow effects */
+.MLK__rows > .row div.separator,
+.MLK__rows > .row div.keycap-small,
+.MLK__rows > .row .separator,
+.MLK__rows > .row .keycap-small,
+.separator,
+.keycap-small {
+  box-shadow: none !important;
+  border: none !important;
+  transform: none !important;
+  background: transparent !important;
+}
+
+/* Force separators to never have any effects */
+.ML__keyboard .separator,
+.ML__keyboard .keycap-small {
+  box-shadow: none !important;
+  border: none !important;
+  transform: none !important;
+  background: transparent !important;
+  transition: none !important;
+}
+
+.ML__keyboard .separator:hover,
+.ML__keyboard .keycap-small:hover,
+.ML__keyboard .separator:active,
+.ML__keyboard .keycap-small:active {
+  box-shadow: none !important;
+  border: none !important;
+  transform: none !important;
+  background: transparent !important;
+}
+
+/* Ultra-specific separator override */
+.MLK__rows > .row div[class*="separator"],
+.MLK__rows > .row div[class*="keycap-small"] {
+  box-shadow: none !important;
+  border: none !important;
+  transform: none !important;
+  background: transparent !important;
+  transition: none !important;
+}
+
+.MLK__rows > .row div[class*="separator"]:hover,
+.MLK__rows > .row div[class*="separator"]:active,
+.MLK__rows > .row div[class*="keycap-small"]:hover,
+.MLK__rows > .row div[class*="keycap-small"]:active {
+  box-shadow: none !important;
+  border: none !important;
+  transform: none !important;
+  background: transparent !important;
+}
+
+/* Hover state - lift the button slightly */
+.ML__keyboard .MLK__keycap:hover,
+.ML__keyboard [class*="keycap"]:hover,
+.MLK__rows > .row div:not(.separator):not(.keycap-small):hover {
+  /* box-shadow: 
+    0 3px 0 0 var(--color-base-300),
+    0 4px 6px -1px rgba(0, 0, 0, 0.15),
+    0 2px 4px -1px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-1px) !important; */
+}
+
+/* Active/pressed state - push the button down */
+.ML__keyboard .MLK__keycap:active,
+.ML__keyboard [class*="keycap"]:active,
+.ML__keyboard .MLK__keycap.is-pressed,
+.ML__keyboard [class*="keycap"].is-pressed,
+.MLK__rows > .row div:not(.separator):not(.keycap-small):active {
+  /* box-shadow: 
+    0 1px 0 0 var(--color-base-300),
+    0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(1px) !important; */
+}
+
+/* 
+@media (prefers-color-scheme: dark) {
+  .ML__keyboard {
+      --_accent-color: var(--keyboard-accent-color, #0b5c9c);
+      --_background: var(--keyboard-background, #151515);
+      --_border: var(--keyboard-border, transparent);
+      --_toolbar-text: var(--keyboard-toolbar-text, #e3e4e8);
+      --_toolbar-background-hover: var(--keyboard-toolbar-background-hover, #303030);
+      --keyboard-toolbar-background-hover: #303030;
+      --_horizontal-rule: var(--keyboard-horizontal-rule, 1px solid #303030);
+      --_keycap-background: var(--keycap-background, #1f2022);
+      --_keycap-background-hover: var(--keycap-background-hover, #2f3032);
+      --_keycap-border: var(--_keycap-border, transparent);
+      --_keycap-border-bottom: var(--_keycap-border-bottom, transparent);
+      --_keycap-text: var(--keycap-text, #e3e4e8);
+      --_keycap-secondary-background: var(--keycap-secondary-background, #3d4144);
+      --_keycap-secondary-background-hover: var(--keycap-secondary-background-hover, #4d5154);
+      --_keycap-secondary-text: var(--keycap-secondary-text, #e7ebee);
+      --keycap-secondary-border: transparent;
+      --keycap-secondary-border-bottom: transparent;
+      --_keycap-secondary-border: var(--keycap-secondary-border, transparent);
+      --_keycap-secondary-border-bottom: var(--keycap-secondary-border-bottom, transparent);
+      --_variant-panel-background: var(--variant-panel-background, #303030);
+      --_variant-keycap-text-active: var(--variant-keycap-text-active, #fff);
+  }
+} */
+
+@media screen and (min-width: 0px) and (max-width: 640px) {
+  .ML__keyboard {
+    --_keycap-font-size: 1rem !important;
+  }
+}
+
+
+
+.keycap {
+  cursor: pointer !important;
+  border-radius: 6px !important;
+  position: relative !important;
+}
+
+.keycap-fraction {
+  /* font-size: 1rem !important; */
+  padding-top: 0.25rem !important;
+}
+
+.keycap-control {
+  background-color: var(--color-base-300) !important;
+  box-shadow: 
+    0 2px 0 0 var(--color-base-300),
+    0 2px 4px -1px rgba(0, 0, 0, 0.15),
+    0 1px 3px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.keycap-control:hover {
+  background-color: var(--color-base-300) !important;
+  box-shadow: 
+    0 3px 0 0 var(--color-base-300),
+    0 4px 6px -1px rgba(0, 0, 0, 0.2),
+    0 2px 4px -1px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-1px) !important;
+}
+
+.keycap-control:active {
+  background-color: var(--color-base-300) !important;
+  box-shadow: 
+    0 1px 0 0 var(--color-base-300),
+    0 1px 2px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(1px) !important;
+}
+
+/* @media screen and (min-width: 601px) {
+  .keycap-fraction {
+    font-size: 1rem !important;
+  }
+} */
+
+.MLK__rows > .row {
+  /* padding-left: 1em !important;
+    padding-right: 1em !important; */
+  width: 100% !important;
+}
+
+.MLK__rows > .row {
+
+}
+
+.MLK__rows > .row:last-child {
+  padding-bottom: 1rem !important;
+}
+
+.MLK__rows > .row div {
+  min-width: 5% !important;
+  max-height: 30px !important;
+  color: var(--color) !important;
+  border-radius: 6px !important;
+  position: relative !important;
+  /* margin: px !important; */
+}
+
+/* 
+.MLK__rows > .row div:first-child {
+  padding-left: 0.5em !important;
+}
+
+.MLK__rows > .row div:last-child {
+  padding-right: 0.5em !important;
+} */
+
+
+
+/* @media screen and (max-width: 639px) {
+  .MLK__rows > .row div {
+    min-width: 10% !important;
+    max-height: 20px !important;
+  }
+  .MLK__rows {
+    --_keycap-height: max(var(--keycap-height, 36px), 36px) !important;
+}
+} */
+
+
+
+
+
+/* .shift {
+} */

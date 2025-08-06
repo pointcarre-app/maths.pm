@@ -1,0 +1,75 @@
+[data-theme="bolt"] {
+    color-scheme: light;
+    --color-base-100: #fefff7;
+    --color-base-200: #f6f9fe;
+    --color-base-300: #f1f3ee;
+    --color-base-content: #34353a;
+    --color-primary: #8442ff;
+    --color-primary-content: #f6f2ff;
+    --color-secondary: #ff0069;
+    --color-secondary-content: #f4f4ff;
+    --color-accent: #cce251;
+    --color-accent-content: #2F271F;
+    --color-neutral-content: #FFFFF0;
+    --color-info: #007fff;
+    --color-info-content: #f3f6ff;
+    --color-success: #00a263;
+    --color-success-content: #f2fff7;
+    --color-warning: #e59f00;
+    --color-warning-content: #543e00;
+    --color-error: #ff4f44;
+    --color-error-content: #fff3f2;
+    --radius-box: 0.25rem;
+    --radius-field: 0.15rem;
+    --radius-selector: 0.15rem;
+    --size-field: 0.25rem;
+    --size-selector: 0.25rem;
+    --border: 1px;
+    --depth: 2;
+    --noise: 0;
+}
+
+.pdf-page {
+    page-break-after: always;
+    /* display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: space-between;*/
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #questions-generated-at-runtime-holder,
+    #questions-generated-at-runtime-holder * {
+        visibility: visible;
+    }
+
+    #questions-generated-at-runtime-holder {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+
+/* Increase size of number input spin buttons to match input height */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.fieldset {
+    /* margin-bottom: 2rem !important; */
+}
+
+.fieldset-legend {
+    font-size: 1.05rem !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 300 !important;
+}

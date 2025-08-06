@@ -1,0 +1,198 @@
+/* Global Styles */
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Typography */
+h1, h2, h3 {
+    margin-top: 0;
+    font-family: 'Spectral', 'Georgia', serif;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #444;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: #555;
+}
+
+/* Links */
+a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code */
+code {
+    background: #f4f4f4;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* Background Pattern */
+.bg-pattern {
+    background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23000000" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+    background-size: 60px 60px;
+}
+
+/* Maths.pm Custom Colors */
+:root {
+    --primary-light: #818cf8;
+    --primary-dark: #4c1d95;
+    --secondary-light: #34d399;
+    --secondary-dark: #059669;
+    --accent-light: #f59e0b;
+    --accent-dark: #d97706;
+    --info-light: #3b82f6;
+    --warning-light: #f59e0b;
+    --success-light: #10b981;
+}
+
+/* Product Card Colors */
+.bg-primary\/20 {
+    background-color: rgba(99, 102, 241, 0.2);
+}
+
+.bg-secondary\/20 {
+    background-color: rgba(52, 211, 153, 0.2);
+}
+
+.bg-accent\/20 {
+    background-color: rgba(245, 158, 11, 0.2);
+}
+
+.bg-info\/20 {
+    background-color: rgba(59, 130, 246, 0.2);
+}
+
+.bg-warning\/20 {
+    background-color: rgba(245, 158, 11, 0.2);
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Card hover effects */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Math formula styling */
+.katex-display {
+    margin: 0.5em 0;
+}
+
+/* Badge soft styling */
+.badge-soft {
+    background-color: rgba(99, 102, 241, 0.1);
+    color: #4c1d95;
+}
+
+/* Utilities */
+.text-primary {
+    color: var(--primary-dark);
+}
+
+.text-secondary {
+    color: var(--secondary-dark);
+}
+
+.text-accent {
+    color: var(--accent-dark);
+}
+
+/* Navigation active state */
+.navbar a.active {
+    font-weight: 600;
+    border-bottom: 2px solid currentColor;
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .footer,
+    .btn,
+    .hero-actions {
+        display: none;
+    }
+    
+    .hero {
+        min-height: auto;
+        padding: 2rem 0;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn {
+        border-width: 2px;
+    }
+    
+    .card {
+        border: 2px solid currentColor;
+    }
+} 

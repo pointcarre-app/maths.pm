@@ -1,0 +1,59 @@
+name: Deploy Maths.pm
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Build static site
+        run: |
+          python -c "
+          import asyncio
+          import httpx
+          from app import app
+          import uvicorn
+          import threading
+          import time
+          
+          # Start server in background
+          def run_server():
+              uvicorn.run(app, host='127.0.0.1', port=8000, log_level='error')
+          
+          server_thread = threading.Thread(target=run_server, daemon=True)
+          server_thread.start()
+          time.sleep(3)
+          
+          # Build site
+          async def build():
+              async with httpx.AsyncClient() as client:
+                  response = await client.get('http://127.0.0.1:8000/build')
+                  result = response.json()
+                  print(f'Build result: {result}')
+                  return result['status'] == 'success'
+          
+          success = asyncio.run(build())
+          if not success:
+              exit(1)
+          "
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

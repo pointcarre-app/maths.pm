@@ -1,0 +1,105 @@
+{% extends "base/main-alt.html" %}
+
+{% block title %}
+  {{ product_title or "Nagini - Python dans le navigateur" }}
+{% endblock title %}
+
+{% block content %}
+  <div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+
+      <!-- Header Section -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">🐍 {{ product_title or "Nagini" }}</h1>
+        <p class="text-xl text-gray-600 mb-6">
+          {{ product_description or "Exécution de code Python directement dans le navigateur" }}
+        </p>
+      </div>
+
+      <!-- Product Status -->
+      {% if product_settings %}
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+          <div class="flex">
+            <div class="ml-3">
+              <p class="text-sm text-blue-700">
+                <strong>Status:</strong>
+                {% if is_enabled %}
+                  <span class="text-green-600">✅ Activé</span>
+                {% else %}
+                  <span class="text-red-600">❌ Désactivé</span>
+                {% endif %}
+              </p>
+              {% if nagini_endpoint %}
+                <p class="text-sm text-blue-700">
+                  <strong>Endpoint:</strong> <code>{{ nagini_endpoint }}</code>
+                </p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Main Content -->
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">🚀 Python dans le navigateur</h2>
+
+        <div class="prose max-w-none">
+          <p class="text-gray-700 mb-4">
+            Nagini permet d'exécuter du code Python directement dans votre navigateur,
+            sans installation locale. Idéal pour l'enseignement et l'apprentissage interactif.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">✨ Fonctionnalités</h3>
+          <ul class="list-disc list-inside text-gray-700 mb-4">
+            <li>Exécution Python via Pyodide</li>
+            <li>Interface interactive</li>
+            <li>Pas d'installation requise</li>
+            <li>Idéal pour l'éducation</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Technical Details -->
+      {% if product_settings %}
+        <div class="bg-gray-50 rounded-lg p-6">
+          <h2 class="text-xl font-semibold text-gray-900 mb-4">🔧 Configuration technique</h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {% if nagini_js_url %}
+              <div>
+                <h3 class="font-medium text-gray-900">Script JavaScript</h3>
+                <p class="text-sm text-gray-600 break-all">{{ nagini_js_url }}</p>
+              </div>
+            {% endif %}
+
+            {% if pyodide_worker_url %}
+              <div>
+                <h3 class="font-medium text-gray-900">Pyodide Worker</h3>
+                <p class="text-sm text-gray-600 break-all">{{ pyodide_worker_url }}</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Back Navigation -->
+      <div class="text-center mt-8">
+        <a href="{{ url_for('index') }}"
+           class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          ← Retour à l'accueil
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block extra_js %}
+  <!-- Nagini-specific JavaScript would go here -->
+  {% if nagini_js_url %}
+    <script>
+        console.log('Nagini endpoint:', '{{ nagini_endpoint }}');
+        console.log('Nagini JS URL:', '{{ nagini_js_url }}');
+        console.log('Pyodide Worker URL:', '{{ pyodide_worker_url }}');
+    </script>
+  {% endif %}
+{% endblock extra_js %}

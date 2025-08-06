@@ -1,0 +1,54 @@
+<footer class="footer p-10 bg-base-200 text-base-content">
+  <aside>
+    <div class="flex items-center gap-2 mb-4">
+      <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+        <span class="text-primary-content font-bold">π</span>
+      </div>
+      <span class="text-xl font-bold">{{ site_name }}</span>
+    </div>
+    <p class="max-w-md">{{ site_description }}</p>
+    <p class="text-sm opacity-70 mt-2">Aucune donnée collectée • Privacy by Design</p>
+  </aside>
+
+  <nav>
+    <h6 class="footer-title">Ressources</h6>
+    {% for product in products %}
+      <a class="link link-hover" href="{{ product.local_path }}">{{ product.title_html|safe }}</a>
+    {% endfor %}
+  </nav>
+
+  <nav>
+    <h6 class="footer-title">Liens utiles</h6>
+    <a class="link link-hover" href="{{ gitlab_url }}" target="_blank">Code source</a>
+    <a class="link link-hover" href="{{ request.url_for('index') }}#contact">Contact</a>
+    <a class="link link-hover" href="{{ request.url_for('index') }}#apropos">À propos</a>
+  </nav>
+
+  <nav>
+    <h6 class="footer-title">Niveaux scolaires</h6>
+    <a class="link link-hover" href="#college">Collège (6e-3e)</a>
+    <a class="link link-hover" href="#lycee">Lycée (2nde-Term)</a>
+  </nav>
+</footer>
+
+<footer class="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
+  <aside class="items-center grid-flow-col">
+    <p>© {{ current_year }} {{ site_name }} - {{ copyright }}</p>
+  </aside>
+  <nav class="md:place-self-center md:justify-self-end">
+    <div class="grid grid-flow-col gap-4">
+      <div class="flex items-center gap-2 text-sm">
+        <img src="{{ request.url_for('static', path='icons/AGPLv3_Logo.svg') }}"
+             alt="AGPLv3"
+             width="24"
+             height="24"
+             title="Code sous licence AGPLv3" />
+        <img src="{{ request.url_for('static', path='icons/CC_BY-NC-SA.svg') }}"
+             alt="CC BY-NC-SA"
+             width="24"
+             height="24"
+             title="Contenu sous licence CC BY-NC-SA 4.0" />
+      </div>
+    </div>
+  </nav>
+</footer>

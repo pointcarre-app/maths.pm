@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Worker Killer</title>
+</head>
+<body>
+    <h1>🔥 Service Worker Elimination Tool</h1>
+    <div id="status"></div>
+    <button onclick="killEverything()">💀 KILL ALL SERVICE WORKERS</button>
+    
+    <script>
+    function log(msg) {
+        document.getElementById('status').innerHTML += '<div>' + msg + '</div>';
+        console.log(msg);
+    }
+    
+    async function killEverything() {
+        log('🚀 Starting complete elimination...');
+        
+        // 1. Unregister ALL service workers
+        if ('serviceWorker' in navigator) {
+            try {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                log(`Found ${registrations.length} service workers to kill`);
+                
+                for (const registration of registrations) {
+                    log(`💀 Killing: ${registration.scope}`);
+                    await registration.unregister();
+                }
+                log('✅ All service workers eliminated');
+            } catch (error) {
+                log('❌ Error killing service workers: ' + error);
+            }
+        }
+        
+        // 2. Clear ALL caches
+        if ('caches' in window) {
+            try {
+                const cacheNames = await caches.keys();
+                log(`Found ${cacheNames.length} caches to clear`);
+                
+                for (const cacheName of cacheNames) {
+                    log(`🧹 Clearing: ${cacheName}`);
+                    await caches.delete(cacheName);
+                }
+                log('✅ All caches cleared');
+            } catch (error) {
+                log('❌ Error clearing caches: ' + error);
+            }
+        }
+        
+        // 3. Clear local storage
+        try {
+            localStorage.clear();
+            sessionStorage.clear();
+            log('✅ Local storage cleared');
+        } catch (error) {
+            log('❌ Error clearing storage: ' + error);
+        }
+        
+        log('🎉 COMPLETE ELIMINATION FINISHED!');
+        log('🔄 Refresh the page now to see clean results');
+        
+        if (confirm('Complete cleanup finished! Refresh the page now?')) {
+            window.location.reload();
+        }
+    }
+    
+    // Auto-run on load
+    window.onload = function() {
+        log('🔧 Service Worker Killer loaded');
+        log('Click the button to eliminate all service workers and caches');
+    };
+    </script>
+</body>
+</html>

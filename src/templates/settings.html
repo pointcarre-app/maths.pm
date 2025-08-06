@@ -1,0 +1,359 @@
+{% extends "base/main-alt.html" %}
+
+{% block title %}
+  Settings - Configuration des produits
+{% endblock title %}
+
+{% block content %}
+  <div class="py-8">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-primary mb-2">⚙️ Configuration</h1>
+      <p class="text-base-content/70">Configuration complète du domaine et des produits</p>
+
+      <!-- Quick Stats -->
+      <div class="stats stats-horizontal shadow-sm bg-base-200 mt-4">
+        <div class="stat">
+          <div class="stat-figure text-primary">🌐</div>
+          <div class="stat-title text-xs">Domaine</div>
+          <div class="stat-value text-sm">
+            {{ DOMAIN_CONFIG.domain_url.replace('https://', '').replace('http://', '') or 'N/A' }}
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-figure text-secondary">📦</div>
+          <div class="stat-title text-xs">Produits</div>
+          <div class="stat-value text-sm">{{ products|length }}</div>
+          <div class="stat-desc text-xs">chargés</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-figure text-accent">🏷️</div>
+          <div class="stat-title text-xs">Meta tags</div>
+          <div class="stat-value text-sm">
+            {{ (DOMAIN_CONFIG.domain_specific_metatags|length) + (DOMAIN_CONFIG.index_view_specific_metatags|length) }}
+          </div>
+          <div class="stat-desc text-xs">configurés</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-figure text-info">🔧</div>
+          <div class="stat-title text-xs">Backend</div>
+          <div class="stat-value text-sm">
+            {{ backend_public_settings|length if backend_public_settings else 0 }}
+          </div>
+          <div class="stat-desc text-xs">paramètres</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domain Info Card -->
+    <div class="card bg-base-200 shadow-sm mb-6">
+      <div class="card-body">
+        <h2 class="card-title text-lg">🌐 Configuration du domaine</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm mb-4">
+          <div>
+            <span class="font-medium">URL:</span>
+            <span class="ml-2">{{ DOMAIN_CONFIG.domain_url or 'N/A' }}</span>
+          </div>
+          <div>
+            <span class="font-medium">Produits chargés:</span>
+            <span class="ml-2 badge badge-primary">{{ products|length }}</span>
+          </div>
+          <div>
+            <span class="font-medium">Template de base:</span>
+            <span class="ml-2">{{ DOMAIN_CONFIG.templating.base_template or 'N/A' }}</span>
+          </div>
+        </div>
+
+        <!-- Templating Settings -->
+        <div class="divider text-xs">Configuration des templates</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div>
+            <span class="font-medium">Titre navbar:</span>
+            <span class="ml-2">{{ DOMAIN_CONFIG.templating.navbar_title or 'N/A' }}</span>
+          </div>
+          <div>
+            <span class="font-medium">Footer template:</span>
+            <span class="ml-2">{{ DOMAIN_CONFIG.templating.footer_template or 'N/A' }}</span>
+          </div>
+          <div>
+            <span class="font-medium">Bouton principal:</span>
+            <span class="ml-2">{{ DOMAIN_CONFIG.templating.button_primary_text or 'N/A' }}</span>
+            {% if DOMAIN_CONFIG.templating.button_primary_href %}
+              <code class="text-xs ml-1">({{ DOMAIN_CONFIG.templating.button_primary_href }})</code>
+            {% endif %}
+          </div>
+          <div>
+            <span class="font-medium">Bouton secondaire:</span>
+            <span class="ml-2">{{ DOMAIN_CONFIG.templating.button_ghost_text or 'N/A' }}</span>
+            {% if DOMAIN_CONFIG.templating.button_ghost_href %}
+              <code class="text-xs ml-1">({{ DOMAIN_CONFIG.templating.button_ghost_href }})</code>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domain Meta Tags -->
+    <div class="card bg-base-100 shadow-sm mb-6">
+      <div class="card-body">
+        <h2 class="card-title text-lg mb-4">🏷️ Meta tags du domaine</h2>
+
+        <div class="tabs tabs-bordered mb-4">
+          <input type="radio" name="domain_tabs" role="tab" class="tab" aria-label="Génériques" checked />
+          <div role="tabpanel" class="tab-content">
+            <div class="overflow-x-auto mt-4">
+              <table class="table table-zebra table-sm">
+                <thead>
+                  <tr>
+                    <th>Meta tag</th>
+                    <th>Valeur</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for key, value in DOMAIN_CONFIG.domain_specific_metatags.items() %}
+                    <tr class="hover">
+                      <td>
+                        <code class="text-xs">{{ key }}</code>
+                      </td>
+                      <td class="max-w-md">
+                        {% if value|length > 80 %}
+                          <details class="collapse collapse-arrow bg-base-200">
+                            <summary class="collapse-title text-xs font-medium">
+                              Voir la valeur ({{ value|length }} caractères)
+                            </summary>
+                            <div class="collapse-content">
+                              <div class="text-xs bg-base-300 p-2 rounded">{{ value }}</div>
+                            </div>
+                          </details>
+                        {% else %}
+                          <span class="text-xs">{{ value }}</span>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <input type="radio" name="domain_tabs" role="tab" class="tab" aria-label="Page d'accueil" />
+          <div role="tabpanel" class="tab-content">
+            <div class="overflow-x-auto mt-4">
+              <table class="table table-zebra table-sm">
+                <thead>
+                  <tr>
+                    <th>Meta tag</th>
+                    <th>Valeur</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for key, value in DOMAIN_CONFIG.index_view_specific_metatags.items() %}
+                    <tr class="hover">
+                      <td>
+                        <code class="text-xs">{{ key }}</code>
+                      </td>
+                      <td class="max-w-md">
+                        {% if value|length > 80 %}
+                          <details class="collapse collapse-arrow bg-base-200">
+                            <summary class="collapse-title text-xs font-medium">
+                              Voir la valeur ({{ value|length }} caractères)
+                            </summary>
+                            <div class="collapse-content">
+                              <div class="text-xs bg-base-300 p-2 rounded">{{ value }}</div>
+                            </div>
+                          </details>
+                        {% else %}
+                          <span class="text-xs">{{ value }}</span>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domain Extra Resources -->
+    {% if DOMAIN_CONFIG.extra_head %}
+      <div class="card bg-base-100 shadow-sm mb-6">
+        <div class="card-body">
+          <h2 class="card-title text-lg mb-4">📦 Ressources externes du domaine</h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {% if DOMAIN_CONFIG.extra_head.js %}
+              <div>
+                <h3 class="font-medium text-base mb-2">🟨 JavaScript</h3>
+                <div class="space-y-2">
+                  {% for js_url in DOMAIN_CONFIG.extra_head.js %}
+                    <div class="bg-base-200 p-2 rounded text-xs">
+                      <code>{{ js_url }}</code>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+
+            {% if DOMAIN_CONFIG.extra_head.css %}
+              <div>
+                <h3 class="font-medium text-base mb-2">🎨 CSS</h3>
+                <div class="space-y-2">
+                  {% for css_url in DOMAIN_CONFIG.extra_head.css %}
+                    <div class="bg-base-200 p-2 rounded text-xs">
+                      <code>{{ css_url }}</code>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Products Overview Table -->
+    <div class="card bg-base-100 shadow-sm mb-6">
+      <div class="card-body">
+        <h2 class="card-title text-lg mb-4">📦 Produits chargés</h2>
+
+        <div class="overflow-x-auto">
+          <table class="table table-zebra table-sm">
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Titre</th>
+                <th>Path</th>
+                <th>Couleur</th>
+                <th>Domaines</th>
+                <th>Settings</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for product in products %}
+                <tr class="hover">
+                  <td>
+                    <div class="font-mono text-sm">{{ product.name }}</div>
+                  </td>
+                  <td>
+                    <div class="font-medium">{{ product.title_html|safe }}</div>
+                    {% if product.subtitle_html %}
+                      <div class="text-xs text-base-content/60">{{ product.subtitle_html|safe }}</div>
+                    {% endif %}
+                  </td>
+                  <td>
+                    <code class="text-xs">{{ product.local_path or '-' }}</code>
+                  </td>
+                  <td>
+                    <div class="badge badge-outline badge-sm" style="border-color: {{ product.color or '#6366f1' }};">
+                      {{ product.color or 'primary' }}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="flex flex-wrap gap-1">
+                      {% for domain in product.domains %}<div class="badge badge-xs">{{ domain }}</div>{% endfor %}
+                    </div>
+                  </td>
+                  <td>
+                    {% if product.backend_settings %}
+                      <div class="badge badge-success badge-xs">✓</div>
+                    {% else %}
+                      <div class="badge badge-ghost badge-xs">-</div>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backend Settings Details -->
+    {% if backend_public_settings %}
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title text-lg mb-4">🔧 Paramètres backend</h2>
+
+          <div class="overflow-x-auto">
+            <table class="table table-zebra table-sm">
+              <thead>
+                <tr>
+                  <th>Clé</th>
+                  <th>Valeur</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for key, value in backend_public_settings.items() %}
+                  <tr class="hover">
+                    <td>
+                      <code class="text-sm font-mono">{{ key }}</code>
+                    </td>
+                    <td>
+                      <div class="max-w-md">
+                        {% if value|length > 100 %}
+                          <details class="collapse collapse-arrow bg-base-200">
+                            <summary class="collapse-title text-xs font-medium">
+                              Voir la valeur ({{ value|length }} caractères)
+                            </summary>
+                            <div class="collapse-content">
+                              <pre class="text-xs bg-base-300 p-2 rounded overflow-x-auto">{{ value }}</pre>
+                            </div>
+                          </details>
+                        {% else %}
+                          <code class="text-xs">{{ value }}</code>
+                        {% endif %}
+                      </div>
+                    </td>
+                    <td>
+                      {% if value.startswith('{') or value.startswith('[') %}
+                        <div class="badge badge-info badge-xs">JSON</div>
+                      {% elif value in ['true', 'false'] %}
+                        <div class="badge badge-warning badge-xs">Boolean</div>
+                      {% elif value.isdigit() %}
+                        <div class="badge badge-success badge-xs">Number</div>
+                      {% else %}
+                        <div class="badge badge-ghost badge-xs">String</div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Navigation -->
+    <div class="text-center mt-8">
+      <a href="{{ url_for('index') }}" class="btn btn-primary btn-sm">← Retour à l'accueil</a>
+      <a href="{{ url_for('get_public_settings') }}" class="btn btn-outline btn-sm ml-2" target="_blank">API JSON</a>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block extra_head %}
+  <style>
+      /* Custom styling for better readability */
+      .table td {
+          vertical-align: top;
+      }
+
+      .table code {
+          background-color: hsl(var(--b2));
+          padding: 0.125rem 0.25rem;
+          border-radius: 0.25rem;
+      }
+
+      pre {
+          white-space: pre-wrap;
+          word-break: break-all;
+      }
+  </style>
+{% endblock extra_head %}

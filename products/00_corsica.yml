@@ -1,0 +1,27 @@
+name: corsica
+title_html: Corsica
+subtitle_html: Maths & Corse
+description: Maths & Corse
+local_path: /corsica
+# source_link: 
+color: accent
+figure_svg: nagini-figure-svg.html
+classes_formatted:
+  - "🇫🇷"
+tags:
+  - Education
+domains:
+  - maths.pm
+
+owner_rdb: "Your Organization"
+owner_url: "https://example.org"
+
+
+
+backend_settings:
+  nagini:
+    lib_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/"
+    entrypoint_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js"
+    worker_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js" 
+  v4pyjs:
+    lib_url: https://cdn.jsdelivr.net/gh/your-org/v4.py.js@v0.0.4-unstable/

@@ -1,0 +1,76 @@
+import teachers.generator as tg
+import teachers.maths as tm
+from teachers.defaults import SEED
+
+
+def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
+    """[sujets0][spé][sujet-1][automatismes][question-8]
+    >>> generate_components(None, 10)
+    {'x': Symbol(s='x'), 'a': Fraction(p=Integer(n=10), q=Integer(n=1)), 'b': Integer(n=7)}
+    """
+
+    gen = tg.MathsGenerator(seed)
+    p = gen.random_integer(1, 10)
+    q = gen.random_integer(1, 10)
+    a = tm.Fraction(p=p, q=q)
+    b = gen.random_integer(1, 10)
+    x = tm.Symbol(s="x")
+
+    return {
+        "x": x,
+        "a": a,
+        "b": b,
+    }
+
+
+def solve(*, x, a, b):
+    """[sujets0][spé][sujet-1][automatismes][question-8]
+    >>> x, a, b = tm.Symbol(s="x"), tm.Fraction(p=tm.Integer(n=10), q=tm.Integer(n=1)), tm.Integer(n=7)
+    >>> answer = solve(x=x, a=a, b=b)
+    >>> answer["maths_object"]
+    Add(l=Mul(l=Fraction(p=Integer(n=10), q=Integer(n=1)), r=Symbol(s='x')), r=Integer(n=7))
+    """
+    maths_object = (a * x) + b
+    return {"maths_object": maths_object}
+
+
+def render_question(*, x, a, b):
+    r"""[sujets0][spé][sujet-1][automatismes][question-8]
+    >>> x, a, b = tm.Symbol(s="x"), tm.Fraction(p=tm.Integer(n=10), q=tm.Integer(n=1)), tm.Integer(n=7)
+    >>> statement = render_question(x=x, a=a, b=b)
+    >>> statement["statement"]
+    "On a représenté ci-contre une droite (\\\\mathcal\\{D\\} dans un repère orthonormé. Donner l'équation de la droite \\\\mathcal\\{D\\} sous la forme $y=ax+b$"
+    """
+
+    statement = r"On a représenté ci-contre une droite (\\mathcal\{D\} dans un repère orthonormé. Donner l'équation de la droite \\mathcal\{D\} sous la forme $y=ax+b$"
+
+    return {
+        "statement": statement,
+    }
+
+
+components = generate_components(None)
+answer = solve(**components)
+question = render_question(**components)
+
+
+print(components | answer | question)
+
+
+missive(
+    {
+        "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-8]",
+        "statement": question["statement"],
+        "answer": {
+            "latex": answer["maths_object"].latex(),
+            "simplified_latex": answer["maths_object"].simplified().latex(),
+            "sympy_exp_data": answer["maths_object"].sympy_expr_data,
+            "formal_repr": repr(answer["maths_object"]),
+        },
+        "components": {
+            "x": components["x"].latex(),
+            "a": components["a"].latex(),
+            "b": components["b"].latex(),
+        },
+    }
+)

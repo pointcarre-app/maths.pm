@@ -1,0 +1,43 @@
+<data-brick>
+  <div id="domain-config" 
+       data-domain_yaml_path="domains/maths-pm.yml" 
+       data-domain_url="{{ DOMAIN_CONFIG['domain_url'] }}"
+       {% for key, value in DOMAIN_CONFIG['domain_specific_metatags'].items() %}
+         data-domain_specific_metatags.{{ key }}="{{ value }}"
+       {% endfor %}
+       {% for key, value in DOMAIN_CONFIG['index_view_specific_metatags'].items() %}
+         data-index_view_specific_metatags.{{ key }}="{{ value }}"
+       {% endfor %}
+       {% for key, value in DOMAIN_CONFIG['extra_head'].items() %}
+         data-extra_head.{{ key }}="{{ value }}"
+       {% endfor %}
+       {% for key, value in DOMAIN_CONFIG['templating'].items() %}
+         data-templating.{{ key }}="{{ value }}"
+       {% endfor %}>
+  </div>
+
+  <div id="backend-public-settings"
+       {% for key, value in backend_public_settings.items() %}
+         data-{{ key|lower }}="{{ value }}"
+       {% endfor %}>
+  </div>
+
+  <div id="nagini-settings" data-endpoint="{{ backend_public_settings.get('NAGINI_ENDPOINT', '') }}">
+  </div>
+
+  <div id="pca-corpus-settings"
+       data-endpoint="{{ backend_public_settings.get('CORPUS_ENDPOINT', '') }}"
+       data-paths-to-load="{{ backend_public_settings.get('CORPUS_PATHS_TO_LOAD', '[]') }}">
+  </div>
+
+  <div id="pca-teachers-settings"
+       data-endpoint="{{ backend_public_settings.get('TEACHERS_ENDPOINT', '') }}"
+       data-paths-to-load="{{ backend_public_settings.get('TEACHERS_FILES_TO_LOAD', '[]') }}">
+  </div>
+
+  <div id="pronoia-sujets-0-qcm-config" 
+       data-partie="1" 
+       data-partie-rdb="Automatismes" 
+       data-generation-mode="maths">
+  </div>
+</data-brick>

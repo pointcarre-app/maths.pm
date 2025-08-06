@@ -1,0 +1,62 @@
+<figure id="teachers-figure-svg"
+        class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-box">
+  <svg viewBox="0 0 500 120"
+       width="100%"
+       height="100%"
+       rx="var(--radius-box)"
+       xmlns="http://www.w3.org/2000/svg"
+       class="block m-0 p-0">
+    <!-- Three boxes with KaTeX content and arrows -->
+
+    <!-- Box 1: 12x-8 = 0 -->
+    <rect x="20" y="25" width="130" height="55" rx="6" class="fill-base-300"></rect>
+    <foreignObject x="22" y="27" width="126" height="51">
+    <div xmlns="http://www.w3.org/1999/xhtml"
+         class="flex items-center justify-center h-full text-base-content">
+      <span class="katex-display">$$12x-8 = 0$$</span>
+    </div>
+    </foreignObject>
+    <text x="85" y="100" text-anchor="middle" class="fill-base-content text-sm">Générer</text>
+
+    <!-- Arrow 1 -->
+    <path d="M 155 52 L 185 52 M 180 47 L 185 52 L 180 57" stroke="currentColor" stroke-width="2" fill="none" opacity="0.7">
+    </path>
+
+    <!-- Box 2: x=\dfrac{2}{3} -->
+    <rect x="190" y="25" width="130" height="55" rx="6" class="fill-primary"></rect>
+    <foreignObject x="192" y="27" width="126" height="51">
+    <div xmlns="http://www.w3.org/1999/xhtml"
+         class="flex items-center justify-center h-full text-primary-content">
+      <span class="katex-display">$$x=\dfrac{2}{3}$$</span>
+    </div>
+    </foreignObject>
+    <text x="255" y="100" text-anchor="middle" class="fill-primary text-sm">Résoudre</text>
+
+    <!-- Arrow 2 -->
+    <path d="M 325 52 L 355 52 M 350 47 L 355 52 L 350 57" stroke="currentColor" stroke-width="2" fill="none" opacity="0.7">
+    </path>
+
+    <!-- Box 3: x=\dfrac{12}{8} -->
+    <rect x="360" y="25" width="130" height="55" rx="6" class="fill-secondary" opacity="0.6"></rect>
+    <foreignObject x="362" y="27" width="126" height="51">
+    <div xmlns="http://www.w3.org/1999/xhtml"
+         class="flex items-center justify-center h-full text-secondary-content">
+      <span class="katex-display">$$ \dfrac{12}{8} \eqsim \dfrac{3}{2} $$</span>
+    </div>
+    </foreignObject>
+    <text x="425" y="100" text-anchor="middle" class="fill-secondary text-sm">Corriger</text>
+  </svg>
+</figure>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.getElementById("teachers-figure-svg"), {
+      delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$", right: "$", display: false},
+          {left: "\\(", right: "\\)", display: false},
+          {left: "\\[", right: "\\]", display: true}
+      ],
+      throwOnError: false
+    });
+  });
+</script>

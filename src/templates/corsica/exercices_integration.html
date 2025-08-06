@@ -1,0 +1,422 @@
+{% extends "base/main-alt.html" %}
+
+{% block view_specific_metatags %}
+  <title>Exercices Mathématiques - Python.Corsica</title>
+{% endblock view_specific_metatags %}
+
+{% block content %}
+  <div class="padding-alt-security max-w-6xl mx-auto mb-14 mt-8">
+    <!-- Header avec titre stylisé -->
+    <div class="bg-gradient-to-r from-blue-500/10 to-green-500/10 rounded-lg p-8 mb-8">
+      <h1 class="text-4xl font-bold text-center mb-4" style="font-family: var(--font-handwritten)">
+        📚 Exercices de Mathématiques - Niveau Seconde
+      </h1>
+      <p class="text-xl text-center text-base-content/70">
+        Apprendre les mathématiques à travers le patrimoine et la culture corse
+      </p>
+    </div>
+
+    <!-- Carte des exercices -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+      <!-- Exercice 1: Triangulation -->
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <figure class="px-6 pt-6">
+          <div class="w-full h-40 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
+            <span class="text-6xl">🗼</span>
+          </div>
+        </figure>
+        <div class="card-body">
+          <div class="badge badge-secondary mb-2">Géométrie</div>
+          <h2 class="card-title">Triangulation des Tours Génoises</h2>
+          <p class="text-sm mb-4">
+            Localisez les tours génoises historiques en utilisant la trigonométrie et la loi des sinus.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="badge badge-outline">Trigonométrie</span>
+            <span class="badge badge-outline">Loi des sinus</span>
+            <span class="badge badge-outline">SVG</span>
+          </div>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary btn-sm" onclick="loadExercise('triangulation')">
+              Commencer l'exercice
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercice 2: Statistiques touristiques -->
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <figure class="px-6 pt-6">
+          <div class="w-full h-40 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg flex items-center justify-center">
+            <span class="text-6xl">📊</span>
+          </div>
+        </figure>
+        <div class="card-body">
+          <div class="badge badge-primary mb-2">Statistiques</div>
+          <h2 class="card-title">Analyse du Tourisme</h2>
+          <p class="text-sm mb-4">
+            Analysez les données touristiques de la Corse avec 3 millions de visiteurs annuels.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="badge badge-outline">Graphiques</span>
+            <span class="badge badge-outline">Moyennes</span>
+            <span class="badge badge-outline">Matplotlib</span>
+          </div>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary btn-sm" onclick="loadExercise('tourism')">
+              Commencer l'exercice
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercice 3: Navigation maritime -->
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <figure class="px-6 pt-6">
+          <div class="w-full h-40 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+            <span class="text-6xl">⚓</span>
+          </div>
+        </figure>
+        <div class="card-body">
+          <div class="badge badge-accent mb-2">Vecteurs</div>
+          <h2 class="card-title">Navigation Maritime</h2>
+          <p class="text-sm mb-4">
+            Calculez les routes optimales entre les ports corses en tenant compte des vents.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="badge badge-outline">Vecteurs</span>
+            <span class="badge badge-outline">Distance</span>
+            <span class="badge badge-outline">Cap</span>
+          </div>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary btn-sm" onclick="loadExercise('navigation')">
+              Commencer l'exercice
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercice 4: Croissance du maquis -->
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <figure class="px-6 pt-6">
+          <div class="w-full h-40 bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg flex items-center justify-center">
+            <span class="text-6xl">🌿</span>
+          </div>
+        </figure>
+        <div class="card-body">
+          <div class="badge badge-success mb-2">Python</div>
+          <h2 class="card-title">Croissance du Maquis</h2>
+          <p class="text-sm mb-4">
+            Modélisez la croissance de la végétation endémique corse avec des suites numériques.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="badge badge-outline">Suites</span>
+            <span class="badge badge-outline">Python</span>
+            <span class="badge badge-outline">Récursivité</span>
+          </div>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary btn-sm" onclick="loadExercise('maquis')">
+              Commencer l'exercice
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercice 5: Fromages AOP -->
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <figure class="px-6 pt-6">
+          <div class="w-full h-40 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
+            <span class="text-6xl">🧀</span>
+          </div>
+        </figure>
+        <div class="card-body">
+          <div class="badge badge-warning mb-2">Python POO</div>
+          <h2 class="card-title">Production Fromages AOP</h2>
+          <p class="text-sm mb-4">
+            Analysez la production de Brocciu et autres fromages corses avec la POO.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="badge badge-outline">Classes</span>
+            <span class="badge badge-outline">Analyse</span>
+            <span class="badge badge-outline">Économie</span>
+          </div>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary btn-sm" onclick="loadExercise('fromages')">
+              Commencer l'exercice
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercice 6: Carte interactive -->
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <figure class="px-6 pt-6">
+          <div class="w-full h-40 bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg flex items-center justify-center">
+            <span class="text-6xl">🗺️</span>
+          </div>
+        </figure>
+        <div class="card-body">
+          <div class="badge badge-info mb-2">Bonus</div>
+          <h2 class="card-title">Carte Interactive SVG</h2>
+          <p class="text-sm mb-4">Créez une carte interactive de la Corse avec calculs de distances.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="badge badge-outline">SVG</span>
+            <span class="badge badge-outline">Pythagore</span>
+            <span class="badge badge-outline">Interactif</span>
+          </div>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary btn-sm" onclick="loadExercise('carte')">
+              Commencer l'exercice
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section des statistiques de progression -->
+    <div class="stats shadow w-full mb-8">
+      <div class="stat">
+        <div class="stat-figure text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               class="inline-block w-8 h-8 stroke-current">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+            </path>
+          </svg>
+        </div>
+        <div class="stat-title">Exercices disponibles</div>
+        <div class="stat-value text-primary">6</div>
+        <div class="stat-desc">Contextualisés pour la Corse</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               class="inline-block w-8 h-8 stroke-current">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
+            </path>
+          </svg>
+        </div>
+        <div class="stat-title">Compétences couvertes</div>
+        <div class="stat-value text-secondary">15+</div>
+        <div class="stat-desc">Programme officiel seconde</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-accent">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               class="inline-block w-8 h-8 stroke-current">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4">
+            </path>
+          </svg>
+        </div>
+        <div class="stat-title">Niveau de difficulté</div>
+        <div class="stat-value text-accent">Adaptatif</div>
+        <div class="stat-desc">De ⭐ à ⭐⭐⭐⭐</div>
+      </div>
+    </div>
+
+    <!-- Zone d'exercice dynamique -->
+    <div id="exercise-container" class="hidden">
+      <div class="bg-base-200 rounded-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 id="exercise-title" class="text-2xl font-bold"></h2>
+          <button class="btn btn-sm btn-ghost" onclick="closeExercise()">✕ Fermer</button>
+        </div>
+        <div id="exercise-content">
+          <!-- Le contenu de l'exercice sera chargé ici dynamiquement -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Section d'information culturelle -->
+    <div class="alert alert-info mb-8">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 24 24"
+           class="stroke-current shrink-0 w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+        </path>
+      </svg>
+      <div>
+        <h3 class="font-bold">Le saviez-vous ?</h3>
+        <div class="text-sm">
+          La Corse compte 360 000 habitants, 1000 km de côtes, 120 plages de sable fin,
+          et le GR20 est considéré comme le sentier de randonnée le plus difficile d'Europe
+          avec ses 180 km et 11 000 m de dénivelé positif !
+        </div>
+      </div>
+    </div>
+
+    <!-- Boutons d'action -->
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/corsica" class="btn btn-outline">← Retour à l'accueil</a>
+      <button class="btn btn-primary" onclick="generateRandomExercise()">🎲 Exercice aléatoire</button>
+      <a href="/jupyterlite" class="btn btn-secondary">📓 Ouvrir JupyterLite</a>
+    </div>
+  </div>
+
+  <!-- Modal pour afficher le code Python -->
+  <dialog id="code_modal" class="modal">
+    <div class="modal-box w-11/12 max-w-5xl">
+      <h3 class="font-bold text-lg mb-4">Code Python de l'exercice</h3>
+      <pre class="bg-base-300 p-4 rounded-lg overflow-x-auto"><code id="python-code"></code></pre>
+      <div class="modal-action">
+        <button class="btn btn-primary" onclick="copyCode()">📋 Copier le code</button>
+        <form method="dialog">
+          <button class="btn">Fermer</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+{% endblock content %}
+
+{% block extra_js %}
+  <script>
+      // Données des exercices
+      const exercises = {
+          triangulation: {
+              title: "Triangulation des Tours Génoises",
+              module: "corsica_triangulation_exercise",
+              description: "Localisez une tour génoise en utilisant deux points d'observation et la trigonométrie."
+          },
+          tourism: {
+              title: "Analyse du Tourisme en Corse",
+              module: "corsica_graph_exercise",
+              description: "Analysez les données touristiques avec statistiques et graphiques."
+          },
+          navigation: {
+              title: "Navigation Maritime",
+              module: "corsica_navigation_exercise",
+              description: "Calculez les routes entre les ports corses."
+          },
+          maquis: {
+              title: "Croissance du Maquis",
+              module: "corsica_python_exercises",
+              function: "generate_python_exercise_1",
+              description: "Modélisez la croissance de la végétation corse."
+          },
+          fromages: {
+              title: "Production de Fromages AOP",
+              module: "corsica_python_exercises",
+              function: "generate_python_exercise_2",
+              description: "Analysez la production de fromages corses."
+          },
+          carte: {
+              title: "Carte Interactive de la Corse",
+              module: "corsica_python_exercises",
+              function: "generate_svg_exercise",
+              description: "Créez une carte SVG interactive."
+          }
+      };
+
+      // Fonction pour charger un exercice
+      async function loadExercise(exerciseId) {
+          const exercise = exercises[exerciseId];
+          if (!exercise) return;
+
+          // Afficher le conteneur d'exercice
+          document.getElementById('exercise-container').classList.remove('hidden');
+          document.getElementById('exercise-title').textContent = exercise.title;
+
+          // Charger le contenu de l'exercice
+          const content = document.getElementById('exercise-content');
+          content.innerHTML = `
+    <div class="loading loading-spinner loading-lg mx-auto block"></div>
+    <p class="text-center mt-4">Chargement de l'exercice...</p>
+  `;
+
+          // Simuler le chargement (en production, cela ferait un appel API)
+          setTimeout(() => {
+              content.innerHTML = `
+      <div class="prose max-w-none">
+        <p class="mb-4">${exercise.description}</p>
+        <div class="bg-base-300 p-4 rounded-lg mb-4">
+          <h3 class="text-lg font-semibold mb-2">Instructions</h3>
+          <p>Cet exercice utilise le module <code>${exercise.module}</code></p>
+          ${exercise.function ? `<p>Fonction: <code>${exercise.function}</code></p>` : ''}
+        </div>
+        <div class="flex gap-4 mt-6">
+          <button class="btn btn-primary" onclick="showPythonCode('${exerciseId}')">
+            👨‍💻 Voir le code Python
+          </button>
+          <button class="btn btn-secondary" onclick="openInJupyter('${exerciseId}')">
+            📓 Ouvrir dans JupyterLite
+          </button>
+        </div>
+      </div>
+    `;
+          }, 1000);
+
+          // Scroll vers l'exercice
+          document.getElementById('exercise-container').scrollIntoView({
+              behavior: 'smooth'
+          });
+      }
+
+      // Fonction pour fermer l'exercice
+      function closeExercise() {
+          document.getElementById('exercise-container').classList.add('hidden');
+      }
+
+      // Fonction pour générer un exercice aléatoire
+      function generateRandomExercise() {
+          const exerciseIds = Object.keys(exercises);
+          const randomId = exerciseIds[Math.floor(Math.random() * exerciseIds.length)];
+          loadExercise(randomId);
+      }
+
+      // Fonction pour afficher le code Python
+      function showPythonCode(exerciseId) {
+          const modal = document.getElementById('code_modal');
+          const codeElement = document.getElementById('python-code');
+
+          // Code exemple (en production, charger depuis le serveur)
+          codeElement.textContent = `# Exercice: ${exercises[exerciseId].title}
+# Module: ${exercises[exerciseId].module}
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Votre code ici...
+print("Exercice chargé avec succès!")`;
+
+          modal.showModal();
+      }
+
+      // Fonction pour copier le code
+      function copyCode() {
+          const code = document.getElementById('python-code').textContent;
+          navigator.clipboard.writeText(code).then(() => {
+              alert('Code copié dans le presse-papiers !');
+          });
+      }
+
+      // Fonction pour ouvrir dans JupyterLite
+      function openInJupyter(exerciseId) {
+          // Rediriger vers JupyterLite avec l'exercice pré-chargé
+          window.open(`/jupyterlite?exercise=${exerciseId}`, '_blank');
+      }
+
+      // Animation au chargement de la page
+      document.addEventListener('DOMContentLoaded', () => {
+          // Animer les cartes d'exercices
+          const cards = document.querySelectorAll('.card');
+          cards.forEach((card, index) => {
+              card.style.opacity = '0';
+              card.style.transform = 'translateY(20px)';
+              setTimeout(() => {
+                  card.style.transition = 'all 0.5s ease';
+                  card.style.opacity = '1';
+                  card.style.transform = 'translateY(0)';
+              }, index * 100);
+          });
+      });
+  </script>
+{% endblock extra_js %}
