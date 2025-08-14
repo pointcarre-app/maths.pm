@@ -18,3 +18,9 @@
 
 
 - [] then ensure you do it also for each product
+
+
+
+## Generic
+
+- [ ] Rule should be one view per router then use only core pm/...

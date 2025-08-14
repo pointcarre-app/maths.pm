@@ -63,18 +63,18 @@ async def corsica(request: Request):
 ## TODO: will be imported from root and dynamically rebuilt
 
 
-@corsica_router.get("/pm/<origin:path>", response_class=HTMLResponse)
-async def pm(request: Request):
-    # try:
-    # Build template context with product-specific settings
-    # context = {
-    #
-    # }
+# @corsica_router.get("/pm/<origin:path>", response_class=HTMLResponse)
+# async def pm(request: Request):
+#     # try:
+#     # Build template context with product-specific settings
+#     # context = {
+#     #
+#     # }
 
-    return settings.templates.TemplateResponse(
-        "corsica/index.html",
-        {
-            "request": request,
-            # "page": {"title": "Nagini - Python dans le navigateur"},
-        },
-    )
+#     return settings.templates.TemplateResponse(
+#         "corsica/index.html",
+#         {
+#             "request": request,
+#             # "page": {"title": "Nagini - Python dans le navigateur"},
+#         },
+#     )
