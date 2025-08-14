@@ -121,8 +121,14 @@ To add new routes, edit the `routes` list in `src/build.py`.
 
 1. Go to your repository settings on GitHub
 2. Navigate to "Pages" in the sidebar
-3. Source should be set to "GitHub Actions"
-4. The site will be available at: `https://[username].github.io/[repository-name]/`
+3. Source should be set to "Deploy from a branch"
+4. Branch should be set to "gh-pages" and folder to "/ (root)"
+5. The site will be available at: `https://[username].github.io/[repository-name]/`
+
+**Alternative Setup (GitHub Actions):**
+If you want to use GitHub Actions deployment:
+1. Set Source to "GitHub Actions" 
+2. Ensure the workflow has proper permissions (already configured)
 
 ## 🐛 Troubleshooting
 

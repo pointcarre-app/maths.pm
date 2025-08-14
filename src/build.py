@@ -121,10 +121,10 @@ class StaticSiteBuilder:
             "/readme",
             "/settings",
             "/sujets0",
-            "/corsica",
+            "/corsica/",  # Use trailing slash to avoid redirect
             "/nagini",
             "/api/health",
-            "/api/products",
+            # "/api/products",  # This endpoint doesn't exist
             "/api/settings",
             "/kill-service-workers",
             "/pm",  # PM root directory
@@ -141,13 +141,14 @@ class StaticSiteBuilder:
         routes.extend(jupyterlite_routes)
 
         # Add PM example routes (these are important documentation)
+        # Note: PM routes need the .md extension
         pm_routes = [
-            "/pm/documentation/README",
-            "/pm/examples/i_radio_example",
-            "/pm/pyly/00_index",
-            "/pm/pyly/01_premiers_pas",
-            "/pm/corsica/a_troiz_geo",
-            "/pm/corsica/e_seconde_stats_python",
+            "/pm/documentation/README.md",
+            "/pm/examples/i_radio_example.md",
+            "/pm/pyly/00_index.md",
+            "/pm/pyly/01_premiers_pas.md",
+            "/pm/corsica/a_troiz_geo.md",
+            "/pm/corsica/e_seconde_stats_python.md",
         ]
         routes.extend(pm_routes)
 
