@@ -145,7 +145,7 @@ feedback_incorrect: "Réponse incorrecte."
 
 
 
-Il y a en tout $58$ carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> et $117$ carrés colorés <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span>.
+Il y a en tout $58$ carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> et $59$ carrés colorés <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span>.
 {: .alert .alert-info .alert-soft}
 
 
@@ -191,7 +191,7 @@ step: 100
 correct: 11700
 unit: "$km^2$"
 tolerance: 0
-feedback_correct: "$117 \\times 10$ $km$ $\\times 10$ $km$ = $11700$ $km^2$"
+feedback_correct: "$(59+58) \\times 10$ $km$ $\\times 10$ $km$ = $11700$ $km^2$"
 feedback_incorrect: "Réponse incorrecte."
 # hint: "They are arranged in 3 rows of 4 apples."
 ```
