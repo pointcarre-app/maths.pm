@@ -96,11 +96,11 @@ La couleur du bouton représente la couleur du point sur la carte. Parmi les 4 p
 
 
 Les conversions entre des données de latitude et longitude exprimées en degrés, minutes et secondes vers des distances en kilomètres sont assez complexes et dépassent largement le niveau troisième.
-{: .alert .alert-info .alert-soft}
+{: .alert .alert-info .alert-outline}
 
 
 Nous nous sommes donc assurés de choisir un quadrillage qui tombe *"quasi-juste"* : chaque carré fait $10$ $km$ de côté.
-{: .alert .alert-success .alert-soft}
+{: .alert .alert-success .alert-outline}
 
 
 
@@ -146,7 +146,7 @@ feedback_incorrect: "Réponse incorrecte."
 
 
 Il y a en tout $58$ carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> et $59$ carrés colorés <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span>.
-{: .alert .alert-info .alert-soft}
+{: .alert .alert-info .alert-outline}
 
 
 
