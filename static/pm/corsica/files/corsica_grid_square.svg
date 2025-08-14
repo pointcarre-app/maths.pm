@@ -568,11 +568,11 @@ z
      <!-- Labels using foreignObject (KaTeX_Main font via CSS) -->
      <!-- Bottom label centered below the square -->
      <foreignObject x="434.039526" y="603.366326" width="60" height="28">
-       <div xmlns="http://www.w3.org/1999/xhtml" style="width:60px;height:28px;display:flex;align-items:center;justify-content:center;color: var(--color-base-content); font-family: KaTeX_Main, 'Times New Roman', serif;  line-height: 1;">$10$ $km$</div>
+       <div xmlns="http://www.w3.org/1999/xhtml" style="width:60px;height:28px;color: var(--color-base-content); font-family: KaTeX_Main, 'Times New Roman', serif;  line-height: 1;">10 km</div>
      </foreignObject>
      <!-- Left label centered to the left of the square -->
      <foreignObject x="365.755589" y="550.08239" width="60" height="28">
-       <div xmlns="http://www.w3.org/1999/xhtml" style="width:60px;height:28px;display:flex;align-items:center;justify-content:center;color: var(--color-base-content); font-family: KaTeX_Main, 'Times New Roman', serif;  line-height: 1;">$10$ $km$</div>
+       <div xmlns="http://www.w3.org/1999/xhtml" style="width:60px;height:28px;color: var(--color-base-content); font-family: KaTeX_Main, 'Times New Roman', serif;  line-height: 1;">10 km</div>
      </foreignObject>
    </g>
 

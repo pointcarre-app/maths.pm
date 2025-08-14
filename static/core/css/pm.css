@@ -24,7 +24,7 @@
 
 
 .fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="p_"] {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
 }
 
 
@@ -48,6 +48,60 @@
 pm-radio > div > button {
   border-width: 1.5px !important;
   font-weight: 400 !important;
+  /* DEFAULT: Filled/solid appearance */
+  --btn-shadow: "" !important;
+  --btn-fg: var(--color-base-100) !important;
+  --btn-bg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: var(--btn-color, var(--color-base-content)) !important;
+  --btn-noise: none !important;
+}
+
+/* Default filled state for outline buttons */
+pm-radio > div > button.btn-outline {
+  --btn-bg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-fg: var(--color-base-100) !important;
+}
+
+/* Default filled state for soft buttons */
+pm-radio > div > button.btn-soft {
+  --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 5%, var(--color-base-100)) !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 30%, var(--color-base-100)) !important;
+}
+
+/* Color-specific overrides for filled default state */
+pm-radio > div > button.btn-primary {
+  --btn-color: var(--color-primary) !important;
+  --btn-bg: var(--color-primary) !important;
+  --btn-fg: var(--color-primary-content) !important;
+}
+
+pm-radio > div > button.btn-secondary {
+  --btn-color: var(--color-secondary) !important;
+  --btn-bg: var(--color-secondary) !important;
+  --btn-fg: var(--color-secondary-content) !important;
+}
+
+pm-radio > div > button.btn-accent {
+  --btn-color: var(--color-accent) !important;
+  --btn-bg: var(--color-accent) !important;
+  --btn-fg: var(--color-accent-content) !important;
+}
+
+/* HOVER: Outline appearance */
+pm-radio > div > button:hover {
+  --btn-shadow: "" !important;
+  --btn-bg: transparent !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: var(--btn-color, var(--color-base-content)) !important;
+  --btn-noise: none !important;
+}
+
+/* Hover for soft buttons */
+pm-radio > div > button.btn-soft:hover {
+  --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 8%, var(--color-base-100)) !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 10%, var(--color-base-100)) !important;
 }
 
 
@@ -156,7 +210,7 @@ h2.fragment {
 }
 
 h3.fragment {
-  margin: 1.25rem 0 0.6rem;
+  margin: 2.5rem 0 0.6rem;
   line-height: 1.35;
 }
 
@@ -177,7 +231,14 @@ h4.fragment {
 
 
 
+.fragment-wrapper[data-f_type="radio_"] + .fragment-wrapper[data-f_type="p_"].statement {
+  margin-top: 1.5rem;
+}
 
+
+[id^="number-feedback-"] .alert {
+  font-size: 1.1rem !important;
+}
 
 
 /* Looser when following content blocks */
@@ -552,11 +613,39 @@ html:not(.pm-ready) [id^="radio-explanation-"] {
   margin-block-end: 0;
 }
 
+
+
+.alert {
+  padding: 1rem !important;
+}
+
+/* Radio feedback alerts - match general text size */
+[id^="radio-feedback-"] .alert,
+[id^="radio-explanation-"] .alert {
+  font-size: 1.1rem !important;
+}
+
+/* Number input feedback alerts - match general text size */
+[id^="number-feedback-"] .alert {
+  font-size: 1.1rem !important;
+}
+
+/* Remove bottom margin from last alert in number feedback */
+[id^="number-feedback-"] .alert:last-child {
+  margin-bottom: 0 !important;
+}
+
+
+[id^="radio-feedback-"] .alert.alert-info {
+  background-color: var(--color-primary-ghost) !important;
+  color: var(--color-base-content);
+}
+
 /* DaisyUI alert primary + outline combo using root.css tokens */
 .alert.alert-primary.alert-outline {
-  background-color: transparent !important;
-  border: 1.5px solid var(--color-primary) !important;
-  color: var(--color-primary) !important;
+  background-color: var(--color-base-300) !important;
+  border: 1.5px solid var(--color-base-300) !important;
+  color: var(--color-base-content) !important;
 }
 
 .alert.alert-primary.alert-outline * { color: inherit; }
@@ -629,6 +718,7 @@ html:not(.pm-ready) [id^="radio-explanation-"] {
 .pm-cols {
   display: grid;
   gap: 1rem;
+  margin-bottom: 1.5rem !important;
 }
 
 /* default to single column on mobile */
@@ -756,7 +846,59 @@ html:not(.pm-ready) [id^="radio-explanation-"] {
 
 .statement {
   padding: 1rem !important;
-  background-color: transparent !important;
+  background-color: var(--color-base-content-ghost-variant) !important;
   border-radius: var(--radius-box) !important;
-  border: 1.5px solid var(--color-primary) !important;
+  border: 1.5px solid transparent !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Statement border colors based on radio answer */
+.statement.statement-correct {
+  border-color: var(--color-success) !important;
+}
+
+.statement.statement-incorrect {
+  border-color: var(--color-error) !important;
+}
+
+.statement.statement-info {
+  border-color: var(--color-info) !important;
+}
+
+/* =============================================================================
+   PM Number Input Button Style - Same as radio buttons
+   ============================================================================= */
+pm-number-input button.btn {
+  border-width: 1.5px !important;
+  font-weight: 400 !important;
+  /* DEFAULT: Filled/solid appearance */
+  --btn-shadow: "" !important;
+  --btn-fg: var(--color-base-100) !important;
+  --btn-bg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: var(--btn-color, var(--color-base-content)) !important;
+  --btn-noise: none !important;
+}
+
+/* Default filled state for soft buttons */
+pm-number-input button.btn-soft {
+  --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 5%, var(--color-base-100)) !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 30%, var(--color-base-100)) !important;
+}
+
+/* HOVER: Outline appearance */
+pm-number-input button.btn:hover {
+  --btn-shadow: "" !important;
+  --btn-bg: transparent !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: var(--btn-color, var(--color-base-content)) !important;
+  --btn-noise: none !important;
+}
+
+/* Hover for soft buttons */
+pm-number-input button.btn-soft:hover {
+  --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 8%, var(--color-base-100)) !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 10%, var(--color-base-100)) !important;
+}
+

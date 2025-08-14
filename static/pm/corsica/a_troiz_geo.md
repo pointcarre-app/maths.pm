@@ -17,12 +17,12 @@ Ou comment apprendre à calculer une surface à partir d'une carte, simplement e
 
 
 
-## 🔲 Quadrillage sur une surface plane
+## 🗺️ Système de coordonnées & unités
 
 --- {: .pm-cols-sm-2 gap-3 .cols-60-40 .mt-6}
 
-On a représenté la Corse sur la _Carte 1_. Cette carte est en $2$ dimensions (sur une surface plane).<br><br>On superpose un quadrillage assez particulier sur la carte, il s'agit du type de quadrillage qui sont (entre autres) sur les globes terrestres.<br><br>
-**C'est grâce à ce quadrillage que tu vas pouvoir calculer la surface de la Corse.**
+On a représenté la Corse sur la _Carte 1_. Cette carte est en $2$ dimensions (sur une surface plane).<br>On superpose un quadrillage assez particulier sur la carte, il s'agit du type de quadrillage qui sont (entre autres) sur les globes terrestres.<br><br>
+***C'est grâce à ce quadrillage que tu vas pouvoir calculer la surface de la Corse.***
 {: .pm-self-center}
 
 ![Carte 1](/static/pm/corsica/files/corsica_grid_with_grid.svg)
@@ -30,7 +30,12 @@ On a représenté la Corse sur la _Carte 1_. Cette carte est en $2$ dimensions (
 
 ---
 
-## 📏 Unités
+
+
+
+Tu te rappelles probablement que sur les cartes, on utilise des unités de mesure spécifiques qui ont plus à voir avec des angles qu'avec des distances.
+
+
 
 Sur cette carte, les lignes horizontales de ce quadrillage sont des lignes de même :
 {: .statement}
@@ -54,14 +59,18 @@ Pour exprimer des latitudes et longitudes, on utilise des unités de mesure spé
 - Kilomètres {:21 | Non, car ces coordonnées ne sont pas appropriées aux géométriques sphériques, or la Terre est une sphère.}
   {: .i-radio}
 
-## 📍 Coordonnées d'Ajaccio et Bastia
+
+
+## 📍Ports d'Ajaccio et Bastia
+
+Sur la _Carte 2_, on a représenté les positions des ports d'Ajaccio et Bastia avec deux points deux couleurs différentes. Sachant que les coordonnées des ports de ces deux villes sont :
 
 
 ![Carte 2 : Corse, ports d'Ajaccio et Bastia](/static/pm/corsica/files/corsica_grid_with_cities.svg)
-{: .max-w-[500px] .mx-auto}
+{: .max-w-[600px] .mx-auto}
 
 
-Sur la _Carte 2_, on a représenté les positions des ports d'Ajaccio et Bastia avec deux points deux couleurs différentes. Sachant que les coordonnées des ports de ces deux villes sont :
+
 
 | Port    | Latitude       | Longitude     |
 | ------- | -------------- | ------------- |
@@ -73,10 +82,10 @@ Sur la _Carte 2_, on a représenté les positions des ports d'Ajaccio et Bastia 
 La couleur du bouton représente la couleur du point sur la carte. Parmi les 4 propositions ci-dessous, deux sont correctes, deux sont fausses. Clique sur une proposition correcte.
 {: .statement}
 
-- <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> Ajaccio {:21 .btn-secondary .btn-outline}
-- <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> Bastia {:20 .btn-secondary .btn-outline}
-- <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> Ajaccio {:20 .btn-accent .btn-outline}
-- <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> Bastia {:21 .btn-accent .btn-outline}
+- <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> Ajaccio {:21}
+- <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> Bastia {:20}
+- <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> Ajaccio {:20}
+- <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> Bastia {:21}
 - Ajaccio a la plus petite longitude et est donc plus à l'ouest que Bastia. Sa longitude est également plus petite que celle de Bastia, donc Ajaccio est plus au Sud. Donc le point <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> correspond à Ajaccio et le point <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> correspond à Bastia. {:29}
 {: .i-radio}
 
@@ -136,8 +145,7 @@ feedback_incorrect: "Réponse incorrecte."
 
 
 
-- Il y a en tout $58$ carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span>.
-- Il y a en tout $117$ carrés colorés <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span>.
+Il y a en tout $58$ carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> et $117$ carrés colorés <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span>.
 {: .alert .alert-info .alert-soft}
 
 
@@ -160,7 +168,7 @@ step: 100
 correct: 5800
 unit: "$km^2$"
 tolerance: 0
-feedback_correct: "$58 \\times 10$ $km$ $\\times 10$ $km$ = 5800 $km^2$"
+feedback_correct: "$58 \\times 10$ $km$ $\\times 10$ $km$ = $5800$ $km^2$"
 feedback_incorrect: "Réponse incorrecte."
 # hint: "They are arranged in 3 rows of 4 apples."
 ```
@@ -183,20 +191,64 @@ step: 100
 correct: 11700
 unit: "$km^2$"
 tolerance: 0
-feedback_correct: "$117 \\times 10$ $km$ $\\times 10$ $km$ = 11700 $km^2$"
+feedback_correct: "$117 \\times 10$ $km$ $\\times 10$ $km$ = $11700$ $km^2$"
 feedback_incorrect: "Réponse incorrecte."
 # hint: "They are arranged in 3 rows of 4 apples."
 ```
 
 
 
-## 🏘️ Notion de voisinage
+
+
+Calculer la moyenne de ces deux valeurs permet d'obtenir astucieusement une estimation de la surface de l'île. Calcule cette moyenne en $km^2$.
+{: .statement}
+
+
+```yaml
+NumberInputPCA: v0.0.1
+id: surface_mean
+type: number
+# label: "How many apples are in the basket?"
+min: 0
+max: 20000
+step: 100
+correct: 8750
+unit: "$km^2$"
+tolerance: 0
+feedback_correct: "$\\frac{5800 + 11700}{2} = 8750$ $km^2$"
+feedback_incorrect: "Réponse incorrecte."
+# hint: "They are arranged in 3 rows of 4 apples."
+```
+
+
+
+
+À l'aide d'une rechercher sur internet, calcule la différence entre la surface de l'île et la surface que tu as calculée ci-dessus.
+{: .statement}
+
+
+
+```yaml
+NumberInputPCA: v0.0.1
+id: surface_mean
+type: number
+# label: "How many apples are in the basket?"
+min: 0
+max: 1000
+step: 1
+correct: 28
+unit: "$km^2$"
+tolerance: 0
+feedback_correct: "$8750 - 8722 = 28$ $km^2$. Ce qui fait une erreur de $28 / 8722 = 0.00321$, soit $0.321\\%$."
+feedback_incorrect: "Réponse incorrecte."
+```
+
+
+<!-- ## 🏘️ Notion de voisinage
 
 🏗️ 🏗️ 🏗️ À paraître en 2026.
 *Tu découvriras ici une façon encore plus maline de sélectionner les carrés que l'on inclut dans la surface de l'île, grâce à la notion de voisinage. Cette méthode permet d'être encore plus précis que ci-dessus*
 {: .alert .alert-info .alert-soft .mt-12}
 
-
-
-
+ -->
 
