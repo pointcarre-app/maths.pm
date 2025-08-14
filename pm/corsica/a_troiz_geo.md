@@ -4277,7 +4277,7 @@ L 624.089137 745.303303
             
             
               
-              <div class="fragment-wrapper alert alert-soft alert-info" data-f_type="ul_">
+              <div class="fragment-wrapper alert-info alert alert-soft" data-f_type="ul_">
                 <ul class="fragment" data-f_type="ul_">
   <ul class="">
 <li>Il y a en tout $58$ carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span>.</li>
