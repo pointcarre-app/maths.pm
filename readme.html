@@ -132,7 +132,7 @@
   <section class="fixed inset-0 w-screen h-screen z-[-10] overflow-hidden">
 
 
-  <!-- <a href="http://127.0.0.1:8000/" class="flex items-center gap-1 sm:gap-2 bg-transparent pl-4 pt-3" style="position:absolute; top:0; left:0">
+  <!-- <a href="../" class="flex items-center gap-1 sm:gap-2 bg-transparent pl-4 pt-3" style="position:absolute; top:0; left:0">
     <p class="w-8 h-8"><svg color="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 82">
   <g transform="translate(0,0)">
   <rect class="stroke-primary" x="5" y="5" width="72" height="72"  fill="transparent" stroke-width="10" rx="4" ry="4" stroke-linejoin="" />
@@ -381,11 +381,11 @@
        
          data-templating.button_primary_text="Ressources"
        
-         data-templating.button_primary_href="/"
+         data-templating.button_primary_href="../"
        
          data-templating.button_ghost_text="Contact"
        
-         data-templating.button_ghost_href="/contact"
+         data-templating.button_ghost_href="../contact"
        >
   </div>
 
@@ -438,12 +438,12 @@
 </svg>
     </a>
     <!-- Mobile title shown next to logo on small screens -->
-    <a href="/" class="navbar-alt-title-mobile">Maths.pm</a>
+    <a href="../" class="navbar-alt-title-mobile">Maths.pm</a>
   </div>
   <div class="navbar-center">
     <div class="text-2xl sm:text-3xl">
       
-        <a href="/" class="font-handwritten">Maths.pm</a>
+        <a href="../" class="font-handwritten">Maths.pm</a>
       
     </div>
   </div>
@@ -574,12 +574,12 @@
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
       </svg>
     </a>
-    <a href="/"
+    <a href="../"
        class="btn btn-sm sm:btn-base btn-primary"
        style="padding: 0.5rem 0.75rem;
               box-shadow: none !important;
               font-weight:300">Ressources</a>
-    <a href="/contact"
+    <a href="../contact"
        class="btn btn-sm sm:btn-base btn-ghost"
        style="padding: 0.5rem 0.75rem;
               box-shadow: none !important;
@@ -630,7 +630,7 @@
     <li>
 
 
-      <a href="/dashboard" class="flex justify-between items-center">
+      <a href="../dashboard" class="flex justify-between items-center">
 
 
         
@@ -639,7 +639,7 @@
     </li>
 
     <li>
-      <a href="/doppel"
+      <a href="../doppel"
          class="flex justify-between items-center hover:bg-primary hover:text-primary-content"
          style="width: 100% !important;
                 background-color: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100))">
@@ -665,7 +665,7 @@
     </li>
 
     <li>
-      <a href="/doppel"
+      <a href="../doppel"
          class="flex justify-between items-center hover:bg-primary hover:text-primary-content"
          style="width: 100% !important;
                 background-color: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100))">
@@ -880,7 +880,7 @@
     <div class="breadcrumbs text-sm mb-6">
       <ul>
         <li>
-          <a href="http://127.0.0.1:8000/" class="link link-hover">Home</a>
+          <a href="../" class="link link-hover">Home</a>
         </li>
         <li>README</li>
       </ul>
@@ -1011,21 +1011,21 @@ uvicorn src:app --host 0.0.0.0 --port 8000 --reload --log-level info
 uvicorn src:app --host 0.0.0.0 --port 8000 --reload
 
 # Main application
-curl http://localhost:8000/                    # Homepage
-curl http://localhost:8000/api/products        # Products API
-curl http://localhost:8000/api/health          # Health check
+curl /                    # Homepage
+curl /api/products        # Products API
+curl /api/health          # Health check
 
 # Documentation
-# Visit: http://localhost:8000/readme          # Beautiful README view
+# Visit: /readme          # Beautiful README view
 
 # Educational tools
-# Visit: http://localhost:8000/sujets0         # Math exercises
+# Visit: /sujets0         # Math exercises
 
 # JupyterLite views (visit in browser)
-# http://localhost:8000/jupyterlite/lab        # Full Lab
-# http://localhost:8000/jupyterlite/repl       # REPL console
-# http://localhost:8000/jupyterlite/embed      # Demo page
-# http://localhost:8000/jupyter                # Old link (redirects)
+# /jupyterlite/lab        # Full Lab
+# /jupyterlite/repl       # REPL console
+# /jupyterlite/embed      # Demo page
+# /jupyter                # Old link (redirects)
 </code></pre>
 
 <h2 id="project-structure-architecture">📁 <strong>Project Structure &amp; Architecture</strong></h2>
@@ -1139,7 +1139,7 @@ curl http://localhost:8000/api/health          # Health check
 <h2 id="development">🛠️ Development</h2>
 <p><strong>Auto-reload is enabled</strong> - the server watches for changes in Python files, YAML configurations, and templates.</p>
 <p><strong>Health Check:</strong></p>
-<pre class="codehilite"><code class="language-bash">curl http://localhost:8000/api/health
+<pre class="codehilite"><code class="language-bash">curl /api/health
 </code></pre>
 
 <pre class="codehilite"><code class="language-json">{
@@ -1252,8 +1252,8 @@ uvicorn src:app --host 0.0.0.0 --port 8000 --reload
 
 <p>Visit:</p>
 <ul>
-<li><code>http://localhost:8000/</code> – Home</li>
-<li><code>http://localhost:8000/pm/pyly/01_premiers_pas.md?format=html</code> – Sample PM page</li>
+<li><code>/</code> – Home</li>
+<li><code>/pm/pyly/01_premiers_pas.md?format=html</code> – Sample PM page</li>
 </ul>
 <p>Frontend entry points:</p>
 <ul>
@@ -1387,7 +1387,7 @@ Subscribe to My Newsletter
         <p class="mb-6">
 Get the latest posts delivered straight to your inbox.
         </p>
-        <form action="/subscribe" method="POST" class="flex justify-center">
+        <form action="../subscribe" method="POST" class="flex justify-center">
           <input type="email" placeholder="Enter your email" class="input input-bordered w-full max-w-xs mr-2" required />
           <button type="submit" class="btn btn-primary">
 Subscribe
