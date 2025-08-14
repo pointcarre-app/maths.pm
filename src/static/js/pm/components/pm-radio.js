@@ -60,17 +60,17 @@ export class PMRadio extends LitElement {
     allButtons.forEach((btn) => {
       // Remove all DaisyUI color classes to ensure clean state
       btn.classList.remove('btn-success', 'btn-error', 'btn-primary', 'btn-secondary', 'btn-accent', 'btn-neutral', 'btn-info', 'btn-warning');
-      btn.classList.add('btn-primary', 'btn-outline');
+      btn.classList.add('btn-outline');
     });
 
     // Styling depending on correctness
     if (flag === 20) {
       // Correct clicked: highlight selected as solid success
-      button.classList.remove('btn-primary', 'btn-outline');
+      button.classList.remove('btn-outline');
       button.classList.add('btn-success');
     } else if (flag === 21) {
       // Wrong clicked: keep selected as solid error, softly show the correct choices
-      button.classList.remove('btn-primary', 'btn-outline');
+      button.classList.remove('btn-outline');
       button.classList.add('btn-error');
       // Soft-highlight all correct answers (flag 20) using outline success
       allButtons.forEach((btn) => {
@@ -84,8 +84,8 @@ export class PMRadio extends LitElement {
         }
       });
     } else {
-      // Neutral/other choice clicked; keep primary outline
-      button.classList.add('btn-primary');
+      // Neutral/other choice clicked; keep outline style
+      // Already has btn-outline from the reset, no additional styling needed
     }
 
     // Build feedback area and render multiple alerts based on rules
@@ -156,6 +156,9 @@ export class PMRadio extends LitElement {
       this._renderLatex(explanationArea);
     }
 
+    // Color the statement above based on answer
+    this._colorPreviousStatement(flag);
+
     // Disable the whole radio group after first click while keeping it visible
     this._disableGroup(groupIndex);
 
@@ -210,6 +213,39 @@ export class PMRadio extends LitElement {
         }
       });
     });
+  }
+
+  _colorPreviousStatement(flag) {
+    try {
+      // Find the wrapper of this radio component
+      const currentWrapper = this.closest('.fragment-wrapper');
+      if (!currentWrapper) return;
+      
+      // Look for previous sibling that contains a statement
+      let prevElement = currentWrapper.previousElementSibling;
+      while (prevElement) {
+        // Check if this element has the statement class
+        const statement = prevElement.querySelector('.statement') || 
+                         (prevElement.classList.contains('statement') ? prevElement : null);
+        if (statement) {
+          // Remove any existing answer classes
+          statement.classList.remove('statement-correct', 'statement-incorrect', 'statement-info');
+          
+          // Add appropriate class based on flag
+          if (flag === 20) {
+            statement.classList.add('statement-correct');
+          } else if (flag === 21) {
+            statement.classList.add('statement-incorrect');
+          } else {
+            statement.classList.add('statement-info');
+          }
+          break;
+        }
+        prevElement = prevElement.previousElementSibling;
+      }
+    } catch (e) {
+      // Fail silently
+    }
   }
 
   _disableGroup(groupIndex) {

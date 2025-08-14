@@ -34,11 +34,17 @@
 
 
   /* More daisyUI to avoid recomputing colors */
+  /* TODO: shouldnt be soft ?
+   */
   --color-primary-ghost: color-mix(in oklab, var(--color-primary, var(--color-base-content)) 8%, var(--color-base-100));
   --color-secondary-ghost: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100));
   --color-accent-ghost: color-mix(in oklab, var(--color-accent, var(--color-base-content)) 8%, var(--color-base-100));
-  
+  --color-base-content-ghost: color-mix(in oklab, var(--color-base-content, var(--color-base-content)) 8%, var(--color-base-100));
 
+
+
+  --color-base-content-ghost-variant: color-mix(in oklab, var(--color-base-content, var(--color-base-content)) 2%, var(--color-base-100));
+  
 
   --scrollbar-color: var(--color-primary-content);
   --scrollbar-color-bg: var(--color-primary-content);

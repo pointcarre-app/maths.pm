@@ -11,7 +11,7 @@
     {% for radio in radios %}
       {% if radio.flag != -1 and radio.flag != 29 %}
         {# Build button classes: default classes + custom classes from radio data #}
-        {% set default_classes = "btn btn-primary btn-outline hover:btn-primary min-w-[50px] px-3 text-base font-normal" %}
+        {% set default_classes = "btn btn-outline min-w-[50px] px-3 text-base font-normal" %}
         {% set custom_classes = radio.classes if radio.classes else "" %}
         {# If custom classes contain 'btn-' variants, they override defaults. Otherwise, merge. #}
         {% if custom_classes and (custom_classes.find('btn-') != -1 or custom_classes.find('pre-') != -1) %}
@@ -21,7 +21,7 @@
           {# No custom btn styling - use defaults + any custom utility classes #}
           {% set button_classes = default_classes + (" " + custom_classes if custom_classes else "") %}
         {% endif %}
-        <button class="{{ button_classes }}"
+        <button class="{{ button_classes }} btn-soft"
                 data-radio-group="{{ fragment_index }}"
                 data-flag="{{ radio.flag }}"
                 data-feedback="{{ radio.feedback | e if radio.feedback else '' }}">

@@ -1,0 +1,766 @@
+/* =============================================================================
+   PM FRAMEWORK CSS - Rationalized Version
+   ============================================================================= */
+
+/* =============================================================================
+   1. CSS CUSTOM PROPERTIES & VARIABLES
+   ============================================================================= */
+:root {
+  /* Typography rhythm */
+  --pm-line-height: 1.5;
+  --pm-font-size: 1.1rem;
+  
+  /* Spacing scale */
+  --pm-space-xs: 0.25rem;
+  --pm-space-sm: 0.5rem;
+  --pm-space-md: 0.75rem;
+  --pm-space-lg: 1rem;
+  --pm-space-xl: 1.5rem;
+  --pm-space-2xl: 2.25rem;
+  --pm-space-3xl: 3rem;
+  --pm-space-4xl: 4.5rem;
+  
+  /* Animation timings */
+  --pm-transition-fast: 200ms ease;
+  --pm-transition-normal: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  --pm-transition-slow: 300ms ease;
+  
+  /* Border styles */
+  --pm-border-width: 1.5px;
+  --pm-border-color: var(--color-base-300);
+  
+  /* Component colors */
+  --pm-ok: hsl(var(--su));
+  --pm-err: hsl(var(--er));
+}
+
+/* =============================================================================
+   2. BASE CONTAINER STYLES
+   ============================================================================= */
+.pm-container {
+  line-height: var(--pm-line-height);
+  font-size: var(--pm-font-size);
+}
+
+/* =============================================================================
+   3. TYPOGRAPHY & HEADINGS
+   ============================================================================= */
+
+/* Heading base styles */
+h1.fragment {
+  margin: var(--pm-space-lg) 0;
+  line-height: 1.25;
+}
+
+h2.fragment {
+  border-top: var(--pm-border-width) solid var(--pm-border-color);
+  padding-top: var(--pm-space-lg);
+  margin: var(--pm-space-4xl) 0 var(--pm-space-xl);
+  line-height: 1.3;
+}
+
+h3.fragment {
+  margin: 1.25rem 0 0.6rem;
+  line-height: 1.35;
+}
+
+h4.fragment {
+  margin: var(--pm-space-lg) 0 var(--pm-space-sm);
+  line-height: 1.4;
+}
+
+/* Heading context adjustments */
+.fragment-wrapper[data-f_type="h2_"] {
+  margin-top: var(--pm-space-3xl);
+}
+
+.fragment-wrapper[data-f_type="h2_"] + .fragment-wrapper[data-f_type="h3_"] h3.fragment {
+  margin-top: 0.7rem;
+}
+
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="h1_"] {
+  margin-top: var(--pm-space-xs);
+}
+
+/* =============================================================================
+   4. PARAGRAPH & TEXT SPACING
+   ============================================================================= */
+
+/* Paragraph spacing */
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="p_"] {
+  margin-top: var(--pm-space-md);
+}
+
+/* Content-heavy elements following paragraphs */
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="svg_"],
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="codex_"],
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="code_"],
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="graph_"],
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="tabvar_"] {
+  margin-top: var(--pm-space-2xl);
+}
+
+/* Paragraphs before heavy content */
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="image_"]) p.fragment,
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="table_"]) p.fragment,
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="codex_"]) p.fragment,
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="code_"]) p.fragment,
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="graph_"]) p.fragment,
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="tabvar_"]) p.fragment {
+  margin-bottom: var(--pm-space-2xl);
+}
+
+/* =============================================================================
+   5. LISTS
+   ============================================================================= */
+ul.fragment,
+ol.fragment {
+  margin: var(--pm-space-sm) 0 var(--pm-space-lg) 1.25rem;
+}
+
+ul.fragment li,
+ol.fragment li {
+  margin: var(--pm-space-xs) 0;
+}
+
+/* =============================================================================
+   6. TABLES
+   ============================================================================= */
+
+/* Fragment tables */
+table.fragment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.fragment-table th,
+table.fragment-table td {
+  border-bottom: 1px solid hsl(var(--bc) / 0.15);
+  padding: var(--pm-space-sm) 0.6rem;
+  vertical-align: top;
+}
+
+table.fragment-table tr th {
+  font-weight: 400;
+}
+
+table.fragment-table tr th:first-child,
+table.fragment-table tr td:first-child {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Markdown tables */
+.fragment table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 !important;
+}
+
+.fragment table th,
+.fragment table td {
+  border: 1px solid hsl(var(--bc) / 0.2);
+  padding: var(--pm-space-sm) var(--pm-space-md);
+  text-align: left;
+}
+
+.fragment table th {
+  background-color: hsl(var(--b2));
+  font-weight: 600;
+}
+
+.fragment table tr:nth-child(even) {
+  background-color: hsl(var(--b2) / 0.3);
+}
+
+/* Table spacing */
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="table_"] {
+  margin-top: var(--pm-space-md);
+}
+
+.fragment-wrapper[data-f_type="table_"] + .fragment-wrapper[data-f_type="p_"] {
+  margin-top: var(--pm-space-2xl);
+}
+
+/* =============================================================================
+   7. MEDIA ELEMENTS (Images, SVGs)
+   ============================================================================= */
+
+/* Images */
+.fragment.image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: var(--pm-space-xs) 0 var(--pm-space-lg);
+}
+
+/* SVGs */
+.fragment.svg {
+  display: block;
+  width: 100%;
+  margin: var(--pm-space-xs) 0 var(--pm-space-lg);
+}
+
+.fragment.svg svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.fragment-wrapper[data-f_type="svg_"] {
+  margin-bottom: var(--pm-space-2xl);
+}
+
+/* SVG in grid layouts */
+.piece_ .fragment[data-f_type="svg_"] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* =============================================================================
+   8. CODE BLOCKS
+   ============================================================================= */
+pre.fragment-code {
+  padding: 0.9rem 1rem;
+  border-radius: 0.5rem;
+  overflow: auto;
+  margin: var(--pm-space-md) 0 var(--pm-space-lg);
+}
+
+.codex .CodeMirror {
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--bc) / 0.15);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* =============================================================================
+   9. INTERACTIVE COMPONENTS - RADIO BUTTONS
+   ============================================================================= */
+
+/* Radio button base - DEFAULT FILLED STATE */
+pm-radio > div > button {
+  border-width: var(--pm-border-width) !important;
+  font-weight: 400 !important;
+  /* DEFAULT: Filled/solid appearance */
+  --btn-shadow: "" !important;
+  --btn-fg: var(--color-base-100) !important;
+  --btn-bg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: var(--btn-color, var(--color-base-content)) !important;
+  --btn-noise: none !important;
+}
+
+/* Default filled state for outline buttons */
+pm-radio > div > button.btn-outline {
+  --btn-bg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-fg: var(--color-base-100) !important;
+}
+
+/* Default filled state for soft buttons */
+pm-radio > div > button.btn-soft {
+  --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 25%, var(--color-base-100)) !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 30%, var(--color-base-100)) !important;
+}
+
+/* Color-specific overrides for filled default state */
+pm-radio > div > button.btn-primary {
+  --btn-color: var(--color-primary) !important;
+  --btn-bg: var(--color-primary) !important;
+  --btn-fg: var(--color-primary-content) !important;
+}
+
+pm-radio > div > button.btn-secondary {
+  --btn-color: var(--color-secondary) !important;
+  --btn-bg: var(--color-secondary) !important;
+  --btn-fg: var(--color-secondary-content) !important;
+}
+
+pm-radio > div > button.btn-accent {
+  --btn-color: var(--color-accent) !important;
+  --btn-bg: var(--color-accent) !important;
+  --btn-fg: var(--color-accent-content) !important;
+}
+
+/* HOVER: Outline appearance */
+pm-radio > div > button:hover {
+  --btn-shadow: "" !important;
+  --btn-bg: transparent !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: var(--btn-color, var(--color-base-content)) !important;
+  --btn-noise: none !important;
+}
+
+/* Hover for soft buttons */
+pm-radio > div > button.btn-soft:hover {
+  --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 8%, var(--color-base-100)) !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 10%, var(--color-base-100)) !important;
+}
+
+.fragment-wrapper[data-f_type="radio_"] {
+  margin-top: var(--pm-space-xs) !important;
+  margin-bottom: var(--pm-space-md) !important;
+}
+
+/* Radio spacing after text/lists */
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="radio_"],
+.fragment-wrapper[data-f_type="ul_"] + .fragment-wrapper[data-f_type="radio_"],
+.fragment-wrapper[data-f_type="ol_"] + .fragment-wrapper[data-f_type="radio_"] {
+  margin-top: var(--pm-space-md) !important;
+}
+
+/* Radio button animations */
+.fragment-wrapper[data-f_type="radio_"] button {
+  transition: all var(--pm-transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ripple effect */
+.fragment-wrapper[data-f_type="radio_"] button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width var(--pm-transition-slow), height var(--pm-transition-slow);
+}
+
+.fragment-wrapper[data-f_type="radio_"] button:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* =============================================================================
+   10. INTERACTIVE COMPONENTS - NUMBER INPUTS
+   ============================================================================= */
+pm-number-input {
+  display: block;
+  --ok: var(--pm-ok);
+  --err: var(--pm-err);
+}
+
+.fragment-wrapper[data-f_type="number_"] {
+  margin: 1.25rem 0 var(--pm-space-xl);
+}
+
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="number_"],
+.fragment-wrapper[data-f_type="ul_"] + .fragment-wrapper[data-f_type="number_"],
+.fragment-wrapper[data-f_type="ol_"] + .fragment-wrapper[data-f_type="number_"] {
+  margin-top: var(--pm-space-md) !important;
+}
+
+/* =============================================================================
+   11. FEEDBACK & ALERT ANIMATIONS
+   ============================================================================= */
+
+/* Base transition setup */
+[id^="radio-feedback-"],
+[id^="radio-explanation-"] {
+  transition: max-height var(--pm-transition-normal),
+              transform var(--pm-transition-normal);
+  transform-origin: top center;
+  overflow: hidden;
+}
+
+/* Collapsed state */
+[id^="radio-feedback-"]:not(.pm-open),
+[id^="radio-explanation-"]:not(.pm-open),
+.pm-collapsed {
+  max-height: 0 !important;
+  transform: scale(0.98) translateY(-0.25rem) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Open state */
+.pm-open {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+}
+
+/* Prevent FOUC */
+html:not(.pm-ready) [id^="radio-feedback-"],
+html:not(.pm-ready) [id^="radio-explanation-"] {
+  max-height: 0 !important;
+  transform: scale(0.98) translateY(-0.25rem) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Alert styling */
+[id^="radio-feedback-"] .alert,
+[id^="radio-explanation-"] .alert {
+  transition: background-color var(--pm-transition-fast),
+              border-color var(--pm-transition-fast),
+              color var(--pm-transition-fast);
+  display: block;
+  padding: 0.625rem 0.875rem;
+  text-align: left;
+  font-size: var(--pm-font-size) !important; /* Match general text size (1.1rem) */
+}
+
+/* Number input feedback alerts - match general text size */
+[id^="number-feedback-"] .alert {
+  font-size: var(--pm-font-size) !important; /* 1.1rem */
+}
+
+/* Remove bottom margin from last alert in number feedback */
+[id^="number-feedback-"] .alert:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Alert variations */
+.alert.alert-primary.alert-outline {
+  background-color: transparent !important;
+  border: var(--pm-border-width) solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
+
+.alert.alert-primary.alert-outline * { 
+  color: inherit; 
+}
+
+.alert-soft {
+  transition: background-color var(--pm-transition-slow),
+              border-color var(--pm-transition-slow),
+              color var(--pm-transition-slow);
+}
+
+/* Paragraph alerts */
+.fragment-wrapper[data-f_type="p_"].alert {
+  font-size: 1rem !important;
+  margin-bottom: var(--pm-space-md) !important;
+}
+
+/* =============================================================================
+   12. SPECIAL COMPONENTS
+   ============================================================================= */
+
+/* Blockquote */
+blockquote.fragment {
+  border-left: 4px solid hsl(var(--bc) / 0.2);
+  padding-left: var(--pm-space-lg);
+  margin: 0.9rem 0 1.1rem;
+  color: hsl(var(--bc) / 0.8);
+}
+
+/* Subtitle styling */
+.fragment-wrapper.pm-subtitle {
+  color: color-mix(in oklch, var(--color-base-content), oklch(from var(--color-base-content) calc(0.9 - l) c h));
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.fragment-wrapper.pm-subtitle p {
+  line-height: 1.15 !important;
+}
+
+/* Statement styling */
+.statement {
+  padding: var(--pm-space-lg) !important;
+  background-color: var(--color-base-content-ghost) !important;
+  border-radius: var(--radius-box) !important;
+  border: var(--pm-border-width) solid transparent !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Statement border colors based on radio answer */
+.statement.statement-correct {
+  border-color: var(--color-success) !important;
+}
+
+.statement.statement-incorrect {
+  border-color: var(--color-error) !important;
+}
+
+.statement.statement-info {
+  border-color: var(--color-info) !important;
+}
+
+/* Progressive list items */
+.pm-lbl-item {
+  transition: max-height var(--pm-transition-normal);
+}
+
+.pm-lbl-item.pm-collapsed {
+  max-height: 0;
+  overflow: hidden;
+}
+
+/* =============================================================================
+   13. GRID LAYOUTS
+   ============================================================================= */
+.pm-cols {
+  display: grid;
+  gap: var(--pm-space-lg);
+}
+
+/* Reset margins inside grids */
+.pm-cols > .fragment-wrapper,
+.pm-cols .fragment-wrapper { 
+  margin: 0 !important; 
+}
+
+.pm-cols .fragment-wrapper[data-f_type="p_"] p.fragment { 
+  margin-bottom: 0 !important; 
+}
+
+/* Grid media scaling */
+.pm-cols .fragment img,
+.pm-cols .fragment svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Grid breakpoints - 2 columns */
+@media (min-width: 640px) {
+  .pm-cols-sm-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pm-cols-sm-2.use-var { grid-template-columns: var(--pm-cols); }
+  .pm-cols-sm-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pm-cols-sm-3.use-var { grid-template-columns: var(--pm-cols); }
+}
+
+@media (min-width: 768px) {
+  .pm-cols-md-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pm-cols-md-2.use-var { grid-template-columns: var(--pm-cols); }
+  .pm-cols-md-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pm-cols-md-3.use-var { grid-template-columns: var(--pm-cols); }
+  
+  .fragment-wrapper.subtitle { font-size: 0.95rem; }
+  .fragment-wrapper.pm-subtitle p { line-height: 1.1 !important; }
+}
+
+@media (min-width: 1024px) {
+  .pm-cols-lg-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pm-cols-lg-2.use-var { grid-template-columns: var(--pm-cols); }
+  .pm-cols-lg-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pm-cols-lg-3.use-var { grid-template-columns: var(--pm-cols); }
+}
+
+/* =============================================================================
+   14. PRE-CLICK ANIMATION CLASSES
+   ============================================================================= */
+.pre-pulse { animation: pulse 2s infinite; }
+.pre-bounce { animation: bounce 1s infinite; }
+.pre-glow { box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+.pre-animate-spin { animation: spin 2s linear infinite; }
+.pre-animate-bounce { animation: bounce 1s infinite; }
+.pre-animate-pulse { animation: pulse 2s infinite; }
+
+.pre-bg-warning {
+  background-color: hsl(var(--wa));
+  color: hsl(var(--wac));
+}
+
+.pre-shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.pre-ring { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); }
+.pre-ring-blue-300 { box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.5); }
+
+/* Gradient classes */
+.pre-bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.pre-from-purple-500 {
+  --tw-gradient-from: #8b5cf6;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(139, 92, 246, 0));
+}
+
+.pre-to-pink-500 {
+  --tw-gradient-to: #ec4899;
+}
+
+/* =============================================================================
+   15. UTILITY CLASSES
+   ============================================================================= */
+.fragment-wrapper {
+  display: block;
+}
+
+.fragment-wrapper.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.divider-tight {
+  margin: 1.25rem 0;
+}
+
+.rounded-box { 
+  border-radius: var(--radius-box); 
+}
+
+.font-handwritten { 
+  font-family: var(--font-handwritten); 
+}
+
+.permanent-border {
+  border: 2px solid hsl(var(--bc));
+}
+
+.pm-place-center { 
+  place-self: center !important; 
+}
+
+.pm-self-center { 
+  align-self: center !important; 
+}
+
+/* Divider heading alignment */
+.divider > h1,
+.divider > h2,
+.divider > h3,
+.divider > h4 {
+  display: inline-block;
+  margin: 0;
+}
+
+/* Hidden elements */
+[data-pm-hidden] {
+  display: none !important;
+}
+
+/* Kill DaisyUI alert icon gaps */
+[id^="radio-feedback-"] .alert > :not([hidden]) ~ :not([hidden]),
+[id^="radio-explanation-"] .alert > :not([hidden]) ~ :not([hidden]) {
+  margin-left: 0;
+}
+
+[id^="radio-feedback-"] .alert:where(*)::before,
+[id^="radio-explanation-"] .alert:where(*)::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Explanation card body */
+[id^="radio-explanation-"] .card-body {
+  padding: 0.875rem 1rem;
+  align-items: flex-start;
+}
+
+[id^="radio-explanation-"] * {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+/* =============================================================================
+   16. CORSICA-SPECIFIC STYLES
+   ============================================================================= */
+.corsica-grid-text,
+.corsica-axis-label,
+.corsica-axis-value {
+  font-family: "KaTeX_Main", "Times New Roman", serif !important;
+  font-size: 28px !important;
+  fill: var(--color-base-content) !important;
+  font-weight: 300 !important;
+}
+
+.corsica-axis-label {
+  font-weight: 600 !important;
+}
+
+/* Corsica SVG theming */
+.corsica-grid #grid_lines path { 
+  stroke: var(--color-primary); 
+  stroke-opacity: .3; 
+  stroke-dasharray: 3.7 1.6; 
+  fill: none; 
+}
+
+.corsica-grid #patch_1 path { 
+  fill: var(--color-base-100); 
+}
+
+.corsica-grid #compass_axes { 
+  color: var(--color-base-content); 
+}
+
+.corsica-grid #arrow-base path { 
+  fill: var(--color-base-content); 
+}
+
+.corsica-grid #city_markers circle { 
+  stroke: var(--color-base-100); 
+  stroke-width: 2; 
+}
+
+/* Cell coloring */
+#svg-corsica-grid-cells-full-and-partial #coord_cells rect.pm-full,
+#svg-corsica-grid-cells-full-only #coord_cells rect.pm-full,
+#svg-corsica-grid-daisyui-only #coord_cells rect.pm-full { 
+  fill: var(--color-secondary); 
+  fill-opacity: .08; 
+}
+
+#svg-corsica-grid-cells-full-and-partial #coord_cells rect.pm-partial,
+#svg-corsica-grid-daisyui-only #coord_cells rect.pm-partial { 
+  fill: var(--color-accent); 
+  fill-opacity: .10; 
+}
+
+#svg-corsica-grid-cells-full-and-partial #coord_cells rect.pm-none,
+#svg-corsica-grid-cells-full-only #coord_cells rect.pm-none,
+#svg-corsica-grid-daisyui-only #coord_cells rect.pm-none { 
+  fill: transparent; 
+}
+
+/* Text colors for variants */
+#svg-corsica-grid-with-cities .corsica-grid-text,
+#svg-corsica-grid-with-labels .corsica-grid-text { 
+  fill: var(--color-base-content); 
+}
+
+/* =============================================================================
+   17. PM NUMBER INPUT BUTTON STYLE
+   ============================================================================= */
+pm-number-input button.btn {
+  border-width: var(--pm-border-width) !important;
+  font-weight: 400 !important;
+  /* DEFAULT: Filled/solid appearance */
+  --btn-shadow: "" !important;
+  --btn-fg: var(--color-base-100) !important;
+  --btn-bg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: var(--btn-color, var(--color-base-content)) !important;
+  --btn-noise: none !important;
+}
+
+/* Default filled state for soft buttons */
+pm-number-input button.btn-soft {
+  --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 5%, var(--color-base-100)) !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 30%, var(--color-base-100)) !important;
+}
+
+/* HOVER: Outline appearance */
+pm-number-input button.btn:hover {
+  --btn-shadow: "" !important;
+  --btn-bg: transparent !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: var(--btn-color, var(--color-base-content)) !important;
+  --btn-noise: none !important;
+}
+
+/* Hover for soft buttons */
+pm-number-input button.btn-soft:hover {
+  --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 8%, var(--color-base-100)) !important;
+  --btn-fg: var(--btn-color, var(--color-base-content)) !important;
+  --btn-border: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 10%, var(--color-base-100)) !important;
+}
+
+

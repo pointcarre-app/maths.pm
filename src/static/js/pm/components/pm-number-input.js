@@ -52,7 +52,7 @@ export class PMNumberInput extends LitElement {
     return html`
       ${d.label ? html`<label class="label"><span class="label-text">${d.label}</span></label>` : null}
       ${this.debug ? this._renderParamsTable(d) : null}
-      <div class="flex items-center gap-2 flex-wrap">
+      <div class="flex items-center gap-2 flex-wrap justify-end mb-3">
         ${useMathField ? html`
           <math-field class="input input-bordered"
                       style="font-size:1rem; font-family:'KaTeX_Main','KaTeX_Math','Times New Roman',serif;"
@@ -61,7 +61,7 @@ export class PMNumberInput extends LitElement {
                       @input=${this._onMathInput}></math-field>
         ` : html`
           <input type="number"
-                 class="input input-bordered input-primary w-128"
+                 class="input input-bordered w-128"
                  style="width:120px;font-size:1rem; font-family:'KaTeX_Main','KaTeX_Math','Times New Roman',serif;"
                  .value=${String(this._value ?? '')}
                  min=${min ?? ''}
@@ -71,7 +71,7 @@ export class PMNumberInput extends LitElement {
                  @input=${this._onInput} />
         `}
         ${unit ? html`<div class="opacity-80 whitespace-nowrap">${unit}</div>` : null}
-        <button class="btn btn-primary btn-soft" @click=${this._onCheck} ?disabled=${this._locked} aria-disabled=${this._locked ? 'true' : 'false'}>Valider</button>
+        <button class="btn btn-soft btn-outline" @click=${this._onCheck} ?disabled=${this._locked} aria-disabled=${this._locked ? 'true' : 'false'}>Valider</button>
       </div>
       ${d.hint ? html`<div class="hint">${unsafeHTMLIfNeeded(d.hint)}</div>` : null}
     `;
@@ -128,15 +128,45 @@ export class PMNumberInput extends LitElement {
     const alerts = [];
     if (ok) {
       const textOk = d.feedback_correct || 'Bonne réponse.';
-      alerts.push(`<div class="alert alert-soft alert-success"><span>${unsafeHTMLIfNeeded(textOk)}</span></div>`);
+      alerts.push(`<div class="alert alert-soft alert-success mb-3"><span>${textOk}</span></div>`);
     } else {
       const textBad = d.feedback_incorrect || 'Ce n\'est pas la bonne réponse.';
-      alerts.push(`<div class="alert alert-soft alert-error"><span>${unsafeHTMLIfNeeded(textBad)}</span></div>`);
+      alerts.push(`<div class="alert alert-soft alert-error mb-3"><span>${textBad}</span></div>`);
       if (d.feedback_correct) {
-        alerts.push(`<div class=\"alert alert-soft alert-success\"><span>${unsafeHTMLIfNeeded(d.feedback_correct)}</span></div>`);
+        alerts.push(`<div class="alert alert-soft alert-success mb-3"><span>${d.feedback_correct}</span></div>`);
       }
     }
     container.innerHTML = alerts.join('');
+    // Render LaTeX in the feedback content
+    this._renderLatex(container);
+  }
+
+  _renderLatex(targetElement) {
+    try {
+      if (!targetElement) return;
+      // Prefer global auto-render helper if present
+      const renderFn = (window && (window.renderMathInElement || (window.katex && window.katex.renderMathInElement))) || null;
+      if (renderFn) {
+        // Slight delay to allow layout/reflow in case of CSS transitions
+        setTimeout(() => {
+          try {
+            renderFn(targetElement, {
+              delimiters: [
+                { left: '$$', right: '$$', display: true },
+                { left: '$', right: '$', display: false },
+                { left: '\\[', right: '\\]', display: true },
+                { left: '\\(', right: '\\)', display: false },
+              ],
+              throwOnError: false,
+            });
+          } catch (_) {
+            // no-op
+          }
+        }, 0);
+      }
+    } catch (_) {
+      // no-op
+    }
   }
 
 
@@ -195,11 +225,9 @@ function withinTolerance(x, target, tol) {
   return Math.abs(x - target) <= t;
 }
 
-// Minimal unsafeHTML helper for docs text (allow simple markup); avoid importing lit/directives to keep this file self-contained
+// Helper function - just return text as-is since we're using innerHTML
 function unsafeHTMLIfNeeded(text) {
   if (typeof text !== 'string') return '';
-  // Render as text (no HTML parsing) to keep safe by default
-  // If later needed, replace with import { unsafeHTML } from 'lit/directives/unsafe-html.js'
   return text;
 }
 
