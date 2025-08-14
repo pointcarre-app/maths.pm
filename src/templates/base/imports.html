@@ -19,11 +19,16 @@
     };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script type="tailwind-config">
+    {
+        plugins: [
+            tailwind.plugin.typography,
+        ],
+    }
+</script>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
-{# <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.4.1/dist/typography.min.css" rel="stylesheet" type="text/css" /> #}
 
-{# <link rel="stylesheet" href="{{ request.url_for('static', path='css/content/prose-daisy.css') }}" /> #}
 <link rel="stylesheet" href="{{ request.url_for('static', path='css/root.css') }}" />
 <link rel="stylesheet" href="{{ request.url_for('static', path='css/styles.css') }}" />
 <link rel="stylesheet" href="{{ request.url_for('static', path='css/styles-alt.css') }}" />

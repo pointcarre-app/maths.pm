@@ -116,9 +116,146 @@ async def readme(request: Request):
 @core_router.get("/settings", response_class=HTMLResponse)
 async def settings_view(request: Request):
     """Display all loaded product settings in a clean table format"""
+
+    # Build unified settings table data
+    unified_settings = []
+
+    # 1. Domain settings - domain_specific_metatags
+    for key, value in settings.domain_config.domain_specific_metatags.items():
+        unified_settings.append(
+            {
+                "type": "domain",
+                "source": "domains/maths.pm.yml",
+                "category": "domain_specific_metatags",
+                "key": key,
+                "value": value,
+                "used_in": "Toutes les pages (base/main-alt.html)",
+                "description": _get_metatag_description(key),
+            }
+        )
+
+    # 2. Domain settings - index_view_specific_metatags
+    for key, value in settings.domain_config.index_view_specific_metatags.items():
+        unified_settings.append(
+            {
+                "type": "domain",
+                "source": "domains/maths.pm.yml",
+                "category": "index_view_specific_metatags",
+                "key": key,
+                "value": value,
+                "used_in": "Page d'accueil et fallback (base/main-alt.html)",
+                "description": _get_metatag_description(key),
+            }
+        )
+
+    # 3. Domain settings - templating
+    for key, value in settings.domain_config.templating.dict().items():
+        unified_settings.append(
+            {
+                "type": "domain",
+                "source": "domains/maths.pm.yml",
+                "category": "templating",
+                "key": key,
+                "value": value,
+                "used_in": "Templates (navbar, footer, base)",
+                "description": _get_template_description(key),
+            }
+        )
+
+    # 4. Domain settings - extra_head
+    if settings.domain_config.extra_head:
+        for key, value in settings.domain_config.extra_head.dict().items():
+            if value:  # Only include if not empty
+                unified_settings.append(
+                    {
+                        "type": "domain",
+                        "source": "domains/maths.pm.yml",
+                        "category": "extra_head",
+                        "key": key,
+                        "value": value,
+                        "used_in": "Head de toutes les pages (base/main-alt.html)",
+                        "description": "Ressources externes JS/CSS",
+                    }
+                )
+
+    # 5. Product settings
+    for product in settings.products:
+        # Backend settings
+        if product.backend_settings:
+            for key, value in product.backend_settings.items():
+                unified_settings.append(
+                    {
+                        "type": "product",
+                        "source": f"products/{product.name}.yml",
+                        "category": "backend_settings",
+                        "key": key,
+                        "value": value,
+                        "used_in": f"Routes /{product.name}/*, JavaScript",
+                        "description": f"Configuration backend pour {product.title_html}",
+                    }
+                )
+
+        # Metatags (if present)
+        if hasattr(product, "metatags") and product.metatags:
+            for key, value in product.metatags.items():
+                unified_settings.append(
+                    {
+                        "type": "product",
+                        "source": f"products/{product.name}.yml",
+                        "category": "metatags",
+                        "key": key,
+                        "value": value,
+                        "used_in": f"PM pages /{product.name}/* (pm/index.html)",
+                        "description": _get_metatag_description(key),
+                    }
+                )
+
     return settings.templates.TemplateResponse(
-        "settings.html", {"request": request, "page": {"title": "Settings - Configuration"}}
+        "settings.html",
+        {
+            "request": request,
+            "page": {"title": "Settings - Configuration"},
+            "unified_settings": unified_settings,
+        },
     )
+
+
+def _get_metatag_description(key: str) -> str:
+    """Get description for common metatag keys"""
+    descriptions = {
+        "title": "Titre de la page (SEO)",
+        "description": "Description pour moteurs de recherche",
+        "keywords": "Mots-clés SEO",
+        "author": "Auteur du contenu",
+        "robots": "Directives pour robots d'indexation",
+        "og:title": "Titre pour partage social (Facebook)",
+        "og:description": "Description pour partage social",
+        "og:image": "Image pour partage social",
+        "twitter:card": "Type de carte Twitter",
+        "twitter:title": "Titre pour Twitter",
+        "twitter:description": "Description pour Twitter",
+        "viewport": "Configuration d'affichage mobile",
+        "theme-color": "Couleur du thème mobile",
+        "copyright": "Information de copyright",
+        "language": "Langue du contenu",
+        "Classification": "Classification du site",
+        "rating": "Classification d'âge",
+    }
+    return descriptions.get(key, "Métadonnée personnalisée")
+
+
+def _get_template_description(key: str) -> str:
+    """Get description for template configuration keys"""
+    descriptions = {
+        "base_template": "Template HTML de base",
+        "footer_template": "Template du pied de page",
+        "navbar_title": "Titre affiché dans la navbar",
+        "button_primary_text": "Texte du bouton principal",
+        "button_primary_href": "Lien du bouton principal",
+        "button_ghost_text": "Texte du bouton secondaire",
+        "button_ghost_href": "Lien du bouton secondaire",
+    }
+    return descriptions.get(key, "Configuration de template")
 
 
 # TODO : make better cause can be very very useful

@@ -12,6 +12,50 @@
     {% include "base/favicon.html" %}
     {% include "base/imports.html" %}
 
+    {# Generic domain-wide metatags from domain config #}
+    {% if DOMAIN_CONFIG.domain_specific_metatags %}
+      {# Essential technical metatags #}
+      {% if DOMAIN_CONFIG.domain_specific_metatags['theme-color'] %}
+        <meta name="theme-color" content="{{ DOMAIN_CONFIG.domain_specific_metatags['theme-color'] }}" />
+      {% endif %}
+
+      {# Business/Site identity #}
+      {% if DOMAIN_CONFIG.domain_specific_metatags.subject %}
+        <meta name="subject" content="{{ DOMAIN_CONFIG.domain_specific_metatags.subject }}" />
+      {% endif %}
+      {% if DOMAIN_CONFIG.domain_specific_metatags.copyright %}
+        <meta name="copyright" content="{{ DOMAIN_CONFIG.domain_specific_metatags.copyright }}" />
+      {% endif %}
+      {% if DOMAIN_CONFIG.domain_specific_metatags.language %}
+        <meta name="language" content="{{ DOMAIN_CONFIG.domain_specific_metatags.language }}" />
+      {% endif %}
+      {% if DOMAIN_CONFIG.domain_specific_metatags.Classification %}
+        <meta name="Classification" content="{{ DOMAIN_CONFIG.domain_specific_metatags.Classification }}" />
+      {% endif %}
+      {% if DOMAIN_CONFIG.domain_specific_metatags.rating %}
+        <meta name="rating" content="{{ DOMAIN_CONFIG.domain_specific_metatags.rating }}" />
+      {% endif %}
+
+      {# Mobile optimization #}
+      {% if DOMAIN_CONFIG.domain_specific_metatags.HandheldFriendly %}
+        <meta name="HandheldFriendly" content="{{ DOMAIN_CONFIG.domain_specific_metatags.HandheldFriendly }}" />
+      {% endif %}
+      {% if DOMAIN_CONFIG.domain_specific_metatags.MobileOptimized %}
+        <meta name="MobileOptimized" content="{{ DOMAIN_CONFIG.domain_specific_metatags.MobileOptimized }}" />
+      {% endif %}
+
+      {# Open Graph site-wide #}
+      {% if DOMAIN_CONFIG.domain_specific_metatags['og:site_name'] %}
+        <meta property="og:site_name" content="{{ DOMAIN_CONFIG.domain_specific_metatags['og:site_name'] }}" />
+      {% endif %}
+
+      {# Twitter site-wide #}
+      {% if DOMAIN_CONFIG.domain_specific_metatags['twitter:site'] %}
+        <meta name="twitter:site" content="{{ DOMAIN_CONFIG.domain_specific_metatags['twitter:site'] }}" />
+      {% endif %}
+    {% endif %}
+
+    {# Page-specific defaults from index_view_specific_metatags - can be overridden #}
     <meta name="description" content="{{ DOMAIN_CONFIG['index_view_specific_metatags']['description'] }}" />
     <meta name="keywords" content="{{ DOMAIN_CONFIG['index_view_specific_metatags']['keywords'] }}" />
     <meta name="author" content="{{ DOMAIN_CONFIG['domain_specific_metatags']['author'] }}" />

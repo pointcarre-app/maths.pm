@@ -53,6 +53,8 @@ product_schema = Map(
         "owner_url": Str(),
         # Add backend_settings support
         StrictOptional("backend_settings"): MapPattern(Str(), YamlAny()),
+        # Add metatags support for product-specific SEO
+        StrictOptional("metatags"): MapPattern(Str(), YamlAny()),
     }
 )
 
@@ -168,9 +170,21 @@ class Settings(BaseSettings):
                     )
 
                     if self.domain_name in product_domains:
-                        logger.info(f"Domain match! Loading '{product_file.name}' as a product.")
                         product_data = product_yaml.data
-                        loaded_products.append(ProductModel(product_data))
+
+                        # Check if product is hidden (support both 'hidden' and 'is_hidden' fields)
+                        is_hidden = (
+                            str(product_data.get("is_hidden", "")).lower() == "true"
+                            or str(product_data.get("hidden", "")).lower() == "true"
+                        )
+
+                        if is_hidden:
+                            logger.info(f"Product '{product_file.name}' is hidden. Skipping.")
+                        else:
+                            logger.info(
+                                f"Domain match! Loading '{product_file.name}' as a product."
+                            )
+                            loaded_products.append(ProductModel(product_data))
                     else:
                         logger.warning(f"Domain mismatch for '{product_file.name}'. Skipping.")
 

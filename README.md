@@ -29,7 +29,6 @@ python -m src
 
 ### 📋 **Main Application**
 - **`/`** - Homepage displaying all educational products and resources
-- **`/readme`** - Documentation page displaying this README with beautiful DaisyUI prose styling
 - **`/api/products`** - JSON API returning all available products
 - **`/api/health`** - Application health check and status
 

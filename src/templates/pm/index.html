@@ -1,9 +1,17 @@
 {% extends "base/main-alt.html" %}
 
+{% block title %}
+  {# Product metatags > PM title > Domain defaults #}
+  {% if product_settings and product_settings.product.metatags and product_settings.product.metatags.title %}
+    {{ product_settings.product.metatags.title }}
+  {% elif pm and pm.title %}
+    {{ pm.title }} - {{ DOMAIN_CONFIG['index_view_specific_metatags']['title'] }}
+  {% else %}
+    {{ DOMAIN_CONFIG['index_view_specific_metatags']['title'] }}
+  {% endif %}
+{% endblock title %}
+
 {% block extra_head %}
-  <meta charset="UTF-8" />
-  <title>Maths Pedagogical Message</title>
-  <meta name="description" content="Delivering pedagogical messages from Pointcarre.app" />
   <link rel="stylesheet" href="{{ request.url_for('static', path='core/css/pm.css') }}" />
   <link rel="stylesheet" href="{{ request.url_for('static', path='core/css/toc.css') }}" />
   <!-- MathLive for LaTeX (if needed later) -->
@@ -26,14 +34,50 @@
 
   {# Todo: Ensure stability cross domains  / producs #}
 
+  {# Product-specific metatags override domain defaults #}
+  {% if product_settings and product_settings.product.metatags %}
+    {% for key, value in product_settings.product.metatags.items() %}
+      {% if key not in ['title'] %}
+        {# Title is handled in title block #}
+        {% if key.startswith('og:') %}
+          <meta property="{{ key }}" content="{{ value }}" />
+        {% elif key.startswith('twitter:') %}
+          <meta name="{{ key }}" content="{{ value }}" />
+        {% elif key.startswith('DC.') %}
+          <meta name="{{ key }}" content="{{ value }}" />
+        {% elif key.startswith('itemprop') %}
+          <meta itemprop="{{ key.replace('itemprop-', '') }}" content="{{ value }}" />
+        {% elif key == 'description' %}
+          {# Override the base template's description #}
+          <meta name="description" content="{{ value }}" />
+        {% elif key == 'keywords' %}
+          <meta name="keywords" content="{{ value }}" />
+        {% else %}
+          <meta name="{{ key }}" content="{{ value }}" />
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% elif pm %}
+    {# Fallback to PM-based metadata if no product metatags #}
+    <meta name="description"
+          content="{{ pm.title }} - {{ pm.chapter if pm.chapter else 'Cours de mathématiques' }}" />
+  {% endif %}
+
+  {# Canonical URL for this PM page #}
+  {% if origin %}
+    <link rel="canonical" href="{{ request.url_for('get_pm', origin=origin) }}" />
+    <meta name="url" content="{{ request.url_for('get_pm', origin=origin) }}" />
+    <meta name="identifier-URL" content="{{ request.url_for('get_pm', origin=origin) }}" />
+  {% endif %}
+
 {% endblock extra_head %}
 
 {% block content %}
   <!-- djlint:off -->
-                              {# styles moved to @css/pm.css #}
+                                      {# styles moved to @css/pm.css #}
 
-                              <div class="sidebar-fixed hidden xl:block">
-                                <div class="w-72 flex flex-col card">
+                                      <div class="sidebar-fixed hidden xl:block">
+                                        <div class="w-72 flex flex-col card">
       <div id="toc" class="p-4 flex-none text-left text-base-content/80">{{ pm.toc.html | safe }}</div>
     </div>
   </div>
@@ -227,41 +271,3 @@
 </div>
 <!-- djlint:on -->
 {% endblock content %}
-
-
-<!-- Header -->
-{# <div class="mb-8">
-          <div class="breadcrumbs text-sm mb-4">
-            <ul>
-              <li>
-                <a href="/" class="link link-hover">Home</a>
-              </li>
-              <li>
-                <a href="/pm/" class="link link-hover">PMs</a>
-              </li>
-              <li>{{ pm.title }}</li>
-            </ul>
-          </div>
-
-          <h1 class="text-4xl font-bold mb-4">{{ pm.title }}</h1>
-
-          <div class="flex flex-wrap gap-2 mb-4">
-            <div class="badge badge-primary">{{ pm.mode }}</div>
-            <div class="badge badge-secondary">{{ pm.class_at_school }}</div>
-            <div class="badge badge-accent">{{ pm.chapter }}</div>
-            {% if pm.interaction_count > 0 %}
-              <div class="badge badge-info">{{ pm.interaction_count }} interactions</div>
-            {% endif %}
-          </div>
-
-          <div class="flex gap-2">
-            <a href="/pm/{{ origin }}?format=json" class="btn btn-sm btn-outline">View JSON</a>
-            <a href="/" class="btn btn-sm btn-ghost">← Back</a>
-          </div>
-</div> #}
-
-<!-- Direct HTML Content -->
-{# Practical but not first: we need more control over the display #}
-{# {% if pm.html_content %}
-          <div class="prose prose-lg max-w-none">{{ pm.html_content | safe }}</div>
-{% endif %} #}

@@ -37,4 +37,29 @@ backend_settings:
       packages:
         - micropip
         - numpy
-        - matplotlib 
+        - matplotlib
+
+# Product-specific metatags
+metatags:
+  title: "JupyterLite - Environnement Jupyter dans le navigateur"
+  description: "Environnement JupyterLab complet dans votre navigateur. Créez et exécutez des notebooks Python sans installation. Idéal pour l'enseignement des mathématiques."
+  keywords: "jupyter, notebook, python, pyodide, calcul scientifique, mathématiques, education"
+  
+  # SEO
+  robots: "index, follow"
+  topic: "Calcul scientifique interactif"
+  summary: "JupyterLab dans le navigateur avec Python et bibliothèques scientifiques pré-installées."
+  category: "Science, Education"
+  
+  # Open Graph
+  "og:title": "JupyterLite - Notebooks scientifiques en ligne"
+  "og:description": "Créez et partagez des notebooks Jupyter directement dans votre navigateur. Python, NumPy, Matplotlib inclus."
+  "og:type": "website"
+  "og:url": "https://maths.pm/jupyterlite/"
+  "og:image": "https://maths.pm/static/icons/jupyterlite-large.png"
+  
+  # Twitter
+  "twitter:card": "summary_large_image"
+  "twitter:title": "JupyterLite - Jupyter dans le navigateur"
+  "twitter:description": "Environnement Jupyter complet sans installation. Parfait pour l'enseignement et le partage de notebooks."
+  "twitter:image": "https://maths.pm/static/icons/jupyterlite-large.png" 

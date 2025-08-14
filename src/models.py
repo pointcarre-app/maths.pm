@@ -36,6 +36,8 @@ class ProductModel:
         self.owner_url: str = data.get("owner_url", "")
         # Add backend settings support
         self.backend_settings: Dict[str, Any] = data.get("backend_settings", {})
+        # Add metatags support for product-specific SEO
+        self.metatags: Dict[str, Any] = data.get("metatags", {})
 
     def to_template_context(self) -> Dict[str, Any]:
         """Convert to template context format."""

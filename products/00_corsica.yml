@@ -28,3 +28,44 @@ backend_settings:
     worker_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js" 
   v4pyjs:
     lib_url: https://cdn.jsdelivr.net/gh/your-org/v4.py.js@v0.0.4-unstable/
+
+# Product-specific metatags that override domain defaults
+metatags:
+  # PAGE-SPECIFIC META TAGS
+  title: "Maths.Corsica - Exercices mathématiques autour de la Corse"
+  description: "Exercices de mathématiques inspirés de la géographie corse : trigonométrie, géométrie, Python. Niveaux troisième et seconde."
+  keywords: "mathématiques, corse, géométrie, trigonométrie, python, collège, lycée, exercices"
+  
+  # SEO SPECIFIC
+  robots: "index, follow"
+  revised: "Dec. 1, 2024, 10:00 am"
+  abstract: "Ressources pédagogiques mathématiques utilisant la géographie de la Corse comme contexte d'apprentissage."
+  topic: "Mathématiques appliquées à la géographie"
+  summary: "Découvrez les mathématiques à travers la géographie corse : calculs de distances, triangulation, statistiques avec Python."
+  pagename: "Maths.Corsica - Exercices géographiques"
+  category: "Education, Mathématiques"
+  subtitle: "Apprendre les maths avec la Corse"
+  
+  # DUBLIN CORE
+  "DC.title": "Maths.Corsica - Mathématiques et géographie de la Corse"
+  "DC.creator": "Maths.pm, contact@pointcarre.app"
+  "DC.subject": "Mathématiques, Géographie, Corse, Python, Education"
+  
+  # SCHEMA.ORG
+  "itemprop-name": "Maths.Corsica - Exercices mathématiques"
+  
+  # OPEN GRAPH - SOCIAL MEDIA
+  "og:title": "Maths.Corsica - Exercices mathématiques autour de la Corse"
+  "og:description": "Exercices de maths inspirés de la Corse : trigonométrie pour calculer des distances, Python pour analyser des données géographiques."
+  "og:image": "https://maths.pm/static/images/corsica-social-card.jpg"
+  "og:type": "website"
+  "og:url": "https://maths.pm/pm/corsica/"
+  
+  # TWITTER CARDS
+  "twitter:card": "summary_large_image"
+  "twitter:creator": "@mathspm"
+  "twitter:title": "Maths.Corsica - La Corse en mathématiques"
+  "twitter:description": "Exercices mathématiques inspirés de la géographie corse pour collège et lycée."
+  "twitter:image": "https://maths.pm/static/images/corsica-twitter-card.jpg"
+  "twitter:image:alt": "Carte de la Corse avec formules mathématiques"
+  "twitter:url": "https://maths.pm/pm/corsica/"

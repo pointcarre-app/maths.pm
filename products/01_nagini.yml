@@ -30,5 +30,26 @@ backend_settings:
     js_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js"
     pyodide_worker_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js" 
 
-
+# Product-specific metatags
+metatags:
+  title: "Nagini - Python dans le navigateur pour l'éducation"
+  description: "Exécutez du Python directement dans votre navigateur. Installez des librairies, créez des graphiques, utilisez des entrées interactives. Idéal pour l'enseignement."
+  keywords: "python, navigateur, pyodide, jupyter, education, programmation, interactif"
+  
+  # SEO
+  robots: "index, follow"
+  topic: "Programmation Python en ligne"
+  summary: "Environnement Python complet dans le navigateur pour l'apprentissage et l'enseignement."
+  category: "Développement, Education"
+  
+  # Open Graph
+  "og:title": "Nagini - Python dans le navigateur"
+  "og:description": "Environnement Python interactif sans installation. Parfait pour l'enseignement et l'apprentissage."
+  "og:type": "website"
+  "og:url": "https://maths.pm/nagini/"
+  
+  # Twitter
+  "twitter:card": "summary"
+  "twitter:title": "Nagini - Python dans le navigateur"
+  "twitter:description": "Exécutez du Python directement dans votre navigateur sans installation."
 

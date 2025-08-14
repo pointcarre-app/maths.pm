@@ -1,15 +1,15 @@
 {% extends "base/main-alt.html" %}
 
 {% block title %}
-  Settings - Configuration des produits
+  Settings - Configuration complète
 {% endblock title %}
 
 {% block content %}
   <div class="py-8">
     <!-- Header -->
     <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-primary mb-2">⚙️ Configuration</h1>
-      <p class="text-base-content/70">Configuration complète du domaine et des produits</p>
+      <h1 class="text-4xl font-bold text-primary mb-2">⚙️ Configuration Unifiée</h1>
+      <p class="text-base-content/70">Tous les paramètres du domaine et des produits</p>
 
       <!-- Quick Stats -->
       <div class="stats stats-horizontal shadow-sm bg-base-200 mt-4">
@@ -29,306 +29,200 @@
         </div>
 
         <div class="stat">
-          <div class="stat-figure text-accent">🏷️</div>
-          <div class="stat-title text-xs">Meta tags</div>
-          <div class="stat-value text-sm">
-            {{ (DOMAIN_CONFIG.domain_specific_metatags|length) + (DOMAIN_CONFIG.index_view_specific_metatags|length) }}
-          </div>
-          <div class="stat-desc text-xs">configurés</div>
+          <div class="stat-figure text-accent">⚙️</div>
+          <div class="stat-title text-xs">Total Settings</div>
+          <div class="stat-value text-sm">{{ unified_settings|length }}</div>
+          <div class="stat-desc text-xs">paramètres</div>
         </div>
 
         <div class="stat">
-          <div class="stat-figure text-info">🔧</div>
-          <div class="stat-title text-xs">Backend</div>
+          <div class="stat-figure text-info">📊</div>
+          <div class="stat-title text-xs">Domain / Product</div>
           <div class="stat-value text-sm">
-            {{ backend_public_settings|length if backend_public_settings else 0 }}
+            {{ unified_settings|selectattr('type', 'eq', 'domain') |list|length }} /
+            {{ unified_settings|selectattr('type', 'eq', 'product') |list|length }}
           </div>
-          <div class="stat-desc text-xs">paramètres</div>
+          <div class="stat-desc text-xs">répartition</div>
         </div>
       </div>
     </div>
 
-    <!-- Domain Info Card -->
+    <!-- Legend -->
     <div class="card bg-base-200 shadow-sm mb-6">
-      <div class="card-body">
-        <h2 class="card-title text-lg">🌐 Configuration du domaine</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm mb-4">
-          <div>
-            <span class="font-medium">URL:</span>
-            <span class="ml-2">{{ DOMAIN_CONFIG.domain_url or 'N/A' }}</span>
+      <div class="card-body py-4">
+        <div class="flex flex-wrap gap-4 text-sm">
+          <div class="flex items-center gap-2">
+            <div class="badge badge-primary">domain</div>
+            <span>Paramètres du domaine (maths.pm)</span>
           </div>
-          <div>
-            <span class="font-medium">Produits chargés:</span>
-            <span class="ml-2 badge badge-primary">{{ products|length }}</span>
+          <div class="flex items-center gap-2">
+            <div class="badge badge-secondary">product</div>
+            <span>Paramètres spécifiques aux produits</span>
           </div>
-          <div>
-            <span class="font-medium">Template de base:</span>
-            <span class="ml-2">{{ DOMAIN_CONFIG.templating.base_template or 'N/A' }}</span>
-          </div>
-        </div>
-
-        <!-- Templating Settings -->
-        <div class="divider text-xs">Configuration des templates</div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-          <div>
-            <span class="font-medium">Titre navbar:</span>
-            <span class="ml-2">{{ DOMAIN_CONFIG.templating.navbar_title or 'N/A' }}</span>
-          </div>
-          <div>
-            <span class="font-medium">Footer template:</span>
-            <span class="ml-2">{{ DOMAIN_CONFIG.templating.footer_template or 'N/A' }}</span>
-          </div>
-          <div>
-            <span class="font-medium">Bouton principal:</span>
-            <span class="ml-2">{{ DOMAIN_CONFIG.templating.button_primary_text or 'N/A' }}</span>
-            {% if DOMAIN_CONFIG.templating.button_primary_href %}
-              <code class="text-xs ml-1">({{ DOMAIN_CONFIG.templating.button_primary_href }})</code>
-            {% endif %}
-          </div>
-          <div>
-            <span class="font-medium">Bouton secondaire:</span>
-            <span class="ml-2">{{ DOMAIN_CONFIG.templating.button_ghost_text or 'N/A' }}</span>
-            {% if DOMAIN_CONFIG.templating.button_ghost_href %}
-              <code class="text-xs ml-1">({{ DOMAIN_CONFIG.templating.button_ghost_href }})</code>
-            {% endif %}
+          <div class="flex items-center gap-2">
+            <div class="badge badge-info badge-outline">Catégorie</div>
+            <span>Type de paramètre (metatags, backend, etc.)</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Domain Meta Tags -->
-    <div class="card bg-base-100 shadow-sm mb-6">
+    <!-- Main Unified Settings Table -->
+    <div class="card bg-base-100 shadow-sm">
       <div class="card-body">
-        <h2 class="card-title text-lg mb-4">🏷️ Meta tags du domaine</h2>
+        <h2 class="card-title text-lg mb-4">🔍 Tableau Unifié des Paramètres</h2>
 
-        <div class="tabs tabs-bordered mb-4">
-          <input type="radio" name="domain_tabs" role="tab" class="tab" aria-label="Génériques" checked />
-          <div role="tabpanel" class="tab-content">
-            <div class="overflow-x-auto mt-4">
-              <table class="table table-zebra table-sm">
-                <thead>
-                  <tr>
-                    <th>Meta tag</th>
-                    <th>Valeur</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for key, value in DOMAIN_CONFIG.domain_specific_metatags.items() %}
-                    <tr class="hover">
-                      <td>
-                        <code class="text-xs">{{ key }}</code>
-                      </td>
-                      <td class="max-w-md">
-                        {% if value|length > 80 %}
-                          <details class="collapse collapse-arrow bg-base-200">
-                            <summary class="collapse-title text-xs font-medium">
-                              Voir la valeur ({{ value|length }} caractères)
-                            </summary>
-                            <div class="collapse-content">
-                              <div class="text-xs bg-base-300 p-2 rounded">{{ value }}</div>
-                            </div>
-                          </details>
-                        {% else %}
-                          <span class="text-xs">{{ value }}</span>
-                        {% endif %}
-                      </td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <input type="radio" name="domain_tabs" role="tab" class="tab" aria-label="Page d'accueil" />
-          <div role="tabpanel" class="tab-content">
-            <div class="overflow-x-auto mt-4">
-              <table class="table table-zebra table-sm">
-                <thead>
-                  <tr>
-                    <th>Meta tag</th>
-                    <th>Valeur</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for key, value in DOMAIN_CONFIG.index_view_specific_metatags.items() %}
-                    <tr class="hover">
-                      <td>
-                        <code class="text-xs">{{ key }}</code>
-                      </td>
-                      <td class="max-w-md">
-                        {% if value|length > 80 %}
-                          <details class="collapse collapse-arrow bg-base-200">
-                            <summary class="collapse-title text-xs font-medium">
-                              Voir la valeur ({{ value|length }} caractères)
-                            </summary>
-                            <div class="collapse-content">
-                              <div class="text-xs bg-base-300 p-2 rounded">{{ value }}</div>
-                            </div>
-                          </details>
-                        {% else %}
-                          <span class="text-xs">{{ value }}</span>
-                        {% endif %}
-                      </td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <!-- Filters -->
+        <div class="mb-4 flex flex-wrap gap-2">
+          <button class="btn btn-xs btn-outline" onclick="filterTable('all')">Tout afficher</button>
+          <button class="btn btn-xs btn-primary" onclick="filterTable('domain')">Domain uniquement</button>
+          <button class="btn btn-xs btn-secondary" onclick="filterTable('product')">
+            Products uniquement
+          </button>
+          <div class="divider divider-horizontal">ou</div>
+          <button class="btn btn-xs btn-info" onclick="filterCategory('metatags')">Metatags</button>
+          <button class="btn btn-xs btn-warning" onclick="filterCategory('backend_settings')">
+            Backend
+          </button>
+          <button class="btn btn-xs btn-success" onclick="filterCategory('templating')">Templates</button>
         </div>
-      </div>
-    </div>
-
-    <!-- Domain Extra Resources -->
-    {% if DOMAIN_CONFIG.extra_head %}
-      <div class="card bg-base-100 shadow-sm mb-6">
-        <div class="card-body">
-          <h2 class="card-title text-lg mb-4">📦 Ressources externes du domaine</h2>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {% if DOMAIN_CONFIG.extra_head.js %}
-              <div>
-                <h3 class="font-medium text-base mb-2">🟨 JavaScript</h3>
-                <div class="space-y-2">
-                  {% for js_url in DOMAIN_CONFIG.extra_head.js %}
-                    <div class="bg-base-200 p-2 rounded text-xs">
-                      <code>{{ js_url }}</code>
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-            {% endif %}
-
-            {% if DOMAIN_CONFIG.extra_head.css %}
-              <div>
-                <h3 class="font-medium text-base mb-2">🎨 CSS</h3>
-                <div class="space-y-2">
-                  {% for css_url in DOMAIN_CONFIG.extra_head.css %}
-                    <div class="bg-base-200 p-2 rounded text-xs">
-                      <code>{{ css_url }}</code>
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    {% endif %}
-
-    <!-- Products Overview Table -->
-    <div class="card bg-base-100 shadow-sm mb-6">
-      <div class="card-body">
-        <h2 class="card-title text-lg mb-4">📦 Produits chargés</h2>
 
         <div class="overflow-x-auto">
-          <table class="table table-zebra table-sm">
+          <table class="table table-zebra table-xs">
             <thead>
               <tr>
-                <th>Nom</th>
-                <th>Titre</th>
-                <th>Path</th>
-                <th>Couleur</th>
-                <th>Domaines</th>
-                <th>Settings</th>
+                <th class="w-20">Type</th>
+                <th class="w-32">Source</th>
+                <th class="w-28">Catégorie</th>
+                <th class="w-40">Clé</th>
+                <th>Valeur</th>
+                <th class="w-48">Utilisé dans</th>
+                <th class="w-40">Description</th>
               </tr>
             </thead>
             <tbody>
-              {% for product in products %}
-                <tr class="hover">
+              {% for setting in unified_settings %}
+                <tr class="hover setting-row" data-type="{{ setting.type }}" data-category="{{ setting.category }}">
                   <td>
-                    <div class="font-mono text-sm">{{ product.name }}</div>
-                  </td>
-                  <td>
-                    <div class="font-medium">{{ product.title_html|safe }}</div>
-                    {% if product.subtitle_html %}
-                      <div class="text-xs text-base-content/60">{{ product.subtitle_html|safe }}</div>
-                    {% endif %}
-                  </td>
-                  <td>
-                    <code class="text-xs">{{ product.local_path or '-' }}</code>
-                  </td>
-                  <td>
-                    <div class="badge badge-outline badge-sm" style="border-color: {{ product.color or '#6366f1' }};">
-                      {{ product.color or 'primary' }}
-                    </div>
-                  </td>
-                  <td>
-                    <div class="flex flex-wrap gap-1">
-                      {% for domain in product.domains %}<div class="badge badge-xs">{{ domain }}</div>{% endfor %}
-                    </div>
-                  </td>
-                  <td>
-                    {% if product.backend_settings %}
-                      <div class="badge badge-success badge-xs">✓</div>
+                    {% if setting.type == 'domain' %}
+                      <div class="badge badge-primary badge-sm">{{ setting.type }}</div>
                     {% else %}
-                      <div class="badge badge-ghost badge-xs">-</div>
+                      <div class="badge badge-secondary badge-sm">{{ setting.type }}</div>
                     {% endif %}
+                  </td>
+                  <td>
+                    <code class="text-xs text-base-content/70">{{ setting.source }}</code>
+                  </td>
+                  <td>
+                    <div class="badge badge-info badge-outline badge-xs">{{ setting.category }}</div>
+                  </td>
+                  <td>
+                    <code class="font-mono text-xs font-bold">{{ setting.key }}</code>
+                  </td>
+                  <td class="max-w-xs">
+                    {% if setting.value is mapping %}
+                      <details class="collapse collapse-arrow bg-base-200">
+                        <summary class="collapse-title text-xs font-medium p-1">
+                          Object ({{ setting.value|length }} keys)
+                        </summary>
+                        <div class="collapse-content">
+                          <pre class="text-xs bg-base-300 p-2 rounded overflow-x-auto">{{ setting.value|tojson(indent=2) }}</pre>
+                        </div>
+                      </details>
+                    {% elif setting.value is sequence and setting.value is not string %}
+                      <details class="collapse collapse-arrow bg-base-200">
+                        <summary class="collapse-title text-xs font-medium p-1">
+                          Array ({{ setting.value|length }} items)
+                        </summary>
+                        <div class="collapse-content">
+                          <pre class="text-xs bg-base-300 p-2 rounded overflow-x-auto">{{ setting.value|tojson(indent=2) }}</pre>
+                        </div>
+                      </details>
+                    {% elif setting.value|string|length > 60 %}
+                      <details class="collapse collapse-arrow bg-base-200">
+                        <summary class="collapse-title text-xs font-medium p-1">
+                          {{ setting.value|string|truncate(60) }}
+                        </summary>
+                        <div class="collapse-content">
+                          <div class="text-xs bg-base-300 p-2 rounded whitespace-pre-wrap">{{ setting.value }}</div>
+                        </div>
+                      </details>
+                    {% else %}
+                      <span class="text-xs">{{ setting.value }}</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    <div class="text-xs text-base-content/70">{{ setting.used_in }}</div>
+                  </td>
+                  <td>
+                    <div class="text-xs text-base-content/60 italic">{{ setting.description }}</div>
                   </td>
                 </tr>
               {% endfor %}
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
 
-    <!-- Backend Settings Details -->
-    {% if backend_public_settings %}
-      <div class="card bg-base-100 shadow-sm">
-        <div class="card-body">
-          <h2 class="card-title text-lg mb-4">🔧 Paramètres backend</h2>
-
-          <div class="overflow-x-auto">
-            <table class="table table-zebra table-sm">
-              <thead>
-                <tr>
-                  <th>Clé</th>
-                  <th>Valeur</th>
-                  <th>Type</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for key, value in backend_public_settings.items() %}
-                  <tr class="hover">
-                    <td>
-                      <code class="text-sm font-mono">{{ key }}</code>
-                    </td>
-                    <td>
-                      <div class="max-w-md">
-                        {% if value|length > 100 %}
-                          <details class="collapse collapse-arrow bg-base-200">
-                            <summary class="collapse-title text-xs font-medium">
-                              Voir la valeur ({{ value|length }} caractères)
-                            </summary>
-                            <div class="collapse-content">
-                              <pre class="text-xs bg-base-300 p-2 rounded overflow-x-auto">{{ value }}</pre>
-                            </div>
-                          </details>
-                        {% else %}
-                          <code class="text-xs">{{ value }}</code>
-                        {% endif %}
-                      </div>
-                    </td>
-                    <td>
-                      {% if value.startswith('{') or value.startswith('[') %}
-                        <div class="badge badge-info badge-xs">JSON</div>
-                      {% elif value in ['true', 'false'] %}
-                        <div class="badge badge-warning badge-xs">Boolean</div>
-                      {% elif value.isdigit() %}
-                        <div class="badge badge-success badge-xs">Number</div>
-                      {% else %}
-                        <div class="badge badge-ghost badge-xs">String</div>
-                      {% endif %}
-                    </td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+        <!-- Summary -->
+        <div class="mt-6 p-4 bg-base-200 rounded-lg">
+          <h3 class="font-semibold mb-2">📊 Résumé</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <div>
+              <span class="font-medium">Paramètres domaine:</span>
+              <span class="ml-2 badge badge-primary badge-sm">
+                {{ unified_settings|selectattr('type', 'eq', 'domain') |list|length }}
+              </span>
+            </div>
+            <div>
+              <span class="font-medium">Paramètres produits:</span>
+              <span class="ml-2 badge badge-secondary badge-sm">
+                {{ unified_settings|selectattr('type', 'eq', 'product') |list|length }}
+              </span>
+            </div>
+            <div>
+              <span class="font-medium">Metatags:</span>
+              <span class="ml-2 badge badge-info badge-sm">
+                {{ unified_settings|selectattr('category', 'in', ['domain_specific_metatags', 'index_view_specific_metatags', 'metatags']) |list|length }}
+              </span>
+            </div>
+            <div>
+              <span class="font-medium">Backend:</span>
+              <span class="ml-2 badge badge-warning badge-sm">
+                {{ unified_settings|selectattr('category', 'eq', 'backend_settings') |list|length }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    {% endif %}
+    </div>
+
+    <!-- Products Quick Reference -->
+    <div class="card bg-base-100 shadow-sm mt-6">
+      <div class="card-body">
+        <h2 class="card-title text-lg mb-4">📦 Référence Rapide des Produits</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {% for product in products %}
+            <div class="card bg-base-200 shadow-sm">
+              <div class="card-body p-4">
+                <h3 class="font-mono font-bold text-sm">{{ product.name }}</h3>
+                <div class="text-xs text-base-content/70">{{ product.title_html|safe }}</div>
+                {% if product.local_path %}
+                  <div class="mt-2">
+                    <code class="text-xs bg-base-300 px-1 py-0.5 rounded">{{ product.local_path }}</code>
+                  </div>
+                {% endif %}
+                <div class="flex gap-2 mt-2">
+                  {% if product.backend_settings %}
+                    <div class="badge badge-warning badge-xs">backend ✓</div>
+                  {% endif %}
+                  {% if product.metatags %}<div class="badge badge-info badge-xs">metatags ✓</div>{% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
 
     <!-- Navigation -->
     <div class="text-center mt-8">
@@ -355,5 +249,59 @@
           white-space: pre-wrap;
           word-break: break-all;
       }
+
+      .setting-row {
+          transition: all 0.2s ease;
+      }
+
+      .setting-row.hidden {
+          display: none;
+      }
+
+      .collapse-title {
+          min-height: unset !important;
+          padding: 0.25rem 0.5rem !important;
+      }
+
+      .collapse-content {
+          padding: 0.5rem !important;
+      }
   </style>
+
+  <script>
+      function filterTable(type) {
+          const rows = document.querySelectorAll('.setting-row');
+          rows.forEach(row => {
+              if (type === 'all') {
+                  row.classList.remove('hidden');
+              } else {
+                  if (row.dataset.type === type) {
+                      row.classList.remove('hidden');
+                  } else {
+                      row.classList.add('hidden');
+                  }
+              }
+          });
+      }
+
+      function filterCategory(category) {
+          const rows = document.querySelectorAll('.setting-row');
+          rows.forEach(row => {
+              if (category === 'metatags') {
+                  // Show all metatag categories
+                  if (row.dataset.category.includes('metatags')) {
+                      row.classList.remove('hidden');
+                  } else {
+                      row.classList.add('hidden');
+                  }
+              } else {
+                  if (row.dataset.category === category) {
+                      row.classList.remove('hidden');
+                  } else {
+                      row.classList.add('hidden');
+                  }
+              }
+          });
+      }
+  </script>
 {% endblock extra_head %}

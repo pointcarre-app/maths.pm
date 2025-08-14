@@ -19,7 +19,7 @@
         <img src="{{ raw_url }}" alt="{{ file_name }}" class="max-w-full rounded" width="1600" height="1200" />
 
       {% elif mt == 'image/svg+xml' %}
-        <div class="prose max-w-none">
+        <div class="max-w-none">
           {% if file_text %}
             {{ file_text | safe }}
           {% else %}
@@ -29,7 +29,9 @@
 
       {% elif mt in ['application/pdf'] %}
         <object data="{{ raw_url }}" type="application/pdf" width="100%" height="800px">
-          <p>PDF preview not available. <a class="link" href="{{ raw_url }}">Open raw</a>.</p>
+          <p>
+            PDF preview not available. <a class="link" href="{{ raw_url }}">Open raw</a>.
+          </p>
         </object>
 
       {% elif mt.startswith('text/') or mt in ['application/json', 'application/xml'] %}
@@ -44,4 +46,3 @@
     </div>
   </div>
 {% endblock content %}
-
