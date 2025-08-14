@@ -32,10 +32,15 @@
     };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script type="tailwind-config">
+    {
+        plugins: [
+            tailwind.plugin.typography,
+        ],
+    }
+</script>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
-
-
 
 <link rel="stylesheet" href="../static/css/root.css" />
 <link rel="stylesheet" href="../static/css/styles.css" />
@@ -83,6 +88,50 @@
     });
 </script>
 
+    
+    
+      
+      
+        <meta name="theme-color" content="#FFFFFF" />
+      
+
+      
+      
+        <meta name="subject" content="Enseignement des mathématiques et logiciels libres (Open Source)" />
+      
+      
+        <meta name="copyright" content="SAS POINTCARRE.APP" />
+      
+      
+        <meta name="language" content="FR" />
+      
+      
+        <meta name="Classification" content="Education" />
+      
+      
+        <meta name="rating" content="General" />
+      
+
+      
+      
+        <meta name="HandheldFriendly" content="True" />
+      
+      
+        <meta name="MobileOptimized" content="320" />
+      
+
+      
+      
+        <meta property="og:site_name" content="Maths.pm" />
+      
+
+      
+      
+        <meta name="twitter:site" content="@mathspm" />
+      
+    
+
+    
     <meta name="description" content="Plateforme d&#39;enseignement des mathématiques pour le secondaire avec des cours interactifs, exercices et ressources pédagogiques libres. Aucune donnée collectée." />
     <meta name="keywords" content="mathématiques, enseignement, collège, lycée, cours, exercices, pédagogie, open source" />
     <meta name="author" content="Maths.pm, contact@pointcarre.app" />
@@ -99,18 +148,6 @@
     
 
     
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
       
         
       
@@ -468,7 +505,7 @@
     </div>
   </div>
   <div class="navbar-end gap-2 sm:pl-18">
-    <button class="btn btn-sm sm:btn-base btn-square btn-ghost"
+    <button class="btn btn-xs sm:btn-base btn-square btn-ghost"
             onclick="my_modal_1.showModal()"
             style="box-shadow: none !important;
                    border: none !important;
@@ -924,8 +961,8 @@
             </button>
           </div>
 
-          <!-- README Content with Custom DaisyUI Prose Styling -->
-          <article class="prose-daisy"><h1 id="mathspm-fastapi-application-public-unstable">📚 Maths.pm - FastAPI Application (Public Unstable)</h1>
+          <!-- README Content with DaisyUI Prose Styling -->
+          <article class="prose prose-lg max-w-none prose-headings:text-primary prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:text-secondary prose-code:bg-base-200 prose-code:px-1 prose-code:rounded prose-pre:bg-base-200 prose-pre:text-base-content prose-blockquote:border-l-primary prose-blockquote:bg-base-200/50 prose-strong:text-primary prose-ul:list-disc prose-ol:list-decimal prose-table:table prose-table:table-zebra prose-th:bg-base-200 prose-th:text-primary prose-img:rounded-lg prose-img:shadow-lg"><h1 id="mathspm-fastapi-application-public-unstable">📚 Maths.pm - FastAPI Application (Public Unstable)</h1>
 <p>A production-grade FastAPI app for Maths.pm educational resources with first-class JupyterLite integration. This repository is now public and tagged as “unstable” to accelerate collaboration. Expect rapid changes and potential breaking updates until we cut the first stable tag.</p>
 <p>This document is comprehensive to help you evaluate, run, audit, and contribute safely.</p>
 <h2 id="quick-start">🚀 <strong>Quick Start</strong></h2>
@@ -947,7 +984,6 @@
 <h3 id="main-application">📋 <strong>Main Application</strong></h3>
 <ul>
 <li><strong><code>/</code></strong> - Homepage displaying all educational products and resources</li>
-<li><strong><code>/readme</code></strong> - Documentation page displaying this README with beautiful DaisyUI prose styling</li>
 <li><strong><code>/api/products</code></strong> - JSON API returning all available products</li>
 <li><strong><code>/api/health</code></strong> - Application health check and status</li>
 </ul>

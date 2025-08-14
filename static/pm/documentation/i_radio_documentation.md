@@ -135,7 +135,7 @@ What causes rain?
     <div id="radio-explanation-0" class="mt-4 hidden">
       <div class="card bg-base-200">
         <div class="card-body">
-          <div class="prose max-w-none">
+          <div class="max-w-none">
             <!-- Explanation content -->
           </div>
         </div>
