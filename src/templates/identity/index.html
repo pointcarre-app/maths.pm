@@ -1,0 +1,134 @@
+{% extends "base/main.html" %}
+{% block content %}
+  <div class="max-w-2xl px-4 mx-auto mt-24 mb-24">
+    <h1 class="text-6xl font-bold mb-4">Identity</h1>
+
+    <div class="mt-24">
+      <hr class="my-4" />
+      <h1 class="text-4xl font-bold mb-8">Headings with Spectral</h1>
+      <div class="max-w-sm text-xl mb-4">Body with Inter</div>
+      <div class="max-w-sm  text-xl font-mono mb-4">Mono with JetBrains Mono</div>
+      <div class="max-w-sm  text-xl font-handwritten mb-4">Handwritten with Dancing Script</div>
+      <div class="max-w-sm  text-base-content/30 text-xl font-accent mb-4">
+        Accent with EB Garamond (to see)
+      </div>
+      <div class="max-w-sm  text-base-content/30 text-xl font-strong mb-4">
+        Strong with Lora (to see)
+      </div>
+    </div>
+    <div class="mt-24">
+      <hr class="my-4" />
+      <h1 class="text-4xl font-bold mb-8">Logo Zélie</h1>
+      <div class="grid grid-cols-4 gap-8">
+        <div>
+          <div class="mb-2 text-xs font-mono text-right">#111827</div>
+          {% include "base/logo-zelie.html" %}
+        </div>
+        <div>
+          <div class="mb-2 text-xs font-mono text-right">--color-primary</div>
+          {% include "base/logo-zelie-primary.html" %}
+        </div>
+        <div>
+          <div class="mb-2 text-xs font-mono text-right">--color-secondary</div>
+          {% include "base/logo-zelie-secondary.html" %}
+        </div>
+        <div>
+          <div class="mb-2 text-xs font-mono text-right">--color-accent</div>
+          {% include "base/logo-zelie-accent.html" %}
+        </div>
+      </div>
+    </div>
+    <div class="mt-24">
+      <hr class="my-4" />
+      <h1 class="text-4xl font-bold mb-8">Buttons</h1>
+      <h2 class="text-2xl font-bold mb-4">Outline</h2>
+      <div class="grid grid-cols-4 gap-8 mb-12">
+        <button class="btn btn-outline">Default</button>
+        <button class="btn btn-outline btn-primary">Primary</button>
+        <button class="btn btn-outline btn-secondary">Secondary</button>
+        <button class="btn btn-outline btn-accent">Accent</button>
+      </div>
+      <h2 class="text-2xl font-bold mb-4">Normal</h2>
+      <div class="grid grid-cols-4 gap-8 mb-12">
+        <button class="btn">Default</button>
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-accent">Accent</button>
+      </div>
+
+      <h2 class="text-2xl font-bold mb-4">Soft</h2>
+      <div class="grid grid-cols-4 gap-8">
+        <button class="btn btn-soft">Default</button>
+        <button class="btn btn-soft btn-primary">Primary</button>
+        <button class="btn btn-soft btn-secondary">Secondary</button>
+        <button class="btn btn-soft btn-accent">Accent</button>
+      </div>
+    </div>
+
+    <div class="mt-24">
+      <hr class="my-4" />
+      <h1 class="text-4xl font-bold mb-8">Progression</h1>
+
+      <h2 class="text-2xl font-bold mb-4">Stats</h2>
+      <div class="stats shadow bg-base-100 mb-12">
+        <div class="stat">
+          <div class="stat-figure text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 class="inline-block h-8 w-8 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+              </path>
+            </svg>
+          </div>
+          <div class="stat-title">Total Likes</div>
+          <div class="stat-value text-primary font-heading">25.6K</div>
+          <div class="stat-desc">21% more than last month</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-figure text-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 class="inline-block h-8 w-8 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
+              </path>
+            </svg>
+          </div>
+          <div class="stat-title">Page Views</div>
+          <div class="stat-value text-secondary">2.6M</div>
+          <div class="stat-desc">21% more than last month</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-figure text-secondary">
+            <div class="avatar avatar-online">
+              <div class="w-16 rounded-full">
+                <img src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp" />
+              </div>
+            </div>
+          </div>
+          <div class="stat-value">86%</div>
+          <div class="stat-title">Tasks done</div>
+          <div class="stat-desc text-secondary">31 tasks remaining</div>
+        </div>
+      </div>
+
+
+      <h2 class="text-2xl font-bold mb-4">Progress</h2>
+      <div class="mb-12">
+        <progress class="progress progress-primary w-56"  max="100"></progress>
+        <progress class="progress progress-secondary w-56" value="0" max="100"></progress>
+        <progress class="progress progress-accent w-56" value="10" max="100"></progress>
+        <progress class="progress progress-info w-56" value="40" max="100"></progress>
+        <progress class="progress progress-neutral  w-56" value="70" max="100"></progress>
+        <progress class="progress w-56" value="100" max="100"></progress>
+      </div>
+
+
+      {% include "identity/zbeul.html" %}
+
+    </div>
+  </div>
+{% endblock content %}

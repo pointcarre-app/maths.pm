@@ -549,3 +549,9 @@ async def get_pm(
             )
 
         return settings.templates.TemplateResponse("pm/index.html", context)
+
+
+@core_router.get("/identity", response_class=HTMLResponse)
+async def identity(request: Request):
+    """HTML interface for frontend execution with logs."""
+    return settings.templates.TemplateResponse("identity/index.html", {"request": request})

@@ -331,6 +331,16 @@ class StaticSiteBuilder:
         if cname_file.exists():
             shutil.copy2(cname_file, self.output_dir / "CNAME")
             logger.info("✓ Copied CNAME file for custom domain")
+        
+        # Copy .nojekyll file to disable Jekyll processing on GitHub Pages
+        nojekyll_file = Path(".nojekyll")
+        if nojekyll_file.exists():
+            shutil.copy2(nojekyll_file, self.output_dir / ".nojekyll")
+            logger.info("✓ Copied .nojekyll file to disable Jekyll processing")
+        else:
+            # Create it if it doesn't exist
+            (self.output_dir / ".nojekyll").touch()
+            logger.info("✓ Created .nojekyll file to disable Jekyll processing")
 
         # Copy JupyterLite output if it exists
         jupyterlite_output = Path("src/static/jupyterlite/_output")

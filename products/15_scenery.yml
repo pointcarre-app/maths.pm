@@ -1,4 +1,5 @@
 name: scenery
+product_type: "repo"
 title_html: Scenery
 subtitle_html: Visualizations and scenes
 description: Utilities for building visual scenes and visualizations for educational content.
@@ -6,7 +7,7 @@ local_path: "#"
 source_link: https://github.com/pointcarre-app/scenery
 color: success
 classes_formatted:
-  - "🌄"
+  - "Open Source"
 tags:
   - visualization
   - python
