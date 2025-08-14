@@ -90,7 +90,7 @@ class StaticSiteBuilder:
 
                     # IMPORTANT: For GitHub Pages, we need to handle the repository path
                     # The site is served at /maths.pm/ so absolute paths need this prefix
-                    
+
                     # First, add the GitHub Pages base path to all absolute URLs
                     if self.base_path:
                         # For GitHub Pages deployment, prepend the base path
@@ -99,6 +99,18 @@ class StaticSiteBuilder:
                         content_str = content_str.replace('src="/', f'src="{self.base_path}/')
                         content_str = content_str.replace("src='/", f"src='{self.base_path}/")
                         content_str = content_str.replace('action="/', f'action="{self.base_path}/')
+                        
+                        # Fix JavaScript import statements
+                        content_str = content_str.replace("import '/static/", f"import '{self.base_path}/static/")
+                        content_str = content_str.replace('import "/static/', f'import "{self.base_path}/static/')
+                        content_str = content_str.replace("from '/static/", f"from '{self.base_path}/static/")
+                        content_str = content_str.replace('from "/static/', f'from "{self.base_path}/static/')
+                        
+                        # Fix @js alias in imports
+                        content_str = content_str.replace("from '@js/", f"from '{self.base_path}/static/js/")
+                        content_str = content_str.replace('from "@js/', f'from "{self.base_path}/static/js/')
+                        content_str = content_str.replace("import '@js/", f"import '{self.base_path}/static/js/")
+                        content_str = content_str.replace('import "@js/', f'import "{self.base_path}/static/js/')
                     else:
                         # For local testing, use relative paths
                         depth = len(Path(path).parts) - 1
@@ -111,6 +123,14 @@ class StaticSiteBuilder:
                             content_str = content_str.replace('src="/', f'src="{prefix}')
                             content_str = content_str.replace("src='/", f"src='{prefix}")
                             content_str = content_str.replace('action="/', f'action="{prefix}')
+                            
+                            # Fix JavaScript import statements for local testing
+                            content_str = content_str.replace("import '/static/", f"import '{prefix}static/")
+                            content_str = content_str.replace('import "/static/', f'import "{prefix}static/')
+                            content_str = content_str.replace("from '/static/", f"from '{prefix}static/")
+                            content_str = content_str.replace('from "/static/', f'from "{prefix}static/')
+                            content_str = content_str.replace("from '@js/", f"from '{prefix}static/js/")
+                            content_str = content_str.replace('from "@js/', f'from "{prefix}static/js/')
                         else:
                             # For root level files, remove leading slashes
                             content_str = content_str.replace('href="/', 'href="')
@@ -118,6 +138,12 @@ class StaticSiteBuilder:
                             content_str = content_str.replace('src="/', 'src="')
                             content_str = content_str.replace("src='/", "src='")
                             content_str = content_str.replace('action="/', 'action="')
+                            
+                            # Fix imports for root level
+                            content_str = content_str.replace("import '/static/", "import 'static/")
+                            content_str = content_str.replace('import "/static/', 'import "static/')
+                            content_str = content_str.replace("from '@js/", "from 'static/js/")
+                            content_str = content_str.replace('from "@js/', 'from "static/js/')
 
                     content = content_str.encode("utf-8")
 
