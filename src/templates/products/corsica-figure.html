@@ -1,6 +1,9 @@
-<figure class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-none">
-  <div class="bg-base-200/90 grid grid-cols-[60%_40%] gap-0 w-full"
-       style="border-radius: var(--radius-box)">
+<figure class="m-0 p-0 rounded-none" style="width: 100%; height: 100%; display: block;">
+  <div class="bg-base-200/90 gap-0 w-full"
+       style="border-radius: var(--radius-box);
+              display: grid;
+              grid-template-columns: 60% 40%;
+              height: 100%">
     <div class="flex items-center text-center text-left">
       <h1 class="pl-3 sm:pl-8 " style="font-family: var(--font-handwritten)">
         <span class="text-base-content/60">Matematica in l'Isula di a Bellezza</span>
@@ -8,11 +11,9 @@
         <span class="text-xl block text-primary font-semibold">Maths.Corsica</span>
       </h1>
     </div>
-    <div class="mx-auto">
-      {# {% set width = "122" %} #}
-      {% set width = 20 %}
-      {# {% set height = "243" %} #}
+    <div class="mx-auto" style="display: flex; align-items: center; justify-content: center; height: 100%;">
       {% set width = 40 %}
+      {% set height = 80 %}
       {% include "corsica/corsica-wikimedia.html" %}
     </div>
   </div>

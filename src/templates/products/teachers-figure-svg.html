@@ -1,5 +1,8 @@
 <figure id="teachers-figure-svg"
-        class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-box">
+        class="m-0 p-0 rounded-box"
+        style="width: 100%;
+               height: 100%;
+               display: block">
   <svg viewBox="0 0 500 120"
        width="100%"
        height="100%"
@@ -48,15 +51,26 @@
   </svg>
 </figure>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.getElementById("teachers-figure-svg"), {
-      delimiters: [
-          {left: "$$", right: "$$", display: true},
-          {left: "$", right: "$", display: false},
-          {left: "\\(", right: "\\)", display: false},
-          {left: "\\[", right: "\\]", display: true}
-      ],
-      throwOnError: false
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.getElementById("teachers-figure-svg"), {
+            delimiters: [{
+                left: "$$",
+                right: "$$",
+                display: true
+            }, {
+                left: "$",
+                right: "$",
+                display: false
+            }, {
+                left: "\\(",
+                right: "\\)",
+                display: false
+            }, {
+                left: "\\[",
+                right: "\\]",
+                display: true
+            }],
+            throwOnError: false
+        });
     });
-  });
 </script>

@@ -19,7 +19,7 @@
 
     <div class="">Niveau Troisième</div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4  max-w-4xl mx-auto mb-12 mt-4"
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4  max-w-4xl mx-auto mb-12 mt-4"
          style="border-radius: var(--radius-box)">
       <a href="{{ request.url_for('get_pm', origin='corsica/a_troiz_geo.md') ~ '?format=html' }}"
          class="btn btn-outline btn-primary">
@@ -29,49 +29,34 @@
         </svg> #}
         <span style="font-family:var(--font-heading)">Géographie de l'île</span>
       </a>
-      <button class="btn btn-outline">
+      <button class="btn btn-outline btn-primary">
         {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
           <rect x="14" y="2" width="8" height="8" rx="1" />
         </svg> #}
-        <span style="font-weight: 300;"></span>
+        <span style="font-family:var(--font-heading)">Navigation autour de l'île</span>
       </button>
-      <button class="btn btn-outline">
-        {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
-          <rect x="14" y="2" width="8" height="8" rx="1" />
-        </svg> #}
-        <span style="font-weight: 300;">Navigation (& trigo)</span>
-      </button>
-
     </div>
 
-    <div>Niveau Seconde</div>
+    <div class="">Niveau Seconde</div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4  max-w-4xl mx-auto mb-12 mt-4"
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4  max-w-4xl mx-auto mb-12 mt-4"
          style="border-radius: var(--radius-box)">
-      <button class="btn btn-outline">
+      <a href="{{ request.url_for('get_pm', origin='corsica/a_troiz_geo.md') ~ '?format=html' }}"
+         class="btn btn-outline btn-primary">
         {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
           <rect x="14" y="2" width="8" height="8" rx="1" />
         </svg> #}
-        <span style="font-weight: 300;">Surface de l'île (& Python)</span>
-      </button>
-      <button class="btn btn-outline">
+        <span style="font-family:var(--font-heading)">Géographie de l'île avec Python</span>
+      </a>
+      <button class="btn btn-outline btn-primary">
         {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
           <rect x="14" y="2" width="8" height="8" rx="1" />
         </svg> #}
-        <span style="font-weight: 300;"></span>
+        <span style="font-family:var(--font-heading)">Navigation autour de l'île (avec Python)</span>
       </button>
-      <button class="btn btn-outline">
-        {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
-          <rect x="14" y="2" width="8" height="8" rx="1" />
-        </svg> #}
-        <span style="font-weight: 300;">Navigation (& trigo)</span>
-      </button>
-
     </div>
 
     <div class="">
