@@ -1,12 +1,13 @@
 name: v4pyjs
+product_type: "repo"
 title_html: v4.py.js
 subtitle_html: KaTeX-compatible SVG from Python/JS
-description: Build KaTeX-compatible SVG from Python, optionally via JavaScript.
+description: Build KaTeX-compatible SVG from Python with a High-level API for maths content, optionally via JavaScript thanks to Nagini. 
 local_path: "#"
 source_link: https://github.com/pointcarre-app/v4.py.js
 color: accent
 classes_formatted:
-  - "🇫🇷"
+  - "Open Source"
 tags:
   - python
   - javascript
@@ -20,7 +21,7 @@ owner_rdb: "POINTCARRE.APP"
 owner_url: "https://github.com/pointcarre-app"
 
 # Backend settings specific to v4pyjs (none for now)
-backend_settings: {}
+# backend_settings: removed - optional field, not needed when empty
 
 
 

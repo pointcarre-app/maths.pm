@@ -16,8 +16,13 @@ class ProductModel:
         self.domains: List[str] = data.get("domains", [])
         self.name: str = data.get("name", "")
         self.title_html: str = data.get("title_html", "")
-        self.is_hidden: bool = data.get("is_hidden", "").lower() == "true"
-        self.is_beta: bool = data.get("is_beta", "").lower() == "true"
+        self.product_type: Optional[str] = data.get("product_type")  # New field (e.g., "repo")
+        # Support both 'hidden' and 'is_hidden' for backward compatibility
+        self.is_hidden: bool = (
+            str(data.get("is_hidden", "")).lower() == "true"
+            or str(data.get("hidden", "")).lower() == "true"
+        )
+        self.is_beta: bool = str(data.get("is_beta", "")).lower() == "true"
         self.subtitle_html: Optional[str] = data.get("subtitle_html")
         self.description: str = data.get("description", "")
         self.local_path: Optional[str] = data.get("local_path")

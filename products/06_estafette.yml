@@ -1,12 +1,13 @@
 name: estafette
+product_type: "repo"
 title_html: Estafette
 subtitle_html: French Tech should be more than a buzzword 🇫🇷
-description: A collection of scripts and assets around French Tech initiatives.
+description: "High-level API for typical deployment scenarios using containers, s3 buckets, and mailing services. Big thanks to Brevo, OVH, Scaleway, and Scalingo."
 local_path: "#"
 source_link: https://github.com/pointcarre-app/estafette
 color: info
 classes_formatted:
-  - "🇫🇷"
+  - "Infrastructure 🇫🇷"
 tags:
   - python
   - tools
@@ -17,7 +18,7 @@ domains:
 owner_rdb: "POINTCARRE.APP"
 owner_url: "https://github.com/pointcarre-app"
 
-backend_settings: {}
+# backend_settings: removed - optional field, not needed when empty
 
 
 

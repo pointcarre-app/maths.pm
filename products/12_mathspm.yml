@@ -1,4 +1,8 @@
+
+# TODO TODO TODO 
+# Should only be a domain (and + core maybe hence some frontend stuff + databrick + event maangement + DOPPEL)
 name: mathspm
+hidden: true
 title_html: Maths.pm (tools)
 subtitle_html: Tools for maths teaching (FR & EN)
 description: Tools and resources to support math educators and students.
@@ -18,7 +22,7 @@ domains:
 owner_rdb: "POINTCARRE.APP"
 owner_url: "https://github.com/pointcarre-app"
 
-backend_settings: {}
+# backend_settings: removed - optional field, not needed when empty
 
 
 

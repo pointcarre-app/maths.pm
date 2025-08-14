@@ -1,4 +1,5 @@
 name: cubrick
+product_type: "repo"
 title_html: Cubrick
 # is_hidden: true
 is_beta: true
@@ -9,7 +10,7 @@ source_link: https://framagit.org/your-org/pca-cubrick
 color: primary
 figure_svg: cubrick-figure-svg.html
 classes_formatted:
-  - "🇫🇷"
+  - "Open Source"
 tags:
   - manim
   - animation

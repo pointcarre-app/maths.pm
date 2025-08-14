@@ -2,7 +2,7 @@ name: corsica
 title_html: Maths.Corsica
 font_class: "font-handwritten"
 subtitle_html: Maths & Corse
-description: Maths & Corse
+description: "Quelques exemples mathématiques autour de la Corse : géométrie, trigonométrie, Python. Niveaux troisième et seconde."
 local_path: /corsica
 # source_link: 
 color: accent

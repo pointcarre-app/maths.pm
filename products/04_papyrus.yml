@@ -1,12 +1,13 @@
 name: papyrus
+product_type: "repo"
 title_html: Papyrus
 subtitle_html: PDF builder for math content
-description: Build and print math-oriented PDFs from JSON or HTML with a simple UI.
+description: "Build and print maths friendly PDFs. You can use JSON and HTML inputs, or rely on a simple UI for minimalistic content."
 local_path: "#"
 source_link: https://github.com/pointcarre-app/papyrus
 color: warning
 classes_formatted:
-  - "🇫🇷"
+  - "Open Source"
 tags:
   - pdf
   - printing
@@ -18,7 +19,7 @@ domains:
 owner_rdb: "POINTCARRE.APP"
 owner_url: "https://github.com/pointcarre-app"
 
-backend_settings: {}
+# backend_settings: removed - optional field, not needed when empty
 
 
 

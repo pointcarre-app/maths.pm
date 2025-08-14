@@ -1,13 +1,15 @@
 name: nagini
+product_type: "repo"
 title_html: Nagini
 subtitle_html: Python dans le navigateur
-description: Exécuter des scripts Python dans le navigateur, installle des librairies, passer des arguments en JS, utiliser des inputs, etc.)
+description: Execute Python scripts within the browser, install libraries, pass arguments from JS, use inputs, display graphs, and more.
+# description: Exécuter des scripts Python dans le navigateur, installle des librairies, passer des arguments en JS, utiliser des inputs, etc.)
 local_path: /nagini
-source_link: https://github.com/your-org/nagini
+source_link: https://github.com/pointcarre-app/nagini
 color: accent
 figure_svg: nagini-figure-svg.html
 classes_formatted:
-  - "🇫🇷"
+  - "Open Source"
 tags:
   - python
   - pyodide

@@ -34,7 +34,9 @@ product_schema = Map(
     {
         "name": Str(),
         "title_html": Str(),
+        StrictOptional("product_type"): Str(),  # New field for product type (e.g., "repo")
         StrictOptional("font_class"): Str(),
+        StrictOptional("hidden"): Str(),  # Alternative to is_hidden for backward compatibility
         StrictOptional("is_hidden"): Str(),
         StrictOptional("is_beta"): Str(),
         StrictOptional("subtitle_html"): Str(),

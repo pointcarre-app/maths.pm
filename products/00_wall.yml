@@ -1,4 +1,5 @@
 name: wall
+hidden: true
 title_html: Wall
 subtitle_html: Affichage de contenus scientifiques
 description: Affichage de contenus scientifiques via HTML, CSS, JavaScript, et technologies Open Source.

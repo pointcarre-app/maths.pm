@@ -17,7 +17,7 @@ Ou comment apprendre à calculer une surface à partir d'une carte, simplement e
 
 
 
-## 🗺️ Système de coordonnées
+## 🗺️ Système de coordonnées & unités
 
 --- {: .pm-cols-sm-2 gap-3 .cols-60-40 .mt-6}
 
@@ -31,9 +31,6 @@ On a représenté la Corse sur la _Carte 1_. Cette carte est en $2$ dimensions (
 ---
 
 
-
-
-### Unités
 
 
 Tu te rappelles probablement que sur les cartes, on utilise des unités de mesure spécifiques qui ont plus à voir avec des angles qu'avec des distances.
@@ -52,7 +49,7 @@ Tandis que les lignes verticales sont des lignes de même :
 
 - Latitude {:21 | Sur une représentation plane, la latitude se lit verticalement, et correspond donc à une ligne horizontale.}
 - Longitude {:20 | Sur une représentation plane, la longitude se lit horizontalement, et correspond donc à une ligne verticale.}
-- General Info{:29 | Un petit moyen mnémotechnique : les voyelles sont croisées : la l**A**titude est une **O**rdonnée, tandis que la l**O**ngitude est une **A**bscisse.}
+- General Info{:29 | Un petit moyen mnémotechnique : les voyelles sont croisées : la l**A**titude se lit comme une **O**rdonnée, tandis que la l**O**ngitude se lit comme une **A**bscisse.}
   {: .i-radio}
 
 Pour exprimer des latitudes et longitudes, on utilise des unités de mesure spécifiques :
@@ -64,9 +61,9 @@ Pour exprimer des latitudes et longitudes, on utilise des unités de mesure spé
 
 
 
-### Coordonnées d'Ajaccio et Bastia
+## 📍Ports d'Ajaccio et Bastia
 
-Sur la _Carte 2_, on a représenté les positions des ports d'Ajaccio et Bastia avec deux points deux couleurs différentes. Sachant que les coordonnées des ports de ces deux villes sont :
+Sur la _Carte 2_, on a représenté les positions des ports d'Ajaccio et Bastia avec deux points de deux couleurs différentes. Sachant que les coordonnées des ports de ces deux villes sont :
 
 
 ![Carte 2 : Corse, ports d'Ajaccio et Bastia](/static/pm/corsica/files/corsica_grid_with_cities.svg)
@@ -89,7 +86,7 @@ La couleur du bouton représente la couleur du point sur la carte. Parmi les 4 p
 - <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> Bastia {:20}
 - <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> Ajaccio {:20}
 - <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> Bastia {:21}
-- Ajaccio a la plus petite longitude et est donc plus à l'ouest que Bastia. Sa longitude est également plus petite que celle de Bastia, donc Ajaccio est plus au Sud. Donc le point <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> correspond à Ajaccio et le point <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> correspond à Bastia. {:29}
+- Ajaccio a la plus petite longitude et est donc plus à l'ouest que Bastia. Sa latitude est également plus petite que celle de Bastia, donc Ajaccio est plus au Sud. Donc le point <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> correspond à Ajaccio et le point <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> correspond à Bastia. {:29}
 {: .i-radio}
 
 
@@ -111,7 +108,7 @@ Nous nous sommes donc assurés de choisir un quadrillage qui tombe *"quasi-juste
 {: .mx-auto}
 
 
-💡 _Horitontalement, on compte 9 carrés, et verticalement 19 carrés._<br>
+💡 _Horizontalement, on compte 9 carrés, et verticalement 19 carrés._<br>
 Quelle est la surface totale représentée sur cette carte ? Tu exprimeras ton résultat en $km^2$, arrondi à l'unité (c'est à dire, sans virgule).
 {: .statement}
 
@@ -131,7 +128,7 @@ step: 100
 correct: 17100
 unit: "$km^2$"
 tolerance: 0
-feedback_correct: "$19 \\times 9 \\ times 10$ $km$ $\\times 10$ $km$ = 17100"
+feedback_correct: "$19 \\times 9 \\times 10$ $km$ $\\times 10$ $km$ = 17100"
 feedback_incorrect: "Réponse incorrecte."
 # hint: "They are arranged in 3 rows of 4 apples."
 ```
@@ -148,8 +145,7 @@ feedback_incorrect: "Réponse incorrecte."
 
 
 
-- Il y a en tout $58$ carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span>.
-- Il y a en tout $117$ carrés colorés <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span>.
+Il y a en tout $58$ carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> et $59$ carrés colorés <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span>.
 {: .alert .alert-info .alert-soft}
 
 
@@ -172,14 +168,14 @@ step: 100
 correct: 5800
 unit: "$km^2$"
 tolerance: 0
-feedback_correct: "$58 \\times 10$ $km$ $\\times 10$ $km$ = 5800 $km^2$"
+feedback_correct: "$58 \\times 10$ $km$ $\\times 10$ $km$ = $5800$ $km^2$"
 feedback_incorrect: "Réponse incorrecte."
 # hint: "They are arranged in 3 rows of 4 apples."
 ```
 
 
 
-La surface colorée avec cette couleur <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span> correspond à la surface des carrés qui sont partiellement dans l'île. Calcule la surface totale représentées par les carrées colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> et <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span> en $km^2$.
+La surface colorée avec cette couleur <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span> correspond à la surface des carrés qui sont partiellement dans l'île. Calcule la surface totale représentée par les carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> et <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span> en $km^2$.
 {: .statement}
 
 
@@ -195,11 +191,57 @@ step: 100
 correct: 11700
 unit: "$km^2$"
 tolerance: 0
-feedback_correct: "$117 \\times 10$ $km$ $\\times 10$ $km$ = 11700 $km^2$"
+feedback_correct: "$(59+58) \\times 10$ $km$ $\\times 10$ $km$ = $11700$ $km^2$"
 feedback_incorrect: "Réponse incorrecte."
 # hint: "They are arranged in 3 rows of 4 apples."
 ```
 
+
+
+
+
+Calculer la moyenne de ces deux valeurs permet d'obtenir astucieusement une estimation de la surface de l'île. Calcule cette moyenne en $km^2$.
+{: .statement}
+
+
+```yaml
+NumberInputPCA: v0.0.1
+id: surface_mean
+type: number
+# label: "How many apples are in the basket?"
+min: 0
+max: 20000
+step: 100
+correct: 8750
+unit: "$km^2$"
+tolerance: 0
+feedback_correct: "$\\frac{5800 + 11700}{2} = 8750$ $km^2$"
+feedback_incorrect: "Réponse incorrecte."
+# hint: "They are arranged in 3 rows of 4 apples."
+```
+
+
+
+
+À l'aide d'une recherche sur internet, calcule la différence entre la surface de l'île et la surface que tu as calculée ci-dessus.
+{: .statement}
+
+
+
+```yaml
+NumberInputPCA: v0.0.1
+id: surface_mean
+type: number
+# label: "How many apples are in the basket?"
+min: 0
+max: 1000
+step: 1
+correct: 28
+unit: "$km^2$"
+tolerance: 0
+feedback_correct: "$8750 - 8722 = 28$ $km^2$. Ce qui fait une erreur de $28 / 8722 = 0.00321$, soit $0.321\\%$."
+feedback_incorrect: "Réponse incorrecte."
+```
 
 
 <!-- ## 🏘️ Notion de voisinage
