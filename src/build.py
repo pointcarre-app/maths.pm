@@ -19,10 +19,13 @@ logger = logging.getLogger(__name__)
 class StaticSiteBuilder:
     """Builds static site from FastAPI routes"""
 
-    def __init__(self, base_url: str = "http://localhost:8000", output_dir: str = "dist"):
+    def __init__(
+        self, base_url: str = "http://localhost:8000", output_dir: str = "dist", base_path: str = ""
+    ):
         self.base_url = base_url
         self.output_dir = Path(output_dir)
         self.client = None
+        self.base_path = base_path  # For GitHub Pages, this would be "/repository-name"
 
     async def __aenter__(self):
         self.client = httpx.AsyncClient(timeout=30.0)
@@ -64,7 +67,39 @@ class StaticSiteBuilder:
                 output_path = output_path.with_suffix(".json")
                 output_path.write_text(response.text, encoding="utf-8")
             else:
-                output_path.write_bytes(response.content)
+                content = response.content
+
+                # Fix absolute URLs in HTML files
+                if response.headers.get("content-type", "").startswith("text/html"):
+                    content_str = content.decode("utf-8")
+                    # Replace absolute URLs with relative ones
+                    content_str = content_str.replace('"http://127.0.0.1:8000/static/', '"/static/')
+                    content_str = content_str.replace("'http://127.0.0.1:8000/static/", "'/static/")
+                    content_str = content_str.replace('"http://localhost:8000/static/', '"/static/')
+                    content_str = content_str.replace("'http://localhost:8000/static/", "'/static/")
+                    content_str = content_str.replace('="127.0.0.1:8000/static/', '="/static/')
+                    content_str = content_str.replace("='127.0.0.1:8000/static/", "='/static/")
+
+                    # Fix root-relative paths to work from subdirectories
+                    # For pages in subdirectories, we need to adjust the paths
+                    depth = len(Path(path).parts) - 1
+                    if depth > 0:
+                        # Create relative path prefix (e.g., "../" for one level deep)
+                        prefix = "../" * depth
+                        # Replace absolute paths with relative ones
+                        content_str = content_str.replace(
+                            'href="/static/', f'href="{prefix}static/'
+                        )
+                        content_str = content_str.replace('src="/static/', f'src="{prefix}static/')
+                        content_str = content_str.replace('="/static/', f'="{prefix}static/')
+                    else:
+                        # For root level files, use relative paths
+                        content_str = content_str.replace('href="/static/', 'href="static/')
+                        content_str = content_str.replace('src="/static/', 'src="static/')
+
+                    content = content_str.encode("utf-8")
+
+                output_path.write_bytes(content)
 
             logger.info(f"✓ Saved {path} → {output_path.relative_to(self.output_dir)}")
             return True
