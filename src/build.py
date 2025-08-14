@@ -88,24 +88,36 @@ class StaticSiteBuilder:
                     content_str = content_str.replace('.md"', '.html"')
                     content_str = content_str.replace(".md'", ".html'")
 
-                    # Fix root-relative paths to work from subdirectories
-                    depth = len(Path(path).parts) - 1
-                    if depth > 0:
-                        # Create relative path prefix
-                        prefix = "../" * depth
-                        # Replace all absolute paths with relative ones
-                        content_str = content_str.replace('href="/', f'href="{prefix}')
-                        content_str = content_str.replace("href='/", f"href='{prefix}")
-                        content_str = content_str.replace('src="/', f'src="{prefix}')
-                        content_str = content_str.replace("src='/", f"src='{prefix}")
-                        content_str = content_str.replace('action="/', f'action="{prefix}')
+                    # IMPORTANT: For GitHub Pages, we need to handle the repository path
+                    # The site is served at /maths.pm/ so absolute paths need this prefix
+                    
+                    # First, add the GitHub Pages base path to all absolute URLs
+                    if self.base_path:
+                        # For GitHub Pages deployment, prepend the base path
+                        content_str = content_str.replace('href="/', f'href="{self.base_path}/')
+                        content_str = content_str.replace("href='/", f"href='{self.base_path}/")
+                        content_str = content_str.replace('src="/', f'src="{self.base_path}/')
+                        content_str = content_str.replace("src='/", f"src='{self.base_path}/")
+                        content_str = content_str.replace('action="/', f'action="{self.base_path}/')
                     else:
-                        # For root level files, remove leading slashes
-                        content_str = content_str.replace('href="/', 'href="')
-                        content_str = content_str.replace("href='/", "href='")
-                        content_str = content_str.replace('src="/', 'src="')
-                        content_str = content_str.replace("src='/", "src='")
-                        content_str = content_str.replace('action="/', 'action="')
+                        # For local testing, use relative paths
+                        depth = len(Path(path).parts) - 1
+                        if depth > 0:
+                            # Create relative path prefix
+                            prefix = "../" * depth
+                            # Replace all absolute paths with relative ones
+                            content_str = content_str.replace('href="/', f'href="{prefix}')
+                            content_str = content_str.replace("href='/", f"href='{prefix}")
+                            content_str = content_str.replace('src="/', f'src="{prefix}')
+                            content_str = content_str.replace("src='/", f"src='{prefix}")
+                            content_str = content_str.replace('action="/', f'action="{prefix}')
+                        else:
+                            # For root level files, remove leading slashes
+                            content_str = content_str.replace('href="/', 'href="')
+                            content_str = content_str.replace("href='/", "href='")
+                            content_str = content_str.replace('src="/', 'src="')
+                            content_str = content_str.replace("src='/", "src='")
+                            content_str = content_str.replace('action="/', 'action="')
 
                     content = content_str.encode("utf-8")
 
@@ -207,7 +219,7 @@ class StaticSiteBuilder:
         return report
 
 
-async def build_static_site(base_url: str = "http://localhost:8000") -> Dict:
+async def build_static_site(base_url: str = "http://localhost:8000", base_path: str = "") -> Dict:
     """Main build function"""
-    async with StaticSiteBuilder(base_url=base_url) as builder:
+    async with StaticSiteBuilder(base_url=base_url, base_path=base_path) as builder:
         return await builder.build()

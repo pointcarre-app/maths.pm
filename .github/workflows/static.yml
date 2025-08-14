@@ -43,7 +43,7 @@ jobs:
           
       - name: Build static site
         run: |
-          python scripts/build_static.py
+          python scripts/build_for_github.py
           
       - name: Setup Pages
         uses: actions/configure-pages@v5

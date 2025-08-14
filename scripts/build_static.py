@@ -31,7 +31,7 @@ def run_server():
         sys.exit(1)
 
 
-async def build_static_site():
+async def build_static_site(for_github_pages=False):
     """Build the static site by calling the API endpoint"""
     try:
         async with httpx.AsyncClient(timeout=60.0) as client:
