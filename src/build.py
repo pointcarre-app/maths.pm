@@ -243,6 +243,12 @@ class StaticSiteBuilder:
             shutil.copytree(src_static, dst_static, dirs_exist_ok=True)
             logger.info(f"✓ Copied static files to {dst_static}")
 
+        # Copy CNAME file for custom domain
+        cname_file = Path("CNAME")
+        if cname_file.exists():
+            shutil.copy2(cname_file, self.output_dir / "CNAME")
+            logger.info("✓ Copied CNAME file for custom domain")
+
         # Copy JupyterLite output if it exists
         jupyterlite_output = Path("src/static/jupyterlite/_output")
         if jupyterlite_output.exists():
