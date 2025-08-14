@@ -1,22 +1,24 @@
 # 
 # application
 #
-httpx==0.27.0  # Needed for static site generation
+httpx==0.27.0  # Needed for static site generation  TODO : see if not only in requirements-dev.txt
 fastapi==0.115.13
 jinja2==3.1.6
 markdown==3.8.2
+orjson==3.11.1 # should become standard for json
 pydantic==2.8.2
 pydantic_settings==2.9.1
 python-dotenv==1.1.0
-strictyaml==1.7.3
+
+strictyaml==1.7.3 # should be used as much as possible
 uvicorn==0.34.0
 # gunicorn==23.0.0 # to decide about production
 #
-# quality
+# quality ---> to requirements-dev.txt
 #
-djlint==1.36.4 
-black==24.4.2
-ruff==0.11.2
+# djlint==1.36.4 
+# black==24.4.2
+# ruff==0.11.2
 #
 # JupyterLite
 #
@@ -24,9 +26,12 @@ jupyterlite-core==0.5.1
 jupyterlite-pyodide-kernel==0.5.2
 jupyterlite-p5-kernel==0.1.1
 # ipywidgets
+# Don't install ipykernel here (only jupyterlite when hosted)
+
 #
 # Future Products
 #
+bs4==0.0.2
 markdown==3.8.2 #  For README view
 # minify-html==0.16.4 #  For future Products
 # sympy==1.14.0 # Maybe for future Products
@@ -43,4 +48,4 @@ markdown==3.8.2 #  For README view
 # pca-estafette 
 # pca-scenery
 # pca-teachers  ? 
-PyYAML==6.0.1 
+PyYAML==6.0.1  ########...........

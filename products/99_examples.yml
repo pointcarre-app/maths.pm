@@ -1,0 +1,21 @@
+name: examples
+title_html: Examples & Documentation
+subtitle_html: Interactive examples and test cases
+description: "Collection of examples demonstrating various PM fragment features, including i-radio interactive questions."
+local_path: "#"
+color: info
+classes_formatted:
+  - "📝"
+tags:
+  - examples
+  - documentation
+  - testing
+  - i-radio
+domains:
+  - maths.pm
+owner_rdb: "Documentation"
+owner_url: "#"
+backend_settings:
+  examples:
+    enabled: true
+    description: "Test and example files for PM features"

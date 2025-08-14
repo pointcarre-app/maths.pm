@@ -123,17 +123,19 @@ h6 {
 
 
 
+.badge {
+    gap: 0 !important
+}
+
+
+
+
 
 @media screen and (max-width: 639px) {
   .main-navbar {
     height: 2rem !important;
     min-height: unset !important;
   }
-
-
-
-  
-
 }
 
 .card > figure {
@@ -154,6 +156,17 @@ h6 {
     display: none;
   }
 }
+
+
+
+
+/************* Extends Tailwind / DaisyUI *************/
+
+.divider-only-right::before {
+  content: none !important;
+}
+
+
 
 
 

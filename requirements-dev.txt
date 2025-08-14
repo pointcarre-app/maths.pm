@@ -1,0 +1,6 @@
+# Todo: check version
+ipykernel
+matplotlib
+djlint==1.36.4 
+black==24.4.2
+ruff==0.11.2

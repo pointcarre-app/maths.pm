@@ -1,0 +1,26 @@
+name: scenery
+title_html: Scenery
+subtitle_html: Visualizations and scenes
+description: Utilities for building visual scenes and visualizations for educational content.
+local_path: "#"
+source_link: https://github.com/pointcarre-app/scenery
+color: success
+classes_formatted:
+  - "🌄"
+tags:
+  - visualization
+  - python
+  - scenes
+domains:
+  - maths.pm
+
+owner_rdb: "POINTCARRE.APP"
+owner_url: "https://github.com/pointcarre-app"
+
+backend_settings: {}
+
+
+
+
+
+

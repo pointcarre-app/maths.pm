@@ -1,0 +1,78 @@
+{# Progressive reveal for labeled list (lbl_) with height transitions #}
+{% set items = fragment.data.list if fragment.data and fragment.data.list is defined else [] %}
+{% set reveal_first = fragment.data.reveal_first if fragment.data and fragment.data.reveal_first is defined else 0 %}
+<div class="fragment" data-f_type="{{ fragment.f_type.value }}">
+  <ul class="pm-lbl-list list-disc ml-5" data-reveal-first="{{ reveal_first }}">
+    {% set ns = namespace(i=0) %}
+    {% for entry in items %}
+      {% for key, _ in entry.items() %}
+        <li class="pm-lbl-item {{ '' if ns.i < reveal_first else 'pm-collapsed' }}">{{ key | safe }}</li>
+        {% set ns.i = ns.i + 1 %}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+  <div class="mt-3 flex gap-2">
+    <button class="btn btn-sm btn-outline" data-action="next">Afficher une ligne</button>
+    <button class="btn btn-sm btn-ghost" data-action="all">Tout afficher</button>
+  </div>
+</div>
+<script>
+    (() => {
+        const root = document.currentScript?.previousElementSibling;
+        if (!root) return;
+        const list = root.querySelector('.pm-lbl-list');
+        if (!list) return;
+        const items = Array.from(list.querySelectorAll('.pm-lbl-item'));
+        const pre = parseInt(list.getAttribute('data-reveal-first') || '0', 10) || 0;
+        let nextIndex = 0;
+        const btnNext = root.querySelector('[data-action="next"]');
+        const btnAll = root.querySelector('[data-action="all"]');
+
+        // Initialize collapsed state, then open first N without animation
+        items.forEach((li, idx) => {
+            li.style.maxHeight = '0px';
+            li.classList.add('pm-collapsed');
+            li.classList.remove('pm-open');
+            if (idx < pre) {
+                li.classList.add('pm-open');
+                li.classList.remove('pm-collapsed');
+                li.style.maxHeight = '';
+            }
+        });
+        nextIndex = Math.min(pre, items.length);
+
+        function expand(li) {
+            if (!li) return;
+            const target = Math.max(1, li.scrollHeight);
+            // ensure starting point
+            li.classList.add('pm-open');
+            li.classList.remove('pm-collapsed');
+            if (!li.style.maxHeight || getComputedStyle(li).maxHeight === 'none') {
+                li.style.maxHeight = '0px';
+                li.offsetHeight; // force reflow
+            }
+            li.style.maxHeight = `${target}px`;
+            const onEnd = (evt) => {
+                if (evt.propertyName !== 'max-height') return;
+                li.style.maxHeight = '';
+                li.removeEventListener('transitionend', onEnd);
+            };
+            li.addEventListener('transitionend', onEnd);
+        }
+
+        function revealNext() {
+            const li = items[nextIndex++];
+            if (li) expand(li);
+            if (nextIndex >= items.length && btnNext) btnNext.disabled = true;
+        }
+
+        function revealAll() {
+            for (let i = nextIndex; i < items.length; i++) expand(items[i]);
+            nextIndex = items.length;
+            if (btnNext) btnNext.disabled = true;
+        }
+
+        if (btnNext) btnNext.addEventListener('click', revealNext);
+        if (btnAll) btnAll.addEventListener('click', revealAll);
+    })();
+</script>

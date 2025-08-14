@@ -11,6 +11,17 @@
   "disabled_extensions": [
     "fspath"
   ],
+  "jupyter-config-data": {
+    "contentsStorageName": "JupyterLite Storage - Local",
+    "fileTypes": {
+      "json": {
+        "name": "json",
+        "extensions": [".json"],
+        "mimeTypes": ["application/json"],
+        "fileFormat": "text"
+      }
+    }
+  },
   "settings_overrides": {
     "@jupyterlite/application-extension:shell": {
       "devMode": true,
@@ -18,6 +29,13 @@
         "scope": "/static/jupyterlite/",
         "enabled": false
       }
+    },
+    "@jupyterlite/pyodide-kernel-extension:kernel": {
+      "mountDrive": true,
+      "disablePyPIFallback": false
+    },
+    "@jupyterlab/filebrowser-extension:browser": {
+      "showHiddenFiles": false
     }
   }
 } 

@@ -1,28 +1,111 @@
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-*.so
-.ipynb_checkpoints/
-.DS_Store
-env/
-venv/
-.env
-.venv
-dist/
-build/
-_output/
-# node_modules # cause small
-# .vscode
+#############################################
+# Global ignores for a public repository    #
+#############################################
+
+
+# Custom
+src/corsica/get_block_migration
 
 # OS files
 .DS_Store
+Thumbs.db
 
-# Node dependencies
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Compiled extensions
+*.so
+
+# Virtual environments / Python tooling
+.Python
+env/
+venv/
+.venv/
+.env
+.env.*
+.envrc
+pip-wheel-metadata/
+*.egg-info/
+*.egg
+
+# Jupyter / IPython
+.ipynb_checkpoints/
+.jupyter/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Test / Coverage
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+pytestdebug.log
+
+# Build / Dist outputs
+build/
+dist/
+site/
+wheelhouse/
+
+# Node / Frontend
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+.parcel-cache/
+.turbo/
+.next/
+out/
 
-# Build outputs
+# Editors / IDEs
+.idea/
+.vscode/
+.history/
+.fleet/
+
+# Logs / Databases / Misc
+*.log
+*.pid
+*.seed
+*.sqlite
+*.sqlite3
+*.db
+*.doit.db
+
+# Project-specific generated outputs
+_output/
+src/static/jupyterlite/_output/
+src/static/jupyterlite/.jupyterlite.doit.db
+**/_output/
+
+# Platform / framework specific
 /plugins/
 /platforms/
 /public/
+
+# Security: never commit secrets
+secrets.*
+credentials.*
+*.pem
+*.key
+*.p12
+*.crt
+*.cer
+
+# Local data (allowlist tracked sample files elsewhere)
+files-for-lite/data/processed/
+files-for-lite/data/raw/
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+*.swp
+*.swo
+

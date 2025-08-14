@@ -9,18 +9,18 @@ class MasonLogger {
     }
 
     log(...args) {
-        console.log(this.prefix, ...args);
-        window.atlas.add(this.prefix, 'log', args.join(' '));
+        try { console.log(this.prefix, ...args); } catch {}
+        try { window.atlas?.add(this.prefix, 'log', args.map(String).join(' ')); } catch {}
     }
 
     warn(...args) {
-        console.warn(this.prefix, ...args);
-        window.atlas.add(this.prefix, 'warn', args.join(' '));
+        try { console.warn(this.prefix, ...args); } catch {}
+        try { window.atlas?.add(this.prefix, 'warn', args.map(String).join(' ')); } catch {}
     }
 
     error(...args) {
-        console.error(this.prefix, ...args);
-        window.atlas.add(this.prefix, 'error', args.join(' '));
+        try { console.error(this.prefix, ...args); } catch {}
+        try { window.atlas?.add(this.prefix, 'error', args.map(String).join(' ')); } catch {}
     }
 }
 
@@ -34,15 +34,16 @@ class Mason {
          */
         this.logger = new MasonLogger();
         this.components = new Map(); // Store component references
-        this.logger.log('Creating Mason instance');
+        this.logger.log('Creating Mason instance', { time: new Date().toISOString() });
     }
 
     // Main initialization method - now accepts data directly
     async init(brickTagName, data = null) {
-        this.logger.log('Initializing', brickTagName, 'with data:', data);
+        this.logger.log('Initializing', brickTagName, 'with data:', data ? '[provided]' : '[load]');
         
         // Find the component in the DOM
         const component = document.querySelector(brickTagName);
+        this.logger.log('Query component ->', component ? 'found' : 'missing');
         
         if (!component) {
             this.logger.error(`Component ${brickTagName} not found`);
@@ -52,6 +53,7 @@ class Mason {
         try {
             // If data is provided, use it directly. Otherwise, load it.
             const componentData = data || await this.loadData();
+            this.logger.log('Data ready, length:', typeof componentData === 'string' ? componentData.length : 'n/a');
             
             if (!componentData) {
                 throw new Error('No data available for component');
@@ -63,11 +65,10 @@ class Mason {
             
             // Store reference for later use
             this.components.set(brickTagName, component);
-            
-            this.logger.log('Successfully initialized', brickTagName);
+            this.logger.log('Successfully initialized', brickTagName, { ts: Date.now() });
             
         } catch (error) {
-            this.logger.error('Error initializing component:', error);
+            this.logger.error('Error initializing component:', error?.message || error);
             // Set error state in the component
             component.data = { error: error.message };
         }

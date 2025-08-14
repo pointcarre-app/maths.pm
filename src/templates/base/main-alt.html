@@ -2,6 +2,8 @@
 <html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>
       {% block title %}
         {{ DOMAIN_CONFIG['index_view_specific_metatags']['title'] }}
@@ -49,14 +51,16 @@
     {% block extra_head %}
     {% endblock extra_head %}
   </head>
-  <body class="bg-base-100 text-base-content font-sans min-h-screen">
+
+  {% include "base/bg.html" %}
+  <body class="text-base-content font-sans min-h-screen">
     {% include "base/data-brick.html" %}
 
     {% include "base/navbar-alt.html" %}
     {# {% include "base/below-navbar.html" %} #}
     {% include "base/drawer.html" %}
 
-    <main class="container mx-auto max-w-3xl">
+    <main class="container mx-auto">
       {% block content %}
       {% endblock content %}
     </main>

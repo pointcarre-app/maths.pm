@@ -1,0 +1,24 @@
+name: candor
+title_html: Candor
+subtitle_html: Internal HTML experiments
+description: Private repository for internal HTML experiments and prototypes.
+local_path: "#"
+source_link: https://github.com/pointcarre-app/candor
+color: primary
+classes_formatted:
+  - "🔒"
+tags:
+  - html
+  - internal
+  - experiments
+domains:
+  - maths.pm
+
+owner_rdb: "POINTCARRE.APP"
+owner_url: "https://github.com/pointcarre-app"
+
+backend_settings: {}
+
+
+
+

@@ -1,4 +1,4 @@
-<div class="navbar main-alt-navbar">
+<div class="navbar main-alt-navbar bg-base-100">
   <div class="navbar-start">
     <a href="{{ DOMAIN_CONFIG['domain_url'] }}" class="w-[32px] sm:w-[40px] h-[32px] sm:h-[40px]">
       {% include "base/logo-zelie-primary.html" %}
@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="navbar-end gap-2 sm:pl-18">
-    <button class="btn btn-square btn-ghost"
+    <button class="btn btn-sm sm:btn-base btn-square btn-ghost"
             onclick="my_modal_1.showModal()"
             style="box-shadow: none !important;
                    border: none !important;
@@ -27,16 +27,18 @@
            stroke="currentColor"
            stroke-width="2"
            stroke-linecap="round"
-           stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M12 16v-4"></path>
-        <path d="M12 8h.01"></path>
+           stroke-linejoin="round"
+           class="lucide lucide-book-type-icon lucide-book-type">
+        <path d="M10 13h4" />
+        <path d="M12 6v7" />
+        <path d="M16 8V6H8v2" />
+        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
       </svg>
     </button>
     <dialog id="my_modal_1" class="modal">
       <div class="modal-box">{% include "base/modal-info-content.html" %}</div>
     </dialog>
-    <a class="btn btn-square btn-ghost"
+    <a class="btn btn-sm sm:btn-base btn-square btn-ghost"
        style="box-shadow: none !important;
               border: none !important;
               font-weight:400">
@@ -56,12 +58,12 @@
       </svg>
     </a>
     <a href="{{ DOMAIN_CONFIG['templating']['button_primary_href'] }}"
-       class="btn btn-primary"
+       class="btn btn-sm sm:btn-base btn-primary"
        style="padding: 0.5rem 0.75rem;
               box-shadow: none !important;
               font-weight:300">{{ DOMAIN_CONFIG['templating']['button_primary_text'] }}</a>
     <a href="{{ DOMAIN_CONFIG['templating']['button_ghost_href'] }}"
-       class="btn btn-ghost"
+       class="btn btn-sm sm:btn-base btn-ghost"
        style="padding: 0.5rem 0.75rem;
               box-shadow: none !important;
               font-weight:300">{{ DOMAIN_CONFIG['templating']['button_ghost_text'] }}</a>

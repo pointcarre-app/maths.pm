@@ -1,8 +1,8 @@
-<div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg">
+<div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg max-w-[450px]">
   <div class="max-h-[180px] bg-base-200 rounded-t-box">
     {% if product.figure_png %}
       <figure class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-none flex items-center justify-center bg-white p-4">
-        <img src="{{ product.figure_png }}" alt="{{ product.name }} Logo" class="object-contain h-full">
+        <img src="{{ product.figure_png }}" alt="{{ product.name }} Logo" class="object-contain h-full" />
       </figure>
     {% elif product.figure_svg %}
       {% set svg_path = "products/" + product.figure_svg %}
@@ -11,14 +11,13 @@
   </div>
 
   <hr class="border-base-300" />
-
   <div class="card-body py-8">
     <div class="flex flex-row items-center justify-between mb-3">
-      <h2 class="card-title text-2xl gap-0">{{ product.title_html|safe }}</h2>
+      <h2 class="card-title text-2xl gap-0 {{ product.font_class }}">{{ product.title_html|safe }}</h2>
       <div>
         {% if product.classes_formatted %}
           {% for class_name in product.classes_formatted %}
-            <span class="badge badge-soft font-mono">{{ class_name|safe }}</span>
+            <span class="badge badge-outline font-mono">{{ class_name|safe }}</span>
           {% endfor %}
         {% endif %}
       </div>

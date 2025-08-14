@@ -1,6 +1,6 @@
 name: cubrick
 title_html: Cubrick
-is_hidden: true
+# is_hidden: true
 is_beta: true
 subtitle_html: Animations & infographies
 description: Design et moteur d'animations utilisant Manim permettant de créer des infographies, des vidéos et des diapositives.

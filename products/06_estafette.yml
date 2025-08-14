@@ -1,0 +1,24 @@
+name: estafette
+title_html: Estafette
+subtitle_html: French Tech should be more than a buzzword 🇫🇷
+description: A collection of scripts and assets around French Tech initiatives.
+local_path: "#"
+source_link: https://github.com/pointcarre-app/estafette
+color: info
+classes_formatted:
+  - "🇫🇷"
+tags:
+  - python
+  - tools
+  - community
+domains:
+  - maths.pm
+
+owner_rdb: "POINTCARRE.APP"
+owner_url: "https://github.com/pointcarre-app"
+
+backend_settings: {}
+
+
+
+

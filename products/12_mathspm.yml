@@ -1,0 +1,25 @@
+name: mathspm
+title_html: Maths.pm (tools)
+subtitle_html: Tools for maths teaching (FR & EN)
+description: Tools and resources to support math educators and students.
+local_path: "#"
+source_link: https://github.com/pointcarre-app/maths.pm
+color: accent
+classes_formatted:
+  - "🇫🇷"
+  - "🇬🇧"
+tags:
+  - education
+  - tools
+  - maths
+domains:
+  - maths.pm
+
+owner_rdb: "POINTCARRE.APP"
+owner_url: "https://github.com/pointcarre-app"
+
+backend_settings: {}
+
+
+
+

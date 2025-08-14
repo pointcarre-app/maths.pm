@@ -1,0 +1,6 @@
+<div class="fragment form-control" data-f_type="{{ fragment.f_type.value }}">
+  <label class="label">
+    <span class="label-text">{{ fragment.question if fragment.question else fragment.html | safe }}</span>
+  </label>
+  <input type="text" class="input input-bordered" placeholder="Enter your answer..." />
+</div>

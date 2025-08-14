@@ -1,20 +1,39 @@
-<div class="fixed left-0 top-0  h-screen w-[calc(260px+1rem)] bg-base-100 text-base-content z-40 transition-transform duration-300 shadow -translate-x-full"
-     id="left-sidebar"
-     style="border-right: 0.1px solid var(--color-accent) !important">
+<style>
+    @media (max-width: 639px) {
+        #left-sidebar {
+            border-right: none !important;
+        }
+    }
+</style>
+
+<!-- Toggle buttons -->
+<style>
+    @keyframes spin-then-scale {
+        0% {
+            transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+            transform: rotate(360deg) scale(1);
+        }
+
+        100% {
+            transform: rotate(360deg) scale(1.2);
+        }
+    }
+
+    .spin-scale-hover:hover {
+        animation: spin-then-scale 1s ease-in-out forwards;
+    }
+</style>
+
+{# <div class="fixed left-0 top-0  h-screen w-[calc(260px+1rem)] bg-base-100 text-base-content z-40 transition-transform duration-300 shadow -translate-x-full" id="left-sidebar" style="border-right: 0.1px solid var(--color-accent) !important">
   <ul class="menu p-4 min-h-full mt-12" style="width: 260px !important;">
     <li>
       <a href="/dashboard" class="flex justify-between items-center" style="width: 100% !important">
         <span>Tableau de bord</span>
         <div class="p-1" style="border-radius: var(--radius-selector)">
-          <svg class="stroke-base-content"
-               xmlns="http://www.w3.org/2000/svg"
-               width="18"
-               height="18"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke-width="1.5"
-               stroke-linecap="round"
-               stroke-linejoin="round">
+          <svg class="stroke-base-content" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <rect width="7" height="9" x="3" y="3" rx="1" />
             <rect width="7" height="5" x="14" y="3" rx="1" />
             <rect width="7" height="9" x="14" y="12" rx="1" />
@@ -47,16 +66,7 @@
     <li>
       <a href="/pronoia"class="flex justify-between items-center" style="width: 100% !important;">
         <span>S'entraîner pour le Bac</span>
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="18"
-             height="18"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="1.5"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             class="lucide lucide-notebook-pen-icon lucide-notebook-pen">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-notebook-pen-icon lucide-notebook-pen">
           <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" />
           <path d="M2 6h4" />
           <path d="M2 10h4" />
@@ -89,208 +99,38 @@
         </li>
       </ul>
     </li>
-    {# <li>
-      <a href="/exam" class="flex justify-between items-center" style="width: 100% !important;">
-        <span>Bac blanc complet</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-test-tube-diagonal-icon lucide-test-tube-diagonal">
-<path d="M21 7 6.82 21.18a2.83 2.83 0 0 1-3.99-.01a2.83 2.83 0 0 1 0-4L17 3" />
-<path d="m16 2 6 6" />
-<path d="M12 16H4" />
-        </svg>
-      </a>
-      <ul class="">
-        <li>
-          <a href="/exam/sujets0">Sujets 0 du ministère</a>
-        </li>
-        <li>
-          <a class="hover:bg-primary hover:text-primary-content flex justify-between items-center">
-            <span>Sujet aléatoire</span>
-          </a>
-        </li>
-      </ul>
-    </li> #}
-    {# <li>
-      <a class="flex justify-between items-center">
-        <span>Cours & Méthodes</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-heart-icon lucide-book-heart">
-<path d="M16 8.2A2.22 2.22 0 0 0 13.8 6c-.8 0-1.4.3-1.8.9-.4-.6-1-.9-1.8-.9A2.22 2.22 0 0 0 8 8.2c0 .6.3 1.2.7 1.6A226.652 226.652 0 0 0 12 13a404 404 0 0 0 3.3-3.1 2.413 2.413 0 0 0 .7-1.7" />
-<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
-        </svg>
-      </a>
-      <ul>
-        <li>
-          <a>Programme officiel</a>
-        </li>
-        <li>
-          <a>Fiches de révisions</a>
-        </li>
-        <li>
-          <a class="hover:bg-primary hover:text-primary-content flex justify-between items-center">Flashcards
-          </a>
-        </li>
-        <li>
-          <a class="hover:bg-primary hover:text-primary-content flex justify-between items-center">Fiches méthodes
-          </a>
-        </li>
-      </ul>
-    </li> #}
-  </ul>
+</ul>
 </div>
+#}
 
 
-<style>
-    @media (max-width: 639px) {
-        #left-sidebar {
-            border-right: none !important;
-        }
-    }
-</style>
+{# <button class="btn btn-circle btn-xl fixed bottom-4 left-4 z-50 spin-scale-hover bg-base-100" id="left-toggle" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2) !important; border:0 !important">
+  <div class="w-8 h-8">{% include "base/logo-zelie-primary.html" %}</div>
+</button> #}
+
 
 <div class="fixed  right-0 top-0 h-screen w-[calc(250px+1rem)] bg-base-200/90 backdrop-blur text-base-content z-40 transition-transform duration-300 overflow-y-auto translate-x-full"
      id="right-sidebar">
   <ul class="menu p-4 min-h-full mt-12" style="width: 250px !important;">
 
-    <li>
-      <a href="/profile" class="flex justify-between items-center" style="width: 100% !important">
-        <span>Profil</span>
-        <div class="p-1" style="border-radius: var(--radius-selector)">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="18"
-               height="18"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="1.5"
-               stroke-linecap="round"
-               stroke-linejoin="round"
-               class="lucide lucide-user-icon lucide-user">
-            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
-          </svg>
-        </div>
-      </a>
-      <ul>
-        <li>
-          <a href="/dashboard" class="flex justify-between items-center">
-            <span>Semaine en cours</span>
-            <span class="badge badge-secondary badge-soft badge-xs font-bold">7</span>
-          </a>
-        </li>
-        <li>
-          <a href="/dashboard" class="flex justify-between items-center">
-            <span>Recommendations</span>
-            <span class="badge badge-soft badge-xs font-bold">3</span>
-          </a>
-        </li>
-        <li>
-          <a href="/dashboard" class="flex justify-between items-center">
-            <span>Activité récente</span>
-            <span class="badge badge-soft badge-xs font-bold">2</span>
-          </a>
-        </li>
 
-      </ul>
-    </li>
     <li>
-      <a href="/dashboard" class="flex justify-between items-center" style="width: 100% !important">
-        <span>Paramètres</span>
-        <div class="p-1" style="border-radius: var(--radius-selector)">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="18"
-               height="18"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="1.5"
-               stroke-linecap="round"
-               stroke-linejoin="round"
-               class="lucide lucide-cog-icon lucide-cog">
-            <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" />
-            <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-            <path d="M12 2v2" />
-            <path d="M12 22v-2" />
-            <path d="m17 20.66-1-1.73" />
-            <path d="M11 10.27 7 3.34" />
-            <path d="m20.66 17-1.73-1" />
-            <path d="m3.34 7 1.73 1" />
-            <path d="M14 12h8" />
-            <path d="M2 12h2" />
-            <path d="m20.66 7-1.73 1" />
-            <path d="m3.34 17 1.73-1" />
-            <path d="m17 3.34-1 1.73" />
-            <path d="m11 13.73-4 6.93" />
-          </svg>
-        </div>
-      </a>
-      <ul>
-        <li>
-          <a href="/dashboard" class="flex justify-between items-center">
-            <span>Semaine en cours</span>
-            <span class="badge badge-secondary badge-soft badge-xs font-bold">7</span>
-          </a>
-        </li>
-        <li>
-          <a href="/dashboard" class="flex justify-between items-center">
-            <span>Recommendations</span>
-            <span class="badge badge-soft badge-xs font-bold">3</span>
-          </a>
-        </li>
-        <li>
-          <a href="/dashboard" class="flex justify-between items-center">
-            <span>Activité récente</span>
-            <span class="badge badge-soft badge-xs font-bold">2</span>
-          </a>
-        </li>
 
-      </ul>
-    </li>
-    <li>
-      <a href="/index" class="flex justify-between items-center" style="width: 100% !important">
-        <span>Index</span>
-        <div class="p-1" style="border-radius: var(--radius-selector)">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="18"
-               height="18"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="1.5"
-               stroke-linecap="round"
-               stroke-linejoin="round"
-               class="lucide lucide-list-icon lucide-list">
-            <path d="M3 12h.01" />
-            <path d="M3 18h.01" />
-            <path d="M3 6h.01" />
-            <path d="M8 12h13" />
-            <path d="M8 18h13" />
-            <path d="M8 6h13" />
-          </svg>
-        </div>
-      </a>
-      <ul>
-        <li>
-          <a href="/savoir-faire" class="flex justify-between items-center">
-            <span>Savoir faire</span>
-          </a>
-        </li>
-        <li>
-          <a href="/dashboard" class="flex justify-between items-center">
-            <span>Recommendations</span>
-            <span class="badge badge-soft badge-xs font-bold">3</span>
-          </a>
-        </li>
-        <li>
-          <a href="/dashboard" class="flex justify-between items-center">
-            <span>Activité récente</span>
-            <span class="badge badge-soft badge-xs font-bold">2</span>
-          </a>
-        </li>
 
-      </ul>
+      <a href="/dashboard" class="flex justify-between items-center">
+
+
+        {# <span class="badge badge-secondary badge-soft badge-sm">18</span> #}
+      </a>
+
     </li>
+
     <li>
-      <a class="flex justify-between items-center" style="width: 100% !important;">
-        <span>Index</span>
+      <a href="/doppel"
+         class="flex justify-between items-center hover:bg-primary hover:text-primary-content"
+         style="width: 100% !important;
+                background-color: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100))">
+        <span>Data-brick</span>
         <svg xmlns="http://www.w3.org/2000/svg"
              width="18"
              height="18"
@@ -300,25 +140,16 @@
              stroke-width="1.5"
              stroke-linecap="round"
              stroke-linejoin="round"
-             class="lucide lucide-list-icon lucide-list">
-          <path d="M3 12h.01" />
-          <path d="M3 18h.01" />
-          <path d="M3 6h.01" />
-          <path d="M8 12h13" />
-          <path d="M8 18h13" />
-          <path d="M8 6h13" />
+             class="lucide lucide-cuboid-icon lucide-cuboid">
+          <path d="m21.12 6.4-6.05-4.06a2 2 0 0 0-2.17-.05L2.95 8.41a2 2 0 0 0-.95 1.7v5.82a2 2 0 0 0 .88 1.66l6.05 4.07a2 2 0 0 0 2.17.05l9.95-6.12a2 2 0 0 0 .95-1.7V8.06a2 2 0 0 0-.88-1.66Z" />
+          <path d="M10 22v-8L2.25 9.15" />
+          <path d="m10 14 11.77-6.87" />
         </svg>
       </a>
-      <ul style="margin-left: 0rem !important;">
-        <li class="ml-1">
-          <a href="/dashboard" class="flex justify-between items-center">
-            <code class="bg-base-300 p-2">data-brick</code>
-            <span class="badge badge-secondary badge-soft badge-sm">18</span>
-          </a>
-        </li>
+      <ul id="doppel-all-files-list" style="margin-left: 0rem !important;">
+        <!-- All files will be populated here consecutively -->
       </ul>
     </li>
-
 
     <li>
       <a href="/doppel"
@@ -438,33 +269,6 @@
 
 </div>
 
-<!-- Toggle buttons -->
-<style>
-    @keyframes spin-then-scale {
-        0% {
-            transform: rotate(0deg) scale(1);
-        }
-
-        50% {
-            transform: rotate(360deg) scale(1);
-        }
-
-        100% {
-            transform: rotate(360deg) scale(1.2);
-        }
-    }
-
-    .spin-scale-hover:hover {
-        animation: spin-then-scale 1s ease-in-out forwards;
-    }
-</style>
-
-<button class="btn btn-circle btn-xl fixed bottom-4 left-4 z-50 spin-scale-hover bg-base-100"
-        id="left-toggle"
-        style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2) !important;
-               border:0 !important">
-  <div class="w-8 h-8">{% include "base/logo-zelie-primary.html" %}</div>
-</button>
 
 <button class="btn btn-circle hover:bg-transparent btn-lg fixed bottom-4 right-4 z-50 spin-scale-hover"
         id="right-toggle">
@@ -490,13 +294,26 @@
         const leftToggle = document.getElementById('left-toggle');
         const rightToggle = document.getElementById('right-toggle');
 
-        leftToggle.addEventListener('click', () => {
-            leftSidebar.classList.toggle('-translate-x-full');
-        });
+        try {
 
-        rightToggle.addEventListener('click', () => {
-            rightSidebar.classList.toggle('translate-x-full');
-        });
+            leftToggle.addEventListener('click', () => {
+                leftSidebar.classList.toggle('-translate-x-full');
+            });
+        } catch (e) {
+            console.log("no leftsidebar found")
+            console.error(e);
+        }
+
+
+        try {
+
+            rightToggle.addEventListener('click', () => {
+                rightSidebar.classList.toggle('translate-x-full');
+            });
+        } catch (e) {
+            console.log("no rightsidebar found")
+            console.error(e);
+        }
 
         // Theme management
         function setTheme(theme) {

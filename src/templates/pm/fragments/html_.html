@@ -1,0 +1,7 @@
+<div class="fragment" data-f_type="{{ fragment.f_type.value }}">
+  {% if fragment.data.content %}
+    {{ fragment.data.content | safe }}
+  {% else %}
+    <a href="{{ fragment.data.src }}" class="link">{{ fragment.data.src }}</a>
+  {% endif %}
+</div>

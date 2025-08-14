@@ -1,0 +1,26 @@
+name: atlas
+title_html: Atlas
+subtitle_html: Data and content atlas
+description: Internal atlas for organizing data and content across projects.
+local_path: "#"
+source_link: https://github.com/pointcarre-app/atlas
+color: primary
+classes_formatted:
+  - "🗺️"
+tags:
+  - data
+  - content
+  - internal
+domains:
+  - maths.pm
+
+owner_rdb: "POINTCARRE.APP"
+owner_url: "https://github.com/pointcarre-app"
+
+backend_settings: {}
+
+
+
+
+
+

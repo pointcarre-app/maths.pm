@@ -1,6 +1,6 @@
 name: jupyterlite
 title_html: JupyterLite
-is_hidden: true
+# is_hidden: true
 is_beta: true
 subtitle_html: Environnement de calcul interactif
 description: "Un environnement JupyterLite complet proposant deux noyaux (kernels) : Python et p5.js"

@@ -1,6 +1,8 @@
-# 📚 Maths.pm - FastAPI Application
+# 📚 Maths.pm - FastAPI Application (Public Unstable)
 
-A **FastAPI-powered application** for Maths.pm educational resources with **JupyterLite integration** for interactive Python notebooks.
+A production-grade FastAPI app for Maths.pm educational resources with first-class JupyterLite integration. This repository is now public and tagged as “unstable” to accelerate collaboration. Expect rapid changes and potential breaking updates until we cut the first stable tag.
+
+This document is comprehensive to help you evaluate, run, audit, and contribute safely.
 
 ## 🚀 **Quick Start**
 
@@ -34,7 +36,7 @@ python -m src
 ### 🎯 **Educational Tools**
 - **`/sujets0`** - Interactive mathematics question generator for French "Sujets 0" exams
 
-### 🔬 **JupyterLite Views** *(The Complete Suite)*
+### 🔬 **JupyterLite Views** (Complete Suite)
 
 #### **Primary Interfaces**
 - **`/jupyterlite/`** - Smart entry point (auto-redirects to Lab)
@@ -45,7 +47,7 @@ python -m src
 #### **Specialized Views**
 - **`/jupyterlite/sandbox/repl`** - Clean, full-screen REPL interface (perfect for embedding)
 
-#### **Backward Compatibility** *(Your Old Links Still Work)*
+#### **Backward Compatibility** (Old links still work)
 - **`/jupyter`** - Redirects to `/jupyterlite/lab` (permanent redirect)
 - **`/jupyter/repl`** - Redirects to `/jupyterlite/repl` (permanent redirect)
 
@@ -169,29 +171,29 @@ graph TB
     JUPYTER -->|Redirects to| STATIC
 ```
 
-### **Key Architecture Concepts:**
+### **Key Architecture Concepts**
 
-#### **🌐 Configuration Layer**
+#### 🌐 Configuration Layer
 - **`domains/maths.pm.yml`**: Domain-wide settings (meta tags, templates, branding)
 - **`products/*.yml`**: Individual service definitions with backend settings
 - **Domain filtering**: Products are loaded only if they match the current domain
 
-#### **⚙️ Application Layer** 
+#### ⚙️ Application Layer
 - **`settings.py`**: Central configuration manager that loads and validates YAML configs
 - **`models.py`**: Pydantic models for type-safe configuration handling
 - **`app.py`**: FastAPI application with modular router architecture
 
-#### **🛣️ Router Organization**
+#### 🛣️ Router Organization
 - **Modular routers**: Each feature has its own router (root, api, sujets0, jupyterlite)
 - **Conditional mounting**: JupyterLite router only loads if enabled
 - **Backward compatibility**: Old `/jupyter` routes redirect to new `/jupyterlite` routes
 
-#### **📚 Content Pipeline**
+#### 📚 Content Pipeline
 - **`files-for-lite/`**: Source notebooks and content
 - **`_output/`**: JupyterLite build artifacts (generated at startup)
 - **`static/`**: Served assets including the built JupyterLite interface
 
-### **Directory Structure:**
+### Directory Structure
 ```
 pca-mathspm/
 ├── domains/                # 🌐 Domain configurations
@@ -215,7 +217,7 @@ pca-mathspm/
 └── _output/                # 🏗️ JupyterLite build (generated)
 ```
 
-## 🛠️ **Development**
+## 🛠️ Development
 
 **Auto-reload is enabled** - the server watches for changes in Python files, YAML configurations, and templates.
 
@@ -233,7 +235,7 @@ curl http://localhost:8000/api/health
 }
 ```
 
-## 🎯 **Key Features**
+## 🎯 Key Features
 
 - ✅ **Modern FastAPI** with async support and organized router architecture
 - ✅ **Complete JupyterLite suite** with 5 different views for various use cases
@@ -244,20 +246,20 @@ curl http://localhost:8000/api/health
 - ✅ **Hot reload** for rapid development
 - ✅ **Conditional features** - disable components as needed
 
-## 🎓 **Educational Use Cases**
+## 🎓 Educational Use Cases
 
-### **For Teachers:**
+### For Teachers
 - Use `/jupyterlite/embed` to demonstrate both interfaces to students
 - Start beginners with `/jupyterlite/repl` (less overwhelming)
 - Graduate advanced students to `/jupyterlite/lab` (more powerful)
 - Use `/sujets0` for French mathematics exam preparation
 
-### **For Students:**
+### For Students
 - **Homework**: Use REPL for quick calculations and verification
 - **Projects**: Use Lab for complex data analysis and visualization
 - **Learning**: Progress from REPL → Lab as skills develop
 
-### **For Integration:**
+### For Integration
 - **Website embedding**: Use sandbox views for clean integration
 - **Demonstrations**: Use embed view to showcase capabilities
 - **Direct access**: Link to specific Lab or REPL as needed
@@ -265,3 +267,115 @@ curl http://localhost:8000/api/health
 ---
 
 **Built with FastAPI + JupyterLite + strictyaml** 🚀
+
+---
+
+## 🧩 PM Namespace, Components, and Frontend Architecture
+
+We progressively enhance server-rendered PM pages with web components (Lit). Each fragment type (f_type) can be upgraded to a component for dynamic behavior while preserving SEO and first paint. All code lives under:
+
+- `@js/pm/*` → `src/static/js/pm/*`
+- `@core/css/pm.css` → `src/static/core/css/pm.css`
+
+Entry point: `@js/pm/main.js` exports `PMRuntime` with APIs to initialize dynamic behaviors and drive reveal modes:
+
+- `init()` initializes all interactive fragments
+- `initFragment(wrapperEl)` initializes a specific fragment wrapper
+- Modes: `setMode('all'|'step')`, `next()`, `prev()`, `goTo(i)`
+
+Interactive components shipped:
+
+- `pm-radio` for `radio_` fragments
+- `pm-codex` for `codex_` fragments (lazy CodeMirror init)
+
+Open examples directly under `/static/js/examples/` to validate in isolation.
+
+---
+
+## 🔒 Security & Privacy
+
+This repository is public. Follow these guidelines to keep your deployments safe:
+
+- Never commit secrets. Use environment variables or secret stores.
+  - `.env`, `.env.*`, and common secret file patterns are ignored by `.gitignore`.
+  - Checklists in `src/corsica/get_block_migration/MIGRATION_CHECKLIST.md` mention `SECRET_KEY`; do not use defaults in production.
+- Credentials in YAML or code are not used; product configs are loaded from files that should not contain secrets.
+- External CDNs are used for UI libraries (Tailwind, DaisyUI, KaTeX, CodeMirror). For offline or stricter environments, self-host and pin versions.
+- CORS: validate domain settings in `domains/maths.pm.yml` before exposing publicly.
+- JupyterLite runs client-side via Pyodide; no server-side code execution. Still, treat notebook content as untrusted when embedding.
+
+Security scanning checklist before deploying:
+
+- [ ] Search for `SECRET_KEY`, `token`, `password`, `apikey`, `client_secret` in repo history (pre-push hooks recommended).
+- [ ] Ensure `.gitignore` covers local build outputs, caches, and notebooks’ checkpoints.
+- [ ] Rotate any default values (e.g., `dev-secret-change-in-production`).
+- [ ] Review logs for inadvertent PII.
+- [ ] Enable HTTPS and HSTS at the reverse proxy.
+
+---
+
+## 🧭 Release Policy (Unstable → Stable)
+
+- The `main` branch is unstable; breaking changes can occur.
+- Tagging strategy:
+  - `v0.x.y` → Unstable pre-releases
+  - First stable tag will be `v1.0.0`
+- Changelog: summarize notable changes in GitHub Releases.
+
+Recommended workflow:
+
+1. Fork and work on feature branches.
+2. Open PRs targeting `main` with a clear description and testing notes.
+3. CI (when enabled) must pass before merge.
+
+---
+
+## 🧰 Local Development Guide
+
+Dependencies:
+
+- Python 3.11+
+- Node (optional) for frontend tooling (not required for basic use)
+
+Install and run:
+
+```bash
+pip install -r requirements.txt
+uvicorn src:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Visit:
+
+- `http://localhost:8000/` – Home
+- `http://localhost:8000/pm/pyly/01_premiers_pas.md?format=html` – Sample PM page
+
+Frontend entry points:
+
+- `src/static/js/pm/main.js` (PM runtime)
+- `src/static/core/css/pm.css` (PM styles)
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions that improve stability, UX, and pedagogy.
+
+Guidelines:
+
+- Keep code polite and welcoming; avoid slang in comments and logs.
+- Prefer progressive enhancement to maintain SSR.
+- Match existing code style; include types where applicable.
+- Write small, focused PRs with before/after notes and screenshots when UI changes.
+
+Ways to help:
+
+- Implement Lit components for remaining fragment types (`graph_`, `tabvar_`, etc.).
+- Expand examples in `/static/js/examples/`.
+- Improve testing, linting, and CI workflows.
+
+---
+
+## 📜 License
+
+AGPL-3.0. See `LICENSE`. If you run a modified version over a network, you must make the modified source available to users of that service (AGPL network clause).
+

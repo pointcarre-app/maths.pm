@@ -5,10 +5,9 @@
 {% endblock navbar_title %}
 
 {% block content %}
-  <div class="mt-8 padding-security-alt mb-14">
+  <div class="mt-8 padding-security-alt max-w-4xl mx-auto mb-14">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-14">
       {% for product in products %}
-
         {% if not product.is_hidden %}
           {% include "products/product-card.html" %}
         {% endif %}

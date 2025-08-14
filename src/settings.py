@@ -14,12 +14,12 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import Field, computed_field
 from pydantic_settings import BaseSettings
-from strictyaml import Any, Map, MapPattern, Optional as StrictOptional, Seq, Str, load
+from strictyaml import Any as YamlAny, Map, MapPattern, Optional as StrictOptional, Seq, Str, load
 
 import logging
 import yaml
 
-from .models import ProductModel, DomainModel
+from .models import ProductModel, DomainModel, ProductSettings
 
 # Get the logger instance from the app
 logger = logging.getLogger("maths_pm")
@@ -34,6 +34,7 @@ product_schema = Map(
     {
         "name": Str(),
         "title_html": Str(),
+        StrictOptional("font_class"): Str(),
         StrictOptional("is_hidden"): Str(),
         StrictOptional("is_beta"): Str(),
         StrictOptional("subtitle_html"): Str(),
@@ -49,7 +50,7 @@ product_schema = Map(
         "owner_rdb": Str(),
         "owner_url": Str(),
         # Add backend_settings support
-        StrictOptional("backend_settings"): MapPattern(Str(), Any()),
+        StrictOptional("backend_settings"): MapPattern(Str(), YamlAny()),
     }
 )
 
@@ -57,8 +58,8 @@ product_schema = Map(
 domain_config_schema = Map(
     {
         "domain_url": Str(),
-        "domain_specific_metatags": MapPattern(Str(), Any()),
-        "index_view_specific_metatags": MapPattern(Str(), Any()),
+        "domain_specific_metatags": MapPattern(Str(), YamlAny()),
+        "index_view_specific_metatags": MapPattern(Str(), YamlAny()),
         "templating": Map(
             {
                 "base_template": Str(),
@@ -76,7 +77,7 @@ domain_config_schema = Map(
                 StrictOptional("css"): Seq(Str()),
             }
         ),
-        "backend_settings": MapPattern(Str(), Any()),
+        "backend_settings": MapPattern(Str(), YamlAny()),
     }
 )
 
@@ -250,6 +251,18 @@ class Settings(BaseSettings):
         default=["micropip", "numpy", "matplotlib"], description="Pyodide packages"
     )
 
+    # ------------------------------------------------------------------
+    # PCA Codex support
+    # ------------------------------------------------------------------
+    def build_codex_path_from_script_path(self, script_path: str) -> Path:
+        """Resolve the absolute path to a codex script file.
+
+        By convention, codex files are stored under the repository-level
+        'files/' directory. The script_path is a POSIX-like relative path
+        such as 'pyly/premiers-pas-affichages-strings.py'.
+        """
+        return (self.base_dir / "files" / script_path).resolve()
+
     @computed_field
     @property
     def templates_dir(self) -> Path:
@@ -259,6 +272,12 @@ class Settings(BaseSettings):
     @property
     def static_dir(self) -> Path:
         return self.src_dir / "static"
+
+    @computed_field
+    @property
+    def images_files_dir(self) -> Path:
+        """Directory for user-provided images served at /images."""
+        return self.base_dir / "files" / "images"
 
     @computed_field
     @property
@@ -443,13 +462,3 @@ def reload_product_settings():
 
 # Log what's available at module load time
 logger.info(f"📋 Module loaded with product settings: {list_available_product_settings()}")
-
-# ============================================================================
-# DEPRECATED: These will be removed in future versions
-# ============================================================================
-# TODO: Remove these and update all imports to use `settings.base_dir` etc.
-# These exist only for backward compatibility with old code
-BASE_DIR = settings.base_dir  # Use: settings.base_dir
-SRC_DIR = settings.src_dir  # Use: settings.src_dir
-DOMAIN_NAME = settings.domain_name  # Use: settings.domain_name
-DOMAIN_CONFIG_FILE = settings.domain_config_file  # Use: settings.domain_config_file

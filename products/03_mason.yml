@@ -1,0 +1,25 @@
+name: mason
+title_html: Mason
+subtitle_html: LitElement components with KaTeX integration
+description: LitElement Web Components with KaTeX integration for interactive educational interfaces.
+local_path: "#"
+source_link: https://github.com/pointcarre-app/mason
+color: primary
+classes_formatted:
+  - "🇫🇷"
+tags:
+  - webcomponents
+  - lit
+  - javascript
+  - katex
+domains:
+  - maths.pm
+
+owner_rdb: "POINTCARRE.APP"
+owner_url: "https://github.com/pointcarre-app"
+
+backend_settings: {}
+
+
+
+

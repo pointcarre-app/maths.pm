@@ -1,0 +1,22 @@
+<div class="fragment overflow-x-auto" data-f_type="{{ fragment.f_type.value }}">
+  {% if fragment.data and fragment.data.headers is defined and fragment.data.rows is defined %}
+    <table class="fragment-table table">
+      {% if fragment.data.headers %}
+        <thead>
+          <tr>
+            {% for h in fragment.data.headers %}<th>{{ h | safe }}</th>{% endfor %}
+          </tr>
+        </thead>
+      {% endif %}
+      <tbody>
+        {% for row in fragment.data.rows %}
+          <tr>
+            {% for cell in row %}<td>{{ cell | safe }}</td>{% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div>{{ fragment.html | safe }}</div>
+  {% endif %}
+</div>

@@ -1,0 +1,24 @@
+name: core_legacy
+title_html: Core Legacy
+subtitle_html: Legacy core codebase
+description: Legacy version of the core codebase preserved for reference.
+local_path: "#"
+source_link: https://github.com/pointcarre-app/core-legacy
+color: secondary
+classes_formatted:
+  - "🗂️"
+tags:
+  - legacy
+  - archive
+  - html
+domains:
+  - maths.pm
+
+owner_rdb: "POINTCARRE.APP"
+owner_url: "https://github.com/pointcarre-app"
+
+backend_settings: {}
+
+
+
+

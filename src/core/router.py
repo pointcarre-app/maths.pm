@@ -7,77 +7,124 @@ HTML pages and user-facing routes
 """
 
 import markdown
+from fastapi import APIRouter, Request, Query, HTTPException, Response
 from pathlib import Path
-from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.responses import JSONResponse
+import mimetypes
 
-from ..settings import settings
+from ..settings import settings, get_product_settings
+from .pm.services.pm_runner import build_pm_from_file
+from .pm.services.pm_fs_service import (
+    build_pm_tree,
+    resolve_pm_path,
+    build_file_preview_data,
+)
+
+
+from typing import Any
+import orjson
+
+
+class ORJSONPrettyResponse(JSONResponse):
+    def render(self, content: Any) -> bytes:
+        return orjson.dumps(
+            content,
+            option=orjson.OPT_NON_STR_KEYS | orjson.OPT_SERIALIZE_NUMPY | orjson.OPT_INDENT_2,
+        )
+
 
 # Create sujets0 router
-root_router = APIRouter(tags=["root"])
+core_router = APIRouter(tags=["core"])
+
+print(settings.products)
 
 
-@root_router.get("/", response_class=HTMLResponse)
+def _build_pm_tree(base_pms_dir: Path, root_dir: Path) -> dict:
+    """Compatibility wrapper around the service function.
+
+    Kept to avoid touching templates that call this helper name.
+    """
+    return build_pm_tree(base_pms_dir=base_pms_dir, root_dir=root_dir)
+
+
+@core_router.get("/pm", response_class=HTMLResponse)
+async def get_pm_root(request: Request):
+    """Directory view for the PM root folder (pms/)."""
+    base_pms_dir: Path = settings.base_dir / "pms"
+    if not base_pms_dir.exists():
+        raise HTTPException(status_code=404, detail="PM root folder not found")
+
+    tree = _build_pm_tree(base_pms_dir=base_pms_dir, root_dir=base_pms_dir)
+    context = {
+        "request": request,
+        "page": {"title": "PM Folder - root"},
+        "product_name": None,
+        "product_settings": None,
+        "tree": tree,
+    }
+    return settings.templates.TemplateResponse("pm/dir.html", context)
+
+
+@core_router.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    """Main page - displays all resources"""
+    """Main page - displays all resources for the current domain"""
     products_for_template = [p.to_template_context() for p in settings.products]
     return settings.templates.TemplateResponse(
-        "index.html", {"request": request, "page": {"title": "Homepage"}, "products": products_for_template}
+        "index.html",
+        {"request": request, "page": {"title": "Homepage"}, "products": products_for_template},
     )
 
 
-@root_router.get("/readme", response_class=HTMLResponse)
+# TODO : only when starting the app
+@core_router.get("/readme", response_class=HTMLResponse)
 async def readme(request: Request):
-    """Display README.md with DaisyUI prose styling"""
+    """Display README.md (from root of repo) with DaisyUI prose styling"""
     readme_path = settings.base_dir / "README.md"
-    
+
     if not readme_path.exists():
         return settings.templates.TemplateResponse(
-            "readme.html", 
+            "readme.html",
             {
-                "request": request, 
-                "page": {"title": "README"}, 
+                "request": request,
+                "page": {"title": "README"},
                 "readme_content": "<p>README.md not found</p>",
-                "error": True
-            }
+                "error": True,
+            },
         )
-    
+
     # Read and convert markdown to HTML
     with open(readme_path, "r", encoding="utf-8") as f:
         markdown_content = f.read()
-    
+
     # Convert markdown to HTML with extensions
     html_content = markdown.markdown(
-        markdown_content, 
-        extensions=['codehilite', 'fenced_code', 'tables', 'toc']
+        markdown_content, extensions=["codehilite", "fenced_code", "tables", "toc"]
     )
-    
+
     return settings.templates.TemplateResponse(
-        "readme.html", 
+        "readme.html",
         {
-            "request": request, 
-            "page": {"title": "README - Documentation"}, 
+            "request": request,
+            "page": {"title": "README - Documentation"},
             "readme_content": html_content,
-            "error": False
-        }
+            "error": False,
+        },
     )
 
 
-@root_router.get("/settings", response_class=HTMLResponse)
+@core_router.get("/settings", response_class=HTMLResponse)
 async def settings_view(request: Request):
     """Display all loaded product settings in a clean table format"""
     return settings.templates.TemplateResponse(
-        "settings.html", 
-        {
-            "request": request, 
-            "page": {"title": "Settings - Configuration"}
-        }
+        "settings.html", {"request": request, "page": {"title": "Settings - Configuration"}}
     )
 
 
-@root_router.get("/kill-service-workers", response_class=HTMLResponse)
+# TODO : make better cause can be very very useful
+@core_router.get("/kill-service-workers", response_class=HTMLResponse)
 async def kill_service_workers(request: Request):
-    """Emergency service worker elimination tool"""
+    """Emergency service worker elimination tool (pyodide / jupyterlite ...)"""
     return HTMLResponse("""
     <!DOCTYPE html>
     <html>
@@ -224,3 +271,128 @@ async def kill_service_workers(request: Request):
     </body>
     </html>
     """)
+
+
+@core_router.get("/pm/{origin:path}")
+async def get_pm(
+    request: Request,
+    origin: str,
+    format: str = Query(
+        "html", description="Response format (json or html)", regex="^(json|html)$"
+    ),
+    debug: bool = Query(False, description="Debug mode"),
+) -> Response:
+    """Get a PM from a markdown file.
+
+    Args:
+        request: The request object
+        origin: Path to the markdown file (first part is treated as product name)
+        format: Response format ('json' or 'html')
+
+    Returns:
+        JSON representation of the PM or template response
+
+    Examples:
+        - `/pm/corsica/a_surface.md` - HTML view with corsica product settings
+        - `/pm/pyly/index.md` - HTML view with pyly product settings
+        - `/pm/pyly/index.md?format=json` - JSON data of Python curriculum
+        - `/pm/pyly/index.md?format=html` - Explicit HTML format
+
+    """
+    # Extract product name from the first part of the origin path
+    origin_parts = origin.split("/")
+    product_name = origin_parts[0] if origin_parts else ""
+    # print("product_name")
+    # print("product_name")
+    # print("product_name")
+    # print("product_name")
+    # print("product_name")
+    # print("product_name")
+    # print("product_name")
+    # print(product_name)
+    # Get product-specific settings dynamically
+    product_settings = get_product_settings(product_name) if product_name else None
+
+    # Build path from origin - for now assume it's relative to pms/ directory
+    # This can be made configurable later
+    # TODO sel: OK for now but
+    pm_path = resolve_pm_path(origin, settings.base_dir)
+
+    if not pm_path.exists():
+        raise HTTPException(status_code=404, detail=f"PM file not found: {origin}")
+
+    # If path is a directory, render a tree view of its contents
+    if pm_path.is_dir():
+        root_dir: Path = pm_path
+        base_pms_dir: Path = settings.base_dir / "pms"
+        tree = _build_pm_tree(base_pms_dir=base_pms_dir, root_dir=root_dir)
+
+        context = {
+            "request": request,
+            "page": {"title": f"PM Folder - {tree['rel_path']}"},
+            "product_name": product_name,
+            "product_settings": product_settings.to_dict() if product_settings else None,
+            "tree": tree,
+        }
+        return settings.templates.TemplateResponse("pm/dir.html", context)
+
+    # Serve non-markdown files directly (images, data, etc.)
+    if pm_path.is_file() and pm_path.suffix.lower() != ".md":
+        media_type, _ = mimetypes.guess_type(str(pm_path))
+
+        # Raw mode keeps previous behavior (direct file response)
+        if format == "raw":
+            return FileResponse(str(pm_path), media_type=media_type, filename=pm_path.name)
+
+        # Otherwise render a simple preview page that embeds the asset
+        preview_data = build_file_preview_data(
+            path=pm_path, origin=origin, base_dir=settings.base_dir
+        )
+
+        context = {
+            "request": request,
+            "page": {"title": f"File - {pm_path.name}"},
+            "product_name": product_name,
+            "product_settings": product_settings.to_dict() if product_settings else None,
+            **preview_data,
+        }
+        return settings.templates.TemplateResponse("pm/file.html", context)
+
+    # Regular file rendering for markdown
+    pm = build_pm_from_file(str(pm_path), verbosity=0)
+
+    if format == "json":
+        # Include product settings in JSON response if available
+        response_data = pm.model_dump()
+        if product_settings:
+            response_data["product_settings"] = product_settings.to_dict()
+        return ORJSONPrettyResponse(content=response_data)
+
+    elif format == "html":
+        # Convert PM to JSON-compatible dict using Pydantic's json method
+        pm_json = pm.model_dump_json()
+
+        # Build template context with product settings
+        context = {
+            "request": request,
+            "debug": debug,
+            "pm": pm,
+            "pm_json": pm_json,
+            "origin": origin,
+            "product_name": product_name,
+            "page": {"title": f"PM - {pm.title}"},
+        }
+
+        # Add product-specific context if settings are available
+        if product_settings:
+            context.update(
+                {
+                    "product_settings": product_settings.to_dict(),
+                    "product_title": product_settings.title,
+                    "product_description": product_settings.description,
+                    "product_backend_settings": product_settings.backend_settings,
+                    "is_product_enabled": product_settings.is_enabled,
+                }
+            )
+
+        return settings.templates.TemplateResponse("pm/index.html", context)

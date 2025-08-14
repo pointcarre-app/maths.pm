@@ -1,0 +1,62 @@
+{% extends "base/main-alt.html" %}
+
+{% block content %}
+  <div class="w-full md:max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto mt-12 px-4">
+    <div class="bg-base-100 border border-base-300 rounded-lg px-6 mb-6 pt-2 pb-12">
+      <div class="mb-4">
+        <a href="/pm" class="btn btn-sm btn-ghost">← `/pms`</a>
+      </div>
+      <div class="overflow-x-auto mb-6" style="width: 100%; margin:auto; max-width:var(--inner-width)">
+        <div class="" style="width: 100%; margin:auto; max-width:var(--inner-width)">
+          <h1 class="text-3xl font-bold font-mono">{{ page.title }}</h1>
+          {% if product_name %}
+            <div class="text-sm opacity-70 my-5">
+              Product found: <span class="badge badge-primary badge-sm">{{ product_name }}</span>
+            </div>
+          {% endif %}
+          <div>
+            {# width:100% cause daisyUI ? #}
+            <ul class="menu bg-base-200 rounded-box font-mono w-full"
+                style="width: 100%;
+                       margin:auto;
+                       max-width:var(--inner-width)">
+              {% macro render_node(node) -%}
+                {% if node.is_dir %}
+                  <li>
+                    <details open>
+                      <summary class="font-semibold">
+                        <span class="mr-2">📁</span> {{ node.name }}
+                        <span class="ml-2 text-xs opacity-60">/{{ node.rel_path }}</span>
+                      </summary>
+                      <ul>
+                        {% for child in node.children %}{{ render_node(child) }}{% endfor %}
+                      </ul>
+                    </details>
+                  </li>
+                {% else %}
+                  <li class="w-full">
+                    <div class="flex justify-between w-full">
+                      <a class="link link-hover flex-1 overflow-hidden text-ellipsis whitespace-nowrap"
+                         href="{{ '/pm/' + node.rel_path + '?format=html' }}">📄 {{ node.name }}</a>
+                      {% set path_parts = node.rel_path.split('/') %}
+                      {% set label = "go" %}
+                      {% if 'files' in path_parts %}
+                        {% set label = "Open" %}
+                      {% elif node.is_md %}
+                        {% set label = "Run" %}
+                      {% endif %}
+                      <a class="btn btn-xs btn-primary ml-2 shrink-0 w-20 justify-center"
+                         href="{{ '/pm/' + node.rel_path + '?format=html' }}">{{ label }}</a>
+                    </div>
+                  </li>
+                {% endif %}
+              {%- endmacro %}
+
+              {{ render_node(tree) }}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

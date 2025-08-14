@@ -1,0 +1,22 @@
+{
+  "LiteBuildConfig": {
+    "contents": ["files-for-lite"],
+    "extra_file_types": {
+      "json": {
+        "name": "json",
+        "extensions": [".json"],
+        "mimeTypes": ["application/json"],
+        "fileFormat": "text"
+      },
+      "geojson": {
+        "name": "geojson",
+        "extensions": [".geojson"],
+        "mimeTypes": ["application/geo+json"],
+        "fileFormat": "text"
+      }
+    }
+  },
+  "ContentsManager": {
+    "allow_hidden": false
+  }
+}

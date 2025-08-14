@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>codex_example</title>
+    <link rel="stylesheet" href="/static/core/css/pm.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "@js/": "/static/js/"
+            }
+        }
+    </script>
+  </head>
+  <body>
+    <div class="pm-container" style="max-width: 720px; margin: 2rem auto;">
+      <div class="fragment-wrapper codex" data-f_type="codex_">
+        <div class="fragment codex" data-codex-container>
+          <div class="skeleton h-6 w-28 mb-2"></div>
+          <div class="skeleton h-40 w-full rounded mb-2"></div>
+          <textarea class="codex-editor hidden" data-language="python">print('Hello from CodeMirror')</textarea>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+        import PMRuntime from '@js/pm/main.js';
+        const runtime = new PMRuntime({
+            mode: 'all'
+        });
+        runtime.init();
+        window.pmRuntime = runtime;
+    </script>
+  </body>
+</html>

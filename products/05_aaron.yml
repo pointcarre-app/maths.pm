@@ -1,0 +1,23 @@
+name: aaron
+title_html: Aaron
+subtitle_html: Internal project
+description: Private repository.
+local_path: "#"
+source_link: https://github.com/pointcarre-app/aaron
+color: info
+classes_formatted:
+  - "🔒"
+tags:
+  - internal
+  - private
+domains:
+  - maths.pm
+
+owner_rdb: "POINTCARRE.APP"
+owner_url: "https://github.com/pointcarre-app"
+
+backend_settings: {}
+
+
+
+

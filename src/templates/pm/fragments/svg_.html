@@ -1,0 +1,13 @@
+<div class="fragment svg" data-f_type="{{ fragment.f_type.value }}">
+  {% if fragment.data.content %}
+    {{ fragment.data.content | safe }}
+    {% if fragment.html %}
+      <div class="mt-0 text-xs sm:text-sm text-center italic">{{ fragment.html }}</div>
+    {% endif %}
+  {% else %}
+    <img src="{{ fragment.data.src }}" alt="{{ fragment.html }}" width="1200" height="800" />
+    {% if fragment.html %}
+      <div class="mt-0 text-xs sm:text-sm text-center">{{ fragment.html | safe }}</div>
+    {% endif %}
+  {% endif %}
+</div>

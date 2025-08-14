@@ -10,7 +10,7 @@ class ImportHelper {
      */
     static async importNagini() {
         try {
-            const naginiModule = await import('https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@0.0.5/src/nagini.js');
+            const naginiModule = await import('https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@0.0.18/src/nagini.js');
             return naginiModule.Nagini;
         } catch (error) {
             throw new Error(`Failed to import Nagini from CDN: ${error.message}`);

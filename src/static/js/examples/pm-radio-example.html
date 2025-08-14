@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>PM Radio Example</title>
+    <link rel="stylesheet" href="/static/core/css/pm.css" />
+    <script type="importmap">
+        {
+            "imports": {
+                "@js/": "/static/js/"
+            }
+        }
+    </script>
+  </head>
+  <body>
+    <div class="pm-container" style="max-width: 720px; margin: 2rem auto;">
+      <div class="fragment-wrapper" data-f_type="radio_">
+        <div class="fragment">
+          <div class="mb-3">
+            <span class="text-base font-medium">2 + 2 = ?</span>
+          </div>
+          <div class="flex flex-wrap gap-2 items-center mb-3">
+            <button class="btn btn-primary btn-sm btn-outline min-w-[50px] px-3"
+                    data-radio-group="0"
+                    data-flag="21"
+                    data-feedback="Nope">3</button>
+            <button class="btn btn-primary btn-sm btn-outline min-w-[50px] px-3"
+                    data-radio-group="0"
+                    data-flag="20"
+                    data-feedback="Correct!">4</button>
+          </div>
+          <div id="radio-feedback-0" class="mt-3 hidden">
+            <div class="alert">
+              <span id="radio-feedback-text-0"></span>
+            </div>
+          </div>
+          <div id="radio-explanation-0" class="mt-4 hidden">
+            <div class="card bg-base-200">
+              <div class="card-body">
+                <div class="prose">Because 2 + 2 = 4.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+        import PMRuntime from '@js/pm/main.js';
+        const runtime = new PMRuntime({
+            mode: 'all'
+        });
+        runtime.init();
+    </script>
+  </body>
+</html>

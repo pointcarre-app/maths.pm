@@ -22,7 +22,7 @@ async def jupyterlite_index(request: Request):
 async def jupyterlite_lab(request: Request):
     """
     JupyterLite notebook interface - redirect to static files.
-    
+
     Uses jupyterlite_settings for product-specific configuration.
     All settings are loaded automatically in settings.py.
     """
@@ -32,10 +32,14 @@ async def jupyterlite_lab(request: Request):
         if jupyterlite_settings:
             jupyter_config = {
                 "enabled": jupyterlite_settings.get_nested_setting("jupyterlite", "enabled", True),
-                "version": jupyterlite_settings.get_nested_setting("jupyterlite", "version", "0.4.3"),
-                "kernels": jupyterlite_settings.get_nested_setting("jupyterlite", "kernels", ["python"]),
+                "version": jupyterlite_settings.get_nested_setting(
+                    "jupyterlite", "version", "0.4.3"
+                ),
+                "kernels": jupyterlite_settings.get_nested_setting(
+                    "jupyterlite", "kernels", ["python"]
+                ),
             }
-        
+
         # Check if JupyterLite assets exist and are properly configured
         output_dir = settings.jupyterlite_dir / "_output"
         lab_index = output_dir / "lab" / "index.html"
@@ -68,9 +72,9 @@ async def jupyterlite_lab(request: Request):
                     
                     <div class="config">
                         <strong>🎯 Product Configuration:</strong><br>
-                        Enabled: {jupyter_config.get('enabled', 'Unknown')}<br>
-                        Version: {jupyter_config.get('version', 'Unknown')}<br>
-                        Kernels: {', '.join(str(k) for k in jupyter_config.get('kernels', []))}
+                        Enabled: {jupyter_config.get("enabled", "Unknown")}<br>
+                        Version: {jupyter_config.get("version", "Unknown")}<br>
+                        Kernels: {", ".join(str(k) for k in jupyter_config.get("kernels", []))}
                     </div>
                     
                     <p>JupyterLite is enabled and auto-installation is running in the background.</p>
@@ -97,9 +101,7 @@ async def jupyterlite_lab(request: Request):
             """)
 
         # Redirect to the actual JupyterLite lab interface
-        return RedirectResponse(
-            url="/static/jupyterlite/_output/lab/index.html", status_code=302
-        )
+        return RedirectResponse(url="/static/jupyterlite/_output/lab/index.html", status_code=302)
 
     except Exception as e:
         return HTMLResponse(f"""
@@ -175,9 +177,7 @@ async def jupyterlite_repl(request: Request):
             """)
 
         # Redirect to the actual JupyterLite REPL interface
-        return RedirectResponse(
-            url="/static/jupyterlite/_output/repl/index.html", status_code=302
-        )
+        return RedirectResponse(url="/static/jupyterlite/_output/repl/index.html", status_code=302)
 
     except Exception as e:
         return HTMLResponse(f"<h1>Error loading REPL: {str(e)}</h1>")
@@ -191,15 +191,17 @@ async def jupyterlite_embed(request: Request):
         "request": request,
         "page": {"title": "JupyterLite - Demo"},
     }
-    
+
     # Add product-specific context if available
     if jupyterlite_settings:
-        context.update({
-            "product_name": jupyterlite_settings.name,
-            "product_title": jupyterlite_settings.title,
-            "jupyter_config": jupyterlite_settings.get_setting("jupyterlite", {})
-        })
-    
+        context.update(
+            {
+                "product_name": jupyterlite_settings.name,
+                "product_title": jupyterlite_settings.title,
+                "jupyter_config": jupyterlite_settings.get_setting("jupyterlite", {}),
+            }
+        )
+
     return settings.templates.TemplateResponse("jupyterlite/sandbox/embed.html", context)
 
 
@@ -207,8 +209,7 @@ async def jupyterlite_embed(request: Request):
 async def jupyterlite_sandbox_repl(request: Request):
     """JupyterLite REPL in a dedicated sandbox page"""
     return settings.templates.TemplateResponse(
-        "jupyterlite/sandbox/repl.html",
-        {"request": request}
+        "jupyterlite/sandbox/repl.html", {"request": request}
     )
 
 
@@ -218,10 +219,12 @@ from fastapi import APIRouter
 # Create a separate router for backward compatibility
 jupyter_compat_router = APIRouter(tags=["jupyter-compat"])
 
+
 @jupyter_compat_router.get("/jupyter")
 async def jupyter_redirect(request: Request):
     """Backward compatibility: redirect /jupyter to /jupyterlite/lab"""
     return RedirectResponse(url="/jupyterlite/lab", status_code=301)
+
 
 @jupyter_compat_router.get("/jupyter/repl")
 async def jupyter_repl_redirect(request: Request):
@@ -344,4 +347,4 @@ async def debug_service_worker(request: Request):
         </script>
     </body>
     </html>
-    """) 
+    """)

@@ -1,0 +1,60 @@
+<div class="fragment" data-f_type="{{ fragment.f_type.value }}">
+  {% if fragment.question is defined %}
+    <div class="mb-3">
+      <span class="text-base font-medium">{{ fragment.question }}</span>
+    </div>
+  {% endif %}
+  {% set radios = fragment.data.radios if fragment.data and fragment.data.radios is defined else [] %}
+  {# Ensure a stable per-fragment index is available even when included outside of a for-loop scope #}
+  {% set fragment_index = fragment_index if fragment_index is defined else 0 %}
+  <div class="flex flex-wrap gap-2 items-end mb-3 justify-end">
+    {% for radio in radios %}
+      {% if radio.flag != -1 and radio.flag != 29 %}
+        {# Build button classes: default classes + custom classes from radio data #}
+        {% set default_classes = "btn btn-primary btn-outline hover:btn-primary min-w-[50px] px-3 text-base font-normal" %}
+        {% set custom_classes = radio.classes if radio.classes else "" %}
+        {# If custom classes contain 'btn-' variants, they override defaults. Otherwise, merge. #}
+        {% if custom_classes and (custom_classes.find('btn-') != -1 or custom_classes.find('pre-') != -1) %}
+          {# Custom styling detected - use minimal base + custom classes #}
+          {% set button_classes = "btn min-w-[50px] px-3 text-base font-normal " + custom_classes %}
+        {% else %}
+          {# No custom btn styling - use defaults + any custom utility classes #}
+          {% set button_classes = default_classes + (" " + custom_classes if custom_classes else "") %}
+        {% endif %}
+        <button class="{{ button_classes }}"
+                data-radio-group="{{ fragment_index }}"
+                data-flag="{{ radio.flag }}"
+                data-feedback="{{ radio.feedback | e if radio.feedback else '' }}">
+          {{ radio.html | safe }}
+        </button>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div id="radio-feedback-{{ fragment_index }}"
+       class="opacity-0 scale-95 -translate-y-2 pointer-events-none">
+    <div class="alert">
+      <span id="radio-feedback-text-{{ fragment_index }}"></span>
+    </div>
+  </div>
+
+  {% for radio in radios %}
+    {% if radio.flag == 29 %}
+      <div id="radio-explanation-{{ fragment_index }}" class="mb-3 pm-open">
+        <div class="alert alert-primary alert-outline">
+          {% if radio.feedback %}
+            {{ radio.feedback | safe }}
+          {% else %}
+            {{ radio.html | safe }}
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  {% for radio in radios %}
+    {% if radio.flag == -1 %}
+      <div class="text-sm opacity-70 italic">{{ radio.html | safe }}</div>
+    {% endif %}
+  {% endfor %}
+</div>

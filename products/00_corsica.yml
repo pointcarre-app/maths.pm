@@ -1,13 +1,16 @@
 name: corsica
-title_html: Corsica
+title_html: Maths.Corsica
+font_class: "font-handwritten"
 subtitle_html: Maths & Corse
 description: Maths & Corse
 local_path: /corsica
 # source_link: 
 color: accent
-figure_svg: nagini-figure-svg.html
+figure_svg: corsica-figure.html
 classes_formatted:
-  - "🇫🇷"
+  - "3<sup>ème</sup>"
+  - "2<sup>nde</sup>"
+  
 tags:
   - Education
 domains:

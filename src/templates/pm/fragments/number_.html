@@ -1,0 +1,62 @@
+{% set num_id = (fragment.data.id if fragment.data and fragment.data.id is defined else 'pm-number-' ~ loop.index) %}
+{% set fragment_index = fragment_index if fragment_index is defined else 0 %}
+<div class="fragment" data-f_type="{{ fragment.f_type.value }}">
+  <pm-number-input id="{{ num_id }}" data-payload='{{ fragment.data | tojson | e }}' data-fragment-index="{{ fragment_index }}"
+  {% if debug %}debug{% endif %}
+  ></pm-number-input>
+  <script type="module">
+      import '/static/js/pm/components/pm-number-input.js';
+  </script>
+  {# <div class="mt-2 flex items-center gap-2">
+    <span class="opacity-70">feedback:</span>
+    <span class="badge badge-secondary badge-xs rounded-full"></span>
+  </div> #}
+  <div id="number-feedback-{{ fragment_index }}" class="mb-3"></div>
+  {% if debug %}
+    <div class="mt-2">
+      <div class="border border-base-300 rounded-md p-2 text-xs">
+        <div class="font-semibold mb-1">NumberInput Debug</div>
+        <table class="font-mono text-xs">
+          <tbody>
+            {% if fragment.data and fragment.data.id is defined %}
+              <tr>
+                <td class="px-2 py-1 opacity-70">id</td>
+                <td class="py-1">{{ fragment.data.id }}</td>
+              </tr>
+            {% endif %}
+            {% if fragment.data and fragment.data.min is defined %}
+              <tr>
+                <td class="px-2 py-1 opacity-70">min</td>
+                <td class="py-1">{{ fragment.data.min }}</td>
+              </tr>
+            {% endif %}
+            {% if fragment.data and fragment.data.max is defined %}
+              <tr>
+                <td class="px-2 py-1 opacity-70">max</td>
+                <td class="py-1">{{ fragment.data.max }}</td>
+              </tr>
+            {% endif %}
+            {% if fragment.data and fragment.data.step is defined %}
+              <tr>
+                <td class="px-2 py-1 opacity-70">step</td>
+                <td class="py-1">{{ fragment.data.step }}</td>
+              </tr>
+            {% endif %}
+            {% if fragment.data and fragment.data.correct is defined %}
+              <tr>
+                <td class="px-2 py-1 opacity-70">correct</td>
+                <td class="py-1">{{ fragment.data.correct }}</td>
+              </tr>
+            {% endif %}
+            {% if fragment.data and fragment.data.tolerance is defined %}
+              <tr>
+                <td class="px-2 py-1 opacity-70">tolerance</td>
+                <td class="py-1">{{ fragment.data.tolerance }}</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endif %}
+</div>

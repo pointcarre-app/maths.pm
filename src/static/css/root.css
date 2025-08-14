@@ -1,5 +1,8 @@
 /**************** Root ****************/
 :root {
+
+
+  --inner-width: 640px;
   --font-inter: "Inter", sans-serif;
   --font-spectral: "Spectral", serif;
   --font-playfair: "Playfair Display", serif;
@@ -37,8 +40,16 @@
   
 
 
+  --scrollbar-color: var(--color-primary-content);
+  --scrollbar-color-bg: var(--color-primary-content);
+
 }
 
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-color) var(--scrollbar-color-bg);
+}
 
 
 
