@@ -117,7 +117,8 @@ pm-radio > div > button.btn-soft:hover {
 }
 
 /* Radios buttons */
-.fragment-wrapper[data-f_type="radio_"] {
+.fragment-wrapper[data-f_type="radio_"],
+.fragment-wrapper[data-f_type="number_"] {
   margin-top: 0.25rem !important;
   margin-bottom: 0.75rem !important  ;
 }
@@ -231,7 +232,8 @@ h4.fragment {
 
 
 
-.fragment-wrapper[data-f_type="radio_"] + .fragment-wrapper[data-f_type="p_"].statement {
+.fragment-wrapper[data-f_type="radio_"] + .fragment-wrapper[data-f_type="p_"].statement,
+.fragment-wrapper[data-f_type="number_"] + .fragment-wrapper[data-f_type="p_"].statement {
   margin-top: 1.5rem;
 }
 

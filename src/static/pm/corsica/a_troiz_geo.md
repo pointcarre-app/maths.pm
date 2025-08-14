@@ -92,7 +92,7 @@ La couleur du bouton représente la couleur du point sur la carte. Parmi les 4 p
 
 
 
-## 📏 Représentations des distances
+## 📏 Représentation des distances
 
 
 Les conversions entre des données de latitude et longitude exprimées en degrés, minutes et secondes vers des distances en kilomètres sont assez complexes et dépassent largement le niveau troisième.

@@ -331,7 +331,7 @@ class StaticSiteBuilder:
         if cname_file.exists():
             shutil.copy2(cname_file, self.output_dir / "CNAME")
             logger.info("✓ Copied CNAME file for custom domain")
-        
+
         # Copy .nojekyll file to disable Jekyll processing on GitHub Pages
         nojekyll_file = Path(".nojekyll")
         if nojekyll_file.exists():
