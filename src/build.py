@@ -49,8 +49,12 @@ class StaticSiteBuilder:
                 elif path.endswith("/"):
                     output_path = self.output_dir / path[1:] / "index.html"
                 elif "." in path.split("/")[-1]:
-                    # Has extension, keep as is
-                    output_path = self.output_dir / path[1:]
+                    # Has extension - but convert .md to .html for PM routes
+                    if path.endswith(".md") and path.startswith("/pm/"):
+                        # PM markdown files should be saved as HTML
+                        output_path = self.output_dir / path[1:].replace(".md", ".html")
+                    else:
+                        output_path = self.output_dir / path[1:]
                 else:
                     # No extension, treat as HTML
                     output_path = (
@@ -72,30 +76,36 @@ class StaticSiteBuilder:
                 # Fix absolute URLs in HTML files
                 if response.headers.get("content-type", "").startswith("text/html"):
                     content_str = content.decode("utf-8")
-                    # Replace absolute URLs with relative ones
-                    content_str = content_str.replace('"http://127.0.0.1:8000/static/', '"/static/')
-                    content_str = content_str.replace("'http://127.0.0.1:8000/static/", "'/static/")
-                    content_str = content_str.replace('"http://localhost:8000/static/', '"/static/')
-                    content_str = content_str.replace("'http://localhost:8000/static/", "'/static/")
-                    content_str = content_str.replace('="127.0.0.1:8000/static/', '="/static/')
-                    content_str = content_str.replace("='127.0.0.1:8000/static/", "='/static/")
+
+                    # Remove all server URLs (handle all internal links)
+                    content_str = content_str.replace("http://127.0.0.1:8000/", "/")
+                    content_str = content_str.replace("http://localhost:8000/", "/")
+                    content_str = content_str.replace("//127.0.0.1:8000/", "/")
+
+                    # Fix PM route links - change .md to .html
+                    content_str = content_str.replace('.md?format=html"', '.html"')
+                    content_str = content_str.replace(".md?format=html'", ".html'")
+                    content_str = content_str.replace('.md"', '.html"')
+                    content_str = content_str.replace(".md'", ".html'")
 
                     # Fix root-relative paths to work from subdirectories
-                    # For pages in subdirectories, we need to adjust the paths
                     depth = len(Path(path).parts) - 1
                     if depth > 0:
-                        # Create relative path prefix (e.g., "../" for one level deep)
+                        # Create relative path prefix
                         prefix = "../" * depth
-                        # Replace absolute paths with relative ones
-                        content_str = content_str.replace(
-                            'href="/static/', f'href="{prefix}static/'
-                        )
-                        content_str = content_str.replace('src="/static/', f'src="{prefix}static/')
-                        content_str = content_str.replace('="/static/', f'="{prefix}static/')
+                        # Replace all absolute paths with relative ones
+                        content_str = content_str.replace('href="/', f'href="{prefix}')
+                        content_str = content_str.replace("href='/", f"href='{prefix}")
+                        content_str = content_str.replace('src="/', f'src="{prefix}')
+                        content_str = content_str.replace("src='/", f"src='{prefix}")
+                        content_str = content_str.replace('action="/', f'action="{prefix}')
                     else:
-                        # For root level files, use relative paths
-                        content_str = content_str.replace('href="/static/', 'href="static/')
-                        content_str = content_str.replace('src="/static/', 'src="static/')
+                        # For root level files, remove leading slashes
+                        content_str = content_str.replace('href="/', 'href="')
+                        content_str = content_str.replace("href='/", "href='")
+                        content_str = content_str.replace('src="/', 'src="')
+                        content_str = content_str.replace("src='/", "src='")
+                        content_str = content_str.replace('action="/', 'action="')
 
                     content = content_str.encode("utf-8")
 
