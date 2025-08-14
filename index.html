@@ -853,13 +853,17 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-14">
       
         
-          <div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg max-w-[450px]">
-  <div class="max-h-[180px] bg-base-200 rounded-t-box">
+          <div class="card p-0 border-base-300 border-1 shadow-lg" style="max-width: 450px;">
+  <!-- Safari-compatible fixed height container -->
+  <div class="bg-base-200 rounded-t-box" style="height: 120px; position: relative;">
     
       
-      <figure class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-none">
-  <div class="bg-base-200/90 grid grid-cols-[60%_40%] gap-0 w-full"
-       style="border-radius: var(--radius-box)">
+      <figure class="m-0 p-0 rounded-none" style="width: 100%; height: 100%; display: block;">
+  <div class="bg-base-200/90 gap-0 w-full"
+       style="border-radius: var(--radius-box);
+              display: grid;
+              grid-template-columns: 60% 40%;
+              height: 100%">
     <div class="flex items-center text-center text-left">
       <h1 class="pl-3 sm:pl-8 " style="font-family: var(--font-handwritten)">
         <span class="text-base-content/60">Matematica in l'Isula di a Bellezza</span>
@@ -867,9 +871,7 @@
         <span class="text-xl block text-primary font-semibold">Maths.Corsica</span>
       </h1>
     </div>
-    <div class="mx-auto">
-      
-      
+    <div class="mx-auto" style="display: flex; align-items: center; justify-content: center; height: 100%;">
       
       
       
@@ -881,7 +883,7 @@
      xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
      xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
      width="40"
-     height="971.249"
+     height="80"
      viewBox="0 0 489.6 971.249"
      preserveAspectRatio="xMidYMid meet"
      id="svg2"
@@ -969,11 +971,12 @@
         
       
         
-          <div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg max-w-[450px]">
-  <div class="max-h-[180px] bg-base-200 rounded-t-box">
+          <div class="card p-0 border-base-300 border-1 shadow-lg" style="max-width: 450px;">
+  <!-- Safari-compatible fixed height container -->
+  <div class="bg-base-200 rounded-t-box" style="height: 120px; position: relative;">
     
       
-      <figure class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-none">
+      <figure class="m-0 p-0 rounded-none" style="width: 100%; height: 100%; display: block;">
   <svg viewBox="0 0 500 120"
        width="100%"
        height="100%"
@@ -1079,11 +1082,12 @@
         
       
         
-          <div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg max-w-[450px]">
-  <div class="max-h-[180px] bg-base-200 rounded-t-box">
+          <div class="card p-0 border-base-300 border-1 shadow-lg" style="max-width: 450px;">
+  <!-- Safari-compatible fixed height container -->
+  <div class="bg-base-200 rounded-t-box" style="height: 120px; position: relative;">
     
       
-      <figure class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-none">
+      <figure class="m-0 p-0 rounded-none" style="width: 100%; height: 100%; display: block;">
   <svg viewBox="0 0 500 120"
        width="100%"
        height="100%"
@@ -1189,11 +1193,12 @@
         
       
         
-          <div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg max-w-[450px]">
-  <div class="max-h-[180px] bg-base-200 rounded-t-box">
+          <div class="card p-0 border-base-300 border-1 shadow-lg" style="max-width: 450px;">
+  <!-- Safari-compatible fixed height container -->
+  <div class="bg-base-200 rounded-t-box" style="height: 120px; position: relative;">
     
       
-      <figure class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-none">
+      <figure class="m-0 p-0 rounded-none" style="width: 100%; height: 100%; display: block;">
   <svg viewBox="0 0 500 120"
        width="100%"
        height="100%"
@@ -1284,12 +1289,16 @@
         
       
         
-          <div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg max-w-[450px]">
-  <div class="max-h-[180px] bg-base-200 rounded-t-box">
+          <div class="card p-0 border-base-300 border-1 shadow-lg" style="max-width: 450px;">
+  <!-- Safari-compatible fixed height container -->
+  <div class="bg-base-200 rounded-t-box" style="height: 120px; position: relative;">
     
       
       <figure id="teachers-figure-svg"
-        class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-box">
+        class="m-0 p-0 rounded-box"
+        style="width: 100%;
+               height: 100%;
+               display: block">
   <svg viewBox="0 0 500 120"
        width="100%"
        height="100%"
@@ -1338,17 +1347,28 @@
   </svg>
 </figure>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.getElementById("teachers-figure-svg"), {
-      delimiters: [
-          {left: "$$", right: "$$", display: true},
-          {left: "$", right: "$", display: false},
-          {left: "\\(", right: "\\)", display: false},
-          {left: "\\[", right: "\\]", display: true}
-      ],
-      throwOnError: false
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.getElementById("teachers-figure-svg"), {
+            delimiters: [{
+                left: "$$",
+                right: "$$",
+                display: true
+            }, {
+                left: "$",
+                right: "$",
+                display: false
+            }, {
+                left: "\\(",
+                right: "\\)",
+                display: false
+            }, {
+                left: "\\[",
+                right: "\\]",
+                display: true
+            }],
+            throwOnError: false
+        });
     });
-  });
 </script>
     
   </div>
@@ -1413,11 +1433,12 @@
         
       
         
-          <div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg max-w-[450px]">
-  <div class="max-h-[180px] bg-base-200 rounded-t-box">
+          <div class="card p-0 border-base-300 border-1 shadow-lg" style="max-width: 450px;">
+  <!-- Safari-compatible fixed height container -->
+  <div class="bg-base-200 rounded-t-box" style="height: 120px; position: relative;">
     
       
-      <figure class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-none">
+      <figure class="m-0 p-0 rounded-none" style="width: 100%; height: 100%; display: block;">
   <svg viewBox="0 0 500 120"
        width="100%"
        height="100%"
@@ -1426,21 +1447,21 @@
 
     <!-- A stack of papers using primary color with opacity -->
     <g class="stroke-primary" stroke-width="1">
-      <!-- Back paper (outline only) -->
-      <rect x="160" y="25" width="180" height="85" rx="2" transform="rotate(-3 250 70)" fill="none" style="stroke-opacity: 0.5" />
-      <!-- Middle paper (outline only) -->
-      <rect x="160" y="20" width="180" height="85" rx="2" transform="rotate(2 250 67.5)" fill="none" style="stroke-opacity: 0.7" />
-      <!-- Top paper (light fill and full stroke) -->
-      <rect x="160" y="15" width="180" height="85" rx="2" class="fill-primary" style="fill-opacity: 0.1; stroke-opacity: 1;" />
+    <!-- Back paper (outline only) -->
+    <rect x="160" y="25" width="180" height="85" rx="2" transform="rotate(-3 250 70)" fill="none" style="stroke-opacity: 0.5" />
+    <!-- Middle paper (outline only) -->
+    <rect x="160" y="20" width="180" height="85" rx="2" transform="rotate(2 250 67.5)" fill="none" style="stroke-opacity: 0.7" />
+    <!-- Top paper (light fill and full stroke) -->
+    <rect x="160" y="15" width="180" height="85" rx="2" class="fill-primary" style="fill-opacity: 0.1; stroke-opacity: 1;" />
     </g>
-    
+
     <!-- Content imitation on the top paper -->
     <g class="stroke-primary" stroke-linecap="round" style="stroke-opacity: 0.4">
-      <line x1="175" y1="35" x2="325" y2="35" stroke-width="1.5" style="stroke-opacity: 0.6" />
-      <line x1="175" y1="50" x2="315" y2="50" stroke-width="1"/>
-      <line x1="175" y1="60" x2="325" y2="60" stroke-width="1"/>
-      <line x1="175" y1="70" x2="305" y2="70" stroke-width="1"/>
-      <line x1="175" y1="80" x2="325" y2="80" stroke-width="1"/>
+    <line x1="175" y1="35" x2="325" y2="35" stroke-width="1.5" style="stroke-opacity: 0.6" />
+    <line x1="175" y1="50" x2="315" y2="50" stroke-width="1" />
+    <line x1="175" y1="60" x2="325" y2="60" stroke-width="1" />
+    <line x1="175" y1="70" x2="305" y2="70" stroke-width="1" />
+    <line x1="175" y1="80" x2="325" y2="80" stroke-width="1" />
     </g>
   </svg>
 </figure>
@@ -1492,12 +1513,16 @@
         
       
         
-          <div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg max-w-[450px]">
-  <div class="max-h-[180px] bg-base-200 rounded-t-box">
+          <div class="card p-0 border-base-300 border-1 shadow-lg" style="max-width: 450px;">
+  <!-- Safari-compatible fixed height container -->
+  <div class="bg-base-200 rounded-t-box" style="height: 120px; position: relative;">
     
       
       <figure id="teachers-figure-svg"
-        class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden forge-figure rounded-none">
+        class="m-0 p-0 forge-figure rounded-none"
+        style="width: 100%;
+               height: 100%;
+               display: block">
   <svg viewBox="0 0 500 120"
        width="100%"
        height="100%"
@@ -1584,11 +1609,26 @@
         
       
         
-          <div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg max-w-[450px]">
-  <div class="max-h-[180px] bg-base-200 rounded-t-box">
+          <div class="card p-0 border-base-300 border-1 shadow-lg" style="max-width: 450px;">
+  <!-- Safari-compatible fixed height container -->
+  <div class="bg-base-200 rounded-t-box" style="height: 120px; position: relative;">
     
-      <figure class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-none flex items-center justify-center bg-white p-4">
-        <img src="static/icons/jupyterlite-large.png" alt="jupyterlite Logo" class="object-contain h-full" />
+      <figure class="m-0 p-0 rounded-none bg-white"
+              style="width: 100%;
+                     height: 100%;
+                     display: flex;
+                     align-items: center;
+                     justify-content: center;
+                     padding: 1rem">
+        <img src="static/icons/jupyterlite-large.png"
+             alt="jupyterlite Logo"
+             width="400"
+             height="96"
+             style="max-width: 100%;
+                    max-height: 100%;
+                    width: auto;
+                    height: auto;
+                    object-fit: contain" />
       </figure>
     
   </div>
@@ -1636,8 +1676,9 @@
         
       
         
-          <div class="card p-0 border-base-300 border-1 aspect-[500/120] shadow-lg max-w-[450px]">
-  <div class="max-h-[180px] bg-base-200 rounded-t-box">
+          <div class="card p-0 border-base-300 border-1 shadow-lg" style="max-width: 450px;">
+  <!-- Safari-compatible fixed height container -->
+  <div class="bg-base-200 rounded-t-box" style="height: 120px; position: relative;">
     
   </div>
 
