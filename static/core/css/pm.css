@@ -1,0 +1,762 @@
+/* PM namespace styles (moved from pm/index.html) */
+
+
+/* Typography and rhythm */
+.pm-container {
+  /* line-height: 1.65; */
+  line-height: 1.5;
+  font-size: 1.1rem;
+}
+
+
+
+
+/* .pm-container .fragment {
+  line-height: 1.65;
+} */
+
+
+/* Bad idea */
+/* Now p IS the fragment, not nested inside it */
+/* .pm-container p.fragment {
+  margin: 0.5rem 0 0.9rem;
+} */
+
+
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="p_"] {
+  margin-top: 0.75rem;
+}
+
+
+/* Increase margin when p_ is followed by content-heavy elements */
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="svg_"]
+/* , .fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="image_"] */
+, .fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="codex_"]
+, .fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="code_"]
+, .fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="graph_"]
+, .fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="tabvar_"] {
+  margin-top: 2.25rem;
+}
+
+
+.fragment-wrapper[data-f_type="svg_"] {
+  margin-bottom: 2.25rem;
+}
+
+
+
+pm-radio > div > button {
+  border-width: 1.5px !important;
+  font-weight: 400 !important;
+}
+
+
+
+
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="table_"] {
+  margin-top: 0.75rem;
+}
+
+
+.fragment-wrapper[data-f_type="table_"] + .fragment-wrapper[data-f_type="p_"] {
+  margin-top: 2.25rem;
+}
+
+/* Radios buttons */
+.fragment-wrapper[data-f_type="radio_"] {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.75rem !important  ;
+}
+
+
+/* Radio buttons spacing when following text/lists */
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="radio_"]
+, .fragment-wrapper[data-f_type="ul_"] + .fragment-wrapper[data-f_type="radio_"]
+, .fragment-wrapper[data-f_type="ol_"] + .fragment-wrapper[data-f_type="radio_"]
+, .fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="number_"]
+, .fragment-wrapper[data-f_type="ul_"] + .fragment-wrapper[data-f_type="number_"]
+, .fragment-wrapper[data-f_type="ol_"] + .fragment-wrapper[data-f_type="number_"]  {
+  margin-top: 0.75rem !important;
+}
+
+/* .fragment-wrapper[data-f_type="h2_"] + .fragment-wrapper[data-f_type="radio_"]
+, .fragment-wrapper[data-f_type="h3_"] + .fragment-wrapper[data-f_type="radio_"]
+, .fragment-wrapper[data-f_type="h4_"] + .fragment-wrapper[data-f_type="radio_"] {
+  margin-top: 1rem;
+} */
+
+
+/* When radio is followed by a heading, reduce the heading's top margin */
+/* .fragment-wrapper[data-f_type="radio_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment {
+  margin-top: 1.5rem;
+}
+
+.fragment-wrapper[data-f_type="radio_"] + .fragment-wrapper[data-f_type="h3_"] h3.fragment {
+  margin-top: 1.25rem;
+} */
+
+/* Radio followed by paragraph needs less space */
+/* .fragment-wrapper[data-f_type="radio_"] + .fragment-wrapper[data-f_type="p_"] {
+  margin-top: -0.5rem;
+} */
+
+/* Also increase the bottom margin of the p itself before heavy content */
+/* .fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="svg_"]) p.fragment, */
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="image_"]) p.fragment,
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="table_"]) p.fragment,
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="codex_"]) p.fragment,
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="code_"]) p.fragment,
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="graph_"]) p.fragment,
+.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="tabvar_"]) p.fragment {
+  margin-bottom: 2.25rem;
+}
+
+.fragment-wrapper.pm-subtitle {
+  /* padding: 1.5rem; */
+  /* border: 1px solid var(--color-base-300) !important; */
+  /* background-color: var(--color-base-200) !important; */
+  /* border-radius: var(--radius-box) !important; */
+  color:color-mix(in oklch, var(--color-base-content), oklch(from var(--color-base-content) calc(0.9 - l) c h));
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.fragment-wrapper.pm-subtitle p {
+  line-height: 1.15 !important;
+}
+
+
+@media (max-width: 768px) {
+  .fragment-wrapper.subtitle {
+    font-size: 0.95rem ;
+  }
+
+  .fragment-wrapper.pm-subtitle p {
+    line-height: 1.1 !important;
+  }
+  
+}
+
+
+
+
+/* Headings spacing defaults */
+h1.fragment {
+  margin:1rem 0 1rem;
+  line-height: 1.25;
+}
+
+h2.fragment {
+  border-top: 1.5px solid var(--color-base-300) !important;
+  padding-top: 1rem;
+  margin: 4.5rem 0 1.5rem;
+  line-height: 1.3;
+}
+
+h3.fragment {
+  margin: 1.25rem 0 0.6rem;
+  line-height: 1.35;
+}
+
+h4.fragment {
+  margin: 1rem 0 0.5rem;
+  line-height: 1.4;
+}
+
+
+
+.fragment-wrapper[data-f_type="h2_"] + .fragment-wrapper[data-f_type="h3_"] h3.fragment {
+  margin-top: 0.7rem;
+}
+
+.fragment-wrapper[data-f_type="h2_"]  {
+  margin-top: 3rem;
+}
+
+
+
+
+
+
+/* Looser when following content blocks */
+/* .fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment,
+.fragment-wrapper[data-f_type="ul_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment,
+.fragment-wrapper[data-f_type="ol_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment,
+.fragment-wrapper[data-f_type="q_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment,
+.fragment-wrapper[data-f_type="code_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment,
+.fragment-wrapper[data-f_type="table_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment,
+.fragment-wrapper[data-f_type="image_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment,
+.fragment-wrapper[data-f_type="svg_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment,
+.fragment-wrapper[data-f_type="html_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment  {
+  margin-top: 3rem;
+} */
+
+/* Lists */
+ul.fragment,
+ol.fragment {
+  margin: 0.5rem 0 1rem 1.25rem;
+}
+
+ul.fragment li,
+ol.fragment li {
+  margin: 0.25rem 0;
+}
+
+/* Blockquote */
+blockquote.fragment {
+  border-left: 4px solid hsl(var(--bc) / 0.2);
+  padding-left: 1rem;
+  margin: 0.9rem 0 1.1rem;
+  color: hsl(var(--bc) / 0.8);
+}
+
+/* Tables */
+table.fragment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.fragment-table tr th {
+  font-weight: 400;
+}
+
+table.fragment-table tr th:first-child,
+table.fragment-table tr td:first-child {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+table.fragment-table th,
+table.fragment-table td {
+  border-bottom: 1px solid hsl(var(--bc) / 0.15);
+  padding: 0.5rem 0.6rem;
+  vertical-align: top;
+}
+
+table.fragment-table thead th {
+  font-weight: 400;
+}
+
+/* Markdown tables */
+.fragment table {
+  width: 100%;
+  border-collapse: collapse;
+  /* margin: 1rem 0; */
+  margin: 0 !important;
+}
+
+.fragment table th,
+.fragment table td {
+  border: 1px solid hsl(var(--bc) / 0.2);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.fragment table th {
+  background-color: hsl(var(--b2));
+  font-weight: 600;
+}
+
+.fragment table tr:nth-child(even) {
+  background-color: hsl(var(--b2) / 0.3);
+}
+
+/* Code */
+pre.fragment-code {
+  padding: 0.9rem 1rem;
+  border-radius: 0.5rem;
+  overflow: auto;
+  margin: 0.75rem 0 1rem;
+}
+
+.codex .CodeMirror {
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--bc) / 0.15);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Images */
+.fragment.image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 0.25rem 0 1rem;
+}
+
+/* SVGs */
+.fragment.svg {
+  display: block;
+  width: 100%;
+  margin: 0.25rem 0 1rem;
+}
+
+.fragment.svg svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Fragment wrapper for custom class application */
+.fragment-wrapper {
+  display: block;
+}
+
+/* Enable Tailwind utility classes on fragment-wrapper */
+.fragment-wrapper.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Misc */
+.divider-tight {
+  margin: 1.25rem 0;
+}
+/* Utility: rounded box using DaisyUI radius var */
+.rounded-box { border-radius: var(--radius-box); }
+.font-handwritten { font-family: var(--font-handwritten); }
+
+/* Ensure divider content centers correctly with block-level headings */
+.divider > h1,
+.divider > h2,
+.divider > h3,
+.divider > h4 {
+  display: inline-block;
+  margin: 0;
+}
+
+/* Reveal mode */
+[data-pm-hidden] {
+  display: none !important;
+}
+
+/* Product-specific sample (keep scoped to corsica classes) */
+.corsica-grid-text {
+  font-family: "KaTeX_Main", "Times New Roman", serif !important;
+  font-size: 28px !important;
+  fill: var(--color-base-content) !important;
+  font-weight:300 !important;
+}
+
+.corsica-axis-label {
+  font-family: "KaTeX_Main", "Times New Roman", serif !important;
+  font-size: 28px !important;
+  fill: var(--color-base-content) !important;
+  font-weight:300 !important;
+}
+
+.corsica-axis-value {
+  font-family: "KaTeX_Main", "Times New Roman", serif !important;
+  font-size: 28px !important;
+  fill: var(--color-base-content) !important;
+  font-weight:300 !important;
+}
+
+/* Placeholder rules for Corsica grid styling */
+.corsica-grid .corsica-grid-text {}
+.corsica-axis-labels-group {}
+
+/* ===========================
+   Scoped SVG themes (DaisyUI)
+   =========================== */
+
+/* Full vs partial vs none cells */
+#svg-corsica-grid-cells-full-and-partial #coord_cells rect.pm-full { fill: var(--color-secondary); fill-opacity: .08; }
+#svg-corsica-grid-cells-full-and-partial #coord_cells rect.pm-partial { fill: var(--color-accent); fill-opacity: .10; }
+#svg-corsica-grid-cells-full-and-partial #coord_cells rect.pm-none { fill: transparent; }
+
+#svg-corsica-grid-cells-full-only #coord_cells rect.pm-full { fill: var(--color-secondary); fill-opacity: .08; }
+#svg-corsica-grid-cells-full-only #coord_cells rect.pm-none { fill: transparent; }
+
+#svg-corsica-grid-daisyui-only #coord_cells rect.pm-full { fill: var(--color-secondary); fill-opacity: .08; }
+#svg-corsica-grid-daisyui-only #coord_cells rect.pm-partial { fill: var(--color-accent); fill-opacity: .10; }
+#svg-corsica-grid-daisyui-only #coord_cells rect.pm-none { fill: transparent; }
+
+/* Common grid line and base styling */
+.corsica-grid #grid_lines path { stroke: var(--color-primary); stroke-opacity: .3; stroke-dasharray: 3.7 1.6; fill: none; }
+.corsica-grid #patch_1 path { fill: var(--color-base-100); }
+
+/* Axis labels and compass */
+.corsica-grid .corsica-axis-label { fill: var(--color-base-content); font-weight: 600; font-size: 28px; }
+.corsica-grid #compass_axes { color: var(--color-base-content); }
+.corsica-grid #arrow-base path { fill: var(--color-base-content); }
+
+/* City markers colors */
+.corsica-grid #city_markers circle { stroke: var(--color-base-100); stroke-width: 2; }
+
+/* Optional variants for other exported svgs */
+#svg-corsica-grid-with-cities .corsica-grid-text { fill: var(--color-base-content); }
+#svg-corsica-grid-with-labels .corsica-grid-text { fill: var(--color-base-content); }
+
+
+/* ==========================
+   Number input fragment
+   ========================== */
+/* Provide component color tokens */
+.pm-container {
+  --pm-ok: hsl(var(--su));
+  --pm-err: hsl(var(--er));
+}
+
+/* Host element spacing */
+pm-number-input {
+  display: block;
+  /* expose colors to the component */
+  --ok: var(--pm-ok);
+  --err: var(--pm-err);
+}
+
+/* Wrapper rhythm around number inputs */
+.fragment-wrapper[data-f_type="number_"] {
+  margin: 1.25rem 0 1.5rem;
+}
+
+
+/* Tighter when following h1_ */
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="h1_"] {
+  margin-top: 0.25rem;
+}
+
+
+/* Looser before headings */
+/* makes no sense */
+/* .fragment-wrapper[data-f_type="number_"] + .fragment-wrapper[data-f_type="h2_"] h2.fragment {
+  margin-top: 0.5rem;
+}
+.fragment-wrapper[data-f_type="number_"] + .fragment-wrapper[data-f_type="h3_"] h3.fragment {
+  margin-top: 0.25rem;
+} */
+
+/* Tighter when following text */
+.fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="number_"] {
+  margin-top: 0.75rem;
+}
+
+
+
+
+/* ==========================
+   Radio Alert Animations - Using Tailwind transition utilities
+   ========================== */
+
+/* Base transition setup for all radio feedback/explanation areas */
+
+[id^="radio-feedback-"],
+[id^="radio-explanation-"] {
+  /* Smooth transitions for height and transform */
+  transition: max-height 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top center;
+  overflow: hidden;
+}
+
+/* Default to collapsed unless explicitly opened */
+[id^="radio-feedback-"]:not(.pm-open),
+[id^="radio-explanation-"]:not(.pm-open) {
+  max-height: 0 !important;
+  /* keep opacity controlled by classes on inner elements if needed */
+  transform: scale(0.98) translateY(-0.25rem) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Default margins */
+[id^="radio-feedback-"].pm-open {
+  /* margin-top: 0.75rem; */
+  /* margin-bottom: 0.25rem; */
+}
+
+/* [id^="radio-explanation-"].pm-open {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+} */
+
+/* Prevent FOUC: hide radios/explanations until runtime marks pm-ready */
+html:not(.pm-ready) [id^="radio-feedback-"],
+html:not(.pm-ready) [id^="radio-explanation-"] {
+  max-height: 0 !important;
+  transform: scale(0.98) translateY(-0.25rem) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Collapsed state: remove space and interaction, hide visually */
+.pm-collapsed {
+  max-height: 0 !important;
+  transform: scale(0.98) translateY(-0.25rem) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  pointer-events: none !important;
+}
+/* lbl_ progressive list - hide by default */
+.pm-lbl-item {
+  transition: max-height 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pm-lbl-item.pm-collapsed {
+  max-height: 0;
+  overflow: hidden;
+}
+
+/* Open state: visible; height is driven by inline max-height set by JS */
+.pm-open {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+}
+
+/* Alert box color transitions */
+[id^="radio-feedback-"] .alert,
+[id^="radio-explanation-"] .alert {
+  transition: background-color 200ms ease,
+              border-color 200ms ease,
+              color 200ms ease;
+  /* Remove DaisyUI alert grid left icon gap when no icon is present */
+  display: block;
+  padding: 0.625rem 0.875rem;
+  text-align: left;
+}
+
+/* Kill possible left icon column gap from DaisyUI's alert if theme injects it */
+[id^="radio-feedback-"] .alert > :not([hidden]) ~ :not([hidden]),
+[id^="radio-explanation-"] .alert > :not([hidden]) ~ :not([hidden]) {
+  margin-left: 0;
+}
+
+[id^="radio-feedback-"] .alert:where(*)::before,
+[id^="radio-explanation-"] .alert:where(*)::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Card inside explanation - simplified animation */
+[id^="radio-explanation-"] .card {
+  /* No additional transform needed since parent handles it */
+  transition: none;
+}
+
+/* Explanation card body spacing and alignment */
+[id^="radio-explanation-"] .card-body {
+  padding: 0.875rem 1rem;
+  align-items: flex-start;
+}
+
+/* Remove unexpected left margins inside explanation content */
+/* Ensure explanation content has no extra typographic margins */
+[id^="radio-explanation-"] * {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+/* DaisyUI alert primary + outline combo using root.css tokens */
+.alert.alert-primary.alert-outline {
+  background-color: transparent !important;
+  border: 1.5px solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
+
+.alert.alert-primary.alert-outline * { color: inherit; }
+
+/* Ensure feedback text spans render inline content properly */
+[id^="radio-feedback-"] .alert span[id^="radio-feedback-text-"] {
+  display: inline;
+  max-height: none !important;
+}
+
+/* Smooth transitions for alert state changes */
+.alert-soft {
+  transition: background-color 0.3s ease,
+              border-color 0.3s ease,
+              color 0.3s ease;
+}
+
+/* Extra spacing when multiple feedback/explanation blocks stack */
+/* .fragment-wrapper[data-f_type="radio_"] [id^="radio-feedback-"].pm-open + [id^="radio-explanation-"].pm-open,
+.fragment-wrapper[data-f_type="radio_"] [id^="radio-feedback-"].pm-open + [id^="radio-feedback-"].pm-open,
+.fragment-wrapper[data-f_type="radio_"] [id^="radio-explanation-"].pm-open + [id^="radio-feedback-"].pm-open,
+.fragment-wrapper[data-f_type="radio_"] [id^="radio-explanation-"].pm-open + [id^="radio-explanation-"].pm-open {
+  margin-top: 1.25rem !important;
+} */
+
+/* Button state transitions */
+.fragment-wrapper[data-f_type="radio_"] button {
+  transition: all 0.2s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add ripple effect on click */
+.fragment-wrapper[data-f_type="radio_"] button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+.fragment-wrapper[data-f_type="radio_"] button:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+
+.fragment-wrapper[data-f_type="p_"].alert {
+  font-size: 1rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+
+
+
+
+
+
+
+
+/* ******************PIECE_****************** */
+
+
+/* Responsive columns for markdown layout directives */
+.pm-cols {
+  display: grid;
+  gap: 1rem;
+}
+
+/* default to single column on mobile */
+.pm-cols > .fragment-wrapper { margin: 0; }
+
+/* 2 cols breakpoints */
+@media (min-width: 640px) { /* sm */
+  .pm-cols-sm-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pm-cols-sm-2.use-var { grid-template-columns: var(--pm-cols); }
+}
+@media (min-width: 768px) { /* md */
+  .pm-cols-md-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pm-cols-md-2.use-var { grid-template-columns: var(--pm-cols); }
+}
+@media (min-width: 1024px) { /* lg */
+  .pm-cols-lg-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pm-cols-lg-2.use-var { grid-template-columns: var(--pm-cols); }
+}
+
+/* 3 cols breakpoints */
+@media (min-width: 640px) { /* sm */
+  .pm-cols-sm-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pm-cols-sm-3.use-var { grid-template-columns: var(--pm-cols); }
+}
+@media (min-width: 768px) { /* md */
+  .pm-cols-md-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pm-cols-md-3.use-var { grid-template-columns: var(--pm-cols); }
+}
+@media (min-width: 1024px) { /* lg */
+  .pm-cols-lg-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pm-cols-lg-3.use-var { grid-template-columns: var(--pm-cols); }
+}
+
+/* Ensure media scales nicely in grid */
+.pm-cols .fragment img,
+.pm-cols .fragment svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Harmonize spacing inside piece_ column layouts: rely on grid gap */
+.pm-cols .fragment-wrapper { margin: 0 !important; }
+.pm-cols .fragment-wrapper[data-f_type="radio_"] { margin: 0 !important; }
+.pm-cols .fragment-wrapper[data-f_type="p_"] + .fragment-wrapper[data-f_type="radio_"] { margin-top: 0 !important; }
+.pm-cols .fragment-wrapper[data-f_type="p_"] p.fragment { margin-bottom: 0 !important; }
+
+/* Utility helpers for vertical/horizontal centering of a single grid item */
+.pm-self-center { align-self: center !important; }
+
+/* =============================================================================
+   i-Radio Pre-Click Classes
+   ============================================================================= */
+
+/* Pre-click animation classes for i-radio buttons */
+.pre-pulse {
+  animation: pulse 2s infinite;
+}
+
+.pre-bounce {
+  animation: bounce 1s infinite;
+}
+
+.pre-glow {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.pre-animate-spin {
+  animation: spin 2s linear infinite;
+}
+
+.pre-animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+.pre-animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.pre-bg-warning {
+  background-color: hsl(var(--wa));
+  color: hsl(var(--wac));
+}
+
+.pre-shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.pre-ring {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.pre-ring-blue-300 {
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.5);
+}
+
+/* Gradient classes for pre-click effects */
+.pre-bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.pre-from-purple-500 {
+  --tw-gradient-from: #8b5cf6;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(139, 92, 246, 0));
+}
+
+.pre-to-pink-500 {
+  --tw-gradient-to: #ec4899;
+}
+
+/* Utility classes that persist after click */
+.permanent-border {
+  border: 2px solid hsl(var(--bc));
+}
+.pm-place-center { place-self: center !important; }
+
+
+
+.piece_ .fragment[data-f_type="svg_"] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+}
+
+
+
+.statement {
+  padding: 1rem !important;
+  background-color: transparent !important;
+  border-radius: var(--radius-box) !important;
+  border: 1.5px solid var(--color-primary) !important;
+}

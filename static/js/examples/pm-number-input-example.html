@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>PM NumberInput Example</title>
+    <link rel="stylesheet" href="/static/css/pm.css" />
+    <script type="importmap">
+        {
+            "imports": {
+                "@js/": "/static/js/"
+            }
+        }
+    </script>
+    <script type="module" src="/static/js/pm/components/pm-number-input.js"></script>
+    <script type="module" src="/static/js/core/mason.js"></script>
+  </head>
+  <body>
+    <div class="pm-container" style="max-width: 720px; margin: 2rem auto;">
+      <h2 class="text-xl font-semibold mb-4">NumberInputPCA – Mason wiring</h2>
+      <pm-number-input id="circle_area_q1"></pm-number-input>
+    </div>
+
+    <script>
+        const data = {
+            version: 'NumberInputPCA',
+            id: 'circle_area_q1',
+            type: 'number',
+            label: 'Enter the radius of the circle',
+            min: 0,
+            max: 100,
+            step: 0.5,
+            unit: 'cm',
+            correct: 7.5,
+            tolerance: 0.1,
+            feedback_correct: '✅ Well done — that\u2019s the correct radius.',
+            feedback_incorrect: '❌ Incorrect. Check your calculation.',
+            hint: 'The diameter is 15 cm — radius is half.'
+        };
+        window.masonInstance?.init('pm-number-input', data);
+    </script>
+  </body>
+</html>

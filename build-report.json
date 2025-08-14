@@ -1,0 +1,93 @@
+{
+  "status": "partial",
+  "total_routes": 21,
+  "successful": 18,
+  "failed": 3,
+  "output_dir": "dist",
+  "routes": [
+    {
+      "route": "/",
+      "success": true
+    },
+    {
+      "route": "/readme",
+      "success": true
+    },
+    {
+      "route": "/settings",
+      "success": true
+    },
+    {
+      "route": "/sujets0",
+      "success": true
+    },
+    {
+      "route": "/corsica/",
+      "success": true
+    },
+    {
+      "route": "/nagini",
+      "success": true
+    },
+    {
+      "route": "/api/health",
+      "success": true
+    },
+    {
+      "route": "/api/settings",
+      "success": true
+    },
+    {
+      "route": "/kill-service-workers",
+      "success": true
+    },
+    {
+      "route": "/pm",
+      "success": true
+    },
+    {
+      "route": "/jupyterlite/",
+      "success": false
+    },
+    {
+      "route": "/jupyterlite/lab",
+      "success": false
+    },
+    {
+      "route": "/jupyterlite/repl",
+      "success": false
+    },
+    {
+      "route": "/jupyterlite/embed",
+      "success": true
+    },
+    {
+      "route": "/jupyterlite/sandbox/repl",
+      "success": true
+    },
+    {
+      "route": "/pm/documentation/README.md",
+      "success": true
+    },
+    {
+      "route": "/pm/examples/i_radio_example.md",
+      "success": true
+    },
+    {
+      "route": "/pm/pyly/00_index.md",
+      "success": true
+    },
+    {
+      "route": "/pm/pyly/01_premiers_pas.md",
+      "success": true
+    },
+    {
+      "route": "/pm/corsica/a_troiz_geo.md",
+      "success": true
+    },
+    {
+      "route": "/pm/corsica/e_seconde_stats_python.md",
+      "success": true
+    }
+  ]
+}

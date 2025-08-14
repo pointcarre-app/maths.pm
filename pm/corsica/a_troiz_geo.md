@@ -1,0 +1,4539 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      
+        Maths.pm - Logiciels libres pour les enseignants de mathématiques
+      
+    </title>
+    <link rel="icon" type="image/x-icon" href="../../../static/favicon/apple-icon-57x57.png" />
+
+    
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      rel="stylesheet" />
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet" />
+
+
+<script>
+    // Suppress Tailwind production warning for development
+    window.process = {
+        env: {
+            NODE_ENV: 'development'
+        }
+    };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+
+
+
+<link rel="stylesheet" href="../../../static/css/root.css" />
+<link rel="stylesheet" href="../../../static/css/styles.css" />
+<link rel="stylesheet" href="../../../static/css/styles-alt.css" />
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.body, {
+                delimiters: [{
+                    left: '$$',
+                    right: '$$',
+                    display: true
+                }, {
+                    left: '$',
+                    right: '$',
+                    display: false
+                }],
+                throwOnError: false
+            });
+        } else {
+            // Retry after a short delay if KaTeX isn't loaded yet
+            setTimeout(function() {
+                if (typeof renderMathInElement !== 'undefined') {
+                    renderMathInElement(document.body, {
+                        delimiters: [{
+                            left: '$$',
+                            right: '$$',
+                            display: true
+                        }, {
+                            left: '$',
+                            right: '$',
+                            display: false
+                        }],
+                        throwOnError: false
+                    });
+                }
+            }, 500);
+        }
+    });
+</script>
+
+    <meta name="description" content="Plateforme d&#39;enseignement des mathématiques pour le secondaire avec des cours interactifs, exercices et ressources pédagogiques libres. Aucune donnée collectée." />
+    <meta name="keywords" content="mathématiques, enseignement, collège, lycée, cours, exercices, pédagogie, open source" />
+    <meta name="author" content="Maths.pm, contact@pointcarre.app" />
+
+    <!-- Custom head elements from domain config -->
+    
+      
+
+      
+    
+
+    <!-- 🎯 Smart Product Dependency Loader -->
+    
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <script>
+        // Set backend settings as a global JS object
+        // ... existing code ...
+    </script>
+
+    
+  <meta charset="UTF-8" />
+  <title>Maths Pedagogical Message</title>
+  <meta name="description" content="Delivering pedagogical messages from Pointcarre.app" />
+  <link rel="stylesheet" href="../../../static/core/css/pm.css" />
+  <link rel="stylesheet" href="../../../static/core/css/toc.css" />
+  <!-- MathLive for LaTeX (if needed later) -->
+  <script src="https://cdn.jsdelivr.net/npm/mathlive@0.105.2/mathlive.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/mathlive@0.105.2/mathlive-static.min.css" rel="stylesheet" />
+  <!-- CodeMirror (for codex_ rendering) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+  <!-- Import map for JS namespace aliases -->
+  <script type="importmap">
+      {
+          "imports": {
+              "@js/": "/static/js/"
+          }
+      }
+  </script>
+
+
+  
+
+
+  </head>
+
+  <section class="fixed inset-0 w-screen h-screen z-[-10] overflow-hidden">
+
+
+  <!-- <a href="http://127.0.0.1:8000/" class="flex items-center gap-1 sm:gap-2 bg-transparent pl-4 pt-3" style="position:absolute; top:0; left:0">
+    <p class="w-8 h-8"><svg color="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 82">
+  <g transform="translate(0,0)">
+  <rect class="stroke-primary" x="5" y="5" width="72" height="72"  fill="transparent" stroke-width="10" rx="4" ry="4" stroke-linejoin="" />
+  <rect class="stroke-primary fill-primary" x="36" y="36" width="10" height="10"   stroke-width="8" rx="1" ry="1" stroke-linejoin="" />
+  </g>
+</svg></p>
+    <p class="font-heading">
+      <span class="text-lg"><span class="">pointcarre</span>.app</span>
+      
+      
+       
+    </p>
+</a> -->
+
+
+  <svg xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 800 600"
+       preserveAspectRatio="xMidYMid slice"
+       width="100%"
+       height="100%">
+    <defs>
+    <radialGradient id="gradient" cx="18%" cy="35%" r="15%" fx="18%" fy="35%">
+    <stop offset="0%" stop-color="#a46dff" stop-opacity="0.5" />
+    <stop offset="70%" stop-color="#a46dff" stop-opacity="0.3" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="30" />
+    </filter>
+
+    
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f0f0f0" stroke-width="0.5" />
+    </pattern>
+
+    
+    <pattern id="notebook-lines" width="30" height="30" patternUnits="userSpaceOnUse">
+    <!-- Main line (thicker) -->
+    <line x1="0" y1="29" x2="30" y2="29" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
+
+    
+    <line x1="0" y1="7" x2="30" y2="7" stroke="var(--color-primary)" stroke-width="0.45" opacity="0.10" />
+    <line x1="0" y1="14" x2="30" y2="14" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
+    <line x1="0" y1="21" x2="30" y2="21" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
+
+    
+    <line x1="29" y1="0" x2="29" y2="64" stroke="var(--color-primary)" stroke-width="0.45" opacity="0.10" />
+    </pattern>
+    </defs>
+
+    
+    <rect width="100%" height="100%" opacity="0.3" fill="var(--color-base-100)" />
+
+    
+    <rect width="100%" height="100%" fill="url(#notebook-lines)" opacity="0.5" />
+
+    
+    <!-- <line class="special-vertical-line" x1="149.5" y1="0" x2="149.5" y2="600" stroke="#FF007F" stroke-width="1" opacity="0" /> -->
+
+    
+    
+  </svg>
+
+</section>
+  <body class="text-base-content font-sans min-h-screen">
+    <data-brick>
+  <div id="domain-config" 
+       data-domain_yaml_path="domains/maths-pm.yml" 
+       data-domain_url="https://maths.pm"
+       
+         data-domain_specific_metatags.viewport="width=device-width, initial-scale=1.0"
+       
+         data-domain_specific_metatags.theme-color="#FFFFFF"
+       
+         data-domain_specific_metatags.charset="UTF-8"
+       
+         data-domain_specific_metatags.subject="Enseignement des mathématiques et logiciels libres (Open Source)"
+       
+         data-domain_specific_metatags.copyright="SAS POINTCARRE.APP"
+       
+         data-domain_specific_metatags.language="FR"
+       
+         data-domain_specific_metatags.Classification="Education"
+       
+         data-domain_specific_metatags.author="Maths.pm, contact@pointcarre.app"
+       
+         data-domain_specific_metatags.designer="SAS POINTCARRE.APP"
+       
+         data-domain_specific_metatags.reply-to="contact@pointcarre.app"
+       
+         data-domain_specific_metatags.owner="SAS POINTCARRE.APP"
+       
+         data-domain_specific_metatags.directory="education"
+       
+         data-domain_specific_metatags.coverage="Europe"
+       
+         data-domain_specific_metatags.distribution="Europe"
+       
+         data-domain_specific_metatags.rating="General"
+       
+         data-domain_specific_metatags.revisit-after="7 days"
+       
+         data-domain_specific_metatags.target="all"
+       
+         data-domain_specific_metatags.HandheldFriendly="True"
+       
+         data-domain_specific_metatags.MobileOptimized="320"
+       
+         data-domain_specific_metatags.mobile-web-app-capable="yes"
+       
+         data-domain_specific_metatags.apple-mobile-web-app-capable="yes"
+       
+         data-domain_specific_metatags.apple-touch-fullscreen="yes"
+       
+         data-domain_specific_metatags.apple-mobile-web-app-status-bar-style="black"
+       
+         data-domain_specific_metatags.format-detection="telephone=no"
+       
+         data-domain_specific_metatags.medium="website"
+       
+         data-domain_specific_metatags.syndication-source="https://maths.pm"
+       
+         data-domain_specific_metatags.original-source="https://maths.pm"
+       
+         data-domain_specific_metatags.http-equiv-Expires="0"
+       
+         data-domain_specific_metatags.http-equiv-Pragma="no-cache"
+       
+         data-domain_specific_metatags.http-equiv-Cache-Control="no-cache"
+       
+         data-domain_specific_metatags.http-equiv-imagetoolbar="no"
+       
+         data-domain_specific_metatags.http-equiv-x-dns-prefetch-control="off"
+       
+         data-domain_specific_metatags.og:site_name="Maths.pm"
+       
+         data-domain_specific_metatags.og:email="contact@pointcarre.app"
+       
+         data-domain_specific_metatags.og:latitude="48.8566"
+       
+         data-domain_specific_metatags.og:longitude="2.3522"
+       
+         data-domain_specific_metatags.og:street-address="Your Address"
+       
+         data-domain_specific_metatags.og:locality="Paris"
+       
+         data-domain_specific_metatags.og:region="Île-de-France"
+       
+         data-domain_specific_metatags.og:postal-code="75001"
+       
+         data-domain_specific_metatags.og:country-name="France"
+       
+         data-domain_specific_metatags.twitter:site="@mathspm"
+       
+         data-domain_specific_metatags.twitter:site_name="Maths.pm"
+       
+         data-domain_specific_metatags.ICBM="48.8566, 2.3522"
+       
+         data-domain_specific_metatags.geo.region="FR-IDF"
+       
+         data-domain_specific_metatags.geo.placename="Paris"
+       
+         data-domain_specific_metatags.generator="HTML5"
+       
+         data-domain_specific_metatags.ResourceLoaderDynamicStyles=""
+       
+       
+         data-index_view_specific_metatags.title="Maths.pm - Logiciels libres pour les enseignants de mathématiques"
+       
+         data-index_view_specific_metatags.description="Plateforme d&#39;enseignement des mathématiques pour le secondaire avec des cours interactifs, exercices et ressources pédagogiques libres. Aucune donnée collectée."
+       
+         data-index_view_specific_metatags.keywords="mathématiques, enseignement, collège, lycée, cours, exercices, pédagogie, open source"
+       
+         data-index_view_specific_metatags.robots="index, follow"
+       
+         data-index_view_specific_metatags.googlebot="index, follow"
+       
+         data-index_view_specific_metatags.revised="Jul. 17, 2025, 10:00 am"
+       
+         data-index_view_specific_metatags.abstract="Plateforme éducative pour l&#39;enseignement des mathématiques avec génération automatique d&#39;exercices et de sujets d&#39;examen."
+       
+         data-index_view_specific_metatags.topic="Enseignement des mathématiques"
+       
+         data-index_view_specific_metatags.summary="Ressources pédagogiques mathématiques pour professeurs : exercices, sujets d&#39;examen et outils Open Source."
+       
+         data-index_view_specific_metatags.url="https://maths.pm/"
+       
+         data-index_view_specific_metatags.identifier-URL="https://maths.pm/"
+       
+         data-index_view_specific_metatags.pagename="Accueil - Ressources mathématiques"
+       
+         data-index_view_specific_metatags.category="Education"
+       
+         data-index_view_specific_metatags.date="Jul. 17, 2025"
+       
+         data-index_view_specific_metatags.search_date="2025-07-17"
+       
+         data-index_view_specific_metatags.subtitle="Ressources pédagogiques mathématiques Open Source"
+       
+         data-index_view_specific_metatags.pageKey="maths-pm-home"
+       
+         data-index_view_specific_metatags.DC.title="Maths.pm - Ressources pédagogiques mathématiques Open Source"
+       
+         data-index_view_specific_metatags.DC.creator="Maths.pm, contact@pointcarre.app"
+       
+         data-index_view_specific_metatags.DC.subject="Enseignement, Mathématiques, Pédagogie, Open Source"
+       
+         data-index_view_specific_metatags.itemprop-name="Maths.pm - Ressources mathématiques"
+       
+         data-index_view_specific_metatags.og:title="Maths.pm - Ressources pédagogiques mathématiques"
+       
+         data-index_view_specific_metatags.og:description="Plateforme éducative pour professeurs de mathématiques. Exercices et sujets générés automatiquement avec des technologies Open Source."
+       
+         data-index_view_specific_metatags.og:image="https://maths.pm/static/images/maths-pm-social-card.jpg"
+       
+         data-index_view_specific_metatags.og:type="website"
+       
+         data-index_view_specific_metatags.og:url="https://maths.pm/"
+       
+         data-index_view_specific_metatags.twitter:card="summary_large_image"
+       
+         data-index_view_specific_metatags.twitter:creator="@mathspm"
+       
+         data-index_view_specific_metatags.twitter:title="Maths.pm - Ressources pédagogiques mathématiques"
+       
+         data-index_view_specific_metatags.twitter:description="Plateforme éducative pour professeurs de mathématiques. Exercices et sujets générés automatiquement."
+       
+         data-index_view_specific_metatags.twitter:image="https://maths.pm/static/images/maths-pm-twitter-card.jpg"
+       
+         data-index_view_specific_metatags.twitter:image:alt="Logo Maths.pm avec formules mathématiques"
+       
+         data-index_view_specific_metatags.twitter:url="https://maths.pm/"
+       
+       
+         data-extra_head.js="[]"
+       
+         data-extra_head.css="[]"
+       
+       
+         data-templating.base_template="base/main-alt.html"
+       
+         data-templating.footer_template="domains/maths-pm/footers.html"
+       
+         data-templating.navbar_title="Maths.pm"
+       
+         data-templating.button_primary_text="Ressources"
+       
+         data-templating.button_primary_href="/"
+       
+         data-templating.button_ghost_text="Contact"
+       
+         data-templating.button_ghost_href="/contact"
+       >
+  </div>
+
+  <div id="backend-public-settings"
+       
+         data-nagini="{&#34;endpoint&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/&#34;, &#34;js_url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js&#34;, &#34;pyodide_worker_url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js&#34;}"
+       
+         data-v4pyjs="{&#34;lib_url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/v4.py.js@v0.0.4-unstable/&#34;}"
+       
+         data-teachers="{&#34;endpoint&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/&#34;, &#34;files_to_load&#34;: [{&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/__init__.py&#34;, &#34;path&#34;: &#34;teachers/__init__.py&#34;}, {&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/generator.py&#34;, &#34;path&#34;: &#34;teachers/generator.py&#34;}, {&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/maths.py&#34;, &#34;path&#34;: &#34;teachers/maths.py&#34;}, {&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/formatting.py&#34;, &#34;path&#34;: &#34;teachers/formatting.py&#34;}, {&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/corrector.py&#34;, &#34;path&#34;: &#34;teachers/corrector.py&#34;}, {&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/defaults.py&#34;, &#34;path&#34;: &#34;teachers/defaults.py&#34;}]}"
+       
+         data-arpege_generator_script_paths="[&#34;/static/py/services/sujets0/spe_sujet1_auto_01_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_02_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_03_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_04_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_05_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_06_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_07_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_08_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_09_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_10_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_11_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_12_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_01_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_02_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_03_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_04_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_05_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_06_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_07_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_08_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_09_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_10_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_11_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_12_question.py&#34;]"
+       
+         data-corpus=""
+       
+         data-jupyterlite="{&#34;enabled&#34;: &#34;true&#34;, &#34;version&#34;: &#34;0.4.3&#34;, &#34;kernels&#34;: [&#34;python&#34;], &#34;packages&#34;: [&#34;numpy&#34;, &#34;matplotlib&#34;, &#34;sympy&#34;], &#34;pyodide&#34;: {&#34;version&#34;: &#34;0.26.4&#34;, &#34;packages&#34;: [&#34;micropip&#34;, &#34;numpy&#34;, &#34;matplotlib&#34;]}}"
+       
+         data-examples="{&#34;enabled&#34;: &#34;true&#34;, &#34;description&#34;: &#34;Test and example files for PM features&#34;}"
+       >
+  </div>
+
+  <div id="nagini-settings" data-endpoint="">
+  </div>
+
+  <div id="pca-corpus-settings"
+       data-endpoint=""
+       data-paths-to-load="[]">
+  </div>
+
+  <div id="pca-teachers-settings"
+       data-endpoint=""
+       data-paths-to-load="[]">
+  </div>
+
+  <div id="pronoia-sujets-0-qcm-config" 
+       data-partie="1" 
+       data-partie-rdb="Automatismes" 
+       data-generation-mode="maths">
+  </div>
+</data-brick>
+
+    <div class="navbar main-alt-navbar bg-base-100">
+  <div class="navbar-start">
+    <a href="https://maths.pm" class="w-[32px] sm:w-[40px] h-[32px] sm:h-[40px]">
+      <svg color="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 82">
+  <g transform="translate(0,0)">
+  <rect class="stroke-primary" x="5" y="5" width="72" height="72"  fill="transparent" stroke-width="10" rx="4" ry="4" stroke-linejoin="" />
+  <rect class="stroke-primary fill-primary" x="36" y="36" width="10" height="10"   stroke-width="8" rx="1" ry="1" stroke-linejoin="" />
+  </g>
+</svg>
+    </a>
+    <!-- Mobile title shown next to logo on small screens -->
+    <a href="/" class="navbar-alt-title-mobile">Maths.pm</a>
+  </div>
+  <div class="navbar-center">
+    <div class="text-2xl sm:text-3xl">
+      
+        <a href="/" class="font-handwritten">Maths.pm</a>
+      
+    </div>
+  </div>
+  <div class="navbar-end gap-2 sm:pl-18">
+    <button class="btn btn-sm sm:btn-base btn-square btn-ghost"
+            onclick="my_modal_1.showModal()"
+            style="box-shadow: none !important;
+                   border: none !important;
+                   font-weight:400">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="20"
+           height="20"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           class="lucide lucide-book-type-icon lucide-book-type">
+        <path d="M10 13h4" />
+        <path d="M12 6v7" />
+        <path d="M16 8V6H8v2" />
+        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+      </svg>
+    </button>
+    <dialog id="my_modal_1" class="modal">
+      <div class="modal-box"><div class="py-8 sm:px-6">
+  <div class="text-left mb-8">
+    <h2 class="text-2xl font-bold mb-2">Licences et droits d'usage</h2>
+  </div>
+
+  <div class="bg-base-100 rounded-lg border border-base-300 p-2 sm:p-6 mb-6">
+    <div class="max-w-3xl mx-auto">
+  <div class="flex flex-col sm:flex-row w-full py-2">
+    <div class="grid grow place-items-center sm:h-30">
+      <div class="flex flex-col items-center">
+        <div class="text-sm sm:text-base text-center font-heading mb-2">Codes sources</div>
+        <img class="h-[40px]" src="../../../static/icons/AGPLv3_Logo.svg" alt="Logo licence AGPLv3">
+      </div>
+    </div>
+    <div class="divider divider-horizontal text-xs px-12">
+      <span class="hidden sm:block"><span class="badge badge-sm badge-primary">LICENCES</span></span>
+    </div>
+    <div class="grid grow place-items-center sm:h-30">
+      <div class="flex flex-col">
+        <div class="text-sm sm:text-base text-center font-heading mb-2">Contenus</div>
+        <img class="h-[40px]" src="../../../static/icons/CC_BY-NC-SA.svg" alt="Logo licence Creative Commons">
+      </div>
+    </div>
+  </div>
+</div> 
+  </div>
+
+
+  <details class="p-0">
+    <summary class="cursor-pointer  hover:bg-base-100 rounded-lg text-sm">
+      <span class="select-none">Codes sources : AGPLv3</span>
+    </summary>
+    <div class="px-4 pb-4 pt-4 text-sm leading-relaxed">
+      <div class="flex justify-center mb-4">
+        <img class="w-24 h-auto"
+             src="../../../static/icons/licenses/AGPLv3_Logo.svg"
+             alt="Logo licence AGPLv3"
+             width="96"
+             height="96" />
+      </div>
+      <p>
+        Tous les codes sources des ressources référencées sur ce site et créées par la SAS Pointcarre.app sont distribués sous licence
+        <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="link link-primary">AGPLv3</a>.
+      </p>
+      <p class="mt-2">
+        Vous êtes libre de les utiliser, modifier et redistribuer, y compris pour un usage commercial,
+        à condition de partager vos modifications sous la même licence.
+      </p>
+    </div>
+  </details>
+
+  <details class="p-0">
+    <summary class="cursor-pointer  hover:bg-base-100 rounded-lg text-sm">
+      <span class="select-none">Contenus : CC BY-NC-SA 4.0</span>
+    </summary>
+    <div class="px-4 pb-4 pt-4 text-sm leading-relaxed">
+      <div class="flex justify-center mb-4">
+        <img class="w-24 h-auto"
+             src="../../../static/icons/licenses/CC_BY-NC-SA.svg"
+             alt="Logo licence Creative Commons BY-NC-SA"
+             width="96"
+             height="96" />
+      </div>
+      <p>
+        Tous les contenus référencés sur ce site et créés par la SAS Pointcarre.app
+        (exercices, cours, articles, documentation, mentions légales, etc.) sont sous licence
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="link link-primary">CC BY-NC-SA 4.0</a>.
+      </p>
+      <p class="mt-2">
+        Vous pouvez les partager et les adapter librement pour un usage non commercial,
+        en citant la source et en conservant la même licence.
+      </p>
+    </div>
+  </details>
+
+  <div class="modal-action"></div>
+  <div class="text-right">
+    <form method="dialog">
+      <button class="btn btn-soft">Fermer</button>
+    </form>
+  </div>
+
+
+</div></div>
+    </dialog>
+    <a class="btn btn-sm sm:btn-base btn-square btn-ghost"
+       style="box-shadow: none !important;
+              border: none !important;
+              font-weight:400">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="20"
+           height="20"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           class="lucide lucide-upload-icon lucide-upload">
+        <path d="M12 3v12"></path>
+        <path d="m17 8-5-5-5 5"></path>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      </svg>
+    </a>
+    <a href="/"
+       class="btn btn-sm sm:btn-base btn-primary"
+       style="padding: 0.5rem 0.75rem;
+              box-shadow: none !important;
+              font-weight:300">Ressources</a>
+    <a href="/contact"
+       class="btn btn-sm sm:btn-base btn-ghost"
+       style="padding: 0.5rem 0.75rem;
+              box-shadow: none !important;
+              font-weight:300">Contact</a>
+  </div>
+</div>
+    
+    <style>
+    @media (max-width: 639px) {
+        #left-sidebar {
+            border-right: none !important;
+        }
+    }
+</style>
+
+<!-- Toggle buttons -->
+<style>
+    @keyframes spin-then-scale {
+        0% {
+            transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+            transform: rotate(360deg) scale(1);
+        }
+
+        100% {
+            transform: rotate(360deg) scale(1.2);
+        }
+    }
+
+    .spin-scale-hover:hover {
+        animation: spin-then-scale 1s ease-in-out forwards;
+    }
+</style>
+
+
+
+
+
+
+
+<div class="fixed  right-0 top-0 h-screen w-[calc(250px+1rem)] bg-base-200/90 backdrop-blur text-base-content z-40 transition-transform duration-300 overflow-y-auto translate-x-full"
+     id="right-sidebar">
+  <ul class="menu p-4 min-h-full mt-12" style="width: 250px !important;">
+
+
+    <li>
+
+
+      <a href="/dashboard" class="flex justify-between items-center">
+
+
+        
+      </a>
+
+    </li>
+
+    <li>
+      <a href="/doppel"
+         class="flex justify-between items-center hover:bg-primary hover:text-primary-content"
+         style="width: 100% !important;
+                background-color: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100))">
+        <span>Data-brick</span>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="18"
+             height="18"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             class="lucide lucide-cuboid-icon lucide-cuboid">
+          <path d="m21.12 6.4-6.05-4.06a2 2 0 0 0-2.17-.05L2.95 8.41a2 2 0 0 0-.95 1.7v5.82a2 2 0 0 0 .88 1.66l6.05 4.07a2 2 0 0 0 2.17.05l9.95-6.12a2 2 0 0 0 .95-1.7V8.06a2 2 0 0 0-.88-1.66Z" />
+          <path d="M10 22v-8L2.25 9.15" />
+          <path d="m10 14 11.77-6.87" />
+        </svg>
+      </a>
+      <ul id="doppel-all-files-list" style="margin-left: 0rem !important;">
+        <!-- All files will be populated here consecutively -->
+      </ul>
+    </li>
+
+    <li>
+      <a href="/doppel"
+         class="flex justify-between items-center hover:bg-primary hover:text-primary-content"
+         style="width: 100% !important;
+                background-color: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100))">
+        <span>Doppel</span>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="18"
+             height="18"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             class="lucide lucide-drama-icon lucide-drama">
+          <path d="M10 11h.01" />
+          <path d="M14 6h.01" />
+          <path d="M18 6h.01" />
+          <path d="M6.5 13.1h.01" />
+          <path d="M22 5c0 9-4 12-6 12s-6-3-6-12c0-2 2-3 6-3s6 1 6 3" />
+          <path d="M17.4 9.9c-.8.8-2 .8-2.8 0" />
+          <path d="M10.1 7.1C9 7.2 7.7 7.7 6 8.6c-3.5 2-4.7 3.9-3.7 5.6 4.5 7.8 9.5 8.4 11.2 7.4.9-.5 1.9-2.1 1.9-4.7" />
+          <path d="M9.1 16.5c.3-1.1 1.4-1.7 2.4-1.4" />
+        </svg>
+      </a>
+      <ul id="doppel-all-files-list" style="margin-left: 0rem !important;">
+        <!-- All files will be populated here consecutively -->
+      </ul>
+    </li>
+
+    <!-- Theme Selector - moved outside the main li to avoid overflow issues -->
+    <li class="mt-6">
+      <div class="text-sm font-semibold mb-2">Thèmes</div>
+      <ul class="">
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'bolt')">
+            ⚡️ Bolt
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'purple')">
+            🟪 Purple
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'dark-black')">
+            ⚫️ DarkBlack
+          </button>
+        </li>
+
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'night')">
+            🌒 Night
+          </button>
+        </li>
+
+
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'light')">
+            Light
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'dark')">
+            Dark
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'zelie')">
+            Zelie
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'cyberpunk')">
+            Cyberpunk
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'dracula')">
+            Dracula
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'emerald')">
+            Emerald
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'nord')">
+            Nord
+          </button>
+        </li>
+      </ul>
+    </li>
+
+    <li class="mt-auto">
+      <div class="join font-mono">
+        <span class="badge join-item badge-neutral">1<sup>ère</sup></span>
+        <span class="badge join-item badge-secondary badge-soft">Spé. Maths</span>
+      </div>
+    </li>
+  </ul>
+
+
+</div>
+
+
+<button class="btn btn-circle hover:bg-transparent btn-lg fixed bottom-4 right-4 z-50 spin-scale-hover"
+        id="right-toggle">
+  <svg xmlns="http://www.w3.org/2000/svg"
+       width="18"
+       height="18"
+       viewBox="0 0 24 24"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="1"
+       stroke-linecap="round"
+       stroke-linejoin="round">
+    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Sidebar toggle
+        const leftSidebar = document.getElementById('left-sidebar');
+        const rightSidebar = document.getElementById('right-sidebar');
+        const leftToggle = document.getElementById('left-toggle');
+        const rightToggle = document.getElementById('right-toggle');
+
+        try {
+
+            leftToggle.addEventListener('click', () => {
+                leftSidebar.classList.toggle('-translate-x-full');
+            });
+        } catch (e) {
+            console.log("no leftsidebar found")
+            console.error(e);
+        }
+
+
+        try {
+
+            rightToggle.addEventListener('click', () => {
+                rightSidebar.classList.toggle('translate-x-full');
+            });
+        } catch (e) {
+            console.log("no rightsidebar found")
+            console.error(e);
+        }
+
+        // Theme management
+        function setTheme(theme) {
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+        }
+
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                setTheme(prefersDark ? "dark" : "light");
+            }
+        }
+
+        initializeTheme();
+
+        // Add event listeners to theme buttons - updated for new button structure
+        const themeButtons = document.querySelectorAll("button[onclick*='data-theme']");
+        themeButtons.forEach((button) => {
+            const originalOnClick = button.getAttribute("onclick");
+            button.removeAttribute("onclick");
+            const themeMatch = originalOnClick.match(/data-theme', '([^']+)'/);
+            const themeName = themeMatch ? themeMatch[1] : "light";
+            button.addEventListener("click", function() {
+                setTheme(themeName);
+            });
+        });
+
+        // Listen for system theme changes
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+            if (!localStorage.getItem("theme")) {
+                setTheme(e.matches ? "dark" : "light");
+            }
+        });
+    });
+</script>
+
+    <main class="container mx-auto">
+      
+  <!-- djlint:off -->
+                      
+
+                      <div class="sidebar-fixed hidden xl:block">
+                        <div class="w-72 flex flex-col card">
+      <div id="toc" class="p-4 flex-none text-left text-base-content/80">
+<ul>
+<li><a href="#geographie-de-lile">Géographie de l'île</a><ul>
+<li><a href="#quadrillage-sur-une-surface-plane">🔲 Quadrillage sur une surface plane</a></li>
+<li><a href="#unites">📏 Unités</a></li>
+<li><a href="#coordonnees-dajaccio-et-bastia">📍 Coordonnées d'Ajaccio et Bastia</a></li>
+<li><a href="#representations-des-distances">📏 Représentations des distances</a></li>
+<li><a href="#calcul-de-la-surface-de-lile">🧮 Calcul de la surface de l'île</a></li>
+<li><a href="#notion-de-voisinage">🏘️ Notion de voisinage</a></li>
+</ul>
+</li>
+</ul>
+</div>
+    </div>
+  </div>
+
+  <div class="pm-container lg:text-lg w-full md:max-w-3xl lg:max-w-4xl xl:max-w-4xl mx-auto">
+    <div class="bg-base-100 shadow-2xl mt-12 px-4 py-4">
+      <!-- Main Content -->
+      <div class="max-w-[640px] mx-auto md:py-12 bg-base-100">
+        
+          
+        
+
+        <!-- Fragments (rendered via partials) -->
+        
+        
+          
+          
+          
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="h1_">
+                <h1 id="geographie-de-lile"
+    class="fragment text-2xl sm:text-3xl md:text-4xl font-bold"
+    data-f_type="h1_">Géographie de l'île</h1>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper pm-subtitle" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">Ou comment apprendre à calculer une surface à partir d'une carte, simplement en dessinant de petits carrés. ▣</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper border-[0.1px] border-primary/60 card" data-f_type="html_">
+                <div class="fragment" data-f_type="html_">
+  
+    <div class="
+              bg-base-100
+            
+            grid grid-cols-1 md:grid-cols-[60%_40%] gap-0 py-8
+            
+              shadow-xl sm:shadow-none
+            
+            pt-8 rounded-box">
+  <div class="pl-0 md:pl-12  md:flex items-center text-center md:text-left">
+    <div class="font-handwritten">
+      <span class="text-xl md:text-2xl text-base-content/60 mb-2 hidden md:block">Matematica in l'Isula di a Bellezza</span>
+      <hr class="mb-4 hidden md:block border-[0.1px] border-base-content/60" />
+      <span class="text-4xl md:text-5xl block mb-6 md:mb-0 text-primary font-semibold">Maths.Corsica</span>
+    </div>
+  </div>
+  <div class="mx-auto md:pr-12">
+    
+    
+    
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:cc="http://web.resource.org/cc/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+     width="122"
+     height="243"
+     viewBox="0 0 489.6 971.249"
+     preserveAspectRatio="xMidYMid meet"
+     id="svg2"
+     sodipodi:version="0.32"
+     inkscape:version="0.45.1"
+     sodipodi:docname="Corsica-locator.svg"
+     sodipodi:docbase="/home/thomas/Desktop"
+     inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <metadata id="metadata56">
+  <rdf:RDF>
+  <cc:Work rdf:about="">
+  <dc:format>image/svg+xml</dc:format>
+  <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+  </cc:Work>
+  </rdf:RDF>
+  </metadata>
+  <defs id="defs54" />
+  <sodipodi:namedview inkscape:window-height="963" inkscape:window-width="1280" inkscape:pageshadow="2" inkscape:pageopacity="0.0" guidetolerance="10.0" gridtolerance="10.0" objecttolerance="10.0" borderopacity="1.0" bordercolor="#666666" pagecolor="#ffffff" id="base" inkscape:zoom="1" inkscape:cx="244.8" inkscape:cy="12.826764" inkscape:window-x="0" inkscape:window-y="0" inkscape:current-layer="svg2" />
+
+  
+  <style type="text/css" id="style4">
+      tspan {
+          display: block;
+          font-size: 20;
+      }
+
+      path#corsica {
+          fill: var(--color-primary-content);
+          stroke: var(--color-primary);
+          stroke-width: 4px;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+      }
+  </style>
+  <path id="corsica" d="M 276.95126,911.04675 C 276.43404,910.87373 275.47691,909.07373 274.82430,907.04675 C 273.24417,902.13891 272.10790,900.86134 269.32300,900.86134 C 266.55340,900.86134 262.67596,899.23188 257.95451,896.08382 C 254.44747,893.74548 250.06831,893.74746 247.16112,896.08869 C 244.61749,898.13715 242.89839,896.11199 242.89839,891.06704 C 242.89839,887.17913 243.39723,885.74133 245.39839,883.86134 C 246.77339,882.56959 247.89839,880.41842 247.89839,879.08095 C 247.89839,877.67567 248.95770,875.81593 250.40792,874.67519 C 253.53921,872.21211 252.80658,870.86134 248.33937,870.86134 C 245.56506,870.86134 244.89839,870.47385 244.89839,868.86134 C 244.89839,866.52873 243.63431,866.26968 241.97982,868.26323 C 241.33991,869.03426 239.65689,869.95612 238.23978,870.31179 C 234.91939,871.14516 232.25934,868.79813 230.72678,863.68288 C 229.90256,860.93188 229.11856,859.95614 227.98541,860.27102 C 227.11255,860.51357 224.87476,861.01980 223.01255,861.39597 C 219.75131,862.05475 219.65081,861.98390 220.28160,859.47063 C 220.75588,857.58096 220.54706,856.86134 219.52443,856.86134 C 218.74780,856.86134 217.85335,857.53634 217.53676,858.36134 C 216.82570,860.21434 213.89839,860.35459 213.89839,858.53565 C 213.89839,856.76505 209.66091,852.86134 207.73893,852.86134 C 206.89712,852.86134 205.39058,851.95770 204.39106,850.85324 C 202.73815,849.02679 202.41838,848.98577 200.85600,850.39970 C 199.29573,851.81173 198.77009,851.76236 195.12278,849.86128 C 192.91428,848.71015 190.88113,846.90335 190.60468,845.84619 C 190.15362,844.12134 189.24961,843.94651 181.79663,844.14270 L 173.49123,844.36134 L 172.80216,841.01869 C 172.42317,839.18023 171.68369,837.24664 171.15886,836.72181 C 170.22263,835.78558 164.34560,835.41486 160.39839,836.04305 C 158.70420,836.31267 158.39839,835.80077 158.39839,832.69519 C 158.39839,830.67881 158.10464,828.73506 157.74561,828.37574 C 157.38658,828.01643 154.36700,828.25872 151.03543,828.91416 C 143.69476,830.35835 141.48843,829.76821 142.44437,826.61627 C 142.82051,825.37606 143.97654,823.43234 145.01333,822.29689 C 146.05011,821.16144 146.88678,819.81144 146.87259,819.29689 C 146.82241,817.47712 139.33160,814.82470 136.07942,815.47513 C 133.33081,816.02486 132.72723,815.72518 131.19068,813.04791 C 129.81276,810.64703 128.47072,809.81760 124.91805,809.17121 C 121.23432,808.50098 120.33691,807.91575 120.06598,806.00699 C 119.85218,804.50071 120.47660,803.14465 121.81598,802.20651 C 124.84304,800.08627 124.41410,798.43183 119.64839,793.84605 L 115.39839,789.75650 L 117.79125,787.94686 C 119.82069,786.41206 120.18410,785.27652 120.18410,780.47001 C 120.18410,777.35304 120.56982,774.56441 121.04125,774.27305 C 121.51268,773.98169 121.89839,772.69301 121.89839,771.40931 C 121.89839,770.12561 122.57728,768.81480 123.40704,768.49639 C 124.23680,768.17799 125.43403,766.77984 126.06756,765.38940 C 127.47193,762.30715 130.89839,761.95486 130.89839,764.89272 C 130.89839,768.39214 133.63624,768.24157 138.00522,764.50189 C 140.86516,762.05389 143.90934,760.57422 147.77866,759.75135 C 153.98901,758.43063 155.47671,757.14104 156.90374,751.84146 C 157.97922,747.84745 161.49325,744.80482 167.20329,742.92357 C 169.87314,742.04395 170.90607,741.17649 170.66586,740.01567 C 170.39454,738.70445 169.31263,738.41499 165.44930,738.62003 C 161.95774,738.80533 160.03335,738.38847 158.66541,737.15049 C 157.36927,735.97750 154.15781,735.19901 148.66939,734.72735 C 141.14786,734.08097 140.41030,733.81171 138.10996,730.87242 C 136.74977,729.13442 134.58756,727.31346 133.30505,726.82585 C 130.00762,725.57217 124.96473,727.55666 123.82407,730.55682 C 122.71963,733.46171 119.61312,733.33412 119.04042,730.36034 C 118.83091,729.27242 117.81324,727.78957 116.77894,727.06512 C 114.40587,725.40296 114.41206,723.73494 116.80876,719.03703 C 118.95257,714.83481 118.15115,711.86134 114.87473,711.86134 C 112.57318,711.86134 98.789394,717.23143 95.413754,719.44323 C 94.101404,720.30312 91.761074,720.86146 90.213034,720.68400 C 87.698714,720.39577 87.387414,719.95557 87.295454,716.55840 C 87.238834,714.46678 86.788304,712.35125 86.294284,711.85723 C 85.800254,711.36320 82.021584,710.82453 77.897224,710.66017 C 70.932344,710.38262 70.375124,710.19721 70.071634,708.05630 C 69.891914,706.78852 70.284514,705.10102 70.944074,704.30630 C 72.314684,702.65481 76.475444,702.36797 77.398394,703.86134 C 78.546234,705.71858 82.978064,704.87842 85.310814,702.36134 C 86.585124,700.98634 88.251134,699.85323 89.013064,699.84331 C 89.774994,699.83340 91.894504,698.02363 93.723084,695.82161 C 97.862544,690.83676 97.428974,687.26858 92.155644,682.92185 C 89.109144,680.41068 88.762144,679.73043 89.855584,678.41293 C 91.518794,676.40887 94.514714,676.41911 95.286934,678.43148 C 96.386134,681.29594 100.24842,679.66394 102.19987,675.51044 C 103.91559,671.85868 104.19121,671.69369 107.52957,672.31997 C 111.90389,673.14060 113.54602,671.88368 114.96000,666.63253 C 115.92497,663.04892 115.80456,662.39036 113.79287,660.24901 C 112.55916,658.93579 110.50320,657.86134 109.22408,657.86134 C 107.58481,657.86134 106.89839,657.28571 106.89839,655.91103 C 106.89839,653.21449 109.52670,652.00180 114.05472,652.60913 C 120.98403,653.53855 122.74064,649.29837 118.79926,641.15657 C 116.26431,635.92006 116.76408,634.23323 121.42784,632.28459 C 123.38451,631.46704 125.21837,630.19105 125.50311,629.44905 C 126.24034,627.52785 122.34946,619.70972 118.41038,615.19729 C 115.36100,611.70406 114.86862,611.47828 112.89936,612.67024 C 110.97652,613.83410 110.46471,613.68544 108.28049,611.32863 C 106.28388,609.17424 105.55027,608.90537 104.36124,609.89217 C 103.55667,610.55990 102.89839,612.41525 102.89839,614.01517 C 102.89839,615.87089 102.26478,617.15984 101.14839,617.57519 C 100.18589,617.93329 98.188404,619.10845 96.709534,620.18667 C 94.730674,621.62941 92.486224,622.12752 88.209534,622.07309 C 85.013404,622.03241 81.203514,622.45506 79.743114,623.01232 C 77.790564,623.75736 75.434194,623.60187 70.839554,622.42478 C 63.765374,620.61246 62.312794,620.86734 55.610374,625.09705 C 50.838244,628.10860 48.491514,628.26145 50.861004,625.40640 C 51.795104,624.28087 51.841514,623.13694 51.045694,620.85405 C 49.932634,617.66112 50.341434,615.37578 52.475434,612.86134 C 53.175614,612.03634 53.894714,610.04128 54.073434,608.42788 C 54.342284,606.00092 53.966734,605.38952 51.898394,604.88689 C 50.301384,604.49879 49.280084,603.45938 49.070834,602.00920 C 48.890674,600.76061 48.101054,599.49260 47.316124,599.19139 C 46.531194,598.89019 45.163434,597.11477 44.276654,595.24603 C 42.390504,591.27126 43.592754,588.86134 47.461824,588.86134 C 48.737014,588.86134 50.058474,588.41134 50.398394,587.86134 C 51.227974,586.51905 57.827944,586.59222 61.832164,587.98810 C 64.909684,589.06093 65.275784,588.90738 69.481384,584.77989 C 74.553594,579.80190 74.985014,577.67747 71.267694,575.98374 C 68.819554,574.86829 68.681114,574.46320 69.272814,570.14631 C 69.990084,564.91322 71.982834,562.18480 76.478004,560.28110 C 78.171784,559.56378 80.112154,558.30871 80.789924,557.49203 C 81.577544,556.54301 83.172704,556.16143 85.210324,556.43462 C 89.855504,557.05743 95.318624,554.04544 95.711224,550.64513 C 95.993614,548.19942 96.382944,547.95642 99.711224,548.14852 C 103.30579,548.35600 103.40629,548.26541 103.71292,544.54155 C 104.11681,539.63647 102.57314,537.86134 97.903754,537.86134 C 94.305004,537.86134 94.128364,537.70095 93.517124,533.87844 C 93.079024,531.13877 92.077774,529.36976 90.309414,528.21108 C 88.130264,526.78325 87.832834,526.02435 88.357094,523.22979 C 88.792114,520.91095 88.364814,518.73577 86.916664,515.89715 C 84.514764,511.18903 83.551534,510.93489 81.275394,514.40872 C 79.931554,516.45968 79.068684,516.83802 76.847544,516.35017 C 75.312764,516.01308 73.798534,516.21389 73.434574,516.80279 C 72.105054,518.95400 70.193414,517.74223 68.005494,513.36134 C 66.289474,509.92535 65.197514,508.86134 63.387254,508.86134 C 62.083304,508.86134 60.738314,508.41134 60.398394,507.86134 C 60.058474,507.31134 58.862464,506.86134 57.740584,506.86134 C 56.618714,506.86134 54.466304,505.53980 52.957464,503.92458 L 50.214124,500.98782 L 44.985544,502.52053 C 42.109824,503.36352 39.493374,503.78965 39.171204,503.46749 C 38.849044,503.14532 39.375194,501.13039 40.340434,498.98987 C 41.726064,495.91711 41.856814,494.65217 40.961724,492.97967 C 39.641314,490.51246 36.683184,490.21080 34.898394,492.36134 C 33.551614,493.98412 28.898394,494.44083 28.898394,492.95023 C 28.898394,491.84095 34.685874,486.86134 35.975124,486.86134 C 36.934564,486.86134 40.898394,483.23830 40.898394,482.36134 C 40.898394,482.08634 39.135194,481.86134 36.980184,481.86134 C 32.218284,481.86134 29.898394,481.05810 29.898394,479.40934 C 29.898394,477.75750 32.913624,475.16272 35.398394,474.67626 C 36.724784,474.41659 37.299444,473.62400 37.104604,472.32303 C 36.943014,471.24410 36.828594,468.64013 36.850344,466.53642 C 36.887104,462.97942 36.697544,462.72417 34.144134,462.89238 C 29.892304,463.17248 29.742284,463.02923 31.491514,460.35957 C 32.393084,458.98360 32.908614,457.00841 32.637134,455.97027 C 32.365654,454.93213 32.512634,453.48551 32.963764,452.75558 C 34.239744,450.69098 32.056854,448.87965 29.023814,449.48626 C 25.532444,450.18453 21.255324,446.97954 22.243154,444.40529 C 22.758314,443.06280 23.700254,442.75271 26.159914,443.11587 C 27.941074,443.37885 31.873394,442.76997 34.898394,441.76279 C 37.923394,440.75561 41.674254,439.67256 43.233624,439.35600 C 44.793004,439.03945 47.094604,437.67365 48.348294,436.32090 C 50.825784,433.64764 52.922534,433.26871 56.031194,434.93241 C 57.555364,435.74812 58.604174,435.62892 60.430264,434.43241 C 61.749034,433.56832 64.103864,432.86134 65.663214,432.86134 C 67.222564,432.86134 68.974294,432.38544 69.555944,431.80379 C 70.137594,431.22214 73.152594,430.48418 76.255944,430.16389 C 79.359294,429.84359 81.951714,429.08199 82.016874,428.47144 C 82.304994,425.77199 81.469724,424.19737 77.806424,420.53407 C 75.657004,418.38466 73.898394,416.07373 73.898394,415.39868 C 73.898394,413.02206 70.133284,410.68849 66.727464,410.95422 C 62.316964,411.29834 59.129694,410.16204 57.862144,407.79362 C 56.682204,405.58887 52.852934,405.24827 49.909784,407.08630 C 47.220894,408.76554 45.672484,407.05263 45.518694,402.22869 C 45.402644,398.58876 45.601544,398.35724 51.148394,395.67563 C 57.129144,392.78425 58.310774,391.04345 54.898394,390.15109 C 53.798394,389.86343 52.898394,389.23695 52.898394,388.75890 C 52.898394,388.28085 51.139314,386.72561 48.989334,385.30282 C 45.278684,382.84723 44.928484,382.79442 42.089704,384.26241 C 40.444884,385.11298 37.548304,387.62070 35.652834,389.83512 C 32.277634,393.77828 28.737564,395.02816 27.341634,392.76951 C 26.970504,392.16900 26.606444,388.45650 26.532624,384.51951 C 26.400084,377.45169 26.357374,377.34328 23.148394,375.93087 C 19.445824,374.30121 18.982444,372.42191 21.898394,370.86134 C 22.998394,370.27264 23.898394,369.04761 23.898394,368.13907 C 23.898394,366.84925 24.513174,367.07615 26.703114,369.17425 C 30.150234,372.47680 32.665364,372.60446 33.831954,369.53610 C 34.912534,366.69394 39.535804,363.50822 41.491034,364.25851 C 42.278114,364.56055 43.998544,364.31720 45.314214,363.71774 C 47.482444,362.72983 47.683584,362.08771 47.463334,356.85690 C 47.185794,350.26528 48.509864,347.92488 53.666654,345.89198 C 56.462554,344.78978 57.590774,344.85405 61.472824,346.33661 C 65.707334,347.95379 66.133654,347.95840 67.849424,346.40566 C 70.879544,343.66344 71.091374,339.72813 68.363734,336.85122 C 65.678194,334.01872 66.212284,332.22989 69.898394,331.71114 C 71.989654,331.41683 72.362394,330.87174 72.178204,328.37717 C 72.018274,326.21109 72.807004,324.51911 75.060494,322.19410 C 79.471534,317.64305 78.447874,315.77206 71.966814,316.53964 C 65.530004,317.30199 64.541664,315.50989 68.281904,309.85801 C 70.203814,306.95380 70.898394,304.61236 70.898394,301.03777 C 70.898394,295.14561 72.939404,292.86134 78.204084,292.86134 C 81.022144,292.86134 82.236934,292.27429 83.542704,290.28145 C 84.982114,288.08463 85.727964,287.79439 88.565754,288.32676 C 91.460124,288.86975 91.898394,288.68299 91.898394,286.90665 C 91.898394,285.75526 91.242804,284.86134 90.398394,284.86134 C 88.495974,284.86134 88.457164,282.92388 90.330504,281.47158 C 92.749284,279.59643 92.306224,267.46900 89.698614,264.17526 C 87.835444,261.82186 93.353594,255.78857 95.919064,257.37411 C 96.457694,257.70701 96.898394,259.97782 96.898394,262.42036 C 96.898394,266.84147 98.234344,268.12539 100.48879,265.87094 C 101.03351,265.32622 103.56577,264.59454 106.11604,264.24499 L 110.75289,263.60944 L 111.07564,266.98539 C 111.36074,269.96748 111.77012,270.39734 114.58471,270.66995 C 118.45324,271.04463 123.40675,268.64406 125.04434,265.60099 C 125.70722,264.36918 126.15628,261.74079 126.04225,259.76012 C 125.91401,257.53260 126.41921,255.67398 127.36666,254.88767 C 129.51169,253.10746 129.27538,251.36099 126.64839,249.57917 L 124.39839,248.05305 L 127.39839,246.82727 C 129.04839,246.15310 132.64839,245.54478 135.39839,245.47546 C 138.44908,245.39856 141.47663,244.62064 143.16409,243.48008 C 145.25955,242.06376 146.90147,241.76612 149.93939,242.25191 C 153.23308,242.77859 154.05526,242.57777 154.54419,241.12720 C 154.87155,240.15598 156.04201,237.41433 157.14522,235.03464 C 158.90832,231.23155 159.45244,230.78358 161.64139,231.33297 C 169.21480,233.23378 169.60093,233.18269 171.97986,229.96502 C 173.24191,228.25800 174.81674,226.86134 175.47946,226.86134 C 176.14218,226.86134 176.94343,226.18634 177.26002,225.36134 C 178.13063,223.09254 179.83355,223.56059 180.89839,226.36134 C 181.71344,228.50509 182.47575,228.86134 186.24791,228.86134 C 188.66738,228.86134 192.56009,228.18634 194.89839,227.36134 C 197.23669,226.53634 200.41671,225.86134 201.96510,225.86134 C 203.51349,225.86134 205.06700,225.39753 205.41735,224.83066 C 205.77943,224.24481 207.47312,224.06614 209.34165,224.41667 C 212.31320,224.97414 212.84183,224.68893 214.84523,221.44736 C 216.67661,218.48411 217.64493,217.86134 220.42093,217.86134 C 222.26862,217.86134 224.07563,217.38358 224.43651,216.79966 C 224.79740,216.21573 226.21970,215.30948 227.59718,214.78576 C 229.51018,214.05844 229.90916,213.42351 229.28647,212.09744 C 228.83810,211.14259 228.45485,206.98634 228.43482,202.86134 L 228.39839,195.36134 L 232.06836,195.64464 C 234.93665,195.86605 236.08348,195.43517 237.31836,193.67213 C 238.18738,192.43144 238.89839,190.48146 238.89839,189.33883 C 238.89839,186.60670 240.74272,184.86134 243.62977,184.86134 C 244.91204,184.86134 246.22050,184.18551 246.53747,183.35951 C 247.60569,180.57576 255.80519,175.79984 258.39867,176.45077 C 259.71100,176.78014 261.37280,176.66976 262.09155,176.20548 C 262.81031,175.74120 264.07339,175.33705 264.89839,175.30736 C 265.72339,175.27768 268.02441,174.90163 270.01176,174.47170 C 273.06593,173.81099 274.49992,174.18372 279.27779,176.88019 C 284.68022,179.92913 285.04041,179.99830 287.41442,178.44279 C 288.78060,177.54764 289.89839,176.42807 289.89839,175.95486 C 289.89839,175.48166 291.07578,174.86942 292.51481,174.59433 C 295.45851,174.03161 298.36830,176.33689 299.94336,180.47962 C 300.77765,182.67398 301.31996,182.92766 303.94439,182.35124 C 307.77716,181.50942 310.09011,183.24928 309.30369,186.38262 C 308.63344,189.05311 310.38210,192.86134 312.27859,192.86134 C 314.40962,192.86134 317.29245,196.71073 318.89839,201.70062 C 320.02600,205.20427 320.95698,206.44067 322.64839,206.68089 C 324.34911,206.92243 324.89839,206.50380 324.89839,204.96607 C 324.89839,203.84717 325.91089,202.41089 327.14839,201.77434 C 328.38589,201.13778 330.63589,199.46276 332.14839,198.05206 C 334.52653,195.83398 334.89839,194.71669 334.89839,189.78926 C 334.89839,184.88699 335.23169,183.87298 337.28527,182.52742 C 338.59805,181.66725 340.64627,179.38731 341.83687,177.46088 C 343.77223,174.32940 343.87877,173.50287 342.84241,169.65982 C 341.30743,163.96776 340.63349,148.22482 341.82916,145.99070 C 342.51551,144.70824 342.22666,143.41776 340.77746,141.29200 C 339.67860,139.68014 338.33695,137.46134 337.79602,136.36134 C 336.71819,134.16954 335.55484,132.18542 332.14839,126.72918 C 329.61794,122.67606 329.16372,117.08049 331.29867,116.26123 C 332.06883,115.96570 334.37023,113.01622 336.41289,109.70684 C 339.14267,105.28425 339.83157,103.39452 339.01261,102.57556 C 338.39979,101.96274 337.89562,100.08884 337.89223,98.411334 C 337.88884,96.733834 337.21384,94.072394 336.39223,92.497024 C 333.61697,87.175704 334.34619,85.568464 341.89839,80.361334 C 349.03089,75.443574 349.77952,74.245104 347.74944,70.994434 C 346.90881,69.648374 346.89040,68.323024 347.68082,66.055623 C 348.59331,63.438053 348.44976,62.560713 346.75690,60.408593 C 344.53638,57.585653 343.47260,52.242523 344.94938,51.329823 C 346.28168,50.506413 346.13099,47.493933 344.68517,46.048113 C 344.01789,45.380833 343.37405,42.136273 343.25441,38.837983 C 343.05051,33.217163 343.20846,32.752353 345.77295,31.426203 C 347.27779,30.648023 349.03698,28.852573 349.68227,27.436323 C 350.60788,25.404833 351.57293,24.861333 354.25451,24.861333 C 356.12395,24.861333 358.23044,24.166163 358.93559,23.316511 C 359.96584,22.075136 361.51961,21.899979 366.84572,22.424800 C 372.26589,22.958890 373.71700,22.784822 374.80852,21.469621 C 376.75570,19.123413 377.88109,19.451610 381.52313,23.427797 C 383.91916,26.043643 384.87099,28.109353 385.09414,31.177793 C 385.38053,35.115703 385.69192,35.501403 390.39787,37.746973 C 394.81955,39.856893 395.15222,40.223293 393.27629,40.917243 C 392.10971,41.348793 390.80738,42.975253 390.38223,44.531603 C 387.86046,53.763143 388.03121,56.857843 391.29871,61.141753 C 393.14817,63.566523 393.85477,65.423403 393.43332,66.751293 C 393.08682,67.843013 393.23357,69.551884 393.75943,70.548784 C 394.28529,71.545684 395.24158,78.882284 395.88453,86.852324 C 396.52747,94.822374 397.43030,101.79738 397.89082,102.35233 C 398.35134,102.90729 399.02973,106.73634 399.39835,110.86134 C 399.76697,114.98634 400.74728,122.15267 401.57682,126.78651 C 403.69400,138.61322 402.78768,144.52032 397.41918,153.88467 C 393.91277,160.00095 392.97893,162.71281 392.42601,168.38467 C 392.05195,172.22184 391.05346,177.54576 390.20715,180.21561 C 389.18684,183.43434 388.88370,186.69293 389.30742,189.88709 C 389.84855,193.96631 389.53606,195.43936 387.26769,199.50240 C 384.70259,204.09694 384.64033,204.54929 385.80020,210.16484 C 387.60167,218.88669 393.48595,230.01493 403.10139,242.88454 C 407.81754,249.19678 412.57656,256.16134 413.67699,258.36134 C 419.16620,269.33549 421.53266,285.67229 419.22624,296.67053 C 417.70754,303.91251 418.52488,313.26092 421.26172,319.95160 C 423.22168,324.74305 424.37754,343.09753 422.89389,345.86975 C 422.25904,347.05598 421.15325,353.35814 420.43658,359.87455 C 419.27268,370.45745 419.32245,372.88647 420.90268,382.62255 C 421.87571,388.61753 423.47686,395.06126 424.46079,396.94193 C 426.21550,400.29583 428.43648,409.94835 429.50433,418.86134 C 429.80085,421.33634 429.38542,428.58646 428.58116,434.97271 C 427.45555,443.91067 427.35248,448.63062 428.13353,455.47271 C 429.61267,468.43013 429.50229,501.13635 427.95504,508.36134 C 426.33106,515.94467 425.34372,517.82761 416.41277,530.37363 C 412.39546,536.01707 405.86400,546.13652 401.89842,552.86130 C 397.93283,559.58608 393.24095,566.72463 391.47202,568.72475 C 384.65719,576.43025 374.65164,589.42477 372.92336,592.81449 C 371.46625,595.67232 371.13521,598.59534 371.21922,607.86134 C 371.30036,616.80981 370.96967,619.91602 369.72875,621.86134 C 368.85164,623.23634 367.36171,627.60673 366.41779,631.57332 C 364.78887,638.41851 364.79269,639.51649 366.49282,653.16194 L 368.28406,667.53858 L 366.00586,673.78676 C 364.06269,679.11608 363.90547,680.46423 364.93682,682.95413 C 365.60187,684.55969 365.89197,687.14346 365.58149,688.69586 C 365.18404,690.68307 365.54555,691.97098 366.80301,693.04765 C 368.34018,694.36381 368.53464,695.88563 368.19854,703.96912 C 367.73671,715.07673 367.72427,716.06944 367.92226,726.01244 C 368.10514,735.19662 367.04955,737.55476 362.36178,738.43419 C 357.99702,739.25302 355.54535,742.33317 357.03816,745.12250 C 357.83657,746.61435 358.75909,746.93920 360.95183,746.50065 C 364.64741,745.76154 365.80942,747.56447 362.45856,748.83846 C 359.54994,749.94432 359.46131,750.18860 361.04722,752.72804 C 362.45265,754.97850 360.32440,760.59135 357.75663,761.40633 C 356.85290,761.69317 355.56049,763.26288 354.88462,764.89459 C 353.44625,768.36710 352.37808,768.62616 350.89839,765.86134 C 349.62872,763.48894 347.62130,763.28536 345.90380,765.35482 C 344.90670,766.55625 344.99621,767.54770 346.36149,770.42481 C 348.77598,775.51299 347.94140,776.98811 343.36331,775.72404 C 340.43278,774.91489 339.37394,775.02599 337.97822,776.28909 C 335.43857,778.58744 332.98246,778.21265 331.89839,775.36134 C 330.65930,772.10228 327.89839,772.05528 327.89839,775.29325 C 327.89839,776.90464 326.80186,778.49100 324.64839,779.99507 C 320.51272,782.88356 319.93246,783.75139 319.91370,787.07616 C 319.89812,789.83966 323.00989,792.52850 324.88354,791.37052 C 325.40264,791.04970 327.28141,788.76248 329.05858,786.28780 C 331.98544,782.21223 332.57751,781.84886 335.34410,782.43028 C 337.02396,782.78331 339.52339,784.11556 340.89839,785.39084 C 343.02773,787.36575 343.99528,787.59850 347.42420,786.96070 C 354.28788,785.68402 355.97987,787.69084 351.39839,791.67439 C 350.02339,792.86994 348.89839,794.47794 348.89839,795.24774 C 348.89839,796.01753 348.22339,796.90638 347.39839,797.22297 C 346.42621,797.59603 345.89839,799.14677 345.89839,801.62996 C 345.89839,806.02485 344.50064,807.86134 341.15569,807.86134 C 338.16041,807.86134 328.85944,814.70930 325.21554,819.59748 C 321.71886,824.28817 321.10779,824.72886 318.90055,824.15165 C 316.24517,823.45726 315.67277,825.34718 317.92197,827.38268 C 320.28245,829.51888 320.39444,831.38659 318.39223,835.22565 C 316.44329,838.96257 316.50293,839.52466 318.91537,840.15553 C 320.64676,840.60830 320.87792,841.33626 320.54798,845.29688 C 320.33586,847.84322 319.36525,850.79297 318.38201,851.87944 C 317.40212,852.96220 316.55495,855.08456 316.49940,856.59579 C 316.42270,858.68210 315.79662,859.46886 313.89839,859.86433 C 312.52339,860.15079 309.76000,861.91800 307.75752,863.79148 C 305.75504,865.66495 302.15504,867.93431 299.75752,868.83451 C 296.39185,870.09821 295.47535,870.91451 295.73610,872.41628 C 296.54735,877.08876 295.92834,882.88600 294.36309,885.27487 C 291.55451,889.56131 294.64501,888.39109 300.32818,883.01618 C 306.40214,877.27168 309.03914,875.71226 310.81904,876.81230 C 312.53115,877.87044 310.68988,883.83508 307.86074,886.39541 C 306.78145,887.37216 305.89839,888.70683 305.89839,889.36134 C 305.89839,890.01585 304.94601,891.40861 303.78199,892.45635 C 300.37806,895.52027 295.63136,902.93191 294.95495,906.23917 C 294.45090,908.70372 293.66127,909.45009 290.86436,910.10566 C 287.14210,910.97811 278.49460,911.56304 276.95126,911.04675 z " />
+</svg>
+  </div>
+  <div class="mt-4 text-2xl text-center md:text-3xl text-base-content/60 mb-2 block md:hidden font-handwritten">
+    Matematica in l'Isula di a Bellezza
+  </div>
+</div>
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="h2_">
+                <h2 id="quadrillage-sur-une-surface-plane"
+    class="fragment text-xl sm:text-2xl md:text-3xl font-semibold"
+    data-f_type="h2_">🔲 Quadrillage sur une surface plane</h2>
+              </div>
+          
+        
+            
+            
+              
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                  
+                
+                  
+                    
+                  
+                
+                  
+                
+                
+                
+                  
+                  
+                  <div class="piece_ pm-cols use-var pm-cols-sm-2 gap-3 cols-60-40 mt-6" style="--pm-cols: 60% 40%">
+                
+                
+                
+              
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper pm-self-center" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">On a représenté la Corse sur la <em>Carte 1</em>. Cette carte est en $2$ dimensions (sur une surface plane).<br/><br/>On superpose un quadrillage assez particulier sur la carte, il s'agit du type de quadrillage qui sont (entre autres) sur les globes terrestres.<br/><br/>
+<strong>C'est grâce à ce quadrillage que tu vas pouvoir calculer la surface de la Corse.</strong></p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper mx-auto" data-f_type="svg_">
+                <div class="fragment svg" data-f_type="svg_">
+  
+    <?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="911.725312pt" height="1143.904687pt" viewBox="0 0 911.725312 1143.904687" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 1143.904687 
+L 911.725312 1143.904687 
+L 911.725312 0 
+L 0 0 
+z
+" style="fill: var(--color-base-100)"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 209.484095 1102.477187 
+L 702.241217 1102.477187 
+L 702.241217 41.597187 
+L 209.484095 41.597187 
+z
+" style="fill: var(--color-base-100)"/>
+   </g>
+   <g id="PatchCollection_1">
+    <path d="M 558.853948 1088.164429 
+L 556.3725 1089.91912 
+L 551.805804 1085.756468 
+L 553.835055 1082.706736 
+L 560.076305 1085.487996 
+z
+" style="fill: var(--color-primary-content); stroke: var(--color-primary); stroke-width: 2"/>
+    <path d="M 619.91286 778.141913 
+L 619.811221 786.215152 
+L 621.77537 800.9586 
+L 616.127238 815.66512 
+L 618.479457 821.190037 
+L 617.993243 828.526554 
+L 622.262661 835.323163 
+L 621.308872 843.522997 
+L 621.749406 853.176561 
+L 619.480503 867.142235 
+L 620.500032 870.984638 
+L 618.772147 882.312975 
+L 610.057403 885.325295 
+L 605.969121 891.083847 
+L 607.568141 896.23924 
+L 613.036602 904.565625 
+L 611.903719 907.321245 
+L 602.299469 917.864642 
+L 597.798448 915.019524 
+L 594.47773 917.579955 
+L 593.915687 921.730013 
+L 597.374324 923.858749 
+L 593.897915 929.587926 
+L 589.425292 927.057302 
+L 584.988363 930.310991 
+L 576.163291 922.694144 
+L 575.13161 929.611981 
+L 570.936267 933.718364 
+L 566.906798 934.888043 
+L 564.205094 942.832158 
+L 565.982511 947.204009 
+L 570.321042 951.053521 
+L 576.230731 944.366129 
+L 578.417028 939.870542 
+L 582.34202 937.544218 
+L 588.660972 939.308471 
+L 594.229702 944.103557 
+L 604.235516 942.52977 
+L 597.167481 954.434101 
+L 594.744301 956.035019 
+L 595.673561 961.812869 
+L 591.35983 966.173831 
+L 583.493624 967.433006 
+L 573.411402 974.991674 
+L 566.542362 984.391177 
+L 559.803926 984.413804 
+L 560.08592 989.232819 
+L 564.849266 990.531237 
+L 561.773992 999.526015 
+L 557.860727 1002.351727 
+L 561.133079 1005.609048 
+L 566.586527 1006.617468 
+L 564.888115 1017.454346 
+L 561.757179 1018.844571 
+L 561.963813 1025.376491 
+L 556.457902 1024.723482 
+L 545.786196 1036.835666 
+L 536.950982 1039.483366 
+L 536.633718 1043.541416 
+L 539.250546 1050.275012 
+L 538.888689 1060.441729 
+L 546.38721 1052.86253 
+L 556.095133 1048.403014 
+L 553.333733 1057.763798 
+L 549.406291 1060.130909 
+L 542.631734 1070.206422 
+L 541.216915 1074.601164 
+L 535.80373 1081.025375 
+L 534.96189 1086.122081 
+L 525.250704 1087.582655 
+L 516.67309 1087.235764 
+L 513.882272 1079.141467 
+L 510.56673 1075.208475 
+L 500.03822 1074.209666 
+L 488.987838 1068.395609 
+L 476.415296 1070.030567 
+L 475.174034 1065.028211 
+L 477.202548 1058.356341 
+L 483.43236 1053.641758 
+L 481.303702 1050.148929 
+L 488.906182 1042.542846 
+L 488.223101 1040.56137 
+L 479.025374 1039.307988 
+L 476.295906 1034.943259 
+L 471.000307 1039.806709 
+L 467.330613 1039.212251 
+L 463.662919 1034.124361 
+L 465.524786 1024.130048 
+L 465.45728 1018.647908 
+L 456.407618 1028.712928 
+L 450.557291 1028.710832 
+L 441.143298 1023.622747 
+L 438.750755 1018.365072 
+L 433.765979 1018.583253 
+L 429.427979 1012.541542 
+L 423.853153 1016.350574 
+L 413.89438 1008.313414 
+L 404.098094 1009.859107 
+L 401.02055 1006.274044 
+L 396.007438 1004.94228 
+L 393.092226 998.845892 
+L 386.316725 997.862552 
+L 379.073472 1000.186957 
+L 377.874439 997.570668 
+L 380.76995 992.647375 
+L 375.907466 988.431297 
+L 370.119638 990.733189 
+L 360.677017 992.095976 
+L 358.969869 988.448843 
+L 363.86384 982.504189 
+L 363.521433 977.715167 
+L 359.098431 974.141236 
+L 350.369032 974.390347 
+L 346.634126 969.524018 
+L 334.372061 967.119334 
+L 332.95707 963.400289 
+L 340.620709 957.833097 
+L 331.698992 949.572394 
+L 329.095263 945.125097 
+L 332.216515 942.842221 
+L 335.494306 935.243588 
+L 336.485312 922.024277 
+L 340.857935 919.721924 
+L 349.839304 921.687876 
+L 352.043448 918.007333 
+L 364.865233 911.059239 
+L 372.041646 911.640804 
+L 375.653414 907.645143 
+L 377.351074 897.824377 
+L 382.924858 894.053713 
+L 389.961519 892.228065 
+L 393.362549 889.543857 
+L 392.980973 884.24377 
+L 379.557644 883.536576 
+L 376.129927 880.319696 
+L 358.912266 879.328568 
+L 353.800588 873.858725 
+L 345.620689 868.91902 
+L 336.80668 872.835133 
+L 327.131874 870.307215 
+L 332.516067 857.90879 
+L 330.412368 853.042951 
+L 326.890856 851.722398 
+L 321.134565 853.692062 
+L 310.231593 859.315218 
+L 305.03818 860.495217 
+L 301.203064 863.491033 
+L 294.592254 861.46209 
+L 296.721074 855.070174 
+L 292.082445 851.846673 
+L 284.811415 852.726341 
+L 280.047384 850.359287 
+L 273.903414 851.541941 
+L 274.454778 846.732934 
+L 278.423536 844.57851 
+L 285.977877 848.278312 
+L 295.232788 841.441567 
+L 299.296212 839.593623 
+L 307.179815 830.125755 
+L 305.821172 823.10796 
+L 302.287145 821.974545 
+L 303.067893 816.376392 
+L 312.229191 815.824793 
+L 315.633015 808.20464 
+L 319.954627 809.380994 
+L 326.351788 807.943626 
+L 327.979779 799.277999 
+L 331.362199 793.838439 
+L 326.125084 792.106778 
+L 324.722782 786.160607 
+L 332.308945 784.75461 
+L 335.340735 780.139202 
+L 335.181908 773.297684 
+L 330.965199 764.348658 
+L 341.164138 757.622426 
+L 337.68803 746.643703 
+L 333.107766 739.48563 
+L 326.976856 735.021326 
+L 321.51335 736.851429 
+L 318.727139 731.762424 
+L 314.169025 731.386616 
+L 311.767119 734.436363 
+L 312.28624 741.191846 
+L 307.621347 742.226827 
+L 303.15168 746.398567 
+L 294.709485 747.419632 
+L 287.065837 746.814249 
+L 279.43707 749.033005 
+L 276.576566 747.57358 
+L 265.941032 746.001067 
+L 253.603606 750.73699 
+L 251.451446 744.015891 
+L 256.839718 734.737644 
+L 256.322598 727.382033 
+L 250.843554 726.996704 
+L 249.30498 720.152729 
+L 245.586194 718.782029 
+L 244.741615 710.708082 
+L 253.560745 707.421635 
+L 264.810928 709.845099 
+L 268.088725 709.431023 
+L 278.701929 700.452791 
+L 278.507018 694.687825 
+L 273.439155 693.541327 
+L 272.907927 683.552016 
+L 278.298163 678.458806 
+L 288.680292 672.094441 
+L 294.117278 672.693415 
+L 304.973525 667.847536 
+L 303.734177 662.709171 
+L 312.409729 663.731321 
+L 315.042012 657.892651 
+L 311.400928 650.051547 
+L 302.419149 649.541484 
+L 302.642348 645.817054 
+L 300.051619 638.221843 
+L 295.385261 634.202361 
+L 297.953876 629.253026 
+L 293.29722 622.834959 
+L 293.174778 618.77128 
+L 288.135744 617.145144 
+L 284.215036 622.864457 
+L 279.809968 622.167254 
+L 274.805326 624.376648 
+L 268.527126 613.361091 
+L 264.091768 614.218108 
+L 258.582633 612.394961 
+L 251.28754 604.938953 
+L 244.74234 607.630168 
+L 238.522674 608.217735 
+L 239.66991 604.109158 
+L 243.844985 599.513722 
+L 241.885552 595.767001 
+L 236.175847 591.119087 
+L 242.084774 586.516386 
+L 241.300609 581.784271 
+L 231.870202 583.29376 
+L 230.576991 578.072766 
+L 238.690901 577.309798 
+L 236.521903 571.027845 
+L 237.996008 560.109883 
+L 232.547699 558.814761 
+L 235.174465 553.558114 
+L 231.366213 551.54695 
+L 234.346637 547.614588 
+L 232.857748 544.813535 
+L 222.552053 545.689416 
+L 218.789092 541.868721 
+L 223.042166 538.737886 
+L 226.237613 541.210503 
+L 234.149094 539.511219 
+L 236.543381 536.052668 
+L 241.689227 535.895467 
+L 254.43398 529.017261 
+L 259.097919 531.342673 
+L 266.123285 528.408167 
+L 277.171248 526.592236 
+L 279.954898 524.872178 
+L 288.11239 523.950328 
+L 288.585906 514.733074 
+L 282.004975 511.337041 
+L 281.064136 504.604893 
+L 274.83718 499.718954 
+L 269.291483 499.333415 
+L 265.235427 501.415841 
+L 258.527172 493.34987 
+L 251.47476 495.778163 
+L 245.462148 490.968251 
+L 248.810228 486.825864 
+L 256.684667 483.775553 
+L 259.681309 480.77042 
+L 258.959464 475.781264 
+L 255.16236 475.492566 
+L 246.769679 467.770428 
+L 242.722427 467.913381 
+L 238.076777 471.243745 
+L 234.49017 476.929567 
+L 230.317825 480.193541 
+L 224.932832 480.308875 
+L 227.489671 473.556673 
+L 224.228442 471.301773 
+L 226.131732 460.392475 
+L 220.232453 458.969224 
+L 222.439193 451.222034 
+L 226.916315 456.621005 
+L 231.159204 456.66091 
+L 236.563219 453.616296 
+L 234.284713 449.934758 
+L 239.736368 447.473226 
+L 244.900723 449.310735 
+L 250.771102 446.810932 
+L 247.720362 438.225694 
+L 252.090248 436.250731 
+L 248.537339 432.285647 
+L 250.572339 427.696216 
+L 257.560776 425.061681 
+L 264.985251 426.630359 
+L 269.038727 430.021356 
+L 272.352138 428.379215 
+L 275.604227 421.750082 
+L 274.762362 416.104666 
+L 269.099284 411.628969 
+L 277.977315 410.076047 
+L 278.360321 401.832279 
+L 283.797131 395.489959 
+L 281.453254 390.385647 
+L 269.563294 391.599556 
+L 269.886463 389.131723 
+L 276.688384 379.867501 
+L 277.599487 365.909402 
+L 281.476625 363.775412 
+L 285.626349 365.133866 
+L 291.712631 359.404541 
+L 298.042135 360.585002 
+L 301.842383 357.73324 
+L 297.953763 353.037534 
+L 301.998989 349.85309 
+L 300.919142 344.533118 
+L 303.798542 339.817248 
+L 300.195059 335.265324 
+L 298.294666 327.367499 
+L 304.495535 322.665816 
+L 304.273629 328.994825 
+L 305.763429 336.786867 
+L 310.912944 332.894805 
+L 315.645234 332.652993 
+L 321.301822 338.692482 
+L 325.117271 340.424326 
+L 334.032773 338.942673 
+L 341.613575 331.605954 
+L 339.780301 323.730046 
+L 344.861221 319.155165 
+L 343.86195 313.26866 
+L 350.656111 308.793111 
+L 355.673473 311.58343 
+L 363.406429 306.032558 
+L 369.93278 307.655027 
+L 374.61944 304.411881 
+L 374.178554 301.262915 
+L 379.962984 294.490293 
+L 387.355224 295.638493 
+L 391.422266 294.534959 
+L 394.668646 289.505085 
+L 402.171056 288.333217 
+L 405.670787 291.26916 
+L 413.85462 290.650196 
+L 421.206181 287.534625 
+L 433.050735 286.362627 
+L 437.584557 287.340964 
+L 442.3842 284.879161 
+L 445.557269 279.993027 
+L 454.159526 278.116383 
+L 460.355294 274.963395 
+L 461.520498 271.806085 
+L 457.788782 262.471977 
+L 460.249797 253.272582 
+L 466.116161 254.026136 
+L 469.837139 249.355007 
+L 472.658146 240.714729 
+L 479.225497 240.31463 
+L 482.062104 234.756925 
+L 487.659135 233.221693 
+L 490.704086 230.026597 
+L 496.05625 230.908025 
+L 510.399797 226.929421 
+L 520.295517 232.723186 
+L 527.595269 233.364523 
+L 534.007094 228.39956 
+L 537.229689 229.794962 
+L 541.627115 237.386415 
+L 551.138046 238.262161 
+L 553.407231 249.452671 
+L 557.417421 250.216264 
+L 562.494254 256.422996 
+L 565.08571 264.746491 
+L 569.224534 266.017826 
+L 573.800629 259.895225 
+L 578.927078 256.799901 
+L 582.845009 251.078707 
+L 582.237688 241.47391 
+L 590.744266 231.683355 
+L 593.024738 226.146546 
+L 590.560286 213.514498 
+L 590.782939 202.159958 
+L 592.133575 190.36131 
+L 589.906025 184.535902 
+L 584.022996 178.725885 
+L 581.889246 172.399284 
+L 577.456144 165.322243 
+L 587.302155 150.382355 
+L 591.013057 145.978745 
+L 586.220382 141.640067 
+L 584.552876 130.38808 
+L 582.670708 124.537827 
+L 597.370593 114.113367 
+L 598.403618 107.35159 
+L 595.079261 105.903495 
+L 599.59659 95.210511 
+L 594.730919 91.783342 
+L 593.620261 87.947194 
+L 595.847239 81.440176 
+L 591.937975 74.987642 
+L 592.973589 70.600977 
+L 591.347323 64.992425 
+L 599.800333 57.29389 
+L 606.230115 58.525697 
+L 609.522844 56.372164 
+L 620.93888 57.860056 
+L 625.216249 57.415459 
+L 628.978966 54.155255 
+L 633.203071 59.806507 
+L 636.774417 61.208768 
+L 642.707278 67.597916 
+L 648.426713 70.05563 
+L 644.025 78.420655 
+L 642.991753 83.895473 
+L 645.670926 93.504003 
+L 651.107946 101.611406 
+L 650.341446 107.474734 
+L 651.792242 112.671573 
+L 653.223589 129.860869 
+L 654.926052 135.959281 
+L 652.850558 140.551777 
+L 657.153211 146.751379 
+L 658.066207 155.583545 
+L 656.421876 161.494088 
+L 658.780143 166.736313 
+L 661.838376 183.895024 
+L 661.228924 190.255799 
+L 652.390934 205.599487 
+L 650.081153 211.673925 
+L 650.753973 216.578479 
+L 647.418552 224.357489 
+L 647.92108 227.516882 
+L 645.000939 238.560795 
+L 643.234048 253.971814 
+L 640.437877 258.599944 
+L 640.345679 266.47876 
+L 641.743826 273.597621 
+L 647.79337 287.489986 
+L 653.693904 297.083496 
+L 672.925359 323.344599 
+L 677.327955 332.137982 
+L 680.82552 346.618516 
+L 681.428505 360.40977 
+L 679.35063 373.402194 
+L 679.910527 385.253988 
+L 684.206493 399.914678 
+L 684.379533 412.634587 
+L 685.570796 420.369498 
+L 683.354548 429.455844 
+L 680.582168 450.837039 
+L 680.9067 459.43156 
+L 682.708508 472.661992 
+L 685.155082 482.962782 
+L 688.856533 492.751491 
+L 692.751533 510.301584 
+L 692.936221 518.797327 
+L 690.138719 537.823091 
+L 689.974404 550.491785 
+L 692.104683 561.851312 
+L 690.694856 590.832227 
+L 691.715184 600.168312 
+L 688.634211 624.01404 
+L 679.964032 634.48531 
+L 666.744838 654.498722 
+L 648.998061 682.542076 
+L 638.18636 695.85669 
+L 630.141053 707.292888 
+L 624.703931 719.260916 
+L 624.463992 727.266061 
+L 625.834168 736.445089 
+L 624.089137 745.303303 
+L 619.816299 753.996635 
+L 617.469302 768.150965 
+z
+" style="fill: var(--color-primary-content); stroke: var(--color-primary); stroke-width: 2"/>
+   </g>
+   <!-- Grid lines -->
+   <g id="grid_lines">
+    <!-- Vertical lines -->
+    <path d="M 209.484095 1102.477187 L 209.484095 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 266.051969 1102.477187 L 266.051969 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 322.619842 1102.477187 L 322.619842 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 379.187716 1102.477187 L 379.187716 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 435.755589 1102.477187 L 435.755589 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 492.323463 1102.477187 L 492.323463 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 548.891336 1102.477187 L 548.891336 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 605.45921 1102.477187 L 605.45921 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 662.027083 1102.477187 L 662.027083 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 718.594957 1102.477187 L 718.594957 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <!-- Horizontal lines -->
+    <path d="M 209.484095 1102.477187 L 718.594957 1102.477187" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 1045.909314 L 718.594957 1045.909314" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 989.341441 L 718.594957 989.341441" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 932.773567 L 718.594957 932.773567" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 876.205694 L 718.594957 876.205694" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 819.63782 L 718.594957 819.63782" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 763.069947 L 718.594957 763.069947" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 706.502073 L 718.594957 706.502073" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 649.9342 L 718.594957 649.9342" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 593.366326 L 718.594957 593.366326" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 536.798453 L 718.594957 536.798453" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 480.230579 L 718.594957 480.230579" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 423.662706 L 718.594957 423.662706" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 367.094832 L 718.594957 367.094832" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 310.526959 L 718.594957 310.526959" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 253.959085 L 718.594957 253.959085" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 197.391212 L 718.594957 197.391212" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 140.823338 L 718.594957 140.823338" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 84.255465 L 718.594957 84.255465" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 27.687591 L 718.594957 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+   </g>
+  </g>
+ </g>
+</svg>
+
+    
+      <div class="mt-0 text-xs sm:text-sm text-center italic">Carte 1</div>
+    
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+                
+                
+                </div>
+                
+              
+            
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="h2_">
+                <h2 id="unites"
+    class="fragment text-xl sm:text-2xl md:text-3xl font-semibold"
+    data-f_type="h2_">📏 Unités</h2>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper statement" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">Sur cette carte, les lignes horizontales de ce quadrillage sont des lignes de même :</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper i-radio" data-f_type="radio_">
+                <div class="fragment" data-f_type="radio_">
+  
+  
+  
+  
+  <div class="flex flex-wrap gap-2 items-end mb-3 justify-end">
+    
+      
+        
+        
+        
+        
+        
+          
+          
+        
+        <button class="btn btn-primary btn-outline hover:btn-primary min-w-[50px] px-3 text-base font-normal"
+                data-radio-group="10"
+                data-flag="20"
+                data-feedback="Sur une représentation plane, la latitude se lit verticalement, et correspond donc à une ligne horizontale.">
+          Latitude
+        </button>
+      
+    
+      
+        
+        
+        
+        
+        
+          
+          
+        
+        <button class="btn btn-primary btn-outline hover:btn-primary min-w-[50px] px-3 text-base font-normal"
+                data-radio-group="10"
+                data-flag="21"
+                data-feedback="Sur une représentation plane, la longitude se lit horizontalement, et correspond donc à une ligne verticale.">
+          Longitude
+        </button>
+      
+    
+  </div>
+
+  <div id="radio-feedback-10"
+       class="opacity-0 scale-95 -translate-y-2 pointer-events-none">
+    <div class="alert">
+      <span id="radio-feedback-text-10"></span>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+
+  
+    
+  
+    
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper statement" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">Tandis que les lignes verticales sont des lignes de même :</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper i-radio" data-f_type="radio_">
+                <div class="fragment" data-f_type="radio_">
+  
+  
+  
+  
+  <div class="flex flex-wrap gap-2 items-end mb-3 justify-end">
+    
+      
+        
+        
+        
+        
+        
+          
+          
+        
+        <button class="btn btn-primary btn-outline hover:btn-primary min-w-[50px] px-3 text-base font-normal"
+                data-radio-group="12"
+                data-flag="21"
+                data-feedback="Sur une représentation plane, la latitude se lit verticalement, et correspond donc à une ligne horizontale.">
+          Latitude
+        </button>
+      
+    
+      
+        
+        
+        
+        
+        
+          
+          
+        
+        <button class="btn btn-primary btn-outline hover:btn-primary min-w-[50px] px-3 text-base font-normal"
+                data-radio-group="12"
+                data-flag="20"
+                data-feedback="Sur une représentation plane, la longitude se lit horizontalement, et correspond donc à une ligne verticale.">
+          Longitude
+        </button>
+      
+    
+      
+    
+  </div>
+
+  <div id="radio-feedback-12"
+       class="opacity-0 scale-95 -translate-y-2 pointer-events-none">
+    <div class="alert">
+      <span id="radio-feedback-text-12"></span>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+      <div id="radio-explanation-12" class="mb-3 pm-open">
+        <div class="alert alert-primary alert-outline">
+          
+            Un petit moyen mnémotechnique : les voyelles sont croisées : la l<strong>A</strong>titude est une <strong>O</strong>rdonnée, tandis que la l<strong>O</strong>ngitude est une <strong>A</strong>bscisse.
+          
+        </div>
+      </div>
+    
+  
+
+  
+    
+  
+    
+  
+    
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper statement" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">Pour exprimer des latitudes et longitudes, on utilise des unités de mesure spécifiques :</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper i-radio" data-f_type="radio_">
+                <div class="fragment" data-f_type="radio_">
+  
+  
+  
+  
+  <div class="flex flex-wrap gap-2 items-end mb-3 justify-end">
+    
+      
+        
+        
+        
+        
+        
+          
+          
+        
+        <button class="btn btn-primary btn-outline hover:btn-primary min-w-[50px] px-3 text-base font-normal"
+                data-radio-group="14"
+                data-flag="20"
+                data-feedback="Exemple : ($41°55&#39;0.02&#34;$ $N$ ; $8°43&#39;59.99&#34;$ $E$) pour 41 degrés, 55 minutes et 0.02 secondes Nord, et 8 degrés, 43 minutes et 59.99 secondes Est.">
+          Degrés, minutes et secondes
+        </button>
+      
+    
+      
+        
+        
+        
+        
+        
+          
+          
+        
+        <button class="btn btn-primary btn-outline hover:btn-primary min-w-[50px] px-3 text-base font-normal"
+                data-radio-group="14"
+                data-flag="21"
+                data-feedback="Non, car ces coordonnées ne sont pas appropriées aux géométriques sphériques, or la Terre est une sphère.">
+          Kilomètres
+        </button>
+      
+    
+  </div>
+
+  <div id="radio-feedback-14"
+       class="opacity-0 scale-95 -translate-y-2 pointer-events-none">
+    <div class="alert">
+      <span id="radio-feedback-text-14"></span>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+
+  
+    
+  
+    
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="h2_">
+                <h2 id="coordonnees-dajaccio-et-bastia"
+    class="fragment text-xl sm:text-2xl md:text-3xl font-semibold"
+    data-f_type="h2_">📍 Coordonnées d'Ajaccio et Bastia</h2>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper max-w-[500px] mx-auto" data-f_type="svg_">
+                <div class="fragment svg" data-f_type="svg_">
+  
+    <?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="911.725312pt" height="1180pt" viewBox="0 0 911.725312 1180" xmlns="http://www.w3.org/2000/svg" version="1.1" class="corsica-grid">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt} .corsica-axis-label{font-size:28px;font-weight:700}</style>
+  <!-- Arrow marker using base-content color -->
+  <marker id="arrow-base" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M 0 0 L 6 3 L 0 6 z" style="fill: var(--color-base-content);"/>
+  </marker>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 1143.904687 
+L 911.725312 1143.904687 
+L 911.725312 0 
+L 0 0 
+z
+" style="fill: var(--color-base-100)"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 209.484095 1102.477187 
+L 702.241217 1102.477187 
+L 702.241217 41.597187 
+L 209.484095 41.597187 
+z
+" style="fill: var(--color-base-100)"/>
+   </g>
+   <g id="PatchCollection_1">
+    <path d="M 558.853948 1088.164429 
+L 556.3725 1089.91912 
+L 551.805804 1085.756468 
+L 553.835055 1082.706736 
+L 560.076305 1085.487996 
+z
+" style="fill: var(--color-primary-content); stroke: var(--color-primary); stroke-width: 2"/>
+    <path d="M 619.91286 778.141913 
+L 619.811221 786.215152 
+L 621.77537 800.9586 
+L 616.127238 815.66512 
+L 618.479457 821.190037 
+L 617.993243 828.526554 
+L 622.262661 835.323163 
+L 621.308872 843.522997 
+L 621.749406 853.176561 
+L 619.480503 867.142235 
+L 620.500032 870.984638 
+L 618.772147 882.312975 
+L 610.057403 885.325295 
+L 605.969121 891.083847 
+L 607.568141 896.23924 
+L 613.036602 904.565625 
+L 611.903719 907.321245 
+L 602.299469 917.864642 
+L 597.798448 915.019524 
+L 594.47773 917.579955 
+L 593.915687 921.730013 
+L 597.374324 923.858749 
+L 593.897915 929.587926 
+L 589.425292 927.057302 
+L 584.988363 930.310991 
+L 576.163291 922.694144 
+L 575.13161 929.611981 
+L 570.936267 933.718364 
+L 566.906798 934.888043 
+L 564.205094 942.832158 
+L 565.982511 947.204009 
+L 570.321042 951.053521 
+L 576.230731 944.366129 
+L 578.417028 939.870542 
+L 582.34202 937.544218 
+L 588.660972 939.308471 
+L 594.229702 944.103557 
+L 604.235516 942.52977 
+L 597.167481 954.434101 
+L 594.744301 956.035019 
+L 595.673561 961.812869 
+L 591.35983 966.173831 
+L 583.493624 967.433006 
+L 573.411402 974.991674 
+L 566.542362 984.391177 
+L 559.803926 984.413804 
+L 560.08592 989.232819 
+L 564.849266 990.531237 
+L 561.773992 999.526015 
+L 557.860727 1002.351727 
+L 561.133079 1005.609048 
+L 566.586527 1006.617468 
+L 564.888115 1017.454346 
+L 561.757179 1018.844571 
+L 561.963813 1025.376491 
+L 556.457902 1024.723482 
+L 545.786196 1036.835666 
+L 536.950982 1039.483366 
+L 536.633718 1043.541416 
+L 539.250546 1050.275012 
+L 538.888689 1060.441729 
+L 546.38721 1052.86253 
+L 556.095133 1048.403014 
+L 553.333733 1057.763798 
+L 549.406291 1060.130909 
+L 542.631734 1070.206422 
+L 541.216915 1074.601164 
+L 535.80373 1081.025375 
+L 534.96189 1086.122081 
+L 525.250704 1087.582655 
+L 516.67309 1087.235764 
+L 513.882272 1079.141467 
+L 510.56673 1075.208475 
+L 500.03822 1074.209666 
+L 488.987838 1068.395609 
+L 476.415296 1070.030567 
+L 475.174034 1065.028211 
+L 477.202548 1058.356341 
+L 483.43236 1053.641758 
+L 481.303702 1050.148929 
+L 488.906182 1042.542846 
+L 488.223101 1040.56137 
+L 479.025374 1039.307988 
+L 476.295906 1034.943259 
+L 471.000307 1039.806709 
+L 467.330613 1039.212251 
+L 463.662919 1034.124361 
+L 465.524786 1024.130048 
+L 465.45728 1018.647908 
+L 456.407618 1028.712928 
+L 450.557291 1028.710832 
+L 441.143298 1023.622747 
+L 438.750755 1018.365072 
+L 433.765979 1018.583253 
+L 429.427979 1012.541542 
+L 423.853153 1016.350574 
+L 413.89438 1008.313414 
+L 404.098094 1009.859107 
+L 401.02055 1006.274044 
+L 396.007438 1004.94228 
+L 393.092226 998.845892 
+L 386.316725 997.862552 
+L 379.073472 1000.186957 
+L 377.874439 997.570668 
+L 380.76995 992.647375 
+L 375.907466 988.431297 
+L 370.119638 990.733189 
+L 360.677017 992.095976 
+L 358.969869 988.448843 
+L 363.86384 982.504189 
+L 363.521433 977.715167 
+L 359.098431 974.141236 
+L 350.369032 974.390347 
+L 346.634126 969.524018 
+L 334.372061 967.119334 
+L 332.95707 963.400289 
+L 340.620709 957.833097 
+L 331.698992 949.572394 
+L 329.095263 945.125097 
+L 332.216515 942.842221 
+L 335.494306 935.243588 
+L 336.485312 922.024277 
+L 340.857935 919.721924 
+L 349.839304 921.687876 
+L 352.043448 918.007333 
+L 364.865233 911.059239 
+L 372.041646 911.640804 
+L 375.653414 907.645143 
+L 377.351074 897.824377 
+L 382.924858 894.053713 
+L 389.961519 892.228065 
+L 393.362549 889.543857 
+L 392.980973 884.24377 
+L 379.557644 883.536576 
+L 376.129927 880.319696 
+L 358.912266 879.328568 
+L 353.800588 873.858725 
+L 345.620689 868.91902 
+L 336.80668 872.835133 
+L 327.131874 870.307215 
+L 332.516067 857.90879 
+L 330.412368 853.042951 
+L 326.890856 851.722398 
+L 321.134565 853.692062 
+L 310.231593 859.315218 
+L 305.03818 860.495217 
+L 301.203064 863.491033 
+L 294.592254 861.46209 
+L 296.721074 855.070174 
+L 292.082445 851.846673 
+L 284.811415 852.726341 
+L 280.047384 850.359287 
+L 273.903414 851.541941 
+L 274.454778 846.732934 
+L 278.423536 844.57851 
+L 285.977877 848.278312 
+L 295.232788 841.441567 
+L 299.296212 839.593623 
+L 307.179815 830.125755 
+L 305.821172 823.10796 
+L 302.287145 821.974545 
+L 303.067893 816.376392 
+L 312.229191 815.824793 
+L 315.633015 808.20464 
+L 319.954627 809.380994 
+L 326.351788 807.943626 
+L 327.979779 799.277999 
+L 331.362199 793.838439 
+L 326.125084 792.106778 
+L 324.722782 786.160607 
+L 332.308945 784.75461 
+L 335.340735 780.139202 
+L 335.181908 773.297684 
+L 330.965199 764.348658 
+L 341.164138 757.622426 
+L 337.68803 746.643703 
+L 333.107766 739.48563 
+L 326.976856 735.021326 
+L 321.51335 736.851429 
+L 318.727139 731.762424 
+L 314.169025 731.386616 
+L 311.767119 734.436363 
+L 312.28624 741.191846 
+L 307.621347 742.226827 
+L 303.15168 746.398567 
+L 294.709485 747.419632 
+L 287.065837 746.814249 
+L 279.43707 749.033005 
+L 276.576566 747.57358 
+L 265.941032 746.001067 
+L 253.603606 750.73699 
+L 251.451446 744.015891 
+L 256.839718 734.737644 
+L 256.322598 727.382033 
+L 250.843554 726.996704 
+L 249.30498 720.152729 
+L 245.586194 718.782029 
+L 244.741615 710.708082 
+L 253.560745 707.421635 
+L 264.810928 709.845099 
+L 268.088725 709.431023 
+L 278.701929 700.452791 
+L 278.507018 694.687825 
+L 273.439155 693.541327 
+L 272.907927 683.552016 
+L 278.298163 678.458806 
+L 288.680292 672.094441 
+L 294.117278 672.693415 
+L 304.973525 667.847536 
+L 303.734177 662.709171 
+L 312.409729 663.731321 
+L 315.042012 657.892651 
+L 311.400928 650.051547 
+L 302.419149 649.541484 
+L 302.642348 645.817054 
+L 300.051619 638.221843 
+L 295.385261 634.202361 
+L 297.953876 629.253026 
+L 293.29722 622.834959 
+L 293.174778 618.77128 
+L 288.135744 617.145144 
+L 284.215036 622.864457 
+L 279.809968 622.167254 
+L 274.805326 624.376648 
+L 268.527126 613.361091 
+L 264.091768 614.218108 
+L 258.582633 612.394961 
+L 251.28754 604.938953 
+L 244.74234 607.630168 
+L 238.522674 608.217735 
+L 239.66991 604.109158 
+L 243.844985 599.513722 
+L 241.885552 595.767001 
+L 236.175847 591.119087 
+L 242.084774 586.516386 
+L 241.300609 581.784271 
+L 231.870202 583.29376 
+L 230.576991 578.072766 
+L 238.690901 577.309798 
+L 236.521903 571.027845 
+L 237.996008 560.109883 
+L 232.547699 558.814761 
+L 235.174465 553.558114 
+L 231.366213 551.54695 
+L 234.346637 547.614588 
+L 232.857748 544.813535 
+L 222.552053 545.689416 
+L 218.789092 541.868721 
+L 223.042166 538.737886 
+L 226.237613 541.210503 
+L 234.149094 539.511219 
+L 236.543381 536.052668 
+L 241.689227 535.895467 
+L 254.43398 529.017261 
+L 259.097919 531.342673 
+L 266.123285 528.408167 
+L 277.171248 526.592236 
+L 279.954898 524.872178 
+L 288.11239 523.950328 
+L 288.585906 514.733074 
+L 282.004975 511.337041 
+L 281.064136 504.604893 
+L 274.83718 499.718954 
+L 269.291483 499.333415 
+L 265.235427 501.415841 
+L 258.527172 493.34987 
+L 251.47476 495.778163 
+L 245.462148 490.968251 
+L 248.810228 486.825864 
+L 256.684667 483.775553 
+L 259.681309 480.77042 
+L 258.959464 475.781264 
+L 255.16236 475.492566 
+L 246.769679 467.770428 
+L 242.722427 467.913381 
+L 238.076777 471.243745 
+L 234.49017 476.929567 
+L 230.317825 480.193541 
+L 224.932832 480.308875 
+L 227.489671 473.556673 
+L 224.228442 471.301773 
+L 226.131732 460.392475 
+L 220.232453 458.969224 
+L 222.439193 451.222034 
+L 226.916315 456.621005 
+L 231.159204 456.66091 
+L 236.563219 453.616296 
+L 234.284713 449.934758 
+L 239.736368 447.473226 
+L 244.900723 449.310735 
+L 250.771102 446.810932 
+L 247.720362 438.225694 
+L 252.090248 436.250731 
+L 248.537339 432.285647 
+L 250.572339 427.696216 
+L 257.560776 425.061681 
+L 264.985251 426.630359 
+L 269.038727 430.021356 
+L 272.352138 428.379215 
+L 275.604227 421.750082 
+L 274.762362 416.104666 
+L 269.099284 411.628969 
+L 277.977315 410.076047 
+L 278.360321 401.832279 
+L 283.797131 395.489959 
+L 281.453254 390.385647 
+L 269.563294 391.599556 
+L 269.886463 389.131723 
+L 276.688384 379.867501 
+L 277.599487 365.909402 
+L 281.476625 363.775412 
+L 285.626349 365.133866 
+L 291.712631 359.404541 
+L 298.042135 360.585002 
+L 301.842383 357.73324 
+L 297.953763 353.037534 
+L 301.998989 349.85309 
+L 300.919142 344.533118 
+L 303.798542 339.817248 
+L 300.195059 335.265324 
+L 298.294666 327.367499 
+L 304.495535 322.665816 
+L 304.273629 328.994825 
+L 305.763429 336.786867 
+L 310.912944 332.894805 
+L 315.645234 332.652993 
+L 321.301822 338.692482 
+L 325.117271 340.424326 
+L 334.032773 338.942673 
+L 341.613575 331.605954 
+L 339.780301 323.730046 
+L 344.861221 319.155165 
+L 343.86195 313.26866 
+L 350.656111 308.793111 
+L 355.673473 311.58343 
+L 363.406429 306.032558 
+L 369.93278 307.655027 
+L 374.61944 304.411881 
+L 374.178554 301.262915 
+L 379.962984 294.490293 
+L 387.355224 295.638493 
+L 391.422266 294.534959 
+L 394.668646 289.505085 
+L 402.171056 288.333217 
+L 405.670787 291.26916 
+L 413.85462 290.650196 
+L 421.206181 287.534625 
+L 433.050735 286.362627 
+L 437.584557 287.340964 
+L 442.3842 284.879161 
+L 445.557269 279.993027 
+L 454.159526 278.116383 
+L 460.355294 274.963395 
+L 461.520498 271.806085 
+L 457.788782 262.471977 
+L 460.249797 253.272582 
+L 466.116161 254.026136 
+L 469.837139 249.355007 
+L 472.658146 240.714729 
+L 479.225497 240.31463 
+L 482.062104 234.756925 
+L 487.659135 233.221693 
+L 490.704086 230.026597 
+L 496.05625 230.908025 
+L 510.399797 226.929421 
+L 520.295517 232.723186 
+L 527.595269 233.364523 
+L 534.007094 228.39956 
+L 537.229689 229.794962 
+L 541.627115 237.386415 
+L 551.138046 238.262161 
+L 553.407231 249.452671 
+L 557.417421 250.216264 
+L 562.494254 256.422996 
+L 565.08571 264.746491 
+L 569.224534 266.017826 
+L 573.800629 259.895225 
+L 578.927078 256.799901 
+L 582.845009 251.078707 
+L 582.237688 241.47391 
+L 590.744266 231.683355 
+L 593.024738 226.146546 
+L 590.560286 213.514498 
+L 590.782939 202.159958 
+L 592.133575 190.36131 
+L 589.906025 184.535902 
+L 584.022996 178.725885 
+L 581.889246 172.399284 
+L 577.456144 165.322243 
+L 587.302155 150.382355 
+L 591.013057 145.978745 
+L 586.220382 141.640067 
+L 584.552876 130.38808 
+L 582.670708 124.537827 
+L 597.370593 114.113367 
+L 598.403618 107.35159 
+L 595.079261 105.903495 
+L 599.59659 95.210511 
+L 594.730919 91.783342 
+L 593.620261 87.947194 
+L 595.847239 81.440176 
+L 591.937975 74.987642 
+L 592.973589 70.600977 
+L 591.347323 64.992425 
+L 599.800333 57.29389 
+L 606.230115 58.525697 
+L 609.522844 56.372164 
+L 620.93888 57.860056 
+L 625.216249 57.415459 
+L 628.978966 54.155255 
+L 633.203071 59.806507 
+L 636.774417 61.208768 
+L 642.707278 67.597916 
+L 648.426713 70.05563 
+L 644.025 78.420655 
+L 642.991753 83.895473 
+L 645.670926 93.504003 
+L 651.107946 101.611406 
+L 650.341446 107.474734 
+L 651.792242 112.671573 
+L 653.223589 129.860869 
+L 654.926052 135.959281 
+L 652.850558 140.551777 
+L 657.153211 146.751379 
+L 658.066207 155.583545 
+L 656.421876 161.494088 
+L 658.780143 166.736313 
+L 661.838376 183.895024 
+L 661.228924 190.255799 
+L 652.390934 205.599487 
+L 650.081153 211.673925 
+L 650.753973 216.578479 
+L 647.418552 224.357489 
+L 647.92108 227.516882 
+L 645.000939 238.560795 
+L 643.234048 253.971814 
+L 640.437877 258.599944 
+L 640.345679 266.47876 
+L 641.743826 273.597621 
+L 647.79337 287.489986 
+L 653.693904 297.083496 
+L 672.925359 323.344599 
+L 677.327955 332.137982 
+L 680.82552 346.618516 
+L 681.428505 360.40977 
+L 679.35063 373.402194 
+L 679.910527 385.253988 
+L 684.206493 399.914678 
+L 684.379533 412.634587 
+L 685.570796 420.369498 
+L 683.354548 429.455844 
+L 680.582168 450.837039 
+L 680.9067 459.43156 
+L 682.708508 472.661992 
+L 685.155082 482.962782 
+L 688.856533 492.751491 
+L 692.751533 510.301584 
+L 692.936221 518.797327 
+L 690.138719 537.823091 
+L 689.974404 550.491785 
+L 692.104683 561.851312 
+L 690.694856 590.832227 
+L 691.715184 600.168312 
+L 688.634211 624.01404 
+L 679.964032 634.48531 
+L 666.744838 654.498722 
+L 648.998061 682.542076 
+L 638.18636 695.85669 
+L 630.141053 707.292888 
+L 624.703931 719.260916 
+L 624.463992 727.266061 
+L 625.834168 736.445089 
+L 624.089137 745.303303 
+L 619.816299 753.996635 
+ L 617.469302 768.150965 
+z
+" style="fill: var(--color-primary-content); stroke: var(--color-primary); stroke-width: 2"/>
+   </g>
+   <!-- Grid lines -->
+   <g id="grid_lines">
+    <!-- Vertical lines -->
+    <path d="M 209.484095 1102.477187 L 209.484095 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 266.051969 1102.477187 L 266.051969 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 322.619842 1102.477187 L 322.619842 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 379.187716 1102.477187 L 379.187716 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 435.755589 1102.477187 L 435.755589 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 492.323463 1102.477187 L 492.323463 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 548.891336 1102.477187 L 548.891336 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 605.45921 1102.477187 L 605.45921 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 662.027083 1102.477187 L 662.027083 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 718.594957 1102.477187 L 718.594957 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <!-- Horizontal lines -->
+    <path d="M 209.484095 1102.477187 L 718.594957 1102.477187" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 1045.909314 L 718.594957 1045.909314" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 989.341441 L 718.594957 989.341441" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 932.773567 L 718.594957 932.773567" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 876.205694 L 718.594957 876.205694" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 819.63782 L 718.594957 819.63782" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 763.069947 L 718.594957 763.069947" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 706.502073 L 718.594957 706.502073" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 649.9342 L 718.594957 649.9342" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 593.366326 L 718.594957 593.366326" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 536.798453 L 718.594957 536.798453" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 480.230579 L 718.594957 480.230579" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 423.662706 L 718.594957 423.662706" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 367.094832 L 718.594957 367.094832" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 310.526959 L 718.594957 310.526959" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 253.959085 L 718.594957 253.959085" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 197.391212 L 718.594957 197.391212" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 140.823338 L 718.594957 140.823338" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 84.255465 L 718.594957 84.255465" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 27.687591 L 718.594957 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+   </g>
+   <!-- Axis labels -->
+   <g id="axis_labels" class="corsica-axis-labels-group">
+    <!-- X-axis label (Longitude) -->
+    <text x="456" y="1155" text-anchor="middle" class="corsica-grid-text corsica-axis-label">Longitude (°)</text>
+    
+    <!-- Y-axis label (Latitude) - rotated -->
+    <text x="120" y="565" text-anchor="middle" transform="rotate(-90, 120, 565)" class="corsica-grid-text corsica-axis-label">Latitude (°)</text>
+   </g>
+
+   <!-- Mini compass axes near top-left (2 squares length) -->
+   <g id="compass_axes" class="color-base-content">
+    <!-- Aligned to grid: center at vertical x=322.619842 and horizontal y=140.823338; length 2 squares -->
+    <!-- Vertical (Y) axis with arrow pointing North -->
+    <line x1="322.619842" y1="197.391212" x2="322.619842" y2="84.255465" style="stroke: var(--color-base-content); stroke-width: 2" marker-end="url(#arrow-base)"/>
+    <!-- Horizontal (X) axis with arrow pointing East crossing mid of Y axis -->
+    <line x1="266.051969" y1="140.823338" x2="379.187716" y2="140.823338" style="stroke: var(--color-base-content); stroke-width: 2" marker-end="url(#arrow-base)"/>
+    <!-- Labels -->
+    <text x="322.619842" y="70" text-anchor="middle" class="corsica-grid-text">N</text>
+    <text x="388" y="148" text-anchor="start" class="corsica-grid-text">E</text>
+   </g>
+
+   <!-- City markers (no names) -->
+   <g id="city_markers">
+    <!-- Bastia: lat 42.700001, lon 9.45 -->
+    <circle cx="642.27494" cy="249.92735" r="14" style="fill: var(--color-secondary); stroke: var(--color-base-100); stroke-width: 2"/>
+    <!-- Ajaccio: lat 41.916672, lon 8.73333 -->
+    <circle cx="308.760731" cy="741.699494" r="14" style="fill: var(--color-accent); stroke: var(--color-base-100); stroke-width: 2"/>
+   </g>
+  </g>
+ </g>
+</svg>
+
+
+
+    
+      <div class="mt-0 text-xs sm:text-sm text-center italic">Carte 2 : Corse, ports d&#39;Ajaccio et Bastia</div>
+    
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="p_">
+                <p class="fragment" data-f_type="p_">Sur la <em>Carte 2</em>, on a représenté les positions des ports d'Ajaccio et Bastia avec deux points deux couleurs différentes. Sachant que les coordonnées des ports de ces deux villes sont :</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="table_">
+                <div class="fragment overflow-x-auto" data-f_type="table_">
+  
+    <table class="fragment-table table">
+      
+        <thead>
+          <tr>
+            <th>Port</th><th>Latitude</th><th>Longitude</th>
+          </tr>
+        </thead>
+      
+      <tbody>
+        
+          <tr>
+            <td>Ajaccio</td><td>$41°55'17"$ $N$</td><td>$8°44'22"$ $E$</td>
+          </tr>
+        
+          <tr>
+            <td>Bastia</td><td>$42°42'20"$ $N$</td><td>$9°27'15"$ $E$</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper statement" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">La couleur du bouton représente la couleur du point sur la carte. Parmi les 4 propositions ci-dessous, deux sont correctes, deux sont fausses. Clique sur une proposition correcte.</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper i-radio" data-f_type="radio_">
+                <div class="fragment" data-f_type="radio_">
+  
+  
+  
+  
+  <div class="flex flex-wrap gap-2 items-end mb-3 justify-end">
+    
+      
+        
+        
+        
+        
+        
+          
+          
+        
+        <button class="btn min-w-[50px] px-3 text-base font-normal btn-secondary btn-outline"
+                data-radio-group="20"
+                data-flag="21"
+                data-feedback="">
+          <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> Ajaccio
+        </button>
+      
+    
+      
+        
+        
+        
+        
+        
+          
+          
+        
+        <button class="btn min-w-[50px] px-3 text-base font-normal btn-secondary btn-outline"
+                data-radio-group="20"
+                data-flag="20"
+                data-feedback="">
+          <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> Bastia
+        </button>
+      
+    
+      
+        
+        
+        
+        
+        
+          
+          
+        
+        <button class="btn min-w-[50px] px-3 text-base font-normal btn-accent btn-outline"
+                data-radio-group="20"
+                data-flag="20"
+                data-feedback="">
+          <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> Ajaccio
+        </button>
+      
+    
+      
+        
+        
+        
+        
+        
+          
+          
+        
+        <button class="btn min-w-[50px] px-3 text-base font-normal btn-accent btn-outline"
+                data-radio-group="20"
+                data-flag="21"
+                data-feedback="">
+          <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> Bastia
+        </button>
+      
+    
+      
+    
+  </div>
+
+  <div id="radio-feedback-20"
+       class="opacity-0 scale-95 -translate-y-2 pointer-events-none">
+    <div class="alert">
+      <span id="radio-feedback-text-20"></span>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <div id="radio-explanation-20" class="mb-3 pm-open">
+        <div class="alert alert-primary alert-outline">
+          
+            Ajaccio a la plus petite longitude et est donc plus à l'ouest que Bastia. Sa longitude est également plus petite que celle de Bastia, donc Ajaccio est plus au Sud. Donc le point <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> correspond à Ajaccio et le point <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> correspond à Bastia.
+          
+        </div>
+      </div>
+    
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="h2_">
+                <h2 id="representations-des-distances"
+    class="fragment text-xl sm:text-2xl md:text-3xl font-semibold"
+    data-f_type="h2_">📏 Représentations des distances</h2>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper alert alert-info alert-soft" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">Les conversions entre des données de latitude et longitude exprimées en degrés, minutes et secondes vers des distances en kilomètres sont assez complexes et dépassent largement le niveau troisième.</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper alert alert-success alert-soft" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">Nous nous sommes donc assurés de choisir un quadrillage qui tombe <em>"quasi-juste"</em> : chaque carré fait $10$ $km$ de côté.</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper mx-auto" data-f_type="svg_">
+                <div class="fragment svg" data-f_type="svg_">
+  
+    <?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="911.725312pt" height="1180pt" viewBox="0 0 911.725312 1180" xmlns="http://www.w3.org/2000/svg" version="1.1" class="corsica-grid">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt} .corsica-axis-label{font-size:28px;font-weight:700}</style>
+  <!-- Arrow marker using base-content color -->
+  <marker id="arrow-base" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M 0 0 L 6 3 L 0 6 z" style="fill: var(--color-base-content);"/>
+  </marker>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 1143.904687 
+L 911.725312 1143.904687 
+L 911.725312 0 
+L 0 0 
+z
+" style="fill: var(--color-base-100)"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 209.484095 1102.477187 
+L 702.241217 1102.477187 
+L 702.241217 41.597187 
+L 209.484095 41.597187 
+z
+" style="fill: var(--color-base-100)"/>
+   </g>
+   <g id="PatchCollection_1">
+    <path d="M 558.853948 1088.164429 
+L 556.3725 1089.91912 
+L 551.805804 1085.756468 
+L 553.835055 1082.706736 
+L 560.076305 1085.487996 
+z
+" style="fill: var(--color-primary-content); stroke: var(--color-primary); stroke-width: 2"/>
+    <path d="M 619.91286 778.141913 
+L 619.811221 786.215152 
+L 621.77537 800.9586 
+L 616.127238 815.66512 
+L 618.479457 821.190037 
+L 617.993243 828.526554 
+L 622.262661 835.323163 
+L 621.308872 843.522997 
+L 621.749406 853.176561 
+L 619.480503 867.142235 
+L 620.500032 870.984638 
+L 618.772147 882.312975 
+L 610.057403 885.325295 
+L 605.969121 891.083847 
+L 607.568141 896.23924 
+L 613.036602 904.565625 
+L 611.903719 907.321245 
+L 602.299469 917.864642 
+L 597.798448 915.019524 
+L 594.47773 917.579955 
+L 593.915687 921.730013 
+L 597.374324 923.858749 
+L 593.897915 929.587926 
+L 589.425292 927.057302 
+L 584.988363 930.310991 
+L 576.163291 922.694144 
+L 575.13161 929.611981 
+L 570.936267 933.718364 
+L 566.906798 934.888043 
+L 564.205094 942.832158 
+L 565.982511 947.204009 
+L 570.321042 951.053521 
+L 576.230731 944.366129 
+L 578.417028 939.870542 
+L 582.34202 937.544218 
+L 588.660972 939.308471 
+L 594.229702 944.103557 
+L 604.235516 942.52977 
+L 597.167481 954.434101 
+L 594.744301 956.035019 
+L 595.673561 961.812869 
+L 591.35983 966.173831 
+L 583.493624 967.433006 
+L 573.411402 974.991674 
+L 566.542362 984.391177 
+L 559.803926 984.413804 
+L 560.08592 989.232819 
+L 564.849266 990.531237 
+L 561.773992 999.526015 
+L 557.860727 1002.351727 
+L 561.133079 1005.609048 
+L 566.586527 1006.617468 
+L 564.888115 1017.454346 
+L 561.757179 1018.844571 
+L 561.963813 1025.376491 
+L 556.457902 1024.723482 
+L 545.786196 1036.835666 
+L 536.950982 1039.483366 
+L 536.633718 1043.541416 
+L 539.250546 1050.275012 
+L 538.888689 1060.441729 
+L 546.38721 1052.86253 
+L 556.095133 1048.403014 
+L 553.333733 1057.763798 
+L 549.406291 1060.130909 
+L 542.631734 1070.206422 
+L 541.216915 1074.601164 
+L 535.80373 1081.025375 
+L 534.96189 1086.122081 
+L 525.250704 1087.582655 
+L 516.67309 1087.235764 
+L 513.882272 1079.141467 
+L 510.56673 1075.208475 
+L 500.03822 1074.209666 
+L 488.987838 1068.395609 
+L 476.415296 1070.030567 
+L 475.174034 1065.028211 
+L 477.202548 1058.356341 
+L 483.43236 1053.641758 
+L 481.303702 1050.148929 
+L 488.906182 1042.542846 
+L 488.223101 1040.56137 
+L 479.025374 1039.307988 
+L 476.295906 1034.943259 
+L 471.000307 1039.806709 
+L 467.330613 1039.212251 
+L 463.662919 1034.124361 
+L 465.524786 1024.130048 
+L 465.45728 1018.647908 
+L 456.407618 1028.712928 
+L 450.557291 1028.710832 
+L 441.143298 1023.622747 
+L 438.750755 1018.365072 
+L 433.765979 1018.583253 
+L 429.427979 1012.541542 
+L 423.853153 1016.350574 
+L 413.89438 1008.313414 
+L 404.098094 1009.859107 
+L 401.02055 1006.274044 
+L 396.007438 1004.94228 
+L 393.092226 998.845892 
+L 386.316725 997.862552 
+L 379.073472 1000.186957 
+L 377.874439 997.570668 
+L 380.76995 992.647375 
+L 375.907466 988.431297 
+L 370.119638 990.733189 
+L 360.677017 992.095976 
+L 358.969869 988.448843 
+L 363.86384 982.504189 
+L 363.521433 977.715167 
+L 359.098431 974.141236 
+L 350.369032 974.390347 
+L 346.634126 969.524018 
+L 334.372061 967.119334 
+L 332.95707 963.400289 
+L 340.620709 957.833097 
+L 331.698992 949.572394 
+L 329.095263 945.125097 
+L 332.216515 942.842221 
+L 335.494306 935.243588 
+L 336.485312 922.024277 
+L 340.857935 919.721924 
+L 349.839304 921.687876 
+L 352.043448 918.007333 
+L 364.865233 911.059239 
+L 372.041646 911.640804 
+L 375.653414 907.645143 
+L 377.351074 897.824377 
+L 382.924858 894.053713 
+L 389.961519 892.228065 
+L 393.362549 889.543857 
+L 392.980973 884.24377 
+L 379.557644 883.536576 
+L 376.129927 880.319696 
+L 358.912266 879.328568 
+L 353.800588 873.858725 
+L 345.620689 868.91902 
+L 336.80668 872.835133 
+L 327.131874 870.307215 
+L 332.516067 857.90879 
+L 330.412368 853.042951 
+L 326.890856 851.722398 
+L 321.134565 853.692062 
+L 310.231593 859.315218 
+L 305.03818 860.495217 
+L 301.203064 863.491033 
+L 294.592254 861.46209 
+L 296.721074 855.070174 
+L 292.082445 851.846673 
+L 284.811415 852.726341 
+L 280.047384 850.359287 
+L 273.903414 851.541941 
+L 274.454778 846.732934 
+L 278.423536 844.57851 
+L 285.977877 848.278312 
+L 295.232788 841.441567 
+L 299.296212 839.593623 
+L 307.179815 830.125755 
+L 305.821172 823.10796 
+L 302.287145 821.974545 
+L 303.067893 816.376392 
+L 312.229191 815.824793 
+L 315.633015 808.20464 
+L 319.954627 809.380994 
+L 326.351788 807.943626 
+L 327.979779 799.277999 
+L 331.362199 793.838439 
+L 326.125084 792.106778 
+L 324.722782 786.160607 
+L 332.308945 784.75461 
+L 335.340735 780.139202 
+L 335.181908 773.297684 
+L 330.965199 764.348658 
+L 341.164138 757.622426 
+L 337.68803 746.643703 
+L 333.107766 739.48563 
+L 326.976856 735.021326 
+L 321.51335 736.851429 
+L 318.727139 731.762424 
+L 314.169025 731.386616 
+L 311.767119 734.436363 
+L 312.28624 741.191846 
+L 307.621347 742.226827 
+L 303.15168 746.398567 
+L 294.709485 747.419632 
+L 287.065837 746.814249 
+L 279.43707 749.033005 
+L 276.576566 747.57358 
+L 265.941032 746.001067 
+L 253.603606 750.73699 
+L 251.451446 744.015891 
+L 256.839718 734.737644 
+L 256.322598 727.382033 
+L 250.843554 726.996704 
+L 249.30498 720.152729 
+L 245.586194 718.782029 
+L 244.741615 710.708082 
+L 253.560745 707.421635 
+L 264.810928 709.845099 
+L 268.088725 709.431023 
+L 278.701929 700.452791 
+L 278.507018 694.687825 
+L 273.439155 693.541327 
+L 272.907927 683.552016 
+L 278.298163 678.458806 
+L 288.680292 672.094441 
+L 294.117278 672.693415 
+L 304.973525 667.847536 
+L 303.734177 662.709171 
+L 312.409729 663.731321 
+L 315.042012 657.892651 
+L 311.400928 650.051547 
+L 302.419149 649.541484 
+L 302.642348 645.817054 
+L 300.051619 638.221843 
+L 295.385261 634.202361 
+L 297.953876 629.253026 
+L 293.29722 622.834959 
+L 293.174778 618.77128 
+L 288.135744 617.145144 
+L 284.215036 622.864457 
+L 279.809968 622.167254 
+L 274.805326 624.376648 
+L 268.527126 613.361091 
+L 264.091768 614.218108 
+L 258.582633 612.394961 
+L 251.28754 604.938953 
+L 244.74234 607.630168 
+L 238.522674 608.217735 
+L 239.66991 604.109158 
+L 243.844985 599.513722 
+L 241.885552 595.767001 
+L 236.175847 591.119087 
+L 242.084774 586.516386 
+L 241.300609 581.784271 
+L 231.870202 583.29376 
+L 230.576991 578.072766 
+L 238.690901 577.309798 
+L 236.521903 571.027845 
+L 237.996008 560.109883 
+L 232.547699 558.814761 
+L 235.174465 553.558114 
+L 231.366213 551.54695 
+L 234.346637 547.614588 
+L 232.857748 544.813535 
+L 222.552053 545.689416 
+L 218.789092 541.868721 
+L 223.042166 538.737886 
+L 226.237613 541.210503 
+L 234.149094 539.511219 
+L 236.543381 536.052668 
+L 241.689227 535.895467 
+L 254.43398 529.017261 
+L 259.097919 531.342673 
+L 266.123285 528.408167 
+L 277.171248 526.592236 
+L 279.954898 524.872178 
+L 288.11239 523.950328 
+L 288.585906 514.733074 
+L 282.004975 511.337041 
+L 281.064136 504.604893 
+L 274.83718 499.718954 
+L 269.291483 499.333415 
+L 265.235427 501.415841 
+L 258.527172 493.34987 
+L 251.47476 495.778163 
+L 245.462148 490.968251 
+L 248.810228 486.825864 
+L 256.684667 483.775553 
+L 259.681309 480.77042 
+L 258.959464 475.781264 
+L 255.16236 475.492566 
+L 246.769679 467.770428 
+L 242.722427 467.913381 
+L 238.076777 471.243745 
+L 234.49017 476.929567 
+L 230.317825 480.193541 
+L 224.932832 480.308875 
+L 227.489671 473.556673 
+L 224.228442 471.301773 
+L 226.131732 460.392475 
+L 220.232453 458.969224 
+L 222.439193 451.222034 
+L 226.916315 456.621005 
+L 231.159204 456.66091 
+L 236.563219 453.616296 
+L 234.284713 449.934758 
+L 239.736368 447.473226 
+L 244.900723 449.310735 
+L 250.771102 446.810932 
+L 247.720362 438.225694 
+L 252.090248 436.250731 
+L 248.537339 432.285647 
+L 250.572339 427.696216 
+L 257.560776 425.061681 
+L 264.985251 426.630359 
+L 269.038727 430.021356 
+L 272.352138 428.379215 
+L 275.604227 421.750082 
+L 274.762362 416.104666 
+L 269.099284 411.628969 
+L 277.977315 410.076047 
+L 278.360321 401.832279 
+L 283.797131 395.489959 
+L 281.453254 390.385647 
+L 269.563294 391.599556 
+L 269.886463 389.131723 
+L 276.688384 379.867501 
+L 277.599487 365.909402 
+L 281.476625 363.775412 
+L 285.626349 365.133866 
+L 291.712631 359.404541 
+L 298.042135 360.585002 
+L 301.842383 357.73324 
+L 297.953763 353.037534 
+L 301.998989 349.85309 
+L 300.919142 344.533118 
+L 303.798542 339.817248 
+L 300.195059 335.265324 
+L 298.294666 327.367499 
+L 304.495535 322.665816 
+L 304.273629 328.994825 
+L 305.763429 336.786867 
+L 310.912944 332.894805 
+L 315.645234 332.652993 
+L 321.301822 338.692482 
+L 325.117271 340.424326 
+L 334.032773 338.942673 
+L 341.613575 331.605954 
+L 339.780301 323.730046 
+L 344.861221 319.155165 
+L 343.86195 313.26866 
+L 350.656111 308.793111 
+L 355.673473 311.58343 
+L 363.406429 306.032558 
+L 369.93278 307.655027 
+L 374.61944 304.411881 
+L 374.178554 301.262915 
+L 379.962984 294.490293 
+L 387.355224 295.638493 
+L 391.422266 294.534959 
+L 394.668646 289.505085 
+L 402.171056 288.333217 
+L 405.670787 291.26916 
+L 413.85462 290.650196 
+L 421.206181 287.534625 
+L 433.050735 286.362627 
+L 437.584557 287.340964 
+L 442.3842 284.879161 
+L 445.557269 279.993027 
+L 454.159526 278.116383 
+L 460.355294 274.963395 
+L 461.520498 271.806085 
+L 457.788782 262.471977 
+L 460.249797 253.272582 
+L 466.116161 254.026136 
+L 469.837139 249.355007 
+L 472.658146 240.714729 
+L 479.225497 240.31463 
+L 482.062104 234.756925 
+L 487.659135 233.221693 
+L 490.704086 230.026597 
+L 496.05625 230.908025 
+L 510.399797 226.929421 
+L 520.295517 232.723186 
+L 527.595269 233.364523 
+L 534.007094 228.39956 
+L 537.229689 229.794962 
+L 541.627115 237.386415 
+L 551.138046 238.262161 
+L 553.407231 249.452671 
+L 557.417421 250.216264 
+L 562.494254 256.422996 
+L 565.08571 264.746491 
+L 569.224534 266.017826 
+L 573.800629 259.895225 
+L 578.927078 256.799901 
+L 582.845009 251.078707 
+L 582.237688 241.47391 
+L 590.744266 231.683355 
+L 593.024738 226.146546 
+L 590.560286 213.514498 
+L 590.782939 202.159958 
+L 592.133575 190.36131 
+L 589.906025 184.535902 
+L 584.022996 178.725885 
+L 581.889246 172.399284 
+L 577.456144 165.322243 
+L 587.302155 150.382355 
+L 591.013057 145.978745 
+L 586.220382 141.640067 
+L 584.552876 130.38808 
+L 582.670708 124.537827 
+L 597.370593 114.113367 
+L 598.403618 107.35159 
+L 595.079261 105.903495 
+L 599.59659 95.210511 
+L 594.730919 91.783342 
+L 593.620261 87.947194 
+L 595.847239 81.440176 
+L 591.937975 74.987642 
+L 592.973589 70.600977 
+L 591.347323 64.992425 
+L 599.800333 57.29389 
+L 606.230115 58.525697 
+L 609.522844 56.372164 
+L 620.93888 57.860056 
+L 625.216249 57.415459 
+L 628.978966 54.155255 
+L 633.203071 59.806507 
+L 636.774417 61.208768 
+L 642.707278 67.597916 
+L 648.426713 70.05563 
+L 644.025 78.420655 
+L 642.991753 83.895473 
+L 645.670926 93.504003 
+L 651.107946 101.611406 
+L 650.341446 107.474734 
+L 651.792242 112.671573 
+L 653.223589 129.860869 
+L 654.926052 135.959281 
+L 652.850558 140.551777 
+L 657.153211 146.751379 
+L 658.066207 155.583545 
+L 656.421876 161.494088 
+L 658.780143 166.736313 
+L 661.838376 183.895024 
+L 661.228924 190.255799 
+L 652.390934 205.599487 
+L 650.081153 211.673925 
+L 650.753973 216.578479 
+L 647.418552 224.357489 
+L 647.92108 227.516882 
+L 645.000939 238.560795 
+L 643.234048 253.971814 
+L 640.437877 258.599944 
+L 640.345679 266.47876 
+L 641.743826 273.597621 
+L 647.79337 287.489986 
+L 653.693904 297.083496 
+L 672.925359 323.344599 
+L 677.327955 332.137982 
+L 680.82552 346.618516 
+L 681.428505 360.40977 
+L 679.35063 373.402194 
+L 679.910527 385.253988 
+L 684.206493 399.914678 
+L 684.379533 412.634587 
+L 685.570796 420.369498 
+L 683.354548 429.455844 
+L 680.582168 450.837039 
+L 680.9067 459.43156 
+L 682.708508 472.661992 
+L 685.155082 482.962782 
+L 688.856533 492.751491 
+L 692.751533 510.301584 
+L 692.936221 518.797327 
+L 690.138719 537.823091 
+L 689.974404 550.491785 
+L 692.104683 561.851312 
+L 690.694856 590.832227 
+L 691.715184 600.168312 
+L 688.634211 624.01404 
+L 679.964032 634.48531 
+L 666.744838 654.498722 
+L 648.998061 682.542076 
+L 638.18636 695.85669 
+L 630.141053 707.292888 
+L 624.703931 719.260916 
+L 624.463992 727.266061 
+L 625.834168 736.445089 
+L 624.089137 745.303303 
+L 619.816299 753.996635 
+L 617.469302 768.150965 
+z
+" style="fill: var(--color-primary-content); stroke: var(--color-primary); stroke-width: 2"/>
+   </g>
+   <!-- Grid lines -->
+   <g id="grid_lines">
+    <!-- Vertical lines -->
+    <path d="M 209.484095 1102.477187 L 209.484095 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 266.051969 1102.477187 L 266.051969 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 322.619842 1102.477187 L 322.619842 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 379.187716 1102.477187 L 379.187716 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 435.755589 1102.477187 L 435.755589 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 492.323463 1102.477187 L 492.323463 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 548.891336 1102.477187 L 548.891336 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 605.45921 1102.477187 L 605.45921 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 662.027083 1102.477187 L 662.027083 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 718.594957 1102.477187 L 718.594957 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <!-- Horizontal lines -->
+    <path d="M 209.484095 1102.477187 L 718.594957 1102.477187" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 1045.909314 L 718.594957 1045.909314" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 989.341441 L 718.594957 989.341441" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 932.773567 L 718.594957 932.773567" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 876.205694 L 718.594957 876.205694" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 819.63782 L 718.594957 819.63782" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 763.069947 L 718.594957 763.069947" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 706.502073 L 718.594957 706.502073" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 649.9342 L 718.594957 649.9342" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 593.366326 L 718.594957 593.366326" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 536.798453 L 718.594957 536.798453" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 480.230579 L 718.594957 480.230579" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 423.662706 L 718.594957 423.662706" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 367.094832 L 718.594957 367.094832" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 310.526959 L 718.594957 310.526959" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 253.959085 L 718.594957 253.959085" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 197.391212 L 718.594957 197.391212" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 140.823338 L 718.594957 140.823338" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 84.255465 L 718.594957 84.255465" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 27.687591 L 718.594957 27.687591" style="fill: none; stroke: var(--color-primary); stroke-opacity: 0.3; stroke-dasharray: 3.7,1.6"/>
+   </g>
+
+   <!-- Center square (highlighted cell) -->
+   <g id="center_square" class="color-base-content">
+     <!-- Cell around the grid center: (x: 435.755589 to 492.323463, y: 536.798453 to 593.366326) -->
+     <!-- Fill the square -->
+     <rect x="435.755589" y="536.798453" width="56.567874" height="56.567873" style="fill: var(--color-base-300); stroke: none" />
+
+     <!-- Draw each side as a line, styled like compass axes (no arrowheads) -->
+     <!-- Top side (left → right) -->
+     <line x1="435.755589" y1="536.798453" x2="492.323463" y2="536.798453" style="stroke: var(--color-base-content); stroke-width: 2"/>
+     <!-- Right side (top → bottom) -->
+     <line x1="492.323463" y1="536.798453" x2="492.323463" y2="593.366326" style="stroke: var(--color-base-content); stroke-width: 2"/>
+     <!-- Bottom side (left → right) -->
+     <line x1="435.755589" y1="593.366326" x2="492.323463" y2="593.366326" style="stroke: var(--color-base-content); stroke-width: 2"/>
+     <!-- Left side (bottom → top) -->
+     <line x1="435.755589" y1="593.366326" x2="435.755589" y2="536.798453" style="stroke: var(--color-base-content); stroke-width: 2"/>
+
+     <!-- Labels using foreignObject (KaTeX_Main font via CSS) -->
+     <!-- Bottom label centered below the square -->
+     <foreignObject x="434.039526" y="603.366326" width="60" height="28">
+       <div xmlns="http://www.w3.org/1999/xhtml" style="width:60px;height:28px;display:flex;align-items:center;justify-content:center;color: var(--color-base-content); font-family: KaTeX_Main, 'Times New Roman', serif;  line-height: 1;">$10$ $km$</div>
+     </foreignObject>
+     <!-- Left label centered to the left of the square -->
+     <foreignObject x="365.755589" y="550.08239" width="60" height="28">
+       <div xmlns="http://www.w3.org/1999/xhtml" style="width:60px;height:28px;display:flex;align-items:center;justify-content:center;color: var(--color-base-content); font-family: KaTeX_Main, 'Times New Roman', serif;  line-height: 1;">$10$ $km$</div>
+     </foreignObject>
+   </g>
+
+   <!-- Axis labels -->
+   <g id="axis_labels" class="corsica-axis-labels-group">
+    <!-- X-axis label (Longitude) -->
+    <text x="456" y="1155" text-anchor="middle" class="corsica-grid-text corsica-axis-label">Longitude (°)</text>
+    
+    <!-- Y-axis label (Latitude) - rotated -->
+    <text x="120" y="565" text-anchor="middle" transform="rotate(-90, 120, 565)" class="corsica-grid-text corsica-axis-label">Latitude (°)</text>
+   </g>
+
+   <!-- Mini compass axes near top-left (2 squares length) -->
+   <g id="compass_axes" class="color-base-content">
+    <!-- Aligned to grid: center at vertical x=322.619842 and horizontal y=140.823338; length 2 squares -->
+    <!-- Vertical (Y) axis with arrow pointing North -->
+    <line x1="322.619842" y1="197.391212" x2="322.619842" y2="84.255465" style="stroke: var(--color-base-content); stroke-width: 2" marker-end="url(#arrow-base)"/>
+    <!-- Horizontal (X) axis with arrow pointing East crossing mid of Y axis -->
+    <line x1="266.051969" y1="140.823338" x2="379.187716" y2="140.823338" style="stroke: var(--color-base-content); stroke-width: 2" marker-end="url(#arrow-base)"/>
+    <!-- Labels -->
+    <text x="322.619842" y="70" text-anchor="middle" class="corsica-grid-text">N</text>
+    <text x="388" y="148" text-anchor="start" class="corsica-grid-text">E</text>
+   </g>
+
+   <!-- NOTE: City markers removed in this variant -->
+  </g>
+ </g>
+</svg>
+
+
+
+    
+      <div class="mt-0 text-xs sm:text-sm text-center italic">Carte 3 : Corse avec quadrillage $10$ $km$ par $10$ $km$</div>
+    
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper statement" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">💡 <em>Horitontalement, on compte 9 carrés, et verticalement 19 carrés.</em><br/>
+Quelle est la surface totale représentée sur cette carte ? Tu exprimeras ton résultat en $km^2$, arrondi à l'unité (c'est à dire, sans virgule).</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="number_">
+                
+
+<div class="fragment" data-f_type="number_">
+  <pm-number-input id="total_surface" data-payload='{"NumberInputPCA": "v0.0.1", "correct": 17100, "feedback_correct": "$19 \\times 9 \\ times 10$ $km$ $\\times 10$ $km$ = 17100", "feedback_incorrect": "R\u00e9ponse incorrecte.", "id": "total_surface", "max": 20000, "min": 0, "step": 100, "tolerance": 0, "type": "number", "unit": "$km^2$", "version": "v0.0.1"}' data-fragment-index="26"
+  
+  ></pm-number-input>
+  <script type="module">
+      import '/static/js/pm/components/pm-number-input.js';
+  </script>
+  
+  <div id="number-feedback-26" class="mb-3"></div>
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="h2_">
+                <h2 id="calcul-de-la-surface-de-lile"
+    class="fragment text-xl sm:text-2xl md:text-3xl font-semibold"
+    data-f_type="h2_">🧮 Calcul de la surface de l'île</h2>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper mx-auto" data-f_type="svg_">
+                <div class="fragment svg" data-f_type="svg_">
+  
+    <?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg id="svg-corsica-grid-cells-full-only" xmlns:xlink="http://www.w3.org/1999/xlink" width="911.725312pt" height="1180pt" viewBox="0 0 911.725312 1180" xmlns="http://www.w3.org/2000/svg" version="1.1" class="corsica-grid">
+ <defs>
+  <style type="text/css">
+    *{stroke-linejoin: round; stroke-linecap: butt}
+    .corsica-axis-label{font-size:28px;font-weight:700}
+    #coord_cells rect{stroke: none;}
+    #coord_cells rect.pm-none{fill: transparent;}
+    #coord_cells rect.pm-full{fill: var(--color-secondary, oklch(var(--color-secondary))); fill-opacity: 0.25;}
+    #coord_cells rect.pm-partial{fill: var(--color-accent, oklch(var(--color-accent))); fill-opacity: 0.75;}
+  </style>
+  <!-- Arrow marker using base-content color (used by compass) -->
+  <marker id="arrow-base" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M 0 0 L 6 3 L 0 6 z" style="fill: var(--color-base-content);"/>
+  </marker>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 1143.904687 
+L 911.725312 1143.904687 
+L 911.725312 0 
+L 0 0 
+z
+" style="fill: var(--color-base-100)"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 209.484095 1102.477187 
+L 702.241217 1102.477187 
+L 702.241217 41.597187 
+L 209.484095 41.597187 
+z
+" style="fill: var(--color-base-100)"/>
+   </g>
+   <g id="PatchCollection_1">
+    <!-- Island shape -->
+    <path d="M 558.853948 1088.164429 
+L 556.3725 1089.91912 
+L 551.805804 1085.756468 
+L 553.835055 1082.706736 
+L 560.076305 1085.487996 
+z
+" style="fill: var(--color-primary-content); stroke: var(--color-primary); stroke-width: 2; fill-opacity: 0.25;"/>
+    <path d="M 619.91286 778.141913 
+L 619.811221 786.215152 
+L 621.77537 800.9586 
+L 616.127238 815.66512 
+L 618.479457 821.190037 
+L 617.993243 828.526554 
+L 622.262661 835.323163 
+L 621.308872 843.522997 
+L 621.749406 853.176561 
+L 619.480503 867.142235 
+L 620.500032 870.984638 
+L 618.772147 882.312975 
+L 610.057403 885.325295 
+L 605.969121 891.083847 
+L 607.568141 896.23924 
+L 613.036602 904.565625 
+L 611.903719 907.321245 
+L 602.299469 917.864642 
+L 597.798448 915.019524 
+L 594.47773 917.579955 
+L 593.915687 921.730013 
+L 597.374324 923.858749 
+L 593.897915 929.587926 
+L 589.425292 927.057302 
+L 584.988363 930.310991 
+L 576.163291 922.694144 
+L 575.13161 929.611981 
+L 570.936267 933.718364 
+L 566.906798 934.888043 
+L 564.205094 942.832158 
+L 565.982511 947.204009 
+L 570.321042 951.053521 
+L 576.230731 944.366129 
+L 578.417028 939.870542 
+L 582.34202 937.544218 
+L 588.660972 939.308471 
+L 594.229702 944.103557 
+L 604.235516 942.52977 
+L 597.167481 954.434101 
+L 594.744301 956.035019 
+L 595.673561 961.812869 
+L 591.35983 966.173831 
+L 583.493624 967.433006 
+L 573.411402 974.991674 
+L 566.542362 984.391177 
+L 559.803926 984.413804 
+L 560.08592 989.232819 
+L 564.849266 990.531237 
+L 561.773992 999.526015 
+L 557.860727 1002.351727 
+L 561.133079 1005.609048 
+L 566.586527 1006.617468 
+L 564.888115 1017.454346 
+L 561.757179 1018.844571 
+L 561.963813 1025.376491 
+L 556.457902 1024.723482 
+L 545.786196 1036.835666 
+L 536.950982 1039.483366 
+L 536.633718 1043.541416 
+L 539.250546 1050.275012 
+L 538.888689 1060.441729 
+L 546.38721 1052.86253 
+L 556.095133 1048.403014 
+L 553.333733 1057.763798 
+L 549.406291 1060.130909 
+L 542.631734 1070.206422 
+L 541.216915 1074.601164 
+L 535.80373 1081.025375 
+L 534.96189 1086.122081 
+L 525.250704 1087.582655 
+L 516.67309 1087.235764 
+L 513.882272 1079.141467 
+L 510.56673 1075.208475 
+L 500.03822 1074.209666 
+L 488.987838 1068.395609 
+L 476.415296 1070.030567 
+L 475.174034 1065.028211 
+L 477.202548 1058.356341 
+L 483.43236 1053.641758 
+L 481.303702 1050.148929 
+L 488.906182 1042.542846 
+L 488.223101 1040.56137 
+L 479.025374 1039.307988 
+L 476.295906 1034.943259 
+L 471.000307 1039.806709 
+L 467.330613 1039.212251 
+L 463.662919 1034.124361 
+L 465.524786 1024.130048 
+L 465.45728 1018.647908 
+L 456.407618 1028.712928 
+L 450.557291 1028.710832 
+L 441.143298 1023.622747 
+L 438.750755 1018.365072 
+L 433.765979 1018.583253 
+L 429.427979 1012.541542 
+L 423.853153 1016.350574 
+L 413.89438 1008.313414 
+L 404.098094 1009.859107 
+L 401.02055 1006.274044 
+L 396.007438 1004.94228 
+L 393.092226 998.845892 
+L 386.316725 997.862552 
+L 379.073472 1000.186957 
+L 377.874439 997.570668 
+L 380.76995 992.647375 
+L 375.907466 988.431297 
+L 370.119638 990.733189 
+L 360.677017 992.095976 
+L 358.969869 988.448843 
+L 363.86384 982.504189 
+L 363.521433 977.715167 
+L 359.098431 974.141236 
+L 350.369032 974.390347 
+L 346.634126 969.524018 
+L 334.372061 967.119334 
+L 332.95707 963.400289 
+L 340.620709 957.833097 
+L 331.698992 949.572394 
+L 329.095263 945.125097 
+L 332.216515 942.842221 
+L 335.494306 935.243588 
+L 336.485312 922.024277 
+L 340.857935 919.721924 
+L 349.839304 921.687876 
+L 352.043448 918.007333 
+L 364.865233 911.059239 
+L 372.041646 911.640804 
+L 375.653414 907.645143 
+L 377.351074 897.824377 
+L 382.924858 894.053713 
+L 389.961519 892.228065 
+L 393.362549 889.543857 
+L 392.980973 884.24377 
+L 379.557644 883.536576 
+L 376.129927 880.319696 
+L 358.912266 879.328568 
+L 353.800588 873.858725 
+L 345.620689 868.91902 
+L 336.80668 872.835133 
+L 327.131874 870.307215 
+L 332.516067 857.90879 
+L 330.412368 853.042951 
+L 326.890856 851.722398 
+L 321.134565 853.692062 
+L 310.231593 859.315218 
+L 305.03818 860.495217 
+L 301.203064 863.491033 
+L 294.592254 861.46209 
+L 296.721074 855.070174 
+L 292.082445 851.846673 
+L 284.811415 852.726341 
+L 280.047384 850.359287 
+L 273.903414 851.541941 
+L 274.454778 846.732934 
+L 278.423536 844.57851 
+L 285.977877 848.278312 
+L 295.232788 841.441567 
+L 299.296212 839.593623 
+L 307.179815 830.125755 
+L 305.821172 823.10796 
+L 302.287145 821.974545 
+L 303.067893 816.376392 
+L 312.229191 815.824793 
+L 315.633015 808.20464 
+L 319.954627 809.380994 
+L 326.351788 807.943626 
+L 327.979779 799.277999 
+L 331.362199 793.838439 
+L 326.125084 792.106778 
+L 324.722782 786.160607 
+L 332.308945 784.75461 
+L 335.340735 780.139202 
+L 335.181908 773.297684 
+L 330.965199 764.348658 
+L 341.164138 757.622426 
+L 337.68803 746.643703 
+L 333.107766 739.48563 
+L 326.976856 735.021326 
+L 321.51335 736.851429 
+L 318.727139 731.762424 
+L 314.169025 731.386616 
+L 311.767119 734.436363 
+L 312.28624 741.191846 
+L 307.621347 742.226827 
+L 303.15168 746.398567 
+L 294.709485 747.419632 
+L 287.065837 746.814249 
+L 279.43707 749.033005 
+L 276.576566 747.57358 
+L 265.941032 746.001067 
+L 253.603606 750.73699 
+L 251.451446 744.015891 
+L 256.839718 734.737644 
+L 256.322598 727.382033 
+L 250.843554 726.996704 
+L 249.30498 720.152729 
+L 245.586194 718.782029 
+L 244.741615 710.708082 
+L 253.560745 707.421635 
+L 264.810928 709.845099 
+L 268.088725 709.431023 
+L 278.701929 700.452791 
+L 278.507018 694.687825 
+L 273.439155 693.541327 
+L 272.907927 683.552016 
+L 278.298163 678.458806 
+L 288.680292 672.094441 
+L 294.117278 672.693415 
+L 304.973525 667.847536 
+L 303.734177 662.709171 
+L 312.409729 663.731321 
+L 315.042012 657.892651 
+L 311.400928 650.051547 
+L 302.419149 649.541484 
+L 302.642348 645.817054 
+L 300.051619 638.221843 
+L 295.385261 634.202361 
+L 297.953876 629.253026 
+L 293.29722 622.834959 
+L 293.174778 618.77128 
+L 288.135744 617.145144 
+L 284.215036 622.864457 
+L 279.809968 622.167254 
+L 274.805326 624.376648 
+L 268.527126 613.361091 
+L 264.091768 614.218108 
+L 258.582633 612.394961 
+L 251.28754 604.938953 
+L 244.74234 607.630168 
+L 238.522674 608.217735 
+L 239.66991 604.109158 
+L 243.844985 599.513722 
+L 241.885552 595.767001 
+L 236.175847 591.119087 
+L 242.084774 586.516386 
+L 241.300609 581.784271 
+L 231.870202 583.29376 
+L 230.576991 578.072766 
+L 238.690901 577.309798 
+L 236.521903 571.027845 
+L 237.996008 560.109883 
+L 232.547699 558.814761 
+L 235.174465 553.558114 
+L 231.366213 551.54695 
+L 234.346637 547.614588 
+L 232.857748 544.813535 
+L 222.552053 545.689416 
+L 218.789092 541.868721 
+L 223.042166 538.737886 
+L 226.237613 541.210503 
+L 234.149094 539.511219 
+L 236.543381 536.052668 
+L 241.689227 535.895467 
+L 254.43398 529.017261 
+L 259.097919 531.342673 
+L 266.123285 528.408167 
+L 277.171248 526.592236 
+L 279.954898 524.872178 
+L 288.11239 523.950328 
+L 288.585906 514.733074 
+L 282.004975 511.337041 
+L 281.064136 504.604893 
+L 274.83718 499.718954 
+L 269.291483 499.333415 
+L 265.235427 501.415841 
+L 258.527172 493.34987 
+L 251.47476 495.778163 
+L 245.462148 490.968251 
+L 248.810228 486.825864 
+L 256.684667 483.775553 
+L 259.681309 480.77042 
+L 258.959464 475.781264 
+L 255.16236 475.492566 
+L 246.769679 467.770428 
+L 242.722427 467.913381 
+L 238.076777 471.243745 
+L 234.49017 476.929567 
+L 230.317825 480.193541 
+L 224.932832 480.308875 
+L 227.489671 473.556673 
+L 224.228442 471.301773 
+L 226.131732 460.392475 
+L 220.232453 458.969224 
+L 222.439193 451.222034 
+L 226.916315 456.621005 
+L 231.159204 456.66091 
+L 236.563219 453.616296 
+L 234.284713 449.934758 
+L 239.736368 447.473226 
+L 244.900723 449.310735 
+L 250.771102 446.810932 
+L 247.720362 438.225694 
+L 252.090248 436.250731 
+L 248.537339 432.285647 
+L 250.572339 427.696216 
+L 257.560776 425.061681 
+L 264.985251 426.630359 
+L 269.038727 430.021356 
+L 272.352138 428.379215 
+L 275.604227 421.750082 
+L 274.762362 416.104666 
+L 269.099284 411.628969 
+L 277.977315 410.076047 
+L 278.360321 401.832279 
+L 283.797131 395.489959 
+L 281.453254 390.385647 
+L 269.563294 391.599556 
+L 269.886463 389.131723 
+L 276.688384 379.867501 
+L 277.599487 365.909402 
+L 281.476625 363.775412 
+L 285.626349 365.133866 
+L 291.712631 359.404541 
+L 298.042135 360.585002 
+L 301.842383 357.73324 
+L 297.953763 353.037534 
+L 301.998989 349.85309 
+L 300.919142 344.533118 
+L 303.798542 339.817248 
+L 300.195059 335.265324 
+L 298.294666 327.367499 
+L 304.495535 322.665816 
+L 304.273629 328.994825 
+L 305.763429 336.786867 
+L 310.912944 332.894805 
+L 315.645234 332.652993 
+L 321.301822 338.692482 
+L 325.117271 340.424326 
+L 334.032773 338.942673 
+L 341.613575 331.605954 
+L 339.780301 323.730046 
+L 344.861221 319.155165 
+L 343.86195 313.26866 
+L 350.656111 308.793111 
+L 355.673473 311.58343 
+L 363.406429 306.032558 
+L 369.93278 307.655027 
+L 374.61944 304.411881 
+L 374.178554 301.262915 
+L 379.962984 294.490293 
+L 387.355224 295.638493 
+L 391.422266 294.534959 
+L 394.668646 289.505085 
+L 402.171056 288.333217 
+L 405.670787 291.26916 
+L 413.85462 290.650196 
+L 421.206181 287.534625 
+L 433.050735 286.362627 
+L 437.584557 287.340964 
+L 442.3842 284.879161 
+L 445.557269 279.993027 
+L 454.159526 278.116383 
+L 460.355294 274.963395 
+L 461.520498 271.806085 
+L 457.788782 262.471977 
+L 460.249797 253.272582 
+L 466.116161 254.026136 
+L 469.837139 249.355007 
+L 472.658146 240.714729 
+L 479.225497 240.31463 
+L 482.062104 234.756925 
+L 487.659135 233.221693 
+L 490.704086 230.026597 
+L 496.05625 230.908025 
+L 510.399797 226.929421 
+L 520.295517 232.723186 
+L 527.595269 233.364523 
+L 534.007094 228.39956 
+L 537.229689 229.794962 
+L 541.627115 237.386415 
+L 551.138046 238.262161 
+L 553.407231 249.452671 
+L 557.417421 250.216264 
+L 562.494254 256.422996 
+L 565.08571 264.746491 
+L 569.224534 266.017826 
+L 573.800629 259.895225 
+L 578.927078 256.799901 
+L 582.845009 251.078707 
+L 582.237688 241.47391 
+L 590.744266 231.683355 
+L 593.024738 226.146546 
+L 590.560286 213.514498 
+L 590.782939 202.159958 
+L 592.133575 190.36131 
+L 589.906025 184.535902 
+L 584.022996 178.725885 
+L 581.889246 172.399284 
+L 577.456144 165.322243 
+L 587.302155 150.382355 
+L 591.013057 145.978745 
+L 586.220382 141.640067 
+L 584.552876 130.38808 
+L 582.670708 124.537827 
+L 597.370593 114.113367 
+L 598.403618 107.35159 
+L 595.079261 105.903495 
+L 599.59659 95.210511 
+L 594.730919 91.783342 
+L 593.620261 87.947194 
+L 595.847239 81.440176 
+L 591.937975 74.987642 
+L 592.973589 70.600977 
+L 591.347323 64.992425 
+L 599.800333 57.29389 
+L 606.230115 58.525697 
+L 609.522844 56.372164 
+L 620.93888 57.860056 
+L 625.216249 57.415459 
+L 628.978966 54.155255 
+L 633.203071 59.806507 
+L 636.774417 61.208768 
+L 642.707278 67.597916 
+L 648.426713 70.05563 
+L 644.025 78.420655 
+L 642.991753 83.895473 
+L 645.670926 93.504003 
+L 651.107946 101.611406 
+L 650.341446 107.474734 
+L 651.792242 112.671573 
+L 653.223589 129.860869 
+L 654.926052 135.959281 
+L 652.850558 140.551777 
+L 657.153211 146.751379 
+L 658.066207 155.583545 
+L 656.421876 161.494088 
+L 658.780143 166.736313 
+L 661.838376 183.895024 
+L 661.228924 190.255799 
+L 652.390934 205.599487 
+L 650.081153 211.673925 
+L 650.753973 216.578479 
+L 647.418552 224.357489 
+L 647.92108 227.516882 
+L 645.000939 238.560795 
+L 643.234048 253.971814 
+L 640.437877 258.599944 
+L 640.345679 266.47876 
+L 641.743826 273.597621 
+L 647.79337 287.489986 
+L 653.693904 297.083496 
+L 672.925359 323.344599 
+L 677.327955 332.137982 
+L 680.82552 346.618516 
+L 681.428505 360.40977 
+L 679.35063 373.402194 
+L 679.910527 385.253988 
+L 684.206493 399.914678 
+L 684.379533 412.634587 
+L 685.570796 420.369498 
+L 683.354548 429.455844 
+L 680.582168 450.837039 
+L 680.9067 459.43156 
+L 682.708508 472.661992 
+L 685.155082 482.962782 
+L 688.856533 492.751491 
+L 692.751533 510.301584 
+L 692.936221 518.797327 
+L 690.138719 537.823091 
+L 689.974404 550.491785 
+L 692.104683 561.851312 
+L 690.694856 590.832227 
+L 691.715184 600.168312 
+L 688.634211 624.01404 
+L 679.964032 634.48531 
+L 666.744838 654.498722 
+L 648.998061 682.542076 
+L 638.18636 695.85669 
+L 630.141053 707.292888 
+L 624.703931 719.260916 
+L 624.463992 727.266061 
+L 625.834168 736.445089 
+L 624.089137 745.303303 
+      L 619.816299 753.996635 
+      L 617.469302 768.150965 
+      z
+" style="fill: var(--color-primary-content); stroke: var(--color-primary); stroke-width: 2"/>
+   </g>
+   <!-- Grid lines -->
+   <g id="grid_lines">
+    <!-- Vertical lines -->
+    <path d="M 209.484095 1102.477187 L 209.484095 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 266.051969 1102.477187 L 266.051969 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 322.619842 1102.477187 L 322.619842 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 379.187716 1102.477187 L 379.187716 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 435.755589 1102.477187 L 435.755589 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 492.323463 1102.477187 L 492.323463 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 548.891336 1102.477187 L 548.891336 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 605.45921 1102.477187 L 605.45921 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 662.027083 1102.477187 L 662.027083 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 718.594957 1102.477187 L 718.594957 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <!-- Horizontal lines -->
+    <path d="M 209.484095 1102.477187 L 718.594957 1102.477187" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 1045.909314 L 718.594957 1045.909314" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 989.341441 L 718.594957 989.341441" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 932.773567 L 718.594957 932.773567" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 876.205694 L 718.594957 876.205694" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 819.63782 L 718.594957 819.63782" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 763.069947 L 718.594957 763.069947" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 706.502073 L 718.594957 706.502073" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 649.9342 L 718.594957 649.9342" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 593.366326 L 718.594957 593.366326" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 536.798453 L 718.594957 536.798453" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 480.230579 L 718.594957 480.230579" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 423.662706 L 718.594957 423.662706" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 367.094832 L 718.594957 367.094832" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 310.526959 L 718.594957 310.526959" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 253.959085 L 718.594957 253.959085" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 197.391212 L 718.594957 197.391212" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 140.823338 L 718.594957 140.823338" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 84.255465 L 718.594957 84.255465" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+    <path d="M 209.484095 27.687591 L 718.594957 27.687591" style="fill: none; stroke: var(--color-base-content); stroke-opacity: 0.8; stroke-dasharray: 3.7,1.6"/>
+   </g>
+
+   <!-- Axis labels -->
+   <g id="axis_labels" class="corsica-axis-labels-group">
+    <!-- X-axis label (Longitude) -->
+    <text x="456" y="1155" text-anchor="middle" class="corsica-grid-text corsica-axis-label">Longitude (°)</text>
+    
+    <!-- Y-axis label (Latitude) - rotated -->
+    <text x="120" y="565" text-anchor="middle" transform="rotate(-90, 120, 565)" class="corsica-grid-text corsica-axis-label">Latitude (°)</text>
+   </g>
+
+   <!-- Mini compass axes near top-left (2 squares length) -->
+   <g id="compass_axes" class="color-base-content">
+    <!-- Aligned to grid: center at vertical x=322.619842 and horizontal y=140.823338; length 2 squares -->
+    <!-- Vertical (Y) axis with arrow pointing North -->
+    <line x1="322.619842" y1="197.391212" x2="322.619842" y2="84.255465" style="stroke: var(--color-base-content); stroke-width: 2" marker-end="url(#arrow-base)"/>
+    <!-- Horizontal (X) axis with arrow pointing East crossing mid of Y axis -->
+    <line x1="266.051969" y1="140.823338" x2="379.187716" y2="140.823338" style="stroke: var(--color-base-content); stroke-width: 2" marker-end="url(#arrow-base)"/>
+    <!-- Labels -->
+    <text x="322.619842" y="70" text-anchor="middle" class="corsica-grid-text">N</text>
+    <text x="388" y="148" text-anchor="start" class="corsica-grid-text">E</text>
+   </g>
+
+
+
+   <!-- ===============================
+        Grid cell overlays without labels
+        Each rect is present; color is applied only if fully inside island
+        =============================== -->
+   <g id="coord_cells" style="pointer-events: none; fill: transparent;">
+
+
+
+    <rect x="548.891336" y="28" width="56.567874" height="56.567873" fill="var(--color-accent, oklch(var(--color-accent)))" fill-opacity="0.75"/> 
+    <rect x="605.45921" y="28" width="56.567873" height="56.567873" fill="var(--color-accent, oklch(var(--color-accent)))" fill-opacity="0.75"/> 
+
+    <!-- Row 0 -->
+    <rect x="209.484095" y="84.255465" width="56.567874" height="56.567873"/> 
+    <rect x="266.051969" y="84.255465" width="56.567873" height="56.567873"/>
+    <rect x="322.619842" y="84.255465" width="56.567874" height="56.567873"/>
+    <rect x="379.187716" y="84.255465" width="56.567873" height="56.567873"/>
+    <rect x="435.755589" y="84.255465" width="56.567874" height="56.567873"/>
+    <rect x="492.323463" y="84.255465" width="56.567873" height="56.567873"/>
+    <rect x="548.891336" y="84.255465" width="56.567874" height="56.567873" fill="var(--color-accent, oklch(var(--color-accent)))" fill-opacity="0.75"/> 
+    <rect x="605.45921" y="84.255465" width="56.567873" height="56.567873" fill="var(--color-accent, oklch(var(--color-accent)))" fill-opacity="0.75"/> 
+    <rect x="662.027083" y="84.255465" width="56.567874" height="56.567873"/>
+
+    <!-- Row 1 -->
+    <rect x="209.484095" y="140.823338" width="56.567874" height="56.567874"/>
+    <rect x="266.051969" y="140.823338" width="56.567873" height="56.567874"/>
+    <rect x="322.619842" y="140.823338" width="56.567874" height="56.567874"/>
+    <rect x="379.187716" y="140.823338" width="56.567873" height="56.567874"/>
+    <rect x="435.755589" y="140.823338" width="56.567874" height="56.567874"/>
+    <rect x="492.323463" y="140.823338" width="56.567873" height="56.567874"/>
+    <rect x="548.891336" y="140.823338" width="56.567874" height="56.567874"/>
+    <rect x="605.45921" y="140.823338" width="56.567873" height="56.567874"/>
+    <rect x="662.027083" y="140.823338" width="56.567874" height="56.567874"/>
+
+    <!-- Row 2 -->
+    <rect x="209.484095" y="197.391212" width="56.567874" height="56.567873"/>
+    <rect x="266.051969" y="197.391212" width="56.567873" height="56.567873"/>
+    <rect x="322.619842" y="197.391212" width="56.567874" height="56.567873"/>
+    <rect x="379.187716" y="197.391212" width="56.567873" height="56.567873"/>
+    <rect x="435.755589" y="197.391212" width="56.567874" height="56.567873"/>
+    <rect x="492.323463" y="197.391212" width="56.567873" height="56.567873"/>
+    <rect x="548.891336" y="197.391212" width="56.567874" height="56.567873"/>
+    <rect x="605.45921" y="197.391212" width="56.567873" height="56.567873"/>
+    <rect x="662.027083" y="197.391212" width="56.567874" height="56.567873"/>
+
+    <!-- Row 3 -->
+    <rect x="209.484095" y="253.959085" width="56.567874" height="56.567874"/>
+    <rect x="266.051969" y="253.959085" width="56.567873" height="56.567874"/>
+    <rect x="322.619842" y="253.959085" width="56.567874" height="56.567874"/>
+    <rect x="379.187716" y="253.959085" width="56.567873" height="56.567874"/>
+    <rect x="435.755589" y="253.959085" width="56.567874" height="56.567874"/>
+    <rect x="492.323463" y="253.959085" width="56.567873" height="56.567874"/>
+    <rect x="548.891336" y="253.959085" width="56.567874" height="56.567874"/>
+    <rect x="605.45921" y="253.959085" width="56.567873" height="56.567874"/>
+    <rect x="662.027083" y="253.959085" width="56.567874" height="56.567874"/>
+
+    <!-- Row 4 -->
+    <rect x="209.484095" y="310.526959" width="56.567874" height="56.567873"/>
+    <rect x="266.051969" y="310.526959" width="56.567873" height="56.567873"/>
+    <rect x="322.619842" y="310.526959" width="56.567874" height="56.567873"/>
+    <rect x="379.187716" y="310.526959" width="56.567873" height="56.567873"/>
+    <rect x="435.755589" y="310.526959" width="56.567874" height="56.567873"/>
+    <rect x="492.323463" y="310.526959" width="56.567873" height="56.567873"/>
+    <rect x="548.891336" y="310.526959" width="56.567874" height="56.567873"/>
+    <rect x="605.45921" y="310.526959" width="56.567873" height="56.567873"/>
+    <rect x="662.027083" y="310.526959" width="56.567874" height="56.567873"/>
+
+    <!-- Row 5 -->
+    <rect x="209.484095" y="367.094832" width="56.567874" height="56.567874"/>
+    <rect x="266.051969" y="367.094832" width="56.567873" height="56.567874"/>
+    <rect x="322.619842" y="367.094832" width="56.567874" height="56.567874"/>
+    <rect x="379.187716" y="367.094832" width="56.567873" height="56.567874"/>
+    <rect x="435.755589" y="367.094832" width="56.567874" height="56.567874"/>
+    <rect x="492.323463" y="367.094832" width="56.567873" height="56.567874"/>
+    <rect x="548.891336" y="367.094832" width="56.567874" height="56.567874"/>
+    <rect x="605.45921" y="367.094832" width="56.567873" height="56.567874"/>
+    <rect x="662.027083" y="367.094832" width="56.567874" height="56.567874"/>
+
+    <!-- Row 6 -->
+    <rect x="209.484095" y="423.662706" width="56.567874" height="56.567873"/>
+    <rect x="266.051969" y="423.662706" width="56.567873" height="56.567873"/>
+    <rect x="322.619842" y="423.662706" width="56.567874" height="56.567873"/>
+    <rect x="379.187716" y="423.662706" width="56.567873" height="56.567873"/>
+    <rect x="435.755589" y="423.662706" width="56.567874" height="56.567873"/>
+    <rect x="492.323463" y="423.662706" width="56.567873" height="56.567873"/>
+    <rect x="548.891336" y="423.662706" width="56.567874" height="56.567873"/>
+    <rect x="605.45921" y="423.662706" width="56.567873" height="56.567873"/>
+    <rect x="662.027083" y="423.662706" width="56.567874" height="56.567873"/>
+
+    <!-- Row 7 -->
+    <rect x="209.484095" y="480.230579" width="56.567873" height="56.567874"  fill="var(--color-accent, oklch(var(--color-accent)))" fill-opacity="0.75"/> 
+    <rect x="266.051969" y="480.230579" width="56.567873" height="56.567874"  fill="var(--color-accent, oklch(var(--color-accent)))" fill-opacity="0.75"/> 
+    <rect x="322.619842" y="480.230579" width="56.567874" height="56.567874"/>
+    <rect x="379.187716" y="480.230579" width="56.567873" height="56.567874"/>
+    <rect x="435.755589" y="480.230579" width="56.567874" height="56.567874"/>
+    <rect x="492.323463" y="480.230579" width="56.567873" height="56.567874"/>
+    <rect x="548.891336" y="480.230579" width="56.567874" height="56.567874"/>
+    <rect x="605.45921" y="480.230579" width="56.567873" height="56.567874"/>
+    <rect x="662.027083" y="480.230579" width="56.567874" height="56.567874"/>
+
+    <!-- Row 8 -->
+    <rect x="209.484095" y="536.798453" width="56.567873" height="56.567873"  fill="var(--color-accent, oklch(var(--color-accent)))" fill-opacity="0.75"/> 
+    <rect x="266.051969" y="536.798453" width="56.567873" height="56.567873"  fill="var(--color-accent, oklch(var(--color-accent)))" fill-opacity="0.75"/> 
+    <rect x="322.619842" y="536.798453" width="56.567874" height="56.567873"/>
+    <rect x="379.187716" y="536.798453" width="56.567873" height="56.567873"/>
+    <rect x="435.755589" y="536.798453" width="56.567874" height="56.567873"/>
+    <rect x="492.323463" y="536.798453" width="56.567873" height="56.567873"/>
+    <rect x="548.891336" y="536.798453" width="56.567874" height="56.567873"/>
+    <rect x="605.45921" y="536.798453" width="56.567873" height="56.567873"/>
+    <rect x="662.027083" y="536.798453" width="56.567874" height="56.567873"/>
+
+    <!-- Row 9 -->
+    <rect x="209.484095" y="593.366326" width="56.567874" height="56.567874"/>
+    <rect x="266.051969" y="593.366326" width="56.567873" height="56.567874"/>
+    <rect x="322.619842" y="593.366326" width="56.567874" height="56.567874"/>
+    <rect x="379.187716" y="593.366326" width="56.567873" height="56.567874"/>
+    <rect x="435.755589" y="593.366326" width="56.567874" height="56.567874"/>
+    <rect x="492.323463" y="593.366326" width="56.567873" height="56.567874"/>
+    <rect x="548.891336" y="593.366326" width="56.567874" height="56.567874"/>
+    <rect x="605.45921" y="593.366326" width="56.567873" height="56.567874"/>
+    <rect x="662.027083" y="593.366326" width="56.567874" height="56.567874"/>
+
+    <!-- Row 10 -->
+    <rect x="209.484095" y="649.9342" width="56.567874" height="56.567873"/>
+    <rect x="266.051969" y="649.9342" width="56.567873" height="56.567873"/>
+    <rect x="322.619842" y="649.9342" width="56.567874" height="56.567873"/>
+    <rect x="379.187716" y="649.9342" width="56.567873" height="56.567873"/>
+    <rect x="435.755589" y="649.9342" width="56.567874" height="56.567873"/>
+    <rect x="492.323463" y="649.9342" width="56.567873" height="56.567873"/>
+    <rect x="548.891336" y="649.9342" width="56.567874" height="56.567873"/>
+    <rect x="605.45921" y="649.9342" width="56.567873" height="56.567873"/>
+    <rect x="662.027083" y="649.9342" width="56.567874" height="56.567873"/>
+
+    <!-- Row 11 -->
+    <rect x="209.484095" y="706.502073" width="56.567874" height="56.567874"/>
+    <rect x="266.051969" y="706.502073" width="56.567873" height="56.567874"/>
+    <rect x="322.619842" y="706.502073" width="56.567874" height="56.567874"/>
+    <rect x="379.187716" y="706.502073" width="56.567873" height="56.567874"/>
+    <rect x="435.755589" y="706.502073" width="56.567874" height="56.567874"/>
+    <rect x="492.323463" y="706.502073" width="56.567873" height="56.567874"/>
+    <rect x="548.891336" y="706.502073" width="56.567874" height="56.567874"/>
+    <rect x="605.45921" y="706.502073" width="56.567873" height="56.567874"/>
+    <rect x="662.027083" y="706.502073" width="56.567874" height="56.567874"/>
+
+    <!-- Row 12 -->
+    <rect x="209.484095" y="763.069947" width="56.567874" height="56.567873"/>
+    <rect x="266.051969" y="763.069947" width="56.567873" height="56.567873"/>
+    <rect x="322.619842" y="763.069947" width="56.567874" height="56.567873"/>
+    <rect x="379.187716" y="763.069947" width="56.567873" height="56.567873"/>
+    <rect x="435.755589" y="763.069947" width="56.567874" height="56.567873"/>
+    <rect x="492.323463" y="763.069947" width="56.567873" height="56.567873"/>
+    <rect x="548.891336" y="763.069947" width="56.567874" height="56.567873"/>
+    <rect x="605.45921" y="763.069947" width="56.567873" height="56.567873"/>
+    <rect x="662.027083" y="763.069947" width="56.567874" height="56.567873"/>
+
+    <!-- Row 13 -->
+    <rect x="209.484095" y="819.63782" width="56.567874" height="56.567874"/>
+    <rect x="266.051969" y="819.63782" width="56.567873" height="56.567874"/>
+    <rect x="322.619842" y="819.63782" width="56.567874" height="56.567874"/>
+    <rect x="379.187716" y="819.63782" width="56.567873" height="56.567874"/>
+    <rect x="435.755589" y="819.63782" width="56.567874" height="56.567874"/>
+    <rect x="492.323463" y="819.63782" width="56.567873" height="56.567874"/>
+    <rect x="548.891336" y="819.63782" width="56.567874" height="56.567874"/>
+    <rect x="605.45921" y="819.63782" width="56.567873" height="56.567874"/>
+    <rect x="662.027083" y="819.63782" width="56.567874" height="56.567874"/>
+
+    <!-- Row 14 -->
+    <rect x="209.484095" y="876.205694" width="56.567874" height="56.567873"/>
+    <rect x="266.051969" y="876.205694" width="56.567873" height="56.567873"/>
+    <rect x="322.619842" y="876.205694" width="56.567874" height="56.567873"/>
+    <rect x="379.187716" y="876.205694" width="56.567873" height="56.567873"/>
+    <rect x="435.755589" y="876.205694" width="56.567874" height="56.567873"/>
+    <rect x="492.323463" y="876.205694" width="56.567873" height="56.567873"/>
+    <rect x="548.891336" y="876.205694" width="56.567874" height="56.567873"/>
+    <rect x="605.45921" y="876.205694" width="56.567873" height="56.567873"/>
+    <rect x="662.027083" y="876.205694" width="56.567874" height="56.567873"/>
+
+    <!-- Row 15 -->
+    <rect x="209.484095" y="932.773567" width="56.567874" height="56.567874"/>
+    <rect x="266.051969" y="932.773567" width="56.567873" height="56.567874"/>
+    <rect x="322.619842" y="932.773567" width="56.567874" height="56.567874"/>
+    <rect x="379.187716" y="932.773567" width="56.567873" height="56.567874"/>
+    <rect x="435.755589" y="932.773567" width="56.567874" height="56.567874"/>
+    <rect x="492.323463" y="932.773567" width="56.567873" height="56.567874"/>
+    <rect x="548.891336" y="932.773567" width="56.567874" height="56.567874"/>
+    <rect x="605.45921" y="932.773567" width="56.567873" height="56.567874"/>
+    <rect x="662.027083" y="932.773567" width="56.567874" height="56.567874"/>
+
+    <!-- Row 16 -->
+    <rect x="209.484095" y="989.341441" width="56.567874" height="56.567873"/>
+    <rect x="266.051969" y="989.341441" width="56.567873" height="56.567873"/>
+    <rect x="322.619842" y="989.341441" width="56.567874" height="56.567873"/>
+    <rect x="379.187716" y="989.341441" width="56.567873" height="56.567873"/>
+    <rect x="435.755589" y="989.341441" width="56.567874" height="56.567873"/>
+    <rect x="492.323463" y="989.341441" width="56.567873" height="56.567873"/>
+    <rect x="548.891336" y="989.341441" width="56.567874" height="56.567873"/>
+    <rect x="605.45921" y="989.341441" width="56.567873" height="56.567873"/>
+    <rect x="662.027083" y="989.341441" width="56.567874" height="56.567873"/>
+
+
+    <!-- Row 17 -->
+    <rect x="209.484095" y="1045.909314" width="56.567874" height="56.567873"/>
+    <rect x="266.051969" y="1045.909314" width="56.567873" height="56.567873"/>
+    <rect x="322.619842" y="1045.909314" width="56.567874" height="56.567873"/>
+    <rect x="379.187716" y="1045.909314" width="56.567873" height="56.567873"/>
+    <rect x="435.755589" y="1045.909314" width="56.567874" height="56.567873"/>
+    <rect x="492.323463" y="1045.909314" width="56.567873" height="56.567873"/>
+    <rect x="548.891336" y="1045.909314" width="56.567874" height="56.567873"/>
+    <rect x="605.45921" y="1045.909314" width="56.567873" height="56.567873"/>
+    <rect x="662.027083" y="1045.909314" width="56.567874" height="56.567873"/>
+
+
+
+
+   </g>
+  </g>
+ </g>
+
+  <!-- Post-processing script to color squares:
+      full (all samples inside) -> var(--color-secondary)
+      partial (some samples inside) -> var(--color-accent)
+      none -> transparent -->
+ <script><![CDATA[
+ (function(){
+   var svg = document.currentScript && document.currentScript.ownerSVGElement;
+   if (!svg) return;
+   var rects = Array.prototype.slice.call(svg.querySelectorAll('#coord_cells rect'));
+   var islandPaths = Array.prototype.slice.call(svg.querySelectorAll('#PatchCollection_1 path'));
+    var AUTO_OPACITY = 0.75;
+
+   function makePoint(x, y){
+     if (window.DOMPoint) return new DOMPoint(x, y);
+     var pt = svg.createSVGPoint();
+     pt.x = x; pt.y = y; return pt;
+   }
+
+   function isInsideIsland(x, y){
+     for (var i=0; i<islandPaths.length; i++){
+       var p = islandPaths[i];
+       if (typeof p.isPointInFill === 'function' && p.isPointInFill(makePoint(x,y))) return true;
+     }
+     return false;
+   }
+
+   rects.forEach(function(rect, idx){
+     var col = idx % 9;
+     var row = Math.floor(idx / 9);
+     rect.setAttribute('id', 'cell-c' + col + '-r' + row);
+     rect.dataset.col = String(col);
+     rect.dataset.row = String(row);
+
+     // Respect manual fill if author sets it on the rect (fill, data-fill or inline style)
+     var hasInlineStyle = rect.getAttribute('style') || '';
+     var hasExplicitFill = rect.hasAttribute('fill') || rect.hasAttribute('data-fill') || /(^|;)\s*fill\s*:/.test(hasInlineStyle);
+
+     if (hasExplicitFill){
+       // If data-fill is provided, apply it (and optional opacity) once and skip auto-coloring
+       if (rect.hasAttribute('data-fill')) rect.setAttribute('fill', rect.getAttribute('data-fill'));
+       if (rect.hasAttribute('data-fill-opacity')) rect.setAttribute('fill-opacity', rect.getAttribute('data-fill-opacity'));
+       rect.classList.remove('pm-none', 'pm-partial', 'pm-full');
+       rect.removeAttribute('data-coverage');
+       return;
+     }
+
+     var x = parseFloat(rect.getAttribute('x'));
+     var y = parseFloat(rect.getAttribute('y'));
+     var w = parseFloat(rect.getAttribute('width'));
+     var h = parseFloat(rect.getAttribute('height'));
+
+      var samples = [];
+      var gridN = 24; // 25x25 grid sampling for thin features
+      for (var i = 0; i <= gridN; i++) {
+        for (var j = 0; j <= gridN; j++) {
+          samples.push([x + w * (i / gridN), y + h * (j / gridN)]);
+        }
+      }
+
+     var insideCount = 0;
+     for (var i = 0; i < samples.length; i++) {
+       if (isInsideIsland(samples[i][0], samples[i][1])) insideCount++;
+     }
+     var fullyInside = insideCount === samples.length;
+     var partiallyInside = insideCount > 0 && !fullyInside;
+
+     if (fullyInside){
+       rect.classList.remove('pm-none', 'pm-partial', 'pm-full');
+       rect.setAttribute('fill', 'var(--color-secondary, oklch(var(--color-secondary)))');
+       rect.setAttribute('fill-opacity', String(AUTO_OPACITY));
+       rect.setAttribute('data-coverage', 'full');
+     } else if (partiallyInside){
+       rect.classList.remove('pm-none', 'pm-full', 'pm-partial');
+       rect.setAttribute('fill', 'var(--color-accent, oklch(var(--color-accent)))');
+       rect.setAttribute('fill-opacity', String(AUTO_OPACITY));
+       rect.setAttribute('data-coverage', 'partial');
+     } else {
+       rect.classList.remove('pm-full', 'pm-partial', 'pm-none');
+       rect.setAttribute('fill', 'transparent');
+       rect.removeAttribute('fill-opacity');
+       rect.setAttribute('data-coverage', 'none');
+     }
+   });
+ })();
+ ]]></script>
+</svg>
+
+
+
+    
+      <div class="mt-0 text-xs sm:text-sm text-center italic">Carte 3 : Carte de la Corse avec quadrillage $10$ $km$ par $10$ $km$</div>
+    
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper alert alert-soft alert-info" data-f_type="ul_">
+                <ul class="fragment" data-f_type="ul_">
+  <ul class="">
+<li>Il y a en tout $58$ carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span>.</li>
+<li>Il y a en tout $117$ carrés colorés <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span>.</li>
+</ul>
+</ul>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper statement" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">La surface colorée avec cette couleur <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> correspond à la surface des carrés qui sont entièrement dans l'île. Calcule cette surface en $km^2$.</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="number_">
+                
+
+<div class="fragment" data-f_type="number_">
+  <pm-number-input id="surface_within_the_island" data-payload='{"NumberInputPCA": "v0.0.1", "correct": 5800, "feedback_correct": "$58 \\times 10$ $km$ $\\times 10$ $km$ = 5800 $km^2$", "feedback_incorrect": "R\u00e9ponse incorrecte.", "id": "surface_within_the_island", "max": 20000, "min": 0, "step": 100, "tolerance": 0, "type": "number", "unit": "$km^2$", "version": "v0.0.1"}' data-fragment-index="31"
+  
+  ></pm-number-input>
+  <script type="module">
+      import '/static/js/pm/components/pm-number-input.js';
+  </script>
+  
+  <div id="number-feedback-31" class="mb-3"></div>
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper statement" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">La surface colorée avec cette couleur <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span> correspond à la surface des carrés qui sont partiellement dans l'île. Calcule la surface totale représentées par les carrées colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> et <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span> en $km^2$.</p>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="number_">
+                
+
+<div class="fragment" data-f_type="number_">
+  <pm-number-input id="surface_within_the_island" data-payload='{"NumberInputPCA": "v0.0.1", "correct": 11700, "feedback_correct": "$117 \\times 10$ $km$ $\\times 10$ $km$ = 11700 $km^2$", "feedback_incorrect": "R\u00e9ponse incorrecte.", "id": "surface_within_the_island", "max": 20000, "min": 0, "step": 100, "tolerance": 0, "type": "number", "unit": "$km^2$", "version": "v0.0.1"}' data-fragment-index="33"
+  
+  ></pm-number-input>
+  <script type="module">
+      import '/static/js/pm/components/pm-number-input.js';
+  </script>
+  
+  <div id="number-feedback-33" class="mb-3"></div>
+  
+</div>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper " data-f_type="h2_">
+                <h2 id="notion-de-voisinage"
+    class="fragment text-xl sm:text-2xl md:text-3xl font-semibold"
+    data-f_type="h2_">🏘️ Notion de voisinage</h2>
+              </div>
+          
+        
+            
+            
+              
+              <div class="fragment-wrapper alert alert-info alert-soft mt-12" data-f_type="p_">
+                <p class="fragment" data-f_type="p_">🏗️ 🏗️ 🏗️ À paraître en 2026.
+<em>Tu découvriras ici une façon encore plus maline de sélectionner les carrés que l'on inclut dans la surface de l'île, grâce à la notion de voisinage. Cette méthode permet d'être encore plus précis que ci-dessus</em></p>
+              </div>
+          
+        
+        
+        
+    
+  </div>
+  
+
+  <!-- Product Settings Debug (collapsible) -->
+  
+    <div class="collapse collapse-arrow bg-base-100 mt-4">
+      <input type="checkbox" />
+      <div class="collapse-title text-sm font-medium">
+        Product Settings: <span class="badge badge-primary badge-sm">corsica</span>
+        
+          <span class="badge badge-success badge-sm ml-2">Loaded</span>
+        
+
+      </div>
+      <div class="collapse-content">
+        
+          <div class="grid gap-4">
+            <!-- Basic Product Info -->
+            <div class="card bg-base-200 p-4">
+              <h4 class="font-semibold mb-2">Basic Information</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                <div>
+                  <strong>Name:</strong> corsica
+                </div>
+                <div>
+                  <strong>Title:</strong> Maths.Corsica
+                </div>
+                <div>
+                  <strong>Enabled:</strong>
+                  
+                    <span class="badge badge-success badge-sm">Yes</span>
+                  
+                </div>
+                
+                  <div>
+                    <strong>Local Path:</strong> /corsica
+                  </div>
+                
+              </div>
+              
+                <div class="mt-2">
+                  <strong>Description:</strong>
+                  <p class="text-sm mt-1">Maths &amp; Corse</p>
+                </div>
+              
+            </div>
+
+            <!-- Backend Settings -->
+            
+              <div class="card bg-base-200 p-4">
+                <h4 class="font-semibold mb-2">Backend Settings</h4>
+                <pre class="text-xs bg-base-300 p-3 rounded overflow-auto max-h-64">{
+  "nagini": {
+    "entrypoint_url": "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js",
+    "lib_url": "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/",
+    "worker_url": "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js"
+  },
+  "v4pyjs": {
+    "lib_url": "https://cdn.jsdelivr.net/gh/your-org/v4.py.js@v0.0.4-unstable/"
+  }
+}</pre>
+              </div>
+            
+
+            <!-- Full Product Data -->
+            <div class="card bg-base-200 p-4">
+              <h4 class="font-semibold mb-2">Complete Product Configuration</h4>
+              <pre class="text-xs bg-base-300 p-3 rounded overflow-auto max-h-64">{
+  "backend_settings": {
+    "nagini": {
+      "entrypoint_url": "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js",
+      "lib_url": "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/",
+      "worker_url": "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js"
+    },
+    "v4pyjs": {
+      "lib_url": "https://cdn.jsdelivr.net/gh/your-org/v4.py.js@v0.0.4-unstable/"
+    }
+  },
+  "description": "Maths \u0026 Corse",
+  "is_enabled": true,
+  "local_path": "/corsica",
+  "name": "corsica",
+  "product": {
+    "backend_settings": {
+      "nagini": {
+        "entrypoint_url": "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js",
+        "lib_url": "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/",
+        "worker_url": "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js"
+      },
+      "v4pyjs": {
+        "lib_url": "https://cdn.jsdelivr.net/gh/your-org/v4.py.js@v0.0.4-unstable/"
+      }
+    },
+    "classes_formatted": [
+      "3\u003csup\u003e\u00e8me\u003c/sup\u003e",
+      "2\u003csup\u003ende\u003c/sup\u003e"
+    ],
+    "color": "accent",
+    "description": "Maths \u0026 Corse",
+    "domains": [
+      "maths.pm"
+    ],
+    "figure_png": null,
+    "figure_svg": "corsica-figure.html",
+    "is_beta": false,
+    "is_hidden": false,
+    "local_path": "/corsica",
+    "name": "corsica",
+    "owner_rdb": "Your Organization",
+    "owner_url": "https://example.org",
+    "source_link": null,
+    "subtitle_html": "Maths \u0026 Corse",
+    "tags": [
+      "Education"
+    ],
+    "title_html": "Maths.Corsica"
+  },
+  "title": "Maths.Corsica"
+}</pre>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  
+  <!-- PM runtime boot -->
+  <script type="module">
+      import PMRuntime from '@js/pm/main.js';
+      const runtime = new PMRuntime({
+          mode: 'all'
+      });
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+          runtime.init();
+      } else {
+          window.addEventListener('DOMContentLoaded', () => runtime.init(), {
+              once: true
+          });
+      }
+      window.pmRuntime = runtime;
+</script>
+</div>
+</div>
+<!-- djlint:on -->
+
+    </main>
+
+    
+    
+
+    <!-- Navbar active state management -->
+    <script src="../../../static/js/navbar-active-state.js"></script>
+
+  </body>
+</html>
+
+
+<!-- Subscription Call-to-Action
+      <section class="my-12 p-6 bg-base-200 rounded-lg text-center">
+        <h2 class="text-2xl font-semibold mb-4">
+Subscribe to My Newsletter
+        </h2>
+        <p class="mb-6">
+Get the latest posts delivered straight to your inbox.
+        </p>
+        <form action="/subscribe" method="POST" class="flex justify-center">
+          <input type="email" placeholder="Enter your email" class="input input-bordered w-full max-w-xs mr-2" required />
+          <button type="submit" class="btn btn-primary">
+Subscribe
+          </button>
+        </form>
+      </section>
+       -->

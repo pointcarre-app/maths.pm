@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      
+        Maths.pm - Logiciels libres pour les enseignants de mathématiques
+      
+    </title>
+    <link rel="icon" type="image/x-icon" href="../static/favicon/apple-icon-57x57.png" />
+
+    
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      rel="stylesheet" />
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet" />
+
+
+<script>
+    // Suppress Tailwind production warning for development
+    window.process = {
+        env: {
+            NODE_ENV: 'development'
+        }
+    };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+
+
+
+<link rel="stylesheet" href="../static/css/root.css" />
+<link rel="stylesheet" href="../static/css/styles.css" />
+<link rel="stylesheet" href="../static/css/styles-alt.css" />
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.body, {
+                delimiters: [{
+                    left: '$$',
+                    right: '$$',
+                    display: true
+                }, {
+                    left: '$',
+                    right: '$',
+                    display: false
+                }],
+                throwOnError: false
+            });
+        } else {
+            // Retry after a short delay if KaTeX isn't loaded yet
+            setTimeout(function() {
+                if (typeof renderMathInElement !== 'undefined') {
+                    renderMathInElement(document.body, {
+                        delimiters: [{
+                            left: '$$',
+                            right: '$$',
+                            display: true
+                        }, {
+                            left: '$',
+                            right: '$',
+                            display: false
+                        }],
+                        throwOnError: false
+                    });
+                }
+            }, 500);
+        }
+    });
+</script>
+
+    <meta name="description" content="Plateforme d&#39;enseignement des mathématiques pour le secondaire avec des cours interactifs, exercices et ressources pédagogiques libres. Aucune donnée collectée." />
+    <meta name="keywords" content="mathématiques, enseignement, collège, lycée, cours, exercices, pédagogie, open source" />
+    <meta name="author" content="Maths.pm, contact@pointcarre.app" />
+
+    <!-- Custom head elements from domain config -->
+    
+      
+
+      
+    
+
+    <!-- 🎯 Smart Product Dependency Loader -->
+    
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <!-- Loading sujets0 dependencies (route: /sujets0) -->
+          
+            
+            
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <script>
+        // Set backend settings as a global JS object
+        // ... existing code ...
+    </script>
+
+    
+  <link rel="stylesheet" href="../static/css/features/sujets0.css" />
+
+  </head>
+
+  <section class="fixed inset-0 w-screen h-screen z-[-10] overflow-hidden">
+
+
+  <!-- <a href="http://127.0.0.1:8000/" class="flex items-center gap-1 sm:gap-2 bg-transparent pl-4 pt-3" style="position:absolute; top:0; left:0">
+    <p class="w-8 h-8"><svg color="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 82">
+  <g transform="translate(0,0)">
+  <rect class="stroke-primary" x="5" y="5" width="72" height="72"  fill="transparent" stroke-width="10" rx="4" ry="4" stroke-linejoin="" />
+  <rect class="stroke-primary fill-primary" x="36" y="36" width="10" height="10"   stroke-width="8" rx="1" ry="1" stroke-linejoin="" />
+  </g>
+</svg></p>
+    <p class="font-heading">
+      <span class="text-lg"><span class="">pointcarre</span>.app</span>
+      
+      
+       
+    </p>
+</a> -->
+
+
+  <svg xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 800 600"
+       preserveAspectRatio="xMidYMid slice"
+       width="100%"
+       height="100%">
+    <defs>
+    <radialGradient id="gradient" cx="18%" cy="35%" r="15%" fx="18%" fy="35%">
+    <stop offset="0%" stop-color="#a46dff" stop-opacity="0.5" />
+    <stop offset="70%" stop-color="#a46dff" stop-opacity="0.3" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="30" />
+    </filter>
+
+    
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f0f0f0" stroke-width="0.5" />
+    </pattern>
+
+    
+    <pattern id="notebook-lines" width="30" height="30" patternUnits="userSpaceOnUse">
+    <!-- Main line (thicker) -->
+    <line x1="0" y1="29" x2="30" y2="29" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
+
+    
+    <line x1="0" y1="7" x2="30" y2="7" stroke="var(--color-primary)" stroke-width="0.45" opacity="0.10" />
+    <line x1="0" y1="14" x2="30" y2="14" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
+    <line x1="0" y1="21" x2="30" y2="21" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
+
+    
+    <line x1="29" y1="0" x2="29" y2="64" stroke="var(--color-primary)" stroke-width="0.45" opacity="0.10" />
+    </pattern>
+    </defs>
+
+    
+    <rect width="100%" height="100%" opacity="0.3" fill="var(--color-base-100)" />
+
+    
+    <rect width="100%" height="100%" fill="url(#notebook-lines)" opacity="0.5" />
+
+    
+    <!-- <line class="special-vertical-line" x1="149.5" y1="0" x2="149.5" y2="600" stroke="#FF007F" stroke-width="1" opacity="0" /> -->
+
+    
+    
+  </svg>
+
+</section>
+  <body class="text-base-content font-sans min-h-screen">
+    <data-brick>
+  <div id="domain-config" 
+       data-domain_yaml_path="domains/maths-pm.yml" 
+       data-domain_url="https://maths.pm"
+       
+         data-domain_specific_metatags.viewport="width=device-width, initial-scale=1.0"
+       
+         data-domain_specific_metatags.theme-color="#FFFFFF"
+       
+         data-domain_specific_metatags.charset="UTF-8"
+       
+         data-domain_specific_metatags.subject="Enseignement des mathématiques et logiciels libres (Open Source)"
+       
+         data-domain_specific_metatags.copyright="SAS POINTCARRE.APP"
+       
+         data-domain_specific_metatags.language="FR"
+       
+         data-domain_specific_metatags.Classification="Education"
+       
+         data-domain_specific_metatags.author="Maths.pm, contact@pointcarre.app"
+       
+         data-domain_specific_metatags.designer="SAS POINTCARRE.APP"
+       
+         data-domain_specific_metatags.reply-to="contact@pointcarre.app"
+       
+         data-domain_specific_metatags.owner="SAS POINTCARRE.APP"
+       
+         data-domain_specific_metatags.directory="education"
+       
+         data-domain_specific_metatags.coverage="Europe"
+       
+         data-domain_specific_metatags.distribution="Europe"
+       
+         data-domain_specific_metatags.rating="General"
+       
+         data-domain_specific_metatags.revisit-after="7 days"
+       
+         data-domain_specific_metatags.target="all"
+       
+         data-domain_specific_metatags.HandheldFriendly="True"
+       
+         data-domain_specific_metatags.MobileOptimized="320"
+       
+         data-domain_specific_metatags.mobile-web-app-capable="yes"
+       
+         data-domain_specific_metatags.apple-mobile-web-app-capable="yes"
+       
+         data-domain_specific_metatags.apple-touch-fullscreen="yes"
+       
+         data-domain_specific_metatags.apple-mobile-web-app-status-bar-style="black"
+       
+         data-domain_specific_metatags.format-detection="telephone=no"
+       
+         data-domain_specific_metatags.medium="website"
+       
+         data-domain_specific_metatags.syndication-source="https://maths.pm"
+       
+         data-domain_specific_metatags.original-source="https://maths.pm"
+       
+         data-domain_specific_metatags.http-equiv-Expires="0"
+       
+         data-domain_specific_metatags.http-equiv-Pragma="no-cache"
+       
+         data-domain_specific_metatags.http-equiv-Cache-Control="no-cache"
+       
+         data-domain_specific_metatags.http-equiv-imagetoolbar="no"
+       
+         data-domain_specific_metatags.http-equiv-x-dns-prefetch-control="off"
+       
+         data-domain_specific_metatags.og:site_name="Maths.pm"
+       
+         data-domain_specific_metatags.og:email="contact@pointcarre.app"
+       
+         data-domain_specific_metatags.og:latitude="48.8566"
+       
+         data-domain_specific_metatags.og:longitude="2.3522"
+       
+         data-domain_specific_metatags.og:street-address="Your Address"
+       
+         data-domain_specific_metatags.og:locality="Paris"
+       
+         data-domain_specific_metatags.og:region="Île-de-France"
+       
+         data-domain_specific_metatags.og:postal-code="75001"
+       
+         data-domain_specific_metatags.og:country-name="France"
+       
+         data-domain_specific_metatags.twitter:site="@mathspm"
+       
+         data-domain_specific_metatags.twitter:site_name="Maths.pm"
+       
+         data-domain_specific_metatags.ICBM="48.8566, 2.3522"
+       
+         data-domain_specific_metatags.geo.region="FR-IDF"
+       
+         data-domain_specific_metatags.geo.placename="Paris"
+       
+         data-domain_specific_metatags.generator="HTML5"
+       
+         data-domain_specific_metatags.ResourceLoaderDynamicStyles=""
+       
+       
+         data-index_view_specific_metatags.title="Maths.pm - Logiciels libres pour les enseignants de mathématiques"
+       
+         data-index_view_specific_metatags.description="Plateforme d&#39;enseignement des mathématiques pour le secondaire avec des cours interactifs, exercices et ressources pédagogiques libres. Aucune donnée collectée."
+       
+         data-index_view_specific_metatags.keywords="mathématiques, enseignement, collège, lycée, cours, exercices, pédagogie, open source"
+       
+         data-index_view_specific_metatags.robots="index, follow"
+       
+         data-index_view_specific_metatags.googlebot="index, follow"
+       
+         data-index_view_specific_metatags.revised="Jul. 17, 2025, 10:00 am"
+       
+         data-index_view_specific_metatags.abstract="Plateforme éducative pour l&#39;enseignement des mathématiques avec génération automatique d&#39;exercices et de sujets d&#39;examen."
+       
+         data-index_view_specific_metatags.topic="Enseignement des mathématiques"
+       
+         data-index_view_specific_metatags.summary="Ressources pédagogiques mathématiques pour professeurs : exercices, sujets d&#39;examen et outils Open Source."
+       
+         data-index_view_specific_metatags.url="https://maths.pm/"
+       
+         data-index_view_specific_metatags.identifier-URL="https://maths.pm/"
+       
+         data-index_view_specific_metatags.pagename="Accueil - Ressources mathématiques"
+       
+         data-index_view_specific_metatags.category="Education"
+       
+         data-index_view_specific_metatags.date="Jul. 17, 2025"
+       
+         data-index_view_specific_metatags.search_date="2025-07-17"
+       
+         data-index_view_specific_metatags.subtitle="Ressources pédagogiques mathématiques Open Source"
+       
+         data-index_view_specific_metatags.pageKey="maths-pm-home"
+       
+         data-index_view_specific_metatags.DC.title="Maths.pm - Ressources pédagogiques mathématiques Open Source"
+       
+         data-index_view_specific_metatags.DC.creator="Maths.pm, contact@pointcarre.app"
+       
+         data-index_view_specific_metatags.DC.subject="Enseignement, Mathématiques, Pédagogie, Open Source"
+       
+         data-index_view_specific_metatags.itemprop-name="Maths.pm - Ressources mathématiques"
+       
+         data-index_view_specific_metatags.og:title="Maths.pm - Ressources pédagogiques mathématiques"
+       
+         data-index_view_specific_metatags.og:description="Plateforme éducative pour professeurs de mathématiques. Exercices et sujets générés automatiquement avec des technologies Open Source."
+       
+         data-index_view_specific_metatags.og:image="https://maths.pm/static/images/maths-pm-social-card.jpg"
+       
+         data-index_view_specific_metatags.og:type="website"
+       
+         data-index_view_specific_metatags.og:url="https://maths.pm/"
+       
+         data-index_view_specific_metatags.twitter:card="summary_large_image"
+       
+         data-index_view_specific_metatags.twitter:creator="@mathspm"
+       
+         data-index_view_specific_metatags.twitter:title="Maths.pm - Ressources pédagogiques mathématiques"
+       
+         data-index_view_specific_metatags.twitter:description="Plateforme éducative pour professeurs de mathématiques. Exercices et sujets générés automatiquement."
+       
+         data-index_view_specific_metatags.twitter:image="https://maths.pm/static/images/maths-pm-twitter-card.jpg"
+       
+         data-index_view_specific_metatags.twitter:image:alt="Logo Maths.pm avec formules mathématiques"
+       
+         data-index_view_specific_metatags.twitter:url="https://maths.pm/"
+       
+       
+         data-extra_head.js="[]"
+       
+         data-extra_head.css="[]"
+       
+       
+         data-templating.base_template="base/main-alt.html"
+       
+         data-templating.footer_template="domains/maths-pm/footers.html"
+       
+         data-templating.navbar_title="Maths.pm"
+       
+         data-templating.button_primary_text="Ressources"
+       
+         data-templating.button_primary_href="/"
+       
+         data-templating.button_ghost_text="Contact"
+       
+         data-templating.button_ghost_href="/contact"
+       >
+  </div>
+
+  <div id="backend-public-settings"
+       
+         data-nagini="{&#34;endpoint&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/&#34;, &#34;js_url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js&#34;, &#34;pyodide_worker_url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js&#34;}"
+       
+         data-v4pyjs="{&#34;lib_url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/v4.py.js@v0.0.4-unstable/&#34;}"
+       
+         data-teachers="{&#34;endpoint&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/&#34;, &#34;files_to_load&#34;: [{&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/__init__.py&#34;, &#34;path&#34;: &#34;teachers/__init__.py&#34;}, {&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/generator.py&#34;, &#34;path&#34;: &#34;teachers/generator.py&#34;}, {&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/maths.py&#34;, &#34;path&#34;: &#34;teachers/maths.py&#34;}, {&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/formatting.py&#34;, &#34;path&#34;: &#34;teachers/formatting.py&#34;}, {&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/corrector.py&#34;, &#34;path&#34;: &#34;teachers/corrector.py&#34;}, {&#34;url&#34;: &#34;https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.2/src/teachers/defaults.py&#34;, &#34;path&#34;: &#34;teachers/defaults.py&#34;}]}"
+       
+         data-arpege_generator_script_paths="[&#34;/static/py/services/sujets0/spe_sujet1_auto_01_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_02_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_03_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_04_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_05_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_06_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_07_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_08_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_09_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_10_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_11_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet1_auto_12_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_01_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_02_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_03_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_04_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_05_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_06_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_07_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_08_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_09_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_10_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_11_question.py&#34;, &#34;/static/py/services/sujets0/spe_sujet2_auto_12_question.py&#34;]"
+       
+         data-corpus=""
+       
+         data-jupyterlite="{&#34;enabled&#34;: &#34;true&#34;, &#34;version&#34;: &#34;0.4.3&#34;, &#34;kernels&#34;: [&#34;python&#34;], &#34;packages&#34;: [&#34;numpy&#34;, &#34;matplotlib&#34;, &#34;sympy&#34;], &#34;pyodide&#34;: {&#34;version&#34;: &#34;0.26.4&#34;, &#34;packages&#34;: [&#34;micropip&#34;, &#34;numpy&#34;, &#34;matplotlib&#34;]}}"
+       
+         data-examples="{&#34;enabled&#34;: &#34;true&#34;, &#34;description&#34;: &#34;Test and example files for PM features&#34;}"
+       >
+  </div>
+
+  <div id="nagini-settings" data-endpoint="">
+  </div>
+
+  <div id="pca-corpus-settings"
+       data-endpoint=""
+       data-paths-to-load="[]">
+  </div>
+
+  <div id="pca-teachers-settings"
+       data-endpoint=""
+       data-paths-to-load="[]">
+  </div>
+
+  <div id="pronoia-sujets-0-qcm-config" 
+       data-partie="1" 
+       data-partie-rdb="Automatismes" 
+       data-generation-mode="maths">
+  </div>
+</data-brick>
+
+    <div class="navbar main-alt-navbar bg-base-100">
+  <div class="navbar-start">
+    <a href="https://maths.pm" class="w-[32px] sm:w-[40px] h-[32px] sm:h-[40px]">
+      <svg color="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 82">
+  <g transform="translate(0,0)">
+  <rect class="stroke-primary" x="5" y="5" width="72" height="72"  fill="transparent" stroke-width="10" rx="4" ry="4" stroke-linejoin="" />
+  <rect class="stroke-primary fill-primary" x="36" y="36" width="10" height="10"   stroke-width="8" rx="1" ry="1" stroke-linejoin="" />
+  </g>
+</svg>
+    </a>
+    <!-- Mobile title shown next to logo on small screens -->
+    <a href="/" class="navbar-alt-title-mobile">Maths.pm</a>
+  </div>
+  <div class="navbar-center">
+    <div class="text-2xl sm:text-3xl">
+      
+        <a href="/" class="font-handwritten">Maths.pm</a>
+      
+    </div>
+  </div>
+  <div class="navbar-end gap-2 sm:pl-18">
+    <button class="btn btn-sm sm:btn-base btn-square btn-ghost"
+            onclick="my_modal_1.showModal()"
+            style="box-shadow: none !important;
+                   border: none !important;
+                   font-weight:400">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="20"
+           height="20"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           class="lucide lucide-book-type-icon lucide-book-type">
+        <path d="M10 13h4" />
+        <path d="M12 6v7" />
+        <path d="M16 8V6H8v2" />
+        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+      </svg>
+    </button>
+    <dialog id="my_modal_1" class="modal">
+      <div class="modal-box"><div class="py-8 sm:px-6">
+  <div class="text-left mb-8">
+    <h2 class="text-2xl font-bold mb-2">Licences et droits d'usage</h2>
+  </div>
+
+  <div class="bg-base-100 rounded-lg border border-base-300 p-2 sm:p-6 mb-6">
+    <div class="max-w-3xl mx-auto">
+  <div class="flex flex-col sm:flex-row w-full py-2">
+    <div class="grid grow place-items-center sm:h-30">
+      <div class="flex flex-col items-center">
+        <div class="text-sm sm:text-base text-center font-heading mb-2">Codes sources</div>
+        <img class="h-[40px]" src="../static/icons/AGPLv3_Logo.svg" alt="Logo licence AGPLv3">
+      </div>
+    </div>
+    <div class="divider divider-horizontal text-xs px-12">
+      <span class="hidden sm:block"><span class="badge badge-sm badge-primary">LICENCES</span></span>
+    </div>
+    <div class="grid grow place-items-center sm:h-30">
+      <div class="flex flex-col">
+        <div class="text-sm sm:text-base text-center font-heading mb-2">Contenus</div>
+        <img class="h-[40px]" src="../static/icons/CC_BY-NC-SA.svg" alt="Logo licence Creative Commons">
+      </div>
+    </div>
+  </div>
+</div> 
+  </div>
+
+
+  <details class="p-0">
+    <summary class="cursor-pointer  hover:bg-base-100 rounded-lg text-sm">
+      <span class="select-none">Codes sources : AGPLv3</span>
+    </summary>
+    <div class="px-4 pb-4 pt-4 text-sm leading-relaxed">
+      <div class="flex justify-center mb-4">
+        <img class="w-24 h-auto"
+             src="../static/icons/licenses/AGPLv3_Logo.svg"
+             alt="Logo licence AGPLv3"
+             width="96"
+             height="96" />
+      </div>
+      <p>
+        Tous les codes sources des ressources référencées sur ce site et créées par la SAS Pointcarre.app sont distribués sous licence
+        <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="link link-primary">AGPLv3</a>.
+      </p>
+      <p class="mt-2">
+        Vous êtes libre de les utiliser, modifier et redistribuer, y compris pour un usage commercial,
+        à condition de partager vos modifications sous la même licence.
+      </p>
+    </div>
+  </details>
+
+  <details class="p-0">
+    <summary class="cursor-pointer  hover:bg-base-100 rounded-lg text-sm">
+      <span class="select-none">Contenus : CC BY-NC-SA 4.0</span>
+    </summary>
+    <div class="px-4 pb-4 pt-4 text-sm leading-relaxed">
+      <div class="flex justify-center mb-4">
+        <img class="w-24 h-auto"
+             src="../static/icons/licenses/CC_BY-NC-SA.svg"
+             alt="Logo licence Creative Commons BY-NC-SA"
+             width="96"
+             height="96" />
+      </div>
+      <p>
+        Tous les contenus référencés sur ce site et créés par la SAS Pointcarre.app
+        (exercices, cours, articles, documentation, mentions légales, etc.) sont sous licence
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="link link-primary">CC BY-NC-SA 4.0</a>.
+      </p>
+      <p class="mt-2">
+        Vous pouvez les partager et les adapter librement pour un usage non commercial,
+        en citant la source et en conservant la même licence.
+      </p>
+    </div>
+  </details>
+
+  <div class="modal-action"></div>
+  <div class="text-right">
+    <form method="dialog">
+      <button class="btn btn-soft">Fermer</button>
+    </form>
+  </div>
+
+
+</div></div>
+    </dialog>
+    <a class="btn btn-sm sm:btn-base btn-square btn-ghost"
+       style="box-shadow: none !important;
+              border: none !important;
+              font-weight:400">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="20"
+           height="20"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           class="lucide lucide-upload-icon lucide-upload">
+        <path d="M12 3v12"></path>
+        <path d="m17 8-5-5-5 5"></path>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      </svg>
+    </a>
+    <a href="/"
+       class="btn btn-sm sm:btn-base btn-primary"
+       style="padding: 0.5rem 0.75rem;
+              box-shadow: none !important;
+              font-weight:300">Ressources</a>
+    <a href="/contact"
+       class="btn btn-sm sm:btn-base btn-ghost"
+       style="padding: 0.5rem 0.75rem;
+              box-shadow: none !important;
+              font-weight:300">Contact</a>
+  </div>
+</div>
+    
+    <style>
+    @media (max-width: 639px) {
+        #left-sidebar {
+            border-right: none !important;
+        }
+    }
+</style>
+
+<!-- Toggle buttons -->
+<style>
+    @keyframes spin-then-scale {
+        0% {
+            transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+            transform: rotate(360deg) scale(1);
+        }
+
+        100% {
+            transform: rotate(360deg) scale(1.2);
+        }
+    }
+
+    .spin-scale-hover:hover {
+        animation: spin-then-scale 1s ease-in-out forwards;
+    }
+</style>
+
+
+
+
+
+
+
+<div class="fixed  right-0 top-0 h-screen w-[calc(250px+1rem)] bg-base-200/90 backdrop-blur text-base-content z-40 transition-transform duration-300 overflow-y-auto translate-x-full"
+     id="right-sidebar">
+  <ul class="menu p-4 min-h-full mt-12" style="width: 250px !important;">
+
+
+    <li>
+
+
+      <a href="/dashboard" class="flex justify-between items-center">
+
+
+        
+      </a>
+
+    </li>
+
+    <li>
+      <a href="/doppel"
+         class="flex justify-between items-center hover:bg-primary hover:text-primary-content"
+         style="width: 100% !important;
+                background-color: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100))">
+        <span>Data-brick</span>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="18"
+             height="18"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             class="lucide lucide-cuboid-icon lucide-cuboid">
+          <path d="m21.12 6.4-6.05-4.06a2 2 0 0 0-2.17-.05L2.95 8.41a2 2 0 0 0-.95 1.7v5.82a2 2 0 0 0 .88 1.66l6.05 4.07a2 2 0 0 0 2.17.05l9.95-6.12a2 2 0 0 0 .95-1.7V8.06a2 2 0 0 0-.88-1.66Z" />
+          <path d="M10 22v-8L2.25 9.15" />
+          <path d="m10 14 11.77-6.87" />
+        </svg>
+      </a>
+      <ul id="doppel-all-files-list" style="margin-left: 0rem !important;">
+        <!-- All files will be populated here consecutively -->
+      </ul>
+    </li>
+
+    <li>
+      <a href="/doppel"
+         class="flex justify-between items-center hover:bg-primary hover:text-primary-content"
+         style="width: 100% !important;
+                background-color: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100))">
+        <span>Doppel</span>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="18"
+             height="18"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             class="lucide lucide-drama-icon lucide-drama">
+          <path d="M10 11h.01" />
+          <path d="M14 6h.01" />
+          <path d="M18 6h.01" />
+          <path d="M6.5 13.1h.01" />
+          <path d="M22 5c0 9-4 12-6 12s-6-3-6-12c0-2 2-3 6-3s6 1 6 3" />
+          <path d="M17.4 9.9c-.8.8-2 .8-2.8 0" />
+          <path d="M10.1 7.1C9 7.2 7.7 7.7 6 8.6c-3.5 2-4.7 3.9-3.7 5.6 4.5 7.8 9.5 8.4 11.2 7.4.9-.5 1.9-2.1 1.9-4.7" />
+          <path d="M9.1 16.5c.3-1.1 1.4-1.7 2.4-1.4" />
+        </svg>
+      </a>
+      <ul id="doppel-all-files-list" style="margin-left: 0rem !important;">
+        <!-- All files will be populated here consecutively -->
+      </ul>
+    </li>
+
+    <!-- Theme Selector - moved outside the main li to avoid overflow issues -->
+    <li class="mt-6">
+      <div class="text-sm font-semibold mb-2">Thèmes</div>
+      <ul class="">
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'bolt')">
+            ⚡️ Bolt
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'purple')">
+            🟪 Purple
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'dark-black')">
+            ⚫️ DarkBlack
+          </button>
+        </li>
+
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'night')">
+            🌒 Night
+          </button>
+        </li>
+
+
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'light')">
+            Light
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'dark')">
+            Dark
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'zelie')">
+            Zelie
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'cyberpunk')">
+            Cyberpunk
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'dracula')">
+            Dracula
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'emerald')">
+            Emerald
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
+                  onclick="document.documentElement.setAttribute('data-theme', 'nord')">
+            Nord
+          </button>
+        </li>
+      </ul>
+    </li>
+
+    <li class="mt-auto">
+      <div class="join font-mono">
+        <span class="badge join-item badge-neutral">1<sup>ère</sup></span>
+        <span class="badge join-item badge-secondary badge-soft">Spé. Maths</span>
+      </div>
+    </li>
+  </ul>
+
+
+</div>
+
+
+<button class="btn btn-circle hover:bg-transparent btn-lg fixed bottom-4 right-4 z-50 spin-scale-hover"
+        id="right-toggle">
+  <svg xmlns="http://www.w3.org/2000/svg"
+       width="18"
+       height="18"
+       viewBox="0 0 24 24"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="1"
+       stroke-linecap="round"
+       stroke-linejoin="round">
+    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Sidebar toggle
+        const leftSidebar = document.getElementById('left-sidebar');
+        const rightSidebar = document.getElementById('right-sidebar');
+        const leftToggle = document.getElementById('left-toggle');
+        const rightToggle = document.getElementById('right-toggle');
+
+        try {
+
+            leftToggle.addEventListener('click', () => {
+                leftSidebar.classList.toggle('-translate-x-full');
+            });
+        } catch (e) {
+            console.log("no leftsidebar found")
+            console.error(e);
+        }
+
+
+        try {
+
+            rightToggle.addEventListener('click', () => {
+                rightSidebar.classList.toggle('translate-x-full');
+            });
+        } catch (e) {
+            console.log("no rightsidebar found")
+            console.error(e);
+        }
+
+        // Theme management
+        function setTheme(theme) {
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+        }
+
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                setTheme(prefersDark ? "dark" : "light");
+            }
+        }
+
+        initializeTheme();
+
+        // Add event listeners to theme buttons - updated for new button structure
+        const themeButtons = document.querySelectorAll("button[onclick*='data-theme']");
+        themeButtons.forEach((button) => {
+            const originalOnClick = button.getAttribute("onclick");
+            button.removeAttribute("onclick");
+            const themeMatch = originalOnClick.match(/data-theme', '([^']+)'/);
+            const themeName = themeMatch ? themeMatch[1] : "light";
+            button.addEventListener("click", function() {
+                setTheme(themeName);
+            });
+        });
+
+        // Listen for system theme changes
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+            if (!localStorage.getItem("theme")) {
+                setTheme(e.matches ? "dark" : "light");
+            }
+        });
+    });
+</script>
+
+    <main class="container mx-auto">
+      
+  <div class="padding-alt-security sm:mb-28">
+    <div class="card shadow-lg mx-auto py-6 card mt-12">
+      <h1 class="text-center text-2xl font-bold text-base-content/60 mb-1"></h1>
+      <h2 class="text-center text-xl font-bold mb-3">
+        Pour l'épreuve anticipée de mathématiques en classe de 1ère
+      </h2>
+      <div class="max-w-[400px] mx-auto"><figure class="m-0 p-0 align-top aspect-[500/120] w-full h-full overflow-hidden rounded-none">
+  <svg viewBox="0 0 500 120"
+       width="100%"
+       height="100%"
+       xmlns="http://www.w3.org/2000/svg"
+       class="block m-0 p-0">
+    <!-- Nagini the Snake -->
+
+    <!-- Snake body path -->
+    <path d="M 30 75 Q 80 45, 130 70 Q 180 95, 230 60 Q 280 35, 330 65 Q 380 90, 410 55 Q 425 45, 445 50" class="stroke-primary" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.9">
+    </path>
+
+    <!-- Snake body segments for texture -->
+    <circle cx="50" cy="65" r="5" class="fill-primary" opacity="0.7"></circle>
+    <circle cx="80" cy="53" r="4" class="fill-secondary" opacity="0.7"></circle>
+    <circle cx="110" cy="67" r="5" class="fill-accent" opacity="0.7"></circle>
+    <circle cx="145" cy="83" r="4" class="fill-primary" opacity="0.7"></circle>
+    <circle cx="180" cy="90" r="5" class="fill-secondary" opacity="0.7"></circle>
+    <circle cx="215" cy="65" r="4" class="fill-accent" opacity="0.7"></circle>
+    <circle cx="250" cy="47" r="5" class="fill-primary" opacity="0.7"></circle>
+    <circle cx="285" cy="60" r="4" class="fill-secondary" opacity="0.7"></circle>
+    <circle cx="320" cy="77" r="5" class="fill-accent" opacity="0.7"></circle>
+    <circle cx="355" cy="85" r="4" class="fill-primary" opacity="0.7"></circle>
+    <circle cx="385" cy="65" r="4" class="fill-secondary" opacity="0.7"></circle>
+    <circle cx="405" cy="53" r="3" class="fill-accent" opacity="0.7"></circle>
+
+    <!-- Snake head (much bigger) -->
+    <path d="M 445 50 Q 465 40, 480 50 Q 472 62, 445 50 Z" class="fill-primary stroke-primary" stroke-width="1" opacity="0.9">
+    </path>
+    <ellipse cx="462" cy="50" rx="16" ry="12" class="fill-primary" opacity="0.9"></ellipse>
+
+    <!-- Snake eyes (better placement on sides) -->
+    <circle cx="466" cy="43" r="2" class="fill-accent" opacity="1"></circle>
+    <circle cx="466" cy="57" r="2" class="fill-accent" opacity="1"></circle>
+
+    <!-- Snake tongue (bigger and longer) -->
+    <path d="M 478 50 L 488 48 M 488 48 L 492 45 M 488 48 L 492 51" class="stroke-secondary" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8">
+    </path>
+
+    <!-- Snake tail -->
+    <ellipse cx="35" cy="73" rx="4" ry="3" class="fill-secondary stroke-secondary" stroke-width="1" opacity="0.8"></ellipse>
+  </svg>
+</figure></div>
+    </div>
+    <div class="grid grid-cols-3 gap-2 sm:gap-4 max-w-4xl mx-auto mt-12">
+      <button class="btn btn-sm md:btn-md  btn-neutral btn-outline btn-active" data-tab="generate">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5 hidden sm:block"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
+          <rect x="14" y="2" width="8" height="8" rx="1" />
+        </svg>
+        <span style="font-weight: 400;">Générer<span class="hidden sm:inline">des exercices</span> </span>
+      </button>
+      <button class="btn btn-sm md:btn-md btn-outline btn-neutral" data-tab="documentation">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5 hidden sm:block"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             class="lucide lucide-file-text-icon lucide-file-text">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+          <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+          <path d="M10 9H8" />
+          <path d="M16 13H8" />
+          <path d="M16 17H8" />
+        </svg>
+        <span style="font-weight: 400;">
+          <span class="hidden sm:inline">Lire la documentation</span>
+          <span class="sm:hidden">Documentation</span>
+        </span>
+      </button>
+      <button class="btn btn-sm md:btn-md btn-outline btn-neutral" data-tab="subjects">
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5 hidden sm:block"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             class="lucide lucide-landmark-icon lucide-landmark">
+          <path d="M10 18v-7" />
+          <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z" />
+          <path d="M14 18v-7" />
+          <path d="M18 18v-7" />
+          <path d="M3 22h18" />
+          <path d="M6 18v-7" />
+        </svg>
+        <span style="font-weight: 400;">
+          <span class="hidden sm:inline">Consulter les Sujets 0</span>
+          <span class="sm:hidden">Sujets 0</span>
+        </span>
+      </button>
+    </div>
+
+    <div class="tab-alt-content card mt-6" id="generate-content">
+      <div class="flex card justify-center bg-base-300 sm:p-8 mb-6">
+  <form class="space-y-6 w-full" id="arpege-form">
+    <!-- Two main columns: numbers on left, radio buttons on right -->
+    <div class="flex flex-col sm:flex-row sm:gap-12">
+      <!-- Left column: Number inputs -->
+      <div class="flex flex-col sm:gap-6 flex-1">
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend w-full flex justify-between items-center">
+            <div>Nombre de copies à générer</div>
+            <div class="relative hidden">
+              <div class="badge badge-outline badge-sm cursor-help peer">?</div>
+              <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50">
+                tooltiptext
+              </div>
+            </div>
+          </legend>
+          <div class="join w-full">
+            <input type="number"
+                   id="nb-eleves"
+                   name="nb-eleves"
+                   min="1"
+                   max="50"
+                   value="30"
+                   required
+                   class="input input-sm join-item w-full"
+                   aria-describedby="nb-eleves-help" />
+            <button type="button"
+                    class="btn btn-sm join-item"
+                    onclick="document.getElementById('nb-eleves').stepDown()">-</button>
+            <button type="button" class="btn btn-sm join-item" onclick="document.getElementById('nb-eleves').stepUp()">
+              +
+            </button>
+          </div>
+          <p class="label">Obligatoire, entre 1 et 50.</p>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend w-full flex justify-between items-center">
+            <div>Nombre de questions par copie</div>
+            <div class="relative">
+              <div class="badge badge-outline badge-sm cursor-help peer">?</div>
+              <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50">
+                Nombre de questions
+                <br />
+                par copie générée
+                <br />
+                Maximum: 12
+              </div>
+            </div>
+          </legend>
+          <div class="join w-full">
+            <input type="number"
+                   id="nb-questions"
+                   name="nb-questions"
+                   min="1"
+                   max="12"
+                   value="12"
+                   required
+                   class="input input-sm join-item w-full"
+                   aria-describedby="nb-questions-help" />
+            <button type="button"
+                    class="btn btn-sm join-item"
+                    onclick="document.getElementById('nb-questions').stepDown()">-</button>
+            <button type="button"
+                    class="btn btn-sm join-item"
+                    onclick="document.getElementById('nb-questions').stepUp()">+</button>
+          </div>
+          <p class="label">Obligatoire, entre 1 et 12.</p>
+        </fieldset>
+      </div>
+
+      <!-- Right column: Radio buttons -->
+      <div class="flex flex-col sm:gap-6 flex-1">
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend w-full flex justify-between items-center">
+            <div>Programmes officiels couverts</div>
+            <div class="relative">
+              <div class="badge badge-outline badge-sm cursor-help peer">?</div>
+              <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50">
+                Choisir le niveau
+                <br />
+                du programme officiel
+                <br />
+                à couvrir
+              </div>
+            </div>
+          </legend>
+          <div class="join">
+            <input class="join-item btn w-[50%] font-light input-sm" type="radio" name="options" aria-label="2nde" />
+            <input class="join-item btn w-[50%] font-light input-sm"
+                   type="radio"
+                   name="options"
+                   aria-label="2nde & 1ère" />
+          </div>
+          <p class="label">Obligatoire, entre 1 et 50.</p>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend w-full flex justify-between items-center">
+            <div>Filière / Spécialité</div>
+            <div class="relative">
+              <div class="badge badge-outline badge-sm cursor-help peer">?</div>
+              <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50">
+                Spé = Spécialité Maths
+                <br />
+                Non Spé = Tronc commun
+                <br />
+                Techno = Filière technologique
+              </div>
+            </div>
+          </legend>
+          <div class="join">
+            <input class="join-item btn w-[33.3%] font-light input-sm"
+                   type="radio"
+                   name="sujets0"
+                   aria-label="Spé."
+                   checked />
+            <input class="join-item btn w-[33.3%] font-light input-sm"
+                   type="radio"
+                   name="sujets0"
+                   aria-label="Non Spé."
+                   disabled />
+            <input class="join-item btn w-[33.3%] font-light input-sm"
+                   type="radio"
+                   name="sujets0"
+                   aria-label="Techno"
+                   disabled />
+          </div>
+          <p class="label">Obligatoire, entre 1 et 50.</p>
+        </fieldset>
+      </div>
+    </div>
+
+    <fieldset class="fieldset">
+      <button type="submit" class="btn btn-outline w-full">Générer</button>
+    </fieldset>
+  </form>
+</div>
+
+<div class="p-4">
+  <div class="indicator">
+    <span id="nagini-dot" class="indicator-item badge badge-xs badge-warning"></span>
+    <span id="nagini-label" class="badge">Nagini loading…</span>
+  </div>
+</div>
+
+<div id="questions-preview-holder" class="my-8"></div>
+
+<div id="questions-generated-at-runtime-holder" class="card-content" hidden></div>
+
+<script type="module">
+    // Import Nagini directly from CDN
+    import {
+        Nagini
+    } from "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@0.0.5/src/nagini.js";
+
+    import {
+        QuestionFactory
+    } from "/static/js/core/question-factory.js";
+
+    // Get backend settings element
+    const backendSettings = document.getElementById("backend-public-settings");
+
+    // Extract pyodide worker URL from nagini settings
+    const naginiSettings = JSON.parse(backendSettings.dataset.nagini || '{}');
+    const pyodideWorkerUrl = naginiSettings.pyodide_worker_url;
+
+    // Extract arpege generator script paths (already correctly formatted)
+    const pythonFileUrls = JSON.parse(
+        backendSettings.dataset.arpege_generator_script_paths || '[]'
+    );
+
+    // Extract teachers files from nested teachers object
+    const teachersSettings = JSON.parse(backendSettings.dataset.teachers || '{}');
+    const teachersFilesToLoad = teachersSettings.files_to_load || [];
+
+    const managerBackend = "pyodide";
+    const micropipPackages = [];
+    const packages = ["sympy", "pydantic"];
+
+    const includeNaginiResult = true;
+    const includeMetadata = false;
+
+    let generatedQuestions = [];
+
+    async function arpegeGenerator() {
+        console.log("➡️ Arpege:Generator");
+
+        const nbQuestions = parseInt(document.getElementById('nb-questions').value) || 4;
+
+        const managerPromise = Nagini.createManager(
+            managerBackend,
+            packages,
+            micropipPackages,
+            teachersFilesToLoad,
+            pyodideWorkerUrl
+        );
+
+        const readyPromise = managerPromise.then((mgr) =>
+            Nagini.waitForReady(mgr).then(() => mgr)
+        );
+
+        readyPromise
+            .then(async (mgr) => {
+                displayIndicatorNaginiIsReady();
+                generatedQuestions = [];
+
+                // Clear preview holder before generating new questions
+                document.getElementById("questions-preview-holder").innerHTML = "";
+                document.getElementById("questions-generated-at-runtime-holder").innerHTML = "";
+
+                for (let i = 0; i < Math.min(nbQuestions, pythonFileUrls.length); i++) {
+                    const pythonFileUrl = pythonFileUrls[i];
+
+                    console.log(`➡️ Generating question from ${pythonFileUrl}`);
+
+                    try {
+                        const question = await QuestionFactory.createFromPyodide(
+                            pythonFileUrl,
+                            mgr,
+                            Nagini, // Pass Nagini class as parameter
+                            includeNaginiResult,
+                            includeMetadata
+                        );
+
+                        generatedQuestions.push(question);
+                        renderQuestion(question, document.getElementById("questions-generated-at-runtime-holder"));
+                    } catch (error) {
+                        console.error(`❌ Failed to generate question from ${pythonFileUrl}:`, error);
+                        const div = document.createElement("div");
+                        div.classList.add("mt-8");
+                        div.innerHTML = `
+            <div class="card card-error">
+              <div class="card-body shadow-lg mb-5">
+                    <div class="text-error">Erreur lors de la génération</div>
+                    <pre class="text-xs">${error}</pre>
+                </div>
+              </div>
+            </div>
+          `;
+                        document.getElementById("questions-generated-at-runtime-holder").appendChild(div);
+                    }
+                }
+                // Render preview after all questions are generated
+                renderQuestionsPreview(generatedQuestions);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+
+    async function renderQuestion(question, containerEl) {
+        const naginiResult = question.naginiResult;
+        const div = document.createElement("div");
+        div.classList.add("mt-8");
+        div.innerHTML = `
+          <div class="card">
+            <div class="card-body bg-base-200 shadow-lg mb-5">
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra table-sm">
+                        <tbody>
+                            <tr><td colspan="2" class="font-mono w-32 align-top text-right bg-primary/10">Metadata</td></tr>
+                            <tr><td class="font-mono w-32 align-top">Origin</td><td class="align-top"><code>${
+                             question.origin
+                            }</code></td></tr>
+                            <tr><td class="font-mono w-32 align-top">Python File</td><td class="font-mono text-xs align-top">${
+                                question.pythonFileUrl
+                            }</td></tr>
+                            <tr><td class="font-mono w-32 align-top">Beacon</td><td class="align-top">${
+                                question.beacon
+                            }</td></tr>
+                            <tr><td class="font-mono w-32 align-top">ID</td><td class="font-mono text-xs align-top">${
+                                question.id
+                            }</td></tr>
+                            <tr><td colspan="2" class="font-mono w-32 align-top text-right bg-primary/10">Question data</td></tr>
+                            <tr><td class="font-mono w-32 align-top">Statement</td><td id="statement-${question.id}" class="align-top">${
+                                question.statement
+                            }</td></tr>
+                            <tr><td class="font-mono w-32 align-top bg-base-300">Answer Latex</td><td class="align-top">$${
+                                question.answer.latex
+                            }$</td></tr>
+                            <tr><td class="font-mono w-32 align-top bg-base-300">Answer Simplified Latex</td><td class="align-top">$${
+                                question.answer.simplified_latex
+                            }$</td></tr>
+                            <tr><td class="font-mono w-32 align-top">Answer SymPy Expr Data</td><td class="align-top">
+                                <code>${question.answer.sympy_exp_data?.type || "N/A"}</code><br />
+                                <code>${question.answer.sympy_exp_data?.["sp.srepr"] || "N/A"}</code><br />
+                                <code>${question.answer.sympy_exp_data?.str || "N/A"}</code><br />
+                             </td></tr>
+                            <tr><td class="font-mono w-32 align-top">Answer Formal Repr</td><td class="align-top">${
+                                question.answer.formal_repr
+                            }</td></tr>
+                        </tbody>
+                    </table>
+                    <hr />
+                    <details>
+                        <summary class="font-mono pl-4">Stdout</summary>
+                        <pre style="padding: 1rem; border-radius: 0.5rem; overflow-x: auto; white-space: pre-wrap; font-family: monospace;">${
+                            naginiResult?.stdout
+                        }</pre>
+                    </details>
+                    <details>
+                        <summary class="font-mono pl-4">Stderr</summary>
+                        <pre style="padding: 1rem; border-radius: 0.5rem; overflow-x: auto; white-space: pre-wrap; font-family: monospace;">${
+                            naginiResult?.stderr
+                        }</pre>
+                    </details>
+                    <details>
+                        <summary class="font-mono pl-4">Complete Nagini Result</summary>
+                        <pre style="padding: 1rem; border-radius: 0.5rem; overflow-x: auto; white-space: pre-wrap; font-family: monospace;">${
+                            JSON.stringify(naginiResult, null, 2)
+                        }</pre>
+                    </details>
+                </div>
+            </div>
+          </div>
+        `;
+
+        containerEl.appendChild(div);
+
+        if (window.renderMathInElement) {
+            window.renderMathInElement(div, {
+                delimiters: [{
+                    left: "$$",
+                    right: "$$",
+                    display: true,
+                }, {
+                    left: "$",
+                    right: "$",
+                    display: false,
+                }, {
+                    left: "\\(",
+                    right: "\\)",
+                    display: false,
+                }, {
+                    left: "\\[",
+                    right: "\\]",
+                    display: true,
+                }, ],
+            });
+        }
+    }
+
+    /**
+     * Render a preview of the generated questions in the preview holder div.
+     * @param {Array} questions
+     */
+    function renderQuestionsPreview(questions) {
+        const previewHolder = document.getElementById("questions-preview-holder");
+        previewHolder.innerHTML = "";
+
+        if (!questions || questions.length === 0) {
+            previewHolder.innerHTML = '<div class="text-error">Aucune question générée.</div>';
+            return;
+        }
+
+        // Create a nice card for the preview
+        const card = document.createElement("div");
+        card.className = "card bg-base-100 shadow-lg";
+
+        const cardBody = document.createElement("div");
+        cardBody.className = "card-body";
+
+        const title = document.createElement("h3");
+        title.className = "card-title text-lg mb-4";
+        title.textContent = `${questions.length} question${questions.length > 1 ? 's' : ''} générée${questions.length > 1 ? 's' : ''}`;
+        cardBody.appendChild(title);
+
+        const list = document.createElement("ol");
+        list.style.paddingLeft = "1.5em";
+        list.style.fontSize = "1.1em";
+        list.style.lineHeight = "1.7";
+
+        questions.forEach((q, idx) => {
+            const li = document.createElement("li");
+            li.style.marginBottom = "1.5em";
+            li.innerHTML = q.statement;
+            list.appendChild(li);
+        });
+
+        cardBody.appendChild(list);
+        card.appendChild(cardBody);
+        previewHolder.appendChild(card);
+
+        // Render math if available
+        if (window.renderMathInElement) {
+            window.renderMathInElement(previewHolder, {
+                delimiters: [{
+                    left: "$$",
+                    right: "$$",
+                    display: true
+                }, {
+                    left: "$",
+                    right: "$",
+                    display: false
+                }, {
+                    left: "\\(",
+                    right: "\\)",
+                    display: false
+                }, {
+                    left: "\\[",
+                    right: "\\]",
+                    display: true
+                }, ],
+            });
+        }
+    }
+
+    function displayIndicatorNaginiIsReady() {
+        const naginiDot = document.getElementById("nagini-dot");
+        naginiDot.classList.replace("badge-warning", "badge-success");
+        const naginiLabel = document.getElementById("nagini-label");
+        naginiLabel.textContent = "Nagini ready";
+    }
+
+    document.getElementById('arpege-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        arpegeGenerator();
+    });
+</script>
+    </div>
+
+
+    <div class="space-y-6 tab-alt-content tab-alt-hidden" id="documentation-content">
+      <div>
+        <div class="font-heading text-xl mb-2">Documentation</div>
+        <div>
+          Consultez la documentation complète pour comprendre le fonctionnement de l'application et découvrir toutes les fonctionnalités disponibles.
+        </div>
+      </div>
+
+      <div>
+        <div class="font-heading text-xl mb-2">Génération d'exercices</div>
+        <div>
+          Cette application permet de générer des exercices inspirés des Sujets 0 du ministère de l'Éducation nationale. Ces exercices et leurs corrections sont générés aléatoirement grâce à un moteur de calcul formel.
+        </div>
+      </div>
+      <div>
+        <div class="font-heading text-xl mb-2">Fonctionnalités</div>
+        <div>
+          <ul class="list-disc list-inside mb-2">
+            <li>Génération automatique d'exercices QCM</li>
+            <li>Corrections détaillées avec explications</li>
+            <li>Moteur de calcul formel intégré</li>
+            <li>Exercices adaptés aux programmes officiels</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div>
+        <div class="font-heading text-xl mb-2">Guide d'utilisation</div>
+        <div>
+          <ul class="list-disc list-inside mb-2">
+            <li>Comment générer des exercices</li>
+            <li>Personnaliser les paramètres</li>
+            <li>Exporter les résultats</li>
+            <li>Intégrer dans vos cours</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="space-y-6 tab-alt-content tab-alt-hidden" id="subjects-content">
+      <div>
+        <div class="font-heading text-xl mb-2">Sujets 0 de juillet 2025</div>
+        <div>
+          Le ministère a publié :
+          <ul class="list-disc list-inside mb-2">
+            <li>2 sujets 0 pour l'enseignement de spécialité</li>
+            <li>3 sujets 0 pour l'enseignement spécifique</li>
+            <li>2 sujets 0 pour les filières technologiques</li>
+          </ul>
+          Chaque sujet est composé de 2 parties :
+          <ul class="list-disc list-inside mb-2">
+            <li>Partie 1 : QCM de 12 questions pour vérifier les automatismes</li>
+            <li>Partie 2 : 2 exercices entre l'application directe et la résolution de problèmes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <script>
+        console.log('Script is loading...');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded!');
+
+            // Get all tab buttons and content areas
+            const tabButtons = document.querySelectorAll('[data-tab]');
+            const tabContents = document.querySelectorAll('.tab-alt-content');
+
+            console.log('Found buttons:', tabButtons.length);
+            console.log('Found content areas:', tabContents.length);
+
+            // Log each button found
+            tabButtons.forEach((btn, index) => {
+                console.log(`Button ${index}:`, btn.getAttribute('data-tab'));
+            });
+
+            // Add click event listeners to all buttons
+            tabButtons.forEach(button => {
+                console.log('Adding listener to button:', button.getAttribute('data-tab'));
+
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('🔥 BUTTON CLICKED:', this.getAttribute('data-tab'));
+
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('btn-active');
+                        console.log('Removed active from:', btn.getAttribute('data-tab'));
+                    });
+
+                    // Add active class to clicked button
+                    this.classList.add('btn-active');
+                    console.log('Added active to:', this.getAttribute('data-tab'));
+
+                    // Get the tab name from data-tab attribute
+                    const tabName = this.getAttribute('data-tab');
+
+                    // Hide all tab contents
+                    tabContents.forEach(content => {
+                        content.classList.add('tab-alt-hidden');
+                        console.log('Hiding content:', content.id);
+                    });
+
+                    // Show the selected tab content
+                    const selectedContent = document.getElementById(tabName + '-content');
+                    console.log('Looking for content ID:', tabName + '-content');
+                    console.log('Selected content:', selectedContent);
+                    if (selectedContent) {
+                        selectedContent.classList.remove('tab-alt-hidden');
+                        console.log('✅ Showing content:', selectedContent.id);
+                    } else {
+                        console.log('❌ Content not found!');
+                    }
+                });
+            });
+        });
+
+        // Also add a simple test
+        console.log('Adding test click handler...');
+        setTimeout(() => {
+            const testButton = document.querySelector('[data-tab="generate"]');
+            console.log('Test button found:', testButton);
+            if (testButton) {
+                testButton.onclick = function() {
+                    console.log('DIRECT CLICK WORKED!');
+                };
+            }
+        }, 1000);
+    </script>
+  </div>
+
+    </main>
+
+    
+    
+
+    <!-- Navbar active state management -->
+    <script src="../static/js/navbar-active-state.js"></script>
+
+  </body>
+</html>
+
+
+<!-- Subscription Call-to-Action
+      <section class="my-12 p-6 bg-base-200 rounded-lg text-center">
+        <h2 class="text-2xl font-semibold mb-4">
+Subscribe to My Newsletter
+        </h2>
+        <p class="mb-6">
+Get the latest posts delivered straight to your inbox.
+        </p>
+        <form action="/subscribe" method="POST" class="flex justify-center">
+          <input type="email" placeholder="Enter your email" class="input input-bordered w-full max-w-xs mr-2" required />
+          <button type="submit" class="btn btn-primary">
+Subscribe
+          </button>
+        </form>
+      </section>
+       -->
