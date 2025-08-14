@@ -635,17 +635,17 @@ html:not(.pm-ready) [id^="radio-explanation-"] {
   margin-bottom: 0 !important;
 }
 
-
+/* 
 [id^="radio-feedback-"] .alert.alert-info {
   background-color: var(--color-primary-ghost) !important;
   color: var(--color-base-content);
-}
+} */
 
 /* DaisyUI alert primary + outline combo using root.css tokens */
 .alert.alert-primary.alert-outline {
-  background-color: var(--color-base-300) !important;
-  border: 1.5px solid var(--color-base-300) !important;
-  color: var(--color-base-content) !important;
+  background-color: var(--color-primary) !important;
+  border: 1.5px solid var(--color-primary-content) !important;
+  color: var(--color-primary-content) !important;
 }
 
 .alert.alert-primary.alert-outline * { color: inherit; }

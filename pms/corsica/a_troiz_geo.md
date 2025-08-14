@@ -49,7 +49,7 @@ Tandis que les lignes verticales sont des lignes de même :
 
 - Latitude {:21 | Sur une représentation plane, la latitude se lit verticalement, et correspond donc à une ligne horizontale.}
 - Longitude {:20 | Sur une représentation plane, la longitude se lit horizontalement, et correspond donc à une ligne verticale.}
-- General Info{:29 | Un petit moyen mnémotechnique : les voyelles sont croisées : la l**A**titude est une **O**rdonnée, tandis que la l**O**ngitude est une **A**bscisse.}
+- General Info{:29 | Un petit moyen mnémotechnique : les voyelles sont croisées : la l**A**titude se lit comme une **O**rdonnée, tandis que la l**O**ngitude se lit comme une **A**bscisse.}
   {: .i-radio}
 
 Pour exprimer des latitudes et longitudes, on utilise des unités de mesure spécifiques :
@@ -63,7 +63,7 @@ Pour exprimer des latitudes et longitudes, on utilise des unités de mesure spé
 
 ## 📍Ports d'Ajaccio et Bastia
 
-Sur la _Carte 2_, on a représenté les positions des ports d'Ajaccio et Bastia avec deux points deux couleurs différentes. Sachant que les coordonnées des ports de ces deux villes sont :
+Sur la _Carte 2_, on a représenté les positions des ports d'Ajaccio et Bastia avec deux points de deux couleurs différentes. Sachant que les coordonnées des ports de ces deux villes sont :
 
 
 ![Carte 2 : Corse, ports d'Ajaccio et Bastia](/static/pm/corsica/files/corsica_grid_with_cities.svg)
@@ -86,7 +86,7 @@ La couleur du bouton représente la couleur du point sur la carte. Parmi les 4 p
 - <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> Bastia {:20}
 - <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> Ajaccio {:20}
 - <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> Bastia {:21}
-- Ajaccio a la plus petite longitude et est donc plus à l'ouest que Bastia. Sa longitude est également plus petite que celle de Bastia, donc Ajaccio est plus au Sud. Donc le point <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> correspond à Ajaccio et le point <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> correspond à Bastia. {:29}
+- Ajaccio a la plus petite longitude et est donc plus à l'ouest que Bastia. Sa latitude est également plus petite que celle de Bastia, donc Ajaccio est plus au Sud. Donc le point <div class="badge badge-accent badge-xs" style="border-radius: 15rem;"></div> correspond à Ajaccio et le point <div class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></div> correspond à Bastia. {:29}
 {: .i-radio}
 
 
@@ -108,7 +108,7 @@ Nous nous sommes donc assurés de choisir un quadrillage qui tombe *"quasi-juste
 {: .mx-auto}
 
 
-💡 _Horitontalement, on compte 9 carrés, et verticalement 19 carrés._<br>
+💡 _Horizontalement, on compte 9 carrés, et verticalement 19 carrés._<br>
 Quelle est la surface totale représentée sur cette carte ? Tu exprimeras ton résultat en $km^2$, arrondi à l'unité (c'est à dire, sans virgule).
 {: .statement}
 
@@ -128,7 +128,7 @@ step: 100
 correct: 17100
 unit: "$km^2$"
 tolerance: 0
-feedback_correct: "$19 \\times 9 \\ times 10$ $km$ $\\times 10$ $km$ = 17100"
+feedback_correct: "$19 \\times 9 \\times 10$ $km$ $\\times 10$ $km$ = 17100"
 feedback_incorrect: "Réponse incorrecte."
 # hint: "They are arranged in 3 rows of 4 apples."
 ```
@@ -175,7 +175,7 @@ feedback_incorrect: "Réponse incorrecte."
 
 
 
-La surface colorée avec cette couleur <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span> correspond à la surface des carrés qui sont partiellement dans l'île. Calcule la surface totale représentées par les carrées colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> et <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span> en $km^2$.
+La surface colorée avec cette couleur <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span> correspond à la surface des carrés qui sont partiellement dans l'île. Calcule la surface totale représentée par les carrés colorés <span class="badge badge-secondary badge-xs" style="border-radius: 15rem;"></span> et <span class="badge badge-accent badge-xs" style="border-radius: 15rem;"></span> en $km^2$.
 {: .statement}
 
 
@@ -223,7 +223,7 @@ feedback_incorrect: "Réponse incorrecte."
 
 
 
-À l'aide d'une rechercher sur internet, calcule la différence entre la surface de l'île et la surface que tu as calculée ci-dessus.
+À l'aide d'une recherche sur internet, calcule la différence entre la surface de l'île et la surface que tu as calculée ci-dessus.
 {: .statement}
 
 
