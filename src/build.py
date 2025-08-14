@@ -243,7 +243,7 @@ class StaticSiteBuilder:
             shutil.copytree(src_static, dst_static, dirs_exist_ok=True)
             logger.info(f"✓ Copied static files to {dst_static}")
 
-        # Copy CNAME file for custom domain
+        # Copy CNAME file for custom domain (if exists)
         cname_file = Path("CNAME")
         if cname_file.exists():
             shutil.copy2(cname_file, self.output_dir / "CNAME")
