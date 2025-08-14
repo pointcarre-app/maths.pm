@@ -4,7 +4,7 @@ title_html: Cubrick
 # is_hidden: true
 is_beta: true
 subtitle_html: Animations & infographies
-description: Design et moteur d'animations utilisant Manim permettant de créer des infographies, des vidéos et des diapositives.
+description: "Manim-based animation engine with high-level API for generating mathematical visualizations, educational videos, and presentations."
 local_path: /cubrick
 source_link: https://framagit.org/your-org/pca-cubrick
 color: primary
