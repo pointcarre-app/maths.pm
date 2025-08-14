@@ -43,6 +43,10 @@ class ProductModel:
         """Convert to template context format."""
         return self.__dict__
 
+    def __repr__(self):
+        """Clean representation for logging."""
+        return f"ProductModel(name='{self.name}', type='{self.product_type or 'standard'}', hidden={self.is_hidden}, beta={self.is_beta})"
+
 
 class ProductSettings:
     """

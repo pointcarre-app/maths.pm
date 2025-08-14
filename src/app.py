@@ -79,9 +79,9 @@ def build_jupyterlite():
                 relative_source,
             ]
 
-            logger.info(f"Build command: {' '.join(build_cmd)}")
-            logger.info(f"Working directory: {jupyterlite_dir}")
-            logger.info(f"Contents path: {relative_source}")
+            logger.debug(f"Build command: {' '.join(build_cmd)}")
+            logger.debug(f"Working directory: {jupyterlite_dir}")
+            logger.debug(f"Contents path: {relative_source}")
 
             result = subprocess.run(build_cmd, capture_output=True, text=True, check=True)
             logger.info("✅ JupyterLite build completed successfully")
@@ -104,22 +104,23 @@ def build_jupyterlite():
         if files_dir.exists():
             data_files_dir = files_dir / "data"
             if data_files_dir.exists():
-                logger.info(f"✅ Data files found in {data_files_dir}")
-                # List what's actually there for debugging
-                for root, dirs, files in os.walk(data_files_dir):
-                    for file in files:
-                        rel_path = os.path.relpath(os.path.join(root, file), files_dir)
-                        logger.info(f"   📄 {rel_path}")
+                # Count files for summary
+                file_count = sum(1 for _, _, files in os.walk(data_files_dir) for _ in files)
+                logger.info(f"✅ JupyterLite data files ready: {file_count} files loaded")
             else:
                 logger.warning("⚠️  Data files directory not found in files/")
         else:
             logger.warning("⚠️  Files directory not found")
 
         # Check if main files exist
-        if (output_dir / "index.html").exists():
-            logger.info("✅ JupyterLite index.html created")
-        if (output_dir / "lab" / "index.html").exists():
-            logger.info("✅ JupyterLite lab/index.html created")
+        index_exists = (output_dir / "index.html").exists()
+        lab_exists = (output_dir / "lab" / "index.html").exists()
+        if index_exists and lab_exists:
+            logger.info("✅ JupyterLite interface ready at /jupyterlite/")
+        elif index_exists or lab_exists:
+            logger.warning("⚠️  JupyterLite partially built")
+        else:
+            logger.error("❌ JupyterLite build may have failed")
 
     except Exception as e:
         logger.error(f"❌ Failed to build JupyterLite content: {e}", exc_info=True)
@@ -188,7 +189,7 @@ async def cleanup_service_worker_issues():
             with open(service_worker_path, "w", encoding="utf-8") as f:
                 f.write(cache_buster + sw_content)
 
-            logger.info("✅ Service worker cache buster added")
+            logger.debug("✅ Service worker cache buster added")
         else:
             logger.debug("ℹ️  Service worker file not found, skipping cleanup")
 
@@ -201,10 +202,14 @@ async def lifespan(app: FastAPI):
     """
     Handle startup and shutdown events.
     """
-    logger.info("🚀 Starting Maths.pm FastAPI app...")
+    logger.info("=" * 60)
+    logger.info("🚀 Starting Maths.pm FastAPI Application")
+    logger.info(f"📍 Domain: {settings.domain_name}")
+    logger.info(f"🔗 URL: {settings.domain_config.domain_url or 'localhost'}")
+    logger.info("=" * 60)
     # 1) Optionally build JupyterLite
     if settings.jupyterlite_enabled:
-        logger.info("🔧 Building JupyterLite...")
+        logger.info("🔧 Preparing JupyterLite environment...")
         await async_build_jupyterlite()
 
     # 2) Copy entire pms/ to static/pm/ for stable static references
@@ -212,11 +217,8 @@ async def lifespan(app: FastAPI):
         pms_dir = settings.base_dir / "pms"
         static_pm_dir = settings.static_dir / "pm"
         if pms_dir.exists():
-            logger.info("📦 Rewriting pms/ to static/pm/ ...")
-
             # Remove existing static/pm/ directory to ensure a clean copy
             if static_pm_dir.exists():
-                logger.info("🗑️ Removing existing static/pm/ directory...")
                 rmtree(static_pm_dir)
 
             # Ensure destination exists
@@ -235,7 +237,9 @@ async def lifespan(app: FastAPI):
                         copy2(src_file, dest_file)
                     except Exception as e:
                         logger.warning(f"⚠️ Failed to copy {src_file} -> {dest_file}: {e}")
-            logger.info("✅ pms/ rewrite complete")
+            # Count files copied
+            file_count = sum(1 for _, _, files in os.walk(static_pm_dir) for _ in files)
+            logger.info(f"📦 Static PM files ready: {file_count} files copied from pms/")
         else:
             logger.info("ℹ️ pms/ directory not found; skipping static sync")
     except Exception as e:

@@ -184,6 +184,57 @@ class StaticSiteBuilder:
             logger.error(f"✗ Failed to fetch {path}: {e}")
             return False
 
+    def _generate_pm_routes(self) -> tuple:
+        """Dynamically generate routes for all files in pms/ directory
+
+        Returns:
+            tuple: (markdown_routes, asset_routes)
+                   markdown_routes: List of .md file routes
+                   asset_routes: List of other asset file routes (svg, html, etc.)
+        """
+        markdown_routes = []
+        asset_routes = []
+        pms_dir = Path("pms")
+
+        if pms_dir.exists():
+            logger.info("🔍 Scanning pms/ directory for all files...")
+
+            # Walk through all subdirectories and categorize files
+            for file_path in pms_dir.rglob("*"):
+                if file_path.is_file():
+                    # Convert file path to route path
+                    # Example: pms/corsica/a_troiz_geo.md -> /pm/corsica/a_troiz_geo.md
+                    relative_path = file_path.relative_to(pms_dir)
+                    route_path = f"/pm/{relative_path.as_posix()}"
+
+                    if file_path.suffix == ".md":
+                        markdown_routes.append(route_path)
+                    else:
+                        # Other assets (SVG, HTML, images, etc.)
+                        asset_routes.append(route_path)
+
+            logger.info(f"✓ Found {len(markdown_routes)} markdown files in pms/ directory")
+            logger.info(f"✓ Found {len(asset_routes)} asset files in pms/ directory")
+
+            # Log some examples for debugging
+            if markdown_routes:
+                logger.info("📝 Example PM markdown routes:")
+                for route in markdown_routes[:3]:  # Show first 3 as examples
+                    logger.info(f"   - {route}")
+                if len(markdown_routes) > 3:
+                    logger.info(f"   ... and {len(markdown_routes) - 3} more")
+
+            if asset_routes:
+                logger.info("🎨 Example PM asset routes:")
+                for route in asset_routes[:3]:  # Show first 3 as examples
+                    logger.info(f"   - {route}")
+                if len(asset_routes) > 3:
+                    logger.info(f"   ... and {len(asset_routes) - 3} more")
+        else:
+            logger.warning("⚠️ pms/ directory not found, skipping PM route generation")
+
+        return markdown_routes, asset_routes
+
     async def build(self) -> Dict:
         """Build the static site"""
         # Clean and create output directory
@@ -191,42 +242,74 @@ class StaticSiteBuilder:
             shutil.rmtree(self.output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-        # Define routes to export
+        # ====== CORE ROUTES ======
+        # Basic application routes
         routes = [
-            "/",
-            "/readme",
-            "/settings",
-            "/sujets0",
-            "/corsica/",  # Use trailing slash to avoid redirect
-            "/nagini",
-            "/api/health",
-            # "/api/products",  # This endpoint doesn't exist
-            "/api/settings",
-            "/kill-service-workers",
-            "/pm",  # PM root directory
+            "/",  # Main index page
+            "/readme",  # README/documentation page
+            "/settings",  # Settings view page
+            "/kill-service-workers",  # Service worker management
+            "/pm",  # PM root directory listing
         ]
 
-        # Add JupyterLite routes
+        # ====== API ROUTES ======
+        # All API endpoints from OpenAPI spec
+        api_routes = [
+            "/api/health",  # Health check endpoint
+            "/api/settings",  # Get public settings
+            "/api/settings/serialized",  # Get serialized settings
+            "/api/build",  # Build static site endpoint
+            # Note: Add any additional API routes here as needed
+        ]
+        routes.extend(api_routes)
+
+        # ====== API DOCUMENTATION ROUTES ======
+        # FastAPI auto-generated documentation
+        documentation_routes = [
+            "/openapi.json",  # OpenAPI JSON schema
+            "/docs",  # Swagger UI documentation
+            "/redoc",  # ReDoc documentation
+        ]
+        routes.extend(documentation_routes)
+
+        # ====== PRODUCT ROUTES ======
+        # Product-specific routes
+        product_routes = [
+            "/sujets0",  # Sujets0 product
+            "/corsica/",  # Corsica product (trailing slash to avoid redirect)
+            "/nagini",  # Nagini product
+        ]
+        routes.extend(product_routes)
+
+        # ====== JUPYTERLITE ROUTES ======
+        # JupyterLite and Jupyter compatibility routes
         jupyterlite_routes = [
-            "/jupyterlite/",
-            "/jupyterlite/lab",
-            "/jupyterlite/repl",
-            "/jupyterlite/embed",
-            "/jupyterlite/sandbox/repl",
+            "/jupyterlite/",  # JupyterLite main page
+            "/jupyterlite/lab",  # JupyterLite lab interface
+            "/jupyterlite/repl",  # JupyterLite REPL
+            "/jupyterlite/embed",  # JupyterLite embed mode
+            "/jupyterlite/sandbox/repl",  # Sandbox REPL
+            "/jupyter",  # Jupyter redirect (compatibility)
+            "/jupyter/repl",  # Jupyter REPL redirect (compatibility)
         ]
         routes.extend(jupyterlite_routes)
 
-        # Add PM example routes (these are important documentation)
-        # Note: PM routes need the .md extension
-        pm_routes = [
-            "/pm/documentation/README.md",
-            "/pm/examples/i_radio_example.md",
-            "/pm/pyly/00_index.md",
-            "/pm/pyly/01_premiers_pas.md",
-            "/pm/corsica/a_troiz_geo.md",
-            "/pm/corsica/e_seconde_stats_python.md",
-        ]
-        routes.extend(pm_routes)
+        # ====== PM (MARKDOWN) ROUTES ======
+        # Dynamically generate routes for all files in pms/ directory
+        # Markdown routes require the .md extension to work properly
+        # Examples:
+        #   /pm/documentation/README.md -> Documentation readme
+        #   /pm/corsica/a_troiz_geo.md -> Corsica geography content
+        #   /pm/pyly/00_index.md -> Python curriculum index
+        #   /pm/examples/i_radio_example.md -> Interactive radio example
+        #
+        # Asset routes serve static files (SVG, HTML, images, etc.)
+        # Examples:
+        #   /pm/corsica/files/corsica_grid.svg -> SVG graphics
+        #   /pm/corsica/files/header.html -> HTML templates
+        markdown_routes, asset_routes = self._generate_pm_routes()
+        routes.extend(markdown_routes)
+        routes.extend(asset_routes)
 
         # Fetch all routes
         results = []

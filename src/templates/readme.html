@@ -5,73 +5,88 @@
 {% endblock title %}
 
 {% block content %}
-  <div class="container mx-auto px-4 py-8">
-    <!-- Header -->
-    <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-primary mb-2">📚 Documentation</h1>
-      <p class="text-lg text-base-content/70">Complete guide to Maths.pm application</p>
-    </div>
 
-    <!-- Breadcrumb -->
-    <div class="breadcrumbs text-sm mb-6">
-      <ul>
-        <li>
-          <a href="{{ url_for('index') }}" class="link link-hover">Home</a>
-        </li>
-        <li>README</li>
-      </ul>
-    </div>
 
-    {% if error %}
-      <!-- Error State -->
-      <div class="alert alert-error">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="stroke-current shrink-0 h-6 w-6"
-             fill="none"
-             viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>{{ readme_content|safe }}</span>
-      </div>
-    {% else %}
-      <!-- README Content with DaisyUI Prose -->
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <!-- Table of Contents Button -->
-          <div class="flex justify-end mb-4">
-            <button class="btn btn-outline btn-sm" onclick="toggleTOC()">
+  <div class="bg-base-100">
+
+    <div class="container max-w-[960px] mx-auto">
+      <div class="">
+
+        <!-- README Content with DaisyUI Prose -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <!-- Table of Contents Button -->
+            <div class="flex justify-start mb-4">
+              <button class="btn btn-outline btn-sm" onclick="toggleTOC()">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-4 w-4 mr-1"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                Table of Contents
+              </button>
+            </div>
+
+            <!-- README Content with DaisyUI Prose Styling -->
+            <article class="prose prose-lg max-w-none prose-headings:text-primary prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:text-secondary prose-code:bg-base-200 prose-code:px-1 prose-code:rounded prose-pre:bg-base-200 prose-pre:text-base-content prose-blockquote:border-l-primary prose-blockquote:bg-base-200/50 prose-strong:text-primary prose-ul:list-disc prose-ol:list-decimal prose-table:table prose-table:table-zebra prose-th:bg-base-200 prose-th:text-primary prose-img:rounded-lg prose-img:shadow-lg">{{ readme_content|safe }}</article>
+          </div>
+        </div>
+
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold text-primary mb-2">📚 Documentation</h1>
+          <p class="text-lg text-base-content/70">Complete guide to Maths.pm application</p>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumbs text-sm mb-6">
+          <ul>
+            <li>
+              <a href="{{ url_for('index') }}" class="link link-hover">Home</a>
+            </li>
+            <li>README</li>
+          </ul>
+        </div>
+
+        {% if error %}
+          <!-- Error State -->
+          <div class="alert alert-error">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="stroke-current shrink-0 h-6 w-6"
+                 fill="none"
+                 viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{{ readme_content|safe }}</span>
+          </div>
+        {% else %}
+
+
+          <!-- Back to Top Button -->
+          <div class="fixed bottom-6 right-6">
+            <button class="btn btn-circle btn-primary shadow-lg"
+                    onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
               <svg xmlns="http://www.w3.org/2000/svg"
-                   class="h-4 w-4 mr-1"
+                   class="h-6 w-6"
                    fill="none"
                    viewBox="0 0 24 24"
                    stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
               </svg>
-              Table of Contents
             </button>
           </div>
+        {% endif %}
 
-          <!-- README Content with DaisyUI Prose Styling -->
-          <article class="prose prose-lg max-w-none prose-headings:text-primary prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:text-secondary prose-code:bg-base-200 prose-code:px-1 prose-code:rounded prose-pre:bg-base-200 prose-pre:text-base-content prose-blockquote:border-l-primary prose-blockquote:bg-base-200/50 prose-strong:text-primary prose-ul:list-disc prose-ol:list-decimal prose-table:table prose-table:table-zebra prose-th:bg-base-200 prose-th:text-primary prose-img:rounded-lg prose-img:shadow-lg">{{ readme_content|safe }}</article>
-        </div>
+
       </div>
 
-      <!-- Back to Top Button -->
-      <div class="fixed bottom-6 right-6">
-        <button class="btn btn-circle btn-primary shadow-lg"
-                onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               class="h-6 w-6"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-          </svg>
-        </button>
-      </div>
-    {% endif %}
+
+    </div>
+
   </div>
-
   <script>
       function toggleTOC() {
           // Simple TOC toggle - could be enhanced to show/hide a floating TOC
@@ -140,4 +155,5 @@
           });
       });
   </script>
+
 {% endblock content %}

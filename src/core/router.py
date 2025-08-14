@@ -6,6 +6,7 @@ Web Routes for Maths.pm Application
 HTML pages and user-facing routes
 """
 
+import logging
 import markdown
 from fastapi import APIRouter, Request, Query, HTTPException, Response
 from pathlib import Path
@@ -14,6 +15,9 @@ from fastapi.responses import JSONResponse
 import mimetypes
 
 from ..settings import settings, get_product_settings
+
+# Get the logger
+logger = logging.getLogger("maths_pm")
 from .pm.services.pm_runner import build_pm_from_file
 from .pm.services.pm_fs_service import (
     build_pm_tree,
@@ -37,7 +41,19 @@ class ORJSONPrettyResponse(JSONResponse):
 # Create sujets0 router
 core_router = APIRouter(tags=["core"])
 
-print(settings.products)
+# Log domain and product configuration at startup
+logger.info(
+    f"📍 Domain: {settings.domain_name} ({settings.domain_config.domain_url or 'localhost'})"
+)
+logger.info(f"📦 Products loaded: {len(settings.products)} total")
+for product in settings.products:
+    if not product.is_hidden:
+        logger.info(
+            f"   ✅ {product.name:<20} - {product.title_html[:40] if product.title_html else 'No title'}"
+        )
+if any(p.is_hidden for p in settings.products):
+    hidden_count = sum(1 for p in settings.products if p.is_hidden)
+    logger.info(f"   🔒 {hidden_count} hidden product(s) not shown")
 
 
 def _build_pm_tree(base_pms_dir: Path, root_dir: Path) -> dict:
