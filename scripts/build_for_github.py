@@ -47,19 +47,23 @@ async def fetch_and_save(client, route, output_dir, base_path="/maths.pm"):
 
         # Determine output path
         output_dir = Path(output_dir)
-        if route == "/":
+
+        # Remove query parameters from route for file path determination
+        route_path = route.split("?")[0]
+
+        if route_path == "/":
             output_path = output_dir / "index.html"
-        elif route.endswith("/"):
-            output_path = output_dir / route[1:] / "index.html"
-        elif "." in route.split("/")[-1]:
+        elif route_path.endswith("/"):
+            output_path = output_dir / route_path[1:] / "index.html"
+        elif "." in route_path.split("/")[-1]:
             # Has extension - convert .md to .html for PM routes
-            if route.endswith(".md") and route.startswith("/pm/"):
-                output_path = output_dir / route[1:].replace(".md", ".html")
+            if route_path.endswith(".md") and route_path.startswith("/pm/"):
+                output_path = output_dir / route_path[1:].replace(".md", ".html")
             else:
-                output_path = output_dir / route[1:]
+                output_path = output_dir / route_path[1:]
         else:
             # No extension, save as HTML
-            output_path = output_dir / f"{route[1:]}.html"
+            output_path = output_dir / f"{route_path[1:]}.html"
 
         # Create parent directories
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -89,6 +93,13 @@ async def fetch_and_save(client, route, output_dir, base_path="/maths.pm"):
                 content = content.replace('from "/static/', f'from "{base_path}/static/')
                 content = content.replace("from '@js/", f"from '{base_path}/static/js/")
                 content = content.replace('from "@js/', f'from "{base_path}/static/js/')
+
+            # Convert PM links from .md to .html and remove ?format=html
+            # This ensures links work in the static site
+            content = content.replace('.md?format=html"', '.html"')
+            content = content.replace(".md?format=html'", ".html'")
+            content = content.replace('.md"', '.html"')  # Convert any remaining .md links
+            content = content.replace(".md'", ".html'")
 
             output_path.write_text(content, encoding="utf-8")
         else:
@@ -183,7 +194,8 @@ async def build_static_site():
             # Get ALL markdown files
             for md_file in pms_dir.rglob("*.md"):
                 relative_path = md_file.relative_to(pms_dir)
-                route_path = f"/pm/{relative_path.as_posix()}"
+                # Add ?format=html to get rendered HTML instead of raw markdown
+                route_path = f"/pm/{relative_path.as_posix()}?format=html"
                 routes.append(route_path)
                 logger.info(f"  Added MD route: {route_path}")
 
