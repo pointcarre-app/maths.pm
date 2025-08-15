@@ -1,6 +1,6 @@
 name: corpus
 title_html: Corpus
-# is_hidden: true
+hidden: true
 is_beta: true
 subtitle_html: Base de données des programmes officiels
 description: "Une base de données contenant les programmes officiels de mathématiques du secondaire, structurée et accessible via API."

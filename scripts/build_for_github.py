@@ -67,7 +67,7 @@ async def fetch_and_save(client, route, output_dir, base_path="/maths.pm"):
         # Fix paths in HTML content
         if response.headers.get("content-type", "").startswith("text/html"):
             content = response.text
-            
+
             # CRITICAL: Remove all localhost URLs first
             content = content.replace("http://127.0.0.1:8000/", "/")
             content = content.replace("http://localhost:8000/", "/")

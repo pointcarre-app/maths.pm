@@ -1,4 +1,5 @@
 name: atlas
+hidden: true
 title_html: Atlas
 subtitle_html: Data and content atlas
 description: Internal atlas for organizing data and content across projects.

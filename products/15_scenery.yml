@@ -2,7 +2,7 @@ name: scenery
 product_type: "repo"
 title_html: Scenery
 subtitle_html: Visualizations and scenes
-description: Utilities for building visual scenes and visualizations for educational content.
+description: "Scenery makes integration tests easy & DRY via yamelization. Django focus for database access, all framework for JSON & HTML served assertion."
 local_path: "#"
 source_link: https://github.com/pointcarre-app/scenery
 color: success

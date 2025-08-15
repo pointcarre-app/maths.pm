@@ -3,12 +3,12 @@ title_html: JupyterLite
 # is_hidden: true
 is_beta: true
 subtitle_html: Environnement de calcul interactif
-description: "Un environnement JupyterLite complet proposant deux noyaux (kernels) : Python et p5.js"
+description: "Thank you to the JupyterLite team for the incredible work. Here, we make accessible via in-browser JupyterLab two kernels accessible: Python and p5.js."
 local_path: /jupyterlite/
 color: warning
 figure_png: /static/icons/jupyterlite-large.png
 classes_formatted:
-  - "🐍"
+  - ""
 tags:
   - jupyter
   - python
