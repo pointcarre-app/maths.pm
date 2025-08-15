@@ -28,6 +28,8 @@ export class PMNumberInput extends LitElement {
     this._status = null;
     this._message = '';
     this._locked = false;
+    this._resizeObservers = new WeakMap();
+    this._boundOnTransitionEnd = new WeakMap();
   }
 
   connectedCallback() {
@@ -39,6 +41,8 @@ export class PMNumberInput extends LitElement {
         try { this.data = JSON.parse(payload); } catch {}
       }
     }
+    // Initialize any existing feedback containers to be collapsed
+    this._initializeCollapsibles();
   }
 
   render() {
@@ -123,7 +127,13 @@ export class PMNumberInput extends LitElement {
     const idx = this._getFragmentIndex();
     const container = document.getElementById(`number-feedback-${idx}`);
     if (!container) return;
-    if (!this._status) { container.innerHTML = ''; return; }
+    
+    if (!this._status) { 
+      container.innerHTML = '';
+      this._collapse(container);
+      return; 
+    }
+    
     const ok = this._status === 'correct';
     const alerts = [];
     if (ok) {
@@ -136,7 +146,17 @@ export class PMNumberInput extends LitElement {
         alerts.push(`<div class="alert alert-soft alert-success mb-3"><span>${d.feedback_correct}</span></div>`);
       }
     }
-    container.innerHTML = alerts.join('');
+    
+    const htmlAlerts = alerts.join('');
+    container.innerHTML = htmlAlerts;
+    
+    // Expand container with animation if there's content
+    if (htmlAlerts) {
+      this._expand(container);
+    } else {
+      this._collapse(container);
+    }
+    
     // Render LaTeX in the feedback content
     this._renderLatex(container);
   }
@@ -218,6 +238,113 @@ export class PMNumberInput extends LitElement {
     this.requestUpdate();
     this._renderExternalFeedback();
   };
+
+  _initializeCollapsibles() {
+    // Find number feedback containers for this component's index
+    const idx = this._getFragmentIndex();
+    const container = document.getElementById(`number-feedback-${idx}`);
+    if (container) {
+      // Start fully collapsed without space
+      container.classList.add('pm-collapsed');
+      container.classList.remove('pm-open');
+      // Ensure no stale inline max-height
+      container.style.maxHeight = '0px';
+    }
+  }
+
+  _expand(el) {
+    if (!el) return;
+    // Measure content and set max-height to animate open
+    const target = Math.max(1, el.scrollHeight);
+    this._stripLegacyVisibilityClasses(el);
+    el.classList.add('pm-open');
+    el.classList.remove('pm-collapsed');
+    el.removeAttribute('aria-hidden');
+    el.style.opacity = '';
+    // First set to current computed height to allow transition from 0 → value
+    el.style.maxHeight = `${target}px`;
+    // Clean any accidental collapsed states on children
+    el.querySelectorAll('.pm-collapsed').forEach((child) => {
+      child.classList.remove('pm-collapsed');
+      if (child.style && 'maxHeight' in child.style) child.style.maxHeight = '';
+    });
+
+    // Dynamically grow height if content reflows (e.g., fonts/images/KaTeX)
+    this._observeDuringExpand(el);
+
+    // After transition completes, let it be auto height to prevent cropping
+    this._attachTransitionEnd(el, () => {
+      // If still open, clear explicit max-height so content can grow freely
+      if (el.classList.contains('pm-open')) {
+        el.style.maxHeight = '';
+      }
+      this._disconnectObserver(el);
+    });
+  }
+
+  _collapse(el) {
+    if (!el) return;
+    // Animate close by setting max-height to 0
+    this._stripLegacyVisibilityClasses(el);
+    // If max-height is not set (auto), set it to current height to enable transition
+    const computed = getComputedStyle(el).maxHeight;
+    if (!el.style.maxHeight || computed === 'none') {
+      el.style.maxHeight = `${Math.max(1, el.scrollHeight)}px`;
+      // Force reflow so the browser registers the starting height
+      // eslint-disable-next-line no-unused-expressions
+      el.offsetHeight;
+    }
+    el.style.maxHeight = '0px';
+    el.classList.add('pm-collapsed');
+    el.classList.remove('pm-open');
+    el.setAttribute('aria-hidden', 'true');
+    this._disconnectObserver(el);
+  }
+
+  _stripLegacyVisibilityClasses(el) {
+    const legacy = ['opacity-0', 'opacity-100', 'scale-95', 'scale-100', '-translate-y-2', '-translate-y-4', 'translate-y-0', 'pointer-events-none'];
+    legacy.forEach((cls) => el.classList.remove(cls));
+  }
+
+  _observeDuringExpand(el) {
+    // Avoid duplicate observers
+    if (this._resizeObservers.has(el)) return;
+    if (typeof ResizeObserver === 'function') {
+      const ro = new ResizeObserver(() => {
+        if (!el.classList.contains('pm-open')) return;
+        // Update to new content height while animating
+        el.style.maxHeight = `${Math.max(1, el.scrollHeight)}px`;
+      });
+      ro.observe(el);
+      this._resizeObservers.set(el, ro);
+    } else {
+      // Fallback: update a few times
+      let ticks = 0;
+      const id = setInterval(() => {
+        if (!el.classList.contains('pm-open') || ++ticks > 10) return clearInterval(id);
+        el.style.maxHeight = `${Math.max(1, el.scrollHeight)}px`;
+      }, 50);
+      this._resizeObservers.set(el, { disconnect() { clearInterval(id); } });
+    }
+  }
+
+  _disconnectObserver(el) {
+    const ro = this._resizeObservers.get(el);
+    if (ro && typeof ro.disconnect === 'function') ro.disconnect();
+    this._resizeObservers.delete(el);
+  }
+
+  _attachTransitionEnd(el, handler) {
+    const bound = (evt) => {
+      if (evt.propertyName !== 'max-height') return;
+      handler();
+    };
+    // Detach previous listener if any
+    const prev = this._boundOnTransitionEnd.get(el);
+    if (prev) el.removeEventListener('transitionend', prev);
+    el.addEventListener('transitionend', bound);
+    this._boundOnTransitionEnd.set(el, bound);
+  }
 }
 
 function withinTolerance(x, target, tol) {

@@ -8,14 +8,7 @@ Product-specific settings for configuration
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 
-from ..settings import settings
-
-from ..settings import get_product_settings
-
-
-PRODUCT_NAME = "corsica"
-# Get product-specific settings dynamically
-corsica_settings = get_product_settings(PRODUCT_NAME)
+from ..settings import settings, corsica_settings
 
 
 corsica_router = APIRouter(tags=["corsica"], prefix="/corsica")

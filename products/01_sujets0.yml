@@ -23,6 +23,39 @@ domains:
 owner_rdb: "Your Organization"
 owner_url: "https://example.org"
 
+# Product-specific metatags
+metatags:
+  # SEO metatags
+  title: "Sujets 0 - Générateur d'exercices pour l'épreuve anticipée de 1ère"
+  description: "Générez automatiquement des exercices similaires aux sujets 0 de l'épreuve anticipée de mathématiques. Valeurs aléatoires, corrigés détaillés."
+  keywords: "sujets 0, épreuve anticipée, première, mathématiques, exercices, générateur, QCM, automatismes"
+  robots: "index, follow"
+  
+  # Open Graph metatags
+  og:title: "Sujets 0 - Exercices mathématiques 1ère"
+  og:description: "Générateur automatique d'exercices pour l'épreuve anticipée de mathématiques en première. Entraînement avec corrigés."
+  og:image: "https://maths.pm/static/images/sujets0-preview.jpg"
+  og:type: "website"
+  og:url: "https://maths.pm/sujets0"
+  
+  # Twitter Card metatags
+  twitter:card: "summary_large_image"
+  twitter:title: "Sujets 0 - Générateur d'exercices"
+  twitter:description: "Préparez l'épreuve anticipée avec des exercices générés automatiquement"
+  twitter:image: "https://maths.pm/static/images/sujets0-twitter.jpg"
+  
+  # Dublin Core metatags
+  DC.title: "Générateur de sujets 0 pour l'épreuve anticipée"
+  DC.creator: "Maths.pm Sujets0"
+  DC.subject: "Mathématiques, Éducation, Évaluation"
+  DC.description: "Outil de génération d'exercices mathématiques"
+  
+  # Additional metatags
+  topic: "Évaluation et exercices mathématiques"
+  category: "Éducation, Mathématiques, Première"
+  revised: "2025-01-15"
+  pagename: "Sujets 0 - Générateur"
+
 # # Backend settings specific to Sujets0
 # backend_settings:
 #   # Local script paths for Arpege generator

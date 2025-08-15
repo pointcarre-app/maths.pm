@@ -9,7 +9,7 @@ the HTML responses.
 ## 📍 Testing: /corsica/
 **URL**: http://127.0.0.1:5001/corsica/
 **Product**: corsica
-**Timestamp**: 2025-08-15T21:43:58.170618
+**Timestamp**: 2025-08-15T22:24:27.913762
 
 ### 📊 Basic Information
 - **Page Title**: Maths.Corsica - Exercices mathématiques autour de la Corse
@@ -136,7 +136,7 @@ the HTML responses.
 ## 📍 Testing: /nagini
 **URL**: http://127.0.0.1:5001/nagini
 **Product**: nagini
-**Timestamp**: 2025-08-15T21:43:58.328472
+**Timestamp**: 2025-08-15T22:24:28.087380
 
 ### 📊 Basic Information
 - **Page Title**: Nagini - Python dans le navigateur pour l'éducation

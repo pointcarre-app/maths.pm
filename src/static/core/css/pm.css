@@ -503,13 +503,14 @@ pm-number-input {
 
 
 /* ==========================
-   Radio Alert Animations - Using Tailwind transition utilities
+   Radio & Number Alert Animations - Using Tailwind transition utilities
    ========================== */
 
-/* Base transition setup for all radio feedback/explanation areas */
+/* Base transition setup for all radio and number feedback/explanation areas */
 
 [id^="radio-feedback-"],
-[id^="radio-explanation-"] {
+[id^="radio-explanation-"],
+[id^="number-feedback-"] {
   /* Smooth transitions for height and transform */
   transition: max-height 280ms cubic-bezier(0.4, 0, 0.2, 1),
               transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -519,7 +520,8 @@ pm-number-input {
 
 /* Default to collapsed unless explicitly opened */
 [id^="radio-feedback-"]:not(.pm-open),
-[id^="radio-explanation-"]:not(.pm-open) {
+[id^="radio-explanation-"]:not(.pm-open),
+[id^="number-feedback-"]:not(.pm-open) {
   max-height: 0 !important;
   /* keep opacity controlled by classes on inner elements if needed */
   transform: scale(0.98) translateY(-0.25rem) !important;
@@ -539,9 +541,10 @@ pm-number-input {
   margin-bottom: 0.5rem;
 } */
 
-/* Prevent FOUC: hide radios/explanations until runtime marks pm-ready */
+/* Prevent FOUC: hide radios/explanations/number feedback until runtime marks pm-ready */
 html:not(.pm-ready) [id^="radio-feedback-"],
-html:not(.pm-ready) [id^="radio-explanation-"] {
+html:not(.pm-ready) [id^="radio-explanation-"],
+html:not(.pm-ready) [id^="number-feedback-"] {
   max-height: 0 !important;
   transform: scale(0.98) translateY(-0.25rem) !important;
   margin-top: 0 !important;
@@ -574,7 +577,8 @@ html:not(.pm-ready) [id^="radio-explanation-"] {
 
 /* Alert box color transitions */
 [id^="radio-feedback-"] .alert,
-[id^="radio-explanation-"] .alert {
+[id^="radio-explanation-"] .alert,
+[id^="number-feedback-"] .alert {
   transition: background-color 200ms ease,
               border-color 200ms ease,
               color 200ms ease;
@@ -586,12 +590,14 @@ html:not(.pm-ready) [id^="radio-explanation-"] {
 
 /* Kill possible left icon column gap from DaisyUI's alert if theme injects it */
 [id^="radio-feedback-"] .alert > :not([hidden]) ~ :not([hidden]),
-[id^="radio-explanation-"] .alert > :not([hidden]) ~ :not([hidden]) {
+[id^="radio-explanation-"] .alert > :not([hidden]) ~ :not([hidden]),
+[id^="number-feedback-"] .alert > :not([hidden]) ~ :not([hidden]) {
   margin-left: 0;
 }
 
 [id^="radio-feedback-"] .alert:where(*)::before,
-[id^="radio-explanation-"] .alert:where(*)::before {
+[id^="radio-explanation-"] .alert:where(*)::before,
+[id^="number-feedback-"] .alert:where(*)::before {
   display: none !important;
   content: none !important;
 }
@@ -621,13 +627,9 @@ html:not(.pm-ready) [id^="radio-explanation-"] {
   padding: 1rem !important;
 }
 
-/* Radio feedback alerts - match general text size */
+/* Radio and number feedback alerts - match general text size */
 [id^="radio-feedback-"] .alert,
-[id^="radio-explanation-"] .alert {
-  font-size: 1.1rem !important;
-}
-
-/* Number input feedback alerts - match general text size */
+[id^="radio-explanation-"] .alert,
 [id^="number-feedback-"] .alert {
   font-size: 1.1rem !important;
 }
