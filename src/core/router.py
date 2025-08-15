@@ -536,6 +536,52 @@ async def get_pm(
             "page": {"title": f"PM - {pm.title}"},
         }
 
+        # Extract page-specific metatags from PM metadata
+        pm_metatags = {}
+        if pm.metadata:
+            # Common metatags that might be in PM files
+            metatag_fields = [
+                "title",
+                "description",
+                "keywords",
+                "author",
+                "robots",
+                "og:title",
+                "og:description",
+                "og:image",
+                "og:url",
+                "og:type",
+                "twitter:card",
+                "twitter:title",
+                "twitter:description",
+                "twitter:image",
+                "DC.title",
+                "DC.creator",
+                "DC.subject",
+                "DC.description",
+                "abstract",
+                "topic",
+                "summary",
+                "category",
+                "revised",
+                "pagename",
+                "subtitle",
+                "canonical",
+            ]
+
+            # Extract any metatag fields from metadata
+            for field in metatag_fields:
+                if field in pm.metadata:
+                    pm_metatags[field] = pm.metadata[field]
+
+            # Also extract any fields that start with common metatag prefixes
+            for key, value in pm.metadata.items():
+                if any(key.startswith(prefix) for prefix in ["og:", "twitter:", "DC.", "itemprop"]):
+                    pm_metatags[key] = value
+
+        # Add PM metatags to context
+        context["pm_metatags"] = pm_metatags
+
         # Add product-specific context if settings are available
         if product_settings:
             context.update(

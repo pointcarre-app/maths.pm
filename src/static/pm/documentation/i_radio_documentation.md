@@ -2,6 +2,28 @@
 title: i-Radio Fragment Complete Documentation
 description: Complete technical documentation for the i-radio fragment system
 chapter: Documentation
+
+# Page-specific metatags
+title: "I Radio Documentation - Interactive Radio Button Components"
+description: "Guide for creating interactive radio button questions and quizzes in PM pages"
+keywords: "i_radio, radio buttons, interactive, quiz, questions, PM components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "I Radio Documentation"
+og:description: "Guide for creating interactive radio button questions and quizzes in PM pages"
+og:type: "article"
+og:url: "https://maths.pm/pm/documentation/i_radio_documentation.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "I Radio Documentation"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Components, Interactive, Documentation"
+revised: "2025-01-15"
+pagename: "I Radio Documentation"
+
 ---
 
 # i-Radio Fragment System Documentation

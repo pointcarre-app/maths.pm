@@ -2,6 +2,28 @@
 title: Text Fragments Guide
 description: Complete guide to text-based fragment types
 chapter: Documentation
+
+# Page-specific metatags
+title: "Text Fragments Guide - PM Fragments System"
+description: "Understanding and using the PM fragments architecture for content creation"
+keywords: "fragments, PM system, content, architecture, components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Text Fragments Guide"
+og:description: "Understanding and using the PM fragments architecture for content creation"
+og:type: "article"
+og:url: "https://maths.pm/pm/documentation/text_fragments_guide.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "Text Fragments Guide"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Architecture, Documentation"
+revised: "2025-01-15"
+pagename: "Text Fragments Guide"
+
 ---
 
 # 📝 Text Fragments Guide

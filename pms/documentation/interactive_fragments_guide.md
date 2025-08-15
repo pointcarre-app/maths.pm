@@ -2,6 +2,28 @@
 title: Interactive Fragments Guide
 description: Guide to all interactive fragment types for engaging learning
 chapter: Documentation
+
+# Page-specific metatags
+title: "Interactive Fragments Guide - PM Fragments System"
+description: "Understanding and using the PM fragments architecture for content creation"
+keywords: "fragments, PM system, content, architecture, components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Interactive Fragments Guide"
+og:description: "Understanding and using the PM fragments architecture for content creation"
+og:type: "article"
+og:url: "https://maths.pm/pm/documentation/interactive_fragments_guide.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "Interactive Fragments Guide"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Architecture, Documentation"
+revised: "2025-01-15"
+pagename: "Interactive Fragments Guide"
+
 ---
 
 # 🎯 Interactive Fragments Guide

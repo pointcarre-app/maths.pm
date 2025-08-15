@@ -1,5 +1,34 @@
 ---
 mode: full
+# Page-specific metatags
+title: "Python pour la spécialité Mathématiques - Programme complet"
+description: "Cours complet de Python pour les élèves de spécialité mathématiques. De la seconde à la terminale, apprenez la programmation appliquée aux mathématiques."
+keywords: "python, mathématiques, spécialité, lycée, programmation, algorithmes, statistiques, probabilités, analyse"
+author: "Maths.pm - Équipe Pyly"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Python pour la spé Maths - Cours complet"
+og:description: "Programme complet de Python pour la spécialité mathématiques au lycée. Bases du langage, algorithmes, statistiques et plus."
+og:image: "https://maths.pm/static/images/python-maths-cover.jpg"
+og:type: "website"
+og:url: "https://maths.pm/pm/pyly/"
+# Twitter Card metatags
+twitter:card: "summary_large_image"
+twitter:title: "Python pour les Maths - Programme lycée"
+twitter:description: "Cours structuré de Python pour la spécialité mathématiques"
+twitter:image: "https://maths.pm/static/images/python-maths-twitter.jpg"
+# Dublin Core metatags
+DC.title: "Curriculum Python pour la spécialité mathématiques"
+DC.creator: "Maths.pm Pyly"
+DC.subject: "Programmation Python, Mathématiques, Éducation"
+DC.description: "Programme structuré d'apprentissage de Python pour lycéens"
+# Additional metatags
+abstract: "Programme complet d'apprentissage de Python adapté au curriculum de spécialité mathématiques"
+topic: "Programmation Python et mathématiques"
+category: "Éducation, Programmation, Mathématiques"
+revised: "2025-01-15"
+pagename: "Index Python Spé Maths"
+canonical: "https://maths.pm/pm/pyly/"
 ---
 
 [TOC]

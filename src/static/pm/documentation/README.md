@@ -1,7 +1,33 @@
 ---
-title: PM Documentation Index
-description: Documentation hub for the Pedagogical Message system
+title: "PM Documentation Index - Système de messages pédagogiques"
+description: "Hub de documentation pour le système PM (Pedagogical Message). Guides complets, références et exemples pour créer du contenu éducatif interactif."
 chapter: Documentation
+keywords: "PM system, documentation, pedagogical message, fragments, guides, références, architecture, interactif"
+author: "Maths.pm - Équipe Documentation"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Documentation système PM - Hub central"
+og:description: "Documentation complète du système de messages pédagogiques pour créer du contenu éducatif riche et interactif."
+og:image: "https://maths.pm/static/images/pm-documentation-hub.jpg"
+og:type: "website"
+og:url: "https://maths.pm/pm/documentation/"
+# Twitter Card metatags
+twitter:card: "summary_large_image"
+twitter:title: "PM System Documentation Hub"
+twitter:description: "Guides et références pour le système PM"
+twitter:image: "https://maths.pm/static/images/pm-docs-twitter.jpg"
+# Dublin Core metatags
+DC.title: "Documentation du système de messages pédagogiques"
+DC.creator: "Maths.pm Documentation Team"
+DC.subject: "Documentation technique, Système éducatif, Architecture"
+DC.description: "Hub central de documentation technique"
+# Additional metatags
+abstract: "Point d'entrée central pour toute la documentation du système PM"
+topic: "Documentation système et architecture"
+category: "Documentation, Technique, Éducation"
+revised: "2025-01-15"
+pagename: "PM Documentation Hub"
+canonical: "https://maths.pm/pm/documentation/"
 ---
 
 # 📚 PM System Documentation

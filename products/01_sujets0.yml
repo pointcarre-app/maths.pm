@@ -1,0 +1,53 @@
+name: sujets0
+title_html: Sujets 0
+# is_hidden: true
+is_beta: true
+subtitle_html: Épreuve anticipée de 1ère
+description: Générer des exercices similaires aux sujets 0 pour l'épreuve anticipée en classe de 1<sup>ère</sup>, avec des valeurs aléatoires.
+local_path: /sujets0
+source_link: ""
+color: success
+figure_svg: sujets0-figure-svg.html
+classes_formatted:
+  - 2<sup>nde</sup>
+  - 1<sup>ère</sup>
+tags:
+  - education
+  - maths
+  - exam
+  - generator
+  - exercises
+domains:
+  - maths.pm
+
+owner_rdb: "Your Organization"
+owner_url: "https://example.org"
+
+# # Backend settings specific to Sujets0
+# backend_settings:
+#   # Local script paths for Arpege generator
+#   arpege_generator_script_paths:
+#     - "/static/py/services/sujets0/spe_sujet1_auto_01_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_02_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_03_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_04_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_05_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_06_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_07_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_08_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_09_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_10_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_11_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_12_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_01_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_02_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_03_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_04_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_05_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_06_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_07_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_08_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_09_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_10_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_11_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_12_question.py" 

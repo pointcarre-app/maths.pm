@@ -44,20 +44,34 @@ corsica_router = APIRouter(tags=["corsica"], prefix="/corsica")
 
 @corsica_router.get("/", response_class=HTMLResponse)
 async def corsica(request: Request):
-    # try:
-    # Build template context with product-specific settings
-    # context = {
-    #
-    # }
+    """Corsica index page with product-specific metatags and settings."""
 
-    return settings.templates.TemplateResponse(
-        "corsica/index.html",
-        {
-            "request": request,
-            "product_settings": corsica_settings.to_dict(),
-            # "page": {"title": "Nagini - Python dans le navigateur"},
-        },
-    )
+    # Build comprehensive context with product-specific settings
+    context = {
+        "request": request,
+    }
+
+    # Add product-specific context if available
+    if corsica_settings and corsica_settings.product:
+        # Get the product model directly
+        product = corsica_settings.product
+
+        context.update(
+            {
+                "product_name": product.name,
+                "product_title": product.title_html,
+                "product_description": product.description,
+                "product_settings": corsica_settings.to_dict(),
+                # Pass product metatags for template to use
+                "product_metatags": product.metatags,
+                # Pass backend settings if any
+                "product_backend_settings": product.backend_settings,
+                # Add the full product object for template access
+                "current_product": product,
+            }
+        )
+
+    return settings.templates.TemplateResponse("corsica/index.html", context)
 
 
 ## TODO: will be imported from root and dynamically rebuilt

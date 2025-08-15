@@ -2,6 +2,28 @@
 title: i-Radio Pre-Click Classes Test
 description: Testing the new pre-click CSS class functionality for i-radio fragments
 chapter: Examples
+
+# Page-specific metatags
+title: "I Radio Pre Click Classes Test - Interactive Radio Button Components"
+description: "Guide for creating interactive radio button questions and quizzes in PM pages"
+keywords: "i_radio, radio buttons, interactive, quiz, questions, PM components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "I Radio Pre Click Classes Test"
+og:description: "Guide for creating interactive radio button questions and quizzes in PM pages"
+og:type: "article"
+og:url: "https://maths.pm/pm/examples/i_radio_pre_click_classes_test.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "I Radio Pre Click Classes Test"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Components, Interactive, Documentation"
+revised: "2025-01-15"
+pagename: "I Radio Pre Click Classes Test"
+
 ---
 
 [TOC]

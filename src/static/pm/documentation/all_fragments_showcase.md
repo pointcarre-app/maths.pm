@@ -2,6 +2,28 @@
 title: Complete Fragment Showcase
 description: Comprehensive demonstration of all fragment types in the PM system
 chapter: Documentation
+
+# Page-specific metatags
+title: "All Fragments Showcase - PM Fragments System"
+description: "Understanding and using the PM fragments architecture for content creation"
+keywords: "fragments, PM system, content, architecture, components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "All Fragments Showcase"
+og:description: "Understanding and using the PM fragments architecture for content creation"
+og:type: "article"
+og:url: "https://maths.pm/pm/documentation/all_fragments_showcase.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "All Fragments Showcase"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Architecture, Documentation"
+revised: "2025-01-15"
+pagename: "All Fragments Showcase"
+
 ---
 
 [TOC]

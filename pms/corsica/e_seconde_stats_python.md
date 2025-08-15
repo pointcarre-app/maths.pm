@@ -1,5 +1,33 @@
 ---
 # chapter_rdb: Bases du langage Python
+# Page-specific metatags
+title: "Surface de la Corse avec Python - Statistiques et programmation"
+description: "Apprenez Python en calculant la surface de la Corse. Introduction à la programmation et aux statistiques pour lycéens de seconde."
+keywords: "python, corse, statistiques, programmation, seconde, lycée, surface, calcul, print, variables"
+author: "Maths.pm - Équipe Python Corsica"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Introduction à Python - Calcul de la surface de la Corse"
+og:description: "Cours interactif de Python pour débutants : apprenez à programmer en calculant la surface de la Corse."
+og:image: "https://maths.pm/images/computer-desk-old-169.jpg"
+og:type: "article"
+og:url: "https://maths.pm/pm/corsica/e_seconde_stats_python.md"
+# Twitter Card metatags
+twitter:card: "summary_large_image"
+twitter:title: "Python & Géographie de la Corse"
+twitter:description: "Apprenez Python en calculant des surfaces géographiques"
+twitter:image: "https://maths.pm/images/computer-desk-old-169.jpg"
+# Dublin Core metatags
+DC.title: "Introduction à Python avec la géographie corse"
+DC.creator: "Maths.pm Python Corsica"
+DC.subject: "Programmation, Python, Géographie, Mathématiques"
+DC.description: "Cours de programmation Python appliqué à la géographie"
+# Additional metatags
+abstract: "Introduction à la programmation Python à travers le calcul de surfaces géographiques"
+topic: "Programmation Python et statistiques"
+category: "Informatique, Mathématiques, Seconde"
+revised: "2025-01-15"
+pagename: "Python et surface de la Corse"
 ---
 
 [TOC]

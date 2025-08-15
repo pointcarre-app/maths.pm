@@ -1,3 +1,25 @@
+---
+# Page-specific metatags
+title: "Number Input Example - Number Input Components"
+description: "Interactive number input fields for mathematical exercises"
+keywords: "number input, forms, interactive, mathematics, components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Number Input Example"
+og:description: "Interactive number input fields for mathematical exercises"
+og:type: "article"
+og:url: "https://maths.pm/pm/examples/number_input_example.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "Number Input Example"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Components, Forms, Documentation"
+revised: "2025-01-15"
+pagename: "Number Input Example"
+---
 # NumberInputPCA – Example Snippets
 
 This file contains ready-to-copy YAML blocks for the upcoming NumberInputPCA fragment. Paste a block into your Markdown (inside a fenced code block) to describe a numeric question. Rendering will be handled by the frontend later.

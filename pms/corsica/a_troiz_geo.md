@@ -1,6 +1,34 @@
 ---
 # chapter_rdb: Bases du langage Python
 class_at_school: troiz
+# Page-specific metatags
+title: "Géographie de la Corse - Calcul de surfaces avec quadrillage"
+description: "Apprenez à calculer la surface de la Corse en utilisant un quadrillage géographique. Exercice de géométrie pour la classe de troisième avec cartes interactives."
+keywords: "corse, géographie, surface, quadrillage, mathématiques, troisième, géométrie, carte, latitude, longitude"
+author: "Maths.pm - Équipe pédagogique Corsica"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Géographie mathématique de la Corse - Calcul de surfaces"
+og:description: "Exercice interactif pour apprendre à calculer la surface de la Corse avec un quadrillage. Niveau troisième."
+og:image: "https://maths.pm/static/pm/corsica/files/corsica_grid_with_grid.svg"
+og:type: "article"
+og:url: "https://maths.pm/pm/corsica/a_troiz_geo.md"
+# Twitter Card metatags
+twitter:card: "summary_large_image"
+twitter:title: "Géographie de la Corse - Exercice de maths"
+twitter:description: "Calculez la surface de la Corse avec des méthodes géométriques simples"
+twitter:image: "https://maths.pm/static/pm/corsica/files/corsica_grid_with_grid.svg"
+# Dublin Core metatags
+DC.title: "Géographie mathématique de la Corse"
+DC.creator: "Maths.pm Corsica"
+DC.subject: "Mathématiques, Géographie, Corse"
+DC.description: "Exercice de calcul de surface géographique"
+# Additional metatags
+abstract: "Méthode de calcul de la surface d'une île en utilisant un quadrillage géographique"
+topic: "Géométrie appliquée à la géographie"
+category: "Mathématiques, Géographie"
+revised: "2025-01-15"
+pagename: "Géographie de la Corse - Calcul de surfaces"
 ---
 
 [TOC]

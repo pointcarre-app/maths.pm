@@ -2,6 +2,28 @@
 title: Code & Media Fragments Guide
 description: Guide for code blocks, images, and visual content fragments
 chapter: Documentation
+
+# Page-specific metatags
+title: "Code Media Fragments Guide - PM Fragments System"
+description: "Understanding and using the PM fragments architecture for content creation"
+keywords: "fragments, PM system, content, architecture, components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Code Media Fragments Guide"
+og:description: "Understanding and using the PM fragments architecture for content creation"
+og:type: "article"
+og:url: "https://maths.pm/pm/documentation/code_media_fragments_guide.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "Code Media Fragments Guide"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Architecture, Documentation"
+revised: "2025-01-15"
+pagename: "Code Media Fragments Guide"
+
 ---
 
 # 💻 Code & Media Fragments Guide

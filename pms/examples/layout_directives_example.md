@@ -1,5 +1,27 @@
 ---
 title: Layout directive example (two columns)
+
+# Page-specific metatags
+title: "Layout Directives Example - Layout Directives and Responsive Design"
+description: "Guide for creating responsive layouts with PM layout directives"
+keywords: "layout, responsive, directives, columns, PM design"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Layout Directives Example"
+og:description: "Guide for creating responsive layouts with PM layout directives"
+og:type: "article"
+og:url: "https://maths.pm/pm/examples/layout_directives_example.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "Layout Directives Example"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Layout, Design, Documentation"
+revised: "2025-01-15"
+pagename: "Layout Directives Example"
+
 ---
 
 # Layout directive example

@@ -56,8 +56,11 @@
     {% endif %}
 
     {# Page-specific defaults from index_view_specific_metatags - can be overridden #}
-    <meta name="description" content="{{ DOMAIN_CONFIG['index_view_specific_metatags']['description'] }}" />
-    <meta name="keywords" content="{{ DOMAIN_CONFIG['index_view_specific_metatags']['keywords'] }}" />
+    {# Only apply defaults if no product-specific metatags are provided #}
+    {% if not product_metatags %}
+      <meta name="description" content="{{ DOMAIN_CONFIG['index_view_specific_metatags']['description'] }}" />
+      <meta name="keywords" content="{{ DOMAIN_CONFIG['index_view_specific_metatags']['keywords'] }}" />
+    {% endif %}
     <meta name="author" content="{{ DOMAIN_CONFIG['domain_specific_metatags']['author'] }}" />
 
     <!-- Custom head elements from domain config -->
@@ -70,21 +73,24 @@
     {% endif %}
 
     <!-- 🎯 Smart Product Dependency Loader -->
-    {% set path_segments = request.url.path.strip('/').split('/') %}
-    {% set current_route = path_segments[0] if path_segments and path_segments[0] else '' %}
+    {# Only load if not already provided by product template #}
+    {% if not product_backend_settings %}
+      {% set path_segments = request.url.path.strip('/').split('/') %}
+      {% set current_route = path_segments[0] if path_segments and path_segments[0] else '' %}
 
-    {% if current_route %}
-      {% for product in products %}
-        {% if product.name == current_route and product.backend_settings %}
-          <!-- Loading {{ product.name }} dependencies (route: /{{ current_route }}) -->
-          {% for setting_key, setting_value in product.backend_settings.items() %}
-            {% if setting_value.js_url %}<script src="{{ setting_value.js_url }}"></script>{% endif %}
-            {% if setting_value.css_url %}
-              <link rel="stylesheet" href="{{ setting_value.css_url }}" />
-            {% endif %}
-          {% endfor %}
-        {% endif %}
-      {% endfor %}
+      {% if current_route %}
+        {% for product in products %}
+          {% if product.name == current_route and product.backend_settings %}
+            <!-- Auto-loading {{ product.name }} dependencies (route: /{{ current_route }}) -->
+            {% for setting_key, setting_value in product.backend_settings.items() %}
+              {% if setting_value.js_url %}<script src="{{ setting_value.js_url }}"></script>{% endif %}
+              {% if setting_value.css_url %}
+                <link rel="stylesheet" href="{{ setting_value.css_url }}" />
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
     {% endif %}
 
     <script>

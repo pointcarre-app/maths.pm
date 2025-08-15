@@ -1,5 +1,33 @@
 ---
 chapter_rdb: Bases du langage Python
+# Page-specific metatags
+title: "Premiers pas avec Python - Apprendre les bases de la programmation"
+description: "Découvrez Python étape par étape : fonction print, calculs de base, variables et types. Cours interactif pour débutants avec exercices pratiques."
+keywords: "python débutant, premiers pas, print, variables, types, int, float, str, programmation, tutoriel"
+author: "Maths.pm - Équipe Pyly"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Premiers pas avec Python - Guide pour débutants"
+og:description: "Apprenez les bases de Python : affichage, calculs, variables. Cours interactif avec exercices pratiques."
+og:image: "https://maths.pm/images/computer-desk-old-169.jpg"
+og:type: "article"
+og:url: "https://maths.pm/pm/pyly/01_premiers_pas.md"
+# Twitter Card metatags
+twitter:card: "summary_large_image"
+twitter:title: "Débuter avec Python - Les bases"
+twitter:description: "Guide complet pour apprendre Python depuis zéro"
+twitter:image: "https://maths.pm/images/computer-desk-old-169.jpg"
+# Dublin Core metatags
+DC.title: "Introduction à la programmation Python"
+DC.creator: "Maths.pm Pyly"
+DC.subject: "Programmation Python, Bases, Éducation"
+DC.description: "Cours d'introduction à Python pour débutants"
+# Additional metatags
+abstract: "Guide pas à pas pour apprendre les concepts fondamentaux de Python"
+topic: "Bases de la programmation Python"
+category: "Programmation, Éducation, Débutant"
+revised: "2025-01-15"
+pagename: "Premiers pas avec Python"
 ---
 
 [TOC]

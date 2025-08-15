@@ -2,6 +2,28 @@
 title: i-Radio Quick Reference
 description: Quick reference guide for i-radio fragments
 chapter: Documentation
+
+# Page-specific metatags
+title: "I Radio Quick Reference - Interactive Radio Button Components"
+description: "Guide for creating interactive radio button questions and quizzes in PM pages"
+keywords: "i_radio, radio buttons, interactive, quiz, questions, PM components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "I Radio Quick Reference"
+og:description: "Guide for creating interactive radio button questions and quizzes in PM pages"
+og:type: "article"
+og:url: "https://maths.pm/pm/documentation/i_radio_quick_reference.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "I Radio Quick Reference"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Components, Interactive, Documentation"
+revised: "2025-01-15"
+pagename: "I Radio Quick Reference"
+
 ---
 
 # i-Radio Quick Reference Guide

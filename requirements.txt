@@ -9,8 +9,6 @@ orjson==3.11.1 # should become standard for json
 pydantic==2.8.2
 pydantic_settings==2.9.1
 python-dotenv==1.1.0
-
-strictyaml==1.7.3 # should be used as much as possible
 uvicorn==0.34.0
 # gunicorn==23.0.0 # to decide about production
 #
@@ -33,6 +31,7 @@ jupyterlite-p5-kernel==0.1.1
 #
 bs4==0.0.2
 markdown==3.8.2 #  For README view
+strictyaml==1.7.3 # should be used as much as possible
 # minify-html==0.16.4 #  For future Products
 # sympy==1.14.0 # Maybe for future Products
 #

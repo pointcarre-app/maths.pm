@@ -2,6 +2,28 @@
 title: CSS Consistency Fixes
 description: Documentation of CSS updates to match new fragment structure
 chapter: Documentation
+
+# Page-specific metatags
+title: "Css Consistency Fixes - PM Fragments System"
+description: "Understanding and using the PM fragments architecture for content creation"
+keywords: "fragments, PM system, content, architecture, components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Css Consistency Fixes"
+og:description: "Understanding and using the PM fragments architecture for content creation"
+og:type: "article"
+og:url: "https://maths.pm/pm/documentation/css_consistency_fixes.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "Css Consistency Fixes"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Architecture, Documentation"
+revised: "2025-01-15"
+pagename: "Css Consistency Fixes"
+
 ---
 
 # CSS Consistency Fixes

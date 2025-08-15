@@ -1,8 +1,84 @@
 {% extends "base/main-alt.html" %}
 
-{% block view_specific_metatags %}
-  <title>python.corsica</title>
-{% endblock view_specific_metatags %}
+{% block title %}
+  {% if product_metatags and product_metatags.title %}
+    {{ product_metatags.title }}
+  {% else %}
+    Maths.Corsica - Exercices mathématiques autour de la Corse
+  {% endif %}
+{% endblock title %}
+
+{% block extra_head %}
+  {# Product-specific metatags override defaults #}
+  {% if product_metatags %}
+    {# SEO metatags #}
+    {% if product_metatags.description %}
+      <meta name="description" content="{{ product_metatags.description }}" />
+    {% endif %}
+    {% if product_metatags.keywords %}
+      <meta name="keywords" content="{{ product_metatags.keywords }}" />
+    {% endif %}
+    {% if product_metatags.robots %}
+      <meta name="robots" content="{{ product_metatags.robots }}" />
+    {% endif %}
+
+    {# Open Graph metatags #}
+    {% if product_metatags['og:title'] %}
+      <meta property="og:title" content="{{ product_metatags['og:title'] }}" />
+    {% endif %}
+    {% if product_metatags['og:description'] %}
+      <meta property="og:description" content="{{ product_metatags['og:description'] }}" />
+    {% endif %}
+    {% if product_metatags['og:image'] %}
+      <meta property="og:image" content="{{ product_metatags['og:image'] }}" />
+    {% endif %}
+    {% if product_metatags['og:url'] %}
+      <meta property="og:url" content="{{ product_metatags['og:url'] }}" />
+    {% endif %}
+
+    {# Twitter Card metatags #}
+    {% if product_metatags['twitter:card'] %}
+      <meta name="twitter:card" content="{{ product_metatags['twitter:card'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:title'] %}
+      <meta name="twitter:title" content="{{ product_metatags['twitter:title'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:description'] %}
+      <meta name="twitter:description" content="{{ product_metatags['twitter:description'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:image'] %}
+      <meta name="twitter:image" content="{{ product_metatags['twitter:image'] }}" />
+    {% endif %}
+
+    {# Dublin Core metatags #}
+    {% for key, value in product_metatags.items() %}
+      {% if key.startswith('DC.') %}<meta name="{{ key }}" content="{{ value }}" />{% endif %}
+    {% endfor %}
+
+    {# Any other custom metatags #}
+    {% if product_metatags.revised %}
+      <meta name="revised" content="{{ product_metatags.revised }}" />
+    {% endif %}
+    {% if product_metatags.topic %}
+      <meta name="topic" content="{{ product_metatags.topic }}" />
+    {% endif %}
+    {% if product_metatags.summary %}
+      <meta name="summary" content="{{ product_metatags.summary }}" />
+    {% endif %}
+    {% if product_metatags.category %}
+      <meta name="category" content="{{ product_metatags.category }}" />
+    {% endif %}
+  {% endif %}
+
+  {# Load product backend settings if any #}
+  {% if product_backend_settings %}
+    {% for service, settings in product_backend_settings.items() %}
+      {% if settings.js_url %}<script src="{{ settings.js_url }}"></script>{% endif %}
+      {% if settings.entrypoint_url %}<script src="{{ settings.entrypoint_url }}"></script>{% endif %}
+      {% if settings.css_url %}<link rel="stylesheet" href="{{ settings.css_url }}" />{% endif %}
+    {% endfor %}
+  {% endif %}
+{% endblock extra_head %}
 
 {% block modal_info_content %}
   {% include "sujets0/modal-info-content.html" %}

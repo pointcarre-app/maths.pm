@@ -2,6 +2,28 @@
 title: number_input – PM Fragment Guide
 description: Authoring and rendering guide for the number_input (number_) fragment using NumberInputPCA YAML.
 chapter: Documentation
+
+# Page-specific metatags
+title: "Number Input - Number Input Components"
+description: "Interactive number input fields for mathematical exercises"
+keywords: "number input, forms, interactive, mathematics, components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Number Input"
+og:description: "Interactive number input fields for mathematical exercises"
+og:type: "article"
+og:url: "https://maths.pm/pm/documentation/number_input.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "Number Input"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Components, Forms, Documentation"
+revised: "2025-01-15"
+pagename: "Number Input"
+
 ---
 
 # number_input – PM Fragment Guide

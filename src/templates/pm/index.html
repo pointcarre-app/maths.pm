@@ -1,8 +1,10 @@
 {% extends "base/main-alt.html" %}
 
 {% block title %}
-  {# Product metatags > PM title > Domain defaults #}
-  {% if product_settings and product_settings.product.metatags and product_settings.product.metatags.title %}
+  {# Priority: PM page metatags > Product metatags > PM title > Domain defaults #}
+  {% if pm_metatags and pm_metatags.title %}
+    {{ pm_metatags.title }}
+  {% elif product_settings and product_settings.product.metatags and product_settings.product.metatags.title %}
     {{ product_settings.product.metatags.title }}
   {% elif pm and pm.title %}
     {{ pm.title }} - {{ DOMAIN_CONFIG['index_view_specific_metatags']['title'] }}
@@ -34,8 +36,28 @@
 
   {# Todo: Ensure stability cross domains  / producs #}
 
-  {# Product-specific metatags override domain defaults #}
-  {% if product_settings and product_settings.product.metatags %}
+  {# PM page-specific metatags have highest priority #}
+  {% if pm_metatags %}
+    {% for key, value in pm_metatags.items() %}
+      {% if key not in ['title'] %}
+        {# Title is handled in title block #}
+        {% if key.startswith('og:') %}
+          <meta property="{{ key }}" content="{{ value }}" />
+        {% elif key.startswith('twitter:') %}
+          <meta name="{{ key }}" content="{{ value }}" />
+        {% elif key.startswith('DC.') %}
+          <meta name="{{ key }}" content="{{ value }}" />
+        {% elif key.startswith('itemprop') %}
+          <meta itemprop="{{ key.replace('itemprop-', '') }}" content="{{ value }}" />
+        {% elif key in ['description', 'keywords', 'author', 'robots', 'abstract', 'topic', 'summary', 'category', 'revised', 'pagename', 'subtitle'] %}
+          <meta name="{{ key }}" content="{{ value }}" />
+        {% else %}
+          <meta name="{{ key }}" content="{{ value }}" />
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% elif product_settings and product_settings.product.metatags %}
+    {# Product-specific metatags override domain defaults #}
     {% for key, value in product_settings.product.metatags.items() %}
       {% if key not in ['title'] %}
         {# Title is handled in title block #}
@@ -58,7 +80,7 @@
       {% endif %}
     {% endfor %}
   {% elif pm %}
-    {# Fallback to PM-based metadata if no product metatags #}
+    {# Fallback to PM-based metadata if no metatags #}
     <meta name="description"
           content="{{ pm.title }} - {{ pm.chapter if pm.chapter else 'Cours de mathématiques' }}" />
   {% endif %}
@@ -74,10 +96,10 @@
 
 {% block content %}
   <!-- djlint:off -->
-                                      {# styles moved to @css/pm.css #}
+                                        {# styles moved to @css/pm.css #}
 
-                                      <div class="sidebar-fixed hidden xl:block">
-                                        <div class="w-72 flex flex-col card">
+                                        <div class="sidebar-fixed hidden xl:block">
+                                          <div class="w-72 flex flex-col card">
       <div id="toc" class="p-4 flex-none text-left text-base-content/80">{{ pm.toc.html | safe }}</div>
     </div>
   </div>

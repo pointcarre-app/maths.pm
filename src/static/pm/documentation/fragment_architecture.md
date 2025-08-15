@@ -2,6 +2,28 @@
 title: Fragment Architecture Documentation
 description: Architectural decisions and patterns for PM fragment rendering
 chapter: Documentation
+
+# Page-specific metatags
+title: "Fragment Architecture - PM Fragments System"
+description: "Understanding and using the PM fragments architecture for content creation"
+keywords: "fragments, PM system, content, architecture, components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Fragment Architecture"
+og:description: "Understanding and using the PM fragments architecture for content creation"
+og:type: "article"
+og:url: "https://maths.pm/pm/documentation/fragment_architecture.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "Fragment Architecture"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Architecture, Documentation"
+revised: "2025-01-15"
+pagename: "Fragment Architecture"
+
 ---
 
 # Fragment Architecture Guide

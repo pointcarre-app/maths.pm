@@ -1,8 +1,61 @@
 {% extends "base/main-alt.html" %}
 
 {% block title %}
-  {{ product_title or "Nagini - Python dans le navigateur" }}
+  {% if product_metatags and product_metatags.title %}
+    {{ product_metatags.title }}
+  {% else %}
+    {{ product_title or "Nagini - Python dans le navigateur" }}
+  {% endif %}
 {% endblock title %}
+
+{% block extra_head %}
+  {# Product-specific metatags override defaults #}
+  {% if product_metatags %}
+    {# SEO metatags #}
+    {% if product_metatags.description %}
+      <meta name="description" content="{{ product_metatags.description }}" />
+    {% endif %}
+    {% if product_metatags.keywords %}
+      <meta name="keywords" content="{{ product_metatags.keywords }}" />
+    {% endif %}
+    {% if product_metatags.robots %}
+      <meta name="robots" content="{{ product_metatags.robots }}" />
+    {% endif %}
+
+    {# Open Graph metatags #}
+    {% if product_metatags['og:title'] %}
+      <meta property="og:title" content="{{ product_metatags['og:title'] }}" />
+    {% endif %}
+    {% if product_metatags['og:description'] %}
+      <meta property="og:description" content="{{ product_metatags['og:description'] }}" />
+    {% endif %}
+    {% if product_metatags['og:url'] %}
+      <meta property="og:url" content="{{ product_metatags['og:url'] }}" />
+    {% endif %}
+
+    {# Twitter Card metatags #}
+    {% if product_metatags['twitter:card'] %}
+      <meta name="twitter:card" content="{{ product_metatags['twitter:card'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:title'] %}
+      <meta name="twitter:title" content="{{ product_metatags['twitter:title'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:description'] %}
+      <meta name="twitter:description" content="{{ product_metatags['twitter:description'] }}" />
+    {% endif %}
+  {% endif %}
+
+  {# Load product backend settings (Nagini-specific scripts) #}
+  {% if product_backend_settings and product_backend_settings.nagini %}
+    {% set nagini_settings = product_backend_settings.nagini %}
+    {% if nagini_settings.js_url %}<script src="{{ nagini_settings.js_url }}"></script>{% endif %}
+    {% if nagini_settings.pyodide_worker_url %}
+      <script>
+          window.NAGINI_WORKER_URL = "{{ nagini_settings.pyodide_worker_url }}";
+      </script>
+    {% endif %}
+  {% endif %}
+{% endblock extra_head %}
 
 {% block content %}
   <div class="container mx-auto px-4 py-8">

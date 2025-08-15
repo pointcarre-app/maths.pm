@@ -2,6 +2,28 @@
 title: Interactive Radio Example
 description: Basic i-radio fragment with correct/wrong flag system
 chapter: Examples
+
+# Page-specific metatags
+title: "I Radio Example - Interactive Radio Button Components"
+description: "Guide for creating interactive radio button questions and quizzes in PM pages"
+keywords: "i_radio, radio buttons, interactive, quiz, questions, PM components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "I Radio Example"
+og:description: "Guide for creating interactive radio button questions and quizzes in PM pages"
+og:type: "article"
+og:url: "https://maths.pm/pm/examples/i_radio_example.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "I Radio Example"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Components, Interactive, Documentation"
+revised: "2025-01-15"
+pagename: "I Radio Example"
+
 ---
 
 

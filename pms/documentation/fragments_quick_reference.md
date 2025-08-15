@@ -2,6 +2,28 @@
 title: Fragments Quick Reference
 description: Quick reference for all PM fragment types
 chapter: Documentation
+
+# Page-specific metatags
+title: "Fragments Quick Reference - PM Fragments System"
+description: "Understanding and using the PM fragments architecture for content creation"
+keywords: "fragments, PM system, content, architecture, components"
+author: "Maths.pm - Documentation Team"
+robots: "index, follow"
+# Open Graph metatags
+og:title: "Fragments Quick Reference"
+og:description: "Understanding and using the PM fragments architecture for content creation"
+og:type: "article"
+og:url: "https://maths.pm/pm/documentation/fragments_quick_reference.md"
+# Twitter Card metatags
+twitter:card: "summary"
+twitter:title: "Fragments Quick Reference"
+twitter:description: "PM System Documentation"
+# Additional metatags
+topic: "PM System Documentation"
+category: "Architecture, Documentation"
+revised: "2025-01-15"
+pagename: "Fragments Quick Reference"
+
 ---
 
 # ⚡ Fragments Quick Reference
