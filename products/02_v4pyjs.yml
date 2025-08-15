@@ -6,6 +6,7 @@ description: Build KaTeX-compatible SVG from Python with a High-level API for ma
 local_path: "#"
 source_link: https://github.com/pointcarre-app/v4.py.js
 color: accent
+figure_svg: v4pyjs.html
 classes_formatted:
   - "Open Source"
 tags:

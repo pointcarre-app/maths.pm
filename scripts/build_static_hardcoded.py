@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-GitHub Pages static site builder with HARDCODED routes.
+HARDCODED static site builder that ACTUALLY WORKS.
 This script explicitly builds ALL routes to ensure nothing is missed.
-Specifically designed for deployment to https://pointcarre-app.github.io/maths.pm/
 """
 
 import asyncio
