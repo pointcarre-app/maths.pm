@@ -7,14 +7,14 @@
     <a href="/" class="navbar-alt-title-mobile">{{ DOMAIN_CONFIG['templating']['navbar_title'] }}</a>
   </div>
   <div class="navbar-center">
-    <div class="text-2xl sm:text-3xl">
+    <div class="text-xl sm:text-3xl">
       {% block navbar_title %}
         <a href="/" class="font-handwritten">{{ DOMAIN_CONFIG['templating']['navbar_title'] }}</a>
       {% endblock navbar_title %}
     </div>
   </div>
   <div class="navbar-end gap-2 sm:pl-18">
-    <button class="btn btn-xs sm:btn-base btn-square btn-ghost"
+    <button class="btn btn-square btn-ghost"
             onclick="my_modal_1.showModal()"
             style="box-shadow: none !important;
                    border: none !important;
@@ -38,7 +38,7 @@
     <dialog id="my_modal_1" class="modal">
       <div class="modal-box">{% include "base/modal-info-content.html" %}</div>
     </dialog>
-    <a class="btn btn-sm sm:btn-base btn-square btn-ghost"
+    <a class="btn  btn-square btn-ghost"
        style="box-shadow: none !important;
               border: none !important;
               font-weight:400">
@@ -58,12 +58,12 @@
       </svg>
     </a>
     <a href="{{ DOMAIN_CONFIG['templating']['button_primary_href'] }}"
-       class="btn btn-sm sm:btn-base btn-primary"
+       class="btn btn-sm sm:btn-md  btn-primary"
        style="padding: 0.5rem 0.75rem;
               box-shadow: none !important;
               font-weight:300">{{ DOMAIN_CONFIG['templating']['button_primary_text'] }}</a>
     <a href="{{ DOMAIN_CONFIG['templating']['button_ghost_href'] }}"
-       class="btn btn-sm sm:btn-base btn-ghost"
+       class="btn btn-sm sm:btn-md btn-ghost"
        style="padding: 0.5rem 0.75rem;
               box-shadow: none !important;
               font-weight:300">{{ DOMAIN_CONFIG['templating']['button_ghost_text'] }}</a>
