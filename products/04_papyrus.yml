@@ -6,6 +6,7 @@ description: "Build and print maths friendly PDFs. You can use JSON and HTML inp
 local_path: "#"
 source_link: https://github.com/pointcarre-app/papyrus
 color: warning
+figure_svg: papyrus-figure-svg.html
 classes_formatted:
   - "Open Source"
 tags:
