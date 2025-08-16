@@ -1,10 +1,24 @@
 {
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-6]",
+  "statement": "Calculer $10^{2} + 0,0001 + \\dfrac{1}{1000}$.",
+  "answer": {
+    "latex": "10^{2} + 0,0001 + \\dfrac{1}{1000}",
+    "simplified_latex": "100,00110000000001",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Rational(1, 1000), Add(Rational(1, 10000), Pow(Integer(10), Integer(2))))",
+      "str": "1/1000 + (1/10000 + 10**2)"
+    },
+    "formal_repr": "Add(l=Add(l=Pow(base=Integer(n=10), exp=Integer(n=2)), r=Decimal(p=1, q=10000)), r=Fraction(p=Integer(n=1), q=Integer(n=1000)))"
+  },
+  "components": {
+    "a": "10^{2}",
+    "b": "0,0001",
+    "c": "\\dfrac{1}{1000}"
+  },
   "seed": 54,
   "generator": "gen_sujet1_auto_06_question",
-  "success": false,
-  "error": "Simplification of Add of <class 'teachers.maths.Integer'> and <class 'teachers.maths.Decimal'>\nl=Integer(n=100)\nr=Decimal(p=1, q=10000)",
-  "error_type": "NotImplementedError",
-  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet1_auto_06_question.py\", line 73, in <module>\n    \"simplified_latex\": answer[\"maths_object\"].simplified().latex(),\n                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 397, in simplified\n    l, r = self.l.simplified(), self.r.simplified()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 438, in simplified\n    raise NotImplementedError(\n        f\"Simplification of Add of {type(l)} and {type(r)}\\n{l=}\\n{r=}\"\n    )\nNotImplementedError: Simplification of Add of <class 'teachers.maths.Integer'> and <class 'teachers.maths.Decimal'>\nl=Integer(n=100)\nr=Decimal(p=1, q=10000)\n",
+  "success": true,
   "stdout": "",
   "stderr": ""
 }

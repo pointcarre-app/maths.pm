@@ -543,10 +543,7 @@
     {
       "name": "gen_sujet1_auto_06_question",
       "file": "gen_sujet1_auto_06_question.py",
-      "questions": [],
-      "successful": 0,
-      "failed": 100,
-      "failed_seeds": [
+      "questions": [
         0,
         1,
         2,
@@ -647,7 +644,9 @@
         97,
         98,
         99
-      ]
+      ],
+      "successful": 100,
+      "failed": 0
     },
     {
       "name": "gen_sujet1_auto_07_question",
@@ -6406,9 +6405,9 @@
       "failed": 0
     }
   ],
-  "total_questions": 4572,
+  "total_questions": 4672,
   "total_attempts": 5900,
-  "total_successful": 4572,
-  "total_failed": 1328,
+  "total_successful": 4672,
+  "total_failed": 1228,
   "seeds_per_generator": 100
 }
