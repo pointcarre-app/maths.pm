@@ -104,11 +104,35 @@ async def sujets0_ex_ante_generated(request: Request):
         with open(index_file, "r", encoding="utf-8") as f:
             index_data = json.load(f)
 
+        # Filter generators to only include gen_ and spe_ with 4 underscores
+        import re
+
+        pattern = re.compile(r"^(gen|spe)_[^_]+_[^_]+_[^_]+_question$")
+
+        filtered_generators = []
+        total_questions = 0
+        total_failed = 0
+
+        for generator in index_data.get("generators", []):
+            if pattern.match(generator["name"]):
+                filtered_generators.append(generator)
+                total_questions += generator.get("successful", 0)
+                total_failed += generator.get("failed", 0)
+
+        # Create filtered index data
+        filtered_index_data = {
+            **index_data,
+            "generators": filtered_generators,
+            "total_questions": total_questions,
+            "total_failed": total_failed,
+            "total_generators": len(filtered_generators),
+        }
+
         # Build context for template
         context = {
             "request": request,
             "page": {"title": "Questions Pré-générées - Sujets 0"},
-            "questions_index": index_data,
+            "questions_index": filtered_index_data,
             "questions_base_url": "/static/sujets0/questions/",
         }
 
@@ -124,7 +148,7 @@ async def sujets0_ex_ante_generated(request: Request):
                 {
                     "product_name": sujets0_product.name,
                     "product_title": "Questions Pré-générées",
-                    "product_description": f"{index_data.get('total_questions', 0)} questions disponibles instantanément",
+                    "product_description": f"{filtered_index_data.get('total_questions', 0)} questions disponibles instantanément",
                     "product_metatags": sujets0_product.metatags,
                     "current_product": sujets0_product,
                 }
@@ -169,9 +193,19 @@ async def sujets0_ex_ante_generated_error_analysis(request: Request):
         with open(index_file, "r", encoding="utf-8") as f:
             index_data = json.load(f)
 
+        # Filter generators to only include gen_ and spe_ with 4 underscores
+        import re
+
+        pattern = re.compile(r"^(gen|spe)_[^_]+_[^_]+_[^_]+_question$")
+
+        filtered_generators = []
+        for generator in index_data.get("generators", []):
+            if pattern.match(generator["name"]):
+                filtered_generators.append(generator)
+
         # Collect all error data
         errors = []
-        for generator in index_data.get("generators", []):
+        for generator in filtered_generators:
             if generator.get("failed", 0) > 0:
                 # Load error details for each failed seed
                 gen_dir = questions_dir / generator["name"]
@@ -199,9 +233,9 @@ async def sujets0_ex_ante_generated_error_analysis(request: Request):
             "page": {"title": "Error Analysis - Questions Pré-générées"},
             "errors": errors,
             "total_errors": len(errors),
-            "total_generators": len(index_data.get("generators", [])),
+            "total_generators": len(filtered_generators),
             "generators_with_errors": len(
-                [g for g in index_data.get("generators", []) if g.get("failed", 0) > 0]
+                [g for g in filtered_generators if g.get("failed", 0) > 0]
             ),
         }
 

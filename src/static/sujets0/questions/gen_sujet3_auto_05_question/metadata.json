@@ -1,10 +1,7 @@
 {
   "name": "gen_sujet3_auto_05_question",
   "file": "gen_sujet3_auto_05_question.py",
-  "questions": [],
-  "successful": 0,
-  "failed": 100,
-  "failed_seeds": [
+  "questions": [
     0,
     1,
     2,
@@ -105,5 +102,7 @@
     97,
     98,
     99
-  ]
+  ],
+  "successful": 100,
+  "failed": 0
 }

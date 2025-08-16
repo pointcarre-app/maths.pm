@@ -121,7 +121,10 @@ n
 
 ```bash
 Simplification of Mul of <class 'teachers.maths.Integer'> and <class...
- 
+```
+
+
+```bash
 Traceback complet:
 Traceback (most recent call last):
   File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
@@ -184,6 +187,10 @@ r=Mul(l=Integer(n=3), r=Symbol(s='x'))
 Erreur de génération
 'Integer' object has no attribute 'as_decimal'
 Type: AttributeError
+```
+
+
+```bash
 Traceback complet
 Traceback (most recent call last):
   File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
@@ -294,6 +301,10 @@ AttributeError: 'Integer' object has no attribute 'as_percent'
 Erreur de génération
 1 validation error for Fraction q Value error, Denominator cannot be zero [type=value_error, input_value=Integer(n=0), input_type=Integer] For further information visit https://errors.pydantic.dev/2.11/v/value_error
 Type: ValidationError
+```
+
+
+```bash
 Traceback complet
 Traceback (most recent call last):
   File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
@@ -350,4 +361,88 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
         "x2": x2,
         "y2": y2,
     }
+```
+
+
+
+## `gen_sujet3_auto_05_question.py`
+
+
+
+### Diag
+
+
+```bash
+Erreur de génération
+Simplification of Mul of and l=Decimal(p=23, q=25) r=Function(name=V)(Symbol(s='n'))
+Type: NotImplementedError
+Traceback complet
+```
+
+
+### Fix from teachers
+
+
+
+```markdown
+
+## [0.0.12] - 2025-01-16
+
+### Enhanced
+- **Mul.simplified() Extensions**: Added comprehensive Pi multiplication cases
+  - `Integer * Pi` and `Pi * Integer` combinations
+  - `Decimal * Pi` and `Pi * Decimal` combinations  
+  - `Fraction * Pi` and `Pi * Fraction` combinations
+  - `Pi * Pow` combinations for expressions like π * r²
+  - Proper coefficient ordering maintains mathematical notation standards
+
+```
+
+
+
+## `gen_sujet2_auto_09_question.py`
+
+
+### Diag
+
+
+```bash
+Erreur de génération
+module 'teachers.maths' has no attribute 'Pi'
+Type: AttributeError
+```
+
+```bash
+Traceback (most recent call last):
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
+    module = load_generator_module(generator_file)
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 46, in load_generator_module
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "", line 1026, in exec_module
+  File "", line 488, in _call_with_frames_removed
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_09_question.py", line 55, in 
+    components = generate_components(None)
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_09_question.py", line 18, in generate_components
+    r=tm.Fraction(p=1, q=3) * tm.Pi() * r**tm.Integer(n=2) * h,
+                              ^^^^^
+AttributeError: module 'teachers.maths' has no attribute 'Pi'
+```
+
+
+### Fix from teachers
+
+
+```markdown
+## [0.0.12] - 2025-01-16
+
+### Added
+- **Pi (π) Mathematical Constant**: New `Pi` class for geometric calculations and mathematical formulas
+  - Full SymPy integration with `sp.pi` for exact symbolic computation
+  - Proper LaTeX rendering (`\\pi`) with coefficient-first notation (2π, (1/3)π, 0.5π)
+  - Numerical evaluation matching `math.pi` for calculations
+  - Complete multiplication support with Integer, Decimal, and Fraction coefficients
+  - Addition operations with other mathematical objects
+  - Perfect for geometric formulas: circle area (πr²), circumference (2πr), volumes ((4/3)πr³)
+
 ```
