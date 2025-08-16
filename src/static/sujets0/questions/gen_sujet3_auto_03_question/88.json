@@ -1,9 +1,9 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
-  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $40,8\\%$ ?",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $40.8\\%$ ?",
   "answer": {
-    "latex": "0,592",
-    "simplified_latex": "0,592",
+    "latex": "0.592",
+    "simplified_latex": "0.592",
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(74, 125)",

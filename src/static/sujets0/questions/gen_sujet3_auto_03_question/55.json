@@ -1,9 +1,9 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
-  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $9,3\\%$ ?",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $9.3\\%$ ?",
   "answer": {
-    "latex": "0,907",
-    "simplified_latex": "0,907",
+    "latex": "0.907",
+    "simplified_latex": "0.907",
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(907, 1000)",

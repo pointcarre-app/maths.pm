@@ -2,8 +2,8 @@
   "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
   "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $91\\%$ ?",
   "answer": {
-    "latex": "0,09",
-    "simplified_latex": "0,09",
+    "latex": "0.09",
+    "simplified_latex": "0.09",
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(9, 100)",

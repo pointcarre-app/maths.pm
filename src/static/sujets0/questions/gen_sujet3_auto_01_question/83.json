@@ -1,10 +1,28 @@
 {
+  "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-1]",
+  "statement": "Donner l'ordre de grandeur de $99990 \\times 99900$.",
+  "answer": {
+    "latex": "10^{10}",
+    "simplified_latex": "10000000000",
+    "sympy_exp_data": {
+      "type": "Pow",
+      "sp.srepr": "Pow(Integer(10), Integer(10))",
+      "str": "10**10"
+    },
+    "formal_repr": "Pow(base=Integer(n=10), exp=Integer(n=10))"
+  },
+  "components": {
+    "a": "99990",
+    "b": "99900",
+    "n1": "5",
+    "n2": "5",
+    "n3": "1",
+    "n4": "2",
+    "expr": "99990 \\times 99900"
+  },
   "seed": 83,
   "generator": "gen_sujet3_auto_01_question",
-  "success": false,
-  "error": "'Integer' object has no attribute 'as_decimal'",
-  "error_type": "AttributeError",
-  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet3_auto_01_question.py\", line 69, in <module>\n    components = generate_components(None)\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet3_auto_01_question.py\", line 20, in generate_components\n    a = a.simplified().as_decimal\n        ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selim/madles/pca-mathspm/env/lib/python3.13/site-packages/pydantic/main.py\", line 991, in __getattr__\n    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')\nAttributeError: 'Integer' object has no attribute 'as_decimal'\n",
+  "success": true,
   "stdout": "",
   "stderr": ""
 }

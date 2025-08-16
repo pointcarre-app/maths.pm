@@ -2,8 +2,8 @@
   "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
   "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $15\\%$ ?",
   "answer": {
-    "latex": "0,85",
-    "simplified_latex": "0,85",
+    "latex": "0.85",
+    "simplified_latex": "0.85",
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(17, 20)",

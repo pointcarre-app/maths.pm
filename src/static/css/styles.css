@@ -11,14 +11,14 @@ html {
 body {
   font-family: var(--font-body);
   font-weight: 300;
-  scrollbar-width: none;
+  /* scrollbar-width: none; */
   -ms-overflow-style: none;
 }
 
 /**************** Scrollbar ****************/
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   display: none;
-}
+} */
 
 
 

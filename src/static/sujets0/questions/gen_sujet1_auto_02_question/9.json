@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-2]",
-  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\dfrac{3}{4}$, $B=\\dfrac{79}{100}$, $C=0,48$",
+  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\dfrac{3}{4}$, $B=\\dfrac{79}{100}$, $C=0.48$",
   "answer": {
     "latex": "\\dfrac{79}{100}",
     "simplified_latex": "\\dfrac{79}{100}",
@@ -14,7 +14,7 @@
   "components": {
     "a": "\\dfrac{3}{4}",
     "b": "\\dfrac{79}{100}",
-    "c": "0,48"
+    "c": "0.48"
   },
   "seed": 9,
   "generator": "gen_sujet1_auto_02_question",

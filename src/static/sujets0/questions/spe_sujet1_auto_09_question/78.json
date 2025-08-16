@@ -1,9 +1,9 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
-  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x -4\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{2}x --1 + \\dfrac{1}{5^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{7}{1}x + 10}{0,2857142857142857}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x -4\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{2}x --1 + \\dfrac{1}{5^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{7}{1}x + 10}{0.2857142857142857}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
   "answer": {
-    "latex": "\\dfrac{\\dfrac{7}{1}}{0,2857142857142857}",
-    "simplified_latex": "24,5",
+    "latex": "\\dfrac{\\dfrac{7}{1}}{0.2857142857142857}",
+    "simplified_latex": "24.5",
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(49, 2)",
@@ -19,10 +19,10 @@
     "c2": "5",
     "a3": "\\dfrac{7}{1}",
     "b3": "10",
-    "c3": "0,2857142857142857",
+    "c3": "0.2857142857142857",
     "expr1": "x^{2} -\\left(x -4\\right)^{2}",
     "expr2": "\\dfrac{1}{2}x --1 + \\dfrac{1}{5^{\\dfrac{1}{2}}}",
-    "expr3": "\\dfrac{\\dfrac{7}{1}x + 10}{0,2857142857142857}"
+    "expr3": "\\dfrac{\\dfrac{7}{1}x + 10}{0.2857142857142857}"
   },
   "seed": 78,
   "generator": "spe_sujet1_auto_09_question",

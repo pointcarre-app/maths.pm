@@ -1,9 +1,9 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-6]",
-  "statement": "Un appareil a besoin d'une énergie de $98 \\times 10^{3}$ Joules (J) pour se mettre en route. A combien de kiloWatt-heure (kWh) cela correspond-il. On donne $1kWh=3,6 \\times 10^{6}J$.",
+  "statement": "Un appareil a besoin d'une énergie de $98 \\times 10^{3}$ Joules (J) pour se mettre en route. A combien de kiloWatt-heure (kWh) cela correspond-il. On donne $1kWh=3.6 \\times 10^{6}J$.",
   "answer": {
-    "latex": "0,03",
-    "simplified_latex": "0,03",
+    "latex": "0.03",
+    "simplified_latex": "0.03",
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(1080863910568919, 36028797018963968)",
@@ -13,7 +13,7 @@
   },
   "components": {
     "k": "98 \\times 10^{3}",
-    "factor": "3,6 \\times 10^{6}"
+    "factor": "3.6 \\times 10^{6}"
   },
   "seed": 95,
   "generator": "spe_sujet2_auto_06_question",

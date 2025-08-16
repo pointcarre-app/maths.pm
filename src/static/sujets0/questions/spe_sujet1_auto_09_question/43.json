@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
-  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x -9\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{5}x --6 + \\dfrac{1}{8^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{6}{2}x + 4}{1,125}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x -9\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{5}x --6 + \\dfrac{1}{8^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{6}{2}x + 4}{1.125}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
   "answer": {
     "latex": "-18",
     "simplified_latex": "-18",
@@ -19,10 +19,10 @@
     "c2": "8",
     "a3": "\\dfrac{6}{2}",
     "b3": "4",
-    "c3": "1,125",
+    "c3": "1.125",
     "expr1": "x^{2} -\\left(x -9\\right)^{2}",
     "expr2": "\\dfrac{1}{5}x --6 + \\dfrac{1}{8^{\\dfrac{1}{2}}}",
-    "expr3": "\\dfrac{\\dfrac{6}{2}x + 4}{1,125}"
+    "expr3": "\\dfrac{\\dfrac{6}{2}x + 4}{1.125}"
   },
   "seed": 43,
   "generator": "spe_sujet1_auto_09_question",

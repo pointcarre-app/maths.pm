@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
-  "statement": "2 articles coûtent 30,4 euros. Combien coûtent 6 articles ?",
+  "statement": "2 articles coûtent 30.4 euros. Combien coûtent 6 articles ?",
   "answer": {
     "latex": "\\dfrac{152}{10}6",
     "simplified_latex": "\\dfrac{456}{5}",

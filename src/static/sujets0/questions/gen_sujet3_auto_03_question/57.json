@@ -1,9 +1,9 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
-  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci augmente de $4,3999999999999995\\%$ ?",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci augmente de $4.3999999999999995\\%$ ?",
   "answer": {
-    "latex": "1,044",
-    "simplified_latex": "1,044",
+    "latex": "1.044",
+    "simplified_latex": "1.044",
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(261, 250)",

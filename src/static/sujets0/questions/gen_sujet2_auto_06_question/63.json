@@ -1,10 +1,25 @@
 {
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(13;-36)$ et $B(-25;23)$. Calculer le coefficient directeur de la droite $d$.",
+  "answer": {
+    "latex": "\\dfrac{23 + 36}{-25 -13}",
+    "simplified_latex": "-\\dfrac{59}{38}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Add(Integer(-25), Integer(-13)), Integer(-1)), Add(Integer(23), Integer(36)))",
+      "str": "(23 + 36)/(-25 - 13)"
+    },
+    "formal_repr": "Fraction(p=Add(l=Integer(n=23), r=Integer(n=36)), q=Add(l=Integer(n=-25), r=Integer(n=-13)))"
+  },
+  "components": {
+    "x1": "13",
+    "y1": "-36",
+    "x2": "-25",
+    "y2": "23"
+  },
   "seed": 63,
   "generator": "gen_sujet2_auto_06_question",
-  "success": false,
-  "error": "1 validation error for Fraction\nq\n  Value error, Denominator cannot be zero [type=value_error, input_value=Integer(n=0), input_type=Integer]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error",
-  "error_type": "ValidationError",
-  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_06_question.py\", line 67, in <module>\n    \"simplified_latex\": answer[\"maths_object\"].simplified().latex(),\n                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 688, in simplified\n    return Fraction(p=p, q=q)\n  File \"/Users/selim/madles/pca-mathspm/env/lib/python3.13/site-packages/pydantic/main.py\", line 253, in __init__\n    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)\npydantic_core._pydantic_core.ValidationError: 1 validation error for Fraction\nq\n  Value error, Denominator cannot be zero [type=value_error, input_value=Integer(n=0), input_type=Integer]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error\n",
+  "success": true,
   "stdout": "",
   "stderr": ""
 }

@@ -1,9 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-2]",
-  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\dfrac{7}{10}$, $B=\\dfrac{67}{100}$, $C=0,73$",
+  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\dfrac{7}{10}$, $B=\\dfrac{67}{100}$, $C=0.73$",
   "answer": {
-    "latex": "0,73",
-    "simplified_latex": "0,73",
+    "latex": "0.73",
+    "simplified_latex": "0.73",
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(73, 100)",
@@ -14,7 +14,7 @@
   "components": {
     "a": "\\dfrac{7}{10}",
     "b": "\\dfrac{67}{100}",
-    "c": "0,73"
+    "c": "0.73"
   },
   "seed": 92,
   "generator": "gen_sujet1_auto_02_question",

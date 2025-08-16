@@ -369,6 +369,14 @@ if __name__ == "__main__":
         [
             "python",
             "-c",
-            "import json; from pathlib import Path; for gen in Path('src/static/sujets0/questions').iterdir(): if gen.is_dir(): q0 = json.load(open(gen / '0.json')); q1 = json.load(open(gen / '1.json')); if q0.get('statement') == q1.get('statement'): print(f'⚠️ {gen.name}: No variation detected')",
+            """
+import json
+from pathlib import Path
+for gen in Path('src/static/sujets0/questions').iterdir():
+    if gen.is_dir():
+        q0 = json.load(open(gen / '0.json'))
+        q1 = json.load(open(gen / '1.json'))
+        if q0.get('statement') == q1.get('statement'):
+            print(f'⚠️ {gen.name}: No variation detected')""",
         ]
     )

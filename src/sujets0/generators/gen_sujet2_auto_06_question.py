@@ -13,6 +13,11 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     x1 = gen.random_integer(-100, 100)
     x2 = gen.random_integer(-100, 100)
+
+    # Ensure x2 ≠ x1 to avoid division by zero
+    while x2.n == x1.n:
+        x2 = gen.random_integer(-100, 100)
+
     y1 = gen.random_integer(-100, 100)
     y2 = gen.random_integer(-100, 100)
 

@@ -1,9 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-6]",
-  "statement": "Calculer $10^{2} + 0,1 + \\dfrac{1}{10000}$.",
+  "statement": "Calculer $10^{2} + 0.1 + \\dfrac{1}{10000}$.",
   "answer": {
-    "latex": "10^{2} + 0,1 + \\dfrac{1}{10000}",
-    "simplified_latex": "100,1001",
+    "latex": "10^{2} + 0.1 + \\dfrac{1}{10000}",
+    "simplified_latex": "100.1001",
     "sympy_exp_data": {
       "type": "Add",
       "sp.srepr": "Add(Rational(1, 10000), Add(Rational(1, 10), Pow(Integer(10), Integer(2))))",
@@ -13,7 +13,7 @@
   },
   "components": {
     "a": "10^{2}",
-    "b": "0,1",
+    "b": "0.1",
     "c": "\\dfrac{1}{10000}"
   },
   "seed": 18,

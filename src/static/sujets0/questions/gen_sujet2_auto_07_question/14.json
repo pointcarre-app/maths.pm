@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
-  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur -7,3 passant par le points $A(9;6)$. On note $B$ le point de la droite $d$ d'abscisse $10$. Calculer l'ordonnée de $d$.",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur -7.3 passant par le points $A(9;6)$. On note $B$ le point de la droite $d$ d'abscisse $10$. Calculer l'ordonnée de $d$.",
   "answer": {
     "latex": "6 + \\left(10 -9\\right) \\times -\\dfrac{73}{10}",
     "simplified_latex": "-\\dfrac{13}{10}",

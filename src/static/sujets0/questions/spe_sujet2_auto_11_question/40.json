@@ -1,9 +1,9 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-11]",
-  "statement": "Quelle est l'expression développée de $\\left(x + 0,59\\right)^{2}$ ?",
+  "statement": "Quelle est l'expression développée de $\\left(x + 0.59\\right)^{2}$ ?",
   "answer": {
-    "latex": "\\left(x + 0,59\\right)^{2}",
-    "simplified_latex": "x^{2} + 1,18x + 0,59^{2}",
+    "latex": "\\left(x + 0.59\\right)^{2}",
+    "simplified_latex": "x^{2} + 1.18x + 0.59^{2}",
     "sympy_exp_data": {
       "type": "Pow",
       "sp.srepr": "Pow(Add(Symbol('x'), Rational(59, 100)), Integer(2))",
@@ -13,8 +13,8 @@
   },
   "components": {
     "x": "x",
-    "a": "0,59",
-    "expr": "\\left(x + 0,59\\right)^{2}"
+    "a": "0.59",
+    "expr": "\\left(x + 0.59\\right)^{2}"
   },
   "seed": 40,
   "generator": "spe_sujet2_auto_11_question",

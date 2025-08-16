@@ -1,10 +1,22 @@
 {
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-3]",
+  "statement": "Le prix d'un article a quintuplé. De combien a-t-il augmenté en pourcentage ?",
+  "answer": {
+    "latex": "400",
+    "simplified_latex": "400",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(400)",
+      "str": "400"
+    },
+    "formal_repr": "Integer(n=400)"
+  },
+  "components": {
+    "n": "5"
+  },
   "seed": 27,
   "generator": "gen_sujet2_auto_03_question",
-  "success": false,
-  "error": "'Integer' object has no attribute 'as_percent'",
-  "error_type": "AttributeError",
-  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_03_question.py\", line 60, in <module>\n    answer = solve(**components)\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_03_question.py\", line 30, in solve\n    maths_object = (n-tm.Integer(n=1)).simplified().as_percent\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selim/madles/pca-mathspm/env/lib/python3.13/site-packages/pydantic/main.py\", line 991, in __getattr__\n    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')\nAttributeError: 'Integer' object has no attribute 'as_percent'\n",
+  "success": true,
   "stdout": "",
   "stderr": ""
 }

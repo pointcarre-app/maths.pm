@@ -1,9 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-6]",
-  "statement": "Calculer $10^{3} + 0,1 + \\dfrac{1}{100}$.",
+  "statement": "Calculer $10^{3} + 0.1 + \\dfrac{1}{100}$.",
   "answer": {
-    "latex": "10^{3} + 0,1 + \\dfrac{1}{100}",
-    "simplified_latex": "1000,11",
+    "latex": "10^{3} + 0.1 + \\dfrac{1}{100}",
+    "simplified_latex": "1000.11",
     "sympy_exp_data": {
       "type": "Add",
       "sp.srepr": "Add(Rational(1, 100), Add(Rational(1, 10), Pow(Integer(10), Integer(3))))",
@@ -13,7 +13,7 @@
   },
   "components": {
     "a": "10^{3}",
-    "b": "0,1",
+    "b": "0.1",
     "c": "\\dfrac{1}{100}"
   },
   "seed": 30,

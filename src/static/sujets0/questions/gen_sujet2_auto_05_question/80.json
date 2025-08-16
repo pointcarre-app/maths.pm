@@ -1,10 +1,23 @@
 {
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-8]",
+  "statement": "On considère un liquide pour lequel 1L pèse 700 g. Combien pèse 350 mL de ce liquide ?",
+  "answer": {
+    "latex": "\\dfrac{350}{\\dfrac{1000}{700}}",
+    "simplified_latex": "245",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(245)",
+      "str": "245"
+    },
+    "formal_repr": "Fraction(p=Integer(n=350), q=Fraction(p=Integer(n=1000), q=Integer(n=700)))"
+  },
+  "components": {
+    "x": "350",
+    "factor": "\\dfrac{1000}{700}"
+  },
   "seed": 80,
   "generator": "gen_sujet2_auto_05_question",
-  "success": false,
-  "error": "'Integer' object has no attribute 'as_decimal'",
-  "error_type": "AttributeError",
-  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_05_question.py\", line 62, in <module>\n    question = render_question(**components)\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_05_question.py\", line 51, in render_question\n    mass = mass.simplified().as_decimal\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selim/madles/pca-mathspm/env/lib/python3.13/site-packages/pydantic/main.py\", line 991, in __getattr__\n    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')\nAttributeError: 'Integer' object has no attribute 'as_decimal'\n",
+  "success": true,
   "stdout": "",
   "stderr": ""
 }

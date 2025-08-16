@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-2]",
-  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\dfrac{7}{20}$, $B=\\dfrac{85}{100}$, $C=0,27$",
+  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\dfrac{7}{20}$, $B=\\dfrac{85}{100}$, $C=0.27$",
   "answer": {
     "latex": "\\dfrac{85}{100}",
     "simplified_latex": "\\dfrac{17}{20}",
@@ -14,7 +14,7 @@
   "components": {
     "a": "\\dfrac{7}{20}",
     "b": "\\dfrac{85}{100}",
-    "c": "0,27"
+    "c": "0.27"
   },
   "seed": 26,
   "generator": "gen_sujet1_auto_02_question",

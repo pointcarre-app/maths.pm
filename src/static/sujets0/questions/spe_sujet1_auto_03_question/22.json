@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-3]",
-  "statement": "Le prix d'un article est multiplié par $0,82$. De combien de pourcent le prix de cet article a-t-il diminué ?",
+  "statement": "Le prix d'un article est multiplié par $0.82$. De combien de pourcent le prix de cet article a-t-il diminué ?",
   "answer": {
     "latex": "\\dfrac{36}{200}",
     "simplified_latex": "\\dfrac{9}{50}",

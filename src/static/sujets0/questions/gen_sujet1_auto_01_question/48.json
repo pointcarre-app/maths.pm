@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $55,00000000000001 \\%$ de $360$.",
+  "statement": "Calculer $55.00000000000001 \\%$ de $360$.",
   "mask": "",
   "answer": {
     "latex": "\\dfrac{11}{20}360",

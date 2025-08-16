@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "5 articles coûtent 99,5 euros. Combien coûtent 2 articles ?",
+  "statement": "5 articles coûtent 99.5 euros. Combien coûtent 2 articles ?",
   "answer": {
     "latex": "\\dfrac{199}{10}2",
     "simplified_latex": "\\dfrac{199}{5}",

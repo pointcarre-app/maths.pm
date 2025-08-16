@@ -2,8 +2,8 @@
   "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
   "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $99\\%$ ?",
   "answer": {
-    "latex": "0,01",
-    "simplified_latex": "0,01",
+    "latex": "0.01",
+    "simplified_latex": "0.01",
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(1, 100)",

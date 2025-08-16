@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-3]",
-  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\left(\\dfrac{1}{2}\\right)^{5}$, $B=\\left(\\dfrac{1}{3}\\right)^{4}$, $C=\\left(\\dfrac{1}{5}\\right)^{4}$, $D=0,02$",
+  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\left(\\dfrac{1}{2}\\right)^{5}$, $B=\\left(\\dfrac{1}{3}\\right)^{4}$, $C=\\left(\\dfrac{1}{5}\\right)^{4}$, $D=0.02$",
   "answer": {
     "latex": "\\left(\\dfrac{1}{2}\\right)^{5}",
     "simplified_latex": "\\dfrac{1}{32}",
@@ -15,7 +15,7 @@
     "a": "\\left(\\dfrac{1}{2}\\right)^{5}",
     "b": "\\left(\\dfrac{1}{3}\\right)^{4}",
     "c": "\\left(\\dfrac{1}{5}\\right)^{4}",
-    "d": "0,02"
+    "d": "0.02"
   },
   "seed": 12,
   "generator": "gen_sujet1_auto_03_question",

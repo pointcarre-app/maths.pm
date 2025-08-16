@@ -1,10 +1,24 @@
 {
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-3]",
+  "statement": "Le prix d'un article est multiplié par $2$. De combien de pourcent le prix de cet article a-t-il augmenté ?",
+  "answer": {
+    "latex": "\\dfrac{200}{200}",
+    "simplified_latex": "1",
+    "sympy_exp_data": {
+      "type": "One",
+      "sp.srepr": "Integer(1)",
+      "str": "1"
+    },
+    "formal_repr": "Fraction(p=Integer(n=200), q=Integer(n=200))"
+  },
+  "components": {
+    "p": "\\dfrac{200}{200}",
+    "direction": "1",
+    "coef": "1 + 1\\dfrac{200}{200}"
+  },
   "seed": 23,
   "generator": "spe_sujet1_auto_03_question",
-  "success": false,
-  "error": "'Integer' object has no attribute 'as_decimal'",
-  "error_type": "AttributeError",
-  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet1_auto_03_question.py\", line 77, in <module>\n    question = render_question(**components)\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet1_auto_03_question.py\", line 57, in render_question\n    coef = coef.simplified().as_decimal\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selim/madles/pca-mathspm/env/lib/python3.13/site-packages/pydantic/main.py\", line 991, in __getattr__\n    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')\nAttributeError: 'Integer' object has no attribute 'as_decimal'\n",
+  "success": true,
   "stdout": "",
   "stderr": ""
 }
