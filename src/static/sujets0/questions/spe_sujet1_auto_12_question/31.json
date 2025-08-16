@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-0 coefficient 4\n-15 coefficient 2\n-3 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 4.714285714285714$ ?",
+  "answer": {
+    "latex": "1",
+    "simplified_latex": "1",
+    "sympy_exp_data": {
+      "type": "One",
+      "sp.srepr": "Integer(1)",
+      "str": "1"
+    },
+    "formal_repr": "Integer(n=1)"
+  },
+  "components": {
+    "note1": "0",
+    "note2": "15",
+    "note3": "3",
+    "coef1": "4",
+    "coef2": "2",
+    "coef3": "1",
+    "mean": "\\dfrac{0 \\times 4 + 15 \\times 2 + 3 \\times 1}{4 + 2 + 1}"
+  },
+  "seed": 31,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-17 coefficient 5\n-2 coefficient 5\n-11 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 9.846153846153847$ ?",
+  "answer": {
+    "latex": "3",
+    "simplified_latex": "3",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(3)",
+      "str": "3"
+    },
+    "formal_repr": "Integer(n=3)"
+  },
+  "components": {
+    "note1": "17",
+    "note2": "2",
+    "note3": "11",
+    "coef1": "5",
+    "coef2": "5",
+    "coef3": "3",
+    "mean": "\\dfrac{17 \\times 5 + 2 \\times 5 + 11 \\times 3}{5 + 5 + 3}"
+  },
+  "seed": 29,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

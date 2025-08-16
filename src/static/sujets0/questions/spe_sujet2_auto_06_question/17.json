@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-6]",
+  "statement": "Un appareil a besoin d'une énergie de $67 \\times 10^{7}$ Joules (J) pour se mettre en route. A combien de kiloWatt-heure (kWh) cela correspond-il. On donne $1kWh=3,6 \\times 10^{6}J$.",
+  "answer": {
+    "latex": "186,11",
+    "simplified_latex": "186,11",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(1637040872363131, 8796093022208)",
+      "str": "1637040872363131/8796093022208"
+    },
+    "formal_repr": "Decimal(x=186.11)"
+  },
+  "components": {
+    "k": "67 \\times 10^{7}",
+    "factor": "3,6 \\times 10^{6}"
+  },
+  "seed": 17,
+  "generator": "spe_sujet2_auto_06_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

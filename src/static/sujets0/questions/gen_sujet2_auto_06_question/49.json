@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(-83;5)$ et $B(-12;-72)$. Calculer le coefficient directeur de la droite $d$.",
+  "answer": {
+    "latex": "\\dfrac{-72 -5}{-12 + 83}",
+    "simplified_latex": "-\\dfrac{77}{71}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Add(Integer(-72), Integer(-5)), Pow(Add(Integer(-12), Integer(83)), Integer(-1)))",
+      "str": "(-72 - 5)/(-12 + 83)"
+    },
+    "formal_repr": "Fraction(p=Add(l=Integer(n=-72), r=Integer(n=-5)), q=Add(l=Integer(n=-12), r=Integer(n=83)))"
+  },
+  "components": {
+    "x1": "-83",
+    "y1": "5",
+    "x2": "-12",
+    "y2": "-72"
+  },
+  "seed": 49,
+  "generator": "gen_sujet2_auto_06_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

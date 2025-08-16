@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $\\dfrac{43}{5} + 49 \\times 12$.",
+  "mask": "",
+  "answer": {
+    "latex": "\\dfrac{43}{5} + 49 \\times 12",
+    "simplified_latex": "\\dfrac{2983}{5}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Rational(43, 5), Mul(Integer(12), Integer(49)))",
+      "str": "43/5 + 49*12"
+    },
+    "formal_repr": "Add(l=Fraction(p=Integer(n=43), q=Integer(n=5)), r=Mul(l=Integer(n=49), r=Integer(n=12)))"
+  },
+  "components": {
+    "a": "\\dfrac{43}{5}",
+    "b": "49",
+    "c": "12"
+  },
+  "seed": 84,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

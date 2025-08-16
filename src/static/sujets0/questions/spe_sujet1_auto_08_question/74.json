@@ -1,0 +1,10 @@
+{
+  "seed": 74,
+  "generator": "spe_sujet1_auto_08_question",
+  "success": false,
+  "error": "Simplification of Mul of <class 'teachers.maths.Fraction'> and <class 'teachers.maths.Symbol'>\nl=Fraction(p=Integer(n=10), q=Integer(n=9))\nr=Symbol(s='x')",
+  "error_type": "NotImplementedError",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 112, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet1_auto_08_question.py\", line 66, in <module>\n    \"simplified_latex\": answer[\"maths_object\"].simplified().latex(),\n                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 397, in simplified\n    l, r = self.l.simplified(), self.r.simplified()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 547, in simplified\n    raise NotImplementedError(\n        f\"Simplification of Mul of {type(l)} and {type(r)}\\n{l=}\\n{r=}\"\n    )\nNotImplementedError: Simplification of Mul of <class 'teachers.maths.Fraction'> and <class 'teachers.maths.Symbol'>\nl=Fraction(p=Integer(n=10), q=Integer(n=9))\nr=Symbol(s='x')\n",
+  "stdout": "{'x': Symbol(s='x'), 'a': Fraction(p=Integer(n=10), q=Integer(n=9)), 'b': Integer(n=2), 'maths_object': Add(l=Mul(l=Fraction(p=Integer(n=10), q=Integer(n=9)), r=Symbol(s='x')), r=Integer(n=2)), 'statement': \"On a représenté ci-contre une droite (\\\\\\\\mathcal\\\\{D\\\\} dans un repère orthonormé. Donner l'équation de la droite \\\\\\\\mathcal\\\\{D\\\\} sous la forme $y=ax+b$\"}\n",
+  "stderr": ""
+}

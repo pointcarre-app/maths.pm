@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(8;-8)$ et $B(-5;-3)$. Calculer le coefficient directeur de la droite $d$.",
+  "answer": {
+    "latex": "\\dfrac{-3 + 8}{-5 -8}",
+    "simplified_latex": "-\\dfrac{5}{13}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Add(Integer(-8), Integer(-5)), Integer(-1)), Add(Integer(-3), Integer(8)))",
+      "str": "(-3 + 8)/(-8 - 5)"
+    },
+    "formal_repr": "Fraction(p=Add(l=Integer(n=-3), r=Integer(n=8)), q=Add(l=Integer(n=-5), r=Integer(n=-8)))"
+  },
+  "components": {
+    "x1": "8",
+    "y1": "-8",
+    "x2": "-5",
+    "y2": "-3"
+  },
+  "seed": 62,
+  "generator": "spe_sujet2_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

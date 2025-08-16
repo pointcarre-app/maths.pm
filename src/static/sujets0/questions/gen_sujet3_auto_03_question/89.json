@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci augmente de $8,4\\%$ ?",
+  "answer": {
+    "latex": "1,084",
+    "simplified_latex": "1,084",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(271, 250)",
+      "str": "271/250"
+    },
+    "formal_repr": "Decimal(p=271, q=250)"
+  },
+  "components": {
+    "p": "\\dfrac{84}{1000}",
+    "direction": "1",
+    "coef": "1 + 1\\dfrac{84}{1000}"
+  },
+  "seed": 89,
+  "generator": "gen_sujet3_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

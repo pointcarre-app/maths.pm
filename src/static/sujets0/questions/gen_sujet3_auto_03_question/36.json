@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $33,7\\%$ ?",
+  "answer": {
+    "latex": "0,663",
+    "simplified_latex": "0,663",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(663, 1000)",
+      "str": "663/1000"
+    },
+    "formal_repr": "Decimal(p=663, q=1000)"
+  },
+  "components": {
+    "p": "\\dfrac{337}{1000}",
+    "direction": "-1",
+    "coef": "1 -\\dfrac{337}{1000}"
+  },
+  "seed": 36,
+  "generator": "gen_sujet3_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,27 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-12]",
+  "statement": "Soit $f$ la fonction définie sur l'intervalle $\\lbracket -9; 9 \\rbracket$ dont la représentation grpahique est donnée ci-contre. Donner l'ensemble $\\mathcal{S}$ des solutions de $f(x) = 0$",
+  "answer": {
+    "latex": "\\left(-10, -7, -2, 10\\right)",
+    "simplified_latex": "\\left(-10, -7, -2, 10\\right)",
+    "sympy_exp_data": {
+      "type": "Tuple",
+      "sp.srepr": "Tuple(Integer(-10), Integer(-7), Integer(-2), Integer(10))",
+      "str": "(-10, -7, -2, 10)"
+    },
+    "formal_repr": "(Integer(n=-10), Integer(n=-7), Integer(n=-2), Integer(n=10))"
+  },
+  "components": {
+    "root1": "-10",
+    "root2": "-7",
+    "root3": "-2",
+    "root4": "10",
+    "x": "x",
+    "f": "f"
+  },
+  "seed": 42,
+  "generator": "gen_sujet3_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

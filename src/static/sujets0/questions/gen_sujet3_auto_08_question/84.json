@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-8]",
+  "statement": "Un object parcours $8$ km en 8 minutes. Quelle est sa vitesse moyenne en km/h ?",
+  "answer": {
+    "latex": "\\dfrac{\\dfrac{8}{8}}{\\dfrac{1}{60}}",
+    "simplified_latex": "60",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(60)",
+      "str": "60"
+    },
+    "formal_repr": "Fraction(p=Fraction(p=Integer(n=8), q=Integer(n=8)), q=Fraction(p=Integer(n=1), q=Integer(n=60)))"
+  },
+  "components": {
+    "d": "8",
+    "t": "8",
+    "factor": "\\dfrac{1}{60}"
+  },
+  "seed": 84,
+  "generator": "gen_sujet3_auto_08_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

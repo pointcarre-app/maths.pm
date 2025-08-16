@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-1]",
+  "statement": "On considère l'arbre de probabilité ci-dessous. Calculer la proabilité de B.",
+  "answer": {
+    "latex": "\\dfrac{8}{10} \\times \\left(\\dfrac{10}{10} + \\dfrac{7}{10}\\right)",
+    "simplified_latex": "\\dfrac{34}{25}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Rational(4, 5), Add(Rational(7, 10), Integer(1)))",
+      "str": "4*(7/10 + 1)/5"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=8), q=Integer(n=10)), r=Add(l=Fraction(p=Integer(n=10), q=Integer(n=10)), r=Fraction(p=Integer(n=7), q=Integer(n=10))))"
+  },
+  "components": {
+    "p_A": "\\dfrac{8}{10}",
+    "p_B_if_A": "\\dfrac{10}{10}",
+    "p_B_if_notA": "\\dfrac{7}{10}"
+  },
+  "seed": 75,
+  "generator": "spe_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-1]",
+  "statement": "Quel est l'inverse du quadruple de $1$ ?",
+  "answer": {
+    "latex": "\\dfrac{1}{4 \\times 1}",
+    "simplified_latex": "\\dfrac{1}{4}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(1, 4)",
+      "str": "1/4"
+    },
+    "formal_repr": "Fraction(p=Integer(n=1), q=Mul(l=Integer(n=4), r=Integer(n=1)))"
+  },
+  "components": {
+    "n": "4",
+    "x": "1"
+  },
+  "seed": 52,
+  "generator": "spe_sujet1_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-9]",
+  "statement": "On note $\\\\mathcal\\{S\\}$ l'ensemble des solutions de l'équation $x^2=4$ sur $\\\\mathbb\\{R\\}$. Calculer $\\\\mathcal\\{S\\}$",
+  "answer": {
+    "latex": "\\left(4^{\\dfrac{1}{2}}, -4^{\\dfrac{1}{2}}\\right)",
+    "simplified_latex": "\\left(2, -2\\right)",
+    "sympy_exp_data": {
+      "type": "Tuple",
+      "sp.srepr": "Tuple(Pow(Integer(4), Rational(1, 2)), Mul(Integer(-1), Pow(Integer(4), Rational(1, 2))))",
+      "str": "(sqrt(4), -sqrt(4))"
+    },
+    "formal_repr": "(Pow(base=Integer(n=4), exp=Fraction(p=Integer(n=1), q=Integer(n=2))), Mul(l=Integer(n=-1), r=Pow(base=Integer(n=4), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))))"
+  },
+  "components": {
+    "n": "4",
+    "x": "x",
+    "relation": "x^{2} = 4"
+  },
+  "seed": 43,
+  "generator": "spe_sujet2_auto_09_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

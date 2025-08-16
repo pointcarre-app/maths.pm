@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $-\\dfrac{41}{10} + \\dfrac{44}{3} \\times -\\dfrac{2}{3}$.",
+  "mask": "",
+  "answer": {
+    "latex": "-\\dfrac{41}{10} + \\dfrac{44}{3} \\times -\\dfrac{2}{3}",
+    "simplified_latex": "-\\dfrac{1249}{90}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Mul(Rational(-2, 3), Rational(44, 3)), Rational(-41, 10))",
+      "str": "(44/3)*(-2/3) - 41/10"
+    },
+    "formal_repr": "Add(l=Fraction(p=Integer(n=-41), q=Integer(n=10)), r=Mul(l=Fraction(p=Integer(n=44), q=Integer(n=3)), r=Fraction(p=Integer(n=-2), q=Integer(n=3))))"
+  },
+  "components": {
+    "a": "-\\dfrac{41}{10}",
+    "b": "\\dfrac{44}{3}",
+    "c": "-\\dfrac{2}{3}"
+  },
+  "seed": 72,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

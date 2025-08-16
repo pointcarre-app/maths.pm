@@ -1,0 +1,27 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
+  "statement": "On définit la function $f$ par $f(x)=5 \\times x^{2} + 2x -1$. Calculer l'image de $-5$ par $f$.",
+  "answer": {
+    "latex": "5 \\times -5^{2} + 2 \\times -5 -1",
+    "simplified_latex": "114",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Integer(-1), Add(Mul(Integer(-5), Integer(2)), Mul(Integer(5), Pow(Integer(-5), Integer(2)))))",
+      "str": "-1 + (2*(-5) + 5*(-5)**2)"
+    },
+    "formal_repr": "Add(l=Add(l=Mul(l=Integer(n=5), r=Pow(base=Integer(n=-5), exp=Integer(n=2))), r=Mul(l=Integer(n=2), r=Integer(n=-5))), r=Integer(n=-1))"
+  },
+  "components": {
+    "x": "x",
+    "f": "f",
+    "x0": "-5",
+    "a": "5",
+    "b": "2",
+    "c": "-1"
+  },
+  "seed": 9,
+  "generator": "gen_sujet2_auto_10_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

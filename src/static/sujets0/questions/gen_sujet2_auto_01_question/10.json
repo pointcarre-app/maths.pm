@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $23 + \\dfrac{1}{2}23$.",
+  "mask": "",
+  "answer": {
+    "latex": "23 + \\dfrac{1}{2}23",
+    "simplified_latex": "\\dfrac{69}{2}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Mul(Rational(1, 2), Integer(23)), Integer(23))",
+      "str": "(1/2)*23 + 23"
+    },
+    "formal_repr": "Add(l=Integer(n=23), r=Mul(l=Fraction(p=Integer(n=1), q=Integer(n=2)), r=Integer(n=23)))"
+  },
+  "components": {
+    "a": "23",
+    "b": "\\dfrac{1}{2}",
+    "c": "23"
+  },
+  "seed": 10,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

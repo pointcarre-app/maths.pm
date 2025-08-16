@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-2 coefficient 2\n-19 coefficient 3\n-8 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 11.5$ ?",
+  "answer": {
+    "latex": "1",
+    "simplified_latex": "1",
+    "sympy_exp_data": {
+      "type": "One",
+      "sp.srepr": "Integer(1)",
+      "str": "1"
+    },
+    "formal_repr": "Integer(n=1)"
+  },
+  "components": {
+    "note1": "2",
+    "note2": "19",
+    "note3": "8",
+    "coef1": "2",
+    "coef2": "3",
+    "coef3": "1",
+    "mean": "\\dfrac{2 \\times 2 + 19 \\times 3 + 8 \\times 1}{2 + 3 + 1}"
+  },
+  "seed": 89,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

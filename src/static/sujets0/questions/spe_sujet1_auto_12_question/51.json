@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-7 coefficient 2\n-16 coefficient 2\n-17 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 13.333333333333334$ ?",
+  "answer": {
+    "latex": "2",
+    "simplified_latex": "2",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(2)",
+      "str": "2"
+    },
+    "formal_repr": "Integer(n=2)"
+  },
+  "components": {
+    "note1": "7",
+    "note2": "16",
+    "note3": "17",
+    "coef1": "2",
+    "coef2": "2",
+    "coef3": "2",
+    "mean": "\\dfrac{7 \\times 2 + 16 \\times 2 + 17 \\times 2}{2 + 2 + 2}"
+  },
+  "seed": 51,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

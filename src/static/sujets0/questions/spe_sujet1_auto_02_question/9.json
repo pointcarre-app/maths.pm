@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-2]",
+  "statement": "On considère la relation $F=a+\\\\dfrac\\{b\\}\\{cd\\}$. Lorsque $a=\\dfrac{1}{8}$, $b = 10$, $c = 6$, $d = -\\dfrac{1}{5}$, quelle est la valeur de $F$ ?",
+  "mask": "F=",
+  "answer": {
+    "latex": "\\dfrac{1}{8} + \\dfrac{10}{6-\\dfrac{1}{5}}",
+    "simplified_latex": "-\\dfrac{197}{24}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Rational(-25, 3), Rational(1, 8))",
+      "str": "-25/3 + 1/8"
+    },
+    "formal_repr": "Add(l=Fraction(p=Integer(n=1), q=Integer(n=8)), r=Fraction(p=Integer(n=10), q=Mul(l=Integer(n=6), r=Fraction(p=Integer(n=-1), q=Integer(n=5)))))"
+  },
+  "components": {
+    "a": "\\dfrac{1}{8}",
+    "b": "10",
+    "c": "6",
+    "d": "-\\dfrac{1}{5}"
+  },
+  "seed": 9,
+  "generator": "spe_sujet1_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

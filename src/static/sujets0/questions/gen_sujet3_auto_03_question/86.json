@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $81,10000000000001\\%$ ?",
+  "answer": {
+    "latex": "0,189",
+    "simplified_latex": "0,189",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(189, 1000)",
+      "str": "189/1000"
+    },
+    "formal_repr": "Decimal(p=189, q=1000)"
+  },
+  "components": {
+    "p": "\\dfrac{811}{1000}",
+    "direction": "-1",
+    "coef": "1 -\\dfrac{811}{1000}"
+  },
+  "seed": 86,
+  "generator": "gen_sujet3_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

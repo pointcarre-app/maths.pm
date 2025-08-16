@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $11\\%$ ?",
+  "answer": {
+    "latex": "0,89",
+    "simplified_latex": "0,89",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(89, 100)",
+      "str": "89/100"
+    },
+    "formal_repr": "Decimal(p=89, q=100)"
+  },
+  "components": {
+    "p": "\\dfrac{110}{1000}",
+    "direction": "-1",
+    "coef": "1 -\\dfrac{110}{1000}"
+  },
+  "seed": 14,
+  "generator": "gen_sujet3_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

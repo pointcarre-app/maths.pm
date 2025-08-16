@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-2]",
+  "statement": "Le prix d'un article est de $50$ euros. Son prix diminue de $40$\\%. Quel est le nouveau prix de l'article ?",
+  "answer": {
+    "latex": "5 \\times 10 \\times \\left(1 -\\dfrac{4}{10}\\right)",
+    "simplified_latex": "30",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Mul(Integer(5), Integer(10)), Add(Integer(1), Mul(Integer(-1), Rational(2, 5))))",
+      "str": "(5*10)*(1 - 1*2/5)"
+    },
+    "formal_repr": "Mul(l=Mul(l=Integer(n=5), r=Integer(n=10)), r=Add(l=Integer(n=1), r=Mul(l=Integer(n=-1), r=Fraction(p=Integer(n=4), q=Integer(n=10)))))"
+  },
+  "components": {
+    "price": "5 \\times 10",
+    "p": "\\dfrac{4}{10}",
+    "direction": "-1"
+  },
+  "seed": 87,
+  "generator": "spe_sujet2_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

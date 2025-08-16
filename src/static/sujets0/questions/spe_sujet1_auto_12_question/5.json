@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-19 coefficient 5\n-8 coefficient 1\n-11 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 14.7$ ?",
+  "answer": {
+    "latex": "4",
+    "simplified_latex": "4",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(4)",
+      "str": "4"
+    },
+    "formal_repr": "Integer(n=4)"
+  },
+  "components": {
+    "note1": "19",
+    "note2": "8",
+    "note3": "11",
+    "coef1": "5",
+    "coef2": "1",
+    "coef3": "4",
+    "mean": "\\dfrac{19 \\times 5 + 8 \\times 1 + 11 \\times 4}{5 + 1 + 4}"
+  },
+  "seed": 5,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $\\dfrac{10}{3} + \\dfrac{46}{3} \\times \\dfrac{15}{2}$.",
+  "mask": "",
+  "answer": {
+    "latex": "\\dfrac{10}{3} + \\dfrac{46}{3} \\times \\dfrac{15}{2}",
+    "simplified_latex": "\\dfrac{355}{3}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Rational(10, 3), Mul(Rational(15, 2), Rational(46, 3)))",
+      "str": "10/3 + (46/3)*(15/2)"
+    },
+    "formal_repr": "Add(l=Fraction(p=Integer(n=10), q=Integer(n=3)), r=Mul(l=Fraction(p=Integer(n=46), q=Integer(n=3)), r=Fraction(p=Integer(n=15), q=Integer(n=2))))"
+  },
+  "components": {
+    "a": "\\dfrac{10}{3}",
+    "b": "\\dfrac{46}{3}",
+    "c": "\\dfrac{15}{2}"
+  },
+  "seed": 35,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

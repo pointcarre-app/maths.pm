@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(29;-14)$ et $B(16;42)$. Calculer le coefficient directeur de la droite $d$.",
+  "answer": {
+    "latex": "\\dfrac{42 + 14}{16 -29}",
+    "simplified_latex": "-\\dfrac{56}{13}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Add(Integer(-29), Integer(16)), Integer(-1)), Add(Integer(14), Integer(42)))",
+      "str": "(14 + 42)/(-29 + 16)"
+    },
+    "formal_repr": "Fraction(p=Add(l=Integer(n=42), r=Integer(n=14)), q=Add(l=Integer(n=16), r=Integer(n=-29)))"
+  },
+  "components": {
+    "x1": "29",
+    "y1": "-14",
+    "x2": "16",
+    "y2": "42"
+  },
+  "seed": 81,
+  "generator": "gen_sujet2_auto_06_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

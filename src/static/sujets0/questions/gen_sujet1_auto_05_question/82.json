@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-5]",
+  "statement": "Calculer la moitié d'un tiers ?",
+  "answer": {
+    "latex": "\\dfrac{1}{2 \\times 3}",
+    "simplified_latex": "\\dfrac{1}{6}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(1, 6)",
+      "str": "1/6"
+    },
+    "formal_repr": "Fraction(p=Integer(n=1), q=Mul(l=Integer(n=2), r=Integer(n=3)))"
+  },
+  "components": {
+    "n1": "2",
+    "n2": "3"
+  },
+  "seed": 82,
+  "generator": "gen_sujet1_auto_05_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

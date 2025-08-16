@@ -1,0 +1,10 @@
+{
+  "seed": 66,
+  "generator": "spe_sujet2_auto_10_question",
+  "success": false,
+  "error": "1 validation error for Interval\nsympy_expr\n  Input should be an instance of Interval [type=is_instance_of, input_value=EmptySet, input_type=EmptySet]\n    For further information visit https://errors.pydantic.dev/2.8/v/is_instance_of",
+  "error_type": "ValidationError",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 112, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet2_auto_10_question.py\", line 97, in <module>\n    components = generate_components(None)\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet2_auto_10_question.py\", line 31, in generate_components\n    interval = tm.Interval(l=root1, r=root2, left_open=True, right_open=True)\n  File \"/Users/selim/.pyenv/versions/3.13.5/lib/python3.13/site-packages/pydantic/main.py\", line 193, in __init__\n    self.__pydantic_validator__.validate_python(data, self_instance=self)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\npydantic_core._pydantic_core.ValidationError: 1 validation error for Interval\nsympy_expr\n  Input should be an instance of Interval [type=is_instance_of, input_value=EmptySet, input_type=EmptySet]\n    For further information visit https://errors.pydantic.dev/2.8/v/is_instance_of\n",
+  "stdout": "",
+  "stderr": ""
+}

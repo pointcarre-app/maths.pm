@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-10]",
+  "statement": "La courbe ci-contre représente la courbe d'équation $ax^2 + bx + c$. On suppose $\\\\lvert a \\\\rvert = 1$. Donner l'équation de la parabole.",
+  "answer": {
+    "latex": "1 \\times x^{2} -5",
+    "simplified_latex": "x^{2} -5",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Mul(Integer(1), Pow(Symbol('x'), Integer(2))), Integer(-5))",
+      "str": "1*x**2 - 5"
+    },
+    "formal_repr": "Add(l=Mul(l=Integer(n=1), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Integer(n=-5))"
+  },
+  "components": {
+    "a": "1",
+    "c": "-5",
+    "x": "x"
+  },
+  "seed": 60,
+  "generator": "spe_sujet1_auto_10_question",
+  "success": true,
+  "stdout": "{'a': Integer(n=1), 'c': Integer(n=-5), 'x': Symbol(s='x'), 'maths_object': Add(l=Mul(l=Integer(n=1), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Integer(n=-5)), 'statement': \"La courbe ci-contre représente la courbe d'équation $ax^2 + bx + c$. On suppose $\\\\\\\\lvert a \\\\\\\\rvert = 1$. Donner l'équation de la parabole.\", 'graph_description': \"Une parabole d'équation $x^2-5$, avec simplement la valeur l'ordonée à l'origine\"}\n",
+  "stderr": ""
+}

@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-4 coefficient 1\n-8 coefficient 3\n-20 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 14.222222222222221$ ?",
+  "answer": {
+    "latex": "5",
+    "simplified_latex": "5",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(5)",
+      "str": "5"
+    },
+    "formal_repr": "Integer(n=5)"
+  },
+  "components": {
+    "note1": "4",
+    "note2": "8",
+    "note3": "20",
+    "coef1": "1",
+    "coef2": "3",
+    "coef3": "5",
+    "mean": "\\dfrac{4 \\times 1 + 8 \\times 3 + 20 \\times 5}{1 + 3 + 5}"
+  },
+  "seed": 20,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

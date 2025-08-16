@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-8]",
+  "statement": "Un object parcours $7$ km en 2 minutes. Quelle est sa vitesse moyenne en km/h ?",
+  "answer": {
+    "latex": "\\dfrac{\\dfrac{7}{2}}{\\dfrac{1}{60}}",
+    "simplified_latex": "210",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(210)",
+      "str": "210"
+    },
+    "formal_repr": "Fraction(p=Fraction(p=Integer(n=7), q=Integer(n=2)), q=Fraction(p=Integer(n=1), q=Integer(n=60)))"
+  },
+  "components": {
+    "d": "7",
+    "t": "2",
+    "factor": "\\dfrac{1}{60}"
+  },
+  "seed": 31,
+  "generator": "gen_sujet3_auto_08_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

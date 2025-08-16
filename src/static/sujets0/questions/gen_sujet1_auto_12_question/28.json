@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-12]",
+  "statement": "Calcluer la $moyenne$ de la série A : -72 ; -67 ; 90",
+  "answer": {
+    "latex": "\\dfrac{-72 + 90 -67}{3}",
+    "simplified_latex": "-\\dfrac{49}{3}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Rational(-67, 3), Mul(Rational(1, 3), Add(Integer(-72), Integer(90))))",
+      "str": "-67/3 + (-72 + 90)/3"
+    },
+    "formal_repr": "Fraction(p=Add(l=Add(l=Integer(n=-72), r=Integer(n=90)), r=Integer(n=-67)), q=Integer(n=3))"
+  },
+  "components": {
+    "f": "moyenne",
+    "a": "-72",
+    "b": "90",
+    "c": "-67"
+  },
+  "seed": 28,
+  "generator": "gen_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

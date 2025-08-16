@@ -1,0 +1,22 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-5]",
+  "statement": "On lance un dé à 4 faces. La probabilité d'obtenir chacune des faces est donnée dans le tableau suivant:\n- Face numéro 1: $\\dfrac{1}{8}$\n- Face numéro 2: $\\dfrac{1}{8}$\n- Face numéro 3: $\\dfrac{1}{8}$\n- Face numéro 4: $x$\n",
+  "answer": {
+    "latex": "\\dfrac{11}{24}",
+    "simplified_latex": "\\dfrac{11}{24}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(11, 24)",
+      "str": "11/24"
+    },
+    "formal_repr": "Fraction(p=Integer(n=11), q=Integer(n=24))"
+  },
+  "components": {
+    "probabilities": "\\left(\\dfrac{3}{24}, \\dfrac{7}{24}, \\dfrac{3}{24}, \\dfrac{11}{24}\\right)"
+  },
+  "seed": 32,
+  "generator": "spe_sujet1_auto_05_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

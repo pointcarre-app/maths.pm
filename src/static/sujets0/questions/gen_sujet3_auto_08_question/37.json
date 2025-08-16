@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-8]",
+  "statement": "Un object parcours $6$ km en 4 minutes. Quelle est sa vitesse moyenne en km/h ?",
+  "answer": {
+    "latex": "\\dfrac{\\dfrac{6}{4}}{\\dfrac{1}{60}}",
+    "simplified_latex": "90",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(90)",
+      "str": "90"
+    },
+    "formal_repr": "Fraction(p=Fraction(p=Integer(n=6), q=Integer(n=4)), q=Fraction(p=Integer(n=1), q=Integer(n=60)))"
+  },
+  "components": {
+    "d": "6",
+    "t": "4",
+    "factor": "\\dfrac{1}{60}"
+  },
+  "seed": 37,
+  "generator": "gen_sujet3_auto_08_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

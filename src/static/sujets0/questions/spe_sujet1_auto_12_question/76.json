@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-11 coefficient 2\n-14 coefficient 3\n-12 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 12.666666666666666$ ?",
+  "answer": {
+    "latex": "1",
+    "simplified_latex": "1",
+    "sympy_exp_data": {
+      "type": "One",
+      "sp.srepr": "Integer(1)",
+      "str": "1"
+    },
+    "formal_repr": "Integer(n=1)"
+  },
+  "components": {
+    "note1": "11",
+    "note2": "14",
+    "note3": "12",
+    "coef1": "2",
+    "coef2": "3",
+    "coef3": "1",
+    "mean": "\\dfrac{11 \\times 2 + 14 \\times 3 + 12 \\times 1}{2 + 3 + 1}"
+  },
+  "seed": 76,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

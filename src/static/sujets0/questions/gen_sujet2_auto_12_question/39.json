@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
+  "statement": "On considère les deux séries $A=-28 ; -24 ; -24 ; -20$  et $B=-58 ; -24 ; -24 ; 10$. Quelle est celle avec le plus grand écart type ?",
+  "answer": {
+    "latex": "B",
+    "simplified_latex": "B",
+    "sympy_exp_data": {
+      "type": "Symbol",
+      "sp.srepr": "Symbol('B')",
+      "str": "B"
+    },
+    "formal_repr": "Symbol(s='B')"
+  },
+  "components": {
+    "a": "\\left(-28, -24, -24, -20\\right)",
+    "b": "\\left(-58, -24, -24, 10\\right)",
+    "center": "-24",
+    "disp_low": "4",
+    "disp_high": "34"
+  },
+  "seed": 39,
+  "generator": "gen_sujet2_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

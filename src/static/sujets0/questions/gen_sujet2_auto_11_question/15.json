@@ -1,0 +1,29 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-11]",
+  "statement": "Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = 7 \\times x^{2} -14x -21$. Parmis la série A: -2; -1, 0, 1, 2, quel est l'antécédent de 0 par la fonction $f$ ?",
+  "answer": {
+    "latex": "-1",
+    "simplified_latex": "-1",
+    "sympy_exp_data": {
+      "type": "NegativeOne",
+      "sp.srepr": "Integer(-1)",
+      "str": "-1"
+    },
+    "formal_repr": "Integer(n=-1)"
+  },
+  "components": {
+    "x": "x",
+    "a": "7",
+    "b": "-14",
+    "c": "-21",
+    "x1": "-1",
+    "x2": "3",
+    "expr": "7 \\times x^{2} -14x -21",
+    "f": "f"
+  },
+  "seed": 15,
+  "generator": "gen_sujet2_auto_11_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

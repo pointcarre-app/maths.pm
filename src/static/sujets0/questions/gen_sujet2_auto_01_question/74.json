@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $\\dfrac{28}{9} -6 \\times -7$.",
+  "mask": "",
+  "answer": {
+    "latex": "\\dfrac{28}{9} -6 \\times -7",
+    "simplified_latex": "\\dfrac{406}{9}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Rational(28, 9), Mul(Integer(-7), Integer(-1), Integer(6)))",
+      "str": "28/9 - 6*(-7)"
+    },
+    "formal_repr": "Add(l=Fraction(p=Integer(n=28), q=Integer(n=9)), r=Mul(l=Integer(n=-6), r=Integer(n=-7)))"
+  },
+  "components": {
+    "a": "\\dfrac{28}{9}",
+    "b": "-6",
+    "c": "-7"
+  },
+  "seed": 74,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur 1,8 passant par le points $A(9;-2)$. On note $B$ le point de la droite $d$ d'abscisse $1$. Calculer l'ordonnée de $d$.",
+  "answer": {
+    "latex": "-2 + \\left(1 -9\\right) \\times \\dfrac{18}{10}",
+    "simplified_latex": "-\\dfrac{82}{5}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Mul(Rational(9, 5), Add(Integer(-9), Integer(1))), Integer(-2))",
+      "str": "(-9 + 1)*(9/5) - 2"
+    },
+    "formal_repr": "Add(l=Integer(n=-2), r=Mul(l=Add(l=Integer(n=1), r=Integer(n=-9)), r=Fraction(p=Integer(n=18), q=Integer(n=10))))"
+  },
+  "components": {
+    "a": "\\dfrac{18}{10}",
+    "x1": "9",
+    "y1": "-2",
+    "x2": "1"
+  },
+  "seed": 9,
+  "generator": "gen_sujet2_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

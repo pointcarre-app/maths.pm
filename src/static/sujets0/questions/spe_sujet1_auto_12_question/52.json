@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-8 coefficient 4\n-1 coefficient 3\n-16 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 9.0$ ?",
+  "answer": {
+    "latex": "4",
+    "simplified_latex": "4",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(4)",
+      "str": "4"
+    },
+    "formal_repr": "Integer(n=4)"
+  },
+  "components": {
+    "note1": "8",
+    "note2": "1",
+    "note3": "16",
+    "coef1": "4",
+    "coef2": "3",
+    "coef3": "4",
+    "mean": "\\dfrac{8 \\times 4 + 1 \\times 3 + 16 \\times 4}{4 + 3 + 4}"
+  },
+  "seed": 52,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-9 coefficient 1\n-1 coefficient 5\n-15 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 6.555555555555555$ ?",
+  "answer": {
+    "latex": "3",
+    "simplified_latex": "3",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(3)",
+      "str": "3"
+    },
+    "formal_repr": "Integer(n=3)"
+  },
+  "components": {
+    "note1": "9",
+    "note2": "1",
+    "note3": "15",
+    "coef1": "1",
+    "coef2": "5",
+    "coef3": "3",
+    "mean": "\\dfrac{9 \\times 1 + 1 \\times 5 + 15 \\times 3}{1 + 5 + 3}"
+  },
+  "seed": 84,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

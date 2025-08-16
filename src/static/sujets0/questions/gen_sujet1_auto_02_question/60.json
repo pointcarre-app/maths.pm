@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-2]",
+  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\dfrac{1}{2}$, $B=\\dfrac{37}{100}$, $C=0,74$",
+  "answer": {
+    "latex": "0,74",
+    "simplified_latex": "0,74",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(37, 50)",
+      "str": "37/50"
+    },
+    "formal_repr": "Decimal(p=74, q=100)"
+  },
+  "components": {
+    "a": "\\dfrac{1}{2}",
+    "b": "\\dfrac{37}{100}",
+    "c": "0,74"
+  },
+  "seed": 60,
+  "generator": "gen_sujet1_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

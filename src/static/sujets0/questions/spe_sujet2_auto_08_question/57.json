@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-8]",
+  "statement": "La courbe ci-contre représente un droite dont le coefficient directeur vaut 1, en valeur absolue. Donner l'équation de la droite sous la forme $ax + by + c = 0$.",
+  "answer": {
+    "latex": "1x + y -10 = 0",
+    "simplified_latex": "x + y -10 = 0",
+    "sympy_exp_data": {
+      "type": "Equality",
+      "sp.srepr": "Equality(Add(Add(Mul(Integer(1), Symbol('x')), Symbol('y')), Integer(-10)), Integer(0))",
+      "str": "Eq((1*x + y) - 10, 0)"
+    },
+    "formal_repr": "Equality(l=Add(l=Add(l=Mul(l=Integer(n=1), r=Symbol(s='x')), r=Symbol(s='y')), r=Integer(n=-10)), r=Integer(n=0))"
+  },
+  "components": {
+    "a": "-1",
+    "c": "10",
+    "x": "x",
+    "y": "y"
+  },
+  "seed": 57,
+  "generator": "spe_sujet2_auto_08_question",
+  "success": true,
+  "stdout": "{'a': Integer(n=-1), 'c': Integer(n=10), 'x': Symbol(s='x'), 'y': Symbol(s='y'), 'maths_object': Equality(l=Add(l=Add(l=Mul(l=Integer(n=1), r=Symbol(s='x')), r=Symbol(s='y')), r=Integer(n=-10)), r=Integer(n=0)), 'statement': \"La courbe ci-contre représente un droite dont le coefficient directeur vaut 1, en valeur absolue. Donner l'équation de la droite sous la forme $ax + by + c = 0$.\", 'graph_description': \"La droite d'équation y = -1x + 10\"}\n",
+  "stderr": ""
+}

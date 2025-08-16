@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-12]",
+  "statement": "Calcluer la $moyenne$ de la série A : -41 ; -15 ; -3",
+  "answer": {
+    "latex": "\\dfrac{-3 -15 -41}{3}",
+    "simplified_latex": "-\\dfrac{59}{3}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Rational(-41, 3), Mul(Rational(1, 3), Add(Integer(-15), Integer(-3))))",
+      "str": "-41/3 + (-15 - 3)/3"
+    },
+    "formal_repr": "Fraction(p=Add(l=Add(l=Integer(n=-3), r=Integer(n=-15)), r=Integer(n=-41)), q=Integer(n=3))"
+  },
+  "components": {
+    "f": "moyenne",
+    "a": "-3",
+    "b": "-15",
+    "c": "-41"
+  },
+  "seed": 41,
+  "generator": "gen_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

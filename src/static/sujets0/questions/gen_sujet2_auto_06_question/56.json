@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(43;21)$ et $B(-98;67)$. Calculer le coefficient directeur de la droite $d$.",
+  "answer": {
+    "latex": "\\dfrac{67 -21}{-98 -43}",
+    "simplified_latex": "-\\dfrac{46}{141}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Add(Integer(-98), Integer(-43)), Integer(-1)), Add(Integer(-21), Integer(67)))",
+      "str": "(-21 + 67)/(-98 - 43)"
+    },
+    "formal_repr": "Fraction(p=Add(l=Integer(n=67), r=Integer(n=-21)), q=Add(l=Integer(n=-98), r=Integer(n=-43)))"
+  },
+  "components": {
+    "x1": "43",
+    "y1": "21",
+    "x2": "-98",
+    "y2": "67"
+  },
+  "seed": 56,
+  "generator": "gen_sujet2_auto_06_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

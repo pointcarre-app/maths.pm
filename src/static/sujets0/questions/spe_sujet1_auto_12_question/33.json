@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-18 coefficient 2\n-5 coefficient 3\n-20 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 14.555555555555555$ ?",
+  "answer": {
+    "latex": "4",
+    "simplified_latex": "4",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(4)",
+      "str": "4"
+    },
+    "formal_repr": "Integer(n=4)"
+  },
+  "components": {
+    "note1": "18",
+    "note2": "5",
+    "note3": "20",
+    "coef1": "2",
+    "coef2": "3",
+    "coef3": "4",
+    "mean": "\\dfrac{18 \\times 2 + 5 \\times 3 + 20 \\times 4}{2 + 3 + 4}"
+  },
+  "seed": 33,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

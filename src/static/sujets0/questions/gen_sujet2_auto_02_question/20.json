@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
+  "statement": "3 articles coûtent 20,1 euros. Combien coûtent 4 articles ?",
+  "answer": {
+    "latex": "\\dfrac{67}{10}4",
+    "simplified_latex": "\\dfrac{134}{5}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Integer(4), Rational(67, 10))",
+      "str": "(67/10)*4"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=67), q=Integer(n=10)), r=Integer(n=4))"
+  },
+  "components": {
+    "n1": "3",
+    "n2": "4",
+    "p": "\\dfrac{67}{10}"
+  },
+  "seed": 20,
+  "generator": "gen_sujet2_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

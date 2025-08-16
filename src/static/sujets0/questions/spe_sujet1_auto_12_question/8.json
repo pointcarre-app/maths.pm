@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-7 coefficient 2\n-11 coefficient 2\n-12 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 9.6$ ?",
+  "answer": {
+    "latex": "1",
+    "simplified_latex": "1",
+    "sympy_exp_data": {
+      "type": "One",
+      "sp.srepr": "Integer(1)",
+      "str": "1"
+    },
+    "formal_repr": "Integer(n=1)"
+  },
+  "components": {
+    "note1": "7",
+    "note2": "11",
+    "note3": "12",
+    "coef1": "2",
+    "coef2": "2",
+    "coef3": "1",
+    "mean": "\\dfrac{7 \\times 2 + 11 \\times 2 + 12 \\times 1}{2 + 2 + 1}"
+  },
+  "seed": 8,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

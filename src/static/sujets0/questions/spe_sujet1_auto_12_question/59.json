@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-7 coefficient 4\n-2 coefficient 1\n-20 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 10.0$ ?",
+  "answer": {
+    "latex": "2",
+    "simplified_latex": "2",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(2)",
+      "str": "2"
+    },
+    "formal_repr": "Integer(n=2)"
+  },
+  "components": {
+    "note1": "7",
+    "note2": "2",
+    "note3": "20",
+    "coef1": "4",
+    "coef2": "1",
+    "coef3": "2",
+    "mean": "\\dfrac{7 \\times 4 + 2 \\times 1 + 20 \\times 2}{4 + 1 + 2}"
+  },
+  "seed": 59,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

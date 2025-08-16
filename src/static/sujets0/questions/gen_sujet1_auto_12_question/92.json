@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-12]",
+  "statement": "Calcluer la $médiane$ de la série A : 7 ; 32 ; 44",
+  "answer": {
+    "latex": "32",
+    "simplified_latex": "32",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(32)",
+      "str": "32"
+    },
+    "formal_repr": "Integer(n=32)"
+  },
+  "components": {
+    "f": "médiane",
+    "a": "7",
+    "b": "32",
+    "c": "44"
+  },
+  "seed": 92,
+  "generator": "gen_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

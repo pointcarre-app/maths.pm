@@ -1,0 +1,32 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x -10\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{8}x --7 + \\dfrac{1}{7^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{3}{1}x -6}{0,1111111111111111}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "answer": {
+    "latex": "\\dfrac{\\dfrac{3}{1}}{0,1111111111111111}",
+    "simplified_latex": "27,0",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(27)",
+      "str": "27"
+    },
+    "formal_repr": "Fraction(p=Fraction(p=Integer(n=3), q=Integer(n=1)), q=Decimal(p=1, q=9))"
+  },
+  "components": {
+    "x": "x",
+    "c1": "-10",
+    "a2": "\\dfrac{1}{8}",
+    "b2": "-7",
+    "c2": "7",
+    "a3": "\\dfrac{3}{1}",
+    "b3": "-6",
+    "c3": "0,1111111111111111",
+    "expr1": "x^{2} -\\left(x -10\\right)^{2}",
+    "expr2": "\\dfrac{1}{8}x --7 + \\dfrac{1}{7^{\\dfrac{1}{2}}}",
+    "expr3": "\\dfrac{\\dfrac{3}{1}x -6}{0,1111111111111111}"
+  },
+  "seed": 31,
+  "generator": "spe_sujet1_auto_09_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

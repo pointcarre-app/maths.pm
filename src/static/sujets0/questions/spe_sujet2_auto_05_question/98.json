@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
+  "statement": "On considère le nombre $N=\\dfrac{15^{7}}{3^{1}}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.",
+  "answer": {
+    "latex": "3^{5} \\times 5^{6}",
+    "simplified_latex": "3796875",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Integer(3), Integer(5)), Pow(Integer(5), Integer(6)))",
+      "str": "3**5*5**6"
+    },
+    "formal_repr": "Mul(l=Pow(base=Integer(n=3), exp=Integer(n=5)), r=Pow(base=Integer(n=5), exp=Integer(n=6)))"
+  },
+  "components": {
+    "x": "3",
+    "y": "5",
+    "n1": "1",
+    "n2": "6",
+    "expr": "\\dfrac{15^{7}}{3^{1}}"
+  },
+  "seed": 98,
+  "generator": "spe_sujet2_auto_05_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

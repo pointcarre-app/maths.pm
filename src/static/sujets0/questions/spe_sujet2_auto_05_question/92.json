@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
+  "statement": "On considère le nombre $N=\\dfrac{15^{19}}{3^{10}}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.",
+  "answer": {
+    "latex": "3^{-1} \\times 5^{9}",
+    "simplified_latex": "\\dfrac{1953125}{3}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Integer(3), Integer(-1)), Pow(Integer(5), Integer(9)))",
+      "str": "5**9/3"
+    },
+    "formal_repr": "Mul(l=Pow(base=Integer(n=3), exp=Integer(n=-1)), r=Pow(base=Integer(n=5), exp=Integer(n=9)))"
+  },
+  "components": {
+    "x": "3",
+    "y": "5",
+    "n1": "10",
+    "n2": "9",
+    "expr": "\\dfrac{15^{19}}{3^{10}}"
+  },
+  "seed": 92,
+  "generator": "spe_sujet2_auto_05_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

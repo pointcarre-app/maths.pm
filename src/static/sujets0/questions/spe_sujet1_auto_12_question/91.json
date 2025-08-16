@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-2 coefficient 2\n-18 coefficient 4\n-5 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 9.6$ ?",
+  "answer": {
+    "latex": "4",
+    "simplified_latex": "4",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(4)",
+      "str": "4"
+    },
+    "formal_repr": "Integer(n=4)"
+  },
+  "components": {
+    "note1": "2",
+    "note2": "18",
+    "note3": "5",
+    "coef1": "2",
+    "coef2": "4",
+    "coef3": "4",
+    "mean": "\\dfrac{2 \\times 2 + 18 \\times 4 + 5 \\times 4}{2 + 4 + 4}"
+  },
+  "seed": 91,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

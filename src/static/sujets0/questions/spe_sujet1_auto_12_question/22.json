@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-4 coefficient 5\n-7 coefficient 4\n-0 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 4.363636363636363$ ?",
+  "answer": {
+    "latex": "2",
+    "simplified_latex": "2",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(2)",
+      "str": "2"
+    },
+    "formal_repr": "Integer(n=2)"
+  },
+  "components": {
+    "note1": "4",
+    "note2": "7",
+    "note3": "0",
+    "coef1": "5",
+    "coef2": "4",
+    "coef3": "2",
+    "mean": "\\dfrac{4 \\times 5 + 7 \\times 4 + 0 \\times 2}{5 + 4 + 2}"
+  },
+  "seed": 22,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

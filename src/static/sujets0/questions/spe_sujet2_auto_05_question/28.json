@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
+  "statement": "On considère le nombre $N=\\dfrac{10^{12}}{2^{3}}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.",
+  "answer": {
+    "latex": "2^{6} \\times 5^{9}",
+    "simplified_latex": "125000000",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Integer(2), Integer(6)), Pow(Integer(5), Integer(9)))",
+      "str": "2**6*5**9"
+    },
+    "formal_repr": "Mul(l=Pow(base=Integer(n=2), exp=Integer(n=6)), r=Pow(base=Integer(n=5), exp=Integer(n=9)))"
+  },
+  "components": {
+    "x": "2",
+    "y": "5",
+    "n1": "3",
+    "n2": "9",
+    "expr": "\\dfrac{10^{12}}{2^{3}}"
+  },
+  "seed": 28,
+  "generator": "spe_sujet2_auto_05_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

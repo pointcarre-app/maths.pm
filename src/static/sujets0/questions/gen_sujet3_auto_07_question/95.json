@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
+  "statement": "9 articles coûtent 118,8 euros. Combien coûtent 18 articles ?",
+  "answer": {
+    "latex": "\\dfrac{132}{10}18",
+    "simplified_latex": "\\dfrac{1188}{5}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Rational(66, 5), Integer(18))",
+      "str": "(66/5)*18"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=132), q=Integer(n=10)), r=Integer(n=18))"
+  },
+  "components": {
+    "n1": "9",
+    "n2": "18",
+    "p": "\\dfrac{132}{10}"
+  },
+  "seed": 95,
+  "generator": "gen_sujet3_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

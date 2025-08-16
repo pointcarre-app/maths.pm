@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-8]",
+  "statement": "Convertir en heures une durée de 180 minutes. Ta réponse doit être sous forme de fraction.",
+  "answer": {
+    "latex": "\\dfrac{180}{60}",
+    "simplified_latex": "3",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(3)",
+      "str": "3"
+    },
+    "formal_repr": "Fraction(p=Integer(n=180), q=Integer(n=60))"
+  },
+  "components": {
+    "x": "180",
+    "factor": "60"
+  },
+  "seed": 73,
+  "generator": "gen_sujet1_auto_08_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

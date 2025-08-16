@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-6]",
+  "statement": "On a représenté ci-contre une droite \\mathcal{D} dans un repère orthonormé. Donner la valeur de son coefficient directeur.",
+  "answer": {
+    "latex": "-2",
+    "simplified_latex": "-2",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(-2)",
+      "str": "-2"
+    },
+    "formal_repr": "Integer(n=-2)"
+  },
+  "components": {
+    "a": "-2",
+    "b": "2"
+  },
+  "seed": 59,
+  "generator": "gen_sujet3_auto_06_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

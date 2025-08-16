@@ -1,0 +1,30 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-7x + 10\\right) \\times \\left(9x + 6\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; -\\dfrac{10}{-7}\\rbracket$ ?",
+  "answer": {
+    "latex": "0 > f(x)",
+    "simplified_latex": "0 > f(x)",
+    "sympy_exp_data": {
+      "type": "StrictGreaterThan",
+      "sp.srepr": "StrictGreaterThan(Integer(0), Function('f')(Symbol('x')))",
+      "str": "0 > f(x)"
+    },
+    "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Function(name=f)(Symbol(s='x')))"
+  },
+  "components": {
+    "root1": "-\\dfrac{10}{-7}",
+    "root2": "\\dfrac{6}{9}",
+    "a1": "-7",
+    "a2": "9",
+    "b1": "10",
+    "b2": "6",
+    "interval": "\\lbracket -\\infty; -\\dfrac{10}{-7}\\rbracket",
+    "x": "x",
+    "f": "f"
+  },
+  "seed": 14,
+  "generator": "spe_sujet2_auto_10_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $-\\dfrac{41}{5} + \\dfrac{5}{4} \\times \\dfrac{25}{4}$.",
+  "mask": "",
+  "answer": {
+    "latex": "-\\dfrac{41}{5} + \\dfrac{5}{4} \\times \\dfrac{25}{4}",
+    "simplified_latex": "-\\dfrac{31}{80}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Rational(-41, 5), Mul(Rational(5, 4), Rational(25, 4)))",
+      "str": "-41/5 + (5/4)*(25/4)"
+    },
+    "formal_repr": "Add(l=Fraction(p=Integer(n=-41), q=Integer(n=5)), r=Mul(l=Fraction(p=Integer(n=5), q=Integer(n=4)), r=Fraction(p=Integer(n=25), q=Integer(n=4))))"
+  },
+  "components": {
+    "a": "-\\dfrac{41}{5}",
+    "b": "\\dfrac{5}{4}",
+    "c": "\\dfrac{25}{4}"
+  },
+  "seed": 66,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

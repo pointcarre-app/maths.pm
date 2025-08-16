@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-2]",
+  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\dfrac{9}{20}$, $B=\\dfrac{51}{100}$, $C=0,7$",
+  "answer": {
+    "latex": "0,7",
+    "simplified_latex": "0,7",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(7, 10)",
+      "str": "7/10"
+    },
+    "formal_repr": "Decimal(p=70, q=100)"
+  },
+  "components": {
+    "a": "\\dfrac{9}{20}",
+    "b": "\\dfrac{51}{100}",
+    "c": "0,7"
+  },
+  "seed": 80,
+  "generator": "gen_sujet1_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

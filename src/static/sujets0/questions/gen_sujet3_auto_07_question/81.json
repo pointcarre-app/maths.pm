@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
+  "statement": "9 articles coûtent 105,3 euros. Combien coûtent 11 articles ?",
+  "answer": {
+    "latex": "\\dfrac{117}{10}11",
+    "simplified_latex": "\\dfrac{1287}{10}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Integer(11), Rational(117, 10))",
+      "str": "(117/10)*11"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=117), q=Integer(n=10)), r=Integer(n=11))"
+  },
+  "components": {
+    "n1": "9",
+    "n2": "11",
+    "p": "\\dfrac{117}{10}"
+  },
+  "seed": 81,
+  "generator": "gen_sujet3_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

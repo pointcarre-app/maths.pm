@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-11]",
+  "statement": "On a représenté ci-contre la courbe $\\\\mathcal\\{C\\}$ d'une fonction ${f}$.\nOn note $A$ le point d'abscisse $x_A=9$ tel que le point appartienne à la courbe $\\\\mathcal\\{C\\}$.\nEcrire l'inégalité correcte de la forme $x\\\\times f(x) ? 0$",
+  "answer": {
+    "latex": "0 > 9f(9)",
+    "simplified_latex": "0 > 9f(9)",
+    "sympy_exp_data": {
+      "type": "StrictGreaterThan",
+      "sp.srepr": "StrictGreaterThan(Integer(0), Mul(Integer(9), Function('f')(Integer(9))))",
+      "str": "0 > 9*f(9)"
+    },
+    "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Mul(l=Integer(n=9), r=Function(name=f)(Integer(n=9))))"
+  },
+  "components": {
+    "root1": "-8",
+    "root2": "8",
+    "root3": "10",
+    "x": "9",
+    "f": "f"
+  },
+  "seed": 79,
+  "generator": "spe_sujet1_auto_11_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

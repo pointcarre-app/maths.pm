@@ -1,0 +1,29 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-11]",
+  "statement": "Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = 4 \\times x^{2} -20x -56$. Parmis la série A: -2; -1, 0, 1, 2, quel est l'antécédent de 0 par la fonction $f$ ?",
+  "answer": {
+    "latex": "-2",
+    "simplified_latex": "-2",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(-2)",
+      "str": "-2"
+    },
+    "formal_repr": "Integer(n=-2)"
+  },
+  "components": {
+    "x": "x",
+    "a": "4",
+    "b": "-20",
+    "c": "-56",
+    "x1": "-2",
+    "x2": "7",
+    "expr": "4 \\times x^{2} -20x -56",
+    "f": "f"
+  },
+  "seed": 66,
+  "generator": "gen_sujet2_auto_11_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur 9,1 passant par le points $A(-4;3)$. On note $B$ le point de la droite $d$ d'abscisse $-4$. Calculer l'ordonnée de $d$.",
+  "answer": {
+    "latex": "3 + \\left(-4 + 4\\right) \\times \\dfrac{91}{10}",
+    "simplified_latex": "3",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Mul(Rational(91, 10), Add(Integer(-4), Integer(4))), Integer(3))",
+      "str": "(-4 + 4)*(91/10) + 3"
+    },
+    "formal_repr": "Add(l=Integer(n=3), r=Mul(l=Add(l=Integer(n=-4), r=Integer(n=4)), r=Fraction(p=Integer(n=91), q=Integer(n=10))))"
+  },
+  "components": {
+    "a": "\\dfrac{91}{10}",
+    "x1": "-4",
+    "y1": "3",
+    "x2": "-4"
+  },
+  "seed": 26,
+  "generator": "gen_sujet2_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

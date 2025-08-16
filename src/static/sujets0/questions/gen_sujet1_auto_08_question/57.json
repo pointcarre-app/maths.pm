@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-8]",
+  "statement": "Convertir en heures une durée de 30 minutes. Ta réponse doit être sous forme de fraction.",
+  "answer": {
+    "latex": "\\dfrac{30}{60}",
+    "simplified_latex": "\\dfrac{1}{2}",
+    "sympy_exp_data": {
+      "type": "Half",
+      "sp.srepr": "Rational(1, 2)",
+      "str": "1/2"
+    },
+    "formal_repr": "Fraction(p=Integer(n=30), q=Integer(n=60))"
+  },
+  "components": {
+    "x": "30",
+    "factor": "60"
+  },
+  "seed": 57,
+  "generator": "gen_sujet1_auto_08_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
+  "statement": "2 articles coûtent 1,4 euros. Combien coûtent 9 articles ?",
+  "answer": {
+    "latex": "\\dfrac{7}{10}9",
+    "simplified_latex": "\\dfrac{63}{10}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Rational(7, 10), Integer(9))",
+      "str": "(7/10)*9"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=7), q=Integer(n=10)), r=Integer(n=9))"
+  },
+  "components": {
+    "n1": "2",
+    "n2": "9",
+    "p": "\\dfrac{7}{10}"
+  },
+  "seed": 42,
+  "generator": "gen_sujet3_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

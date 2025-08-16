@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-7]",
+  "statement": "On a représenté ci-contre la parabole d'équation $y = x^2$. On note (\\\\mathcal\\{J\\}) l'inéquation, sur \\\\mathbb\\{R\\}, $x^{2} > 9$. Donner la ou les inéquation(s) du premier degré équivalente à \\\\mathcal\\{J\\}.",
+  "answer": {
+    "latex": "\\left(x > 9^{\\dfrac{1}{2}}, -9^{\\dfrac{1}{2}} > x\\right)",
+    "simplified_latex": "\\left(x > 3, -3 > x\\right)",
+    "sympy_exp_data": {
+      "type": "Tuple",
+      "sp.srepr": "Tuple(StrictGreaterThan(Symbol('x'), Pow(Integer(9), Rational(1, 2))), StrictGreaterThan(Mul(Integer(-1), Pow(Integer(9), Rational(1, 2))), Symbol('x')))",
+      "str": "(x > sqrt(9), -sqrt(9) > x)"
+    },
+    "formal_repr": "(StrictGreaterThan(l=Symbol(s='x'), r=Pow(base=Integer(n=9), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))), StrictGreaterThan(l=Mul(l=Integer(n=-1), r=Pow(base=Integer(n=9), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))), r=Symbol(s='x')))"
+  },
+  "components": {
+    "n": "9",
+    "x": "x",
+    "relation": "x^{2} > 9"
+  },
+  "seed": 32,
+  "generator": "spe_sujet1_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

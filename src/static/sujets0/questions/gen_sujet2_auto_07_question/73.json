@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur -2,9 passant par le points $A(-7;5)$. On note $B$ le point de la droite $d$ d'abscisse $6$. Calculer l'ordonnée de $d$.",
+  "answer": {
+    "latex": "5 + \\left(6 + 7\\right) \\times -\\dfrac{29}{10}",
+    "simplified_latex": "-\\dfrac{327}{10}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Integer(5), Mul(Rational(-29, 10), Add(Integer(6), Integer(7))))",
+      "str": "5 + (6 + 7)*(-29/10)"
+    },
+    "formal_repr": "Add(l=Integer(n=5), r=Mul(l=Add(l=Integer(n=6), r=Integer(n=7)), r=Fraction(p=Integer(n=-29), q=Integer(n=10))))"
+  },
+  "components": {
+    "a": "-\\dfrac{29}{10}",
+    "x1": "-7",
+    "y1": "5",
+    "x2": "6"
+  },
+  "seed": 73,
+  "generator": "gen_sujet2_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-3]",
+  "statement": "Le prix d'un article est multiplié par $0,74$. De combien de pourcent le prix de cet article a-t-il diminué ?",
+  "answer": {
+    "latex": "\\dfrac{52}{200}",
+    "simplified_latex": "\\dfrac{13}{50}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(13, 50)",
+      "str": "13/50"
+    },
+    "formal_repr": "Fraction(p=Integer(n=52), q=Integer(n=200))"
+  },
+  "components": {
+    "p": "\\dfrac{52}{200}",
+    "direction": "-1",
+    "coef": "1 -\\dfrac{52}{200}"
+  },
+  "seed": 85,
+  "generator": "spe_sujet1_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

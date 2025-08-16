@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-8 coefficient 2\n-9 coefficient 2\n-5 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 7.333333333333333$ ?",
+  "answer": {
+    "latex": "2",
+    "simplified_latex": "2",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(2)",
+      "str": "2"
+    },
+    "formal_repr": "Integer(n=2)"
+  },
+  "components": {
+    "note1": "8",
+    "note2": "9",
+    "note3": "5",
+    "coef1": "2",
+    "coef2": "2",
+    "coef3": "2",
+    "mean": "\\dfrac{8 \\times 2 + 9 \\times 2 + 5 \\times 2}{2 + 2 + 2}"
+  },
+  "seed": 13,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

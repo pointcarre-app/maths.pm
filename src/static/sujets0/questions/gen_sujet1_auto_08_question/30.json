@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-8]",
+  "statement": "Convertir en heures une durée de 350 minutes. Ta réponse doit être sous forme de fraction.",
+  "answer": {
+    "latex": "\\dfrac{350}{60}",
+    "simplified_latex": "\\dfrac{35}{6}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(35, 6)",
+      "str": "35/6"
+    },
+    "formal_repr": "Fraction(p=Integer(n=350), q=Integer(n=60))"
+  },
+  "components": {
+    "x": "350",
+    "factor": "60"
+  },
+  "seed": 30,
+  "generator": "gen_sujet1_auto_08_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

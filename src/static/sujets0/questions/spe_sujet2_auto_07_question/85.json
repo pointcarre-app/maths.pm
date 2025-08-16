@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(-4;-7)$ et $B(9;0)$. Calculer le coefficient directeur de la droite $d$.",
+  "answer": {
+    "latex": "\\dfrac{0 + 7}{9 + 4}",
+    "simplified_latex": "\\dfrac{7}{13}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Add(Integer(0), Integer(7)), Pow(Add(Integer(4), Integer(9)), Integer(-1)))",
+      "str": "(0 + 7)/(4 + 9)"
+    },
+    "formal_repr": "Fraction(p=Add(l=Integer(n=0), r=Integer(n=7)), q=Add(l=Integer(n=9), r=Integer(n=4)))"
+  },
+  "components": {
+    "x1": "-4",
+    "y1": "-7",
+    "x2": "9",
+    "y2": "0"
+  },
+  "seed": 85,
+  "generator": "spe_sujet2_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

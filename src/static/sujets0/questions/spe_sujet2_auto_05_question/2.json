@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
+  "statement": "On considère le nombre $N=\\dfrac{6^{8}}{2^{3}}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.",
+  "answer": {
+    "latex": "2^{2} \\times 3^{5}",
+    "simplified_latex": "972",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Integer(2), Integer(2)), Pow(Integer(3), Integer(5)))",
+      "str": "2**2*3**5"
+    },
+    "formal_repr": "Mul(l=Pow(base=Integer(n=2), exp=Integer(n=2)), r=Pow(base=Integer(n=3), exp=Integer(n=5)))"
+  },
+  "components": {
+    "x": "2",
+    "y": "3",
+    "n1": "3",
+    "n2": "5",
+    "expr": "\\dfrac{6^{8}}{2^{3}}"
+  },
+  "seed": 2,
+  "generator": "spe_sujet2_auto_05_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

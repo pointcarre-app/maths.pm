@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-13 coefficient 1\n-16 coefficient 2\n-17 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 16.142857142857142$ ?",
+  "answer": {
+    "latex": "4",
+    "simplified_latex": "4",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(4)",
+      "str": "4"
+    },
+    "formal_repr": "Integer(n=4)"
+  },
+  "components": {
+    "note1": "13",
+    "note2": "16",
+    "note3": "17",
+    "coef1": "1",
+    "coef2": "2",
+    "coef3": "4",
+    "mean": "\\dfrac{13 \\times 1 + 16 \\times 2 + 17 \\times 4}{1 + 2 + 4}"
+  },
+  "seed": 44,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

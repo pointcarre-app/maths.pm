@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $-16 + \\dfrac{14}{3} \\times \\dfrac{11}{6}$.",
+  "mask": "",
+  "answer": {
+    "latex": "-16 + \\dfrac{14}{3} \\times \\dfrac{11}{6}",
+    "simplified_latex": "-\\dfrac{67}{9}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Integer(-16), Mul(Rational(11, 6), Rational(14, 3)))",
+      "str": "-16 + (14/3)*(11/6)"
+    },
+    "formal_repr": "Add(l=Integer(n=-16), r=Mul(l=Fraction(p=Integer(n=14), q=Integer(n=3)), r=Fraction(p=Integer(n=11), q=Integer(n=6))))"
+  },
+  "components": {
+    "a": "-16",
+    "b": "\\dfrac{14}{3}",
+    "c": "\\dfrac{11}{6}"
+  },
+  "seed": 52,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

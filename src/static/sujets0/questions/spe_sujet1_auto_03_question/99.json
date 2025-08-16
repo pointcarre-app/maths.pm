@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-3]",
+  "statement": "Le prix d'un article est multiplié par $1,52$. De combien de pourcent le prix de cet article a-t-il augmenté ?",
+  "answer": {
+    "latex": "\\dfrac{104}{200}",
+    "simplified_latex": "\\dfrac{13}{25}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(13, 25)",
+      "str": "13/25"
+    },
+    "formal_repr": "Fraction(p=Integer(n=104), q=Integer(n=200))"
+  },
+  "components": {
+    "p": "\\dfrac{104}{200}",
+    "direction": "1",
+    "coef": "1 + 1\\dfrac{104}{200}"
+  },
+  "seed": 99,
+  "generator": "spe_sujet1_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

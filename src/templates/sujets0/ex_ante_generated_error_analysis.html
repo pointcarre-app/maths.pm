@@ -1,0 +1,369 @@
+{% extends "base/main-alt.html" %}
+
+{% block title %}
+  Error Analysis - {{ total_errors }} erreurs à analyser
+{% endblock title %}
+
+{% block extra_head %}
+  <style>
+      .traceback-content {
+          max-height: 300px;
+          overflow-y: auto;
+          font-size: 0.75rem;
+          line-height: 1.2;
+      }
+
+      .error-row:hover {
+          background-color: rgba(239, 68, 68, 0.05);
+      }
+
+      pre {
+          white-space: pre-wrap;
+          word-wrap: break-word;
+      }
+
+      .copy-btn {
+          opacity: 0.5;
+          transition: opacity 0.2s;
+      }
+
+      .copy-btn:hover {
+          opacity: 1;
+      }
+  </style>
+{% endblock extra_head %}
+
+{% block content %}
+  <div class="padding-alt-security mx-auto mb-14 mt-12 max-w-7xl">
+    <!-- Header -->
+    <div class="card shadow-lg mx-auto py-6 mb-8">
+      <h1 class="text-center text-2xl font-bold text-base-content/60 mb-1">Error Analysis</h1>
+      <h2 class="text-center text-xl font-bold mb-3">
+        Analyse de {{ total_errors }} erreurs de génération
+      </h2>
+
+      <!-- Statistics -->
+      <div class="stats stats-horizontal shadow-none mx-auto">
+        <div class="stat">
+          <div class="stat-title">Total Erreurs</div>
+          <div class="stat-value text-error">{{ total_errors }}</div>
+          <div class="stat-desc">Questions échouées</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">Générateurs Affectés</div>
+          <div class="stat-value text-warning">{{ generators_with_errors }}</div>
+          <div class="stat-desc">Sur {{ total_generators }} total</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">Taux d'Échec</div>
+          <div class="stat-value text-error">
+            {{ ((total_errors * 100) / (total_generators * 100)) | round(1) }}%
+          </div>
+          <div class="stat-desc">Sur 5900 questions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="card bg-base-100 shadow-xl mb-6">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-4 items-center">
+          <!-- Generator filter -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Filtrer par générateur</span>
+            </label>
+            <select id="generator-filter" class="select select-bordered">
+              <option value="all">Tous les générateurs</option>
+              {% set unique_generators = errors | map(attribute='generator') | unique | list | sort %}
+              {% for gen in unique_generators %}<option value="{{ gen }}">{{ gen }}</option>{% endfor %}
+            </select>
+          </div>
+
+          <!-- Error type filter -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Type d'erreur</span>
+            </label>
+            <select id="error-type-filter" class="select select-bordered">
+              <option value="all">Tous les types</option>
+              {% set unique_error_types = errors | map(attribute='error_type') | unique | list | sort %}
+              {% for error_type in unique_error_types %}
+                <option value="{{ error_type }}">{{ error_type }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- Search -->
+          <div class="form-control flex-1">
+            <label class="label">
+              <span class="label-text">Rechercher dans les erreurs</span>
+            </label>
+            <input type="text" id="search-filter" placeholder="Rechercher..." class="input input-bordered w-full" />
+          </div>
+
+          <!-- Export button -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">&nbsp;</span>
+            </label>
+            <button id="export-btn" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   class="h-5 w-5 mr-2"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="currentColor"
+                   stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              Exporter pour LLM
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Errors Table -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <div class="overflow-x-auto">
+          <table class="table table-zebra w-full">
+            <thead>
+              <tr>
+                <th class="w-8">#</th>
+                <th>Générateur</th>
+                <th class="w-16 text-center">Seed</th>
+                <th>Type d'Erreur</th>
+                <th>Message d'Erreur</th>
+                <th class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="errors-tbody">
+              {% for error in errors %}
+                <tr class="error-row"
+                    data-generator="{{ error.generator }}"
+                    data-error-type="{{ error.error_type }}"
+                    data-error="{{ error.error | lower }}">
+                  <td>{{ loop.index }}</td>
+                  <td class="font-mono text-sm">{{ error.generator }}</td>
+                  <td class="text-center">{{ error.seed }}</td>
+                  <td>
+                    <span class="badge badge-error">{{ error.error_type }}</span>
+                  </td>
+                  <td class="max-w-md">
+                    <div class="text-sm truncate" title="{{ error.error }}">{{ error.error | truncate(100) }}</div>
+                  </td>
+                  <td class="text-center">
+                    <button class="btn btn-ghost btn-xs" onclick="toggleTraceback('traceback-{{ loop.index }}')">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           class="h-4 w-4"
+                           viewBox="0 0 24 24"
+                           fill="none"
+                           stroke="currentColor"
+                           stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                      </svg>
+                    </button>
+                    <button class="btn btn-ghost btn-xs copy-btn"
+                            onclick="copyError({{ loop.index }}, '{{ error.generator }}', {{ error.seed }}, '{{ error.error_type }}', {{ error.error | tojson }}, {{ error.traceback | tojson }})">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           class="h-4 w-4"
+                           viewBox="0 0 24 24"
+                           fill="none"
+                           stroke="currentColor"
+                           stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr id="traceback-{{ loop.index }}" class="hidden">
+                  <td colspan="6" class="p-0">
+                    <div class="bg-base-200 p-4">
+                      <div class="text-xs font-bold mb-2">Traceback complet:</div>
+                      <pre class="traceback-content bg-base-300 p-2 rounded text-error">{{ error.traceback }}</pre>
+                      {% if error.stdout %}
+                        <div class="text-xs font-bold mt-2 mb-1">Stdout:</div>
+                        <pre class="text-xs bg-base-300 p-2 rounded">{{ error.stdout }}</pre>
+                      {% endif %}
+                      {% if error.stderr %}
+                        <div class="text-xs font-bold mt-2 mb-1">Stderr:</div>
+                        <pre class="text-xs bg-base-300 p-2 rounded text-warning">{{ error.stderr }}</pre>
+                      {% endif %}
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Summary stats -->
+        <div class="mt-6 text-sm text-gray-600">
+          <div id="filter-stats">
+            Affichage de <span id="visible-count">{{ total_errors }}</span> erreur(s) sur {{ total_errors }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Export Modal -->
+    <dialog id="export-modal" class="modal">
+      <div class="modal-box max-w-4xl">
+        <h3 class="font-bold text-lg">Export pour Analyse LLM</h3>
+        <p class="py-4">Copiez le texte ci-dessous pour l'analyser avec un LLM:</p>
+        <textarea id="export-text" class="textarea textarea-bordered w-full h-96 font-mono text-xs" readonly></textarea>
+        <div class="modal-action">
+          <button class="btn btn-primary" onclick="copyExportText()">Copier le texte</button>
+          <form method="dialog">
+            <button class="btn">Fermer</button>
+          </form>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
+  </div>
+
+  <script>
+      // Filter functionality
+      function applyFilters() {
+          const generatorFilter = document.getElementById('generator-filter').value;
+          const errorTypeFilter = document.getElementById('error-type-filter').value;
+          const searchFilter = document.getElementById('search-filter').value.toLowerCase();
+
+          const rows = document.querySelectorAll('.error-row');
+          let visibleCount = 0;
+
+          rows.forEach(row => {
+              const generator = row.dataset.generator;
+              const errorType = row.dataset.errorType;
+              const errorText = row.dataset.error;
+
+              let show = true;
+
+              if (generatorFilter !== 'all' && generator !== generatorFilter) {
+                  show = false;
+              }
+
+              if (errorTypeFilter !== 'all' && errorType !== errorTypeFilter) {
+                  show = false;
+              }
+
+              if (searchFilter && !errorText.includes(searchFilter) && !generator.toLowerCase().includes(searchFilter)) {
+                  show = false;
+              }
+
+              row.style.display = show ? '' : 'none';
+              // Also hide the traceback row
+              const nextRow = row.nextElementSibling;
+              if (nextRow && nextRow.id && nextRow.id.startsWith('traceback-')) {
+                  if (!show) nextRow.style.display = 'none';
+              }
+
+              if (show) visibleCount++;
+          });
+
+          document.getElementById('visible-count').textContent = visibleCount;
+      }
+
+      // Event listeners
+      document.getElementById('generator-filter').addEventListener('change', applyFilters);
+      document.getElementById('error-type-filter').addEventListener('change', applyFilters);
+      document.getElementById('search-filter').addEventListener('input', applyFilters);
+
+      // Toggle traceback visibility
+      function toggleTraceback(id) {
+          const element = document.getElementById(id);
+          element.classList.toggle('hidden');
+      }
+
+      // Copy error details
+      function copyError(index, generator, seed, errorType, error, traceback) {
+          const text = `Generator: ${generator}
+Seed: ${seed}
+Error Type: ${errorType}
+Error: ${error}
+
+Traceback:
+${traceback}`;
+
+          navigator.clipboard.writeText(text).then(() => {
+              // Show feedback
+              const btn = event.target.closest('button');
+              const originalHTML = btn.innerHTML;
+              btn.innerHTML = '✓';
+              setTimeout(() => {
+                  btn.innerHTML = originalHTML;
+              }, 1000);
+          });
+      }
+
+      // Export all visible errors
+      document.getElementById('export-btn').addEventListener('click', () => {
+          const rows = document.querySelectorAll('.error-row');
+          let exportText = `# Error Analysis Report
+Generated: ${new Date().toISOString()}
+Total Errors: ${document.getElementById('visible-count').textContent}
+
+## Errors by Generator:
+
+`;
+
+          const errorsByGenerator = {};
+
+          rows.forEach(row => {
+              if (row.style.display !== 'none') {
+                  const generator = row.dataset.generator;
+                  const cells = row.querySelectorAll('td');
+                  const seed = cells[2].textContent;
+                  const errorType = cells[3].textContent.trim();
+                  const error = cells[4].textContent.trim();
+
+                  if (!errorsByGenerator[generator]) {
+                      errorsByGenerator[generator] = [];
+                  }
+
+                  errorsByGenerator[generator].push({
+                      seed,
+                      errorType,
+                      error
+                  });
+              }
+          });
+
+          Object.keys(errorsByGenerator).sort().forEach(generator => {
+              exportText += `\n### ${generator} (${errorsByGenerator[generator].length} errors)\n\n`;
+              errorsByGenerator[generator].forEach(err => {
+                  exportText += `- Seed ${err.seed}: [${err.errorType}] ${err.error}\n`;
+              });
+          });
+
+          document.getElementById('export-text').value = exportText;
+          document.getElementById('export-modal').showModal();
+      });
+
+      // Copy export text
+      function copyExportText() {
+          const textarea = document.getElementById('export-text');
+          textarea.select();
+          document.execCommand('copy');
+
+          // Show feedback
+          const btn = event.target;
+          const originalText = btn.textContent;
+          btn.textContent = '✓ Copié!';
+          setTimeout(() => {
+              btn.textContent = originalText;
+          }, 1500);
+      }
+  </script>
+{% endblock content %}

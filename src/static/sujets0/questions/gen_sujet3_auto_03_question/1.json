@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $13,8\\%$ ?",
+  "answer": {
+    "latex": "0,862",
+    "simplified_latex": "0,862",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(431, 500)",
+      "str": "431/500"
+    },
+    "formal_repr": "Decimal(p=431, q=500)"
+  },
+  "components": {
+    "p": "\\dfrac{138}{1000}",
+    "direction": "-1",
+    "coef": "1 -\\dfrac{138}{1000}"
+  },
+  "seed": 1,
+  "generator": "gen_sujet3_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

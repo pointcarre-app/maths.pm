@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-15 coefficient 1\n-18 coefficient 1\n-11 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 13.2$ ?",
+  "answer": {
+    "latex": "3",
+    "simplified_latex": "3",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(3)",
+      "str": "3"
+    },
+    "formal_repr": "Integer(n=3)"
+  },
+  "components": {
+    "note1": "15",
+    "note2": "18",
+    "note3": "11",
+    "coef1": "1",
+    "coef2": "1",
+    "coef3": "3",
+    "mean": "\\dfrac{15 \\times 1 + 18 \\times 1 + 11 \\times 3}{1 + 1 + 3}"
+  },
+  "seed": 93,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

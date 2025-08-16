@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-7]",
+  "statement": "On a représenté ci-contre la parabole d'équation $y = x^2$. On note (\\\\mathcal\\{J\\}) l'inéquation, sur \\\\mathbb\\{R\\}, $x^{2} > 25$. Donner la ou les inéquation(s) du premier degré équivalente à \\\\mathcal\\{J\\}.",
+  "answer": {
+    "latex": "\\left(x > 25^{\\dfrac{1}{2}}, -25^{\\dfrac{1}{2}} > x\\right)",
+    "simplified_latex": "\\left(x > 5, -5 > x\\right)",
+    "sympy_exp_data": {
+      "type": "Tuple",
+      "sp.srepr": "Tuple(StrictGreaterThan(Symbol('x'), Pow(Integer(25), Rational(1, 2))), StrictGreaterThan(Mul(Integer(-1), Pow(Integer(25), Rational(1, 2))), Symbol('x')))",
+      "str": "(x > sqrt(25), -sqrt(25) > x)"
+    },
+    "formal_repr": "(StrictGreaterThan(l=Symbol(s='x'), r=Pow(base=Integer(n=25), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))), StrictGreaterThan(l=Mul(l=Integer(n=-1), r=Pow(base=Integer(n=25), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))), r=Symbol(s='x')))"
+  },
+  "components": {
+    "n": "25",
+    "x": "x",
+    "relation": "x^{2} > 25"
+  },
+  "seed": 85,
+  "generator": "spe_sujet1_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

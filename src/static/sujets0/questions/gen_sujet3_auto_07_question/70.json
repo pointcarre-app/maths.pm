@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
+  "statement": "2 articles coûtent 15,2 euros. Combien coûtent 15 articles ?",
+  "answer": {
+    "latex": "\\dfrac{76}{10}15",
+    "simplified_latex": "114",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Rational(38, 5), Integer(15))",
+      "str": "(38/5)*15"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=76), q=Integer(n=10)), r=Integer(n=15))"
+  },
+  "components": {
+    "n1": "2",
+    "n2": "15",
+    "p": "\\dfrac{76}{10}"
+  },
+  "seed": 70,
+  "generator": "gen_sujet3_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

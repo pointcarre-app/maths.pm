@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(94;31)$ et $B(36;88)$. Calculer le coefficient directeur de la droite $d$.",
+  "answer": {
+    "latex": "\\dfrac{88 -31}{36 -94}",
+    "simplified_latex": "-\\dfrac{57}{58}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Add(Integer(-94), Integer(36)), Integer(-1)), Add(Integer(-31), Integer(88)))",
+      "str": "(-31 + 88)/(-94 + 36)"
+    },
+    "formal_repr": "Fraction(p=Add(l=Integer(n=88), r=Integer(n=-31)), q=Add(l=Integer(n=36), r=Integer(n=-94)))"
+  },
+  "components": {
+    "x1": "94",
+    "y1": "31",
+    "x2": "36",
+    "y2": "88"
+  },
+  "seed": 95,
+  "generator": "gen_sujet2_auto_06_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,10 @@
+{
+  "seed": 71,
+  "generator": "gen_sujet3_auto_11_question",
+  "success": false,
+  "error": "module 'teachers.maths' has no attribute 'Pi'",
+  "error_type": "AttributeError",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 112, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet3_auto_11_question.py\", line 55, in <module>\n    components = generate_components(None)\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet3_auto_11_question.py\", line 18, in generate_components\n    r= tm.Pi() * r**tm.Integer(n=2) * h,\n       ^^^^^\nAttributeError: module 'teachers.maths' has no attribute 'Pi'\n",
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
+  "statement": "8 articles coûtent 125,6 euros. Combien coûtent 12 articles ?",
+  "answer": {
+    "latex": "\\dfrac{157}{10}12",
+    "simplified_latex": "\\dfrac{942}{5}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Integer(12), Rational(157, 10))",
+      "str": "(157/10)*12"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=157), q=Integer(n=10)), r=Integer(n=12))"
+  },
+  "components": {
+    "n1": "8",
+    "n2": "12",
+    "p": "\\dfrac{157}{10}"
+  },
+  "seed": 9,
+  "generator": "gen_sujet2_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

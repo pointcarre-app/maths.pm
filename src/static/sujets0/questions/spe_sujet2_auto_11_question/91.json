@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-11]",
+  "statement": "Quelle est l'expression développée de $\\left(x + 0,11\\right)^{2}$ ?",
+  "answer": {
+    "latex": "\\left(x + 0,11\\right)^{2}",
+    "simplified_latex": "x^{2} + 0,22x + 0,11^{2}",
+    "sympy_exp_data": {
+      "type": "Pow",
+      "sp.srepr": "Pow(Add(Symbol('x'), Rational(11, 100)), Integer(2))",
+      "str": "(x + 11/100)**2"
+    },
+    "formal_repr": "Pow(base=Add(l=Symbol(s='x'), r=Decimal(p=11, q=100)), exp=Integer(n=2))"
+  },
+  "components": {
+    "x": "x",
+    "a": "0,11",
+    "expr": "\\left(x + 0,11\\right)^{2}"
+  },
+  "seed": 91,
+  "generator": "spe_sujet2_auto_11_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

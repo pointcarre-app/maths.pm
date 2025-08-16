@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
+  "statement": "On considère le nombre $N=\\dfrac{6^{16}}{2^{8}}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.",
+  "answer": {
+    "latex": "2^{0} \\times 3^{8}",
+    "simplified_latex": "6561",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Integer(2), Integer(0)), Pow(Integer(3), Integer(8)))",
+      "str": "2**0*3**8"
+    },
+    "formal_repr": "Mul(l=Pow(base=Integer(n=2), exp=Integer(n=0)), r=Pow(base=Integer(n=3), exp=Integer(n=8)))"
+  },
+  "components": {
+    "x": "2",
+    "y": "3",
+    "n1": "8",
+    "n2": "8",
+    "expr": "\\dfrac{6^{16}}{2^{8}}"
+  },
+  "seed": 70,
+  "generator": "spe_sujet2_auto_05_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-20 coefficient 3\n-3 coefficient 2\n-0 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 9.428571428571429$ ?",
+  "answer": {
+    "latex": "2",
+    "simplified_latex": "2",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(2)",
+      "str": "2"
+    },
+    "formal_repr": "Integer(n=2)"
+  },
+  "components": {
+    "note1": "20",
+    "note2": "3",
+    "note3": "0",
+    "coef1": "3",
+    "coef2": "2",
+    "coef3": "2",
+    "mean": "\\dfrac{20 \\times 3 + 3 \\times 2 + 0 \\times 2}{3 + 2 + 2}"
+  },
+  "seed": 42,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $35 \\%$ de $60$.",
+  "mask": "",
+  "answer": {
+    "latex": "\\dfrac{7}{20}60",
+    "simplified_latex": "21",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Rational(7, 20), Integer(60))",
+      "str": "(7/20)*60"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=7), q=Integer(n=20)), r=Integer(n=60))"
+  },
+  "components": {
+    "n": "60",
+    "x": "\\dfrac{7}{20}"
+  },
+  "seed": 55,
+  "generator": "gen_sujet1_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

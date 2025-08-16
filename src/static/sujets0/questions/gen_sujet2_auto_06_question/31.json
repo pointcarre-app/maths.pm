@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(-97;-72)$ et $B(20;95)$. Calculer le coefficient directeur de la droite $d$.",
+  "answer": {
+    "latex": "\\dfrac{95 + 72}{20 + 97}",
+    "simplified_latex": "\\dfrac{167}{117}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Add(Integer(20), Integer(97)), Integer(-1)), Add(Integer(72), Integer(95)))",
+      "str": "(72 + 95)/(20 + 97)"
+    },
+    "formal_repr": "Fraction(p=Add(l=Integer(n=95), r=Integer(n=72)), q=Add(l=Integer(n=20), r=Integer(n=97)))"
+  },
+  "components": {
+    "x1": "-97",
+    "y1": "-72",
+    "x2": "20",
+    "y2": "95"
+  },
+  "seed": 31,
+  "generator": "gen_sujet2_auto_06_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

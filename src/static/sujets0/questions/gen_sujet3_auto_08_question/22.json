@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-8]",
+  "statement": "Un object parcours $10$ km en 1 minutes. Quelle est sa vitesse moyenne en km/h ?",
+  "answer": {
+    "latex": "\\dfrac{\\dfrac{10}{1}}{\\dfrac{1}{60}}",
+    "simplified_latex": "600",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(600)",
+      "str": "600"
+    },
+    "formal_repr": "Fraction(p=Fraction(p=Integer(n=10), q=Integer(n=1)), q=Fraction(p=Integer(n=1), q=Integer(n=60)))"
+  },
+  "components": {
+    "d": "10",
+    "t": "1",
+    "factor": "\\dfrac{1}{60}"
+  },
+  "seed": 22,
+  "generator": "gen_sujet3_auto_08_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

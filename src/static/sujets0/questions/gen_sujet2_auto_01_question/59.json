@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $-11 + \\dfrac{33}{8}-16$.",
+  "mask": "",
+  "answer": {
+    "latex": "-11 + \\dfrac{33}{8}-16",
+    "simplified_latex": "-77",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Mul(Integer(-16), Rational(33, 8)), Integer(-11))",
+      "str": "(33/8)*(-16) - 11"
+    },
+    "formal_repr": "Add(l=Integer(n=-11), r=Mul(l=Fraction(p=Integer(n=33), q=Integer(n=8)), r=Integer(n=-16)))"
+  },
+  "components": {
+    "a": "-11",
+    "b": "\\dfrac{33}{8}",
+    "c": "-16"
+  },
+  "seed": 59,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

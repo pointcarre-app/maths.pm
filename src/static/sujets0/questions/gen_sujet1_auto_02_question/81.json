@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-2]",
+  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\dfrac{17}{20}$, $B=\\dfrac{59}{100}$, $C=0,44$",
+  "answer": {
+    "latex": "\\dfrac{17}{20}",
+    "simplified_latex": "\\dfrac{17}{20}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(17, 20)",
+      "str": "17/20"
+    },
+    "formal_repr": "Fraction(p=Integer(n=17), q=Integer(n=20))"
+  },
+  "components": {
+    "a": "\\dfrac{17}{20}",
+    "b": "\\dfrac{59}{100}",
+    "c": "0,44"
+  },
+  "seed": 81,
+  "generator": "gen_sujet1_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-4]",
+  "statement": "Dans un lycée, le la moitié des élèves sont internes, parmi eux, le quart sont des gauchers. Calculer le pourcentage de gauchers internes par rapport à l'ensemble des élèves du lycée.",
+  "answer": {
+    "latex": "\\dfrac{1}{2} \\times \\dfrac{1}{4}",
+    "simplified_latex": "\\dfrac{1}{8}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Rational(1, 4), Rational(1, 2))",
+      "str": "(1/2)*(1/4)"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=1), q=Integer(n=2)), r=Fraction(p=Integer(n=1), q=Integer(n=4)))"
+  },
+  "components": {
+    "p1": "\\dfrac{1}{2}",
+    "p2": "\\dfrac{1}{4}"
+  },
+  "seed": 87,
+  "generator": "spe_sujet2_auto_04_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,30 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-3x + 7\\right) \\times \\left(6x -5\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; -\\dfrac{7}{-3}\\rbracket$ ?",
+  "answer": {
+    "latex": "0 > f(x)",
+    "simplified_latex": "0 > f(x)",
+    "sympy_exp_data": {
+      "type": "StrictGreaterThan",
+      "sp.srepr": "StrictGreaterThan(Integer(0), Function('f')(Symbol('x')))",
+      "str": "0 > f(x)"
+    },
+    "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Function(name=f)(Symbol(s='x')))"
+  },
+  "components": {
+    "root1": "-\\dfrac{7}{-3}",
+    "root2": "-\\dfrac{5}{6}",
+    "a1": "-3",
+    "a2": "6",
+    "b1": "7",
+    "b2": "-5",
+    "interval": "\\lbracket -\\infty; -\\dfrac{7}{-3}\\rbracket",
+    "x": "x",
+    "f": "f"
+  },
+  "seed": 51,
+  "generator": "spe_sujet2_auto_10_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

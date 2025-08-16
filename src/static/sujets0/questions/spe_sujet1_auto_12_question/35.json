@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-17 coefficient 3\n-10 coefficient 2\n-4 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 10.375$ ?",
+  "answer": {
+    "latex": "3",
+    "simplified_latex": "3",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(3)",
+      "str": "3"
+    },
+    "formal_repr": "Integer(n=3)"
+  },
+  "components": {
+    "note1": "17",
+    "note2": "10",
+    "note3": "4",
+    "coef1": "3",
+    "coef2": "2",
+    "coef3": "3",
+    "mean": "\\dfrac{17 \\times 3 + 10 \\times 2 + 4 \\times 3}{3 + 2 + 3}"
+  },
+  "seed": 35,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

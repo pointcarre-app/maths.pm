@@ -1,0 +1,32 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 3\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{9}x -8 + \\dfrac{1}{9^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{9}{10}x -2}{5,0}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "answer": {
+    "latex": "6",
+    "simplified_latex": "6",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(6)",
+      "str": "6"
+    },
+    "formal_repr": "Integer(n=6)"
+  },
+  "components": {
+    "x": "x",
+    "c1": "3",
+    "a2": "\\dfrac{1}{9}",
+    "b2": "8",
+    "c2": "9",
+    "a3": "\\dfrac{9}{10}",
+    "b3": "-2",
+    "c3": "5,0",
+    "expr1": "x^{2} -\\left(x + 3\\right)^{2}",
+    "expr2": "\\dfrac{1}{9}x -8 + \\dfrac{1}{9^{\\dfrac{1}{2}}}",
+    "expr3": "\\dfrac{\\dfrac{9}{10}x -2}{5,0}"
+  },
+  "seed": 92,
+  "generator": "spe_sujet1_auto_09_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

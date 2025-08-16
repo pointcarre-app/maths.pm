@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-2]",
+  "statement": "Le prix d'un article est noté $P$. Ce prix augmente de $40\\%$ puis diminue de $40\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?",
+  "answer": {
+    "latex": "-\\left(\\dfrac{40}{100}\\right)^{2}",
+    "simplified_latex": "-\\dfrac{4}{25}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Integer(-1), Pow(Rational(2, 5), Integer(2)))",
+      "str": "-(2/5)**2"
+    },
+    "formal_repr": "Mul(l=Integer(n=-1), r=Pow(base=Fraction(p=Integer(n=40), q=Integer(n=100)), exp=Integer(n=2)))"
+  },
+  "components": {
+    "p": "40",
+    "direction": "1"
+  },
+  "seed": 4,
+  "generator": "gen_sujet3_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

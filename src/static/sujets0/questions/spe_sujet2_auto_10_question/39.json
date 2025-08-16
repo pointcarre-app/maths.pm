@@ -1,0 +1,30 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-4x + 2\\right) \\times \\left(-2x -10\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; -\\dfrac{10}{-2}\\rbracket$ ?",
+  "answer": {
+    "latex": "f(x) > 0",
+    "simplified_latex": "f(x) > 0",
+    "sympy_exp_data": {
+      "type": "StrictGreaterThan",
+      "sp.srepr": "StrictGreaterThan(Function('f')(Symbol('x')), Integer(0))",
+      "str": "f(x) > 0"
+    },
+    "formal_repr": "StrictGreaterThan(l=Function(name=f)(Symbol(s='x')), r=Integer(n=0))"
+  },
+  "components": {
+    "root1": "-\\dfrac{10}{-2}",
+    "root2": "-\\dfrac{2}{-4}",
+    "a1": "-4",
+    "a2": "-2",
+    "b1": "2",
+    "b2": "-10",
+    "interval": "\\lbracket -\\infty; -\\dfrac{10}{-2}\\rbracket",
+    "x": "x",
+    "f": "f"
+  },
+  "seed": 39,
+  "generator": "spe_sujet2_auto_10_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

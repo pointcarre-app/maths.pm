@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
+  "statement": "On considère le nombre $N=\\dfrac{15^{13}}{3^{7}}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.",
+  "answer": {
+    "latex": "3^{-1} \\times 5^{6}",
+    "simplified_latex": "\\dfrac{15625}{3}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Pow(Integer(3), Integer(-1)), Pow(Integer(5), Integer(6)))",
+      "str": "5**6/3"
+    },
+    "formal_repr": "Mul(l=Pow(base=Integer(n=3), exp=Integer(n=-1)), r=Pow(base=Integer(n=5), exp=Integer(n=6)))"
+  },
+  "components": {
+    "x": "3",
+    "y": "5",
+    "n1": "7",
+    "n2": "6",
+    "expr": "\\dfrac{15^{13}}{3^{7}}"
+  },
+  "seed": 80,
+  "generator": "spe_sujet2_auto_05_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

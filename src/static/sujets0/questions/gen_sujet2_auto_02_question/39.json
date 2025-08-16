@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
+  "statement": "4 articles coûtent 26,8 euros. Combien coûtent 13 articles ?",
+  "answer": {
+    "latex": "\\dfrac{67}{10}13",
+    "simplified_latex": "\\dfrac{871}{10}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Rational(67, 10), Integer(13))",
+      "str": "(67/10)*13"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=67), q=Integer(n=10)), r=Integer(n=13))"
+  },
+  "components": {
+    "n1": "4",
+    "n2": "13",
+    "p": "\\dfrac{67}{10}"
+  },
+  "seed": 39,
+  "generator": "gen_sujet2_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

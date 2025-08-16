@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-4]",
+  "statement": "Suite à une diminution de $30 \\%$, un article coûte $14$ euros. Quel était son prix initial ?",
+  "answer": {
+    "latex": "20",
+    "simplified_latex": "20",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(20)",
+      "str": "20"
+    },
+    "formal_repr": "Integer(n=20)"
+  },
+  "components": {
+    "p0": "20",
+    "p1": "14",
+    "x": "\\dfrac{3}{10}",
+    "direction": "-1"
+  },
+  "seed": 32,
+  "generator": "gen_sujet2_auto_04_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

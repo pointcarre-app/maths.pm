@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
+  "statement": "5 articles coûtent 36,5 euros. Combien coûtent 19 articles ?",
+  "answer": {
+    "latex": "\\dfrac{73}{10}19",
+    "simplified_latex": "\\dfrac{1387}{10}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Rational(73, 10), Integer(19))",
+      "str": "(73/10)*19"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=73), q=Integer(n=10)), r=Integer(n=19))"
+  },
+  "components": {
+    "n1": "5",
+    "n2": "19",
+    "p": "\\dfrac{73}{10}"
+  },
+  "seed": 60,
+  "generator": "gen_sujet2_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

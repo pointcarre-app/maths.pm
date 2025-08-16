@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-2]",
+  "statement": "Le prix d'un article est de $120$ euros. Son prix augmente de $80$\\%. Quel est le nouveau prix de l'article ?",
+  "answer": {
+    "latex": "12 \\times 10 \\times \\left(1 + 1\\dfrac{8}{10}\\right)",
+    "simplified_latex": "216",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Mul(Integer(10), Integer(12)), Add(Mul(Rational(4, 5), Integer(1)), Integer(1)))",
+      "str": "(12*10)*(1*(4/5) + 1)"
+    },
+    "formal_repr": "Mul(l=Mul(l=Integer(n=12), r=Integer(n=10)), r=Add(l=Integer(n=1), r=Mul(l=Integer(n=1), r=Fraction(p=Integer(n=8), q=Integer(n=10)))))"
+  },
+  "components": {
+    "price": "12 \\times 10",
+    "p": "\\dfrac{8}{10}",
+    "direction": "1"
+  },
+  "seed": 76,
+  "generator": "spe_sujet2_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

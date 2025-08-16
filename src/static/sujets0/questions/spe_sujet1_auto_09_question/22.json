@@ -1,0 +1,32 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x -6\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{4}x --10 + \\dfrac{1}{10^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{8}{3}x -7}{1,6666666666666667}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "answer": {
+    "latex": "-12",
+    "simplified_latex": "-12",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(-12)",
+      "str": "-12"
+    },
+    "formal_repr": "Integer(n=-12)"
+  },
+  "components": {
+    "x": "x",
+    "c1": "-6",
+    "a2": "\\dfrac{1}{4}",
+    "b2": "-10",
+    "c2": "10",
+    "a3": "\\dfrac{8}{3}",
+    "b3": "-7",
+    "c3": "1,6666666666666667",
+    "expr1": "x^{2} -\\left(x -6\\right)^{2}",
+    "expr2": "\\dfrac{1}{4}x --10 + \\dfrac{1}{10^{\\dfrac{1}{2}}}",
+    "expr3": "\\dfrac{\\dfrac{8}{3}x -7}{1,6666666666666667}"
+  },
+  "seed": 22,
+  "generator": "spe_sujet1_auto_09_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

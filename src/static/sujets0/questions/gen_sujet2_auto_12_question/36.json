@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
+  "statement": "On considère les deux séries $A=-19 ; -8 ; -8 ; 3$  et $B=-8 ; -8 ; -8 ; -8$. Quelle est celle avec le plus grand écart type ?",
+  "answer": {
+    "latex": "A",
+    "simplified_latex": "A",
+    "sympy_exp_data": {
+      "type": "Symbol",
+      "sp.srepr": "Symbol('A')",
+      "str": "A"
+    },
+    "formal_repr": "Symbol(s='A')"
+  },
+  "components": {
+    "a": "\\left(-19, -8, -8, 3\\right)",
+    "b": "\\left(-8, -8, -8, -8\\right)",
+    "center": "-8",
+    "disp_low": "0",
+    "disp_high": "11"
+  },
+  "seed": 36,
+  "generator": "gen_sujet2_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

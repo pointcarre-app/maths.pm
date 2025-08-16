@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-6]",
+  "statement": "On considère $x$, $y$, et $u$ des réels non nuls tels que $\\\\dfrac\\{1\\}\\{x\\}+ \\\\dfrac\\{1\\}\\{y\\} = \\\\dfrac\\{1\\}\\{u\\}$. Exprimer $u$ en fonction $x$ et $y$.",
+  "answer": {
+    "latex": "\\dfrac{xy}{x + y}",
+    "simplified_latex": "\\dfrac{xy}{x + y}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Symbol('x'), Symbol('y'), Pow(Add(Symbol('x'), Symbol('y')), Integer(-1)))",
+      "str": "x*y/(x + y)"
+    },
+    "formal_repr": "Fraction(p=Mul(l=Symbol(s='x'), r=Symbol(s='y')), q=Add(l=Symbol(s='x'), r=Symbol(s='y')))"
+  },
+  "components": {
+    "x": "x",
+    "y": "y",
+    "u": "u"
+  },
+  "seed": 72,
+  "generator": "spe_sujet1_auto_06_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

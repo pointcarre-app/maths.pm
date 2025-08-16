@@ -1,0 +1,10 @@
+{
+  "seed": 18,
+  "generator": "spe_sujet2_auto_09_question",
+  "success": false,
+  "error": "BaseModel.__init__() takes 1 positional argument but 2 were given",
+  "error_type": "TypeError",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 112, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet2_auto_09_question.py\", line 76, in <module>\n    \"simplified_latex\": answer[\"maths_object\"].simplified().latex(),\n                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 144, in simplified\n    return MathsCollection(elements=[elem.simplified() for elem in self.elements])\n                                     ~~~~~~~~~~~~~~~^^\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 518, in simplified\n    return Mul(l=Integer(n), r=Pow(base, exp))\n                 ~~~~~~~^^^\nTypeError: BaseModel.__init__() takes 1 positional argument but 2 were given\n",
+  "stdout": "",
+  "stderr": ""
+}

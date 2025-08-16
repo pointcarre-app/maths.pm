@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-12]",
+  "statement": "Calcluer la $moyenne$ de la série A : -54 ; 26 ; 42",
+  "answer": {
+    "latex": "\\dfrac{26 -54 + 42}{3}",
+    "simplified_latex": "\\dfrac{14}{3}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Mul(Rational(1, 3), Add(Integer(-54), Integer(26))), Integer(14))",
+      "str": "(-54 + 26)/3 + 14"
+    },
+    "formal_repr": "Fraction(p=Add(l=Add(l=Integer(n=26), r=Integer(n=-54)), r=Integer(n=42)), q=Integer(n=3))"
+  },
+  "components": {
+    "f": "moyenne",
+    "a": "26",
+    "b": "-54",
+    "c": "42"
+  },
+  "seed": 61,
+  "generator": "gen_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

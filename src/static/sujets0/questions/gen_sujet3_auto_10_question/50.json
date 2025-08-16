@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-10]",
+  "statement": "On considère les deux séries $A=9 ; 13 ; 13 ; 17$  et $B=-20 ; 13 ; 13 ; 46$. Quelle est celle avec le plus grand écart type ?",
+  "answer": {
+    "latex": "B",
+    "simplified_latex": "B",
+    "sympy_exp_data": {
+      "type": "Symbol",
+      "sp.srepr": "Symbol('B')",
+      "str": "B"
+    },
+    "formal_repr": "Symbol(s='B')"
+  },
+  "components": {
+    "a": "\\left(9, 13, 13, 17\\right)",
+    "b": "\\left(-20, 13, 13, 46\\right)",
+    "center": "13",
+    "disp_low": "4",
+    "disp_high": "33"
+  },
+  "seed": 50,
+  "generator": "gen_sujet3_auto_10_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

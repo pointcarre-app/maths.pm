@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-20 coefficient 1\n-13 coefficient 1\n-13 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 14.4$ ?",
+  "answer": {
+    "latex": "3",
+    "simplified_latex": "3",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(3)",
+      "str": "3"
+    },
+    "formal_repr": "Integer(n=3)"
+  },
+  "components": {
+    "note1": "20",
+    "note2": "13",
+    "note3": "13",
+    "coef1": "1",
+    "coef2": "1",
+    "coef3": "3",
+    "mean": "\\dfrac{20 \\times 1 + 13 \\times 1 + 13 \\times 3}{1 + 1 + 3}"
+  },
+  "seed": 38,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

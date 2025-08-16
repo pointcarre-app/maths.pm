@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $\\dfrac{33}{8} + \\dfrac{39}{5} \\times -\\dfrac{7}{2}$.",
+  "mask": "",
+  "answer": {
+    "latex": "\\dfrac{33}{8} + \\dfrac{39}{5} \\times -\\dfrac{7}{2}",
+    "simplified_latex": "-\\dfrac{927}{40}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Mul(Rational(-7, 2), Rational(39, 5)), Rational(33, 8))",
+      "str": "(39/5)*(-7/2) + 33/8"
+    },
+    "formal_repr": "Add(l=Fraction(p=Integer(n=33), q=Integer(n=8)), r=Mul(l=Fraction(p=Integer(n=39), q=Integer(n=5)), r=Fraction(p=Integer(n=-7), q=Integer(n=2))))"
+  },
+  "components": {
+    "a": "\\dfrac{33}{8}",
+    "b": "\\dfrac{39}{5}",
+    "c": "-\\dfrac{7}{2}"
+  },
+  "seed": 27,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

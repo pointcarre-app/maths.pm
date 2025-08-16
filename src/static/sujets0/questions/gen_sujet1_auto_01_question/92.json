@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $85 \\%$ de $270$.",
+  "mask": "",
+  "answer": {
+    "latex": "\\dfrac{17}{20}270",
+    "simplified_latex": "\\dfrac{459}{2}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Rational(17, 20), Integer(270))",
+      "str": "(17/20)*270"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=17), q=Integer(n=20)), r=Integer(n=270))"
+  },
+  "components": {
+    "n": "270",
+    "x": "\\dfrac{17}{20}"
+  },
+  "seed": 92,
+  "generator": "gen_sujet1_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

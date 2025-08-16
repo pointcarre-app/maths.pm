@@ -32,8 +32,10 @@ python -m src
 - **`/api/products`** - JSON API returning all available products
 - **`/api/health`** - Application health check and status
 
-### 🎯 **Educational Tools**
-- **`/sujets0`** - Interactive mathematics question generator for French "Sujets 0" exams
+### 🎯 **Educational Tools (Sujets0)**
+- **`/sujets0`** - Interactive mathematics question generator with Nagini (Python in browser)
+- **`/sujets0/ex-ante-generated`** - Pre-generated questions viewer (instant, no Python execution)
+- **`/scenery`** - Testing environment for Nagini and generator development
 
 ### 🔬 **JupyterLite Views** (Complete Suite)
 
@@ -98,7 +100,11 @@ curl http://localhost:8000/api/health          # Health check
 # Visit: http://localhost:8000/readme          # Beautiful README view
 
 # Educational tools
-# Visit: http://localhost:8000/sujets0         # Math exercises
+# Visit: http://localhost:8000/sujets0         # Math exercises (live generation)
+# Visit: http://localhost:8000/sujets0/ex-ante-generated  # Pre-generated questions
+
+# Generate questions (one-time setup for pre-generated viewer)
+python src/build_questions.py
 
 # JupyterLite views (visit in browser)
 # http://localhost:8000/jupyterlite/lab        # Full Lab
@@ -328,6 +334,148 @@ Recommended workflow:
 3. CI (when enabled) must pass before merge.
 
 ---
+
+## 📂 **Repository Structure (Tree View)**
+
+```
+pca-mathspm/
+├── domains/                      # 🌐 Domain configurations
+│   └── maths.pm.yml             # Main domain settings, meta tags
+├── products/                     # 📦 Product definitions (YAML)
+│   ├── 00_corsica.yml           # Corsica math tools
+│   ├── 01_sujets0.yml           # Math exercise generator
+│   ├── 02_nagini.yml            # Python-in-browser
+│   ├── 02_v4pyjs.yml            # JavaScript tools
+│   ├── 03_mason.yml             # Mason product
+│   ├── 04_papyrus.yml           # Papyrus documentation
+│   ├── 05_aaron.yml             # Aaron tools
+│   ├── 06_estafette.yml         # Estafette service
+│   ├── 07_candor.yml            # Candor product
+│   ├── 08_cubrick.yml           # Cubrick tools
+│   ├── 09_core_legacy.yml       # Legacy core
+│   ├── 10_teachers.yml          # Teachers module
+│   ├── 12_mathspm.yml           # Math.pm main
+│   ├── 13_atlas.yml             # Atlas service
+│   ├── 15_scenery.yml           # Scenery testing
+│   ├── 20_corpus.yml            # Corpus content
+│   ├── 20_wall.yml              # Wall display
+│   ├── 50_jupyterlite.yml       # JupyterLite config
+│   └── 99_examples.yml          # Examples & docs
+├── src/                          # ⚙️ Application source code
+│   ├── api/                     # 🔌 API Router
+│   │   ├── __init__.py
+│   │   └── router.py            # /api/products, /api/health
+│   ├── core/                    # 🎯 Core Router & PM System
+│   │   ├── __init__.py
+│   │   ├── router.py            # /pm/* routes, PM renderer
+│   │   └── pm/                  # PM (Page Markdown) system
+│   │       ├── models/          # Fragment & PM models
+│   │       ├── services/        # PM builder, runners
+│   │       └── external/        # YAML metadata extension
+│   ├── corsica/                 # 🗺️ Corsica Router
+│   │   ├── __init__.py
+│   │   ├── router.py            # /corsica/* routes
+│   │   └── exercises/           # Corsica exercise generators
+│   ├── jupyterlite/             # 📓 JupyterLite Router
+│   │   ├── __init__.py
+│   │   └── router.py            # /jupyterlite/*, /jupyter/*
+│   ├── nagini/                  # 🐍 Nagini Router
+│   │   ├── __init__.py
+│   │   └── router.py            # /nagini/* routes
+│   ├── sujets0/                 # 📚 Sujets0 Router
+│   │   ├── __init__.py
+│   │   ├── router.py            # /sujets0, /sujets0/ex-ante-generated, /scenery
+│   │   └── generators/          # Question generators (60+ files)
+│   │       ├── spe_*.py        # Spécialité generators
+│   │       └── gen_*.py        # General generators
+│   ├── static/                  # 📁 Static assets
+│   │   ├── css/                # Stylesheets
+│   │   ├── js/                 # JavaScript
+│   │   │   ├── core/           # Core JS (bricks, mason, storage)
+│   │   │   ├── pm/             # PM components
+│   │   │   └── utils/          # Utilities
+│   │   ├── icons/              # Icons and images
+│   │   ├── pm/                 # PM static content
+│   │   └── sujets0/            
+│   │       ├── generators/     # Generator files (copied at startup)
+│   │       └── questions/      # Pre-generated questions (5000+ JSON)
+│   ├── templates/               # 📄 Jinja2 templates
+│   │   ├── base.html           # Base template
+│   │   ├── index.html          # Homepage
+│   │   ├── sujets0/            # Sujets0 templates
+│   │   │   ├── index.html     # Main Sujets0 page
+│   │   │   ├── ex_ante_generated.html  # Pre-generated viewer
+│   │   │   └── scenery.html   # Testing environment
+│   │   ├── jupyterlite/        # JupyterLite templates
+│   │   ├── pm/                 # PM templates
+│   │   └── products/           # Product templates
+│   ├── app.py                   # 🚀 FastAPI main application
+│   ├── settings.py              # ⚙️ Settings & configuration
+│   ├── models.py                # 📋 Pydantic models
+│   ├── build.py                 # 🏗️ Static site builder
+│   └── build_questions.py       # 🎲 Question pre-generator
+├── files/                        # 📝 Content files
+├── files-for-lite/              # 📓 JupyterLite notebooks
+├── pms/                         # 📄 PM source files
+├── notes/                       # 📖 Documentation
+├── scripts/                     # 🔧 Build scripts
+├── env/                         # 🐍 Python virtual environment
+├── requirements.txt             # 📦 Python dependencies
+├── requirements-dev.txt         # 🛠️ Dev dependencies
+└── README.md                    # 📖 This file
+```
+
+## 🗂️ **Router Modules Documentation**
+
+### **`src/api/router.py`** - API Endpoints
+- **Purpose**: JSON API for products and health checks
+- **Routes**:
+  - `GET /api/products` - Returns all loaded products
+  - `GET /api/health` - Application health status
+- **Key Features**: Product filtering by domain, health monitoring
+
+### **`src/core/router.py`** - PM System & Core Routes  
+- **Purpose**: Page Markdown (PM) rendering system
+- **Routes**:
+  - `GET /pm/{path:path}` - Render PM files as HTML
+  - Various PM-specific endpoints
+- **Key Features**: Fragment-based content, LaTeX support, interactive components
+
+### **`src/corsica/router.py`** - Corsica Math Tools
+- **Purpose**: Corsica-specific mathematics exercises
+- **Routes**:
+  - `GET /corsica` - Main Corsica interface
+  - Exercise-specific endpoints
+- **Key Features**: Grid-based exercises, navigation problems
+
+### **`src/jupyterlite/router.py`** - Notebook Interface
+- **Purpose**: JupyterLite notebook environment
+- **Routes**:
+  - `GET /jupyterlite/` - Auto-redirect to Lab
+  - `GET /jupyterlite/lab` - Full Jupyter Lab
+  - `GET /jupyterlite/repl` - Python REPL
+  - `GET /jupyterlite/embed` - Demo page
+  - `GET /jupyter/*` - Legacy redirects
+- **Key Features**: Browser-based Python, no server execution
+
+### **`src/nagini/router.py`** - Nagini Python Engine
+- **Purpose**: Python execution in browser via Pyodide
+- **Routes**:
+  - `GET /nagini` - Nagini interface
+- **Key Features**: Browser Python execution, package management
+
+### **`src/sujets0/router.py`** - Mathematics Questions
+- **Purpose**: French mathematics exam question generation
+- **Routes**:
+  - `GET /sujets0` - Interactive generator (uses Nagini)
+  - `GET /sujets0/ex-ante-generated` - Pre-generated questions viewer
+  - `GET /scenery` - Testing environment
+- **Key Features**:
+  - **Live generation**: Execute Python generators in browser
+  - **Pre-generated**: 5000+ questions ready instantly
+  - **Testing**: Development environment for generators
+- **Generators**: 60+ Python files generating various math problems
+- **Build Process**: `python src/build_questions.py` creates JSON questions
 
 ## 🧰 Local Development Guide
 

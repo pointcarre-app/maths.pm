@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-1 coefficient 5\n-11 coefficient 1\n-18 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 6.5$ ?",
+  "answer": {
+    "latex": "2",
+    "simplified_latex": "2",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(2)",
+      "str": "2"
+    },
+    "formal_repr": "Integer(n=2)"
+  },
+  "components": {
+    "note1": "1",
+    "note2": "11",
+    "note3": "18",
+    "coef1": "5",
+    "coef2": "1",
+    "coef3": "2",
+    "mean": "\\dfrac{1 \\times 5 + 11 \\times 1 + 18 \\times 2}{5 + 1 + 2}"
+  },
+  "seed": 57,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

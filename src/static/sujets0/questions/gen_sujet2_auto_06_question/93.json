@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(26;85)$ et $B(44;-10)$. Calculer le coefficient directeur de la droite $d$.",
+  "answer": {
+    "latex": "\\dfrac{-10 -85}{44 -26}",
+    "simplified_latex": "-\\dfrac{95}{18}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Add(Integer(-85), Integer(-10)), Pow(Add(Integer(-26), Integer(44)), Integer(-1)))",
+      "str": "(-85 - 10)/(-26 + 44)"
+    },
+    "formal_repr": "Fraction(p=Add(l=Integer(n=-10), r=Integer(n=-85)), q=Add(l=Integer(n=44), r=Integer(n=-26)))"
+  },
+  "components": {
+    "x1": "26",
+    "y1": "85",
+    "x2": "44",
+    "y2": "-10"
+  },
+  "seed": 93,
+  "generator": "gen_sujet2_auto_06_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

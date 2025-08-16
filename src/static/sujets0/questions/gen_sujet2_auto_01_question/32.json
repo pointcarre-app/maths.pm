@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $-\\dfrac{41}{4} -\\dfrac{32}{5} \\times \\dfrac{39}{4}$.",
+  "mask": "",
+  "answer": {
+    "latex": "-\\dfrac{41}{4} -\\dfrac{32}{5} \\times \\dfrac{39}{4}",
+    "simplified_latex": "-\\dfrac{1453}{20}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Mul(Integer(-1), Rational(32, 5), Rational(39, 4)), Rational(-41, 4))",
+      "str": "-32/5*39/4 - 41/4"
+    },
+    "formal_repr": "Add(l=Fraction(p=Integer(n=-41), q=Integer(n=4)), r=Mul(l=Fraction(p=Integer(n=-32), q=Integer(n=5)), r=Fraction(p=Integer(n=39), q=Integer(n=4))))"
+  },
+  "components": {
+    "a": "-\\dfrac{41}{4}",
+    "b": "-\\dfrac{32}{5}",
+    "c": "\\dfrac{39}{4}"
+  },
+  "seed": 32,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

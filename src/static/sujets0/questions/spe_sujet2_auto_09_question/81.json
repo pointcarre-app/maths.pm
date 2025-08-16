@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-9]",
+  "statement": "On note $\\\\mathcal\\{S\\}$ l'ensemble des solutions de l'équation $x^2=64$ sur $\\\\mathbb\\{R\\}$. Calculer $\\\\mathcal\\{S\\}$",
+  "answer": {
+    "latex": "\\left(64^{\\dfrac{1}{2}}, -64^{\\dfrac{1}{2}}\\right)",
+    "simplified_latex": "\\left(8, -8\\right)",
+    "sympy_exp_data": {
+      "type": "Tuple",
+      "sp.srepr": "Tuple(Pow(Integer(64), Rational(1, 2)), Mul(Integer(-1), Pow(Integer(64), Rational(1, 2))))",
+      "str": "(sqrt(64), -sqrt(64))"
+    },
+    "formal_repr": "(Pow(base=Integer(n=64), exp=Fraction(p=Integer(n=1), q=Integer(n=2))), Mul(l=Integer(n=-1), r=Pow(base=Integer(n=64), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))))"
+  },
+  "components": {
+    "n": "64",
+    "x": "x",
+    "relation": "x^{2} = 64"
+  },
+  "seed": 81,
+  "generator": "spe_sujet2_auto_09_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

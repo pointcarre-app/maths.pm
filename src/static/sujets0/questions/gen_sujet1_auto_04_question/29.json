@@ -1,0 +1,22 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-4]",
+  "statement": "Un article augmente de $\\dfrac{90}{100}\\%$ puis de nouveau de $\\dfrac{90}{100}\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?",
+  "answer": {
+    "latex": "2\\dfrac{90}{100} + \\left(\\dfrac{90}{100}\\right)^{2}",
+    "simplified_latex": "\\dfrac{261}{100}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Pow(Rational(9, 10), Integer(2)), Mul(Rational(9, 10), Integer(2)))",
+      "str": "(9/10)**2 + 2*(9/10)"
+    },
+    "formal_repr": "Add(l=Mul(l=Integer(n=2), r=Fraction(p=Integer(n=90), q=Integer(n=100))), r=Pow(base=Fraction(p=Integer(n=90), q=Integer(n=100)), exp=Integer(n=2)))"
+  },
+  "components": {
+    "p": "\\dfrac{90}{100}"
+  },
+  "seed": 29,
+  "generator": "gen_sujet1_auto_04_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

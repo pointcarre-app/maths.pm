@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(21;68)$ et $B(-32;35)$. Calculer le coefficient directeur de la droite $d$.",
+  "answer": {
+    "latex": "\\dfrac{35 -68}{-32 -21}",
+    "simplified_latex": "\\dfrac{33}{53}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Add(Integer(-68), Integer(35)), Pow(Add(Integer(-32), Integer(-21)), Integer(-1)))",
+      "str": "(-68 + 35)/(-32 - 21)"
+    },
+    "formal_repr": "Fraction(p=Add(l=Integer(n=35), r=Integer(n=-68)), q=Add(l=Integer(n=-32), r=Integer(n=-21)))"
+  },
+  "components": {
+    "x1": "21",
+    "y1": "68",
+    "x2": "-32",
+    "y2": "35"
+  },
+  "seed": 12,
+  "generator": "gen_sujet2_auto_06_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

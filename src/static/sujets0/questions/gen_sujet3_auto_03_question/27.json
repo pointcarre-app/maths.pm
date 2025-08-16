@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci augmente de $66,5\\%$ ?",
+  "answer": {
+    "latex": "1,665",
+    "simplified_latex": "1,665",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(333, 200)",
+      "str": "333/200"
+    },
+    "formal_repr": "Decimal(p=333, q=200)"
+  },
+  "components": {
+    "p": "\\dfrac{665}{1000}",
+    "direction": "1",
+    "coef": "1 + 1\\dfrac{665}{1000}"
+  },
+  "seed": 27,
+  "generator": "gen_sujet3_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

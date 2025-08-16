@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-1]",
+  "statement": "Quel est l'inverse du double de $1$ ?",
+  "answer": {
+    "latex": "\\dfrac{1}{2 \\times 1}",
+    "simplified_latex": "\\dfrac{1}{2}",
+    "sympy_exp_data": {
+      "type": "Half",
+      "sp.srepr": "Rational(1, 2)",
+      "str": "1/2"
+    },
+    "formal_repr": "Fraction(p=Integer(n=1), q=Mul(l=Integer(n=2), r=Integer(n=1)))"
+  },
+  "components": {
+    "n": "2",
+    "x": "1"
+  },
+  "seed": 42,
+  "generator": "spe_sujet1_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-8]",
+  "statement": "Convertir en heures une durée de 110 minutes. Ta réponse doit être sous forme de fraction.",
+  "answer": {
+    "latex": "\\dfrac{110}{60}",
+    "simplified_latex": "\\dfrac{11}{6}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(11, 6)",
+      "str": "11/6"
+    },
+    "formal_repr": "Fraction(p=Integer(n=110), q=Integer(n=60))"
+  },
+  "components": {
+    "x": "110",
+    "factor": "60"
+  },
+  "seed": 21,
+  "generator": "gen_sujet1_auto_08_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

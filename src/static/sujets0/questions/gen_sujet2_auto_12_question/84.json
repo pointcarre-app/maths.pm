@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
+  "statement": "On considère les deux séries $A=31 ; 43 ; 43 ; 55$  et $B=39 ; 43 ; 43 ; 47$. Quelle est celle avec le plus grand écart type ?",
+  "answer": {
+    "latex": "A",
+    "simplified_latex": "A",
+    "sympy_exp_data": {
+      "type": "Symbol",
+      "sp.srepr": "Symbol('A')",
+      "str": "A"
+    },
+    "formal_repr": "Symbol(s='A')"
+  },
+  "components": {
+    "a": "\\left(31, 43, 43, 55\\right)",
+    "b": "\\left(39, 43, 43, 47\\right)",
+    "center": "43",
+    "disp_low": "4",
+    "disp_high": "12"
+  },
+  "seed": 84,
+  "generator": "gen_sujet2_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

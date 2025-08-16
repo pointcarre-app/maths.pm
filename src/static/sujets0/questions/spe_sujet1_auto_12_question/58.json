@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-18 coefficient 2\n-6 coefficient 1\n-6 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 10.8$ ?",
+  "answer": {
+    "latex": "2",
+    "simplified_latex": "2",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(2)",
+      "str": "2"
+    },
+    "formal_repr": "Integer(n=2)"
+  },
+  "components": {
+    "note1": "18",
+    "note2": "6",
+    "note3": "6",
+    "coef1": "2",
+    "coef2": "1",
+    "coef3": "2",
+    "mean": "\\dfrac{18 \\times 2 + 6 \\times 1 + 6 \\times 2}{2 + 1 + 2}"
+  },
+  "seed": 58,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

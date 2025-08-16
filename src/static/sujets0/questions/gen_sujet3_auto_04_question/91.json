@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-3][automatismes][question-4]",
+  "statement": "Dans un établissement scolaire, $20$ élèves étudient le Grec, ce qui représente de $4\\%$. Combien d'élèves au total sont inscrits dans l'établissement ?",
+  "mask": "",
+  "answer": {
+    "latex": "\\dfrac{20}{\\dfrac{2^{2} \\times 5^{0}}{100}}",
+    "simplified_latex": "500",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(500)",
+      "str": "500"
+    },
+    "formal_repr": "Fraction(p=Integer(n=20), q=Fraction(p=Mul(l=Pow(base=Integer(n=2), exp=Integer(n=2)), r=Pow(base=Integer(n=5), exp=Integer(n=0))), q=Integer(n=100)))"
+  },
+  "components": {
+    "n": "20",
+    "x": "\\dfrac{2^{2} \\times 5^{0}}{100}"
+  },
+  "seed": 91,
+  "generator": "gen_sujet3_auto_04_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

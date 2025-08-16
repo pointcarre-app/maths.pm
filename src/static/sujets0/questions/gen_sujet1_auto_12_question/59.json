@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-12]",
+  "statement": "Calcluer la $médiane$ de la série A : -79 ; -43 ; 66",
+  "answer": {
+    "latex": "-43",
+    "simplified_latex": "-43",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(-43)",
+      "str": "-43"
+    },
+    "formal_repr": "Integer(n=-43)"
+  },
+  "components": {
+    "f": "médiane",
+    "a": "-43",
+    "b": "-79",
+    "c": "66"
+  },
+  "seed": 59,
+  "generator": "gen_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

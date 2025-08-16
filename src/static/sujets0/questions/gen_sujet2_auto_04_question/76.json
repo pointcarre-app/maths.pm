@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-4]",
+  "statement": "Suite à une augmentation de $70 \\%$, un article coûte $102$ euros. Quel était son prix initial ?",
+  "answer": {
+    "latex": "60",
+    "simplified_latex": "60",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(60)",
+      "str": "60"
+    },
+    "formal_repr": "Integer(n=60)"
+  },
+  "components": {
+    "p0": "60",
+    "p1": "102",
+    "x": "\\dfrac{7}{10}",
+    "direction": "1"
+  },
+  "seed": 76,
+  "generator": "gen_sujet2_auto_04_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

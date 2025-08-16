@@ -1,0 +1,23 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-1]",
+  "statement": "Quel est l'inverse du quintuple de $8$ ?",
+  "answer": {
+    "latex": "\\dfrac{1}{5 \\times 8}",
+    "simplified_latex": "\\dfrac{1}{40}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(1, 40)",
+      "str": "1/40"
+    },
+    "formal_repr": "Fraction(p=Integer(n=1), q=Mul(l=Integer(n=5), r=Integer(n=8)))"
+  },
+  "components": {
+    "n": "5",
+    "x": "8"
+  },
+  "seed": 83,
+  "generator": "spe_sujet1_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

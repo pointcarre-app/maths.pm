@@ -1,0 +1,159 @@
+{% extends "base/main-alt.html" %}
+
+{% block title %}
+  Questions Pré-générées - {{ questions_index.total_attempts | default(questions_index.total_questions) }} questions disponibles
+{% endblock title %}
+
+{% block extra_head %}
+  <!-- Include KaTeX for math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+{% endblock extra_head %}
+
+{% block content %}
+  <div class="padding-alt-security mx-auto mb-14 mt-12 max-w-6xl">
+    <!-- Header -->
+    <div class="card shadow-lg mx-auto py-6 mb-8">
+      <h1 class="text-center text-2xl font-bold text-base-content/60 mb-1">Questions Pré-générées</h1>
+      <h2 class="text-center text-xl font-bold mb-3">
+        {{ questions_index.total_attempts | default(questions_index.generators|length * 100) }} questions mathématiques disponibles
+      </h2>
+
+      <!-- Statistics -->
+      <div class="stats stats-horizontal shadow-none mx-auto">
+        <div class="stat">
+          <div class="stat-title">Générateurs</div>
+          <div class="stat-value text-primary">{{ questions_index.generators|length }}</div>
+          <div class="stat-desc">Fichiers Python</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">Total</div>
+          <div class="stat-value text-secondary">
+            {{ questions_index.total_attempts | default(questions_index.generators|length * 100) }}
+          </div>
+          <div class="stat-desc">Questions générées</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">Réussies</div>
+          <div class="stat-value text-success">
+            {{ questions_index.total_successful | default(questions_index.total_questions) }}
+          </div>
+          <div class="stat-desc">
+            {{ ((questions_index.total_successful | default(questions_index.total_questions) ) * 100 / (questions_index.total_attempts | default(questions_index.generators|length * 100))) | round(1) }}% de succès
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters and Controls -->
+    <div class="card bg-base-100 shadow-xl mb-6">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-4 items-center">
+          <!-- Generator selector -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Générateur</span>
+            </label>
+            <select id="generator-select" class="select select-bordered w-full max-w-xs">
+              <option value="all">Tous les générateurs</option>
+              {% for generator in questions_index.generators %}
+                <option value="{{ generator.name }}">{{ generator.name }} ({{ generator.successful }}/100)</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- Status filter -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Statut</span>
+            </label>
+            <select id="status-select" class="select select-bordered">
+              <option value="all">Toutes</option>
+              <option value="success">Réussies</option>
+              <option value="failed">Échouées</option>
+            </select>
+          </div>
+
+          <!-- Questions per page -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Questions par page</span>
+            </label>
+            <select id="per-page-select" class="select select-bordered">
+              <option value="10">10</option>
+              <option value="20" selected>20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+
+          <!-- Search -->
+          <div class="form-control flex-1">
+            <label class="label">
+              <span class="label-text">Rechercher</span>
+            </label>
+            <input type="text"
+                   id="search-input"
+                   placeholder="Rechercher dans les questions..."
+                   class="input input-bordered w-full" />
+          </div>
+
+          <!-- Load all questions button -->
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">&nbsp;</span>
+            </label>
+            <button id="load-all-btn" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   class="h-5 w-5 mr-2"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="currentColor"
+                   stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Charger toutes les questions
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loading-indicator" class="hidden">
+      <div class="flex justify-center items-center py-8">
+        <span class="loading loading-spinner loading-lg"></span>
+        <span class="ml-3">Chargement des questions...</span>
+      </div>
+    </div>
+
+    <!-- Questions container -->
+    <div id="questions-container" class="space-y-4">
+      <!-- Questions will be loaded here -->
+    </div>
+
+    <!-- Pagination -->
+    <div id="pagination-container" class="flex justify-center mt-8">
+      <!-- Pagination will be rendered here -->
+    </div>
+  </div>
+
+  <!-- Pass Jinja2 data via data attributes -->
+  <div id="jinja-data"
+       data-questions-index='{{ questions_index | tojson }}'
+       data-questions-base-url="{{ questions_base_url }}"
+       style="display: none"></div>
+
+  <script type="module">
+      // Import the pre-generated viewer module
+      import preGeneratedViewer from '/static/js/sujets0/pre-generated-viewer.js';
+
+      // Initialize when DOM is ready
+      document.addEventListener('DOMContentLoaded', () => {
+          preGeneratedViewer.init();
+      });
+  </script>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-6 coefficient 1\n-13 coefficient 5\n-11 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 11.714285714285714$ ?",
+  "answer": {
+    "latex": "1",
+    "simplified_latex": "1",
+    "sympy_exp_data": {
+      "type": "One",
+      "sp.srepr": "Integer(1)",
+      "str": "1"
+    },
+    "formal_repr": "Integer(n=1)"
+  },
+  "components": {
+    "note1": "6",
+    "note2": "13",
+    "note3": "11",
+    "coef1": "1",
+    "coef2": "5",
+    "coef3": "1",
+    "mean": "\\dfrac{6 \\times 1 + 13 \\times 5 + 11 \\times 1}{1 + 5 + 1}"
+  },
+  "seed": 97,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

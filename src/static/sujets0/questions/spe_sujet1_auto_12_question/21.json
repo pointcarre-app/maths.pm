@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-5 coefficient 3\n-13 coefficient 4\n-13 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 10.333333333333334$ ?",
+  "answer": {
+    "latex": "2",
+    "simplified_latex": "2",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(2)",
+      "str": "2"
+    },
+    "formal_repr": "Integer(n=2)"
+  },
+  "components": {
+    "note1": "5",
+    "note2": "13",
+    "note3": "13",
+    "coef1": "3",
+    "coef2": "4",
+    "coef3": "2",
+    "mean": "\\dfrac{5 \\times 3 + 13 \\times 4 + 13 \\times 2}{3 + 4 + 2}"
+  },
+  "seed": 21,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

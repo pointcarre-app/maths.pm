@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci augmente de $43,2\\%$ ?",
+  "answer": {
+    "latex": "1,432",
+    "simplified_latex": "1,432",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(179, 125)",
+      "str": "179/125"
+    },
+    "formal_repr": "Decimal(p=179, q=125)"
+  },
+  "components": {
+    "p": "\\dfrac{432}{1000}",
+    "direction": "1",
+    "coef": "1 + 1\\dfrac{432}{1000}"
+  },
+  "seed": 92,
+  "generator": "gen_sujet3_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

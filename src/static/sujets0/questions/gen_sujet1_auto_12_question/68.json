@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-12]",
+  "statement": "Calcluer la $moyenne$ de la série A : 19 ; 76 ; 89",
+  "answer": {
+    "latex": "\\dfrac{89 + 19 + 76}{3}",
+    "simplified_latex": "\\dfrac{184}{3}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Rational(76, 3), Mul(Rational(1, 3), Add(Integer(19), Integer(89))))",
+      "str": "76/3 + (19 + 89)/3"
+    },
+    "formal_repr": "Fraction(p=Add(l=Add(l=Integer(n=89), r=Integer(n=19)), r=Integer(n=76)), q=Integer(n=3))"
+  },
+  "components": {
+    "f": "moyenne",
+    "a": "89",
+    "b": "19",
+    "c": "76"
+  },
+  "seed": 68,
+  "generator": "gen_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

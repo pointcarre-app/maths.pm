@@ -1,0 +1,30 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(8x + 3\\right) \\times \\left(-9x + 5\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket \\dfrac{5}{-9}; \\infty\\rbracket$ ?",
+  "answer": {
+    "latex": "0 > f(x)",
+    "simplified_latex": "0 > f(x)",
+    "sympy_exp_data": {
+      "type": "StrictGreaterThan",
+      "sp.srepr": "StrictGreaterThan(Integer(0), Function('f')(Symbol('x')))",
+      "str": "0 > f(x)"
+    },
+    "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Function(name=f)(Symbol(s='x')))"
+  },
+  "components": {
+    "root1": "-\\dfrac{3}{8}",
+    "root2": "\\dfrac{5}{-9}",
+    "a1": "8",
+    "a2": "-9",
+    "b1": "3",
+    "b2": "5",
+    "interval": "\\lbracket \\dfrac{5}{-9}; \\infty\\rbracket",
+    "x": "x",
+    "f": "f"
+  },
+  "seed": 10,
+  "generator": "spe_sujet2_auto_10_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

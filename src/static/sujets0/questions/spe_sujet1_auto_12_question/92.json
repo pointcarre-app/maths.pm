@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-13 coefficient 5\n-16 coefficient 5\n-18 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 15.666666666666666$ ?",
+  "answer": {
+    "latex": "5",
+    "simplified_latex": "5",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(5)",
+      "str": "5"
+    },
+    "formal_repr": "Integer(n=5)"
+  },
+  "components": {
+    "note1": "13",
+    "note2": "16",
+    "note3": "18",
+    "coef1": "5",
+    "coef2": "5",
+    "coef3": "5",
+    "mean": "\\dfrac{13 \\times 5 + 16 \\times 5 + 18 \\times 5}{5 + 5 + 5}"
+  },
+  "seed": 92,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

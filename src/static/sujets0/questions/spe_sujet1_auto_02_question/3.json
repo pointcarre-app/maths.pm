@@ -1,0 +1,26 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-2]",
+  "statement": "On considère la relation $F=a+\\\\dfrac\\{b\\}\\{cd\\}$. Lorsque $a=\\dfrac{1}{4}$, $b = 10$, $c = 9$, $d = -\\dfrac{1}{3}$, quelle est la valeur de $F$ ?",
+  "mask": "F=",
+  "answer": {
+    "latex": "\\dfrac{1}{4} + \\dfrac{10}{9-\\dfrac{1}{3}}",
+    "simplified_latex": "-\\dfrac{37}{12}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Rational(-10, 3), Rational(1, 4))",
+      "str": "-10/3 + 1/4"
+    },
+    "formal_repr": "Add(l=Fraction(p=Integer(n=1), q=Integer(n=4)), r=Fraction(p=Integer(n=10), q=Mul(l=Integer(n=9), r=Fraction(p=Integer(n=-1), q=Integer(n=3)))))"
+  },
+  "components": {
+    "a": "\\dfrac{1}{4}",
+    "b": "10",
+    "c": "9",
+    "d": "-\\dfrac{1}{3}"
+  },
+  "seed": 3,
+  "generator": "spe_sujet1_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

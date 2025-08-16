@@ -1,0 +1,28 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
+  "statement": "Voici une série de notes avec les coefficients associés\n-1 coefficient 1\n-3 coefficient 5\n-5 coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = 3.4444444444444446$ ?",
+  "answer": {
+    "latex": "3",
+    "simplified_latex": "3",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(3)",
+      "str": "3"
+    },
+    "formal_repr": "Integer(n=3)"
+  },
+  "components": {
+    "note1": "1",
+    "note2": "3",
+    "note3": "5",
+    "coef1": "1",
+    "coef2": "5",
+    "coef3": "3",
+    "mean": "\\dfrac{1 \\times 1 + 3 \\times 5 + 5 \\times 3}{1 + 5 + 3}"
+  },
+  "seed": 69,
+  "generator": "spe_sujet1_auto_12_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-2]",
+  "statement": "Quel est le maximum parmis les nombres suivants: $A=\\dfrac{1}{4}$, $B=\\dfrac{95}{100}$, $C=0,25$",
+  "answer": {
+    "latex": "\\dfrac{95}{100}",
+    "simplified_latex": "\\dfrac{19}{20}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(19, 20)",
+      "str": "19/20"
+    },
+    "formal_repr": "Fraction(p=Integer(n=95), q=Integer(n=100))"
+  },
+  "components": {
+    "a": "\\dfrac{1}{4}",
+    "b": "\\dfrac{95}{100}",
+    "c": "0,25"
+  },
+  "seed": 87,
+  "generator": "gen_sujet1_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

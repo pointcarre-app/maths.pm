@@ -1,0 +1,27 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
+  "statement": "On définit la function $f$ par $f(x)=6 \\times x^{2} -x + 2$. Calculer l'image de $-2$ par $f$.",
+  "answer": {
+    "latex": "6 \\times -2^{2} --2 + 2",
+    "simplified_latex": "28",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Integer(2), Add(Mul(Integer(-2), Integer(-1)), Mul(Integer(6), Pow(Integer(-2), Integer(2)))))",
+      "str": "2 + (-1*(-2) + 6*(-2)**2)"
+    },
+    "formal_repr": "Add(l=Add(l=Mul(l=Integer(n=6), r=Pow(base=Integer(n=-2), exp=Integer(n=2))), r=Mul(l=Integer(n=-1), r=Integer(n=-2))), r=Integer(n=2))"
+  },
+  "components": {
+    "x": "x",
+    "f": "f",
+    "x0": "-2",
+    "a": "6",
+    "b": "-1",
+    "c": "2"
+  },
+  "seed": 50,
+  "generator": "gen_sujet2_auto_10_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

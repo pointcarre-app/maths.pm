@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $20,9\\%$ ?",
+  "answer": {
+    "latex": "0,791",
+    "simplified_latex": "0,791",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(791, 1000)",
+      "str": "791/1000"
+    },
+    "formal_repr": "Decimal(p=791, q=1000)"
+  },
+  "components": {
+    "p": "\\dfrac{209}{1000}",
+    "direction": "-1",
+    "coef": "1 -\\dfrac{209}{1000}"
+  },
+  "seed": 90,
+  "generator": "gen_sujet3_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

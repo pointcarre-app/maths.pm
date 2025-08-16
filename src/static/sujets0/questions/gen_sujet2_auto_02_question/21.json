@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
+  "statement": "3 articles coûtent 32,4 euros. Combien coûtent 14 articles ?",
+  "answer": {
+    "latex": "\\dfrac{108}{10}14",
+    "simplified_latex": "\\dfrac{756}{5}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Rational(54, 5), Integer(14))",
+      "str": "(54/5)*14"
+    },
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=108), q=Integer(n=10)), r=Integer(n=14))"
+  },
+  "components": {
+    "n1": "3",
+    "n2": "14",
+    "p": "\\dfrac{108}{10}"
+  },
+  "seed": 21,
+  "generator": "gen_sujet2_auto_02_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

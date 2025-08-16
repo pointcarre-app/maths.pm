@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur -4,8 passant par le points $A(-8;8)$. On note $B$ le point de la droite $d$ d'abscisse $5$. Calculer l'ordonnée de $d$.",
+  "answer": {
+    "latex": "8 + \\left(5 + 8\\right) \\times -\\dfrac{48}{10}",
+    "simplified_latex": "-\\dfrac{272}{5}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Integer(8), Mul(Rational(-24, 5), Add(Integer(5), Integer(8))))",
+      "str": "8 + (5 + 8)*(-24/5)"
+    },
+    "formal_repr": "Add(l=Integer(n=8), r=Mul(l=Add(l=Integer(n=5), r=Integer(n=8)), r=Fraction(p=Integer(n=-48), q=Integer(n=10))))"
+  },
+  "components": {
+    "a": "-\\dfrac{48}{10}",
+    "x1": "-8",
+    "y1": "8",
+    "x2": "5"
+  },
+  "seed": 90,
+  "generator": "gen_sujet2_auto_07_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

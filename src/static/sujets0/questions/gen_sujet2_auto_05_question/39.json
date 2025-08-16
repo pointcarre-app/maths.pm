@@ -1,0 +1,10 @@
+{
+  "seed": 39,
+  "generator": "gen_sujet2_auto_05_question",
+  "success": false,
+  "error": "'Integer' object has no attribute 'as_decimal'",
+  "error_type": "AttributeError",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 112, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_05_question.py\", line 62, in <module>\n    question = render_question(**components)\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_05_question.py\", line 51, in render_question\n    mass = mass.simplified().as_decimal\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selim/.pyenv/versions/3.13.5/lib/python3.13/site-packages/pydantic/main.py\", line 828, in __getattr__\n    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')\nAttributeError: 'Integer' object has no attribute 'as_decimal'\n",
+  "stdout": "",
+  "stderr": ""
+}

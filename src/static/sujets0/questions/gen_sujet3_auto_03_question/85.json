@@ -1,0 +1,24 @@
+{
+  "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
+  "statement": "Par combien faut-il multiplier une quantité positive pour que celle-ci diminue de $20,5\\%$ ?",
+  "answer": {
+    "latex": "0,795",
+    "simplified_latex": "0,795",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(159, 200)",
+      "str": "159/200"
+    },
+    "formal_repr": "Decimal(p=159, q=200)"
+  },
+  "components": {
+    "p": "\\dfrac{205}{1000}",
+    "direction": "-1",
+    "coef": "1 -\\dfrac{205}{1000}"
+  },
+  "seed": 85,
+  "generator": "gen_sujet3_auto_03_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}

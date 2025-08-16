@@ -1,0 +1,25 @@
+{
+  "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
+  "statement": "Calculer $-\\dfrac{26}{7} -3 \\times 23$.",
+  "mask": "",
+  "answer": {
+    "latex": "-\\dfrac{26}{7} -3 \\times 23",
+    "simplified_latex": "-\\dfrac{509}{7}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Mul(Integer(-1), Integer(3), Integer(23)), Rational(-26, 7))",
+      "str": "-3*23 - 26/7"
+    },
+    "formal_repr": "Add(l=Fraction(p=Integer(n=-26), q=Integer(n=7)), r=Mul(l=Integer(n=-3), r=Integer(n=23)))"
+  },
+  "components": {
+    "a": "-\\dfrac{26}{7}",
+    "b": "-3",
+    "c": "23"
+  },
+  "seed": 97,
+  "generator": "gen_sujet2_auto_01_question",
+  "success": true,
+  "stdout": "",
+  "stderr": ""
+}
