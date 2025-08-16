@@ -446,3 +446,84 @@ AttributeError: module 'teachers.maths' has no attribute 'Pi'
   - Perfect for geometric formulas: circle area (πr²), circumference (2πr), volumes ((4/3)πr³)
 
 ```
+
+
+
+## `gen_sujet2_auto_08_question.py` and `gen_sujet2_auto_09_question.py`
+
+
+### Diag
+
+- Possible created because of previous edits (not sure)
+
+
+#### `gen_sujet2_auto_08_question.py`
+
+```bash
+# gen_sujet2_auto_08_question.py
+
+Erreur de génération
+Simplification of Mul of and l=Add(l=Mul(l=Integer(n=3), r=Symbol(s='x')), r=Integer(n=-8)) r=Add(l=Mul(l=Integer(n=4), r=Symbol(s='x')), r=Integer(n=-1))
+Type: NotImplementedError
+```
+
+```bash
+Traceback complet
+Traceback (most recent call last):
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
+    module = load_generator_module(generator_file)
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 46, in load_generator_module
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "", line 1026, in exec_module
+  File "", line 488, in _call_with_frames_removed
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_08_question.py", line 68, in 
+    answer = solve(**components)
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_08_question.py", line 47, in solve
+    maths_object = expr.simplified()
+  File "/Users/selim/madles/pca-teachers/src/teachers/maths.py", line 645, in simplified
+    raise NotImplementedError(
+        f"Simplification of Mul of {type(l)} and {type(r)}\n{l=}\n{r=}"
+    )
+NotImplementedError: Simplification of Mul of  and 
+l=Add(l=Mul(l=Integer(n=3), r=Symbol(s='x')), r=Integer(n=-8))
+r=Add(l=Mul(l=Integer(n=4), r=Symbol(s='x')), r=Integer(n=-1))
+
+
+
+
+
+#### `gen_sujet2_auto_09_question.py`
+
+
+```bash
+
+
+Erreur de génération
+Simplification of of and p=Mul(l=Integer(n=3), r=Symbol(s='V')) q=Mul(l=Pi(), r=Pow(base=Symbol(s='r'), exp=Integer(n=2)))
+Type: NotImplementedError
+Traceback complet
+```
+
+```bash
+Traceback (most recent call last):
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
+    module = load_generator_module(generator_file)
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 46, in load_generator_module
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "", line 1026, in exec_module
+  File "", line 488, in _call_with_frames_removed
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_09_question.py", line 66, in 
+    "simplified_latex": answer["maths_object"].simplified().latex(),
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/selim/madles/pca-teachers/src/teachers/maths.py", line 771, in simplified
+    raise NotImplementedError(
+        f"Simplification of {__class__} of {type(p)} and {type(q)}\n{p=}\n{q=}"
+    )
+NotImplementedError: Simplification of  of  and 
+p=Mul(l=Integer(n=3), r=Symbol(s='V'))
+q=Mul(l=Pi(), r=Pow(base=Symbol(s='r'), exp=Integer(n=2)))
+```
+
+
