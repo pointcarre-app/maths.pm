@@ -151,30 +151,6 @@
 
     <div class="tab-alt-content card mt-6" id="generate-content">
       {% include "sujets0/generate-content.html" %}
-
-      <!-- Button to execute all generators -->
-      <div class="mt-6 p-4 border-t border-base-300">
-        <button id="execute-all-generators-btn"
-                class="btn btn-primary btn-outline btn-disabled"
-                disabled
-                title="Waiting for Nagini to load...">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               class="h-5 w-5 mr-2"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="2"
-               stroke-linecap="round"
-               stroke-linejoin="round">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-          </svg>
-          Générer
-        </button>
-        <span class="ml-3 text-sm text-base-content/60">Exécute 3 générateurs de questions</span>
-      </div>
-
-      <!-- Container for generator execution results -->
-      <div id="generator-results-container"></div>
     </div>
 
     <div class="space-y-6 tab-alt-content tab-alt-hidden" id="documentation-content">
@@ -358,7 +334,7 @@
           console.log('Available methods:', Object.keys(Nagini).filter(k => typeof Nagini[k] === 'function'));
       }
 
-      // Import QuestionFactory for executing generators
+      // Import QuestionFactory if needed
       import {
           QuestionFactory
       } from "/static/js/core/question-factory.js";
@@ -387,9 +363,9 @@
 
               // Execute simple Python code
               const result = await manager.executeAsync('test.py', `
-result = 42 * 2
-print(f"The answer is {result}")
-result
+                  result = 42 * 2
+                  print(f"The answer is {result}")
+                  result
               `);
 
               console.log("✅ Python execution successful!");
@@ -398,8 +374,11 @@ result
               // Store the manager
               naginiManager = manager;
 
-              // Success - but don't show UI message
-              console.log("✅ Python engine ready!");
+              // Show success in UI
+              const successDiv = document.createElement('div');
+              successDiv.className = 'alert alert-success mt-4';
+              successDiv.innerHTML = `✅ Python engine ready! Output: ${result.stdout}`;
+              document.querySelector('.padding-alt-security')?.appendChild(successDiv);
 
               return true;
           } catch (error) {
@@ -413,35 +392,14 @@ result
           if (!Nagini) return false;
 
           try {
-              console.log("🧪 Loading packages and teachers module...");
+              console.log("🧪 Testing with sympy package...");
 
-              // Files to load for teachers module
-              const filesToLoad = [{
-                  url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/__init__.py",
-                  path: "teachers/__init__.py",
-              }, {
-                  url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/generator.py",
-                  path: "teachers/generator.py",
-              }, {
-                  url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/maths.py",
-                  path: "teachers/maths.py",
-              }, {
-                  url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/formatting.py",
-                  path: "teachers/formatting.py",
-              }, {
-                  url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/corrector.py",
-                  path: "teachers/corrector.py",
-              }, {
-                  url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/defaults.py",
-                  path: "teachers/defaults.py",
-              }];
-
-              // Create a new manager with packages and teachers module
+              // Create a new manager with sympy
               const manager = await Nagini.createManager(
                   'pyodide',
-                  ['sympy', 'pydantic', 'strictyaml'], // Regular packages
-                  ['antlr4-python3-runtime'], // Micropip packages  
-                  filesToLoad, // Teachers module files
+                  ['sympy'], // Load sympy package
+                  [],
+                  [],
                   'https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.21/src/pyodide/worker/worker-dist.js'
               );
 
@@ -449,36 +407,25 @@ result
 
               // Test sympy
               const result = await manager.executeAsync('sympy_test.py', `
-import sympy as sp
-x = sp.Symbol('x')
-expr = x**2 + 2*x + 1
-factored = sp.factor(expr)
-print(f"Expression: {expr}")
-print(f"Factored: {factored}")
+                  import sympy as sp
+                  x = sp.Symbol('x')
+                  expr = x**2 + 2*x + 1
+                  factored = sp.factor(expr)
+                  print(f"Expression: {expr}")
+                  print(f"Factored: {factored}")
               `);
 
               console.log("✅ Sympy test successful!");
               console.log("Output:", result.stdout);
 
-              // Test if teachers module is available
-              const teachersTest = await manager.executeAsync('teachers_test.py', `
-import teachers
-print("Teachers module loaded successfully!")
-print("Available modules:", dir(teachers))
-              `);
-
-              if (teachersTest.exit_code === 0) {
-                  console.log("✅ Teachers module loaded!");
-                  console.log(teachersTest.stdout);
-              } else {
-                  console.warn("⚠️ Teachers module test failed:", teachersTest.stderr);
-              }
-
               // Update manager
               naginiManager = manager;
 
-              // Success - but don't show UI message
-              console.log("📦 All packages and modules loaded successfully!");
+              // Show success
+              const infoDiv = document.createElement('div');
+              infoDiv.className = 'alert alert-info mt-4';
+              infoDiv.innerHTML = `📦 Sympy loaded! ${result.stdout}`;
+              document.querySelector('.padding-alt-security')?.appendChild(infoDiv);
 
               return true;
           } catch (error) {
@@ -499,183 +446,6 @@ print("Available modules:", dir(teachers))
           }
       }
 
-      // Simple test function for generators - make it global for debugging
-      window.executeAllGenerators = async function executeAllGenerators() {
-          console.log("🚀 executeAllGenerators called!");
-          console.log("Nagini:", Nagini);
-          console.log("naginiManager:", naginiManager);
-
-          if (!Nagini || !naginiManager) {
-              console.error("❌ Nagini or manager not ready");
-              console.error("Nagini:", Nagini);
-              console.error("naginiManager:", naginiManager);
-              alert("Nagini not ready. Wait a few seconds and try again.");
-              return;
-          }
-
-          console.log("✅ Nagini and manager are ready, proceeding...");
-
-          // Disable button
-          const executeBtn = document.getElementById('execute-all-generators-btn');
-          if (executeBtn) {
-              executeBtn.disabled = true;
-              executeBtn.textContent = 'Génération...';
-          }
-
-          console.log("🚀 Starting generator execution...");
-
-          // Only test actual generator files, not test files
-          const testFiles = [
-              'spe_sujet1_auto_01_question.py',
-              'spe_sujet1_auto_02_question.py',
-              'spe_sujet1_auto_03_question.py'
-          ];
-
-          let successCount = 0;
-          let failureCount = 0;
-
-          // Get or create results container
-          let resultsContainer = document.getElementById('generator-results-container');
-          if (!resultsContainer) {
-              resultsContainer = document.createElement('div');
-              resultsContainer.id = 'generator-results-container';
-              document.querySelector('.padding-alt-security')?.appendChild(resultsContainer);
-          }
-
-          // Simple results display
-          resultsContainer.className = 'mt-6';
-          resultsContainer.innerHTML = `
-              <div class="text-sm text-gray-600 mb-4">Questions générées:</div>
-          `;
-
-          // Process each file
-          for (const filename of testFiles) {
-              console.log(`\n🔄 Executing ${filename}...`);
-
-              const url = `/static/sujets0/generators/${filename}`;
-
-              try {
-                  // Fetch the file
-                  const response = await fetch(url);
-                  if (!response.ok) {
-                      throw new Error(`Failed to fetch: ${response.status}`);
-                  }
-                  const pythonCode = await response.text();
-                  console.log(`Fetched ${filename}, size: ${pythonCode.length} chars`);
-
-                  // Execute with Nagini
-                  const result = await naginiManager.executeAsync(filename, pythonCode);
-                  console.log(`Result for ${filename}:`, result);
-
-                  // Display result with enhanced formatting for missive data
-                  const div = document.createElement('div');
-                  // Consider it successful if there's no error and either exit_code is 0 or there's a missive
-                  const success = !result.error && (result.exit_code === 0 || result.missive);
-
-                  if (success) {
-                      successCount++;
-                  } else {
-                      failureCount++;
-                  }
-
-                  div.className = `p-3 mb-4 border-l-4 ${success ? 'border-green-500 bg-base-100' : 'border-red-500 bg-red-50'}`;
-
-                  let outputHtml = '';
-
-                  // Simple filename display
-                  outputHtml += `<div class="text-xs text-gray-500 mb-1">${filename}</div>`;
-
-                  // If there's a missive with question data, display it minimally
-                  if (result.missive && success) {
-                      try {
-                          const missiveData = JSON.parse(result.missive);
-                          if (missiveData.statement || missiveData.question) {
-                              // Question statement
-                              outputHtml += `<div class="font-medium mb-2">${missiveData.statement || missiveData.question}</div>`;
-
-                              // Answer in a subtle way
-                              if (missiveData.answer) {
-                                  const answerDisplay = missiveData.answer.simplified_latex ||
-                                      missiveData.answer.latex ||
-                                      missiveData.answer.simplified_answer ||
-                                      missiveData.answer;
-                                  outputHtml += `<div class="text-sm text-gray-600">Réponse: <span class="font-mono">${answerDisplay}</span></div>`;
-                              }
-                          }
-                      } catch (e) {
-                          // Fallback for non-JSON missive
-                          console.log("Missive parsing failed:", e);
-                          outputHtml += `<div class="text-sm text-gray-600">Output available but not formatted</div>`;
-                      }
-                  } else if (!success) {
-                      outputHtml += `<div class="text-sm text-red-600">Execution failed</div>`;
-                  }
-
-                  // Only show detailed errors in console, not in UI (for cleaner display)
-                  if (result.stderr) {
-                      console.error(`Full stderr for ${filename}:`, result.stderr);
-                  }
-
-                  div.innerHTML = outputHtml;
-                  resultsContainer.appendChild(div);
-
-              } catch (error) {
-                  console.error(`Error with ${filename}:`, error);
-                  failureCount++;
-
-                  const div = document.createElement('div');
-                  div.className = 'p-3 mb-4 border-l-4 border-orange-500 bg-orange-50';
-                  div.innerHTML = `
-                      <div class="text-xs text-gray-500 mb-1">${filename}</div>
-                      <div class="text-sm text-orange-700">Error: ${error.message}</div>
-                  `;
-                  resultsContainer.appendChild(div);
-              }
-          }
-
-          // Add summary
-          if (successCount > 0 || failureCount > 0) {
-              const summaryDiv = document.createElement('div');
-              summaryDiv.className = 'mt-4 pt-4 border-t text-sm text-gray-600';
-              summaryDiv.innerHTML = `${successCount} réussi(s), ${failureCount} échoué(s)`;
-              resultsContainer.appendChild(summaryDiv);
-          }
-
-          // Re-enable button
-          if (executeBtn) {
-              executeBtn.disabled = false;
-              executeBtn.textContent = 'Générer';
-          }
-
-          console.log("✅ Test complete");
-      }
-
-      // Add event listener for execute button - wait for page to be ready
-      function setupExecuteButton() {
-          console.log("Setting up execute button...");
-          const executeBtn = document.getElementById('execute-all-generators-btn');
-          if (executeBtn) {
-              console.log("Button found, adding click listener");
-              executeBtn.onclick = async function() {
-                  console.log("Button clicked!");
-                  await executeAllGenerators();
-              };
-          } else {
-              console.log("Button not found!");
-          }
-      }
-
-      // Try multiple ways to ensure button is set up
-      if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', setupExecuteButton);
-      } else {
-          // DOM is already loaded
-          setupExecuteButton();
-      }
-
-      // Also try after a delay
-      setTimeout(setupExecuteButton, 1000);
-
       // Run tests if Nagini loaded successfully
       if (Nagini) {
           (async () => {
@@ -685,30 +455,9 @@ print("Available modules:", dir(teachers))
               if (basicTest) {
                   displayIndicatorNaginiIsReady();
 
-                  // Test with packages after a delay (increased for loading multiple packages)
+                  // Optional: test with packages after a delay
                   setTimeout(async () => {
-                      const packagesLoaded = await testWithPackages();
-
-                      // Enable the execute button once packages are loaded
-                      if (packagesLoaded) {
-                          const executeBtn = document.getElementById('execute-all-generators-btn');
-                          if (executeBtn) {
-                              console.log("Enabling execute button...");
-                              executeBtn.disabled = false;
-                              executeBtn.classList.remove('btn-disabled');
-                              executeBtn.title = 'Click to run generator tests';
-
-                              // Make sure onclick is set
-                              executeBtn.onclick = async function() {
-                                  console.log("Button clicked from enable!");
-                                  await executeAllGenerators();
-                              };
-
-                              console.log("Button enabled and onclick set");
-                          } else {
-                              console.log("Button not found when trying to enable");
-                          }
-                      }
+                      await testWithPackages();
                   }, 2000);
               }
           })();
