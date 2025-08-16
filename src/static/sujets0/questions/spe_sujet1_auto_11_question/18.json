@@ -3,7 +3,7 @@
   "statement": "On a représenté ci-contre la courbe $\\\\mathcal\\{C\\}$ d'une fonction ${f}$.\nOn note $A$ le point d'abscisse $x_A=0$ tel que le point appartienne à la courbe $\\\\mathcal\\{C\\}$.\nEcrire l'inégalité correcte de la forme $x\\\\times f(x) ? 0$",
   "answer": {
     "latex": "0 > 0f(0)",
-    "simplified_latex": "0 > 0f(0)",
+    "simplified_latex": "0 > 0",
     "sympy_exp_data": {
       "type": "StrictGreaterThan",
       "sp.srepr": "StrictGreaterThan(Integer(0), Mul(Integer(0), Function('f')(Integer(0))))",

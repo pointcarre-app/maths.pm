@@ -1,6 +1,5 @@
 
 
-
 ## Generic notes : 
 
 - We generate 100 questions per generator. 
@@ -9,7 +8,7 @@
         - We'lll adjust those laters
 
 
-## gen_sujet1_auto_01_question.py
+## `gen_sujet1_auto_01_question.py`
 
 ### Diag 
 
@@ -22,8 +21,7 @@
 
 
 
-
-## gen_sujet1_auto_06_question.py
+## `gen_sujet1_auto_06_question.py`
 
 ### Diag
 
@@ -88,3 +86,60 @@ n
 
 
 
+## `gen_sujet1_auto_11_question.py`
+
+
+### Diag
+
+- Interaction in between specific `tm.maths` objects not dealt with
+
+
+
+```bash
+Simplification of Mul of <class 'teachers.maths.Integer'> and <class...
+ 
+Traceback complet:
+Traceback (most recent call last):
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
+    module = load_generator_module(generator_file)
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 46, in load_generator_module
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet1_auto_11_question.py", line 72, in <module>
+    "simplified_latex": answer["maths_object"].simplified().latex(),
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/selim/madles/pca-teachers/src/teachers/maths.py", line 796, in simplified
+    return l ** Integer(n=2) + (Integer(n=2) * l * r).simplified() + r ** Integer(n=2)
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/selim/madles/pca-teachers/src/teachers/maths.py", line 523, in simplified
+    l, r = self.l.simplified(), self.r.simplified()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/Users/selim/madles/pca-teachers/src/teachers/maths.py", line 573, in simplified
+    raise NotImplementedError(
+        f"Simplification of Mul of {type(l)} and {type(r)}\n{l=}\n{r=}"
+    )
+NotImplementedError: Simplification of Mul of <class 'teachers.maths.Integer'> and <class 'teachers.maths.Mul'>
+l=Integer(n=2)
+r=Mul(l=Integer(n=3), r=Symbol(s='x'))
+
+```
+
+
+### Fix from teachers
+
+- Interaction in between specific `tm.maths` not implement 
+- And tested in `teachers/tests/test_mul_simplification.py`
+
+```markdown
+## [0.0.8] - 2025-01-16
+
+### Fixed
+- **Critical Mul Simplification Bug**: Fixed NotImplementedError when simplifying nested multiplication operations
+  - `Mul.simplified()` now correctly handles `Integer * Mul(Integer, Symbol)` combinations in both orders
+  - Added support for `Mul(Integer, Symbol) * Integer` combinations  
+  - Added distributive property handling for nested Mul objects
+  - Resolved the original bug where polynomial expansions like `(ax + b)^2` would fail during simplification
+  - Added zero multiplication simplification (`0 * anything = 0`)
+```
