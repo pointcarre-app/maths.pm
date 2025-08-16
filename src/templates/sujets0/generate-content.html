@@ -149,30 +149,34 @@
 <div id="questions-generated-at-runtime-holder" class="card-content" hidden></div>
 
 <script type="module">
-    // Import Nagini directly from CDN
-    import {
-        Nagini
-    } from "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@0.0.5/src/nagini.js";
+    // Use Nagini from parent template (already loaded globally)
+    const Nagini = window.Nagini;
 
     import {
         QuestionFactory
     } from "/static/js/core/question-factory.js";
 
-    // Get backend settings element
-    const backendSettings = document.getElementById("backend-public-settings");
+    // Hardcoded configuration - no backend settings needed
+    const pyodideWorkerUrl = 'https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.20/src/pyodide/worker/worker-dist.js';
 
-    // Extract pyodide worker URL from nagini settings
-    const naginiSettings = JSON.parse(backendSettings.dataset.nagini || '{}');
-    const pyodideWorkerUrl = naginiSettings.pyodide_worker_url;
+    // Script paths for question generation from static/sujets0/generators
+    const pythonFileUrls = [
+        "/static/sujets0/generators/spe_sujet1_auto_01_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_02_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_03_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_04_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_05_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_06_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_07_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_08_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_09_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_10_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_11_question.py",
+        "/static/sujets0/generators/spe_sujet1_auto_12_question.py"
+    ];
 
-    // Extract arpege generator script paths (already correctly formatted)
-    const pythonFileUrls = JSON.parse(
-        backendSettings.dataset.arpege_generator_script_paths || '[]'
-    );
-
-    // Extract teachers files from nested teachers object
-    const teachersSettings = JSON.parse(backendSettings.dataset.teachers || '{}');
-    const teachersFilesToLoad = teachersSettings.files_to_load || [];
+    // No teacher files for now
+    const teachersFilesToLoad = [];
 
     const managerBackend = "pyodide";
     const micropipPackages = [];
@@ -185,6 +189,16 @@
 
     async function arpegeGenerator() {
         console.log("➡️ Arpege:Generator");
+
+        // Check if Nagini is available
+        if (!Nagini) {
+            console.error("❌ Nagini not available!");
+            const errorDiv = document.createElement("div");
+            errorDiv.className = "alert alert-error mt-4";
+            errorDiv.innerHTML = "Nagini n'est pas encore chargé. Veuillez patienter et réessayer.";
+            document.getElementById("questions-preview-holder").appendChild(errorDiv);
+            return;
+        }
 
         const nbQuestions = parseInt(document.getElementById('nb-questions').value) || 4;
 
@@ -413,8 +427,33 @@
         naginiLabel.textContent = "Nagini ready";
     }
 
-    document.getElementById('arpege-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        arpegeGenerator();
-    });
+    // Wait for Nagini to be available before setting up event listeners
+    function setupEventListeners() {
+        document.getElementById('arpege-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            arpegeGenerator();
+        });
+    }
+
+    // Check if Nagini is already loaded, otherwise wait for it
+    if (window.Nagini) {
+        setupEventListeners();
+    } else {
+        // Poll for Nagini availability
+        const checkInterval = setInterval(() => {
+            if (window.Nagini) {
+                clearInterval(checkInterval);
+                console.log("✅ Nagini is now available in generate-content");
+                setupEventListeners();
+            }
+        }, 100);
+
+        // Stop checking after 10 seconds
+        setTimeout(() => {
+            clearInterval(checkInterval);
+            if (!window.Nagini) {
+                console.error("❌ Nagini failed to load after 10 seconds");
+            }
+        }, 10000);
+    }
 </script>

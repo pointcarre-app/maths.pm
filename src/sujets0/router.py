@@ -7,7 +7,7 @@ Uses product-specific settings for configuration
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 
-from ..settings import settings, sujets0_settings
+from ..settings import settings
 
 # Create sujets0 router
 sujets0_router = APIRouter(tags=["sujets0"])
@@ -18,8 +18,7 @@ async def sujets0(request: Request):
     """
     Sujets0 application page - Mathematics exercise generator.
 
-    Uses sujets0_settings for product-specific configuration.
-    All settings are loaded automatically in settings.py.
+    Uses product settings from the main settings module.
     """
     try:
         # Build template context with product-specific settings
@@ -28,31 +27,35 @@ async def sujets0(request: Request):
             "page": {"title": "Sujets 0 - Générateur d'exercices"},
         }
 
+        # Find the sujets0 product
+        sujets0_product = None
+        for product in settings.products:
+            if product.name == "sujets0":
+                sujets0_product = product
+                break
+
         # Add product-specific context if available
-        if sujets0_settings and sujets0_settings.product:
-            product = sujets0_settings.product
+        if sujets0_product:
             context.update(
                 {
-                    "product_name": product.name,
-                    "product_title": product.title_html,
-                    "product_description": product.description,
-                    "product_settings": sujets0_settings.to_dict(),
+                    "product_name": sujets0_product.name,
+                    "product_title": sujets0_product.title_html,
+                    "product_description": sujets0_product.description,
                     # Pass product metatags for template to use
-                    "product_metatags": product.metatags,
+                    "product_metatags": sujets0_product.metatags,
                     # Pass backend settings if any
-                    "product_backend_settings": product.backend_settings,
+                    "product_backend_settings": sujets0_product.backend_settings,
                     # Add the full product object for template access
-                    "current_product": product,
+                    "current_product": sujets0_product,
                     # Specific settings for Sujets0
-                    "arpege_script_paths": sujets0_settings.get_setting(
+                    "arpege_script_paths": sujets0_product.backend_settings.get(
                         "arpege_generator_script_paths", []
-                    ),
-                    "is_enabled": sujets0_settings.is_enabled,
+                    )
+                    if sujets0_product.backend_settings
+                    else [],
+                    "is_enabled": not sujets0_product.is_hidden,
                 }
             )
-
-            print(context)
-            print("somallaal")
 
         return settings.templates.TemplateResponse("sujets0/index.html", context)
 

@@ -14,6 +14,15 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
+# --- Centralized Logging Configuration ---
+# Configure logging BEFORE importing settings to catch all logs
+logging.basicConfig(
+    level=logging.INFO,  # Changed from DEBUG to INFO
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+logger = logging.getLogger("maths_pm")
+# --- End of Logging Configuration ---
 
 from .settings import settings
 from .core.router import core_router
@@ -23,15 +32,6 @@ from .api.router import api_router
 from .corsica.router import corsica_router
 
 from .jupyterlite.router import jupyterlite_router, jupyter_compat_router
-
-# --- Centralized Logging Configuration ---
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
-logger = logging.getLogger("maths_pm")
-# --- End of Logging Configuration ---
 
 
 def build_jupyterlite():
@@ -43,16 +43,9 @@ def build_jupyterlite():
         source_dir = settings.jupyterlite_content_dir  # files-for-lite/
         jupyterlite_dir = settings.jupyterlite_dir  # src/static/jupyterlite/
 
-        logger.info("📂 Building JupyterLite...")
-        logger.info(f"   Source: {source_dir}")
-        logger.info(f"   Build directory: {jupyterlite_dir}")
-
         if not source_dir.exists():
-            logger.warning(f"⚠️  Source directory not found: {source_dir}")
+            logger.warning(f"⚠️  JupyterLite source not found: {source_dir}")
             return
-
-        # Always build to pick up new files - no caching check
-        logger.info("🔄 Building JupyterLite (fresh build to pick up any new files)...")
 
         # Create jupyterlite directory if it doesn't exist
         jupyterlite_dir.mkdir(parents=True, exist_ok=True)
@@ -65,8 +58,6 @@ def build_jupyterlite():
         os.chdir(str(jupyterlite_dir))
 
         try:
-            logger.info("🔨 Running jupyter lite build...")
-
             # Calculate relative path from jupyterlite dir to files-for-lite
             relative_source = os.path.relpath(source_dir, jupyterlite_dir)
 
@@ -79,51 +70,35 @@ def build_jupyterlite():
                 relative_source,
             ]
 
-            logger.debug(f"Build command: {' '.join(build_cmd)}")
-            logger.debug(f"Working directory: {jupyterlite_dir}")
-            logger.debug(f"Contents path: {relative_source}")
-
             result = subprocess.run(build_cmd, capture_output=True, text=True, check=True)
-            logger.info("✅ JupyterLite build completed successfully")
 
-            if result.stdout:
-                logger.debug(f"Build output: {result.stdout}")
-
-        except subprocess.CalledProcessError as e:
-            logger.error(f"❌ JupyterLite build failed: {e}")
-            if e.stdout:
-                logger.error(f"Build stdout: {e.stdout}")
-            if e.stderr:
-                logger.error(f"Build stderr: {e.stderr}")
+        except subprocess.CalledProcessError:
+            logger.error("❌ JupyterLite build failed")
         finally:
             os.chdir(original_cwd)
 
         # Verify the build worked - files should be in _output directory
         output_dir = jupyterlite_dir / "_output"
-        files_dir = output_dir / "files"
-        if files_dir.exists():
-            data_files_dir = files_dir / "data"
-            if data_files_dir.exists():
-                # Count files for summary
-                file_count = sum(1 for _, _, files in os.walk(data_files_dir) for _ in files)
-                logger.info(f"✅ JupyterLite data files ready: {file_count} files loaded")
-            else:
-                logger.warning("⚠️  Data files directory not found in files/")
-        else:
-            logger.warning("⚠️  Files directory not found")
-
-        # Check if main files exist
         index_exists = (output_dir / "index.html").exists()
         lab_exists = (output_dir / "lab" / "index.html").exists()
+
         if index_exists and lab_exists:
-            logger.info("✅ JupyterLite interface ready at /jupyterlite/")
-        elif index_exists or lab_exists:
-            logger.warning("⚠️  JupyterLite partially built")
+            # Count data files for summary
+            files_dir = output_dir / "files"
+            if files_dir.exists():
+                data_files_dir = files_dir / "data"
+                if data_files_dir.exists():
+                    file_count = sum(1 for _, _, files in os.walk(data_files_dir) for _ in files)
+                    logger.info(f"✅ JupyterLite ready ({file_count} data files)")
+                else:
+                    logger.info("✅ JupyterLite ready")
+            else:
+                logger.info("✅ JupyterLite ready")
         else:
-            logger.error("❌ JupyterLite build may have failed")
+            logger.error("❌ JupyterLite build failed")
 
     except Exception as e:
-        logger.error(f"❌ Failed to build JupyterLite content: {e}", exc_info=True)
+        logger.error(f"❌ JupyterLite build failed: {e}")
 
 
 async def async_build_jupyterlite(force_rebuild: bool = True):
@@ -136,8 +111,6 @@ async def async_build_jupyterlite(force_rebuild: bool = True):
     import subprocess
 
     if force_rebuild:
-        logger.info("🧹 Clearing JupyterLite build cache for fresh rebuild...")
-
         # Clear build cache to ensure fresh rebuild picks up new files
         output_dir = settings.jupyterlite_dir / "_output"
         cache_db = settings.jupyterlite_dir / ".jupyterlite.doit.db"
@@ -146,17 +119,13 @@ async def async_build_jupyterlite(force_rebuild: bool = True):
             # Remove output directory
             if output_dir.exists():
                 subprocess.run(["rm", "-rf", str(output_dir)], check=True)
-                logger.info("✅ Removed old build output")
 
             # Remove cache database
             if cache_db.exists():
                 subprocess.run(["rm", "-f", str(cache_db)], check=True)
-                logger.info("✅ Removed build cache database")
 
         except subprocess.CalledProcessError as e:
             logger.warning(f"⚠️ Cache cleanup failed: {e}")
-    else:
-        logger.info("🔄 Building JupyterLite (using existing cache)...")
 
     # Now build with fresh or existing cache
     build_jupyterlite()
@@ -173,8 +142,6 @@ async def cleanup_service_worker_issues():
         service_worker_path = settings.jupyterlite_dir / "_output" / "service-worker.js"
 
         if service_worker_path.exists():
-            logger.info("🔧 Cleaning up service worker cache issues...")
-
             # Read current service worker
             with open(service_worker_path, "r", encoding="utf-8") as f:
                 sw_content = f.read()
@@ -189,10 +156,6 @@ async def cleanup_service_worker_issues():
             with open(service_worker_path, "w", encoding="utf-8") as f:
                 f.write(cache_buster + sw_content)
 
-            logger.debug("✅ Service worker cache buster added")
-        else:
-            logger.debug("ℹ️  Service worker file not found, skipping cleanup")
-
     except Exception as e:
         logger.warning(f"⚠️  Failed to cleanup service worker: {e}")
 
@@ -202,14 +165,9 @@ async def lifespan(app: FastAPI):
     """
     Handle startup and shutdown events.
     """
-    logger.info("=" * 60)
-    logger.info("🚀 Starting Maths.pm FastAPI Application")
-    logger.info(f"📍 Domain: {settings.domain_name}")
-    logger.info(f"🔗 URL: {settings.domain_config.domain_url or 'localhost'}")
-    logger.info("=" * 60)
+    logger.info(f"🚀 Starting Maths.pm ({settings.domain_config.domain_url or 'localhost'})")
     # 1) Optionally build JupyterLite
     if settings.jupyterlite_enabled:
-        logger.info("🔧 Preparing JupyterLite environment...")
         await async_build_jupyterlite()
 
     # 2) Copy entire pms/ to static/pm/ for stable static references
@@ -239,17 +197,44 @@ async def lifespan(app: FastAPI):
                         logger.warning(f"⚠️ Failed to copy {src_file} -> {dest_file}: {e}")
             # Count files copied
             file_count = sum(1 for _, _, files in os.walk(static_pm_dir) for _ in files)
-            logger.info(f"📦 Static PM files ready: {file_count} files copied from pms/")
-        else:
-            logger.info("ℹ️ pms/ directory not found; skipping static sync")
+            logger.info(f"📦 Static files ready ({file_count} PM files)")
     except Exception as e:
-        logger.warning(f"⚠️ Failed rewriting pms/ to static/pm/: {e}")
-    logger.info("✅ Application startup completed")
+        logger.warning(f"⚠️ Failed copying PM files: {e}")
+
+    # 3) Copy sujets0/generators to static/sujets0/generators
+    try:
+        generators_dir = settings.base_dir / "src" / "sujets0" / "generators"
+        static_generators_dir = settings.static_dir / "sujets0" / "generators"
+
+        if generators_dir.exists():
+            # Remove existing static/sujets0/generators directory to ensure a clean copy
+            if static_generators_dir.exists():
+                rmtree(static_generators_dir)
+
+            # Ensure destination exists
+            static_generators_dir.mkdir(parents=True, exist_ok=True)
+
+            # Copy all Python files from generators
+            for file_path in generators_dir.glob("*.py"):
+                if file_path.name != "__pycache__":
+                    try:
+                        dest_file = static_generators_dir / file_path.name
+                        copy2(file_path, dest_file)
+                    except Exception as e:
+                        logger.warning(f"⚠️ Failed to copy {file_path} -> {dest_file}: {e}")
+
+            # Count files copied
+            file_count = len(list(static_generators_dir.glob("*.py")))
+            logger.info(f"📝 Sujets0 generators ready ({file_count} generator files)")
+        else:
+            logger.warning(f"⚠️ Generators directory not found: {generators_dir}")
+    except Exception as e:
+        logger.warning(f"⚠️ Failed copying sujets0 generators: {e}")
+    logger.info("✅ Ready")
 
     yield
 
-    logger.info("👋 Shutting down Maths.pm FastAPI app...")
-    logger.info("✅ Application shutdown completed")
+    logger.info("👋 Shutting down...")
 
 
 # Initialize application

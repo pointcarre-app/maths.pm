@@ -26,9 +26,9 @@ owner_url: "https://example.org"
 # TODO : thinking about which ones you really need
 backend_settings:
   nagini:
-    endpoint: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/"
-    js_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js"
-    pyodide_worker_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js" 
+    endpoint: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@0.0.18/"
+    js_url: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@0.0.18/src/nagini.js"
+    pyodide_worker_url: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@0.0.18/src/pyodide/worker/worker-dist.js" 
 
 # Product-specific metatags
 metatags:

@@ -1,7 +1,3 @@
-
-
-
-
 ## Corsica
 
 - [ ]  Latex or at least repositionn 10km 10km on square svg
@@ -24,3 +20,8 @@
 ## Generic
 
 - [ ] Rule should be one view per router then use only core pm/...
+
+
+
+- [ ] Add a layer of template for eveery index page not to repete the config and metatags
+    - [ ] Ensure layer present but dont supercede the ones from the markdowns

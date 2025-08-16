@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Nagini Import from esm.sh</title>
+  </head>
+  <body>
+    <h1>Nagini Import Test</h1>
+    <div id="status">Loading...</div>
+    <div id="result"></div>
+
+    <script type="module">
+        const statusDiv = document.getElementById('status');
+        const resultDiv = document.getElementById('result');
+
+        async function testNaginiImport() {
+            const urls = [
+                'https://esm.sh/gh/pointcarre-app/nagini@v0.0.20/src/nagini.js',
+            ];
+
+            for (const url of urls) {
+                statusDiv.innerHTML = `Testing: ${url}`;
+                console.log(`\n🧪 Testing import from: ${url}`);
+
+                try {
+                    // Attempt direct import
+                    const module = await import(url);
+                    console.log('✅ Import successful!');
+                    console.log('Module keys:', Object.keys(module));
+
+                    // Try to find Nagini
+                    const Nagini = module.Nagini || module.default?.Nagini || module.default || module;
+
+                    if (Nagini && typeof Nagini.createManager === 'function') {
+                        console.log('✅ Nagini found with createManager!');
+                        console.log('Available methods:', Object.keys(Nagini).filter(k => typeof Nagini[k] === 'function'));
+
+                        statusDiv.innerHTML = `✅ Success with ${url}`;
+                        resultDiv.innerHTML = `
+                            <h2>Nagini loaded successfully!</h2>
+                            <p>URL: ${url}</p>
+                            <p>Methods: ${Object.keys(Nagini).filter(k => typeof Nagini[k] === 'function').join(', ')}</p>
+                        `;
+
+                        // Test creating a manager
+                        try {
+                            const manager = await Nagini.createManager(
+                                'pyodide',
+                                [],
+                                [],
+                                [],
+                                'https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.20/src/pyodide/worker/worker-dist.js'
+                            );
+
+                            await Nagini.waitForReady(manager);
+
+                            const result = await manager.executeAsync('test.py', 'print("Hello from Pyodide!"); 42');
+                            console.log('Execution result:', result);
+
+                            resultDiv.innerHTML += `
+                                <h3>Execution test successful!</h3>
+                                <p>Output: ${result.stdout || result.output || 'No output'}</p>
+                                <p>Return: ${result.result || result.value || result.return_value}</p>
+                            `;
+                        } catch (execError) {
+                            console.error('Execution test failed:', execError);
+                            resultDiv.innerHTML += `<p style="color: orange;">Execution test failed: ${execError.message}</p>`;
+                        }
+
+                        return true;
+                    } else {
+                        console.warn('Module loaded but Nagini interface not found');
+                        console.log('Module structure:', module);
+                    }
+                } catch (error) {
+                    console.error(`❌ Failed to import from ${url}:`, error);
+
+                    // Try alternative approach with dynamic script tag
+                    if (error.message.includes('export') || error.message.includes('Unexpected token')) {
+                        console.log('Trying dynamic script tag approach...');
+
+                        try {
+                            await new Promise((resolve, reject) => {
+                                const script = document.createElement('script');
+                                script.type = 'module';
+                                script.innerHTML = `
+                                    import * as NaginiModule from '${url}';
+                                    window.__testNaginiModule = NaginiModule;
+                                `;
+                                script.onload = resolve;
+                                script.onerror = reject;
+                                document.head.appendChild(script);
+                                setTimeout(() => reject(new Error('Timeout')), 5000);
+                            });
+
+                            if (window.__testNaginiModule) {
+                                const module = window.__testNaginiModule;
+                                const Nagini = module.Nagini || module.default || module;
+                                delete window.__testNaginiModule;
+
+                                if (Nagini && typeof Nagini.createManager === 'function') {
+                                    console.log('✅ Loaded via dynamic script!');
+                                    statusDiv.innerHTML = `✅ Success with dynamic script: ${url}`;
+                                    return true;
+                                }
+                            }
+                        } catch (scriptError) {
+                            console.error('Dynamic script also failed:', scriptError);
+                        }
+                    }
+                }
+            }
+
+            statusDiv.innerHTML = '❌ All import attempts failed';
+            resultDiv.innerHTML = '<p style="color: red;">Failed to load Nagini. Check console for details.</p>';
+            return false;
+        }
+
+        // Run the test
+        testNaginiImport().catch(error => {
+            console.error('Test failed:', error);
+            statusDiv.innerHTML = '❌ Test error';
+            resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+        });
+    </script>
+  </body>
+</html>

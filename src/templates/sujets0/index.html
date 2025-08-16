@@ -70,75 +70,399 @@
     {% endif %}
   {% endif %}
 
-  {# Load product backend settings if any #}
-  {% if product_backend_settings %}
-    {% for service, settings in product_backend_settings.items() %}
-      {% if settings.js_url %}<script src="{{ settings.js_url }}"></script>{% endif %}
-      {% if settings.entrypoint_url %}<script src="{{ settings.entrypoint_url }}"></script>{% endif %}
-      {% if settings.css_url %}<link rel="stylesheet" href="{{ settings.css_url }}" />{% endif %}
-    {% endfor %}
-  {% endif %}
+  {# Backend settings disabled - we load Nagini manually in the content block #}
 {% endblock extra_head %}
 
 {% block modal_info_content %}
   {% include "sujets0/modal-info-content.html" %}
 {% endblock modal_info_content %}
 
-
 {% block content %}
   <div class="padding-alt-security mx-auto mb-14 mt-12 max-w-3xl ">
+    {% include "sujets0/header.html" %}
 
-
-    {% set shadow_header = True %}
-    {% include "corsica/header.html" %}
-
-
-    <div class="">Niveau Troisième</div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4  max-w-4xl mx-auto mb-12 mt-4"
-         style="border-radius: var(--radius-box)">
-      <a href="{{ request.url_for('get_pm', origin='corsica/a_troiz_geo.md') ~ '?format=html' }}"
-         class="btn btn-outline btn-primary">
-        {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    {# <div class="card shadow-lg mx-auto py-6 card mt-12">
+      <h1 class="text-center text-2xl font-bold text-base-content/60 mb-1">Sujets 0</h1>
+      <h2 class="text-center text-xl font-bold mb-3">
+        Pour l'épreuve anticipée de mathématiques en classe de 1ère
+      </h2>
+      <div class="max-w-[400px] mx-auto">{% include "products/sujets0-figure-svg.html" %}</div>
+    </div> #}
+    <div class="grid grid-cols-3 gap-2 sm:gap-4 max-w-4xl mx-auto mt-12">
+      <button class="btn btn-sm md:btn-md  btn-neutral btn-outline btn-active" data-tab="generate">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5 hidden sm:block"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round">
           <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
           <rect x="14" y="2" width="8" height="8" rx="1" />
-        </svg> #}
-        <span style="font-family:var(--font-heading)">Géographie de l'île</span>
-      </a>
-      <button class="btn btn-outline btn-primary">
-        {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
-          <rect x="14" y="2" width="8" height="8" rx="1" />
-        </svg> #}
-        <span style="font-family:var(--font-heading)">Navigation autour de l'île</span>
+        </svg>
+        <span class="font-normal">Générer<span class="hidden sm:inline">des exercices</span> </span>
+      </button>
+      <button class="btn btn-sm md:btn-md btn-outline btn-neutral" data-tab="documentation">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5 hidden sm:block"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             class="lucide lucide-file-text-icon lucide-file-text">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+          <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+          <path d="M10 9H8" />
+          <path d="M16 13H8" />
+          <path d="M16 17H8" />
+        </svg>
+        <span class="font-normal">
+          <span class="hidden sm:inline">Lire la documentation</span>
+          <span class="sm:hidden">Documentation</span>
+        </span>
+      </button>
+      <button class="btn btn-sm md:btn-md btn-outline btn-neutral" data-tab="subjects">
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5 hidden sm:block"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             class="lucide lucide-landmark-icon lucide-landmark">
+          <path d="M10 18v-7" />
+          <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z" />
+          <path d="M14 18v-7" />
+          <path d="M18 18v-7" />
+          <path d="M3 22h18" />
+          <path d="M6 18v-7" />
+        </svg>
+        <span class="font-normal">
+          <span class="hidden sm:inline">Consulter les Sujets 0</span>
+          <span class="sm:hidden">Sujets 0</span>
+        </span>
       </button>
     </div>
 
-    <div class="">Niveau Seconde</div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4  max-w-4xl mx-auto mb-12 mt-4"
-         style="border-radius: var(--radius-box)">
-      <a href="{{ request.url_for('get_pm', origin='corsica/a_troiz_geo.md') ~ '?format=html' }}"
-         class="btn btn-outline btn-primary">
-        {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
-          <rect x="14" y="2" width="8" height="8" rx="1" />
-        </svg> #}
-        <span style="font-family:var(--font-heading)">Géographie de l'île avec Python</span>
-      </a>
-      <button class="btn btn-outline btn-primary">
-        {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
-          <rect x="14" y="2" width="8" height="8" rx="1" />
-        </svg> #}
-        <span style="font-family:var(--font-heading)">Navigation autour de l'île (avec Python)</span>
-      </button>
+    <div class="tab-alt-content card mt-6" id="generate-content">
+      {% include "sujets0/generate-content.html" %}
     </div>
 
-    <div class="">
-      <div class="space-y-6"></div>
+    <div class="space-y-6 tab-alt-content tab-alt-hidden" id="documentation-content">
+      <div>
+        <div class="font-heading text-xl mb-2">Documentation</div>
+        <div>
+          Consultez la documentation complète pour comprendre le fonctionnement de l'application et découvrir toutes les fonctionnalités disponibles.
+        </div>
+      </div>
+
+      <div>
+        <div class="font-heading text-xl mb-2">Génération d'exercices</div>
+        <div>
+          Cette application permet de générer des exercices inspirés des Sujets 0 du ministère de l'Éducation nationale. Ces exercices et leurs corrections sont générés aléatoirement grâce à un moteur de calcul formel.
+        </div>
+      </div>
+      <div>
+        <div class="font-heading text-xl mb-2">Fonctionnalités</div>
+        <div>
+          <ul class="list-disc list-inside mb-2">
+            <li>Génération automatique d'exercices QCM</li>
+            <li>Corrections détaillées avec explications</li>
+            <li>Moteur de calcul formel intégré</li>
+            <li>Exercices adaptés aux programmes officiels</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="font-heading text-xl mb-2">Guide d'utilisation</div>
+        <div>
+          <ul class="list-disc list-inside mb-2">
+            <li>Comment générer des exercices</li>
+            <li>Personnaliser les paramètres</li>
+            <li>Exporter les résultats</li>
+            <li>Intégrer dans vos cours</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-
+    <div class="space-y-6 tab-alt-content tab-alt-hidden" id="subjects-content">
+      <div>
+        <div class="font-heading text-xl mb-2">Sujets 0 de juillet 2025</div>
+        <div>
+          Le ministère a publié :
+          <ul class="list-disc list-inside mb-2">
+            <li>2 sujets 0 pour l'enseignement de spécialité</li>
+            <li>3 sujets 0 pour l'enseignement spécifique</li>
+            <li>2 sujets 0 pour les filières technologiques</li>
+          </ul>
+          Chaque sujet est composé de 2 parties :
+          <ul class="list-disc list-inside mb-2">
+            <li>Partie 1 : QCM de 12 questions pour vérifier les automatismes</li>
+            <li>Partie 2 : 2 exercices entre l'application directe et la résolution de problèmes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <script>
+      console.log('Script is loading...');
+
+      document.addEventListener('DOMContentLoaded', function() {
+          console.log('DOM loaded!');
+
+          // Get all tab buttons and content areas
+          const tabButtons = document.querySelectorAll('[data-tab]');
+          const tabContents = document.querySelectorAll('.tab-alt-content');
+
+          console.log('Found buttons:', tabButtons.length);
+          console.log('Found content areas:', tabContents.length);
+
+          // Log each button found
+          tabButtons.forEach((btn, index) => {
+              console.log(`Button ${index}:`, btn.getAttribute('data-tab'));
+          });
+
+          // Add click event listeners to all buttons
+          tabButtons.forEach(button => {
+              console.log('Adding listener to button:', button.getAttribute('data-tab'));
+
+              button.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  console.log('🔥 BUTTON CLICKED:', this.getAttribute('data-tab'));
+
+                  // Remove active class from all buttons
+                  tabButtons.forEach(btn => {
+                      btn.classList.remove('btn-active');
+                      console.log('Removed active from:', btn.getAttribute('data-tab'));
+                  });
+
+                  // Add active class to clicked button
+                  this.classList.add('btn-active');
+                  console.log('Added active to:', this.getAttribute('data-tab'));
+
+                  // Get the tab name from data-tab attribute
+                  const tabName = this.getAttribute('data-tab');
+
+                  // Hide all tab contents
+                  tabContents.forEach(content => {
+                      content.classList.add('tab-alt-hidden');
+                      console.log('Hiding content:', content.id);
+                  });
+
+                  // Show the selected tab content
+                  const selectedContent = document.getElementById(tabName + '-content');
+                  console.log('Looking for content ID:', tabName + '-content');
+                  console.log('Selected content:', selectedContent);
+                  if (selectedContent) {
+                      selectedContent.classList.remove('tab-alt-hidden');
+                      console.log('✅ Showing content:', selectedContent.id);
+                  } else {
+                      console.log('❌ Content not found!');
+                  }
+              });
+          });
+      });
+
+      // Also add a simple test
+      //console.log('Adding test click handler...');
+      //setTimeout(() => {
+      //const testButton = document.querySelector('[data-tab="generate"]');
+      //console.log('Test button found:', testButton);
+      //if (testButton) {
+      //testButton.onclick = function() {
+      //console.log('DIRECT CLICK WORKED!');
+      //};
+      //}
+      //}, 1000);
+  </script>
+
+
+  <script type="module">
+      // Use the EXACT approach that works in the test suite
+      // The error in console is harmless - esm.sh still loads the module successfully
+      console.log('⏳ Loading Nagini from esm.sh (ignore any export errors - they are harmless)...');
+
+      let Nagini = null;
+
+      try {
+          // This WILL show an error in console but WILL work anyway
+          const naginiModule = await import('https://esm.sh/gh/pointcarre-app/nagini@v0.0.19/src/nagini.js');
+          Nagini = naginiModule.Nagini;
+
+          if (Nagini) {
+              window.Nagini = Nagini;
+              console.log('✅ Nagini loaded successfully from esm.sh!');
+              console.log('✅ The "export" error in console is harmless - module works fine');
+              console.log('Available methods:', Object.keys(Nagini).filter(k => typeof Nagini[k] === 'function'));
+          }
+      } catch (e) {
+          console.error('Failed to load Nagini:', e.message);
+
+          // If for some reason the simple import fails, try with bundle parameter
+          try {
+              const naginiModule = await import('https://esm.sh/gh/pointcarre-app/nagini@v0.0.19/src/nagini.js?bundle');
+              Nagini = naginiModule.Nagini;
+
+              if (Nagini) {
+                  window.Nagini = Nagini;
+                  console.log('✅ Loaded with bundle parameter');
+              }
+          } catch (e2) {
+              console.error('Bundle approach also failed:', e2.message);
+          }
+      }
+
+      if (!Nagini) {
+          console.error('❌ Failed to load Nagini');
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'alert alert-error mt-4';
+          errorDiv.innerHTML = `
+              <strong>⚠️ Nagini Loading Error</strong><br />
+              Failed to load Python engine from CDN. Please refresh the page.
+          `;
+          document.querySelector('.padding-alt-security')?.appendChild(errorDiv);
+      } else {
+          console.log('✅ Nagini loaded successfully!');
+          console.log('Available methods:', Object.keys(Nagini).filter(k => typeof Nagini[k] === 'function'));
+      }
+
+      // Import QuestionFactory if needed
+      import {
+          QuestionFactory
+      } from "/static/js/core/question-factory.js";
+
+      // Simple configuration - no backend settings needed
+      let naginiManager = null;
+      let generatedQuestions = [];
+
+      // Simple test function
+      async function testNaginiExecution() {
+          if (!Nagini) return false;
+
+          try {
+              console.log("🧪 Testing Python execution...");
+
+              // Create manager with simple setup
+              const manager = await Nagini.createManager(
+                  'pyodide',
+                  [], // No extra packages for now
+                  [],
+                  [],
+                  'https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.19/src/pyodide/worker/worker-dist.js'
+              );
+
+              await Nagini.waitForReady(manager);
+
+              // Execute simple Python code
+              const result = await manager.executeAsync('test.py', `
+                  result = 42 * 2
+                  print(f"The answer is {result}")
+                  result
+              `);
+
+              console.log("✅ Python execution successful!");
+              console.log("Output:", result.stdout);
+
+              // Store the manager
+              naginiManager = manager;
+
+              // Show success in UI
+              const successDiv = document.createElement('div');
+              successDiv.className = 'alert alert-success mt-4';
+              successDiv.innerHTML = `✅ Python engine ready! Output: ${result.stdout}`;
+              document.querySelector('.padding-alt-security')?.appendChild(successDiv);
+
+              return true;
+          } catch (error) {
+              console.error("❌ Test failed:", error);
+              return false;
+          }
+      }
+
+      // Test with packages (optional)
+      async function testWithPackages() {
+          if (!Nagini) return false;
+
+          try {
+              console.log("🧪 Testing with sympy package...");
+
+              // Create a new manager with sympy
+              const manager = await Nagini.createManager(
+                  'pyodide',
+                  ['sympy'], // Load sympy package
+                  [],
+                  [],
+                  'https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.19/src/pyodide/worker/worker-dist.js'
+              );
+
+              await Nagini.waitForReady(manager);
+
+              // Test sympy
+              const result = await manager.executeAsync('sympy_test.py', `
+                  import sympy as sp
+                  x = sp.Symbol('x')
+                  expr = x**2 + 2*x + 1
+                  factored = sp.factor(expr)
+                  print(f"Expression: {expr}")
+                  print(f"Factored: {factored}")
+              `);
+
+              console.log("✅ Sympy test successful!");
+              console.log("Output:", result.stdout);
+
+              // Update manager
+              naginiManager = manager;
+
+              // Show success
+              const infoDiv = document.createElement('div');
+              infoDiv.className = 'alert alert-info mt-4';
+              infoDiv.innerHTML = `📦 Sympy loaded! ${result.stdout}`;
+              document.querySelector('.padding-alt-security')?.appendChild(infoDiv);
+
+              return true;
+          } catch (error) {
+              console.warn("⚠️ Package test failed (this is okay):", error.message);
+              return false;
+          }
+      }
+
+      // Simple indicator update
+      function displayIndicatorNaginiIsReady() {
+          const naginiDot = document.getElementById("nagini-dot");
+          if (naginiDot) {
+              naginiDot.classList.replace("badge-warning", "badge-success");
+          }
+          const naginiLabel = document.getElementById("nagini-label");
+          if (naginiLabel) {
+              naginiLabel.textContent = "Nagini ready";
+          }
+      }
+
+      // Run tests if Nagini loaded successfully
+      if (Nagini) {
+          (async () => {
+              console.log("🚀 Running Nagini tests...");
+
+              const basicTest = await testNaginiExecution();
+              if (basicTest) {
+                  displayIndicatorNaginiIsReady();
+
+                  // Optional: test with packages after a delay
+                  setTimeout(async () => {
+                      await testWithPackages();
+                  }, 2000);
+              }
+          })();
+      }
+  </script>
+
+
 {% endblock content %}
