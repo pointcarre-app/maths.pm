@@ -470,6 +470,28 @@ pca-mathspm/
   - `GET /sujets0` - Interactive generator (uses Nagini)
   - `GET /sujets0/ex-ante-generated` - Pre-generated questions viewer
   - `GET /scenery` - Testing environment
+
+
+
+
+```bash
+/static/js/sujets0/
+├── sujets0-main.js         (main module for sujets0/scenery)
+├── pre-generated-viewer.js  (module for viewing pre-generated questions)
+└── error-analysis.js        (module for error analysis)
+
+/templates/sujets0/
+├── index.html                    → uses sujets0-main.js
+├── ex_ante_generated.html        → uses pre-generated-viewer.js
+├── ex_ante_generated_error_analysis.html → uses error-analysis.js
+└── scenery.html                  → uses sujets0-main.js
+```
+
+
+
+
+
+
 - **Key Features**:
   - **Live generation**: Execute Python generators in browser
   - **Pre-generated**: 5000+ questions ready instantly

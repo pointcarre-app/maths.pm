@@ -17,7 +17,7 @@ def generate_components(difficulty, seed=SEED) -> dict:
     a = tm.Integer(n=10) ** n1
     b = tm.Integer(n=10) ** (-n2)
     c = tm.Fraction(p=tm.Integer(n=1), q=tm.Integer(n=10) ** (n3))
-    
+
     b = b.simplified().as_decimal
     c = c.simplified()
 
@@ -58,7 +58,6 @@ def render_question(*, a, b, c):
     return {
         "statement": statement,
     }
-
 
 
 components = generate_components(None)
