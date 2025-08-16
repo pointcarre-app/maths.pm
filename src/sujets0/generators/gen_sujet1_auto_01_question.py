@@ -14,7 +14,9 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     n = gen.random_integer(1, 50) * tm.Integer(n=10)
     n = n.simplified()
-    x = gen.random_integer(1, 20)
+    x = gen.random_integer(
+        1, 19
+    )  # edit 🧂(to avoid: AttributeError: 'Integer' object has no attribute 'as_percent')
     x = tm.Fraction(p=x, q=20)
 
     return {
@@ -85,5 +87,3 @@ missive(
         },
     }
 )
-
-
