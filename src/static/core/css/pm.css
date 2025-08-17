@@ -906,3 +906,17 @@ pm-number-input button.btn-soft:hover {
   --btn-border: color-mix(in oklab, var(--btn-color, var(--color-base-content)) 10%, var(--color-base-100)) !important;
 }
 
+
+
+
+
+
+
+
+
+
+.fragment-wrapper[data-f_type="ul_"] ul { 
+  margin-top: 0.5rem !important;
+  padding-left: 1.25rem !important;
+  list-style: square !important;
+}
