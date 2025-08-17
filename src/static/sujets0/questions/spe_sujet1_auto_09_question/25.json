@@ -1,10 +1,32 @@
 {
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 2\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{1}x --4 + \\dfrac{1}{5^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{8}{1}x -2}{0.5}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "answer": {
+    "latex": "\\dfrac{\\dfrac{8}{1}}{0.5}",
+    "simplified_latex": "16",
+    "sympy_exp_data": {
+      "type": "Integer",
+      "sp.srepr": "Integer(16)",
+      "str": "16"
+    },
+    "formal_repr": "Fraction(p=Fraction(p=Integer(n=8), q=Integer(n=1)), q=Decimal(p=2, q=4))"
+  },
+  "components": {
+    "x": "x",
+    "c1": "2",
+    "a2": "\\dfrac{1}{1}",
+    "b2": "-4",
+    "c2": "5",
+    "a3": "\\dfrac{8}{1}",
+    "b3": "-2",
+    "c3": "0.5",
+    "expr1": "x^{2} -\\left(x + 2\\right)^{2}",
+    "expr2": "\\dfrac{1}{1}x --4 + \\dfrac{1}{5^{\\dfrac{1}{2}}}",
+    "expr3": "\\dfrac{\\dfrac{8}{1}x -2}{0.5}"
+  },
   "seed": 25,
   "generator": "spe_sujet1_auto_09_question",
-  "success": false,
-  "error": "float division by zero",
-  "error_type": "ZeroDivisionError",
-  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet1_auto_09_question.py\", line 111, in <module>\n    answer = solve(**components)\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet1_auto_09_question.py\", line 80, in solve\n    coef3_eval = coef3.eval()\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 732, in eval\n    return self.p.eval() / self.q.eval()\n           ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~\nZeroDivisionError: float division by zero\n",
+  "success": true,
   "stdout": "",
   "stderr": ""
 }

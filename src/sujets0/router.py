@@ -12,6 +12,13 @@ from ..settings import settings
 # Create sujets0 router
 sujets0_router = APIRouter(tags=["sujets0"])
 
+# Load sujets0 product settings once at module level
+sujets0_product = None
+for product in settings.products:
+    if product.name == "sujets0":
+        sujets0_product = product
+        break
+
 
 @sujets0_router.get("/sujets0", response_class=HTMLResponse)
 async def sujets0(request: Request):
@@ -26,13 +33,6 @@ async def sujets0(request: Request):
             "request": request,
             "page": {"title": "Sujets 0 - Générateur d'exercices"},
         }
-
-        # Find the sujets0 product
-        sujets0_product = None
-        for product in settings.products:
-            if product.name == "sujets0":
-                sujets0_product = product
-                break
 
         # Add product-specific context if available
         if sujets0_product:
@@ -61,6 +61,9 @@ async def sujets0(request: Request):
 
     except Exception as e:
         return HTMLResponse(f"Error: {e}", status_code=500)
+
+
+# @sujets0_router.get("/sujets0/originals", response_class=HTMLResponse)
 
 
 @sujets0_router.get("/sujets0/ex-ante-generated", response_class=HTMLResponse)
@@ -136,13 +139,7 @@ async def sujets0_ex_ante_generated(request: Request):
             "questions_base_url": "/static/sujets0/questions/",
         }
 
-        # Find the sujets0 product for consistent styling
-        sujets0_product = None
-        for product in settings.products:
-            if product.name == "sujets0":
-                sujets0_product = product
-                break
-
+        # Use global sujets0_product for consistent styling
         if sujets0_product:
             context.update(
                 {
@@ -239,13 +236,7 @@ async def sujets0_ex_ante_generated_error_analysis(request: Request):
             ),
         }
 
-        # Find the sujets0 product for consistent styling
-        sujets0_product = None
-        for product in settings.products:
-            if product.name == "sujets0":
-                sujets0_product = product
-                break
-
+        # Use global sujets0_product for consistent styling
         if sujets0_product:
             context.update(
                 {
@@ -278,14 +269,7 @@ async def scenery(request: Request):
             "page": {"title": "Scenery - Testing Environment"},
         }
 
-        # Find the sujets0 product for settings (reusing for now)
-        sujets0_product = None
-        for product in settings.products:
-            if product.name == "sujets0":
-                sujets0_product = product
-                break
-
-        # Add product-specific context if available
+        # Add product-specific context if available (reusing sujets0 settings for scenery)
         if sujets0_product:
             context.update(
                 {
@@ -309,6 +293,144 @@ async def scenery(request: Request):
             )
 
         return settings.templates.TemplateResponse("sujets0/scenery.html", context)
+
+    except Exception as e:
+        return HTMLResponse(f"Error: {e}", status_code=500)
+
+
+@sujets0_router.get("/sujets0-originals/{filiere_number}", response_class=HTMLResponse)
+async def sujets0_originals(request: Request, filiere_number: str):
+    """
+    Original curriculum questions viewer by filiere.
+
+    Displays the official curriculum questions from YAML files organized by filiere:
+    - gen-1, gen-2, gen-3: General mathematics subjects
+    - spe-1, spe-2: Specialty mathematics subjects
+
+    Args:
+        filiere_number: One of "gen-1", "gen-2", "gen-3", "spe-1", "spe-2"
+    """
+    try:
+        import yaml
+        from pathlib import Path
+
+        # Validate filiere_number
+        valid_filieres = ["gen-1", "gen-2", "gen-3", "spe-1", "spe-2"]
+        if filiere_number not in valid_filieres:
+            return HTMLResponse(
+                f"""
+                <div style="padding: 2rem; font-family: system-ui;">
+                    <h1>❌ Filière invalide: {filiere_number}</h1>
+                    <p>Les filières valides sont: {", ".join(valid_filieres)}</p>
+                    <a href="/sujets0">← Retour aux Sujets 0</a>
+                </div>
+                """,
+                status_code=404,
+            )
+
+        # Map filiere to corresponding YAML file and generators
+        filiere_config = {
+            "gen-1": {
+                "yaml_file": None,  # No specific YAML file yet
+                "title": "Sujet Général 1 - Mathématiques",
+                "description": "Questions officielles du curriculum - Sujet général 1",
+                "generator_pattern": "gen_sujet1_*",
+                "has_official_data": False,
+            },
+            "gen-2": {
+                "yaml_file": None,  # No specific YAML file yet
+                "title": "Sujet Général 2 - Mathématiques",
+                "description": "Questions officielles du curriculum - Sujet général 2",
+                "generator_pattern": "gen_sujet2_*",
+                "has_official_data": False,
+            },
+            "gen-3": {
+                "yaml_file": None,  # No specific YAML file yet
+                "title": "Sujet Général 3 - Mathématiques",
+                "description": "Questions officielles du curriculum - Sujet général 3",
+                "generator_pattern": "gen_sujet3_*",
+                "has_official_data": False,
+            },
+            "spe-1": {
+                "yaml_file": "sujet_0_spe_sujet_1.yml",
+                "title": "Sujet Spécialité 1 - Mathématiques",
+                "description": "Questions officielles du curriculum - Spécialité mathématiques 1",
+                "generator_pattern": "spe_sujet1_*",
+                "has_official_data": True,
+            },
+            "spe-2": {
+                "yaml_file": None,  # No specific YAML file yet
+                "title": "Sujet Spécialité 2 - Mathématiques",
+                "description": "Questions officielles du curriculum - Spécialité mathématiques 2",
+                "generator_pattern": "spe_sujet2_*",
+                "has_official_data": False,
+            },
+        }
+
+        config = filiere_config[filiere_number]
+
+        # Load YAML file if it exists
+        curriculum_data = None
+        if config["yaml_file"] and config["has_official_data"]:
+            yaml_path = (
+                Path(settings.base_dir)
+                / "official_curriculums"
+                / "france"
+                / "premiere"
+                / "yamelized"
+                / config["yaml_file"]
+            )
+
+            if yaml_path.exists():
+                # Load YAML content
+                with open(yaml_path, "r", encoding="utf-8") as f:
+                    curriculum_data = yaml.safe_load(f)
+
+        # Find related generators
+        generators_dir = Path(settings.base_dir) / "src" / "sujets0" / "generators"
+        pattern = config["generator_pattern"].replace("*", "")
+
+        related_generators = []
+        if generators_dir.exists():
+            for gen_file in generators_dir.glob(f"{pattern}*.py"):
+                if gen_file.name != "__init__.py":
+                    related_generators.append(
+                        {
+                            "name": gen_file.stem,
+                            "file": gen_file.name,
+                            "path": f"/src/sujets0/generators/{gen_file.name}",
+                        }
+                    )
+
+        related_generators.sort(key=lambda x: x["name"])
+
+        # Build context for template
+        context = {
+            "request": request,
+            "page": {"title": config["title"]},
+            "filiere_number": filiere_number,
+            "filiere_title": config["title"],
+            "filiere_description": config["description"],
+            "curriculum_data": curriculum_data,
+            "related_generators": related_generators,
+            "valid_filieres": valid_filieres,
+            "has_official_data": config["has_official_data"],
+            "filiere_config": filiere_config,
+        }
+
+        # Add product context for consistent styling
+        if sujets0_product:
+            context.update(
+                {
+                    "product_name": sujets0_product.name,
+                    "product_title": config["title"],
+                    "product_description": config["description"],
+                    "product_metatags": sujets0_product.metatags,
+                    "current_product": sujets0_product,
+                }
+            )
+
+        return settings.templates.TemplateResponse("sujets0/originals.html", context)
 
     except Exception as e:
         return HTMLResponse(f"Error: {e}", status_code=500)

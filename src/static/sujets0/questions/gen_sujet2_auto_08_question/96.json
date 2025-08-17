@@ -1,10 +1,27 @@
 {
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
+  "statement": "Dévelloper $\\left(2x + 3\\right) \\times \\left(1x -3\\right)$.",
+  "answer": {
+    "latex": "-9 -3x + 2 \\times x^{2}",
+    "simplified_latex": "-9 -3x + 2 \\times x^{2}",
+    "sympy_exp_data": {
+      "type": "Add",
+      "sp.srepr": "Add(Add(Mul(Integer(2), Pow(Symbol('x'), Integer(2))), Mul(Integer(-1), Integer(3), Symbol('x'))), Integer(-9))",
+      "str": "(2*x**2 - 3*x) - 9"
+    },
+    "formal_repr": "Add(l=Integer(n=-9), r=Add(l=Mul(l=Integer(n=-3), r=Symbol(s='x')), r=Mul(l=Integer(n=2), r=Pow(base=Symbol(s='x'), exp=Integer(n=2)))))"
+  },
+  "components": {
+    "x": "x",
+    "a1": "2",
+    "b1": "3",
+    "a2": "1",
+    "b2": "-3",
+    "expr": "\\left(2x + 3\\right) \\times \\left(1x -3\\right)"
+  },
   "seed": 96,
   "generator": "gen_sujet2_auto_08_question",
-  "success": false,
-  "error": "Simplification of Mul of <class 'teachers.maths.Add'> and <class 'teachers.maths.Add'>\nl=Add(l=Mul(l=Integer(n=2), r=Symbol(s='x')), r=Integer(n=3))\nr=Add(l=Symbol(s='x'), r=Integer(n=-3))",
-  "error_type": "NotImplementedError",
-  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_08_question.py\", line 68, in <module>\n    answer = solve(**components)\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_08_question.py\", line 47, in solve\n    maths_object = expr.simplified()\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 645, in simplified\n    raise NotImplementedError(\n        f\"Simplification of Mul of {type(l)} and {type(r)}\\n{l=}\\n{r=}\"\n    )\nNotImplementedError: Simplification of Mul of <class 'teachers.maths.Add'> and <class 'teachers.maths.Add'>\nl=Add(l=Mul(l=Integer(n=2), r=Symbol(s='x')), r=Integer(n=3))\nr=Add(l=Symbol(s='x'), r=Integer(n=-3))\n",
+  "success": true,
   "stdout": "",
   "stderr": ""
 }

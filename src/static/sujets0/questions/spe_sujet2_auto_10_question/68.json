@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(4x -7\\right) \\times \\left(6x + 9\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket \\dfrac{9}{6}; \\infty\\rbracket$ ?",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(4x -7\\right) \\times \\left(6x + 9\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket --\\dfrac{7}{4}; \\infty\\rbracket$ ?",
   "answer": {
     "latex": "f(x) > 0",
     "simplified_latex": "f(x) > 0",
@@ -12,13 +12,13 @@
     "formal_repr": "StrictGreaterThan(l=Function(name=f)(Symbol(s='x')), r=Integer(n=0))"
   },
   "components": {
-    "root1": "--\\dfrac{7}{4}",
-    "root2": "\\dfrac{9}{6}",
+    "root1": "\\dfrac{9}{6}",
+    "root2": "--\\dfrac{7}{4}",
     "a1": "4",
     "a2": "6",
     "b1": "-7",
     "b2": "9",
-    "interval": "\\lbracket \\dfrac{9}{6}; \\infty\\rbracket",
+    "interval": "\\lbracket --\\dfrac{7}{4}; \\infty\\rbracket",
     "x": "x",
     "f": "f"
   },

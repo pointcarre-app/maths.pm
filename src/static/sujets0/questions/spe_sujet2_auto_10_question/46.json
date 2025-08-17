@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-8x -9\\right) \\times \\left(2x + 8\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket --\\dfrac{9}{-8}; \\infty\\rbracket$ ?",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-8x -9\\right) \\times \\left(2x + 8\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket \\dfrac{8}{2}; \\infty\\rbracket$ ?",
   "answer": {
     "latex": "0 > f(x)",
     "simplified_latex": "0 > f(x)",
@@ -12,13 +12,13 @@
     "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Function(name=f)(Symbol(s='x')))"
   },
   "components": {
-    "root1": "\\dfrac{8}{2}",
-    "root2": "--\\dfrac{9}{-8}",
+    "root1": "--\\dfrac{9}{-8}",
+    "root2": "\\dfrac{8}{2}",
     "a1": "-8",
     "a2": "2",
     "b1": "-9",
     "b2": "8",
-    "interval": "\\lbracket --\\dfrac{9}{-8}; \\infty\\rbracket",
+    "interval": "\\lbracket \\dfrac{8}{2}; \\infty\\rbracket",
     "x": "x",
     "f": "f"
   },

@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-x + 5\\right) \\times \\left(-9x -10\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\dfrac{10}{-9}; \\infty\\rbracket$ ?",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-x + 5\\right) \\times \\left(-9x -10\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\dfrac{5}{-1}; \\infty\\rbracket$ ?",
   "answer": {
     "latex": "f(x) > 0",
     "simplified_latex": "f(x) > 0",
@@ -12,13 +12,13 @@
     "formal_repr": "StrictGreaterThan(l=Function(name=f)(Symbol(s='x')), r=Integer(n=0))"
   },
   "components": {
-    "root1": "-\\dfrac{5}{-1}",
-    "root2": "-\\dfrac{10}{-9}",
+    "root1": "-\\dfrac{10}{-9}",
+    "root2": "-\\dfrac{5}{-1}",
     "a1": "-1",
     "a2": "-9",
     "b1": "5",
     "b2": "-10",
-    "interval": "\\lbracket -\\dfrac{10}{-9}; \\infty\\rbracket",
+    "interval": "\\lbracket -\\dfrac{5}{-1}; \\infty\\rbracket",
     "x": "x",
     "f": "f"
   },

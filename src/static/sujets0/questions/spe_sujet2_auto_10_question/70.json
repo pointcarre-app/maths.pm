@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-7x + 4\\right) \\times \\left(-x + 4\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; -\\dfrac{4}{-7}\\rbracket$ ?",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-7x + 4\\right) \\times \\left(-x + 4\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; \\dfrac{4}{-1}\\rbracket$ ?",
   "answer": {
     "latex": "f(x) > 0",
     "simplified_latex": "f(x) > 0",
@@ -12,13 +12,13 @@
     "formal_repr": "StrictGreaterThan(l=Function(name=f)(Symbol(s='x')), r=Integer(n=0))"
   },
   "components": {
-    "root1": "-\\dfrac{4}{-7}",
-    "root2": "\\dfrac{4}{-1}",
+    "root1": "\\dfrac{4}{-1}",
+    "root2": "-\\dfrac{4}{-7}",
     "a1": "-7",
     "a2": "-1",
     "b1": "4",
     "b2": "4",
-    "interval": "\\lbracket -\\infty; -\\dfrac{4}{-7}\\rbracket",
+    "interval": "\\lbracket -\\infty; \\dfrac{4}{-1}\\rbracket",
     "x": "x",
     "f": "f"
   },

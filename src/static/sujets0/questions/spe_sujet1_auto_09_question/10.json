@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
-  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 8\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{1}x -3 + \\dfrac{1}{8^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{10}{1}x -4}{0.875}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 8\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{1}x -3 + \\dfrac{1}{8^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{10}{1}x -4}{3}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
   "answer": {
     "latex": "16",
     "simplified_latex": "16",
@@ -19,10 +19,10 @@
     "c2": "8",
     "a3": "\\dfrac{10}{1}",
     "b3": "-4",
-    "c3": "0.875",
+    "c3": "3",
     "expr1": "x^{2} -\\left(x + 8\\right)^{2}",
     "expr2": "\\dfrac{1}{1}x -3 + \\dfrac{1}{8^{\\dfrac{1}{2}}}",
-    "expr3": "\\dfrac{\\dfrac{10}{1}x -4}{0.875}"
+    "expr3": "\\dfrac{\\dfrac{10}{1}x -4}{3}"
   },
   "seed": 10,
   "generator": "spe_sujet1_auto_09_question",

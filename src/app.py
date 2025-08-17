@@ -197,7 +197,7 @@ async def lifespan(app: FastAPI):
                         logger.warning(f"⚠️ Failed to copy {src_file} -> {dest_file}: {e}")
             # Count files copied
             file_count = sum(1 for _, _, files in os.walk(static_pm_dir) for _ in files)
-            logger.info(f"📦 Static files ready ({file_count} PM files)")
+            logger.info(f"🌍 PM files copied in static/pm/ ({file_count})")
     except Exception as e:
         logger.warning(f"⚠️ Failed copying PM files: {e}")
 
@@ -225,12 +225,48 @@ async def lifespan(app: FastAPI):
 
             # Count files copied
             file_count = len(list(static_generators_dir.glob("*.py")))
-            logger.info(f"📝 Sujets0 generators ready ({file_count} generator files)")
+            logger.info(f"📝  {file_count}  Sujets0 generators ready")
         else:
             logger.warning(f"⚠️ Generators directory not found: {generators_dir}")
     except Exception as e:
         logger.warning(f"⚠️ Failed copying sujets0 generators: {e}")
-    logger.info("✅ Ready")
+
+    # 4) Copy entire official_curriculums/ to static/official_curriculums/
+    try:
+        official_curriculums_dir = settings.base_dir / "official_curriculums"
+        static_official_curriculums_dir = settings.static_dir / "official_curriculums"
+
+        os.makedirs(static_official_curriculums_dir, exist_ok=True)
+
+        for root, dirs, files in os.walk(official_curriculums_dir):
+            rel_root = os.path.relpath(root, official_curriculums_dir)
+            dest_root = (
+                static_official_curriculums_dir / rel_root
+                if rel_root != "."
+                else static_official_curriculums_dir
+            )
+            os.makedirs(dest_root, exist_ok=True)
+
+            # Copy all files from official_curriculums/
+            for file_path in official_curriculums_dir.glob("**/*"):
+                if file_path.is_file():
+                    try:
+                        dest_file = static_official_curriculums_dir / file_path.relative_to(
+                            official_curriculums_dir
+                        )
+                        copy2(file_path, dest_file)
+                    except Exception as e:
+                        logger.warning(f"⚠️ Failed to copy {file_path} -> {dest_file}: {e}")
+
+            # Count files copied
+            file_count = len(list(static_official_curriculums_dir.glob("**/*")))
+            logger.info(f"📝 Official curriculums ready ({file_count} files)")
+    except Exception as e:
+        logger.warning(f"⚠️ Failed copying official_curriculums: {e}")
+
+    logger.info(
+        "✅ All static files copied: JupyterLite (optional), PM, Sujets0, Official curriculums"
+    )
 
     yield
 

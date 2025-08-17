@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(10x -2\\right) \\times \\left(5x -1\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; --\\dfrac{2}{10}\\rbracket$ ?",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(10x -2\\right) \\times \\left(5x -1\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; -\\dfrac{1}{5}\\rbracket$ ?",
   "answer": {
     "latex": "f(x) > 0",
     "simplified_latex": "f(x) > 0",
@@ -12,13 +12,13 @@
     "formal_repr": "StrictGreaterThan(l=Function(name=f)(Symbol(s='x')), r=Integer(n=0))"
   },
   "components": {
-    "root1": "--\\dfrac{2}{10}",
-    "root2": "-\\dfrac{1}{5}",
+    "root1": "-\\dfrac{1}{5}",
+    "root2": "--\\dfrac{2}{10}",
     "a1": "10",
     "a2": "5",
     "b1": "-2",
     "b2": "-1",
-    "interval": "\\lbracket -\\infty; --\\dfrac{2}{10}\\rbracket",
+    "interval": "\\lbracket -\\infty; -\\dfrac{1}{5}\\rbracket",
     "x": "x",
     "f": "f"
   },

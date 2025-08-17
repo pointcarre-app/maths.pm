@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
-  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x -4\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{5}x -2 + \\dfrac{1}{1^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{4}{4}x + 2}{9}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x -4\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{5}x -2 + \\dfrac{1}{1^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{4}{4}x + 2}{19}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
   "answer": {
     "latex": "-8",
     "simplified_latex": "-8",
@@ -19,10 +19,10 @@
     "c2": "1",
     "a3": "\\dfrac{4}{4}",
     "b3": "2",
-    "c3": "9",
+    "c3": "19",
     "expr1": "x^{2} -\\left(x -4\\right)^{2}",
     "expr2": "\\dfrac{1}{5}x -2 + \\dfrac{1}{1^{\\dfrac{1}{2}}}",
-    "expr3": "\\dfrac{\\dfrac{4}{4}x + 2}{9}"
+    "expr3": "\\dfrac{\\dfrac{4}{4}x + 2}{19}"
   },
   "seed": 39,
   "generator": "spe_sujet1_auto_09_question",

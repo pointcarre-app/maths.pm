@@ -331,7 +331,8 @@ q
 ### Fix from generator itself
 
 - Ensure x1 ≠ x2 in the generator: modified generate_components function to guarantee that x1 and x2 are different
-    - while strategy is safe: 
+    - while strategy is extremely safe: -100 ; 100 !!!
+
 
 
 ```python
@@ -457,43 +458,9 @@ AttributeError: module 'teachers.maths' has no attribute 'Pi'
 - Possible created because of previous edits (not sure)
 
 
-#### `gen_sujet2_auto_08_question.py`
-
-```bash
-# gen_sujet2_auto_08_question.py
-
-Erreur de génération
-Simplification of Mul of and l=Add(l=Mul(l=Integer(n=3), r=Symbol(s='x')), r=Integer(n=-8)) r=Add(l=Mul(l=Integer(n=4), r=Symbol(s='x')), r=Integer(n=-1))
-Type: NotImplementedError
-```
-
-```bash
-Traceback complet
-Traceback (most recent call last):
-  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
-    module = load_generator_module(generator_file)
-  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 46, in load_generator_module
-    spec.loader.exec_module(module)
-    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
-  File "", line 1026, in exec_module
-  File "", line 488, in _call_with_frames_removed
-  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_08_question.py", line 68, in 
-    answer = solve(**components)
-  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_08_question.py", line 47, in solve
-    maths_object = expr.simplified()
-  File "/Users/selim/madles/pca-teachers/src/teachers/maths.py", line 645, in simplified
-    raise NotImplementedError(
-        f"Simplification of Mul of {type(l)} and {type(r)}\n{l=}\n{r=}"
-    )
-NotImplementedError: Simplification of Mul of  and 
-l=Add(l=Mul(l=Integer(n=3), r=Symbol(s='x')), r=Integer(n=-8))
-r=Add(l=Mul(l=Integer(n=4), r=Symbol(s='x')), r=Integer(n=-1))
-
-
-
-
-
 #### `gen_sujet2_auto_09_question.py`
+
+##### Specific file diag
 
 
 ```bash
@@ -527,3 +494,315 @@ q=Mul(l=Pi(), r=Pow(base=Symbol(s='r'), exp=Integer(n=2)))
 ```
 
 
+
+##### Specific fix from teachers
+
+```markdown
+
+## [0.0.13] - 2025-01-16
+
+### Fixed
+- **Critical Fraction Symbol/Mul Simplification Bug**: Fixed NotImplementedError when simplifying fractions with Symbol numerators and Mul denominators
+  - `Fraction.simplified()` now correctly handles `Symbol / Mul` combinations (e.g., V/(π*r²))
+  - Added support for 15+ new fraction type combinations: Symbol/Symbol, Symbol/Pi, Symbol/Pow, Mul/Symbol, Mul/Mul, Pi/Symbol, Pi/Mul, Pi/Pi, Pow/Symbol, Pow/Mul, Pow/Pow
+  - Resolved the original bug where expressions like `Symbol('V') / (Pi() * Symbol('r')**Integer(2))` would fail with NotImplementedError
+  - All combinations preserve mathematical structure as-is when already in simplest form
+  - Special case: Pi/Pi correctly simplifies to Integer(1)
+```
+
+
+
+
+
+#### `gen_sujet2_auto_08_question.py`
+
+
+##### Specific file diag
+
+```bash
+# gen_sujet2_auto_08_question.py
+
+Erreur de génération
+Simplification of Mul of and l=Add(l=Mul(l=Integer(n=3), r=Symbol(s='x')), r=Integer(n=-8)) r=Add(l=Mul(l=Integer(n=4), r=Symbol(s='x')), r=Integer(n=-1))
+Type: NotImplementedError
+```
+
+```bash
+Traceback complet
+Traceback (most recent call last):
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
+    module = load_generator_module(generator_file)
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 46, in load_generator_module
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "", line 1026, in exec_module
+  File "", line 488, in _call_with_frames_removed
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_08_question.py", line 68, in 
+    answer = solve(**components)
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_08_question.py", line 47, in solve
+    maths_object = expr.simplified()
+  File "/Users/selim/madles/pca-teachers/src/teachers/maths.py", line 645, in simplified
+    raise NotImplementedError(
+        f"Simplification of Mul of {type(l)} and {type(r)}\n{l=}\n{r=}"
+    )
+NotImplementedError: Simplification of Mul of  and 
+l=Add(l=Mul(l=Integer(n=3), r=Symbol(s='x')), r=Integer(n=-8))
+r=Add(l=Mul(l=Integer(n=4), r=Symbol(s='x')), r=Integer(n=-1))
+```
+
+
+
+
+###### Yet another specific file diag
+
+
+
+
+```bash
+Erreur de génération
+module 'teachers.maths' has no attribute 'group_terms'
+Type: AttributeError
+```
+
+```bash
+Traceback complet
+Traceback (most recent call last):
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
+    module = load_generator_module(generator_file)
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 46, in load_generator_module
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "", line 1026, in exec_module
+  File "", line 488, in _call_with_frames_removed
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_08_question.py", line 68, in 
+    answer = solve(**components)
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_08_question.py", line 48, in solve
+    maths_object = tm.group_terms(maths_object)
+                   ^^^^^^^^^^^^^^
+AttributeError: module 'teachers.maths' has no attribute 'group_terms'
+Seed: 1 | Échec ✗
+```
+
+
+
+
+##### Specific fix from teachers
+
+
+
+
+
+## `spe_sujet1_auto_09_question.py`
+
+
+### Diag 
+
+**(only 14 out of 100 cases)**
+
+
+```bash
+Erreur de génération
+float division by zero
+Type: ZeroDivisionError
+```
+
+
+Also : 
+
+```bash
+  "c3": "0.5555555555555556",
+```
+
+
+
+Because of: 
+
+```python
+(gen.random_integer(0, 10) / gen.random_integer(1, 10)).as_decimal
+``` 
+
+
+### Fix from generator itself
+
+
+```python
+# Use a list of educationally-friendly decimal values
+nice_decimals = [0.1, 0.2, 0.25, 0.4, 0.5, 0.75, 0.8, 1.25, 1.5, 2.5]
+c3_value = gen.random_choice(nice_decimals)
+c3 = tm.Decimal.from_float(c3_value)  # Assuming this method exists
+```
+
+
+
+## `spe_sujet1_auto_09_question.py`
+
+
+### Diag
+
+
+```bash
+Erreur de génération
+'MathsGenerator' object has no attribute 'random_choice'
+Type: AttributeError
+```
+
+```bash
+Traceback (most recent call last):
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
+    module = load_generator_module(generator_file)
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 46, in load_generator_module
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "", line 1026, in exec_module
+  File "", line 488, in _call_with_frames_removed
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet1_auto_09_question.py", line 116, in 
+    components = generate_components(None)
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet1_auto_09_question.py", line 26, in generate_components
+    tm.Decimal(p=gen.random_integer(1, 20), q=gen.random_choice([1, 2, 4, 5, 8, 10])),
+                                              ^^^^^^^^^^^^^^^^^
+AttributeError: 'MathsGenerator' object has no attribute 'random_choice'
+```
+
+
+### Fix from generator itself
+
+*🧂: pasd ma plus grande réussite pour sûr mais ca tourne*
+
+```python
+a3, b3, c3 = (
+    tm.Fraction(p=gen.random_integer(1, 10), q=gen.random_integer(1, 10)),
+    gen.random_integer(-10, 10),
+    tm.Decimal(p=gen.random_integer(1, 20).n, q=gen.random_element_from([1, 2, 4, 5, 8, 10])),
+)
+```
+
+
+
+## `spe_sujet2_auto_07_question.py`
+
+
+## Diag
+
+```bash
+Erreur de génération
+1 validation error for Fraction q Value error, Denominator cannot be zero [type=value_error, input_value=Integer(n=0), input_type=Integer] For further information visit https://errors.pydantic.dev/2.11/v/value_error
+Type: ValidationError
+
+
+```bash
+Traceback complet
+Traceback (most recent call last):
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
+    module = load_generator_module(generator_file)
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 46, in load_generator_module
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "", line 1026, in exec_module
+  File "", line 488, in _call_with_frames_removed
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet2_auto_07_question.py", line 67, in 
+    "simplified_latex": answer["maths_object"].simplified().latex(),
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/selim/madles/pca-teachers/src/teachers/maths.py", line 769, in simplified
+    return Fraction(p=p, q=q)
+  File "/Users/selim/madles/pca-mathspm/env/lib/python3.13/site-packages/pydantic/main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Fraction
+q
+  Value error, Denominator cannot be zero [type=value_error, input_value=Integer(n=0), input_type=Integer]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+```
+
+
+
+
+
+### Fix from generator itself
+
+
+
+Same old story (very very safe cause -10 ; 10 !!!)
+
+```python
+# Ensure x1 != x2 to avoid division by zero (vertical line)
+while x2 == x1:
+  x2 = gen.random_integer(-10, 10)
+``` 
+
+
+
+## `spe_sujet2_auto_10_question.py`
+
+
+### Diag 
+
+*In 36 cases out of 100:*
+
+
+```bash
+Erreur de génération
+1 validation error for Interval sympy_expr Input should be an instance of Interval [type=is_instance_of, input_value=EmptySet, input_type=EmptySet] For further information visit https://errors.pydantic.dev/2.11/v/is_instance_of
+Type: ValidationError
+```
+
+```
+Traceback (most recent call last):
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 114, in generate_question
+    module = load_generator_module(generator_file)
+  File "/Users/selim/madles/pca-mathspm/src/build_questions.py", line 46, in load_generator_module
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "", line 1026, in exec_module
+  File "", line 488, in _call_with_frames_removed
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet2_auto_10_question.py", line 97, in 
+    components = generate_components(None)
+  File "/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet2_auto_10_question.py", line 31, in generate_components
+    interval = tm.Interval(l=root1, r=root2, left_open=True, right_open=True)
+  File "/Users/selim/madles/pca-mathspm/env/lib/python3.13/site-packages/pydantic/main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Interval
+sympy_expr
+  Input should be an instance of Interval [type=is_instance_of, input_value=EmptySet, input_type=EmptySet]
+    For further information visit https://errors.pydantic.dev/2.11/v/is_instance_of
+```
+
+
+
+### Fix from generator itself
+
+
+```python
+  while a1.n == 0 or a2.n == 0:  # ✅ CORRECT: ensure BOTH are non-zero
+      a1 = gen.random_integer(-10, 10)
+      a2 = gen.random_integer(-10, 10)
+```
+
+This instead of `and` solved:
+
+
+```bash
+129	spe_sujet2_auto_10_question	77	ValidationError	
+1 validation error for Fraction q Value error, Denominator cannot be zero [type=value_error,...
+```
+
+
+
+Also: 
+
+
+```python
+# BEFORE (line ~26):
+if root1.eval() < root2.eval():
+    root1, root2 = root2, root1
+
+# AFTER:
+if root1.eval() > root2.eval():  # ✅ Reverse the condition
+    root1, root2 = root2, root1
+```
+
+
+To get rid of:
+
+```
+126	spe_sujet2_auto_10_question	67	ValidationError	
+1 validation error for Interval sympy_expr Input should be an instance of Interval...
+```

@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-4x -7\\right) \\times \\left(9x + 0\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; \\dfrac{0}{9}\\rbracket$ ?",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-4x -7\\right) \\times \\left(9x + 0\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; --\\dfrac{7}{-4}\\rbracket$ ?",
   "answer": {
     "latex": "0 > f(x)",
     "simplified_latex": "0 > f(x)",
@@ -12,13 +12,13 @@
     "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Function(name=f)(Symbol(s='x')))"
   },
   "components": {
-    "root1": "\\dfrac{0}{9}",
-    "root2": "--\\dfrac{7}{-4}",
+    "root1": "--\\dfrac{7}{-4}",
+    "root2": "\\dfrac{0}{9}",
     "a1": "-4",
     "a2": "9",
     "b1": "-7",
     "b2": "0",
-    "interval": "\\lbracket -\\infty; \\dfrac{0}{9}\\rbracket",
+    "interval": "\\lbracket -\\infty; --\\dfrac{7}{-4}\\rbracket",
     "x": "x",
     "f": "f"
   },

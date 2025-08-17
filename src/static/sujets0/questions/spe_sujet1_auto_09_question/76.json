@@ -1,15 +1,15 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
-  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 1\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{8}x -2 + \\dfrac{1}{4^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{5}{1}x + 3}{0.6}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 1\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{8}x -2 + \\dfrac{1}{4^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{5}{1}x + 3}{2}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
   "answer": {
-    "latex": "\\dfrac{\\dfrac{5}{1}}{0.6}",
-    "simplified_latex": "8.333333333333334",
+    "latex": "\\dfrac{\\dfrac{5}{1}}{2}",
+    "simplified_latex": "2.5",
     "sympy_exp_data": {
       "type": "Rational",
-      "sp.srepr": "Rational(25, 3)",
-      "str": "25/3"
+      "sp.srepr": "Rational(5, 2)",
+      "str": "5/2"
     },
-    "formal_repr": "Fraction(p=Fraction(p=Integer(n=5), q=Integer(n=1)), q=Decimal(p=3, q=5))"
+    "formal_repr": "Fraction(p=Fraction(p=Integer(n=5), q=Integer(n=1)), q=Decimal(p=8, q=4))"
   },
   "components": {
     "x": "x",
@@ -19,10 +19,10 @@
     "c2": "4",
     "a3": "\\dfrac{5}{1}",
     "b3": "3",
-    "c3": "0.6",
+    "c3": "2",
     "expr1": "x^{2} -\\left(x + 1\\right)^{2}",
     "expr2": "\\dfrac{1}{8}x -2 + \\dfrac{1}{4^{\\dfrac{1}{2}}}",
-    "expr3": "\\dfrac{\\dfrac{5}{1}x + 3}{0.6}"
+    "expr3": "\\dfrac{\\dfrac{5}{1}x + 3}{2}"
   },
   "seed": 76,
   "generator": "spe_sujet1_auto_09_question",

@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-8x -6\\right) \\times \\left(-4x -1\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; -\\dfrac{1}{-4}\\rbracket$ ?",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-8x -6\\right) \\times \\left(-4x -1\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; --\\dfrac{6}{-8}\\rbracket$ ?",
   "answer": {
     "latex": "f(x) > 0",
     "simplified_latex": "f(x) > 0",
@@ -12,13 +12,13 @@
     "formal_repr": "StrictGreaterThan(l=Function(name=f)(Symbol(s='x')), r=Integer(n=0))"
   },
   "components": {
-    "root1": "-\\dfrac{1}{-4}",
-    "root2": "--\\dfrac{6}{-8}",
+    "root1": "--\\dfrac{6}{-8}",
+    "root2": "-\\dfrac{1}{-4}",
     "a1": "-8",
     "a2": "-4",
     "b1": "-6",
     "b2": "-1",
-    "interval": "\\lbracket -\\infty; -\\dfrac{1}{-4}\\rbracket",
+    "interval": "\\lbracket -\\infty; --\\dfrac{6}{-8}\\rbracket",
     "x": "x",
     "f": "f"
   },

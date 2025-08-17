@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-3x + 10\\right) \\times \\left(-8x + 4\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; -\\dfrac{10}{-3}\\rbracket$ ?",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-3x + 10\\right) \\times \\left(-8x + 4\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; \\dfrac{4}{-8}\\rbracket$ ?",
   "answer": {
     "latex": "f(x) > 0",
     "simplified_latex": "f(x) > 0",
@@ -12,13 +12,13 @@
     "formal_repr": "StrictGreaterThan(l=Function(name=f)(Symbol(s='x')), r=Integer(n=0))"
   },
   "components": {
-    "root1": "-\\dfrac{10}{-3}",
-    "root2": "\\dfrac{4}{-8}",
+    "root1": "\\dfrac{4}{-8}",
+    "root2": "-\\dfrac{10}{-3}",
     "a1": "-3",
     "a2": "-8",
     "b1": "10",
     "b2": "4",
-    "interval": "\\lbracket -\\infty; -\\dfrac{10}{-3}\\rbracket",
+    "interval": "\\lbracket -\\infty; \\dfrac{4}{-8}\\rbracket",
     "x": "x",
     "f": "f"
   },

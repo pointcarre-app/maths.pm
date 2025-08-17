@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
-  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 7\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{1}x -5 + \\dfrac{1}{9^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{5}{9}x + 3}{1.5}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 7\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{1}x -5 + \\dfrac{1}{9^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{5}{9}x + 3}{8}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
   "answer": {
     "latex": "14",
     "simplified_latex": "14",
@@ -19,10 +19,10 @@
     "c2": "9",
     "a3": "\\dfrac{5}{9}",
     "b3": "3",
-    "c3": "1.5",
+    "c3": "8",
     "expr1": "x^{2} -\\left(x + 7\\right)^{2}",
     "expr2": "\\dfrac{1}{1}x -5 + \\dfrac{1}{9^{\\dfrac{1}{2}}}",
-    "expr3": "\\dfrac{\\dfrac{5}{9}x + 3}{1.5}"
+    "expr3": "\\dfrac{\\dfrac{5}{9}x + 3}{8}"
   },
   "seed": 56,
   "generator": "spe_sujet1_auto_09_question",

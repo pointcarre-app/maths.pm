@@ -1,10 +1,32 @@
 {
+  "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 0\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{3}x -2 + \\dfrac{1}{1^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{2}{9}x -7}{1.5}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "answer": {
+    "latex": "\\dfrac{1}{3}",
+    "simplified_latex": "\\dfrac{1}{3}",
+    "sympy_exp_data": {
+      "type": "Rational",
+      "sp.srepr": "Rational(1, 3)",
+      "str": "1/3"
+    },
+    "formal_repr": "Fraction(p=Integer(n=1), q=Integer(n=3))"
+  },
+  "components": {
+    "x": "x",
+    "c1": "0",
+    "a2": "\\dfrac{1}{3}",
+    "b2": "2",
+    "c2": "1",
+    "a3": "\\dfrac{2}{9}",
+    "b3": "-7",
+    "c3": "1.5",
+    "expr1": "x^{2} -\\left(x + 0\\right)^{2}",
+    "expr2": "\\dfrac{1}{3}x -2 + \\dfrac{1}{1^{\\dfrac{1}{2}}}",
+    "expr3": "\\dfrac{\\dfrac{2}{9}x -7}{1.5}"
+  },
   "seed": 7,
   "generator": "spe_sujet1_auto_09_question",
-  "success": false,
-  "error": "Simplification of <class 'teachers.maths.Fraction'> of <class 'teachers.maths.Fraction'> and <class 'teachers.maths.Decimal'>\np=Fraction(p=Integer(n=2), q=Integer(n=9))\nq=Decimal(p=5, q=10)",
-  "error_type": "NotImplementedError",
-  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/spe_sujet1_auto_09_question.py\", line 121, in <module>\n    \"simplified_latex\": answer[\"maths_object\"].simplified().latex(),\n                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 771, in simplified\n    raise NotImplementedError(\n        f\"Simplification of {__class__} of {type(p)} and {type(q)}\\n{p=}\\n{q=}\"\n    )\nNotImplementedError: Simplification of <class 'teachers.maths.Fraction'> of <class 'teachers.maths.Fraction'> and <class 'teachers.maths.Decimal'>\np=Fraction(p=Integer(n=2), q=Integer(n=9))\nq=Decimal(p=5, q=10)\n",
+  "success": true,
   "stdout": "",
   "stderr": ""
 }

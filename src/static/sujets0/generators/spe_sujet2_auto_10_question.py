@@ -11,9 +11,10 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     gen = tg.MathsGenerator(seed)
     a1, a2 = tm.Integer(n=0), tm.Integer(n=0)
-    while a1.n == 0 and a2.n == 0:
+    while a1.n == 0 or a2.n == 0:  # ✅ CORRECT: ensure BOTH are non-zero
         a1 = gen.random_integer(-10, 10)
         a2 = gen.random_integer(-10, 10)
+
     b1 = gen.random_integer(-10, 10)
     b2 = gen.random_integer(-10, 10)
 
@@ -21,9 +22,9 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     f = tm.Function(name="f")
     x = tm.Symbol(s="x")
 
-    if root1.eval() < root2.eval():
+    # 🧂 magic solutio ?
+    if root1.eval() > root2.eval():  # ✅ Reverse the condition
         root1, root2 = root2, root1
-
     i = gen.random_element_from([0, 1, 2])
     if i == 0:
         interval = tm.Interval(l=-tm.Inf(), r=root1, left_open=True, right_open=True)

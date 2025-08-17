@@ -1,10 +1,25 @@
 {
+  "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-9]",
+  "statement": "Le volume $V$ d'un cône de hauteur $h$ et de rayon $r$ est $V = \\dfrac{1}{3}\\pir^{2}h$. Isoler $h$.",
+  "answer": {
+    "latex": "\\dfrac{3V}{\\pir^{2}}",
+    "simplified_latex": "\\dfrac{3V}{\\pir^{2}}",
+    "sympy_exp_data": {
+      "type": "Mul",
+      "sp.srepr": "Mul(Integer(3), Pow(pi, Integer(-1)), Symbol('V'), Pow(Symbol('r'), Integer(-2)))",
+      "str": "3*V/(pi*r**2)"
+    },
+    "formal_repr": "Fraction(p=Mul(l=Integer(n=3), r=Symbol(s='V')), q=Mul(l=Pi(), r=Pow(base=Symbol(s='r'), exp=Integer(n=2))))"
+  },
+  "components": {
+    "v": "V",
+    "h": "h",
+    "r": "r",
+    "expr": "V = \\dfrac{1}{3}\\pir^{2}h"
+  },
   "seed": 80,
   "generator": "gen_sujet2_auto_09_question",
-  "success": false,
-  "error": "Simplification of <class 'teachers.maths.Fraction'> of <class 'teachers.maths.Mul'> and <class 'teachers.maths.Mul'>\np=Mul(l=Integer(n=3), r=Symbol(s='V'))\nq=Mul(l=Pi(), r=Pow(base=Symbol(s='r'), exp=Integer(n=2)))",
-  "error_type": "NotImplementedError",
-  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet2_auto_09_question.py\", line 66, in <module>\n    \"simplified_latex\": answer[\"maths_object\"].simplified().latex(),\n                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/selim/madles/pca-teachers/src/teachers/maths.py\", line 771, in simplified\n    raise NotImplementedError(\n        f\"Simplification of {__class__} of {type(p)} and {type(q)}\\n{p=}\\n{q=}\"\n    )\nNotImplementedError: Simplification of <class 'teachers.maths.Fraction'> of <class 'teachers.maths.Mul'> and <class 'teachers.maths.Mul'>\np=Mul(l=Integer(n=3), r=Symbol(s='V'))\nq=Mul(l=Pi(), r=Pow(base=Symbol(s='r'), exp=Integer(n=2)))\n",
+  "success": true,
   "stdout": "",
   "stderr": ""
 }

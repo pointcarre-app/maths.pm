@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-3x + 2\\right) \\times \\left(1x -6\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; -\\dfrac{2}{-3}\\rbracket$ ?",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-3x + 2\\right) \\times \\left(1x -6\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; -\\dfrac{6}{1}\\rbracket$ ?",
   "answer": {
     "latex": "0 > f(x)",
     "simplified_latex": "0 > f(x)",
@@ -12,13 +12,13 @@
     "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Function(name=f)(Symbol(s='x')))"
   },
   "components": {
-    "root1": "-\\dfrac{2}{-3}",
-    "root2": "-\\dfrac{6}{1}",
+    "root1": "-\\dfrac{6}{1}",
+    "root2": "-\\dfrac{2}{-3}",
     "a1": "-3",
     "a2": "1",
     "b1": "2",
     "b2": "-6",
-    "interval": "\\lbracket -\\infty; -\\dfrac{2}{-3}\\rbracket",
+    "interval": "\\lbracket -\\infty; -\\dfrac{6}{1}\\rbracket",
     "x": "x",
     "f": "f"
   },

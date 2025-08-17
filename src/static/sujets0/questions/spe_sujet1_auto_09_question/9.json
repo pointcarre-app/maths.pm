@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
-  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 4\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{10}x -1 + \\dfrac{1}{5^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{3}{3}x -10}{0.5555555555555556}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
+  "statement": "Parmi les 3 fonctions $$f1: x \\mapsto x^{2} -\\left(x + 4\\right)^{2}$$, $$f2: x \\mapsto \\dfrac{1}{10}x -1 + \\dfrac{1}{5^{\\dfrac{1}{2}}}$$, $$f3: x \\mapsto \\dfrac{\\dfrac{3}{3}x -10}{1.375}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?",
   "answer": {
     "latex": "8",
     "simplified_latex": "8",
@@ -19,10 +19,10 @@
     "c2": "5",
     "a3": "\\dfrac{3}{3}",
     "b3": "-10",
-    "c3": "0.5555555555555556",
+    "c3": "1.375",
     "expr1": "x^{2} -\\left(x + 4\\right)^{2}",
     "expr2": "\\dfrac{1}{10}x -1 + \\dfrac{1}{5^{\\dfrac{1}{2}}}",
-    "expr3": "\\dfrac{\\dfrac{3}{3}x -10}{0.5555555555555556}"
+    "expr3": "\\dfrac{\\dfrac{3}{3}x -10}{1.375}"
   },
   "seed": 9,
   "generator": "spe_sujet1_auto_09_question",

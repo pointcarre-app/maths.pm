@@ -23,13 +23,13 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     a3, b3, c3 = (
         tm.Fraction(p=gen.random_integer(1, 10), q=gen.random_integer(1, 10)),
         gen.random_integer(-10, 10),
-        (gen.random_integer(0, 10) / gen.random_integer(1, 10)).as_decimal,
+        tm.Decimal(p=gen.random_integer(1, 20).n, q=gen.random_element_from([1, 2, 4, 5, 8, 10])),
     )
     expr1 = x ** tm.Integer(n=2) - (x + c1) ** tm.Integer(n=2)
     expr2 = a2 * x - (b2 + tm.Integer(n=1) / (c2 ** (tm.Integer(n=1) / tm.Integer(n=2))))
     expr3 = (a3 * x + b3) / c3
 
-    # TODO: there was a mistkae in the retunred context here 
+    # TODO: there was a mistkae in the retunred context here
     # but this did not affect solve or statement rendering so far
     # I keep it for history until Sel has merged stuff
 
@@ -73,7 +73,13 @@ def solve(*, x, c1, a2, b2, c2, a3, b3, c3, expr1, expr2, expr3):
     """
     coef1 = (tm.Integer(n=2) * c1).simplified()
     coef2 = a2
-    coef3 = a3 / c3
+
+    # Safeguard against division by zero
+    if c3.eval() == 0:
+        # This should not happen with our new generation, but adding safety
+        coef3 = tm.Integer(n=0)
+    else:
+        coef3 = a3 / c3
 
     coef1_eval = coef1.eval()
     coef2_eval = coef2.eval()

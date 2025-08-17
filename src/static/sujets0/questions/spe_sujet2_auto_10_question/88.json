@@ -1,6 +1,6 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(2x + 0\\right) \\times \\left(-4x -5\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\dfrac{0}{2}; \\infty\\rbracket$ ?",
+  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(2x + 0\\right) \\times \\left(-4x -5\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\dfrac{5}{-4}; \\infty\\rbracket$ ?",
   "answer": {
     "latex": "0 > f(x)",
     "simplified_latex": "0 > f(x)",
@@ -12,13 +12,13 @@
     "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Function(name=f)(Symbol(s='x')))"
   },
   "components": {
-    "root1": "-\\dfrac{5}{-4}",
-    "root2": "-\\dfrac{0}{2}",
+    "root1": "-\\dfrac{0}{2}",
+    "root2": "-\\dfrac{5}{-4}",
     "a1": "2",
     "a2": "-4",
     "b1": "0",
     "b2": "-5",
-    "interval": "\\lbracket -\\dfrac{0}{2}; \\infty\\rbracket",
+    "interval": "\\lbracket -\\dfrac{5}{-4}; \\infty\\rbracket",
     "x": "x",
     "f": "f"
   },
