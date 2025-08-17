@@ -503,7 +503,7 @@
           <a href="{{ request.url_for('sujets0_originals', filiere_number=filiere) }}"
              class="nav-pill
                     {% if filiere == filiere_number %}active{% endif %}
-                    {% if filiere_config[filiere].has_official_data %}has-data{% endif %}">{{ filiere.upper() }}</a>
+                    {% if filiere_config[filiere].yaml_file %}has-data{% endif %}">{{ filiere.upper() }}</a>
         {% endfor %}
       </div>
 

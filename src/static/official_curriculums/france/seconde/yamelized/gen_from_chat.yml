@@ -1,0 +1,388 @@
+intentions_majeures:
+  - "La classe de seconde est conçue pour permettre aux élèves de consolider leur maîtrise du socle commun de connaissances, de compétences et de culture afin de réussir la transition du collège au lycée."
+  - "L'enseignement des mathématiques de la classe de seconde est conçu à partir des intentions suivantes":
+    - "permettre à chaque élève de consolider les acquis du collège et une culture mathématique de base, de développer son goût des mathématiques, d'en apprécier les démarches et les objets afin qu'il puisse faire l'expérience personnelle de l'efficacité des concepts mathématiques ainsi que de la simplification et de la généralisation que permet la maîtrise de l'abstraction;"
+    - "préparer au choix de l'orientation: choix de la spécialité mathématiques dans la voie générale, choix de la série dans la voie technologique;"
+    - "assurer les bases mathématiques nécessaires à toutes les poursuites d'études au lycée."
+
+competences_mathématiques:
+  - "chercher, expérimenter – en particulier à l'aide d'outils logiciels;"
+  - "modéliser, faire une simulation, valider ou invalider un modèle;"
+  - "représenter, choisir un cadre (numérique, algébrique, géométrique...), changer de registre;"
+  - "raisonner, démontrer, trouver des résultats partiels et les mettre en perspective;"
+  - "calculer, appliquer des techniques et mettre en œuvre des algorithmes;"
+  - "communiquer un résultat par oral ou par écrit, expliquer une démarche."
+
+diversite_activite_eleve:
+  - |
+    La mise en œuvre du programme doit permettre aux élèves d'acquérir des connaissances, des méthodes et des démarches spécifiques.
+    La diversité des activités concerne aussi bien les contextes (internes aux mathématiques ou liés à des situations issues de la vie quotidienne ou d'autres disciplines) que les types de tâches proposées.
+    Parmi ceux-ci, les travaux écrits faits hors du temps scolaire permettent, à travers l'autonomie laissée à chacun, le développement des qualités de prise d'initiative ou de communication ainsi que la stabilisation des connaissances et des méthodes étudiées.
+
+utilisation_logiciels:
+  - |
+    L'utilisation de logiciels (calculatrice ou ordinateur), d'outils de visualisation et de représentation, de calcul (numérique ou formel), de simulation, de programmation développe la possibilité d'expérimenter, ouvre largement le dialogue entre l'observation et la démonstration et change profondément la nature de l'enseignement.
+    L'utilisation régulière de ces outils peut intervenir selon trois modalités :
+    \begin{itemize}
+      \item par le professeur, en classe, avec un dispositif de visualisation collective adapté;
+      \item par les élèves, en classe, à l'occasion de la résolution d'exercices ou de problèmes;
+      \item dans le cadre du travail personnel des élèves hors du temps de classe.
+    \end{itemize}
+
+evaluation_eleves:
+  - |
+    Les élèves sont évalués en fonction des capacités attendues et selon des modalités variées : devoir surveillé avec ou sans calculatrice, devoir en temps libre, rédaction de travaux de recherche, individuels ou collectifs, compte rendu de travaux pratiques pouvant s'appuyer sur des logiciels, exposé oral d'une solution.
+    L'évaluation doit permettre de repérer les acquis des élèves en lien avec les six compétences mathématiques : chercher, modéliser, représenter, raisonner, calculer, communiquer.
+
+place_oral:
+  - |
+    Les étapes de verbalisation et de reformulation jouent un rôle majeur dans l'appropriation des notions mathématiques et la résolution des problèmes.
+    Des situations variées se prêtent à la pratique de l'oral en mathématiques : la reformulation par l'élève d'un énoncé ou d'une démarche, les échanges interactifs lors de la construction du cours, les mises en commun après un temps de recherche, les corrections d'exercices, les travaux de groupe, les exposés individuels ou à plusieurs.
+    L'oral mathématique mobilise à la fois le langage naturel et le langage symbolique dans ses différents registres (graphiques, formules, calcul).
+
+trace_ecrite:
+  - |
+    Disposer d'une trace de cours claire, explicite et structurée est une aide essentielle à l'apprentissage des mathématiques.
+    Le professeur doit avoir le souci de la bonne qualité (mathématique et rédactionnelle) des traces écrites figurant au tableau et dans les cahiers d'élèves.
+    En particulier, il est essentiel de bien distinguer le statut des énoncés (conjecture, définition, propriété - admise ou démontrée -, démonstration, théorème).
+
+travail_personnel_eleves:
+  - |
+    Si la classe est le lieu privilégié pour la mise en activité mathématique des élèves, les travaux hors du temps scolaire sont indispensables pour consolider les apprentissages.
+    Individuels ou en groupe, évalués à l'écrit ou à l'oral, ces travaux sont conçus de façon à prendre en compte la diversité des élèves et permettent le développement des qualités d'initiatives, tout en assurant la stabilisation des connaissances et des compétences.
+
+lignes_directrices_enseignement:
+  - |
+    Le professeur veille à créer, dans la classe de mathématiques, une atmosphère de travail favorable aux apprentissages, combinant bienveillance et exigence.
+    Il est important de développer chez chaque élève des attitudes positives à l'égard des mathématiques et sa capacité à résoudre des problèmes stimulants.
+    Le professeur veille à établir un équilibre entre divers temps de l'apprentissage :
+    \begin{itemize}
+      \item les temps de recherche, d'activité, de manipulation;
+      \item les temps de dialogue et d'échange, de verbalisation;
+      \item les temps de cours, où le professeur expose avec précision, présente certaines démonstrations et permet aux élèves d'accéder à l'abstraction;
+      \item les temps où sont présentés et discutés des exemples, pour vérifier la bonne compréhension de tous les élèves;
+      \item les exercices et problèmes, allant progressivement de l'application la plus directe au thème d'étude;
+      \item les rituels, afin de consolider les connaissances et les méthodes.
+    \end{itemize}
+
+organisation_programme:
+  - |
+    Le programme s'organise en cinq grandes parties : « Nombres et calculs », « Géométrie », « Fonctions », « Statistiques et probabilités » et « Algorithmique et programmation ».
+    Ce découpage n'est pas un plan de cours et il est essentiel d'exploiter les possibilités d'interaction entre ces parties.
+    Les connaissances du collège sont systématiquement réactivées à travers des problèmes.
+    Démontrer est une composante fondamentale de l'activité mathématique.
+    Le programme propose un certain nombre d'approfondissements possibles, mais en aucun cas obligatoires.
+    Il peut être judicieux d'éclairer le cours par des éléments de contextualisation d'ordre historique, épistémologique ou culturel.
+
+programme:
+  nombres_calculs:
+    objectifs:
+      - "approfondir la connaissance des divers types et ensembles de nombres;"
+      - "développer la pratique du calcul numérique ou algébrique;"
+      - "travailler sur les inégalités;"
+      - "résoudre des problèmes modélisés par des équations ou inéquations se ramenant au premier degré."
+    histoire_maths:
+      - |
+        La notion apparemment familière de nombre ne va pas de soi.
+        Il s'agit également de souligner le gain en efficacité et en généralité qu'apporte le calcul littéral, en expliquant qu'une grande partie des mathématiques n'a pu se développer qu'au fur et à mesure de l'élaboration, au cours des siècles, de symbolismes efficaces.
+        Il est possible d'étudier des textes anciens d'auteurs tels que Diophante, Euclide, Al-Khwarizmi, Fibonacci, Viète, Fermat, Descartes et mettre en évidence leurs aspects algorithmiques.
+
+    manipuler_nombres_reels:
+      contenus:
+        - "Ensemble \\( \\mathbb{R} \\) des nombres réels, droite numérique."
+        - "Intervalles de \\( \\mathbb{R} \\). Notations \\( +\\infty \\) et \\( -\\infty \\)."
+        - "Notation \\( |a| \\). Distance entre deux nombres réels."
+        - "Représentation de l'intervalle \\( [a - r, a + r] \\) puis caractérisation par la condition \\( |x - a| \\leq r \\)."
+        - "Ensemble \\( \\mathbb{D} \\) des nombres décimaux. Encadrement décimal d'un nombre réel à \\( 10^{-n} \\) près."
+        - "Ensemble \\( \\mathbb{Q} \\) des nombres rationnels. Nombres irrationnels; exemples fournis par la géométrie, par exemple \\( \\sqrt{2} \\) et \\( \\pi \\)."
+      capacites_attendues:
+        - "Associer à chaque point de la droite graduée un unique nombre réel et réciproquement."
+        - "Représenter un intervalle de la droite numérique. Déterminer si un nombre réel appartient à un intervalle donné."
+        - "Donner un encadrement, d'amplitude donnée, d'un nombre réel par des décimaux."
+        - "Dans le cadre de la résolution de problèmes, arrondir en donnant le nombre de chiffres significatifs adapté à la situation étudiée."
+      demonstrations:
+        - "Le nombre rationnel \\( \\frac{1}{3} \\) n'est pas décimal."
+        - "Le nombre réel \\( \\sqrt{2} \\) est irrationnel."
+      exemple_algorithme:
+        - "Déterminer par balayage un encadrement de \\( \\sqrt{2} \\) d'amplitude inférieure ou égale à \\( 10^{-n} \\)."
+      approfondissements_possibles:
+        - "Développement décimal illimité d'un nombre réel."
+        - "Observation, sur des exemples, de la périodicité du développement décimal de nombres rationnels, du fait qu'un développement décimal périodique correspond à un rationnel."
+
+    utiliser_notions_multiple_diviseur:
+      contenus:
+        - "Notations \\( \\mathbb{N} \\) et \\( \\mathbb{Z} \\)."
+        - "Définition des notions de multiple, de diviseur, de nombre pair, de nombre impair."
+      capacites_attendues:
+        - "Modéliser et résoudre des problèmes mobilisant les notions de multiple, de diviseur, de nombre pair, de nombre impair, de nombre premier."
+        - "Présenter les résultats fractionnaires sous forme irréductible."
+      demonstrations:
+        - "Pour une valeur numérique de \\( a \\), la somme de deux multiples de \\( a \\) est multiple de \\( a \\)."
+        - "Le carré d'un nombre impair est impair."
+      exemples_algorithme:
+        - "Déterminer si un entier naturel \\( a \\) est multiple d'un entier naturel \\( b \\)."
+        - "Pour des entiers \\( a \\) et \\( b \\) donnés, déterminer le plus grand multiple de \\( a \\) inférieur ou égal à \\( b \\)."
+        - "Déterminer si un entier naturel est premier."
+
+    utiliser_calcul_litteral:
+      contenus:
+        - "Règles de calcul sur les puissances entières relatives, sur les racines carrées. Relation \\( a^2 = |a| \\)."
+        - "Identités \\( a^2 - b^2 = (a - b)(a + b) \\), \\( (a + b)^2 = a^2 + 2ab + b^2 \\) et \\( (a - b)^2 = a^2 - 2ab + b^2 \\), à savoir utiliser dans les deux sens."
+        - "Exemples simples de calcul sur des expressions algébriques, en particulier sur des expressions fractionnaires."
+        - "Somme d'inégalités. Produit d'une inégalité par un réel positif, négatif, en liaison avec le sens de variation d'une fonction affine."
+        - "Ensemble des solutions d'une équation, d'une inéquation."
+      capacites_attendues:
+        - "Effectuer des calculs numériques ou littéraux mettant en jeu des puissances, des racines carrées, des écritures fractionnaires."
+        - "Sur des cas simples de relations entre variables (par exemple \\( U = RI \\), \\( d = vt \\), \\( S = \\pi r^2 \\), \\( V = abc \\), \\( V = \\pi r^2 h \\)), exprimer une variable en fonction des autres. Cas d'une relation du premier degré \\( ax + by = c \\)."
+        - "Choisir la forme la plus adaptée (factorisée, développée réduite) d'une expression en vue de la résolution d'un problème."
+        - "Comparer deux quantités en utilisant leur différence, ou leur quotient dans le cas positif."
+        - "Modéliser un problème par une inéquation."
+        - "Résoudre une inéquation du premier degré."
+      demonstrations:
+        - "Quels que soient les réels positifs \\( a \\) et \\( b \\), on a \\( \\sqrt{ab} = \\sqrt{a} \\sqrt{b} \\)."
+        - "Si \\( a \\) et \\( b \\) sont des réels strictement positifs, \\( \\sqrt{a + b} < \\sqrt{a} + \\sqrt{b} \\)."
+        - "Pour \\( a \\) et \\( b \\) réels positifs, illustration géométrique de l'égalité \\( (a + b)^2 = a^2 + 2ab + b^2 \\)."
+      exemple_algorithme:
+        - "Déterminer la première puissance d'un nombre positif donné supérieure ou inférieure à une valeur donnée."
+      approfondissements_possibles:
+        - "Développement de \\( (a + b + c)^2 \\)."
+        - "Développement de \\( (a + b)^3 \\)."
+        - "Inégalité entre moyennes géométrique et arithmétique de deux réels strictement positifs."
+
+  geometrie:
+    objectifs:
+      - "consolider les notions sur les configurations géométriques abordées au collège et prolonger leur étude;"
+      - "introduire les vecteurs du plan comme outil permettant d'étudier des problèmes issus des mathématiques et des autres disciplines, en particulier de la physique;"
+      - "poursuivre l'étude de la géométrie repérée, qui relie nombres, calculs algébriques, fonctions et géométrie et constitue un outil utile à d'autres disciplines."
+    histoire_maths:
+      - |
+        Les progrès apportés par la « méthode des coordonnées » de Descartes, puis par la notion de vecteur, permettent de relier efficacement géométrie, physique et calcul.
+        On pourra évoquer les mathématiques grecques, en mettant en évidence le rôle central de la géométrie dans la naissance de l'idée de démonstration ainsi que le faible développement de l'algèbre sous l'Antiquité, en partie dû à l'appui systématique sur la géométrie.
+
+    manipuler_vecteurs_plan:
+      contenus:
+        - "Vecteur \\( \\overrightarrow{MM'} \\) associé à la translation qui transforme \\( M \\) en \\( M' \\). Direction, sens et norme."
+        - "Égalité de deux vecteurs. Notation \\( \\vec{u} \\). Vecteur nul."
+        - "Somme de deux vecteurs en lien avec l'enchaînement des translations. Relation de Chasles."
+        - "Base orthonormée. Coordonnées d'un vecteur. Expression de la norme d'un vecteur."
+        - "Expression des coordonnées de \\( \\overrightarrow{AB} \\) en fonction de celles de \\( A \\) et de \\( B \\)."
+        - "Produit d'un vecteur par un nombre réel. Colinéarité de deux vecteurs."
+        - "Déterminant de deux vecteurs dans une base orthonormée, critère de colinéarité. Application à l'alignement, au parallélisme."
+      capacites_attendues:
+        - "Représenter géométriquement des vecteurs."
+        - "Construire géométriquement la somme de deux vecteurs."
+        - "Représenter un vecteur dont on connaît les coordonnées. Lire les coordonnées d'un vecteur."
+        - "Calculer les coordonnées d'une somme de vecteurs, d'un produit d'un vecteur par un nombre réel."
+        - "Calculer la distance entre deux points. Calculer les coordonnées du milieu d'un segment."
+        - "Caractériser alignement et parallélisme par la colinéarité de vecteurs."
+        - "Résoudre des problèmes en utilisant la représentation la plus adaptée des vecteurs."
+      demonstration:
+        - "Deux vecteurs sont colinéaires si et seulement si leur déterminant est nul."
+      approfondissement_possible:
+        - "Définition vectorielle des homothéties."
+
+    resoudre_problemes_geometrie:
+      contenus:
+        - "Projeté orthogonal d'un point sur une droite."
+      capacites_attendues:
+        - "Résoudre des problèmes de géométrie plane sur des figures simples ou complexes (triangles, quadrilatères, cercles)."
+        - "Calculer des longueurs, des angles, des aires et des volumes."
+        - "Traiter de problèmes d'optimisation."
+      demonstrations:
+        - "Le projeté orthogonal du point \\( M \\) sur une droite \\( \\Delta \\) est le point de la droite \\( \\Delta \\) le plus proche du point \\( M \\)."
+        - "Relation trigonométrique \\( \\cos^2(\\alpha) + \\sin^2(\\alpha) = 1 \\) dans un triangle rectangle."
+      approfondissements_possibles:
+        - "Démontrer que les hauteurs d'un triangle sont concourantes."
+        - "Expression de l'aire d'un triangle: \\( \\frac{1}{2}ab\\sin C \\)."
+        - "Formule d'Al-Kashi."
+        - "Le point de concours des médiatrices est le centre du cercle circonscrit."
+
+    representer_caracteriser_droites_plan:
+      contenus:
+        - "Vecteur directeur d'une droite."
+        - "Équation de droite: équation cartésienne, équation réduite."
+        - "Pente (ou coefficient directeur) d'une droite non parallèle à l'axe des ordonnées."
+      capacites_attendues:
+        - "Déterminer une équation de droite à partir de deux points, un point et un vecteur directeur ou un point et la pente."
+        - "Déterminer la pente ou un vecteur directeur d'une droite donnée par une équation ou une représentation graphique."
+        - "Tracer une droite connaissant son équation cartésienne ou réduite."
+        - "Établir que trois points sont alignés ou non."
+        - "Déterminer si deux droites sont parallèles ou sécantes."
+        - "Résoudre un système de deux équations linéaires à deux inconnues, déterminer le point d'intersection de deux droites sécantes."
+      demonstration:
+        - "En utilisant le déterminant, établir la forme générale d'une équation de droite."
+      exemples_algorithme:
+        - "Étudier l'alignement de trois points dans le plan."
+        - "Déterminer une équation de droite passant par deux points donnés."
+      approfondissements_possibles:
+        - "Ensemble des points équidistants d'un point et de l'axe des abscisses."
+        - "Représentation, sur des exemples, de parties du plan décrites par des inégalités sur les coordonnées."
+
+  fonctions:
+    objectifs:
+      - "consolider la notion de fonction, comme exprimant la dépendance d'une variable par rapport à une autre;"
+      - "exploiter divers registres, notamment le registre algébrique et le registre graphique;"
+      - "étendre la panoplie des fonctions de référence;"
+      - "étudier les notions liées aux variations et aux extremums des fonctions."
+    histoire_maths:
+      - |
+        On peut évoquer la très lente élaboration de la notion de fonction, depuis l'Antiquité jusqu'à la codification actuelle par Dirichlet, en mettant en évidence quelques étapes importantes: Newton, Leibniz, Euler.
+        On souligne alors l'importance de la notation algébrique.
+
+    repertoire_fonctions_reference:
+      contenus:
+        - "Fonctions carré, inverse, racine carrée, cube: définitions et courbes représentatives."
+      capacites_attendues:
+        - "Pour deux nombres \\( a \\) et \\( b \\) donnés et une fonction de référence \\( f \\), comparer \\( f(a) \\) et \\( f(b) \\) numériquement ou graphiquement."
+        - "Pour les fonctions affines, carré, inverse, racine carrée et cube, résoudre graphiquement ou algébriquement une équation ou une inéquation du type \\( f(x) = k \\), \\( f(x) < k \\)."
+      demonstration:
+        - "Étudier la position relative des courbes d'équation \\( y = x \\), \\( y = x^2 \\), \\( y = x^3 \\), pour \\( x \\geq 0 \\)."
+
+    representer_fonctions:
+      contenus:
+        - "Fonction à valeurs réelles définie sur un intervalle ou une réunion finie d'intervalles de \\( \\mathbb{R} \\)."
+        - "Courbe représentative: la courbe d'équation \\( y = f(x) \\) est l'ensemble des points du plan dont les coordonnées \\( (x, y) \\) vérifient \\( y = f(x) \\)."
+        - "Fonction paire, impaire. Traduction géométrique."
+      capacites_attendues:
+        - "Exploiter l'équation \\( y = f(x) \\) d'une courbe: appartenance, calcul de coordonnées."
+        - "Modéliser par des fonctions des situations issues des mathématiques, des autres disciplines."
+        - "Résoudre une équation ou une inéquation du type \\( f(x) = k \\), \\( f(x) < k \\), en choisissant une méthode adaptée: graphique, algébrique, logicielle."
+        - "Résoudre une équation, une inéquation produit ou quotient, à l'aide d'un tableau de signes."
+        - "Résoudre, graphiquement ou à l'aide d'un outil numérique, une équation ou inéquation du type \\( f(x) = g(x) \\), \\( f(x) < g(x) \\)."
+      approfondissement_possible:
+        - "Étudier la parité d'une fonction dans des cas simples."
+
+    etudier_variations_extremums:
+      contenus:
+        - "Croissance, décroissance, monotonie d'une fonction définie sur un intervalle. Tableau de variations."
+        - "Maximum, minimum d'une fonction sur un intervalle."
+        - "Pour une fonction affine, interprétation du coefficient directeur comme taux d'accroissement, variations selon son signe."
+        - "Variations des fonctions carré, inverse, racine carrée, cube."
+      capacites_attendues:
+        - "Relier représentation graphique et tableau de variations."
+        - "Déterminer graphiquement les extremums d'une fonction sur un intervalle."
+        - "Exploiter un logiciel de géométrie dynamique ou de calcul formel, la calculatrice ou Python pour décrire les variations d'une fonction donnée par une formule."
+        - "Relier sens de variation, signe et droite représentative d'une fonction affine."
+      demonstration:
+        - "Variations des fonctions carré, inverse, racine carrée."
+      exemples_algorithme:
+        - "Pour une fonction dont le tableau de variations est donné, algorithmes d'approximation numérique d'un extremum (balayage, dichotomie)."
+        - "Algorithme de calcul approché de longueur d'une portion de courbe représentative de fonction."
+      approfondissement_possible:
+        - "Relier les courbes représentatives de la fonction racine carrée et de la fonction carré sur \\( \\mathbb{R}^+ \\)."
+
+  statistiques_probabilites:
+    objectifs:
+      - "En matière d'information chiffrée, les élèves ont travaillé au cycle 4 effectifs, fréquences, proportions, pourcentages, coefficient de proportionnalité, taux d'évolution, coefficient multiplicateur."
+      - "En statistique descriptive, les élèves ont étudié moyenne, médiane et étendue. On introduit la notion de moyenne pondérée et deux indicateurs de dispersion: écart interquartile et écart type."
+      - "En classe de seconde, on formalise la notion de loi (ou distribution) de probabilité dans le cas fini en s'appuyant sur le langage des ensembles et on précise les premiers éléments de calcul des probabilités."
+    histoire_maths:
+      - |
+        L'histoire des probabilités fournit un cadre pour dégager les éléments de la mathématisation du hasard.
+        Un exemple est le problème des partis, dit aussi du chevalier de Méré, l'échange de lettres entre Pascal et Fermat sur ce point puis les travaux de Pascal, Fermat et Huygens qui en découlent.
+
+    utiliser_information_chiffree:
+      contenus:
+        - "Proportion, pourcentage d'une sous-population dans une population."
+        - "Ensembles de référence inclus les uns dans les autres: pourcentage de pourcentage."
+        - "Évolution: variation absolue, variation relative."
+        - "Évolutions successives, évolution réciproque: relation sur les coefficients multiplicateurs (produit, inverse)."
+        - "Indicateurs de tendance centrale d'une série statistique: moyenne pondérée."
+        - "Linéarité de la moyenne."
+        - "Indicateurs de dispersion: écart interquartile, écart type."
+      capacites_attendues:
+        - "Exploiter la relation entre effectifs, proportions et pourcentages."
+        - "Traiter des situations simples mettant en jeu des pourcentages de pourcentages."
+        - "Exploiter la relation entre deux valeurs successives et leur taux d'évolution."
+        - "Calculer le taux d'évolution global à partir des taux d'évolution successifs. Calculer un taux d'évolution réciproque."
+        - "Décrire verbalement les différences entre deux séries statistiques, en s'appuyant sur des indicateurs ou sur des représentations graphiques données."
+        - "Pour des données réelles ou issues d'une simulation, lire et comprendre une fonction écrite en Python renvoyant la moyenne \\( m \\), l'écart type \\( s \\), et la proportion d'éléments appartenant à \\( [m - 2s, m + 2s] \\)."
+
+    modeliser_hasard:
+      contenus:
+        - "Ensemble (univers) des issues. Événements. Réunion, intersection, complémentaire."
+        - "Loi (distribution) de probabilité. Probabilité d'un événement: somme des probabilités des issues."
+        - "Relation \\( P(A \\cup B) + P(A \\cap B) = P(A) + P(B) \\)."
+        - "Dénombrement à l'aide de tableaux et d'arbres."
+      capacites_attendues:
+        - "Utiliser des modèles théoriques de référence (dé, pièce équilibrée, tirage au sort avec équiprobabilité dans une population) en comprenant que les probabilités sont définies a priori."
+        - "Construire un modèle à partir de fréquences observées, en distinguant nettement modèle et réalité."
+        - "Calculer des probabilités dans des cas simples: expérience aléatoire à deux ou trois épreuves."
+
+    echantillonnage:
+      contenus:
+        - "Échantillon aléatoire de taille \\( n \\) pour une expérience à deux issues."
+        - "Version vulgarisée de la loi des grands nombres: « Lorsque \\( n \\) est grand, sauf exception, la fréquence observée est proche de la probabilité. »"
+        - "Principe de l'estimation d'une probabilité, ou d'une proportion dans une population, par une fréquence observée sur un échantillon."
+      capacites_attendues:
+        - "Lire et comprendre une fonction Python renvoyant le nombre ou la fréquence de succès dans un échantillon de taille \\( n \\) pour une expérience aléatoire à deux issues."
+        - "Observer la loi des grands nombres à l'aide d'une simulation sur Python ou tableur."
+        - "Simuler \\( N \\) échantillons de taille \\( n \\) d'une expérience aléatoire à deux issues. Si \\( p \\) est la probabilité d'une issue et \\( f \\) sa fréquence observée dans un échantillon, calculer la proportion des cas où l'écart entre \\( p \\) et \\( f \\) est inférieur ou égal à \\( \\frac{1}{\\sqrt{n}} \\)."
+
+  algorithmique_programmation:
+    description: |
+      La démarche algorithmique est, depuis les origines, une composante essentielle de l'activité mathématique.
+      Au cycle 4, en mathématiques et en technologie, les élèves ont appris à écrire, mettre au point et exécuter un programme simple.
+      Une consolidation des acquis du cycle 4 est proposée autour de deux idées essentielles:
+      \begin{itemize}
+        \item "la notion de fonction;"
+        \item "la programmation comme production d'un texte dans un langage informatique."
+      \end{itemize}
+      Dans le cadre de cette activité, les élèves s'exercent à:
+      \begin{itemize}
+        \item "décrire des algorithmes en langage naturel ou dans un langage de programmation;"
+        \item "en réaliser quelques-uns à l'aide d'un programme simple écrit dans un langage de programmation textuel;"
+        \item "interpréter, compléter ou modifier des algorithmes plus complexes."
+      \end{itemize}
+      Un langage de programmation simple d'usage est nécessaire pour l'écriture des programmes informatiques.
+      Le langage choisi est Python, langage interprété, concis, largement répandu et pouvant fonctionner dans une diversité d'environnements.
+      Les élèves sont entraînés à passer du langage naturel à Python et inversement.
+      L'algorithmique a une place naturelle dans tous les champs des mathématiques et les problèmes ainsi traités doivent être en relation avec les autres parties du programme (fonctions, géométrie, statistiques et probabilité, logique) mais aussi avec les autres disciplines ou la vie courante.
+      À l'occasion de l'écriture d'algorithmes et de petits programmes, il convient de transmettre aux élèves l'exigence d'exactitude et de rigueur, et de les entraîner aux pratiques systématiques de vérification et de contrôle.
+      En programmant, les élèves revisitent les notions de variables et de fonctions sous une forme différente.
+
+    histoire_maths:
+      - |
+        Les textes évoqués dans la thématique « Nombres et calculs » indiquent une préoccupation algorithmique tout au long de l'Histoire.
+        Lorsqu'un texte historique a une visée algorithmique, transformer les méthodes qu'il présente en un algorithme, voire en un programme, ou inversement, est l'occasion de travailler des changements de registre qui donnent du sens au formalisme mathématique.
+
+    utiliser_variables_instructions:
+      contenus:
+        - "Variables informatiques de type entier, booléen, flottant, chaîne de caractères."
+        - "Affectation (notée \\( \\leftarrow \\) en langage naturel)."
+        - "Séquence d'instructions."
+        - "Instruction conditionnelle."
+        - "Boucle bornée (for), boucle non bornée (while)."
+      capacites_attendues:
+        - "Choisir ou déterminer le type d'une variable (entier, flottant ou chaîne de caractères)."
+        - "Concevoir et écrire une instruction d'affectation, une séquence d'instructions, une instruction conditionnelle."
+        - "Écrire une formule permettant un calcul combinant des variables."
+        - "Programmer, dans des cas simples, une boucle bornée, une boucle non bornée."
+        - "Dans des cas plus complexes: lire, comprendre, modifier ou compléter un algorithme ou un programme."
+
+    notion_fonction:
+      contenus:
+        - "Fonctions à un ou plusieurs arguments."
+        - "Fonction renvoyant un nombre aléatoire. Série statistique obtenue par la répétition de l'appel d'une telle fonction."
+      capacites_attendues:
+        - "Écrire des fonctions simples; lire, comprendre, modifier, compléter des fonctions plus complexes. Appeler une fonction."
+        - "Lire et comprendre une fonction renvoyant une moyenne, un écart type. Aucune connaissance sur les listes n'est exigée."
+        - "Écrire des fonctions renvoyant le résultat numérique d'une expérience aléatoire, d'une répétition d'expériences aléatoires indépendantes."
+
+  vocabulaire_ensembliste_logique:
+    description: |
+      L'apprentissage des notations mathématiques et de la logique est transversal à tous les chapitres du programme.
+      Les élèves doivent connaître les notions d'élément d'un ensemble, de sous-ensemble, d'appartenance et d'inclusion, de réunion, d'intersection et de complémentaire, et savoir utiliser les symboles de base correspondants: \\( \\in \\), \\( \\subset \\), \\( \\cap \\), \\( \\cup \\), ainsi que la notation des ensembles de nombres et des intervalles.
+      Ils rencontrent également la notion de couple.
+      Pour le complémentaire d'un sous-ensemble \\( A \\) de \\( E \\), on utilise la notation des probabilités \\( \\overline{A} \\), ou la notation \\( E \\setminus A \\).
+      Les élèves apprennent en situation à:
+      \begin{itemize}
+        \item "reconnaître ce qu'est une proposition mathématique, à utiliser des variables pour écrire des propositions mathématiques;"
+        \item "lire et écrire des propositions contenant les connecteurs « et », « ou »;"
+        \item "formuler la négation de propositions simples (sans implication ni quantificateurs);"
+        \item "mobiliser un contre-exemple pour montrer qu'une proposition est fausse;"
+        \item "formuler une implication, une équivalence logique, et à les mobiliser dans un raisonnement simple;"
+        \item "formuler la réciproque d'une implication;"
+        \item "lire et écrire des propositions contenant une quantification universelle ou existentielle (les symboles \\( \\forall \\) et \\( \\exists \\) sont hors programme)."
+      \end{itemize}
+      Par ailleurs, les élèves produisent des raisonnements par disjonction des cas et par l'absurde.

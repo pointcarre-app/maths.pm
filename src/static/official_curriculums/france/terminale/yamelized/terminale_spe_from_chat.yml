@@ -1,0 +1,465 @@
+intentions_majeures:
+  - |
+    L'enseignement de spécialité de mathématiques de la classe terminale générale est conçu à partir des intentions suivantes :
+    \begin{itemize}
+      \item permettre à chaque élève de consolider les acquis de l'enseignement de spécialité de première, de développer son goût des mathématiques, d'en apprécier les démarches et les objets afin qu'il puisse faire l'expérience personnelle de l'efficacité des concepts mathématiques et de la simplification et la généralisation que permet la maîtrise de l'abstraction;
+      \item développer des interactions avec d'autres enseignements de spécialité;
+      \item préparer aux études supérieures.
+    \end{itemize}
+  - |
+    Le programme de mathématiques définit un ensemble de connaissances et de compétences, réaliste et ambitieux, qui s'appuie sur le programme de la spécialité de première dans un souci de cohérence, en réactivant les notions déjà étudiées et y ajoutant un nombre raisonnable de nouvelles notions, à étudier de manière suffisamment approfondie.
+    L'enseignement de spécialité en classe terminale concerne les élèves ayant confirmé ce choix parmi les trois spécialités suivies en classe de première.
+
+competences_mathématiques:
+  - "chercher, expérimenter, en particulier à l'aide d'outils logiciels;"
+  - "modéliser, faire une simulation, valider ou invalider un modèle;"
+  - "représenter, choisir un cadre (numérique, algébrique, géométrique…), changer de registre;"
+  - "raisonner, démontrer, trouver des résultats partiels et les mettre en perspective;"
+  - "calculer, appliquer des techniques et mettre en œuvre des algorithmes;"
+  - "communiquer un résultat par oral ou par écrit, expliquer une démarche."
+
+diversite_activite_eleve:
+  - |
+    La diversité des activités mathématiques proposées doit permettre aux élèves de prendre conscience de la richesse et de la variété de la démarche mathématique et de la situer au sein de l'activité scientifique.
+    Parmi ceux-ci, les travaux écrits faits hors du temps scolaire (exercices réguliers d'entraînement ou devoirs à la maison) permettent, à travers l'autonomie laissée à chacun, le développement des qualités d'initiative, tout en assurant la stabilisation des connaissances et des compétences.
+
+utilisation_logiciels:
+  - |
+    L'utilisation de logiciels (calculatrice ou ordinateur), d'outils de visualisation et de représentation, de calcul (numérique ou formel), de simulation, de programmation développe la possibilité d'expérimenter, favorise l'interaction entre l'observation et la démonstration et change profondément la nature de l'enseignement.
+    L'utilisation régulière de ces outils peut intervenir selon trois modalités :
+    \begin{itemize}
+      \item par le professeur, en classe, avec un dispositif de visualisation collective adapté;
+      \item par les élèves, sous forme de travaux pratiques de mathématiques en classe, à l'occasion de la résolution d'exercices ou de problèmes;
+      \item dans le cadre du travail personnel des élèves hors du temps de classe.
+    \end{itemize}
+
+evaluation_eleve:
+  - |
+    Les élèves sont évalués en fonction des capacités attendues et selon des modes variés : devoirs surveillés avec ou sans calculatrice, devoirs en temps libre, rédaction de travaux de recherche individuels ou collectifs, travaux pratiques pouvant s'appuyer sur des logiciels, exposé oral d'une solution.
+
+place_oral:
+  - |
+    Les étapes de verbalisation et de reformulation jouent un rôle majeur dans l'appropriation des notions mathématiques et la résolution des problèmes.
+    L'oral mathématique mobilise à la fois le langage naturel et le langage symbolique dans ses différents registres (graphiques, formules, calcul).
+    Ces considérations sont valables pour tous les élèves, elles prennent un relief particulier pour ceux qui ont choisi les mathématiques comme enseignement de spécialité en terminale et qui doivent donc préparer l'épreuve orale terminale du baccalauréat.
+
+trace_ecrite:
+  - |
+    Disposer d'une trace de cours claire, explicite et structurée est une aide essentielle à l'apprentissage des mathématiques.
+    Le professeur doit avoir le souci de la bonne qualité (mathématique et rédactionnelle) des traces écrites figurant au tableau et dans les cahiers d'élèves.
+    En particulier, il est essentiel de bien distinguer le statut des énoncés : conjecture, définition, propriété (admise ou démontrée), démonstration, théorème.
+
+travail_personnel_eleve:
+  - |
+    Si la classe est le lieu privilégié pour la mise en activité mathématique des élèves, les travaux hors du temps scolaire sont indispensables pour consolider les apprentissages.
+    Ces travaux sont conçus de façon à prendre en compte la diversité des élèves et permettent le développement des qualités d'initiative tout en assurant la stabilisation des connaissances et des compétences.
+
+lignes_directrices_enseignement:
+  - |
+    Le professeur veille à créer dans la classe de mathématiques une atmosphère de travail favorable aux apprentissages, combinant bienveillance et exigence.
+    Les problèmes proposés aux élèves doivent être bien conçus et motivants, afin de développer les connaissances et compétences mathématiques du programme.
+    Le professeur doit veiller à établir un équilibre entre divers temps d'apprentissage :
+    \begin{itemize}
+      \item les temps de recherche, d'activité, de manipulation;
+      \item les temps de dialogue et d'échange, de verbalisation;
+      \item les temps de cours, où le professeur expose avec précision, présente certaines démonstrations et permet aux élèves d'accéder à l'abstraction;
+      \item les temps où sont présentés et discutés des exemples, pour vérifier la bonne compréhension de tous les élèves;
+      \item les exercices et problèmes, allant progressivement de l'application la plus directe au thème d'étude;
+      \item les rituels, afin de consolider les connaissances et les méthodes.
+    \end{itemize}
+
+organisation_programme:
+  - |
+    Le programme s'organise en quatre grandes parties : " Algèbre et géométrie ", " Analyse ", " Probabilités " et " Algorithmique et programmation ".
+    Ce découpage n'est pas un plan de cours et il est essentiel d'exploiter les possibilités d'interaction entre ces parties.
+    Démontrer est une composante fondamentale de l'activité mathématique.
+    Le programme propose un certain nombre d'approfondissements possibles, mais en aucun cas obligatoires.
+    Il peut être judicieux d'éclairer le cours par des éléments de contextualisation d'ordre historique, épistémologique ou culturel.
+
+programme:
+  algebre_geometrie:
+    objectifs:
+      - |
+        Le titre de cette partie souligne les interactions entre l'algèbre et la géométrie.
+        Les objectifs sont :
+        \begin{itemize}
+          \item manipuler quelques notions ensemblistes, notamment celles de produit cartésien, de couple, de liste ou k-uplet, qui interviennent dans toutes les parties du programme;
+          \item dénombrer quelques objets combinatoires de base (listes d'éléments, combinaisons, permutations) pouvant être représentés diversement : parties d'un ensemble, mots, chemins dans un arbre;
+          \item travailler le raisonnement par récurrence et de prolonger le travail engagé en classe de première sur les aspects algébriques ou combinatoires des suites;
+          \item l'étude de la géométrie dans l'espace, outre son intérêt propre, soit l'occasion de travailler les notions vectorielles afin de préparer l'étude de l'algèbre linéaire dans l'enseignement supérieur.
+        \end{itemize}
+    histoire_maths:
+      - |
+        Véritable porte d'entrée sur l'infini, le raisonnement par récurrence a été formalisé comme principe fondamental de raisonnement par Pascal, et surtout par Peano et ses collaborateurs et avait été anticipé comme mode de démonstration par les mathématiciens anciens (nombres latéraux et diagonaux), médiévaux (al-Karaji, As-Samaw'al, Fibonacci) et renaissants (Maurolico).
+        Les concepts sous-jacents à la notion de vecteur apparaissent comme modèles physiques dynamiques longtemps avant leur formalisation.
+
+    combinatoire_denombrement:
+      contenus:
+        - "Principe additif : nombre d'éléments d'une réunion d'ensembles deux à deux disjoints."
+        - "Principe multiplicatif : nombre d'éléments d'un produit cartésien. Nombre de k-uplets (ou k-listes) d'un ensemble à \\( n \\) éléments."
+        - "Nombre des parties d'un ensemble à \\( n \\) éléments. Lien avec les \\( n \\)-uplets de \\( \\{0,1\\} \\), les mots de longueur \\( n \\) sur un alphabet à deux éléments, les chemins dans un arbre, les issues dans une succession de \\( n \\) épreuves de Bernoulli."
+        - "Nombre des \\( k \\)-uplets d'éléments distincts d'un ensemble à \\( n \\) éléments. Définition de \\( n! \\). Nombre de permutations d'un ensemble fini à \\( n \\) éléments."
+        - "Combinaisons de \\( k \\) éléments d'un ensemble à \\( n \\) éléments : parties à \\( k \\) éléments de l'ensemble. Représentation en termes de mots ou de chemins."
+        - "Pour \\( 0 \\leq k \\leq n \\), formules : \\( \\binom{n}{k} = \\frac{n(n-1)\\cdots(n-k+1)}{k!} = \\frac{n!}{(n-k)!k!} \\)."
+        - "Explicitation pour \\( k = 0, 1, 2 \\). Symétrie. Relation et triangle de Pascal."
+      capacites_attendues:
+        - "Dans le cadre d'un problème de dénombrement, utiliser une représentation adaptée (ensembles, arbres, tableaux, diagrammes) et reconnaître les objets à dénombrer."
+        - "Effectuer des dénombrements simples dans des situations issues de divers domaines scientifiques (informatique, génétique, théorie des jeux, probabilités, etc.)."
+      demonstrations:
+        - "Démonstration par dénombrement de la relation : \\( \\sum_{k=0}^{n} \\binom{n}{k} = 2^n \\)."
+        - "Démonstrations de la relation de Pascal (par le calcul, par une méthode combinatoire)."
+      approfondissement_possible:
+        - "Combinaisons avec répétitions."
+      exemples_algorithme:
+        - "Pour un entier \\( n \\) donné, génération de la liste des coefficients \\( \\binom{n}{k} \\) à l'aide de la relation de Pascal."
+        - "Génération des permutations d'un ensemble fini, ou tirage aléatoire d'une permutation."
+        - "Génération des parties à 2, 3 éléments d'un ensemble fini."
+
+    manipulation_vecteurs_espace:
+      contenus:
+        - "Vecteurs de l'espace. Translations."
+        - "Combinaisons linéaires de vecteurs de l'espace."
+        - "Droites de l'espace. Vecteurs directeurs d'une droite. Vecteurs colinéaires."
+        - "Caractérisation d'une droite par un point et un vecteur directeur."
+        - "Plans de l'espace. Direction d'un plan de l'espace."
+        - "Caractérisation d'un plan de l'espace par un point et un couple de vecteurs non colinéaires."
+        - "Bases et repères de l'espace. Décomposition d'un vecteur sur une base."
+      capacites_attendues:
+        - "Représenter des combinaisons linéaires de vecteurs donnés."
+        - "Exploiter une figure pour exprimer un vecteur comme combinaison linéaire de vecteurs."
+        - "Décrire la position relative de deux droites, d'une droite et d'un plan, de deux plans."
+        - "Lire sur une figure si deux vecteurs d'un plan, trois vecteurs de l'espace, forment une base."
+        - "Lire sur une figure la décomposition d'un vecteur dans une base."
+        - "Étudier géométriquement des problèmes simples de configurations dans l'espace (alignement, colinéarité, parallélisme, coplanarité)."
+      approfondissements_possibles:
+        - "Barycentre d'une famille d'un système pondéré de deux, trois ou quatre points. Exemples d'utilisation des barycentres, en particulier de la propriété d'associativité, pour résoudre des problèmes de géométrie."
+        - "Fonction vectorielle de Leibniz."
+
+    orthogonalite_distances_espace:
+      contenus:
+        - "Produit scalaire de deux vecteurs de l'espace. Bilinéarité, symétrie."
+        - "Orthogonalité de deux vecteurs. Caractérisation par le produit scalaire."
+        - "Base orthonormée, repère orthonormé."
+        - "Coordonnées d'un vecteur dans une base orthonormée. Expressions du produit scalaire et de la norme. Expression de la distance entre deux points."
+        - "Développement de \\( \\|\\vec{u} + \\vec{v}\\|^2 \\), formules de polarisation."
+        - "Orthogonalité de deux droites, d'un plan et d'une droite."
+        - "Vecteur normal à un plan. Étant donnés un point \\( A \\) et un vecteur non nul \\( \\vec{n} \\), plan passant par \\( A \\) et normal à \\( \\vec{n} \\)."
+        - "Projeté orthogonal d'un point sur une droite, sur un plan."
+      capacites_attendues:
+        - "Utiliser le produit scalaire pour démontrer une orthogonalité, pour calculer un angle, une longueur dans l'espace."
+        - "Utiliser la projection orthogonale pour déterminer la distance d'un point à une droite ou à un plan."
+        - "Résoudre des problèmes impliquant des grandeurs et mesures : longueur, angle, aire, volume."
+        - "Étudier des problèmes de configuration dans l'espace : orthogonalité de deux droites, d'une droite et d'un plan; lieux géométriques simples, par exemple plan médiateur de deux points."
+      demonstration:
+        - "Le projeté orthogonal d'un point \\( M \\) sur un plan \\( \\mathcal{P} \\) est le point de \\( \\mathcal{P} \\) le plus proche de \\( M \\)."
+      approfondissements_possibles:
+        - "Intersection d'une sphère et d'un plan, plan tangent à une sphère en un point."
+        - "Sphère circonscrite à un tétraèdre."
+        - "Fonction scalaire de Leibniz."
+
+    representations_parametriques:
+      contenus:
+        - "Représentation paramétrique d'une droite."
+        - "Équation cartésienne d'un plan."
+      capacites_attendues:
+        - "Déterminer une représentation paramétrique d'une droite. Reconnaître une droite donnée par une représentation paramétrique."
+        - "Déterminer l'équation cartésienne d'un plan dont on connaît un vecteur normal et un point. Reconnaître un plan donné par une équation cartésienne et préciser un vecteur normal à ce plan."
+        - "Déterminer les coordonnées du projeté orthogonal d'un point sur un plan donné par une équation cartésienne, ou sur une droite donnée par un point et un vecteur directeur."
+        - "Dans un cadre géométrique repéré, traduire par un système d'équations linéaires des problèmes de types suivants : décider si trois vecteurs forment une base, déterminer les coordonnées d'un vecteur dans une base, étudier une configuration dans l'espace (alignement, colinéarité, parallélisme, coplanarité, intersection et orthogonalité de droites ou de plans), etc. Dans des cas simples, résoudre le système obtenu et interpréter géométriquement les solutions."
+      demonstration:
+        - "Équation cartésienne du plan normal au vecteur \\( \\vec{n} \\) et passant par le point \\( A \\)."
+      approfondissements_possibles:
+        - "Déterminer l'intersection de deux plans."
+        - "Déterminer un vecteur orthogonal à deux vecteurs non colinéaires."
+        - "Équation d'une sphère dont on connaît le centre et le rayon."
+        - "Intersection d'une sphère et d'une droite."
+
+  analyse:
+    objectifs:
+      - |
+        L'analyse est une part centrale des mathématiques et, comme outil de modélisation et de calcul, elle joue un rôle essentiel dans l'étude de phénomènes issus des autres disciplines.
+        Les buts essentiels du programme de la classe terminale sont de donner aux élèves une bonne intuition des notions fondamentales : convergence, limites, dérivées, intégrales et une solide pratique des calculs afférents.
+    histoire_maths:
+      - |
+        Le calcul infinitésimal, qui contient les fonctions usuelles, le calcul différentiel et intégral ont historiquement précédé la notion de limite qui en donnera des fondements rigoureux.
+        Les procédés par lesquels les mathématiciens ont construit et tabulé le logarithme et les fonctions trigonométriques illustrent les liens entre discret et continu et fournissent une source féconde d'activités.
+
+    suites:
+      contenus:
+        - "La suite \\( (u_n) \\) tend vers \\( +\\infty \\) si tout intervalle de la forme \\( [A; +\\infty[ \\) contient toutes les valeurs \\( u_n \\) à partir d'un certain rang. Cas des suites croissantes non majorées. Suite tendant vers \\( -\\infty \\)."
+        - "La suite \\( (u_n) \\) converge vers le nombre réel \\( \\ell \\) si tout intervalle ouvert contenant \\( \\ell \\) contient toutes les valeurs \\( u_n \\) à partir d'un certain rang."
+        - "Limites et comparaison. Théorèmes des gendarmes."
+        - "Opérations sur les limites."
+        - "Comportement d'une suite géométrique \\( (q^n) \\) où \\( q \\) est un nombre réel."
+        - "Théorème admis : toute suite croissante majorée (ou décroissante minorée) converge."
+      capacites_attendues:
+        - "Établir la convergence d'une suite, ou sa divergence vers \\( +\\infty \\) ou \\( -\\infty \\)."
+        - "Raisonner par récurrence pour établir une propriété d'une suite."
+        - "Étudier des phénomènes d'évolution modélisables par une suite."
+      demonstrations:
+        - "Toute suite croissante non majorée tend vers \\( +\\infty \\)."
+        - "Limite de \\( (q^n) \\), après démonstration par récurrence de l'inégalité de Bernoulli."
+        - "Divergence vers \\( +\\infty \\) d'une suite minorée par une suite divergeant vers \\( +\\infty \\)."
+        - "Limite en \\( +\\infty \\) et en \\( -\\infty \\) de la fonction exponentielle."
+      exemples_algorithme:
+        - "Recherche de seuils."
+        - "Recherche de valeurs approchées de \\( \\pi \\), \\( e \\), \\( \\frac{1+\\sqrt{5}}{2} \\), \\( \\ln(2) \\), etc."
+      approfondissements_possibles:
+        - "Propriétés et utilisation des suites adjacentes."
+        - "Exemples de suites vérifiant une relation de récurrence linéaire d'ordre 2 à coefficients constants."
+        - "Exemples d'application de la méthode de Newton. Étude de la convergence de la méthode de Héron."
+
+    limites_fonctions:
+      contenus:
+        - "Limite finie ou infinie d'une fonction en \\( +\\infty \\), en \\( -\\infty \\), en un point. Asymptote parallèle à un axe de coordonnées."
+        - "Limites faisant intervenir les fonctions de référence étudiées en classe de première : puissances entières, racine carrée, fonction exponentielle."
+        - "Limites et comparaison."
+        - "Opérations sur les limites."
+      capacites_attendues:
+        - "Déterminer dans des cas simples la limite d'une suite ou d'une fonction en un point, en \\( \\pm \\infty \\), en utilisant les limites usuelles, les croissances comparées, les opérations sur les limites, des majorations, minorations ou encadrements, la factorisation du terme prépondérant dans une somme."
+        - "Faire le lien entre l'existence d'une asymptote parallèle à un axe et celle de la limite correspondante."
+      demonstration:
+        - "Croissance comparée de \\( x \\mapsto x^n \\) et \\( \\exp \\) en \\( +\\infty \\)."
+      approfondissements_possibles:
+        - "Asymptotes obliques. Branches infinies."
+
+    complements_derivation:
+      contenus:
+        - "Composée de deux fonctions, notation \\( v \\circ u \\). Relation \\( (v \\circ u)' = (v' \\circ u) \\times u' \\) pour la dérivée de la composée de deux fonctions dérivables."
+        - "Dérivée seconde d'une fonction."
+        - "Fonction convexe sur un intervalle : définition par la position relative de la courbe représentative et des sécantes. Pour une fonction deux fois dérivable, équivalence admise avec la position par rapport aux tangentes, la croissance de \\( f' \\), la positivité de \\( f'' \\)."
+        - "Point d'inflexion."
+      capacites_attendues:
+        - "Calculer la dérivée d'une fonction donnée par une formule simple mettant en jeu opérations algébriques et composition."
+        - "Calculer la fonction dérivée, déterminer les limites et étudier les variations d'une fonction construite simplement à partir des fonctions de référence."
+        - "Démontrer des inégalités en utilisant la convexité d'une fonction."
+        - "Esquisser l'allure de la courbe représentative d'une fonction \\( f \\) à partir de la donnée de tableaux de variations de \\( f \\), de \\( f' \\) ou de \\( f'' \\)."
+        - "Lire sur une représentation graphique de \\( f \\), de \\( f' \\) ou de \\( f'' \\) les intervalles où \\( f \\) est convexe, concave, et les points d'inflexion. Dans le cadre de la résolution de problème, étudier et utiliser la convexité d'une fonction."
+      demonstration:
+        - "Si \\( f'' \\) est positive, alors la courbe représentative de \\( f \\) est au-dessus de ses tangentes."
+      approfondissements_possibles:
+        - "Courbe de Lorenz."
+        - "Dérivée \\( n \\)-ième d'une fonction."
+        - "Inégalité arithmético-géométrique."
+
+    continuite_fonctions:
+      contenus:
+        - "Fonction continue en un point (définition par les limites), sur un intervalle. Toute fonction dérivable est continue."
+        - "Image d'une suite convergente par une fonction continue."
+        - "Théorème des valeurs intermédiaires. Cas des fonctions continues strictement monotones."
+      capacites_attendues:
+        - "Étudier les solutions d'une équation du type \\( f(x) = k \\) : existence, unicité, encadrement."
+        - "Pour une fonction continue \\( f \\) d'un intervalle dans lui-même, étudier une suite définie par une relation de récurrence \\( u_{n+1} = f(u_n) \\)."
+      exemples_algorithme:
+        - "Méthode de dichotomie."
+        - "Méthode de Newton, méthode de la sécante."
+      approfondissements_possibles:
+        - "Démonstration par dichotomie du théorème des valeurs intermédiaires."
+        - "Fonctions continues de \\( \\mathbb{R} \\) dans \\( \\mathbb{R} \\) telles que \\( f(x + y) = f(x) + f(y) \\) pour tous réels \\( x, y \\)."
+        - "Prolongement par continuité."
+
+    fonction_logarithme:
+      contenus:
+        - "Fonction logarithme népérien, notée \\( \\ln \\), construite comme réciproque de la fonction exponentielle."
+        - "Propriétés algébriques du logarithme."
+        - "Fonction dérivée du logarithme, variations."
+        - "Limites en \\( 0 \\) et en \\( +\\infty \\), courbe représentative. Lien entre les courbes représentatives des fonctions logarithme népérien et exponentielle."
+        - "Croissance comparée du logarithme népérien et de \\( x \\mapsto x^n \\) en \\( 0 \\) et en \\( +\\infty \\)."
+      capacites_attendues:
+        - "Utiliser l'équation fonctionnelle de l'exponentielle ou du logarithme pour transformer une écriture, résoudre une équation, une inéquation."
+        - "Dans le cadre d'une résolution de problème, utiliser les propriétés des fonctions exponentielle et logarithme."
+      demonstration:
+        - "Calcul de la fonction dérivée de la fonction logarithme népérien, la dérivabilité étant admise."
+        - "Limite en \\( 0 \\) de \\( x \\mapsto x \\ln(x) \\)."
+      exemple_algorithme:
+        - "Algorithme de Briggs pour le calcul du logarithme."
+      approfondissements_possibles:
+        - "Pour \\( \\alpha \\) dans \\( \\mathbb{R} \\), fonction \\( x \\mapsto x^\\alpha \\)."
+        - "Pour \\( x \\) dans \\( \\mathbb{R} \\), limite de \\( \\left(1 + \\frac{x}{n}\\right)^n \\)."
+
+    fonctions_trigonometriques:
+      contenus:
+        - "Fonctions trigonométriques sinus et cosinus : dérivées, variations, courbes représentatives."
+      capacites_attendues:
+        - "Résoudre une équation du type \\( \\cos(x) = a \\), une inéquation de la forme \\( \\cos(x) \\leq a \\) sur \\( [-\\pi, \\pi] \\)."
+        - "Dans le cadre de la résolution de problème, notamment géométrique, étudier une fonction simple définie à partir de fonctions trigonométriques, pour déterminer des variations, un optimum."
+      approfondissement_possible:
+        - "Fonction tangente."
+
+    primitives_equations_differentielles:
+      contenus:
+        - "Équation différentielle \\( y' = f \\) où \\( f \\) est une fonction continue. Notion de primitive d'une fonction continue sur un intervalle."
+        - "Deux primitives d'une même fonction continue sur un intervalle diffèrent d'une constante."
+        - "Primitives des fonctions usuelles par lecture inverse du tableau des dérivées."
+        - "Équation différentielle \\( y' = ay \\) où \\( a \\) est un réel ; allure des courbes selon le signe de \\( a \\)."
+        - "Équation différentielle \\( y' = ay + b \\) où \\( a \\) et \\( b \\) sont des réels."
+      capacites_attendues:
+        - "Déterminer des primitives d'une fonction continue par lecture inverse du tableau des dérivées, intégration à vue des fonctions usuelles."
+        - "Déterminer une primitive vérifiant une condition initiale."
+        - "Résoudre une équation différentielle \\( y' = ay + b \\) où \\( a \\) et \\( b \\) sont des réels."
+        - "Dans le cadre de la résolution de problème, modéliser une situation par une équation différentielle, déterminer une solution particulière vérifiant une condition initiale."
+      demonstration:
+        - "Résolution de l'équation différentielle \\( y' = ay \\)."
+      approfondissements_possibles:
+        - "Méthode d'Euler pour la résolution approchée d'une équation différentielle \\( y' = f(t,y) \\)."
+        - "Équation différentielle \\( y'' + \\omega^2 y = 0 \\)."
+
+    calcul_integral:
+      contenus:
+        - "Pour une fonction continue et positive sur \\( [a,b] \\), introduction de la notation \\( \\int_a^b f(x)\\,dx \\) comme aire sous la courbe."
+        - "Théorème : si \\( f \\) est continue sur \\( [a,b] \\), la fonction \\( F \\) définie sur \\( [a,b] \\) par \\( F(x) = \\int_a^x f(t)\\,dt \\) est dérivable sur \\( [a,b] \\) et a pour dérivée \\( f \\)."
+        - "Primitive d'une fonction continue sur un intervalle."
+        - "Pour une fonction continue \\( f \\) sur un intervalle \\( [a,b] \\) et \\( F \\) une primitive de \\( f \\), \\( \\int_a^b f(x)\\,dx = F(b) - F(a) \\)."
+        - "Linéarité, positivité, relation de Chasles."
+      capacites_attendues:
+        - "Calculer une intégrale."
+        - "Dans le cadre de la résolution de problème, calculer des aires, des volumes, des valeurs moyennes."
+        - "Encadrer une intégrale à l'aide d'une méthode des rectangles."
+      demonstration:
+        - "Calcul de \\( \\int_0^1 x^n\\,dx \\) pour \\( n \\in \\mathbb{N} \\)."
+      approfondissements_possibles:
+        - "Calcul de \\( \\int_0^{\\pi/2} \\sin(x)\\,dx \\)."
+        - "Calcul de \\( \\int_0^1 e^x\\,dx \\)."
+        - "Méthode du point fixe pour le calcul de \\( \\int_0^1 \\frac{1}{1+x^2}\\,dx \\)."
+
+  probabilites:
+    objectifs:
+      - |
+        Dans cette partie, on diversifie et on approfondit les modèles probabilistes rencontrés, en exploitant des situations où interviennent les probabilités conditionnelles, l'indépendance, les variables aléatoires.
+        Un axe majeur est l'étude de la succession d'un nombre quelconque d'épreuves aléatoires indépendantes.
+    histoire_maths:
+      - |
+        La parution de l'Ars Conjectandi de Jacques Bernoulli (1713), reprenant notamment d'anciens travaux de Huygens, marque une rupture dans l'histoire des probabilités.
+        Un résultat majeur de cet ouvrage est son " théorème d'or ", la loi des grands nombres, qui relie fréquences et probabilité, valide le principe de l'échantillonnage et est le premier exemple de " théorème limite " en théorie des probabilités.
+
+    succession_epreuves_bernoulli:
+      contenus:
+        - "Modèle de la succession d'épreuves indépendantes : la probabilité d'une issue \\( (x_1, \\ldots, x_n) \\) est égale au produit des probabilités des composantes \\( x_i \\). Représentation par un produit cartésien, par un arbre."
+        - "Épreuve de Bernoulli, loi de Bernoulli."
+        - "Schéma de Bernoulli : répétition de \\( n \\) épreuves de Bernoulli indépendantes."
+        - "Loi binomiale \\( \\mathcal{B}(n, p) \\) : loi du nombre de succès. Expression à l'aide des coefficients binomiaux."
+      capacites_attendues:
+        - "Modéliser une situation par une succession d'épreuves indépendantes, ou une succession de deux ou trois épreuves quelconques. Représenter la situation par un arbre. Calculer une probabilité en utilisant l'indépendance, des probabilités conditionnelles, la formule des probabilités totales."
+        - "Modéliser une situation par un schéma de Bernoulli, par une loi binomiale."
+        - "Utiliser l'expression de la loi binomiale pour résoudre un problème de seuil, de comparaison, d'optimisation relatif à des probabilités de nombre de succès."
+        - "Dans le cadre d'une résolution de problème modélisé par une variable binomiale \\( X \\), calculer numériquement une probabilité du type \\( P(X = k) \\), \\( P(X \\leq k) \\), \\( P(k \\leq X \\leq k') \\), en s'aidant au besoin d'un algorithme; chercher un intervalle \\( I \\) pour lequel la probabilité \\( P(X \\in I) \\) est inférieure à une valeur donnée \\( \\alpha \\), ou supérieure à \\( 1 - \\alpha \\)."
+      demonstration:
+        - "Expression de la probabilité de \\( k \\) succès dans le schéma de Bernoulli."
+      exemples_algorithme:
+        - "Simulation de la planche de Galton."
+        - "Problème de la surréservation. Étant donné une variable aléatoire binomiale \\( X \\) et un réel strictement positif \\( \\alpha \\), détermination du plus petit entier \\( k \\) tel que \\( P(X > k) \\leq \\alpha \\)."
+        - "Simulation d'un échantillon d'une variable aléatoire."
+      approfondissements_possibles:
+        - "Loi géométrique."
+        - "Introduction de la loi de Poisson comme limite de lois binomiales. Interprétation (événements rares)."
+
+    sommes_variables_aleatoires:
+      contenus:
+        - "Somme de deux variables aléatoires. Linéarité de l'espérance : \\( E(X + Y) = E(X) + E(Y) \\) et \\( E(aX) = aE(X) \\)."
+        - "Dans le cadre de la succession d'épreuves indépendantes, exemples de variables indépendantes \\( X, Y \\) et relation d'additivité \\( V(X + Y) = V(X) + V(Y) \\). Relation \\( V(aX) = a^2 V(X) \\)."
+        - "Application à l'espérance, la variance et l'écart type de la loi binomiale."
+        - "Échantillon de taille \\( n \\) d'une loi de probabilité : liste \\( (X_1, \\ldots, X_n) \\) de variables indépendantes identiques suivant cette loi. Espérance, variance, écart type de la somme \\( S = X_1 + \\ldots + X_n \\) et de la moyenne \\( M = \\frac{S}{n} \\)."
+      capacites_attendues:
+        - "Représenter une variable comme somme de variables aléatoires plus simples."
+        - "Calculer l'espérance d'une variable aléatoire, notamment en utilisant la propriété de linéarité."
+        - "Calculer la variance d'une variable aléatoire, notamment en l'exprimant comme somme de variables aléatoires indépendantes."
+      demonstration:
+        - "Espérance et variance de la loi binomiale."
+      approfondissements_possibles:
+        - "Relation \\( E(XY) = E(X)E(Y) \\) pour des variables aléatoires indépendantes \\( X, Y \\). Application à la variance de \\( X + Y \\)."
+
+    concentration_loi_grands_nombres:
+      contenus:
+        - "Inégalité de Bienaymé-Tchebychev. Pour une variable aléatoire \\( X \\) d'espérance \\( \\mu \\) et de variance \\( V \\), et quel que soit le réel strictement positif \\( \\delta \\) : \\( P(|X - \\mu| \\geq \\delta) \\leq \\frac{V}{\\delta^2} \\)."
+        - "Inégalité de concentration. Si \\( M \\) est la variable aléatoire moyenne d'un échantillon de taille \\( n \\) d'une variable aléatoire d'espérance \\( \\mu \\) et de variance \\( V \\), alors pour tout \\( \\delta > 0 \\), \\( P(|M - \\mu| \\geq \\delta) \\leq \\frac{V}{n \\delta^2} \\)."
+        - "Loi des grands nombres."
+      capacite_attendue:
+        - "Appliquer l'inégalité de Bienaymé-Tchebychev pour définir une taille d'échantillon, en fonction de la précision et du risque choisi."
+      exemples_algorithme:
+        - "Calculer la probabilité de \\( (|S - pn| > n) \\), où \\( S \\) est une variable aléatoire qui suit une loi binomiale \\( \\mathcal{B}(n, p) \\). Comparer avec l'inégalité de Bienaymé-Tchebychev."
+        - "Simulation d'une marche aléatoire."
+        - "Simuler \\( N \\) échantillons de taille \\( n \\) d'une variable aléatoire d'espérance \\( \\mu \\) et d'écart type \\( \\sigma \\). Calculer l'écart type \\( s \\) de la série des moyennes des échantillons observés, à comparer à \\( \\frac{\\sigma}{\\sqrt{n}} \\). Calculer la proportion des échantillons pour lesquels l'écart entre la moyenne et \\( \\mu \\) est inférieur ou égal à \\( ks \\), ou à \\( k \\frac{\\sigma}{\\sqrt{n}} \\), pour \\( k = 1, 2, 3 \\)."
+      approfondissements_possibles:
+        - "Estimation."
+        - "Marche aléatoire."
+        - "Exemples d'application issus d'autres disciplines pour diverses valeurs de \\( n \\) : sondage (par exemple \\( n = 1000 \\)), étude du sex ratio (par exemple \\( n = 10^6 \\)), demi-vie d'atomes radioactifs (\\( n = 10^{23} \\))."
+
+  algorithmique_programmation:
+    description: |
+      La démarche algorithmique est, depuis les origines, une composante essentielle de l'activité mathématique.
+      Les classes de seconde et de première ont permis de consolider les acquis du collège (notion de variable, type, de variables, affectation, instruction conditionnelle, boucle notamment), d'introduire et d'utiliser la notion de fonction informatique et de liste.
+      En algorithmique et programmation, le programme reprend les programmes de seconde et de première sans introduire de notion nouvelle, afin de consolider le travail des classes précédentes.
+      Les algorithmes peuvent être écrits en langage naturel ou utiliser le langage Python.
+      L'accent est mis sur la programmation modulaire qui permet de découper une tâche complexe en tâches plus simples.
+    histoire_maths:
+      - |
+        De nombreux textes témoignent d'une préoccupation algorithmique au long de l'Histoire.
+        Lorsqu'un texte historique a une visée algorithmique, transformer les méthodes qu'il présente en un algorithme, voire en un programme, ou inversement, est l'occasion de travailler des changements de registre qui donnent du sens au formalisme mathématique.
+
+    notion_liste:
+      contenus:
+        - "La génération des listes en compréhension et en extension est mise en lien avec la notion d'ensemble."
+        - "Les conditions apparaissant dans les listes définies en compréhension permettent de travailler la logique."
+        - "Afin d'éviter des confusions, on se limite aux listes sans présenter d'autres types de collections."
+      capacites_attendues:
+        - "Générer une liste (en extension, par ajouts successifs ou en compréhension)."
+        - "Manipuler des éléments d'une liste (ajouter, supprimer…) et leurs indices."
+        - "Parcourir une liste."
+        - "Itérer sur les éléments d'une liste."
+
+  vocabulaire_ensembliste_logique:
+    description: |
+      L'apprentissage des notations mathématiques et de la logique est transversal à tous les chapitres du programme.
+      L'apprentissage des notations mathématiques et de la logique est transversal à tous les chapitres du programme.
+      Les élèves doivent connaître les notions d'élément d'un ensemble, de sous-ensemble, d'appartenance et d'inclusion, de réunion, d'intersection et de complémentaire, et savoir utiliser les symboles de base correspondants : \\( \\in \\), \\( \\subset \\), \\( \\cap \\), \\( \\cup \\), ainsi que la notation des ensembles de nombres et des intervalles.
+      Ils connaissent également la notion de couple, de triplet et plus généralement de \\( n \\)-uplet et celle de produit cartésien.
+      La notion de fonction, que les élèves manipulent depuis le cycle 4, est mise en évidence dans les diverses parties du programme : fonctions d'une variable réelle, suites, variables aléatoires, exemples en géométrie.
+      Le symbole de somme \\( \\sum \\) peut être introduit et utilisé pour écrire certaines expressions de façon concise, mais la manipulation de ce symbole pour démontrer des égalités n'est pas un objectif du programme.
+    capacites_attendues:
+      - "reconnaître ce qu'est une proposition mathématique, à utiliser des variables pour écrire des propositions mathématiques;"
+      - "lire et écrire des propositions contenant les connecteurs « et », « ou »;"
+      - "formuler la négation de propositions simples, pouvant contenir un ou deux quantificateurs;"
+      - "mobiliser un contre-exemple pour montrer qu'une proposition est fausse;"
+      - "formuler une implication, une équivalence logique, et à les mobiliser dans un raisonnement simple;"
+      - "formuler la réciproque d'une implication, ou sa contraposée;"
+      - "lire et écrire des propositions contenant une quantification universelle ou existentielle (les symboles \\( \\forall \\) et \\( \\exists \\) ne sont pas exigibles);"
+      - "raisonner par disjonctions des cas, par l'absurde, par contraposée;"
+      - "raisonner par équivalence, utiliser une propriété caractéristique;"
+      - "distinguer condition nécessaire et condition suffisante;"
+      - "démontrer une propriété par récurrence."
+    approfondissements_possibles:
+      - "Ensembles quotients."
+      - "Relations binaires."
+      - "Cardinalité d'une réunion d'ensembles."
+
+  succession_epreuves_independantes:
+    contenus:
+      - "Modèle de la succession d'épreuves indépendantes."
+      - "Représentation par un arbre ou un produit cartésien."
+    capacites_attendues:
+      - "Représenter une situation par un arbre pondéré ou un tableau."
+      - "Calculer des probabilités conditionnelles."
+
+  variables_aleatoires_reelles:
+    contenus:
+      - "Variable aléatoire réelle : modélisation du résultat numérique d'une expérience aléatoire."
+      - "Loi d'une variable aléatoire."
+      - "Espérance, variance, écart-type."
+    capacites_attendues:
+      - "Déterminer la loi d'une variable aléatoire."
+      - "Calculer une espérance, une variance, un écart-type."
+      - "Utiliser la linéarité de l'espérance."
+    approfondissements_possibles:
+      - "Inégalité de Bienaymé-Tchebychev."
+      - "Covariance de deux variables aléatoires."
+
+  loi_binomiale:
+    contenus:
+      - "Épreuve de Bernoulli, loi de Bernoulli."
+      - "Schéma de Bernoulli, loi binomiale."
+    capacites_attendues:
+      - "Reconnaître une situation relevant de la loi binomiale."
+      - "Calculer des probabilités dans le cadre de la loi binomiale."
+    approfondissements_possibles:
+      - "Approximation de la loi binomiale par la loi normale."
+      - "Intervalle de fluctuation."

@@ -1,0 +1,298 @@
+intentions_majeures:
+  - "permettre à chaque élève de consolider les acquis de la seconde, de développer son goût des mathématiques"
+  - "développer des interactions avec d'autres enseignements de spécialité"
+  - "préparer au choix des enseignements de la classe de terminale"
+
+competences_mathématiques:
+  - "chercher, expérimenter, en particulier à l'aide d'outils logiciels"
+  - "modéliser, faire une simulation, valider ou invalider un modèle"
+  - "représenter, choisir un cadre (numérique, algébrique, géométrique…), changer de registre"
+  - "raisonner, démontrer, trouver des résultats partiels et les mettre en perspective"
+  - "calculer, appliquer des techniques et mettre en œuvre des algorithmes"
+  - "communiquer un résultat par oral ou par écrit, expliquer une démarche"
+
+diversite_activite_eleve:
+  - description: |
+      La diversité des activités mathématiques proposées doit permettre aux élèves de prendre conscience de la richesse et de la variété de la démarche mathématique.
+      Parmi ceux-ci, les travaux écrits faits hors du temps scolaire permettent, à travers l'autonomie laissée à chacun, le développement des qualités d'initiative.
+
+utilisation_logiciels:
+  - |
+    Utilisation de logiciels (calculatrice ou ordinateur), d'outils de visualisation et de représentation, de calcul (numérique ou formel), de simulation, de programmation.
+    L'utilisation régulière de ces outils peut intervenir selon trois modalités :
+    \begin{itemize}
+      \item par le professeur, en classe, avec un dispositif de visualisation collective adapté;
+      \item par les élèves, sous forme de travaux pratiques de mathématiques en classe;
+      \item dans le cadre du travail personnel des élèves hors du temps de classe.
+    \end{itemize}
+
+evaluation_eleves:
+  - |
+    Les élèves sont évalués en fonction des capacités attendues et selon des modes variés : devoirs surveillés avec ou sans calculatrice, devoirs en temps libre, rédaction de travaux de recherche individuels ou collectifs.
+
+place_oral:
+  - |
+    Les étapes de verbalisation et de reformulation jouent un rôle majeur dans l'appropriation des notions mathématiques et la résolution des problèmes.
+    Des situations variées se prêtent à la pratique de l'oral en mathématiques : la reformulation par l'élève d'un énoncé ou d'une démarche, les échanges interactifs lors de la construction du cours.
+
+trace_ecrite:
+  - |
+    Disposer d'une trace de cours claire, explicite et structurée est une aide essentielle à l'apprentissage des mathématiques.
+    Le professeur doit avoir le souci de la bonne qualité (mathématique et rédactionnelle) des traces écrites figurant au tableau et dans les cahiers d'élèves.
+
+travail_personnel_eleves:
+  - |
+    Si la classe est le lieu privilégié pour la mise en activité mathématique des élèves, les travaux hors du temps scolaire sont indispensables pour consolider les apprentissages.
+    Fréquents, de longueur raisonnable et de nature variée, ces travaux sont essentiels à la formation des élèves.
+
+programme:
+  algebre:
+    objectifs:
+      - "Les suites sont présentées d'un point de vue principalement algébrique."
+      - "L'objectif est que l'élève soit confronté à des systèmes discrets pour lesquels les suites numériques apparaissent comme modélisation adaptée."
+    suites_numeriques:
+      contenus:
+        - "Exemples de modes de génération d'une suite : explicite \\( u = f(n) \\), par une relation de récurrence \\( u_{n+1} = f(u_n) \\), par un algorithme, par des motifs géométriques."
+        - "Suites arithmétiques : exemples, définition, calcul du terme général. Lien avec l'étude d'évolutions successives à accroissements constants. Lien avec les fonctions affines. Calcul de \\( 1 + 2 + \\dots + n \\)."
+        - "Suites géométriques : exemples, définition, calcul du terme général. Lien avec l'étude d'évolutions successives à taux constant. Lien avec la fonction exponentielle. Calcul de \\( 1 + q + \\dots + q^n \\)."
+        - "Sens de variation d'une suite."
+        - "Sur des exemples, introduction intuitive de la notion de limite, finie ou infinie, d'une suite."
+      capacites_attendues:
+        - "Dans le cadre de l'étude d'une suite, utiliser le registre de la langue naturelle, le registre algébrique, le registre graphique, et passer de l'un à l'autre."
+        - "Calculer des termes d'une suite définie explicitement, par récurrence ou par un algorithme."
+        - "Pour une suite arithmétique ou géométrique, calculer le terme général, la somme de termes consécutifs, déterminer le sens de variation."
+      demonstrations:
+        - "Calcul du terme général d'une suite arithmétique, d'une suite géométrique."
+        - "Calcul de \\( 1 + 2 + \\dots + n \\)."
+        - "Calcul de \\( 1 + q + \\dots + q^n \\)."
+      exemples_algorithme:
+        - "Calcul de termes d'une suite, de sommes de termes, de seuil."
+        - "Calcul de factorielle."
+        - "Liste des premiers termes d'une suite : suites de Syracuse, suite de Fibonacci."
+      approfondissements_possibles:
+        - "Tour de Hanoï."
+        - "Somme des \\( n \\) premiers carrés, des \\( n \\) premiers cubes."
+        - "Remboursement d'un emprunt par annuités constantes."
+
+    equations_fonctions_polynomes:
+      contenus:
+        - "Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines."
+        - "Forme canonique d'une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d'une équation du second degré. Signe."
+      capacites_attendues:
+        - "Étudier le signe d'une fonction polynôme du second degré donnée sous forme factorisée."
+        - "Déterminer les fonctions polynômes du second degré s'annulant en deux nombres réels distincts."
+        - "Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales."
+        - "Choisir une forme adaptée (développée réduite, canonique, factorisée) d'une fonction polynôme du second degré dans le cadre de la résolution d'un problème (équation, inéquation, optimisation, variations)."
+      demonstration:
+        - "Résolution de l'équation du second degré."
+      approfondissements_possibles:
+        - "Factorisation d'un polynôme du troisième degré admettant une racine et résolution de l'équation associée."
+        - "Factorisation de \\( x^n - 1 \\) par \\( x - 1 \\), de \\( x^n - a^n \\) par \\( x - a \\)."
+        - "Déterminer deux nombres réels connaissant leur somme \\( s \\) et leur produit \\( p \\) comme racines de la fonction polynôme \\( x \\mapsto x^2 - s x + p \\)."
+
+  analyse:
+    objectifs:
+      - "Deux points fondamentaux du programme de première sont ici étudiés : le concept de dérivée, avec ses applications à l'étude des fonctions, et la fonction exponentielle."
+      - "L'étude de la dérivation distingue le point de vue local (nombre dérivé) et le point de vue global (fonction dérivée)."
+      - "Les fonctions étudiées sont toutes régulières et le nombre dérivé est introduit à partir de la perception intuitive de la limite du taux de variation."
+    derivation:
+      contenus:
+        - "Point de vue local : Taux de variation. Sécantes à la courbe représentative d'une fonction en un point donné."
+        - "Nombre dérivé d'une fonction en un point, comme limite du taux de variation. Notation \\( f'(a) \\)."
+        - "Tangente à la courbe représentative d'une fonction en un point, comme « limite des sécantes ». Pente. Équation : la tangente à la courbe représentative de \\( f \\) au point d'abscisse \\( a \\) est la droite d'équation \\( y = f(a) + f'(a)(x - a) \\)."
+        - "Point de vue global : Fonction dérivable sur un intervalle. Fonction dérivée."
+        - "Fonction dérivée des fonctions carré, cube, inverse, racine carrée."
+        - "Opérations sur les fonctions dérivables : somme, produit, inverse, quotient, fonction dérivée de \\( x \\mapsto g(ax + b) \\)."
+        - "Pour \\( n \\) dans \\( \\mathbb{Z} \\), fonction dérivée de la fonction \\( x \\mapsto x^n \\)."
+        - "Fonction valeur absolue : courbe représentative, étude de la dérivabilité en 0."
+      capacites_attendues:
+        - "Calculer un taux de variation, la pente d'une sécante."
+        - "Interpréter le nombre dérivé en contexte : pente d'une tangente, vitesse instantanée, coût marginal…"
+        - "Déterminer graphiquement un nombre dérivé par la pente de la tangente. Construire la tangente en un point à la courbe représentative d'une fonction."
+        - "Déterminer l'équation de la tangente en un point à la courbe représentative d'une fonction."
+        - "À partir de la définition, calculer le nombre dérivé en un point ou la fonction dérivée de la fonction carré, de la fonction inverse."
+        - "Dans des cas simples, calculer une fonction dérivée en utilisant les propriétés des opérations sur les fonctions dérivables."
+      demonstrations:
+        - "Équation de la tangente en un point à une courbe représentative."
+        - "La fonction racine carrée n'est pas dérivable en 0."
+        - "Fonction dérivée de la fonction carrée, de la fonction inverse."
+        - "Fonction dérivée d'un produit."
+      exemple_algorithme:
+        - "Écrire la liste des coefficients directeurs des sécantes pour un pas donné."
+
+    variations_courbes:
+      contenus:
+        - "Lien entre le sens de variation d'une fonction dérivable sur un intervalle et signe de sa fonction dérivée ; caractérisation des fonctions constantes."
+        - "Nombre dérivé en un extremum, tangente à la courbe représentative."
+      capacites_attendues:
+        - "Étudier les variations d'une fonction. Déterminer les extremums."
+        - "Résoudre un problème d'optimisation."
+        - "Exploiter les variations d'une fonction pour établir une inégalité. Étudier la position relative de deux courbes représentatives."
+        - "Étudier, en lien avec la dérivation, une fonction polynôme du second degré : variations, extremum, allure selon le signe du coefficient de \\( x^2 \\)."
+      exemple_algorithme:
+        - "Méthode de Newton, en se limitant à des cas favorables."
+
+    fonction_exponentielle:
+      contenus:
+        - "Définition de la fonction exponentielle, comme unique fonction dérivable sur \\( \\mathbb{R} \\) vérifiant \\( f' = f \\) et \\( f(0) = 1 \\). L'existence et l'unicité sont admises. Notation \\( \\exp(x) \\)."
+        - "Pour tous réels \\( x \\) et \\( y \\), \\( \\exp(x + y) = \\exp(x) \\exp(y) \\) et \\( \\exp(x) \\exp(-x) = 1 \\). Nombre \\( e \\). Notation \\( e^x \\)."
+        - "Pour tout réel \\( a \\), la suite \\( (e^{n a}) \\) est une suite géométrique."
+        - "Signe, sens de variation et courbe représentative de la fonction exponentielle."
+      capacites_attendues:
+        - "Transformer une expression en utilisant les propriétés algébriques de la fonction exponentielle."
+        - "Pour une valeur numérique strictement positive de \\( k \\), représenter graphiquement les fonctions \\( t \\mapsto e^{-k t} \\) et \\( t \\mapsto e^{k t} \\)."
+        - "Modéliser une situation par une croissance, une décroissance exponentielle (par exemple évolution d'un capital à taux fixe, décroissance radioactive)."
+      exemple_algorithme:
+        - "Construction de l'exponentielle par la méthode d'Euler."
+        - "Détermination d'une valeur approchée de \\( e \\) à l'aide de la suite \\( \\left(\\left(1 + \\frac{1}{n}\\right)^n \\right) \\)."
+      approfondissements_possibles:
+        - "Unicité d'une fonction \\( f \\) dérivable sur \\( \\mathbb{R} \\) telle que \\( f' = f \\) et \\( f(0) = 1 \\)."
+        - "Pour tous réels \\( x \\) et \\( y \\), \\( \\exp(x + y) = \\exp(x) \\exp(y) \\)."
+        - "La fonction exponentielle est strictement positive et croissante."
+
+    fonctions_trigonometriques:
+      contenus:
+        - "Cercle trigonométrique. Longueur d'arc. Radian."
+        - "Enroulement de la droite sur le cercle trigonométrique. Image d'un nombre réel."
+        - "Cosinus et sinus d'un nombre réel. Lien avec le sinus et le cosinus dans un triangle rectangle. Valeurs remarquables."
+        - "Fonctions cosinus et sinus. Parité, périodicité. Courbes représentatives."
+      capacites_attendues:
+        - "Placer un point sur le cercle trigonométrique."
+        - "Lier la représentation graphique des fonctions cosinus et sinus et le cercle trigonométrique."
+        - "Traduire graphiquement la parité et la périodicité des fonctions trigonométriques."
+        - "Par lecture du cercle trigonométrique, déterminer, pour des valeurs remarquables de \\( x \\), les cosinus et sinus d'angles associés à \\( x \\)."
+      demonstration:
+        - "Calcul de \\( \\sin \\frac{\\pi}{4} \\), \\( \\cos \\frac{\\pi}{3} \\), \\( \\sin \\frac{\\pi}{3} \\)."
+      exemple_algorithme:
+        - "Approximation de \\( \\pi \\) par la méthode d'Archimède."
+
+  geometrie:
+    objectifs:
+      - "L'étude de la géométrie plane menée au collège et en seconde a familiarisé les élèves à la géométrie de configuration, au calcul vectoriel et à la géométrie repérée."
+      - "En première, on poursuit l'étude de la géométrie plane en introduisant de nouveaux outils."
+    calcul_vectoriel:
+      contenus:
+        - "Produit scalaire à partir de la projection orthogonale et de la formule avec le cosinus. Caractérisation de l'orthogonalité."
+        - "Bilinéarité, symétrie. En base orthonormée, expression du produit scalaire et de la norme, critère d'orthogonalité."
+        - "Développement de \\( \\|\\vec{u} + \\vec{v}\\|^2 \\). Formule d'Al-Kashi."
+        - "Transformation de l'expression \\( \\overrightarrow{MA} \\cdot \\overrightarrow{MB} \\)."
+      capacites_attendues:
+        - "Utiliser le produit scalaire pour démontrer une orthogonalité, pour calculer un angle, une longueur dans le plan ou dans l'espace."
+        - "En vue de la résolution d'un problème, calculer le produit scalaire de deux vecteurs en choisissant une méthode adaptée (en utilisant la projection orthogonale, à l'aide des coordonnées, à l'aide des normes et d'un angle, à l'aide de normes)."
+        - "Utiliser le produit scalaire pour résoudre un problème géométrique."
+      demonstrations:
+        - "Formule d'Al-Kashi (démonstration avec le produit scalaire)."
+        - "Ensemble des points \\( M \\) tels que \\( \\overrightarrow{MA} \\cdot \\overrightarrow{MB} = 0 \\) (démonstration avec le produit scalaire)."
+      approfondissements_possibles:
+        - "Loi des sinus."
+        - "Droite d'Euler d'un triangle."
+        - "Les médianes d'un triangle concourent au centre de gravité."
+
+    geometrie_reperee:
+      contenus:
+        - "Vecteur normal à une droite. Le vecteur de coordonnées \\( (a, b) \\) est normal à la droite d'équation \\( a x + b y + c = 0 \\). Le vecteur \\( (-b, a) \\) en est un vecteur directeur."
+        - "Équation de cercle."
+        - "Parabole représentative d'une fonction polynôme du second degré. Axe de symétrie, sommet."
+      capacites_attendues:
+        - "Déterminer une équation cartésienne d'une droite connaissant un point et un vecteur normal."
+        - "Déterminer les coordonnées du projeté orthogonal d'un point sur une droite."
+        - "Déterminer et utiliser l'équation d'un cercle donné par son centre et son rayon."
+        - "Reconnaître une équation de cercle, déterminer centre et rayon."
+        - "Déterminer l'axe de symétrie et le sommet d'une parabole d'équation \\( y = a x^2 + b x + c \\)."
+        - "Utiliser un repère pour étudier une configuration."
+      approfondissements_possibles:
+        - "Recherche de l'ensemble des points équidistants de l'axe des abscisses et d'un point donné."
+        - "Déterminer l'intersection d'un cercle ou d'une parabole d'équation \\( y = a x^2 + b x + c \\) avec une droite parallèle à un axe."
+
+  probabilites_statistiques:
+    objectifs:
+      - "L'enseignement dispensé en classe de seconde a abordé le modèle probabiliste, dans le cas d'un univers fini."
+      - "En première, on développe l'étude de ce modèle."
+      - "L'enseignement s'organise autour des buts suivants : introduire la notion de probabilité conditionnelle, sous-jacente dans toute modélisation probabiliste, et mettre en évidence la problématique de l'inversion des conditionnements."
+    probabilites_conditionnelles:
+      contenus:
+        - "Probabilité conditionnelle d'un événement \\( B \\) sachant un événement \\( A \\) de probabilité non nulle. Notation \\( P_A(B) \\). Indépendance de deux événements."
+        - "Arbres pondérés et calcul de probabilités : règle du produit, de la somme."
+        - "Partition de l'univers (systèmes complets d'événements). Formule des probabilités totales."
+        - "Succession de deux épreuves indépendantes. Représentation par un arbre ou un tableau."
+      capacites_attendues:
+        - "Construire un arbre pondéré ou un tableau en lien avec une situation donnée. Passer du registre de la langue naturelle au registre symbolique et inversement."
+        - "Utiliser un arbre pondéré ou un tableau pour calculer une probabilité."
+        - "Calculer des probabilités conditionnelles lorsque les événements sont présentés sous forme de tableau croisé d'effectifs (tirage au sort avec équiprobabilité d'un individu dans une population)."
+        - "Dans des cas simples, calculer une probabilité à l'aide de la formule des probabilités totales."
+        - "Distinguer en situation \\( P_A(B) \\) et \\( P_B(A) \\), par exemple dans des situations de type « faux positifs »."
+        - "Représenter une répétition de deux épreuves indépendantes par un arbre ou un tableau."
+      exemple_algorithme:
+        - "Méthode de Monte-Carlo : estimation de l'aire sous la parabole, estimation du nombre \\( \\pi \\)."
+      approfondissements_possibles:
+        - "Exemples de succession de plusieurs épreuves indépendantes."
+        - "Exemples de marches aléatoires."
+
+    variables_aleatoires:
+      contenus:
+        - "Variable aléatoire réelle : modélisation du résultat numérique d'une expérience aléatoire ; formalisation comme fonction définie sur l'univers et à valeurs réelles."
+        - "Loi d'une variable aléatoire."
+        - "Espérance, variance, écart type d'une variable aléatoire."
+      capacites_attendues:
+        - "Interpréter en situation et utiliser les notations \\( \\{X = a\\} \\), \\( \\{X \\leq a\\} \\), \\( P(X = a) \\), \\( P(X \\leq a) \\). Passer du registre de la langue naturelle au registre symbolique et inversement."
+        - "Modéliser une situation à l'aide d'une variable aléatoire."
+        - "Déterminer la loi de probabilité d'une variable aléatoire."
+        - "Calculer une espérance, une variance, un écart type."
+        - "Utiliser la notion d'espérance dans une résolution de problème (mise pour un jeu équitable…)."
+      exemples_algorithmes:
+        - "Algorithme renvoyant l'espérance, la variance ou l'écart type d'une variable aléatoire."
+        - "Fréquence d'apparition des lettres d'un texte donné, en français, en anglais."
+      approfondissements_possibles:
+        - "Formule de König-Huygens."
+        - "Pour \\( X \\) variable aléatoire, étude de la fonction du second degré \\( x \\mapsto E((X - x)^2) \\)."
+      experimentations:
+        - "Simuler une variable aléatoire avec Python."
+        - "Lire, comprendre et écrire une fonction Python renvoyant la moyenne d'un échantillon de taille \\( n \\) d'une variable aléatoire."
+        - "Étudier sur des exemples la distance entre la moyenne d'un échantillon simulé de taille \\( n \\) d'une variable aléatoire et l'espérance de cette variable aléatoire."
+        - "Simuler, avec Python ou un tableur, \\( N \\) échantillons de taille \\( n \\) d'une variable aléatoire, d'espérance \\( \\mu \\) et d'écart type \\( \\sigma \\). Si \\( m \\) désigne la moyenne d'un échantillon, calculer la proportion des cas où l'écart entre \\( m \\) et \\( \\mu \\) est inférieur ou égal à \\( 2 \\sigma / \\sqrt{n} \\)."
+
+  algorithmique_programmation:
+    description: |
+      La démarche algorithmique est, depuis les origines, une composante essentielle de l'activité mathématique.
+      Au collège, en mathématiques et en technologie, les élèves ont appris à écrire, mettre au point et exécuter un programme simple.
+      La classe de seconde a permis de consolider les acquis du cycle 4 autour de deux idées essentielles :
+      \begin{itemize}
+        \item "la notion de fonction;"
+        \item "la programmation comme production d'un texte dans un langage informatique."
+      \end{itemize}
+      L'enseignement de spécialité de mathématiques de classe de première vise la consolidation des notions de variable, d'instruction conditionnelle et de boucle ainsi que l'utilisation des fonctions.
+      La seule notion nouvelle est celle de liste qui trouve naturellement sa place dans de nombreuses parties du programme et aide à la compréhension de notions mathématiques telles que les suites numériques, les tableaux de valeurs, les séries statistiques…
+      Comme en classe de seconde, les algorithmes peuvent être écrits en langage naturel ou utiliser le langage Python.
+      Les notions relatives aux types de variables et à l'affectation sont consolidées.
+      Comme en classe de seconde, on utilise le symbole « ← » pour désigner l'affectation dans un algorithme écrit en langage naturel.
+      L'accent est mis sur la programmation modulaire qui permet de découper une tâche complexe en tâches plus simples.
+    notion_liste:
+      description: |
+        La génération des listes en compréhension et en extension est mise en lien avec la notion d'ensemble.
+        Les conditions apparaissant dans les listes définies en compréhension permettent de travailler la logique.
+        Afin d'éviter des confusions, on se limite aux listes sans présenter d'autres types de collections.
+      capacites_attendues:
+        - "Générer une liste (en extension, par ajouts successifs ou en compréhension)."
+        - "Manipuler des éléments d'une liste (ajouter, supprimer…) et leurs indices."
+        - "Parcourir une liste."
+        - "Itérer sur les éléments d'une liste."
+
+  vocabulaire_ensembliste_logique:
+    description: |
+      L'apprentissage des notations mathématiques et de la logique est transversal à tous les chapitres du programme.
+      Aussi, il importe d'y travailler d'abord dans des contextes où ils se présentent naturellement, puis de prévoir des temps où les concepts et types de raisonnement sont étudiés, après avoir été rencontrés plusieurs fois en situation.
+      Les élèves doivent connaître les notions d'élément d'un ensemble, de sous-ensemble, d'appartenance et d'inclusion, de réunion, d'intersection et de complémentaire et savoir utiliser les symboles de base correspondants : \\( \\in \\), \\( \\subset \\), \\( \\cap \\), \\( \\cup \\) ainsi que la notation des ensembles de nombres et des intervalles.
+      Ils rencontrent également la notion de couple et celle de produit cartésien de deux ensembles.
+      Pour le complémentaire d'un sous-ensemble \\( A \\) de \\( E \\), on utilise la notation \\( \\overline{A} \\) des probabilités, ou la notation \\( E \\setminus A \\).
+      Les élèves apprennent en situation à :
+      \begin{itemize}
+        \item "lire et écrire des propositions contenant les connecteurs logiques « et », « ou »;"
+        \item "mobiliser un contre-exemple pour montrer qu'une proposition est fausse;"
+        \item "formuler une implication, une équivalence logique, et à les mobiliser dans un raisonnement simple;"
+        \item "formuler la réciproque d'une implication;"
+        \item "employer les expressions « condition nécessaire », « condition suffisante »;"
+        \item "identifier le statut des égalités (identité, équation) et celui des lettres utilisées (variable, inconnue, paramètre);"
+        \item "utiliser les quantificateurs (les symboles \\( \\forall \\) et \\( \\exists \\) ne sont pas exigibles) et repérer les quantifications implicites dans certaines propositions, particulièrement dans les propositions conditionnelles;"
+        \item "formuler la négation de propositions quantifiées."
+      \end{itemize}
+      Par ailleurs, les élèves produisent des raisonnements par disjonction des cas, par l'absurde, par contraposée, et en découvrent la structure.
