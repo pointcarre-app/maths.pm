@@ -1,3 +1,10 @@
+# BAC Automatismes - Programme de Première avec distinction des niveaux
+# Les compétences sont suffixées selon leur niveau :
+# - _2DE : Compétences du programme de seconde mobilisables au BAC (items 1-12, 15-39)
+# - _1ERE : Compétences spécifiques au programme de première (items 13-14, 40-41)
+#   * Items 13-14 : Équations produit nul et signe d'expressions du second degré
+#   * Items 40-41 : Probabilités conditionnelles et distinctions P(A∩B), P_A(B), P_B(A)
+
 - section: "Calcul numérique et algébrique"
   items:
     - content: "Comparer deux nombres directement ou par calcul :"
@@ -36,9 +43,9 @@
     - content: "Effectuer une application numérique d'une formule (notamment pour les formules utilisées dans les autres disciplines)"
       ministry_id: "bac_1_auto_12_2DE"
     - content: "Déterminer les solutions d'une équation produit nul"
-      ministry_id: "bac_1_auto_13_2DE"
+      ministry_id: "bac_1_auto_13_1ERE"
     - content: "Déterminer le signe d'une expression du premier degré, d'une expression factorisée du second degré"
-      ministry_id: "bac_1_auto_14_2DE"
+      ministry_id: "bac_1_auto_14_1ERE"
 
 - section: "Proportions et pourcentages"
   items:
@@ -106,6 +113,6 @@
     - content: "Utiliser la relation $P(A) = \\frac{\\text{cas favorables}}{\\text{cas possibles}}$ dans le cas de l'équiprobabilité"
       ministry_id: "bac_1_auto_39_2DE"
     - content: "Calculer des probabilités conditionnelles lorsque les événements sont présentés sous forme de tableau croisé d'effectifs ou d'arbres pondérés"
-      ministry_id: "bac_1_auto_40_2DE"
+      ministry_id: "bac_1_auto_40_1ERE"
     - content: "Distinguer $P(A \\cap B)$, $P_A(B)$, $P_B(A)$"
-      ministry_id: "bac_1_auto_41_2DE"
+      ministry_id: "bac_1_auto_41_1ERE"

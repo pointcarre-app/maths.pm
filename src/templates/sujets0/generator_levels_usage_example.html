@@ -1,0 +1,102 @@
+{# 
+  Generator Levels Usage Example
+  ===============================
+  
+  This template snippet demonstrates how to use the generator level information
+  that is now available in all sujets0 views. The GENERATOR_LEVELS dictionary
+  maps each generator to its education level (2DE or 1ERE) based on the 
+  COMPETENCES_MAPPING.md analysis.
+  
+  Available in context:
+  - generator_levels: Full dictionary of all generator levels
+  - get_generator_level: Helper function to get level info for a generator
+#}
+
+{# Example 1: Display level badge for a generator #}
+{% if generator_name %}
+  {% set level_info = get_generator_level(generator_name) %}
+  <span class="badge
+               {% if level_info.level == '1ERE' %}
+                 badge-warning
+               {% else %}
+                 badge-info
+               {% endif %}"
+        title="{{ level_info.note or 'Niveau ' + level_info.level }}">{{ level_info.level }}</span>
+{% endif %}
+
+{# Example 2: Loop through generators with levels #}
+<div class="grid grid-cols-2 gap-4">
+  {% for gen_name, gen_info in generator_levels.items() %}
+    <div class="card bg-base-100 shadow">
+      <div class="card-body">
+        <h3 class="card-title text-sm">{{ gen_name }}</h3>
+        <div class="flex items-center gap-2">
+          <span class="badge {% if gen_info.level == '1ERE' %}badge-warning{% else %}badge-info{% endif %}">
+            {{ gen_info.level }}
+          </span>
+          {% if gen_info.note %}<span class="text-xs text-gray-500">{{ gen_info.note }}</span>{% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{# Example 3: Filter generators by level #}
+<div class="tabs">
+  <a class="tab tab-bordered tab-active" data-level="all">Tous</a>
+  <a class="tab tab-bordered" data-level="2DE">Seconde (2DE)</a>
+  <a class="tab tab-bordered" data-level="1ERE">Première (1ERE)</a>
+</div>
+
+<script>
+    // Example of filtering generators by level in JavaScript
+    function filterByLevel(level) {
+        const generators = {
+            {
+                generator_levels | tojson
+            }
+        };
+
+        if (level === 'all') {
+            return generators;
+        }
+
+        return Object.entries(generators)
+            .filter(([name, info]) => info.level === level)
+            .reduce((acc, [name, info]) => {
+                acc[name] = info;
+                return acc;
+            }, {});
+    }
+</script>
+
+{# Example 4: Statistics by level #}
+{% set stats_2de = generator_levels.values() | selectattr('level', 'equalto', '2DE') | list | length %}
+{% set stats_1ere = generator_levels.values() | selectattr('level', 'equalto', '1ERE') | list | length %}
+{% set stats_demanding = generator_levels.values() | selectattr('note', 'containing', 'demanding') | list | length %}
+
+<div class="stats shadow">
+  <div class="stat">
+    <div class="stat-title">Niveau 2DE</div>
+    <div class="stat-value text-primary">{{ stats_2de }}</div>
+    <div class="stat-desc">Accessible en seconde</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Niveau 1ERE</div>
+    <div class="stat-value text-warning">{{ stats_1ere }}</div>
+    <div class="stat-desc">Spécifique première</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Exigeants</div>
+    <div class="stat-value text-secondary">{{ stats_demanding }}</div>
+    <div class="stat-desc">Mais faisables en 2DE</div>
+  </div>
+</div>
+
+{# Color coding reference:
+   - badge-info (blue): 2DE level (seconde)
+   - badge-warning (yellow): 1ERE level (première)
+   - Special notes appear in tooltips
+#}

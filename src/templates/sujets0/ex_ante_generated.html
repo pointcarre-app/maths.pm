@@ -58,7 +58,11 @@
             <select id="generator-select" class="select select-bordered w-full max-w-xs">
               <option value="all">Tous les générateurs</option>
               {% for generator in questions_index.generators %}
-                <option value="{{ generator.name }}">{{ generator.name }} ({{ generator.successful }}/100)</option>
+                <option value="{{ generator.name }}">
+                  {{ generator.name }}
+                  {% if generator.level %}[{{ generator.level }}]{% endif %}
+                  ({{ generator.successful }}/100)
+                </option>
               {% endfor %}
             </select>
           </div>

@@ -37,7 +37,7 @@
         {% endif %}
       </div>
     </div>
-    <p class="text-sm mb-4">{{ product.description }}</p>
+    <p class="text-sm mb-4">{{ product.description | safe }}</p>
     <div class="flex flex-row gap-4">
       <a href="{{ product.local_path }}"
          class="btn cursor-pointer btn-sm btn-outline btn-primary shadow-none

@@ -149,7 +149,20 @@
                     data-error-type="{{ error.error_type }}"
                     data-error="{{ error.error | lower }}">
                   <td>{{ loop.index }}</td>
-                  <td class="font-mono text-sm">{{ error.generator }}</td>
+                  <td class="font-mono text-sm">
+                    {{ error.generator }}
+                    {% if error.level %}
+                      <span class="badge badge-xs
+                                   {% if error.level == '1ERE' %}
+                                     badge-warning
+                                   {% else %}
+                                     badge-info
+                                   {% endif %}"
+                            title="{{ error.level_note or 'Niveau ' + error.level }}">
+                        {{ error.level }}
+                      </span>
+                    {% endif %}
+                  </td>
                   <td class="text-center">{{ error.seed }}</td>
                   <td>
                     <span class="badge badge-error">{{ error.error_type }}</span>

@@ -229,6 +229,12 @@ function displayQuestions() {
         const cardClass = isSuccess ? 'bg-base-100' : 'bg-error/10 border-error/20';
         const badgeClass = isSuccess ? 'badge-outline' : 'badge-error';
         
+        // Get level from generator information
+        const generatorInfo = QUESTIONS_INDEX.generators.find(g => g.name === q.generator_name);
+        const level = generatorInfo?.level || '';
+        const levelNote = generatorInfo?.level_note || '';
+        const levelBadgeClass = level === '1ERE' ? 'badge-warning' : 'badge-info';
+        
         return `
         <div class="card ${cardClass} shadow-xl">
             <div class="card-body">
@@ -237,7 +243,10 @@ function displayQuestions() {
                         Question ${start + idx + 1} / ${filteredQuestions.length}
                         ${!isSuccess ? '<span class="text-error ml-2">[Échec]</span>' : ''}
                     </h3>
-                    <div class="badge ${badgeClass}">${q.generator_name || 'Unknown'}</div>
+                    <div class="flex gap-2">
+                        ${level ? `<div class="badge ${levelBadgeClass}" title="${levelNote || 'Niveau ' + level}">${level}</div>` : ''}
+                        <div class="badge ${badgeClass}">${q.generator_name || 'Unknown'}</div>
+                    </div>
                 </div>
                 
                 <div class="divider my-2"></div>

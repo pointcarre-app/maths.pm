@@ -155,61 +155,62 @@ async function loadPackagesAndTeachers() {
     try {
         console.log("🧪 Loading packages and teachers module...");
         
-        // Files to load for teachers module
-        //const filesToLoad = [
-            //{
-                //url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/__init__.py",
-                //path: "teachers/__init__.py",
-            //},
-            //{
-                //url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/generator.py",
-                //path: "teachers/generator.py",
-            //},
-            //{
-                //url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/maths.py",
-                //path: "teachers/maths.py",
-            //},
-            //{
-                //url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/formatting.py",
-                //path: "teachers/formatting.py",
-            //},
-            //{
-                //url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/corrector.py",
-                //path: "teachers/corrector.py",
-            //},
-            //{
-                //url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.4/src/teachers/defaults.py",
-                //path: "teachers/defaults.py",
-            //}
-        //];
-
-
+        // Files to load for teachers module‡
         const filesToLoad = [
             {
-                url: "http://127.0.0.1:8001/src/teachers/__init__.py",
+                url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/__init__.py",
                 path: "teachers/__init__.py",
             },
             {
-                url: "http://127.0.0.1:8001/src/teachers/generator.py",
+                url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/generator.py",
                 path: "teachers/generator.py",
             },
             {
-                url: "http://127.0.0.1:8001/src/teachers/maths.py",
+                url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/maths.py",
                 path: "teachers/maths.py",
             },
             {
-                url: "http://127.0.0.1:8001/src/teachers/formatting.py",
+                url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/formatting.py",
                 path: "teachers/formatting.py",
             },
             {
-                url: "http://127.0.0.1:8001/src/teachers/corrector.py",
+                url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/corrector.py",
                 path: "teachers/corrector.py",
             },
             {
-                url: "http://127.0.0.1:8001/src/teachers/defaults.py",
+                url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/defaults.py",
                 path: "teachers/defaults.py",
             }
+              
         ];
+
+
+        // const filesToLoad = [
+        //     {
+        //         url: "http://127.0.0.1:8001/src/teachers/__init__.py",
+        //         path: "teachers/__init__.py",
+        //     },
+        //     {
+        //         url: "http://127.0.0.1:8001/src/teachers/generator.py",
+        //         path: "teachers/generator.py",
+        //     },
+        //     {
+        //         url: "http://127.0.0.1:8001/src/teachers/maths.py",
+        //         path: "teachers/maths.py",
+        //     },
+        //     {
+        //         url: "http://127.0.0.1:8001/src/teachers/formatting.py",
+        //         path: "teachers/formatting.py",
+        //     },
+        //     {
+        //         url: "http://127.0.0.1:8001/src/teachers/corrector.py",
+        //         path: "teachers/corrector.py",
+        //     },
+        //     {
+        //         url: "http://127.0.0.1:8001/src/teachers/defaults.py",
+        //         path: "teachers/defaults.py",
+        //     }
+        // ];
         
         // Create a new manager with packages and teachers module
         const manager = await Nagini.createManager(

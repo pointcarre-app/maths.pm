@@ -13,10 +13,12 @@ Les générateurs de questions sont organisés en deux catégories principales :
 Chaque générateur est mappé à une ou plusieurs compétences du référentiel. Les compétences automatismes relevant du programme de seconde sont suffixées _2DE (automatismes 1-12, 15-39), tandis que celles spécifiques à la première sont suffixées _1ERE (automatismes 13-14, 40-41).
 
 ### Répartition par niveau des générateurs :
-- **Niveau 2DE** : 23 générateurs sur 24 (la plupart des questions restent accessibles aux élèves de seconde)
-  - Dont 2 marqués "demanding but manageable" (exigeants mais faisables) : `spe_sujet1_auto_07`, `spe_sujet2_auto_10`
+- **Niveau 2DE** : 21 générateurs sur 24 (la majorité des questions restent accessibles aux élèves de seconde)
   - Un marqué avec note spéciale : `spe_sujet2_auto_04` (utilise des probabilités conditionnelles mais reste accessible)
-- **Niveau 1ERE** : 1 seul générateur (`spe_sujet2_auto_01` pour les probabilités conditionnelles pures)
+- **Niveau 1ERE** : 3 générateurs
+  - `spe_sujet1_auto_07` : Inéquations du second degré (x² > n)
+  - `spe_sujet2_auto_01` : Probabilités conditionnelles pures (P(B|A))
+  - `spe_sujet2_auto_10` : Signe d'expressions factorisées du second degré
 
 ## Dictionnaire de Mapping des Fichiers aux Compétences
 
@@ -143,7 +145,7 @@ Chaque générateur est mappé à une ou plusieurs compétences du référentiel
 
 **Pourquoi ?** Transforme une inéquation quadratique en signes du 1er degré via racines.
 
-> **Niveau : 2DE** (demanding but manageable)
+> **Niveau : 1ERE**
 
 #### 8. `spe_sujet1_auto_08_question.py`
 **Résumé** : Donner l'équation y = ax + b d'une droite à partir d'un graphique.
@@ -218,9 +220,9 @@ Chaque générateur est mappé à une ou plusieurs compétences du référentiel
 **Résumé** : Prix initial, diminution de p%, calculer le nouveau prix.
 
 **Compétences assignées** :
-- `bac_1_auto_17_1ERE` : Passer d'additif ("diminue de p%") à multiplicatif (multiplier par 1 - p/100).
-- `bac_1_auto_18_1ERE` : Appliquer un taux d'évolution pour valeur finale.
-- `bac_1_auto_19_1ERE` : Calculer un taux d'évolution (implicite dans la conversion).
+- `bac_1_auto_17_2DE` : Passer d'additif ("diminue de p%") à multiplicatif (multiplier par 1 - p/100).
+- `bac_1_auto_18_2DE` : Appliquer un taux d'évolution pour valeur finale.
+- `bac_1_auto_19_2DE` : Calculer un taux d'évolution (implicite dans la conversion).
 
 **Pourquoi ?** C'est un calcul direct d'évolution unique, avec conversion additive/multiplicative.
 
@@ -230,10 +232,10 @@ Chaque générateur est mappé à une ou plusieurs compétences du référentiel
 **Résumé** : Augmentation puis diminution d'un prix par p%, calculer le pourcentage global de variation (identique à un fichier de sujet1).
 
 **Compétences assignées** :
-- `bac_1_auto_17_1ERE` : Conversion additive/multiplicative pour évolutions.
-- `bac_1_auto_18_1ERE` : Appliquer taux pour valeur finale.
-- `bac_1_auto_19_1ERE` : Calculer taux d'évolution en %.
-- `bac_1_auto_20_1ERE` : Taux équivalent à évolutions successives.
+- `bac_1_auto_17_2DE` : Conversion additive/multiplicative pour évolutions.
+- `bac_1_auto_18_2DE` : Appliquer taux pour valeur finale.
+- `bac_1_auto_19_2DE` : Calculer taux d'évolution en %.
+- `bac_1_auto_20_2DE` : Taux équivalent à évolutions successives.
 
 **Pourquoi ?** Identique à un cas précédent ; focus sur évolutions composées et taux global.
 
@@ -267,7 +269,7 @@ Chaque générateur est mappé à une ou plusieurs compétences du référentiel
 
 **Compétences assignées** :
 - `bac_1_auto_3_2DE` : Opérations sur puissances (division avec exposants).
-- `bac_1_auto_4_1ERE` : Passer d'une écriture décimale/fractionnaire.
+- `bac_1_auto_4_2DE` : Passer d'une écriture décimale/fractionnaire.
 - `bac_1_auto_7_2DE` : Conversions d'unités (énergie : J à kWh).
 
 **Pourquoi ?** Implique manipulation de puissances et conversion d'unités avec arrondi.
@@ -315,7 +317,7 @@ Chaque générateur est mappé à une ou plusieurs compétences du référentiel
 
 **Pourquoi ?** Analyse de signe via racines et coefficients, pour un intervalle spécifique.
 
-> **Niveau : 2DE** (demanding but manageable)
+> **Niveau : 1ERE**
 
 #### 11. `spe_sujet2_auto_11_question.py`
 **Résumé** : Développer (x + a)^2.

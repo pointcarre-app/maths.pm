@@ -266,6 +266,7 @@ class FragmentBuilder:
 
         # Check for i-radio class on the parent list element (ul/ol)
         list_classes = tag.get("class", [])
+
         #  WARNING : all on all then... bad
         li_classes = list(set([i for s in lis for i in s.get("class", [])]))
 
@@ -343,11 +344,6 @@ class FragmentBuilder:
                 li.attrs = {}
 
             tag.attrs["class"] = ""
-
-            ul_or_ol = tag.find("ul") or tag.find("ol")
-
-            if ul_or_ol:
-                ul_or_ol.attrs["class"] = ["list"]
 
             # print(tag)
 

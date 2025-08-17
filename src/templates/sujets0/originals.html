@@ -28,265 +28,25 @@
   {% endif %}
 
   <style>
-      .curriculum-section {
-          background: white;
-          border-radius: 8px;
-          padding: 1.5rem;
-          margin-bottom: 1.5rem;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
+      /* Minimal custom CSS - Most styling using DaisyUI and Tailwind */
 
-      .question-card {
-          border: 1px solid #e5e7eb;
-          border-radius: 6px;
-          padding: 1.5rem;
-          margin-bottom: 1.5rem;
-          background: white;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      }
-
-      .question-statement {
-          font-weight: 500;
-          margin-bottom: 1rem;
-          color: #1f2937;
-          font-size: 1.1rem;
-          line-height: 1.6;
-      }
-
-      .choices-container {
-          margin: 1rem 0;
-      }
-
-      .choice-item {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          padding: 1rem;
-          margin-bottom: 0.5rem;
-          border: 2px solid #e5e7eb;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          background: #fafafa;
-          min-height: 3.5rem;
-      }
-
-      .choice-item:hover {
-          border-color: #3b82f6;
-          background: #f0f9ff;
-      }
-
+      /* Custom states for quiz choices that can't be achieved with utilities alone */
       .choice-item.selected {
-          border-color: #3b82f6;
-          background: #dbeafe;
+          @apply border-primary bg-primary/10;
       }
 
       .choice-item.correct {
-          border-color: #10b981;
-          background: #d1fae5;
+          @apply border-success bg-success/10;
       }
 
       .choice-item.incorrect {
-          border-color: #ef4444;
-          background: #fee2e2;
+          @apply border-error bg-error/10;
       }
 
-      .choice-radio {
-          margin-right: 1rem;
-          flex-shrink: 0;
-      }
-
-      /* Override DaisyUI radio styling for better alignment */
-      .radio.choice-radio {
-          width: 1.25rem;
-          height: 1.25rem;
-      }
-
-      .choice-label {
-          font-weight: 400;
-          color: #3b82f6;
-          margin-right: 0.75rem;
-          min-width: 2rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.1rem;
-      }
-
-      .choice-text {
-          flex: 1;
-          color: #1f2937;
-          line-height: 1.6;
-          display: flex;
-          align-items: center;
-          font-size: 1.05rem;
-      }
-
-      .question-actions {
-          margin-top: 1rem;
-          display: flex;
-          gap: 0.75rem;
-          align-items: center;
-      }
-
-      .check-answer-btn {
-          background: #3b82f6;
-          color: white;
-          border: none;
-          padding: 0.5rem 1rem;
-          border-radius: 6px;
-          cursor: pointer;
-          font-weight: 500;
-          transition: background 0.2s;
-      }
-
-      .check-answer-btn:hover {
-          background: #2563eb;
-      }
-
-      .check-answer-btn:disabled {
-          background: #9ca3af;
-          cursor: not-allowed;
-      }
-
-      .reset-btn {
-          background: #6b7280;
-          color: white;
-          border: none;
-          padding: 0.5rem 1rem;
-          border-radius: 6px;
-          cursor: pointer;
-          font-weight: 500;
-          transition: background 0.2s;
-      }
-
-      .reset-btn:hover {
-          background: #4b5563;
-      }
-
-      .feedback {
-          margin-top: 1rem;
-          padding: 0.75rem;
-          border-radius: 6px;
-          font-weight: 500;
-          display: none;
-      }
-
-      .feedback.correct {
-          background: #d1fae5;
-          color: #065f46;
-          border: 1px solid #10b981;
-      }
-
-      .feedback.incorrect {
-          background: #fee2e2;
-          color: #991b1b;
-          border: 1px solid #ef4444;
-      }
-
-      .score-summary {
-          background: #f3f4f6;
-          border-radius: 8px;
-          padding: 1rem;
-          margin-top: 2rem;
-          text-align: center;
-      }
-
-      .score-summary h3 {
-          color: #374151;
-          margin-bottom: 0.5rem;
-      }
-
-      .score-summary.hidden {
-          display: none;
-      }
-
-      .generators-section {
-          background: #f3f4f6;
-          border-radius: 8px;
-          padding: 1.5rem;
-          margin-top: 2rem;
-      }
-
-      .generator-link {
-          display: inline-block;
-          background: #3b82f6;
-          color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 4px;
-          text-decoration: none;
-          margin: 0.25rem;
-          font-size: 0.875rem;
-      }
-
-      .generator-link:hover {
-          background: #2563eb;
-          color: white;
-      }
-
-      .navigation-pills {
-          display: flex;
-          gap: 0.5rem;
-          margin-bottom: 2rem;
-          flex-wrap: wrap;
-      }
-
-      .nav-pill {
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          text-decoration: none;
-          font-size: 0.875rem;
-          font-weight: 500;
-          transition: all 0.2s;
-      }
-
-      .nav-pill.active {
-          background: #3b82f6;
-          color: white;
-      }
-
-      .nav-pill:not(.active) {
-          background: #e5e7eb;
-          color: #6b7280;
-      }
-
-      .nav-pill:not(.active):hover {
-          background: #d1d5db;
-          color: #374151;
-      }
-
-      .nav-pill.has-data {
-          position: relative;
-      }
-
-      .nav-pill.has-data::after {
+      /* Custom indicator for navigation pills with data */
+      .nav-pill-indicator::after {
           content: '✓';
-          position: absolute;
-          top: -4px;
-          right: -4px;
-          background: #10b981;
-          color: white;
-          font-size: 10px;
-          border-radius: 50%;
-          width: 16px;
-          height: 16px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-      }
-
-      .exercise-section {
-          border-left: 4px solid #3b82f6;
-          padding-left: 1rem;
-          margin: 1.5rem 0;
-      }
-
-      .sub-question {
-          margin: 1rem 0;
-          padding: 0.75rem;
-          background: white;
-          border-radius: 4px;
-          border: 1px solid #e5e7eb;
+          @apply absolute -top-1 -right-1 bg-success text-white text-xs rounded-full w-4 h-4 flex items-center justify-center;
       }
   </style>
 
@@ -387,7 +147,7 @@
           const feedback = document.getElementById(`feedback-${questionId}`);
           if (feedback) {
               feedback.style.display = 'block';
-              feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+              feedback.className = isCorrect ? 'alert alert-success mt-4' : 'alert alert-error mt-4';
               feedback.innerHTML = isCorrect ?
                   `✅ <strong>Correct!</strong> Bonne réponse: ${correctAnswer}` :
                   `❌ <strong>Incorrect.</strong> La bonne réponse était: <strong>${correctAnswer}</strong>`;
@@ -462,15 +222,19 @@
           if (answeredQuestions.length > 0) {
               scoreSummary.classList.remove('hidden');
               const percentage = Math.round((correctAnswers.length / answeredQuestions.length) * 100);
-              scoreText.textContent = `Score: ${correctAnswers.length}/${answeredQuestions.length} (${percentage}%)`;
+              scoreText.textContent = `${correctAnswers.length}/${answeredQuestions.length}`;
 
-              // Update color based on performance
-              if (percentage >= 80) {
-                  scoreText.style.color = '#065f46'; // green
-              } else if (percentage >= 60) {
-                  scoreText.style.color = '#d97706'; // orange
-              } else {
-                  scoreText.style.color = '#991b1b'; // red
+              // Update stat color class based on performance
+              const statDiv = scoreText.closest('.stat');
+              if (statDiv) {
+                  statDiv.className = 'stat stat-sm';
+                  if (percentage >= 80) {
+                      statDiv.classList.add('text-success');
+                  } else if (percentage >= 60) {
+                      statDiv.classList.add('text-warning');
+                  } else {
+                      statDiv.classList.add('text-error');
+                  }
               }
           } else {
               scoreSummary.classList.add('hidden');
@@ -485,70 +249,110 @@
 
       {# Header #}
       <div class="mb-8">
-        <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
-          <a href="{{ request.url_for('sujets0') }}" class="hover:text-blue-600">Sujets 0</a>
-          <span>→</span>
-          <span>Questions Originales</span>
-          <span>→</span>
-          <span class="font-semibold">{{ filiere_number.upper() }}</span>
+        <div class="breadcrumbs text-sm mb-2">
+          <ul>
+            <li>
+              <a href="{{ request.url_for('sujets0') }}" class="link link-hover">Sujets 0</a>
+            </li>
+            <li>Questions Originales</li>
+            <li class="font-semibold">{{ filiere_number.upper() }}</li>
+          </ul>
         </div>
 
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ filiere_title }}</h1>
-        <p class="text-lg text-gray-600">{{ filiere_description }}</p>
+        <h1 class="text-3xl font-bold mb-2">
+          {{ filiere_title }}
+          {% if filiere_level and filiere_level != "N/A" %}
+            <span class="badge
+                         {% if filiere_level == '1ERE' %}
+                           badge-warning
+                         {% else %}
+                           badge-success
+                         {% endif %}
+                         badge-lg ml-3"
+                  title="{{ filiere_level_note }}">Niveau {{ filiere_level }}</span>
+          {% endif %}
+        </h1>
+        <p class="text-lg opacity-70">{{ filiere_description }}</p>
       </div>
 
       {# Navigation pills for different filieres #}
-      <div class="navigation-pills">
+      <div class="tabs tabs-boxed mb-6">
         {% for filiere in valid_filieres %}
           <a href="{{ request.url_for('sujets0_originals', filiere_number=filiere) }}"
-             class="nav-pill
-                    {% if filiere == filiere_number %}active{% endif %}
-                    {% if filiere_config[filiere].yaml_file %}has-data{% endif %}">{{ filiere.upper() }}</a>
+             class="tab
+                    {% if filiere == filiere_number %}tab-active{% endif %}
+                    {% if filiere_config[filiere].yaml_file %}relative nav-pill-indicator{% endif %}">
+            {{ filiere.upper() }}
+            {% if all_filieres_levels and all_filieres_levels[filiere] and all_filieres_levels[filiere] != "N/A" %}
+              <span class="badge badge-xs
+                           {% if all_filieres_levels[filiere] == '1ERE' %}
+                             badge-warning
+                           {% else %}
+                             badge-success
+                           {% endif %}
+                           ml-1">{{ all_filieres_levels[filiere] }}</span>
+            {% endif %}
+          </a>
         {% endfor %}
       </div>
 
       {# Legend for navigation pills #}
-      <div class="text-sm text-gray-600 mb-6 flex items-center gap-4">
+      <div class="text-sm opacity-70 mb-6 flex items-center gap-4 flex-wrap">
         <span class="flex items-center gap-1">
-          <span class="w-3 h-3 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</span>
+          <span class="badge badge-success badge-xs">✓</span>
           Données officielles disponibles
         </span>
-        <span class="text-gray-500">•</span>
+        <span>•</span>
         <span>Autres: générateurs automatiques uniquement</span>
+        <span class="divider divider-horizontal mx-2"></span>
+        <span class="flex items-center gap-1.5">
+          <span class="badge badge-success badge-xs">2DE</span>
+          Niveau Seconde
+        </span>
+        <span class="flex items-center gap-1.5">
+          <span class="badge badge-warning badge-xs">1ERE</span>
+          Niveau Première
+        </span>
       </div>
 
       {# Curriculum Content #}
       {% if not has_official_data %}
         {# Empty state for filieres without official data #}
-        <div class="curriculum-section">
-          <div class="text-center py-12">
+        <div class="card bg-base-200 shadow-lg mb-6">
+          <div class="card-body text-center py-12">
             <div class="text-6xl mb-4">📚</div>
-            <h2 class="text-2xl font-bold text-gray-700 mb-4">Données officielles non disponibles</h2>
-            <p class="text-lg text-gray-600 mb-6">
+            <h2 class="card-title justify-center text-2xl mb-4">Données officielles non disponibles</h2>
+            <p class="text-lg opacity-80 mb-6">
               Les questions officielles pour <strong>{{ filiere_number.upper() }}</strong> ne sont pas encore disponibles.
             </p>
 
-            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 max-w-2xl mx-auto mb-6">
-              <h3 class="text-lg font-semibold text-blue-800 mb-3">Que faire en attendant ?</h3>
-              <ul class="text-left text-blue-700 space-y-2">
-                <li class="flex items-start gap-2">
-                  <span class="text-blue-500 mt-1">•</span>
-                  <span>Consultez les <strong>générateurs automatiques</strong> ci-dessous pour des questions similaires</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-blue-500 mt-1">•</span>
-                  <span>Explorez <a href="{{ request.url_for('sujets0_originals', filiere_number='spe-1') }}"
-    class="underline font-semibold">SPE-1</a> qui contient les données officielles</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-blue-500 mt-1">•</span>
-                  <span>Utilisez les <a href="{{ request.url_for('sujets0_ex_ante_generated') }}" class="underline font-semibold">questions pré-générées</a> pour des exercices instantanés</span>
-                </li>
-              </ul>
+            <div class="alert alert-info text-left max-w-2xl mx-auto mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   class="stroke-current shrink-0 w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+              </svg>
+              <div>
+                <h3 class="font-bold mb-3">Que faire en attendant ?</h3>
+                <ul class="list-disc list-inside space-y-2">
+                  <li>
+                    Consultez les <strong>générateurs automatiques</strong> ci-dessous pour des questions similaires
+                  </li>
+                  <li>
+                    Explorez <a href="{{ request.url_for('sujets0_originals', filiere_number='spe-1') }}"
+    class="link link-primary font-semibold">SPE-1</a> qui contient les données officielles
+                  </li>
+                  <li>
+                    Utilisez les <a href="{{ request.url_for('sujets0_ex_ante_generated') }}" class="link link-primary font-semibold">questions pré-générées</a> pour des exercices instantanés
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {% if related_generators %}
-              <div class="text-gray-600">
+              <div class="opacity-70">
                 <p class="mb-4">
                   Cependant, <strong>{{ related_generators|length }} générateurs</strong> sont disponibles pour créer des questions automatiques de cette filière :
                 </p>
@@ -561,206 +365,254 @@
 
         {# Part 1: Multiple Choice Questions - Interactive QCM #}
         {% if curriculum_data.part_1 %}
-          <div class="curriculum-section">
-            <div class="flex justify-between items-center mb-6">
-              <h2 class="text-2xl font-bold text-gray-900">Partie 1 - Questions à Choix Multiple</h2>
-              <div class="score-summary hidden" id="score-summary">
-                <h3 id="score-text">Score: 0/0</h3>
-                <button onclick="resetAllQuestions()" class="reset-btn mt-2">Recommencer tout</button>
-              </div>
-            </div>
-
-            {% for question_key, question_data in curriculum_data.part_1.items() %}
-              <div class="question-card"
-                   data-question="{{ question_key }}"
-                   data-correct="{{ question_data.correct_answer }}">
-                <div class="flex justify-between items-start mb-3">
-                  <h3 class="text-lg font-semibold text-gray-800">{{ question_key.replace('_', ' ').title() }}</h3>
-                  <span class="text-sm text-gray-500 bg-blue-100 px-2 py-1 rounded">{{ filiere_number.upper() }}</span>
-                </div>
-
-                <div class="question-statement">{{ question_data.statement | safe }}</div>
-
-                {% if question_data.table %}
-                  <div class="my-4 p-4 bg-gray-50 rounded-lg border">
-                    <strong class="text-gray-700 block mb-3">Tableau:</strong>
-                    <div class="overflow-x-auto">
-                      <table class="table table-zebra table-sm w-full">
-                        <thead>
-                          <tr class="bg-gray-200">
-                            <th class="text-gray-700 font-semibold">Élément</th>
-                            <th class="text-gray-700 font-semibold">Valeur</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {% for key, value in question_data.table.items() %}
-                            <tr>
-                              <td class="font-medium text-gray-800">{{ key.replace('_', ' ').title() }}</td>
-                              <td class="font-mono text-gray-900">{{ value | safe }}</td>
-                            </tr>
-                          {% endfor %}
-                        </tbody>
-                      </table>
+          <div class="card bg-base-100 shadow-lg mb-6">
+            <div class="card-body">
+              <div class="flex justify-between items-center mb-6">
+                <h2 class="card-title text-2xl">Partie 1 - Questions à Choix Multiple</h2>
+                <div class="stats stats-vertical shadow hidden" id="score-summary">
+                  <div class="stat stat-sm">
+                    <div class="stat-title">Score</div>
+                    <div class="stat-value text-lg" id="score-text">0/0</div>
+                    <div class="stat-actions">
+                      <button onclick="resetAllQuestions()" class="btn btn-sm btn-ghost">Recommencer</button>
                     </div>
                   </div>
-                {% endif %}
-
-                {% if question_data.fonctions %}
-                  <div class="my-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <strong class="text-blue-800">Fonctions:</strong>
-                    <ul class="mt-2 space-y-1">
-                      {% for fonction in question_data.fonctions %}
-                        <li class="ml-4 font-mono text-blue-700">{{ fonction | safe }}</li>
-                      {% endfor %}
-                    </ul>
-                  </div>
-                {% endif %}
-
-                {% if question_data.question %}
-                  <div class="my-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200 font-medium text-yellow-800">
-                    {{ question_data.question | safe }}
-                  </div>
-                {% endif %}
-
-                {% if question_data.choices %}
-                  <div class="choices-container">
-                    {% for choice_key, choice_value in question_data.choices.items() %}
-                      <label class="choice-item flex items-center justify-start"
-                             onclick="selectChoice('{{ question_key }}', '{{ choice_key }}')">
-                        <input type="radio"
-                               name="{{ question_key }}_choice"
-                               value="{{ choice_key }}"
-                               class="radio radio-primary choice-radio flex-shrink-0" />
-                        <span class="choice-label flex items-center justify-center">{{ choice_key }})</span>
-                        <span class="choice-text flex items-center flex-1">{{ choice_value | safe }}</span>
-                      </label>
-                    {% endfor %}
-                  </div>
-
-                  <div class="question-actions">
-                    <button onclick="checkAnswer('{{ question_key }}')"
-                            class="check-answer-btn"
-                            id="check-{{ question_key }}"
-                            disabled>Vérifier la réponse</button>
-                    <button onclick="resetQuestion('{{ question_key }}')" class="reset-btn">Recommencer</button>
-                  </div>
-
-                  <div class="feedback" id="feedback-{{ question_key }}"></div>
-                {% endif %}
+                </div>
               </div>
-            {% endfor %}
 
-            <div class="mt-6 text-center">
-              <button onclick="checkAllAnswers()" class="check-answer-btn text-lg px-6 py-3">
-                🎯 Vérifier toutes les réponses
-              </button>
+              {% for question_key, question_data in curriculum_data.part_1.items() %}
+                <div class="card card-compact bg-base-200 mb-4 question-card"
+                     data-question="{{ question_key }}"
+                     data-correct="{{ question_data.correct_answer }}">
+                  <div class="card-body">
+                    <div class="flex justify-between items-start mb-3">
+                      <h3 class="card-title text-lg">{{ question_key.replace('_', ' ').title() }}</h3>
+                      <span class="badge badge-info badge-sm">{{ filiere_number.upper() }}</span>
+                      {% if filiere_level and filiere_level != "N/A" %}
+                        <span class="badge
+                                     {% if filiere_level == '1ERE' %}
+                                       badge-warning
+                                     {% else %}
+                                       badge-success
+                                     {% endif %}
+                                     badge-sm ml-1"
+                              title="{{ filiere_level_note }}">Niveau {{ filiere_level }}</span>
+                      {% endif %}
+                    </div>
+
+                    <div class="text-lg font-medium mb-4 leading-relaxed">{{ question_data.statement | safe }}</div>
+
+                    {% if question_data.table %}
+                      <div class="alert my-4">
+                        <div class="w-full">
+                          <strong class="block mb-3">Tableau:</strong>
+                          <div class="overflow-x-auto">
+                            <table class="table table-zebra table-sm w-full">
+                              <thead>
+                                <tr>
+                                  <th>Élément</th>
+                                  <th>Valeur</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for key, value in question_data.table.items() %}
+                                  <tr>
+                                    <td class="font-medium">{{ key.replace('_', ' ').title() }}</td>
+                                    <td class="font-mono">{{ value | safe }}</td>
+                                  </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+
+                    {% if question_data.fonctions %}
+                      <div class="alert alert-info my-4">
+                        <div>
+                          <strong>Fonctions:</strong>
+                          <ul class="mt-2 space-y-1 list-disc list-inside">
+                            {% for fonction in question_data.fonctions %}
+                              <li class="font-mono">{{ fonction | safe }}</li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                      </div>
+                    {% endif %}
+
+                    {% if question_data.question %}
+                      <div class="alert alert-warning my-4">
+                        <div class="font-medium">{{ question_data.question | safe }}</div>
+                      </div>
+                    {% endif %}
+
+                    {% if question_data.choices %}
+                      <div class="space-y-3 my-4">
+                        {% for choice_key, choice_value in question_data.choices.items() %}
+                          <label class="choice-item flex items-center gap-3 p-4 border-2 border-base-300 rounded-lg cursor-pointer hover:border-primary hover:bg-base-200 transition-all"
+                                 onclick="selectChoice('{{ question_key }}', '{{ choice_key }}')">
+                            <input type="radio"
+                                   name="{{ question_key }}_choice"
+                                   value="{{ choice_key }}"
+                                   class="radio radio-primary flex-shrink-0" />
+                            <span class="badge badge-outline badge-lg">{{ choice_key }}</span>
+                            <span class="text-base flex-1">{{ choice_value | safe }}</span>
+                          </label>
+                        {% endfor %}
+                      </div>
+
+                      <div class="flex gap-3 mt-4">
+                        <button onclick="checkAnswer('{{ question_key }}')"
+                                class="btn btn-primary"
+                                id="check-{{ question_key }}"
+                                disabled>Vérifier la réponse</button>
+                        <button onclick="resetQuestion('{{ question_key }}')" class="btn btn-outline">Recommencer</button>
+                      </div>
+
+                      <div class="hidden" id="feedback-{{ question_key }}"></div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+
+              <div class="mt-6 text-center">
+                <button onclick="checkAllAnswers()" class="btn btn-primary btn-lg">
+                  🎯 Vérifier toutes les réponses
+                </button>
+              </div>
             </div>
           </div>
         {% endif %}
 
         {# Part 2: Exercises #}
         {% if curriculum_data.part_2 %}
-          <div class="curriculum-section">
-            <h2 class="text-2xl font-bold mb-4 text-gray-900">Partie 2 - Exercices</h2>
+          <div class="card bg-base-100 shadow-lg mb-6">
+            <div class="card-body">
+              <h2 class="card-title text-2xl mb-4">Partie 2 - Exercices</h2>
 
-            {% for exercise_key, exercise_data in curriculum_data.part_2.items() %}
-              <div class="exercise-section">
-                <h3 class="text-xl font-semibold text-gray-800 mb-3">
-                  {{ exercise_key.replace('_', ' ').title() }}
-                </h3>
+              {% for exercise_key, exercise_data in curriculum_data.part_2.items() %}
+                <div class="border-l-4 border-primary pl-4 my-6">
+                  <h3 class="text-xl font-semibold mb-3">{{ exercise_key.replace('_', ' ').title() }}</h3>
 
-                <div class="question-statement mb-4">{{ exercise_data.statement | safe }}</div>
+                  <div class="text-lg mb-4">{{ exercise_data.statement | safe }}</div>
 
-                {% if exercise_data.data %}
-                  <div class="mb-4 p-3 bg-blue-50 rounded border border-blue-200">
-                    <strong>Données:</strong>
-                    <ul class="mt-2 space-y-1">
-                      {% for data_item in exercise_data.data %}<li class="ml-4">{{ data_item | safe }}</li>{% endfor %}
-                    </ul>
-                  </div>
-                {% endif %}
+                  {% if exercise_data.data %}
+                    <div class="alert alert-info mb-4">
+                      <div>
+                        <strong>Données:</strong>
+                        <ul class="mt-2 space-y-1 list-disc list-inside">
+                          {% for data_item in exercise_data.data %}<li>{{ data_item | safe }}</li>{% endfor %}
+                        </ul>
+                      </div>
+                    </div>
+                  {% endif %}
 
-                {% if exercise_data.questions %}
-                  <div class="space-y-3">
-                    <strong class="text-lg">Questions:</strong>
-                    {% for question_item in exercise_data.questions %}
-                      {% for question_num, question_details in question_item.items() %}
-                        <div class="sub-question">
-                          <div class="font-semibold text-gray-700 mb-2">{{ question_num }}</div>
-                          <div class="mb-2">{{ question_details.statement | safe }}</div>
+                  {% if exercise_data.questions %}
+                    <div class="space-y-3">
+                      <strong class="text-lg">Questions:</strong>
+                      {% for question_item in exercise_data.questions %}
+                        {% for question_num, question_details in question_item.items() %}
+                          <div class="card card-compact bg-base-200">
+                            <div class="card-body">
+                              <div class="font-semibold mb-2">{{ question_num }}</div>
+                              <div class="mb-2">{{ question_details.statement | safe }}</div>
 
-                          {% if question_details.equation %}
-                            <div class="my-2 p-2 bg-gray-100 rounded">
-                              <strong>Équation:</strong> {{ question_details.equation | safe }}
-                            </div>
-                          {% endif %}
+                              {% if question_details.equation %}
+                                <div class="alert my-2">
+                                  <div>
+                                    <strong>Équation:</strong> {{ question_details.equation | safe }}
+                                  </div>
+                                </div>
+                              {% endif %}
 
-                          {% if question_details.answer %}
-                            <div class="mt-2 p-2 bg-green-50 rounded border border-green-200">
-                              <strong>Réponse:</strong>
-                              {% if question_details.answer is mapping %}
-                                <ul class="mt-1">
-                                  {% for key, value in question_details.answer.items() %}
-                                    <li>
-                                      <strong>{{ key }}:</strong> {{ value | safe }}
-                                    </li>
-                                  {% endfor %}
-                                </ul>
-                              {% else %}
-                                {{ question_details.answer | safe }}
+                              {% if question_details.answer %}
+                                <div class="alert alert-success mt-2">
+                                  <div>
+                                    <strong>Réponse:</strong>
+                                    {% if question_details.answer is mapping %}
+                                      <ul class="mt-1 list-disc list-inside">
+                                        {% for key, value in question_details.answer.items() %}
+                                          <li>
+                                            <strong>{{ key }}:</strong> {{ value | safe }}
+                                          </li>
+                                        {% endfor %}
+                                      </ul>
+                                    {% else %}
+                                      {{ question_details.answer | safe }}
+                                    {% endif %}
+                                  </div>
+                                </div>
                               {% endif %}
                             </div>
-                          {% endif %}
-                        </div>
+                          </div>
+                        {% endfor %}
                       {% endfor %}
-                    {% endfor %}
-                  </div>
-                {% endif %}
-              </div>
-            {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
           </div>
         {% endif %}
 
       {% else %}
-        <div class="curriculum-section">
-          <div class="text-center text-gray-500 py-8">
+        <div class="card bg-error/10 shadow-lg mb-6">
+          <div class="card-body text-center py-8">
             <div class="text-4xl mb-4">⚠️</div>
-            <h3 class="text-xl font-semibold mb-2">Erreur de chargement</h3>
-            <p>Le fichier YAML pour cette filière n'a pas pu être chargé.</p>
+            <h3 class="card-title justify-center text-xl mb-2">Erreur de chargement</h3>
+            <p class="opacity-80">Le fichier YAML pour cette filière n'a pas pu être chargé.</p>
           </div>
         </div>
       {% endif %}
 
       {# Related Generators Section #}
       {% if related_generators %}
-        <div class="generators-section">
-          <h2 class="text-xl font-bold mb-3 text-gray-800">
-            Générateurs Associés ({{ related_generators|length }})
-          </h2>
-          <p class="text-sm text-gray-600 mb-4">
-            Ces générateurs Python créent des variations automatiques des questions de cette filière.
-          </p>
+        <div class="card bg-base-200 shadow-lg mb-6">
+          <div class="card-body">
+            <h2 class="card-title mb-3">Générateurs Associés ({{ related_generators|length }})</h2>
+            <p class="text-sm opacity-70 mb-4">
+              Ces générateurs Python créent des variations automatiques des questions de cette filière.
+            </p>
 
-          <div class="flex flex-wrap gap-2">
-            {% for generator in related_generators %}
-              <a href="{{ generator.path }}"
-                 class="generator-link"
-                 title="Voir le code du générateur {{ generator.name }}">{{ generator.name }}</a>
-            {% endfor %}
+            <div class="flex flex-wrap gap-2">
+              {% for generator in related_generators %}
+                <a href="{{ generator.path }}"
+                   class="btn btn-sm btn-primary"
+                   title="Voir le code du générateur {{ generator.name }}{%- if generator.level_note %} - {{ generator.level_note }}
+                          {% endif -%}">
+                  <span>{{ generator.name }}</span>
+                  {% if generator.level %}
+                    <span class="badge badge-xs
+                                 {% if generator.level == '1ERE' %}
+                                   badge-warning
+                                 {% else %}
+                                   badge-success
+                                 {% endif %}">{{ generator.level }}</span>
+                  {% endif %}
+                </a>
+              {% endfor %}
+            </div>
           </div>
         </div>
       {% endif %}
 
       {# Footer Navigation #}
-      <div class="mt-8 pt-6 border-t border-gray-200">
-        <div class="flex justify-between items-center">
-          <a href="{{ request.url_for('sujets0') }}" class="text-blue-600 hover:text-blue-800 font-medium">
-            ← Retour aux Sujets 0
-          </a>
+      <div class="divider mt-8"></div>
+      <div class="flex justify-between items-center">
+        <a href="{{ request.url_for('sujets0') }}" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="h-5 w-5 mr-1"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Retour aux Sujets 0
+        </a>
 
-          <div class="text-sm text-gray-500">
-            Filière: <span class="font-semibold">{{ filiere_number.upper() }}</span>
-          </div>
+        <div class="text-sm opacity-70">
+          Filière: <span class="font-semibold">{{ filiere_number.upper() }}</span>
         </div>
       </div>
 

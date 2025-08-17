@@ -19,6 +19,89 @@ for product in settings.products:
         sujets0_product = product
         break
 
+# Generator difficulty levels based on COMPETENCES_MAPPING.md analysis
+# This maps each generator to its appropriate education level
+GENERATOR_LEVELS = {
+    # SPE Sujet 1 - All are 2DE level
+    "spe_sujet1_auto_01_question": {"level": "2DE", "note": None},
+    "spe_sujet1_auto_02_question": {"level": "2DE", "note": None},
+    "spe_sujet1_auto_03_question": {"level": "2DE", "note": None},
+    "spe_sujet1_auto_04_question": {"level": "2DE", "note": None},
+    "spe_sujet1_auto_05_question": {"level": "2DE", "note": None},
+    "spe_sujet1_auto_06_question": {"level": "2DE", "note": None},
+    "spe_sujet1_auto_07_question": {"level": "1ERE", "note": "inéquation du second degré x² > n"},
+    "spe_sujet1_auto_08_question": {"level": "2DE", "note": None},
+    "spe_sujet1_auto_09_question": {"level": "2DE", "note": None},
+    "spe_sujet1_auto_10_question": {"level": "2DE", "note": None},
+    "spe_sujet1_auto_11_question": {"level": "2DE", "note": None},
+    "spe_sujet1_auto_12_question": {"level": "2DE", "note": None},
+    # SPE Sujet 2 - Mixed levels
+    "spe_sujet2_auto_01_question": {"level": "1ERE", "note": "probabilités conditionnelles"},
+    "spe_sujet2_auto_02_question": {"level": "2DE", "note": None},
+    "spe_sujet2_auto_03_question": {"level": "2DE", "note": None},
+    "spe_sujet2_auto_04_question": {
+        "level": "2DE",
+        "note": "utilise compétence 1ERE mais reste accessible",
+    },
+    "spe_sujet2_auto_05_question": {"level": "2DE", "note": None},
+    "spe_sujet2_auto_06_question": {"level": "2DE", "note": None},
+    "spe_sujet2_auto_07_question": {"level": "2DE", "note": None},
+    "spe_sujet2_auto_08_question": {"level": "2DE", "note": None},
+    "spe_sujet2_auto_09_question": {"level": "2DE", "note": None},
+    "spe_sujet2_auto_10_question": {
+        "level": "1ERE",
+        "note": "signe d'expression factorisée du second degré",
+    },
+    "spe_sujet2_auto_11_question": {"level": "2DE", "note": None},
+    "spe_sujet2_auto_12_question": {"level": "2DE", "note": None},
+    # GEN Sujet 1 - Assuming 2DE by default (not explicitly in mapping doc)
+    "gen_sujet1_auto_01_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_02_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_03_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_04_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_05_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_06_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_07_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_08_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_09_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_10_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_11_question": {"level": "2DE", "note": None},
+    "gen_sujet1_auto_12_question": {"level": "2DE", "note": None},
+    # GEN Sujet 2 - Assuming 2DE by default
+    "gen_sujet2_auto_01_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_02_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_03_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_04_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_05_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_06_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_07_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_08_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_09_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_10_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_11_question": {"level": "2DE", "note": None},
+    "gen_sujet2_auto_12_question": {"level": "2DE", "note": None},
+    # GEN Sujet 3 - Assuming 2DE by default
+    "gen_sujet3_auto_01_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_02_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_03_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_04_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_05_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_06_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_07_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_08_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_09_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_10_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_11_question": {"level": "2DE", "note": None},
+    "gen_sujet3_auto_12_question": {"level": "2DE", "note": None},
+}
+
+
+def get_generator_level_info(generator_name):
+    """Get level information for a generator, handling both with and without .py extension."""
+    # Remove .py extension if present
+    clean_name = generator_name.replace(".py", "") if generator_name else ""
+    return GENERATOR_LEVELS.get(clean_name, {"level": "N/A", "note": None})
+
 
 @sujets0_router.get("/sujets0", response_class=HTMLResponse)
 async def sujets0(request: Request):
@@ -56,6 +139,9 @@ async def sujets0(request: Request):
                     if sujets0_product.backend_settings
                     else [],
                     "is_enabled": not sujets0_product.is_hidden,
+                    # Add generator levels information
+                    "generator_levels": GENERATOR_LEVELS,
+                    "get_generator_level": get_generator_level_info,
                 }
             )
 
@@ -120,7 +206,12 @@ async def sujets0_ex_ante_generated(request: Request):
 
         for generator in index_data.get("generators", []):
             if pattern.match(generator["name"]):
-                filtered_generators.append(generator)
+                # Add level information to each generator
+                gen_with_level = generator.copy()
+                level_info = get_generator_level_info(generator["name"])
+                gen_with_level["level"] = level_info["level"]
+                gen_with_level["level_note"] = level_info["note"]
+                filtered_generators.append(gen_with_level)
                 total_questions += generator.get("successful", 0)
                 total_failed += generator.get("failed", 0)
 
@@ -139,6 +230,8 @@ async def sujets0_ex_ante_generated(request: Request):
             "page": {"title": "Questions Pré-générées - Sujets 0"},
             "questions_index": filtered_index_data,
             "questions_base_url": "/static/sujets0/questions/",
+            "generator_levels": GENERATOR_LEVELS,
+            "get_generator_level": get_generator_level_info,
         }
 
         # Use global sujets0_product for consistent styling
@@ -214,6 +307,7 @@ async def sujets0_ex_ante_generated_error_analysis(request: Request):
                         with open(error_file, "r", encoding="utf-8") as ef:
                             error_data = json.load(ef)
                             if not error_data.get("success", True):
+                                level_info = get_generator_level_info(generator["name"])
                                 errors.append(
                                     {
                                         "generator": generator["name"],
@@ -223,6 +317,8 @@ async def sujets0_ex_ante_generated_error_analysis(request: Request):
                                         "traceback": error_data.get("traceback", ""),
                                         "stdout": error_data.get("stdout", ""),
                                         "stderr": error_data.get("stderr", ""),
+                                        "level": level_info["level"],
+                                        "level_note": level_info["note"],
                                     }
                                 )
 
@@ -236,6 +332,8 @@ async def sujets0_ex_ante_generated_error_analysis(request: Request):
             "generators_with_errors": len(
                 [g for g in filtered_generators if g.get("failed", 0) > 0]
             ),
+            "generator_levels": GENERATOR_LEVELS,
+            "get_generator_level": get_generator_level_info,
         }
 
         # Use global sujets0_product for consistent styling
@@ -330,15 +428,72 @@ async def sujets0_originals(request: Request, filiere_number: str):
         if generators_dir.exists():
             for gen_file in generators_dir.glob(f"{pattern}*.py"):
                 if gen_file.name != "__init__.py":
+                    level_info = get_generator_level_info(gen_file.stem)
                     related_generators.append(
                         {
                             "name": gen_file.stem,
                             "file": gen_file.name,
                             "path": f"/src/sujets0/generators/{gen_file.name}",
+                            "level": level_info["level"],
+                            "level_note": level_info["note"],
                         }
                     )
 
         related_generators.sort(key=lambda x: x["name"])
+
+        # Calculate dominant level for this filiere
+        filiere_level = "N/A"
+        filiere_level_note = ""
+        filiere_level_simple = "N/A"  # Simple version for badges
+        if related_generators:
+            levels_count = {"2DE": 0, "1ERE": 0}
+            for gen in related_generators:
+                if gen["level"] in levels_count:
+                    levels_count[gen["level"]] += 1
+
+            # Determine dominant level - simplified logic
+            # If majority (>= 80%) are 2DE, show 2DE
+            # Otherwise if any 1ERE exists, show 1ERE (conservative approach for difficulty)
+            total = levels_count["2DE"] + levels_count["1ERE"]
+            if total > 0:
+                if levels_count["1ERE"] > 0:
+                    # If any 1ERE content exists, mark as 1ERE level
+                    filiere_level = "1ERE"
+                    if levels_count["2DE"] > levels_count["1ERE"]:
+                        filiere_level_note = f"Majoritairement 2DE ({levels_count['2DE']}/{total}) avec quelques 1ERE"
+                    else:
+                        filiere_level_note = "Niveau première"
+                    filiere_level_simple = "1ERE"
+                else:
+                    # Only 2DE content
+                    filiere_level = "2DE"
+                    filiere_level_note = "Niveau seconde"
+                    filiere_level_simple = "2DE"
+
+                # Get level info for all filieres (for navigation)
+        all_filieres_levels = {}
+        for f_num in valid_filieres:
+            f_config = filiere_config.get(f_num, {})
+            f_pattern = f_config.get("pattern", "").replace("*", "")
+            f_level_counts = {"2DE": 0, "1ERE": 0}
+
+            # Count levels for this filiere's generators
+            for gen_name, gen_info in GENERATOR_LEVELS.items():
+                if gen_name.startswith(f_pattern.replace("_*", "_")):
+                    if gen_info["level"] in f_level_counts:
+                        f_level_counts[gen_info["level"]] += 1
+
+            # Determine level for this filiere - same simplified logic
+            total = f_level_counts["2DE"] + f_level_counts["1ERE"]
+            if total > 0:
+                if f_level_counts["1ERE"] > 0:
+                    # If any 1ERE content, mark as 1ERE
+                    all_filieres_levels[f_num] = "1ERE"
+                else:
+                    # Only 2DE content
+                    all_filieres_levels[f_num] = "2DE"
+            else:
+                all_filieres_levels[f_num] = "N/A"
 
         # Build context for template
         context = {
@@ -347,11 +502,17 @@ async def sujets0_originals(request: Request, filiere_number: str):
             "filiere_number": filiere_number,
             "filiere_title": config["title"],
             "filiere_description": f"Questions officielles du curriculum - {config['title']}",
+            "filiere_level": filiere_level,
+            "filiere_level_note": filiere_level_note,
+            "filiere_level_simple": filiere_level_simple,
+            "all_filieres_levels": all_filieres_levels,
             "curriculum_data": curriculum_data,
             "related_generators": related_generators,
             "valid_filieres": valid_filieres,
             "has_official_data": bool(curriculum_data),
             "filiere_config": filiere_config,
+            "generator_levels": GENERATOR_LEVELS,
+            "get_generator_level": get_generator_level_info,
         }
 
         # Add product context for consistent styling
@@ -405,6 +566,9 @@ async def scenery(request: Request):
                     if sujets0_product.backend_settings
                     else [],
                     "is_enabled": not sujets0_product.is_hidden,
+                    # Add generator levels information
+                    "generator_levels": GENERATOR_LEVELS,
+                    "get_generator_level": get_generator_level_info,
                 }
             )
 
