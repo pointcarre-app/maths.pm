@@ -1,10 +1,83 @@
 {% extends "base/main-alt.html" %}
 
-{% block title %}
-  Error Analysis - {{ total_errors }} erreurs à analyser
-{% endblock title %}
 
+{% block title %}
+  Analyse des erreurs pour la génération des questions des sujets 0 - {{ total_errors }} erreurs à analyser
+{% endblock title %}
 {% block extra_head %}
+
+  {#
+{% block extra_head %}
+  <!-- Include KaTeX for math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+{% endblock extra_head %} #}
+
+
+  {# Product-specific metatags override defaults #}
+  {% if product_metatags %}
+    {# SEO metatags #}
+    {% if product_metatags.description %}
+      <meta name="description" content="{{ product_metatags.description }}" />
+    {% endif %}
+    {% if product_metatags.keywords %}
+      <meta name="keywords" content="{{ product_metatags.keywords }}" />
+    {% endif %}
+    {% if product_metatags.robots %}
+      <meta name="robots" content="{{ product_metatags.robots }}" />
+    {% endif %}
+
+    {# Open Graph metatags #}
+    {% if product_metatags['og:title'] %}
+      <meta property="og:title" content="{{ product_metatags['og:title'] }}" />
+    {% endif %}
+    {% if product_metatags['og:description'] %}
+      <meta property="og:description" content="{{ product_metatags['og:description'] }}" />
+    {% endif %}
+    {% if product_metatags['og:image'] %}
+      <meta property="og:image" content="{{ product_metatags['og:image'] }}" />
+    {% endif %}
+    {% if product_metatags['og:url'] %}
+      <meta property="og:url" content="{{ product_metatags['og:url'] }}" />
+    {% endif %}
+
+    {# Twitter Card metatags #}
+    {% if product_metatags['twitter:card'] %}
+      <meta name="twitter:card" content="{{ product_metatags['twitter:card'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:title'] %}
+      <meta name="twitter:title" content="{{ product_metatags['twitter:title'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:description'] %}
+      <meta name="twitter:description" content="{{ product_metatags['twitter:description'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:image'] %}
+      <meta name="twitter:image" content="{{ product_metatags['twitter:image'] }}" />
+    {% endif %}
+
+    {# Dublin Core metatags #}
+    {% for key, value in product_metatags.items() %}
+      {% if key.startswith('DC.') %}<meta name="{{ key }}" content="{{ value }}" />{% endif %}
+    {% endfor %}
+
+    {# Any other custom metatags #}
+    {% if product_metatags.revised %}
+      <meta name="revised" content="{{ product_metatags.revised }}" />
+    {% endif %}
+    {% if product_metatags.topic %}
+      <meta name="topic" content="{{ product_metatags.topic }}" />
+    {% endif %}
+    {% if product_metatags.summary %}
+      <meta name="summary" content="{{ product_metatags.summary }}" />
+    {% endif %}
+    {% if product_metatags.category %}
+      <meta name="category" content="{{ product_metatags.category }}" />
+    {% endif %}
+
+
+  {% endif %}
+
   <style>
       .traceback-content {
           max-height: 300px;
@@ -31,9 +104,22 @@
           opacity: 1;
       }
   </style>
+
+
+  {# Backend settings disabled - we load Nagini manually in the content block #}
 {% endblock extra_head %}
 
+{% block modal_info_content %}
+  {% include "sujets0/modal-info-content.html" %}
+{% endblock modal_info_content %}
+
+
 {% block content %}
+  <div class="padding-alt-security mx-auto mb-14 mt-12 max-w-3xl ">
+    {% include "sujets0/header.html" %}
+  </div>
+
+
   <div class="padding-alt-security mx-auto mb-14 mt-12 max-w-7xl">
     <!-- Header -->
     <div class="card shadow-lg mx-auto py-6 mb-8">
@@ -59,7 +145,7 @@
           <div class="stat-value text-error">
             {{ ((total_errors * 100) / (total_generators * 100)) | round(1) }}%
           </div>
-          <div class="stat-desc">Sur 5900 questions</div>
+          <div class="stat-desc">Sur {{ total_generators * 100 }} questions</div>
         </div>
       </div>
     </div>
@@ -67,47 +153,90 @@
     <!-- Filters -->
     <div class="card bg-base-100 shadow-xl mb-6">
       <div class="card-body">
-        <div class="flex flex-wrap gap-4 items-center">
-          <!-- Generator filter -->
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Filtrer par générateur</span>
-            </label>
-            <select id="generator-filter" class="select select-bordered">
-              <option value="all">Tous les générateurs</option>
-              {% set unique_generators = errors | map(attribute='generator') | unique | list | sort %}
-              {% for gen in unique_generators %}<option value="{{ gen }}">{{ gen }}</option>{% endfor %}
-            </select>
+        <form class="space-y-6 w-full">
+          <!-- Two columns for filters on larger screens -->
+          <div class="flex flex-col sm:flex-row sm:gap-6">
+            <!-- Left column -->
+            <div class="flex-1 space-y-4">
+              <fieldset class="space-y-2">
+                <legend class="label w-full flex justify-between items-center">
+                  <span class="label-text font-semibold">Filtrer par générateur</span>
+                  <div class="relative">
+                    <div class="badge badge-outline badge-xs cursor-help peer">?</div>
+                    <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-xs rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50">
+                      Filtrer les erreurs par
+                      <br />
+                      générateur spécifique
+                    </div>
+                  </div>
+                </legend>
+                <select id="generator-filter" class="select select-bordered w-full">
+                  <option value="all">Tous les générateurs</option>
+                  {% set unique_generators = errors | map(attribute='generator') | unique | list | sort %}
+                  {% for gen in unique_generators %}<option value="{{ gen }}">{{ gen }}</option>{% endfor %}
+                </select>
+                <p class="text-xs text-base-content/60">
+                  {{ unique_generators | length }} générateurs avec erreurs
+                </p>
+              </fieldset>
+            </div>
+
+            <!-- Right column -->
+            <div class="flex-1 space-y-4">
+              <fieldset class="space-y-2">
+                <legend class="label w-full flex justify-between items-center">
+                  <span class="label-text font-semibold">Type d'erreur</span>
+                  <div class="relative">
+                    <div class="badge badge-outline badge-xs cursor-help peer">?</div>
+                    <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-xs rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50">
+                      Filtrer par type
+                      <br />
+                      d'erreur Python
+                    </div>
+                  </div>
+                </legend>
+                <select id="error-type-filter" class="select select-bordered w-full">
+                  <option value="all">Tous les types d'erreurs</option>
+                  {% set unique_error_types = errors | map(attribute='error_type') | unique | list | sort %}
+                  {% for error_type in unique_error_types %}
+                    <option value="{{ error_type }}">{{ error_type }}</option>
+                  {% endfor %}
+                </select>
+                <p class="text-xs text-base-content/60">
+                  {{ unique_error_types | length }} types d'erreurs détectés
+                </p>
+              </fieldset>
+            </div>
           </div>
 
-          <!-- Error type filter -->
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Type d'erreur</span>
-            </label>
-            <select id="error-type-filter" class="select select-bordered">
-              <option value="all">Tous les types</option>
-              {% set unique_error_types = errors | map(attribute='error_type') | unique | list | sort %}
-              {% for error_type in unique_error_types %}
-                <option value="{{ error_type }}">{{ error_type }}</option>
-              {% endfor %}
-            </select>
-          </div>
+          <!-- Search field (full width) -->
+          <fieldset class="space-y-2">
+            <legend class="label">
+              <span class="label-text font-semibold">Recherche</span>
+            </legend>
+            <div class="join w-full">
+              <input type="text"
+                     id="search-filter"
+                     placeholder="Rechercher dans les messages d'erreur..."
+                     class="input input-bordered join-item flex-1" />
+              <button type="button" class="btn btn-square join-item">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-5 w-5"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+            <p class="text-xs text-base-content/60">Rechercher dans les messages et traces d'erreur</p>
+          </fieldset>
 
-          <!-- Search -->
-          <div class="form-control flex-1">
-            <label class="label">
-              <span class="label-text">Rechercher dans les erreurs</span>
-            </label>
-            <input type="text" id="search-filter" placeholder="Rechercher..." class="input input-bordered w-full" />
-          </div>
+          <!-- Action button with additional info -->
+          <div class="divider">Actions</div>
 
-          <!-- Export button -->
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">&nbsp;</span>
-            </label>
-            <button id="export-btn" class="btn btn-primary">
+          <fieldset>
+            <button id="export-btn" type="button" class="btn btn-primary btn-outline w-full">
               <svg xmlns="http://www.w3.org/2000/svg"
                    class="h-5 w-5 mr-2"
                    viewBox="0 0 24 24"
@@ -120,10 +249,13 @@
                 <line x1="16" y1="17" x2="8" y2="17"></line>
                 <polyline points="10 9 9 9 8 9"></polyline>
               </svg>
-              Exporter pour LLM
+              Exporter pour analyse LLM
             </button>
-          </div>
-        </div>
+            <p class="text-xs text-center text-base-content/60 mt-2">
+              Exporte un rapport formaté pour l'analyse par IA
+            </p>
+          </fieldset>
+        </form>
       </div>
     </div>
 

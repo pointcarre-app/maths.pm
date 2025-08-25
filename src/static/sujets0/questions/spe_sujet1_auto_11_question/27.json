@@ -1,21 +1,21 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-11]",
-  "statement": "On a représenté ci-contre la courbe $\\\\mathcal\\{C\\}$ d'une fonction ${f}$.\nOn note $A$ le point d'abscisse $x_A=-4$ tel que le point appartienne à la courbe $\\\\mathcal\\{C\\}$.\nEcrire l'inégalité correcte de la forme $x\\\\times f(x) ? 0$",
+  "statement": "On a représenté ci-contre la courbe $\\\\mathcal\\{C\\}$ d'une fonction ${f}$.\nOn note $A$ le point d'abscisse $x_A=-2$ tel que le point appartienne à la courbe $\\\\mathcal\\{C\\}$.\nEcrire l'inégalité correcte de la forme $x\\\\times f(x) ? 0$",
   "answer": {
-    "latex": "-4f(-4) > 0",
-    "simplified_latex": "-4f(-4) > 0",
+    "latex": "0 > -2f(-2)",
+    "simplified_latex": "0 > -2f(-2)",
     "sympy_exp_data": {
       "type": "StrictGreaterThan",
-      "sp.srepr": "StrictGreaterThan(Mul(Integer(-1), Integer(4), Function('f')(Integer(-4))), Integer(0))",
-      "str": "-4*f(-4) > 0"
+      "sp.srepr": "StrictGreaterThan(Integer(0), Mul(Integer(-1), Integer(2), Function('f')(Integer(-2))))",
+      "str": "0 > -2*f(-2)"
     },
-    "formal_repr": "StrictGreaterThan(l=Mul(l=Integer(n=-4), r=Function(name=f)(Integer(n=-4))), r=Integer(n=0))"
+    "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Mul(l=Integer(n=-2), r=Function(name=f)(Integer(n=-2))))"
   },
   "components": {
-    "root1": "-3",
-    "root2": "5",
-    "root3": "8",
-    "x": "-4",
+    "root1": "-5",
+    "root2": "2",
+    "root3": "10",
+    "x": "-2",
     "f": "f"
   },
   "seed": 27,

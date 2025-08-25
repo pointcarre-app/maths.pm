@@ -8,6 +8,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 
 from ..settings import settings
+from .dispatch_2de_1ere import GENERATOR_LEVELS, get_generator_level_info
 
 # Create sujets0 router
 sujets0_router = APIRouter(tags=["sujets0"])
@@ -18,89 +19,6 @@ for product in settings.products:
     if product.name == "sujets0":
         sujets0_product = product
         break
-
-# Generator difficulty levels based on COMPETENCES_MAPPING.md analysis
-# This maps each generator to its appropriate education level
-GENERATOR_LEVELS = {
-    # SPE Sujet 1 - All are 2DE level
-    "spe_sujet1_auto_01_question": {"level": "2DE", "note": None},
-    "spe_sujet1_auto_02_question": {"level": "2DE", "note": None},
-    "spe_sujet1_auto_03_question": {"level": "2DE", "note": None},
-    "spe_sujet1_auto_04_question": {"level": "2DE", "note": None},
-    "spe_sujet1_auto_05_question": {"level": "2DE", "note": None},
-    "spe_sujet1_auto_06_question": {"level": "2DE", "note": None},
-    "spe_sujet1_auto_07_question": {"level": "1ERE", "note": "inéquation du second degré x² > n"},
-    "spe_sujet1_auto_08_question": {"level": "2DE", "note": None},
-    "spe_sujet1_auto_09_question": {"level": "2DE", "note": None},
-    "spe_sujet1_auto_10_question": {"level": "2DE", "note": None},
-    "spe_sujet1_auto_11_question": {"level": "2DE", "note": None},
-    "spe_sujet1_auto_12_question": {"level": "2DE", "note": None},
-    # SPE Sujet 2 - Mixed levels
-    "spe_sujet2_auto_01_question": {"level": "1ERE", "note": "probabilités conditionnelles"},
-    "spe_sujet2_auto_02_question": {"level": "2DE", "note": None},
-    "spe_sujet2_auto_03_question": {"level": "2DE", "note": None},
-    "spe_sujet2_auto_04_question": {
-        "level": "2DE",
-        "note": "utilise compétence 1ERE mais reste accessible",
-    },
-    "spe_sujet2_auto_05_question": {"level": "2DE", "note": None},
-    "spe_sujet2_auto_06_question": {"level": "2DE", "note": None},
-    "spe_sujet2_auto_07_question": {"level": "2DE", "note": None},
-    "spe_sujet2_auto_08_question": {"level": "2DE", "note": None},
-    "spe_sujet2_auto_09_question": {"level": "2DE", "note": None},
-    "spe_sujet2_auto_10_question": {
-        "level": "1ERE",
-        "note": "signe d'expression factorisée du second degré",
-    },
-    "spe_sujet2_auto_11_question": {"level": "2DE", "note": None},
-    "spe_sujet2_auto_12_question": {"level": "2DE", "note": None},
-    # GEN Sujet 1 - Assuming 2DE by default (not explicitly in mapping doc)
-    "gen_sujet1_auto_01_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_02_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_03_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_04_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_05_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_06_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_07_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_08_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_09_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_10_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_11_question": {"level": "2DE", "note": None},
-    "gen_sujet1_auto_12_question": {"level": "2DE", "note": None},
-    # GEN Sujet 2 - Assuming 2DE by default
-    "gen_sujet2_auto_01_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_02_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_03_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_04_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_05_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_06_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_07_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_08_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_09_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_10_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_11_question": {"level": "2DE", "note": None},
-    "gen_sujet2_auto_12_question": {"level": "2DE", "note": None},
-    # GEN Sujet 3 - Assuming 2DE by default
-    "gen_sujet3_auto_01_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_02_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_03_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_04_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_05_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_06_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_07_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_08_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_09_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_10_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_11_question": {"level": "2DE", "note": None},
-    "gen_sujet3_auto_12_question": {"level": "2DE", "note": None},
-}
-
-
-def get_generator_level_info(generator_name):
-    """Get level information for a generator, handling both with and without .py extension."""
-    # Remove .py extension if present
-    clean_name = generator_name.replace(".py", "") if generator_name else ""
-    return GENERATOR_LEVELS.get(clean_name, {"level": "N/A", "note": None})
 
 
 @sujets0_router.get("/sujets0", response_class=HTMLResponse)
@@ -405,6 +323,9 @@ async def sujets0_originals(request: Request, filiere_number: str):
 
         config = filiere_config[filiere_number]
 
+        # Get pattern for generators
+        pattern = config["pattern"].replace("*", "")
+
         # Load YAML file if specified
         curriculum_data = None
         if config["yaml_file"]:
@@ -420,9 +341,19 @@ async def sujets0_originals(request: Request, filiere_number: str):
                 with open(yaml_path, "r", encoding="utf-8") as f:
                     curriculum_data = yaml.safe_load(f)
 
+                # Add level information to each question
+                if curriculum_data and "part_1" in curriculum_data:
+                    for i, (question_key, question_data) in enumerate(
+                        curriculum_data["part_1"].items(), 1
+                    ):
+                        # Map question to generator (question_1 -> spe_sujetX_auto_01_question)
+                        generator_name = f"{pattern}auto_{i:02d}_question"
+                        level_info = get_generator_level_info(generator_name)
+                        curriculum_data["part_1"][question_key]["level"] = level_info["level"]
+                        curriculum_data["part_1"][question_key]["level_note"] = level_info["note"]
+
         # Find related generators
         generators_dir = Path(settings.base_dir) / "src" / "sujets0" / "generators"
-        pattern = config["pattern"].replace("*", "")
 
         related_generators = []
         if generators_dir.exists():

@@ -12,8 +12,8 @@
     "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Mul(l=Integer(n=5), r=Function(name=f)(Integer(n=5))))"
   },
   "components": {
-    "root1": "-6",
-    "root2": "1",
+    "root1": "-8",
+    "root2": "-1",
     "root3": "10",
     "x": "5",
     "f": "f"

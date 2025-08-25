@@ -10,10 +10,10 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """
 
     gen = tg.MathsGenerator(seed)
-    p = gen.random_integer(1, 10)
-    q = gen.random_integer(1, 10)
+    p = gen.random_integer(1, 5)  # not 10: 🧂 for safest / easier plotting
+    q = gen.random_integer(1, 5)  # not 10: 🧂 for safest / easier plotting
     a = tm.Fraction(p=p, q=q)
-    b = gen.random_integer(1, 10)
+    b = gen.random_integer(1, 4)  # not 10: 🧂 for safest / easier plotting
     x = tm.Symbol(s="x")
 
     return {

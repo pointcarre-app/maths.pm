@@ -12,9 +12,9 @@
     "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Mul(l=Integer(n=-6), r=Function(name=f)(Integer(n=-6))))"
   },
   "components": {
-    "root1": "-7",
-    "root2": "6",
-    "root3": "10",
+    "root1": "-9",
+    "root2": "1",
+    "root3": "7",
     "x": "-6",
     "f": "f"
   },

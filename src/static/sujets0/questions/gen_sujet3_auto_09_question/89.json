@@ -2,8 +2,9 @@
   "seed": 89,
   "generator": "gen_sujet3_auto_09_question",
   "success": false,
-  "error": "No generate_components in gen_sujet3_auto_09_question.py",
-  "error_type": "missing_function",
-  "stdout": "sys.version_info(major=3, minor=13, micro=5, releaselevel='final', serial=0)\n",
+  "error": "'MathsGenerator' object has no attribute 'random_choice'",
+  "error_type": "AttributeError",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 114, in generate_question\n    module = load_generator_module(generator_file)\n  File \"/Users/selim/madles/pca-mathspm/src/build_questions.py\", line 46, in load_generator_module\n    spec.loader.exec_module(module)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet3_auto_09_question.py\", line 53, in <module>\n    components = generate_components(None)\n  File \"/Users/selim/madles/pca-mathspm/src/sujets0/generators/gen_sujet3_auto_09_question.py\", line 17, in generate_components\n    reduction_value = gen.random_choice(reduction_options)\n                      ^^^^^^^^^^^^^^^^^\nAttributeError: 'MathsGenerator' object has no attribute 'random_choice'\n",
+  "stdout": "",
   "stderr": ""
 }

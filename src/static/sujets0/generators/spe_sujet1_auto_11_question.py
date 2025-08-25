@@ -11,9 +11,9 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     gen = tg.MathsGenerator(seed)
 
-    root1 = gen.random_integer(-10, -1)
-    root2 = gen.random_integer(1, 9)
-    root3 = gen.random_integer(root2.n + 1, 10)
+    root1 = gen.random_integer(-7, -5)
+    root2 = gen.random_integer(-1, 3)
+    root3 = gen.random_integer(root2.n + 3, 10)
     x = gen.random_integer(-10, 10)
     while x in [root1, root2, root3]:
         x = gen.random_integer(-10, 10)

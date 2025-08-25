@@ -4,12 +4,23 @@
   {{ filiere_title }} - Questions Originales
 {% endblock title %}
 
+
 {% block extra_head %}
+
+  {#
+{% block extra_head %}
+  <!-- Include KaTeX for math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+{% endblock extra_head %} #}
+
+
   {# Product-specific metatags override defaults #}
   {% if product_metatags %}
     {# SEO metatags #}
     {% if product_metatags.description %}
-      <meta name="description" content="{{ filiere_description }}" />
+      <meta name="description" content="{{ product_metatags.description }}" />
     {% endif %}
     {% if product_metatags.keywords %}
       <meta name="keywords" content="{{ product_metatags.keywords }}" />
@@ -20,12 +31,81 @@
 
     {# Open Graph metatags #}
     {% if product_metatags['og:title'] %}
-      <meta property="og:title" content="{{ filiere_title }}" />
+      <meta property="og:title" content="{{ product_metatags['og:title'] }}" />
     {% endif %}
     {% if product_metatags['og:description'] %}
-      <meta property="og:description" content="{{ filiere_description }}" />
+      <meta property="og:description" content="{{ product_metatags['og:description'] }}" />
     {% endif %}
+    {% if product_metatags['og:image'] %}
+      <meta property="og:image" content="{{ product_metatags['og:image'] }}" />
+    {% endif %}
+    {% if product_metatags['og:url'] %}
+      <meta property="og:url" content="{{ product_metatags['og:url'] }}" />
+    {% endif %}
+
+    {# Twitter Card metatags #}
+    {% if product_metatags['twitter:card'] %}
+      <meta name="twitter:card" content="{{ product_metatags['twitter:card'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:title'] %}
+      <meta name="twitter:title" content="{{ product_metatags['twitter:title'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:description'] %}
+      <meta name="twitter:description" content="{{ product_metatags['twitter:description'] }}" />
+    {% endif %}
+    {% if product_metatags['twitter:image'] %}
+      <meta name="twitter:image" content="{{ product_metatags['twitter:image'] }}" />
+    {% endif %}
+
+    {# Dublin Core metatags #}
+    {% for key, value in product_metatags.items() %}
+      {% if key.startswith('DC.') %}<meta name="{{ key }}" content="{{ value }}" />{% endif %}
+    {% endfor %}
+
+    {# Any other custom metatags #}
+    {% if product_metatags.revised %}
+      <meta name="revised" content="{{ product_metatags.revised }}" />
+    {% endif %}
+    {% if product_metatags.topic %}
+      <meta name="topic" content="{{ product_metatags.topic }}" />
+    {% endif %}
+    {% if product_metatags.summary %}
+      <meta name="summary" content="{{ product_metatags.summary }}" />
+    {% endif %}
+    {% if product_metatags.category %}
+      <meta name="category" content="{{ product_metatags.category }}" />
+    {% endif %}
+
+
   {% endif %}
+
+  <style>
+      .traceback-content {
+          max-height: 300px;
+          overflow-y: auto;
+          font-size: 0.75rem;
+          line-height: 1.2;
+      }
+
+      .error-row:hover {
+          background-color: rgba(239, 68, 68, 0.05);
+      }
+
+      pre {
+          white-space: pre-wrap;
+          word-wrap: break-word;
+      }
+
+      .copy-btn {
+          opacity: 0.5;
+          transition: opacity 0.2s;
+      }
+
+      .copy-btn:hover {
+          opacity: 1;
+      }
+  </style>
+
 
   <style>
       /* Minimal custom CSS - Most styling using DaisyUI and Tailwind */
@@ -244,11 +324,17 @@
 {% endblock extra_head %}
 
 {% block content %}
-  <div class="container mx-auto px-4 py-8">
+
+  <div class="padding-alt-security mx-auto mb-14 mt-12 max-w-3xl">
+    {% include "sujets0/header.html" %}
+  </div>
+
+
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
     <div class="max-w-4xl mx-auto">
 
       {# Header #}
-      <div class="mb-8">
+      {# <div class="mb-8">
         <div class="breadcrumbs text-sm mb-2">
           <ul>
             <li>
@@ -257,365 +343,362 @@
             <li>Questions Originales</li>
             <li class="font-semibold">{{ filiere_number.upper() }}</li>
           </ul>
-        </div>
+</div> #}
 
-        <h1 class="text-3xl font-bold mb-2">
-          {{ filiere_title }}
-          {% if filiere_level and filiere_level != "N/A" %}
-            <span class="badge
-                         {% if filiere_level == '1ERE' %}
+      <h1 class="text-3xl font-bold mb-2">
+        {{ filiere_title }}
+        {% if filiere_level and filiere_level != "N/A" %}
+          <span class="badge
+                       {% if filiere_level == '1ERE' %}
+                         badge-warning
+                       {% else %}
+                         badge-success
+                       {% endif %}
+                       badge-lg ml-3"
+                title="{{ filiere_level_note }}">Niveau {{ filiere_level }}</span>
+        {% endif %}
+      </h1>
+      <p class="text-lg opacity-70">{{ filiere_description }}</p>
+    </div>
+
+    {# Navigation pills for different filieres #}
+    <div class="tabs tabs-boxed mb-6">
+      {% for filiere in valid_filieres %}
+        <a href="{{ request.url_for('sujets0_originals', filiere_number=filiere) }}"
+           class="tab
+                  {% if filiere == filiere_number %}tab-active{% endif %}
+                  {% if filiere_config[filiere].yaml_file %}relative nav-pill-indicator{% endif %}">
+          {{ filiere.upper() }}
+          {% if all_filieres_levels and all_filieres_levels[filiere] and all_filieres_levels[filiere] != "N/A" %}
+            <span class="badge badge-xs
+                         {% if all_filieres_levels[filiere] == '1ERE' %}
                            badge-warning
                          {% else %}
                            badge-success
                          {% endif %}
-                         badge-lg ml-3"
-                  title="{{ filiere_level_note }}">Niveau {{ filiere_level }}</span>
+                         ml-1">{{ all_filieres_levels[filiere] }}</span>
           {% endif %}
-        </h1>
-        <p class="text-lg opacity-70">{{ filiere_description }}</p>
-      </div>
+        </a>
+      {% endfor %}
+    </div>
 
-      {# Navigation pills for different filieres #}
-      <div class="tabs tabs-boxed mb-6">
-        {% for filiere in valid_filieres %}
-          <a href="{{ request.url_for('sujets0_originals', filiere_number=filiere) }}"
-             class="tab
-                    {% if filiere == filiere_number %}tab-active{% endif %}
-                    {% if filiere_config[filiere].yaml_file %}relative nav-pill-indicator{% endif %}">
-            {{ filiere.upper() }}
-            {% if all_filieres_levels and all_filieres_levels[filiere] and all_filieres_levels[filiere] != "N/A" %}
-              <span class="badge badge-xs
-                           {% if all_filieres_levels[filiere] == '1ERE' %}
-                             badge-warning
-                           {% else %}
-                             badge-success
-                           {% endif %}
-                           ml-1">{{ all_filieres_levels[filiere] }}</span>
-            {% endif %}
-          </a>
-        {% endfor %}
-      </div>
+    {# Legend for navigation pills #}
+    <div class="text-sm opacity-70 mb-6 flex items-center gap-4 flex-wrap">
+      <span class="flex items-center gap-1">
+        <span class="badge badge-success badge-xs">✓</span>
+        Données officielles disponibles
+      </span>
+      <span>•</span>
+      <span>Autres: générateurs automatiques uniquement</span>
+      <span class="divider divider-horizontal mx-2"></span>
+      <span class="flex items-center gap-1.5">
+        <span class="badge badge-success badge-xs">2DE</span>
+        Niveau Seconde
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="badge badge-warning badge-xs">1ERE</span>
+        Niveau Première
+      </span>
+    </div>
 
-      {# Legend for navigation pills #}
-      <div class="text-sm opacity-70 mb-6 flex items-center gap-4 flex-wrap">
-        <span class="flex items-center gap-1">
-          <span class="badge badge-success badge-xs">✓</span>
-          Données officielles disponibles
-        </span>
-        <span>•</span>
-        <span>Autres: générateurs automatiques uniquement</span>
-        <span class="divider divider-horizontal mx-2"></span>
-        <span class="flex items-center gap-1.5">
-          <span class="badge badge-success badge-xs">2DE</span>
-          Niveau Seconde
-        </span>
-        <span class="flex items-center gap-1.5">
-          <span class="badge badge-warning badge-xs">1ERE</span>
-          Niveau Première
-        </span>
-      </div>
+    {# Curriculum Content #}
+    {% if not has_official_data %}
+      {# Empty state for filieres without official data #}
+      <div class="card bg-base-200 shadow-lg mb-6">
+        <div class="card-body text-center py-12">
+          <div class="text-6xl mb-4">📚</div>
+          <h2 class="card-title justify-center text-2xl mb-4">Données officielles non disponibles</h2>
+          <p class="text-lg opacity-80 mb-6">
+            Les questions officielles pour <strong>{{ filiere_number.upper() }}</strong> ne sont pas encore disponibles.
+          </p>
 
-      {# Curriculum Content #}
-      {% if not has_official_data %}
-        {# Empty state for filieres without official data #}
-        <div class="card bg-base-200 shadow-lg mb-6">
-          <div class="card-body text-center py-12">
-            <div class="text-6xl mb-4">📚</div>
-            <h2 class="card-title justify-center text-2xl mb-4">Données officielles non disponibles</h2>
-            <p class="text-lg opacity-80 mb-6">
-              Les questions officielles pour <strong>{{ filiere_number.upper() }}</strong> ne sont pas encore disponibles.
-            </p>
-
-            <div class="alert alert-info text-left max-w-2xl mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   fill="none"
-                   viewBox="0 0 24 24"
-                   class="stroke-current shrink-0 w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                </path>
-              </svg>
-              <div>
-                <h3 class="font-bold mb-3">Que faire en attendant ?</h3>
-                <ul class="list-disc list-inside space-y-2">
-                  <li>
-                    Consultez les <strong>générateurs automatiques</strong> ci-dessous pour des questions similaires
-                  </li>
-                  <li>
-                    Explorez <a href="{{ request.url_for('sujets0_originals', filiere_number='spe-1') }}"
+          <div class="alert alert-info text-left max-w-2xl mx-auto mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 class="stroke-current shrink-0 w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+              </path>
+            </svg>
+            <div>
+              <h3 class="font-bold mb-3">Que faire en attendant ?</h3>
+              <ul class="list-disc list-inside space-y-2">
+                <li>
+                  Consultez les <strong>générateurs automatiques</strong> ci-dessous pour des questions similaires
+                </li>
+                <li>
+                  Explorez <a href="{{ request.url_for('sujets0_originals', filiere_number='spe-1') }}"
     class="link link-primary font-semibold">SPE-1</a> qui contient les données officielles
-                  </li>
-                  <li>
-                    Utilisez les <a href="{{ request.url_for('sujets0_ex_ante_generated') }}" class="link link-primary font-semibold">questions pré-générées</a> pour des exercices instantanés
-                  </li>
-                </ul>
-              </div>
+                </li>
+                <li>
+                  Utilisez les <a href="{{ request.url_for('sujets0_ex_ante_generated') }}" class="link link-primary font-semibold">questions pré-générées</a> pour des exercices instantanés
+                </li>
+              </ul>
             </div>
-
-            {% if related_generators %}
-              <div class="opacity-70">
-                <p class="mb-4">
-                  Cependant, <strong>{{ related_generators|length }} générateurs</strong> sont disponibles pour créer des questions automatiques de cette filière :
-                </p>
-              </div>
-            {% endif %}
           </div>
+
+          {% if related_generators %}
+            <div class="opacity-70">
+              <p class="mb-4">
+                Cependant, <strong>{{ related_generators|length }} générateurs</strong> sont disponibles pour créer des questions automatiques de cette filière :
+              </p>
+            </div>
+          {% endif %}
         </div>
+      </div>
 
-      {% elif curriculum_data %}
+    {% elif curriculum_data %}
 
-        {# Part 1: Multiple Choice Questions - Interactive QCM #}
-        {% if curriculum_data.part_1 %}
-          <div class="card bg-base-100 shadow-lg mb-6">
-            <div class="card-body">
-              <div class="flex justify-between items-center mb-6">
-                <h2 class="card-title text-2xl">Partie 1 - Questions à Choix Multiple</h2>
-                <div class="stats stats-vertical shadow hidden" id="score-summary">
-                  <div class="stat stat-sm">
-                    <div class="stat-title">Score</div>
-                    <div class="stat-value text-lg" id="score-text">0/0</div>
-                    <div class="stat-actions">
-                      <button onclick="resetAllQuestions()" class="btn btn-sm btn-ghost">Recommencer</button>
-                    </div>
+      {# Part 1: Multiple Choice Questions - Interactive QCM #}
+      {% if curriculum_data.part_1 %}
+        <div class="card bg-base-100 shadow-lg mb-6">
+          <div class="card-body">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="card-title text-2xl">Partie 1 - Questions à Choix Multiple</h2>
+              <div class="stats stats-vertical shadow hidden" id="score-summary">
+                <div class="stat stat-sm">
+                  <div class="stat-title">Score</div>
+                  <div class="stat-value text-lg" id="score-text">0/0</div>
+                  <div class="stat-actions">
+                    <button onclick="resetAllQuestions()" class="btn btn-sm btn-ghost">Recommencer</button>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {% for question_key, question_data in curriculum_data.part_1.items() %}
-                <div class="card card-compact bg-base-200 mb-4 question-card"
-                     data-question="{{ question_key }}"
-                     data-correct="{{ question_data.correct_answer }}">
-                  <div class="card-body">
-                    <div class="flex justify-between items-start mb-3">
-                      <h3 class="card-title text-lg">{{ question_key.replace('_', ' ').title() }}</h3>
+            {% for question_key, question_data in curriculum_data.part_1.items() %}
+              <div class="card card-compact bg-base-200 mb-4 question-card"
+                   data-question="{{ question_key }}"
+                   data-correct="{{ question_data.correct_answer }}">
+                <div class="card-body">
+                  <div class="flex justify-between items-start mb-3">
+                    <h3 class="card-title text-lg">{{ question_key.replace('_', ' ').title() }}</h3>
+                    <div class="flex items-center gap-1">
                       <span class="badge badge-info badge-sm">{{ filiere_number.upper() }}</span>
-                      {% if filiere_level and filiere_level != "N/A" %}
-                        <span class="badge
-                                     {% if filiere_level == '1ERE' %}
-                                       badge-warning
-                                     {% else %}
-                                       badge-success
-                                     {% endif %}
-                                     badge-sm ml-1"
-                              title="{{ filiere_level_note }}">Niveau {{ filiere_level }}</span>
+                      {% if question_data.level %}
+                        <span class="badge {%- if question_data.level == '1ERE' -%} badge-warning {%- else -%} badge-success {%- endif -%} badge-sm"
+                              {%- if question_data.level_note %} title="{{ question_data.level_note }}"
+                              {% endif -%}>{{ question_data.level }}</span>
                       {% endif %}
                     </div>
-
-                    <div class="text-lg font-medium mb-4 leading-relaxed">{{ question_data.statement | safe }}</div>
-
-                    {% if question_data.table %}
-                      <div class="alert my-4">
-                        <div class="w-full">
-                          <strong class="block mb-3">Tableau:</strong>
-                          <div class="overflow-x-auto">
-                            <table class="table table-zebra table-sm w-full">
-                              <thead>
-                                <tr>
-                                  <th>Élément</th>
-                                  <th>Valeur</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {% for key, value in question_data.table.items() %}
-                                  <tr>
-                                    <td class="font-medium">{{ key.replace('_', ' ').title() }}</td>
-                                    <td class="font-mono">{{ value | safe }}</td>
-                                  </tr>
-                                {% endfor %}
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    {% endif %}
-
-                    {% if question_data.fonctions %}
-                      <div class="alert alert-info my-4">
-                        <div>
-                          <strong>Fonctions:</strong>
-                          <ul class="mt-2 space-y-1 list-disc list-inside">
-                            {% for fonction in question_data.fonctions %}
-                              <li class="font-mono">{{ fonction | safe }}</li>
-                            {% endfor %}
-                          </ul>
-                        </div>
-                      </div>
-                    {% endif %}
-
-                    {% if question_data.question %}
-                      <div class="alert alert-warning my-4">
-                        <div class="font-medium">{{ question_data.question | safe }}</div>
-                      </div>
-                    {% endif %}
-
-                    {% if question_data.choices %}
-                      <div class="space-y-3 my-4">
-                        {% for choice_key, choice_value in question_data.choices.items() %}
-                          <label class="choice-item flex items-center gap-3 p-4 border-2 border-base-300 rounded-lg cursor-pointer hover:border-primary hover:bg-base-200 transition-all"
-                                 onclick="selectChoice('{{ question_key }}', '{{ choice_key }}')">
-                            <input type="radio"
-                                   name="{{ question_key }}_choice"
-                                   value="{{ choice_key }}"
-                                   class="radio radio-primary flex-shrink-0" />
-                            <span class="badge badge-outline badge-lg">{{ choice_key }}</span>
-                            <span class="text-base flex-1">{{ choice_value | safe }}</span>
-                          </label>
-                        {% endfor %}
-                      </div>
-
-                      <div class="flex gap-3 mt-4">
-                        <button onclick="checkAnswer('{{ question_key }}')"
-                                class="btn btn-primary"
-                                id="check-{{ question_key }}"
-                                disabled>Vérifier la réponse</button>
-                        <button onclick="resetQuestion('{{ question_key }}')" class="btn btn-outline">Recommencer</button>
-                      </div>
-
-                      <div class="hidden" id="feedback-{{ question_key }}"></div>
-                    {% endif %}
                   </div>
-                </div>
-              {% endfor %}
 
-              <div class="mt-6 text-center">
-                <button onclick="checkAllAnswers()" class="btn btn-primary btn-lg">
-                  🎯 Vérifier toutes les réponses
-                </button>
-              </div>
-            </div>
-          </div>
-        {% endif %}
+                  <div class="text-lg font-medium mb-4 leading-relaxed">{{ question_data.statement | safe }}</div>
 
-        {# Part 2: Exercises #}
-        {% if curriculum_data.part_2 %}
-          <div class="card bg-base-100 shadow-lg mb-6">
-            <div class="card-body">
-              <h2 class="card-title text-2xl mb-4">Partie 2 - Exercices</h2>
+                  {% if question_data.table %}
+                    <div class="alert my-4">
+                      <div class="w-full">
+                        <strong class="block mb-3">Tableau:</strong>
+                        <div class="overflow-x-auto">
+                          <table class="table table-zebra table-sm w-full">
+                            <thead>
+                              <tr>
+                                <th>Élément</th>
+                                <th>Valeur</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for key, value in question_data.table.items() %}
+                                <tr>
+                                  <td class="font-medium">{{ key.replace('_', ' ').title() }}</td>
+                                  <td class="font-mono">{{ value | safe }}</td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
 
-              {% for exercise_key, exercise_data in curriculum_data.part_2.items() %}
-                <div class="border-l-4 border-primary pl-4 my-6">
-                  <h3 class="text-xl font-semibold mb-3">{{ exercise_key.replace('_', ' ').title() }}</h3>
-
-                  <div class="text-lg mb-4">{{ exercise_data.statement | safe }}</div>
-
-                  {% if exercise_data.data %}
-                    <div class="alert alert-info mb-4">
+                  {% if question_data.fonctions %}
+                    <div class="alert alert-info my-4">
                       <div>
-                        <strong>Données:</strong>
+                        <strong>Fonctions:</strong>
                         <ul class="mt-2 space-y-1 list-disc list-inside">
-                          {% for data_item in exercise_data.data %}<li>{{ data_item | safe }}</li>{% endfor %}
+                          {% for fonction in question_data.fonctions %}
+                            <li class="font-mono">{{ fonction | safe }}</li>
+                          {% endfor %}
                         </ul>
                       </div>
                     </div>
                   {% endif %}
 
-                  {% if exercise_data.questions %}
-                    <div class="space-y-3">
-                      <strong class="text-lg">Questions:</strong>
-                      {% for question_item in exercise_data.questions %}
-                        {% for question_num, question_details in question_item.items() %}
-                          <div class="card card-compact bg-base-200">
-                            <div class="card-body">
-                              <div class="font-semibold mb-2">{{ question_num }}</div>
-                              <div class="mb-2">{{ question_details.statement | safe }}</div>
-
-                              {% if question_details.equation %}
-                                <div class="alert my-2">
-                                  <div>
-                                    <strong>Équation:</strong> {{ question_details.equation | safe }}
-                                  </div>
-                                </div>
-                              {% endif %}
-
-                              {% if question_details.answer %}
-                                <div class="alert alert-success mt-2">
-                                  <div>
-                                    <strong>Réponse:</strong>
-                                    {% if question_details.answer is mapping %}
-                                      <ul class="mt-1 list-disc list-inside">
-                                        {% for key, value in question_details.answer.items() %}
-                                          <li>
-                                            <strong>{{ key }}:</strong> {{ value | safe }}
-                                          </li>
-                                        {% endfor %}
-                                      </ul>
-                                    {% else %}
-                                      {{ question_details.answer | safe }}
-                                    {% endif %}
-                                  </div>
-                                </div>
-                              {% endif %}
-                            </div>
-                          </div>
-                        {% endfor %}
-                      {% endfor %}
+                  {% if question_data.question %}
+                    <div class="alert alert-warning my-4">
+                      <div class="font-medium">{{ question_data.question | safe }}</div>
                     </div>
                   {% endif %}
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
 
-      {% else %}
-        <div class="card bg-error/10 shadow-lg mb-6">
-          <div class="card-body text-center py-8">
-            <div class="text-4xl mb-4">⚠️</div>
-            <h3 class="card-title justify-center text-xl mb-2">Erreur de chargement</h3>
-            <p class="opacity-80">Le fichier YAML pour cette filière n'a pas pu être chargé.</p>
-          </div>
-        </div>
-      {% endif %}
+                  {% if question_data.choices %}
+                    <div class="space-y-3 my-4">
+                      {% for choice_key, choice_value in question_data.choices.items() %}
+                        <label class="choice-item flex items-center gap-3 p-4 border-2 border-base-300 rounded-lg cursor-pointer hover:border-primary hover:bg-base-200 transition-all"
+                               onclick="selectChoice('{{ question_key }}', '{{ choice_key }}')">
+                          <input type="radio"
+                                 name="{{ question_key }}_choice"
+                                 value="{{ choice_key }}"
+                                 class="radio radio-primary flex-shrink-0" />
+                          <span class="badge badge-outline badge-lg">{{ choice_key }}</span>
+                          <span class="text-base flex-1">{{ choice_value | safe }}</span>
+                        </label>
+                      {% endfor %}
+                    </div>
 
-      {# Related Generators Section #}
-      {% if related_generators %}
-        <div class="card bg-base-200 shadow-lg mb-6">
-          <div class="card-body">
-            <h2 class="card-title mb-3">Générateurs Associés ({{ related_generators|length }})</h2>
-            <p class="text-sm opacity-70 mb-4">
-              Ces générateurs Python créent des variations automatiques des questions de cette filière.
-            </p>
+                    <div class="flex gap-3 mt-4">
+                      <button onclick="checkAnswer('{{ question_key }}')"
+                              class="btn btn-primary"
+                              id="check-{{ question_key }}"
+                              disabled>Vérifier la réponse</button>
+                      <button onclick="resetQuestion('{{ question_key }}')" class="btn btn-outline">Recommencer</button>
+                    </div>
 
-            <div class="flex flex-wrap gap-2">
-              {% for generator in related_generators %}
-                <a href="{{ generator.path }}"
-                   class="btn btn-sm btn-primary"
-                   title="Voir le code du générateur {{ generator.name }}{%- if generator.level_note %} - {{ generator.level_note }}
-                          {% endif -%}">
-                  <span>{{ generator.name }}</span>
-                  {% if generator.level %}
-                    <span class="badge badge-xs
-                                 {% if generator.level == '1ERE' %}
-                                   badge-warning
-                                 {% else %}
-                                   badge-success
-                                 {% endif %}">{{ generator.level }}</span>
+                    <div class="hidden" id="feedback-{{ question_key }}"></div>
                   {% endif %}
-                </a>
-              {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+
+            <div class="mt-6 text-center">
+              <button onclick="checkAllAnswers()" class="btn btn-primary btn-lg">
+                🎯 Vérifier toutes les réponses
+              </button>
             </div>
           </div>
         </div>
       {% endif %}
 
-      {# Footer Navigation #}
-      <div class="divider mt-8"></div>
-      <div class="flex justify-between items-center">
-        <a href="{{ request.url_for('sujets0') }}" class="btn btn-ghost btn-sm">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               class="h-5 w-5 mr-1"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-          Retour aux Sujets 0
-        </a>
+      {# Part 2: Exercises #}
+      {% if curriculum_data.part_2 %}
+        <div class="card bg-base-100 shadow-lg mb-6">
+          <div class="card-body">
+            <h2 class="card-title text-2xl mb-4">Partie 2 - Exercices</h2>
 
-        <div class="text-sm opacity-70">
-          Filière: <span class="font-semibold">{{ filiere_number.upper() }}</span>
+            {% for exercise_key, exercise_data in curriculum_data.part_2.items() %}
+              <div class="border-l-4 border-primary pl-4 my-6">
+                <h3 class="text-xl font-semibold mb-3">{{ exercise_key.replace('_', ' ').title() }}</h3>
+
+                <div class="text-lg mb-4">{{ exercise_data.statement | safe }}</div>
+
+                {% if exercise_data.data %}
+                  <div class="alert alert-info mb-4">
+                    <div>
+                      <strong>Données:</strong>
+                      <ul class="mt-2 space-y-1 list-disc list-inside">
+                        {% for data_item in exercise_data.data %}<li>{{ data_item | safe }}</li>{% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if exercise_data.questions %}
+                  <div class="space-y-3">
+                    <strong class="text-lg">Questions:</strong>
+                    {% for question_item in exercise_data.questions %}
+                      {% for question_num, question_details in question_item.items() %}
+                        <div class="card card-compact bg-base-200">
+                          <div class="card-body">
+                            <div class="font-semibold mb-2">{{ question_num }}</div>
+                            <div class="mb-2">{{ question_details.statement | safe }}</div>
+
+                            {% if question_details.equation %}
+                              <div class="alert my-2">
+                                <div>
+                                  <strong>Équation:</strong> {{ question_details.equation | safe }}
+                                </div>
+                              </div>
+                            {% endif %}
+
+                            {% if question_details.answer %}
+                              <div class="alert alert-success mt-2">
+                                <div>
+                                  <strong>Réponse:</strong>
+                                  {% if question_details.answer is mapping %}
+                                    <ul class="mt-1 list-disc list-inside">
+                                      {% for key, value in question_details.answer.items() %}
+                                        <li>
+                                          <strong>{{ key }}:</strong> {{ value | safe }}
+                                        </li>
+                                      {% endfor %}
+                                    </ul>
+                                  {% else %}
+                                    {{ question_details.answer | safe }}
+                                  {% endif %}
+                                </div>
+                              </div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      {% endfor %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <div class="card bg-error/10 shadow-lg mb-6">
+        <div class="card-body text-center py-8">
+          <div class="text-4xl mb-4">⚠️</div>
+          <h3 class="card-title justify-center text-xl mb-2">Erreur de chargement</h3>
+          <p class="opacity-80">Le fichier YAML pour cette filière n'a pas pu être chargé.</p>
         </div>
       </div>
+    {% endif %}
 
+    {# Related Generators Section #}
+    {% if related_generators %}
+      <div class="card bg-base-200 shadow-lg mb-6">
+        <div class="card-body">
+          <h2 class="card-title mb-3">Générateurs Associés ({{ related_generators|length }})</h2>
+          <p class="text-sm opacity-70 mb-4">
+            Ces générateurs Python créent des variations automatiques des questions de cette filière.
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+            {% for generator in related_generators %}
+              <a href="{{ generator.path }}"
+                 class="btn btn-sm btn-primary"
+                 title="Voir le code du générateur {{ generator.name }}{%- if generator.level_note %} - {{ generator.level_note }}
+                        {% endif -%}">
+                <span>{{ generator.name }}</span>
+                {% if generator.level %}
+                  <span class="badge badge-xs
+                               {% if generator.level == '1ERE' %}
+                                 badge-warning
+                               {% else %}
+                                 badge-success
+                               {% endif %}">{{ generator.level }}</span>
+                {% endif %}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {# Footer Navigation #}
+    <div class="divider mt-8"></div>
+    <div class="flex justify-between items-center">
+      <a href="{{ request.url_for('sujets0') }}" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5 mr-1"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Retour aux Sujets 0
+      </a>
+
+      <div class="text-sm opacity-70">
+        Filière: <span class="font-semibold">{{ filiere_number.upper() }}</span>
+      </div>
     </div>
+
   </div>
+</div>
 {% endblock content %}

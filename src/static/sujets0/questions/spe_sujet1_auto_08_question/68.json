@@ -2,23 +2,23 @@
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-8]",
   "statement": "On a représenté ci-contre une droite (\\\\mathcal\\{D\\} dans un repère orthonormé. Donner l'équation de la droite \\\\mathcal\\{D\\} sous la forme $y=ax+b$",
   "answer": {
-    "latex": "\\dfrac{8}{9}x + 2",
-    "simplified_latex": "\\dfrac{8}{9}x + 2",
+    "latex": "\\dfrac{4}{5}x + 1",
+    "simplified_latex": "\\dfrac{4}{5}x + 1",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Mul(Rational(8, 9), Symbol('x')), Integer(2))",
-      "str": "8*x/9 + 2"
+      "sp.srepr": "Add(Mul(Rational(4, 5), Symbol('x')), Integer(1))",
+      "str": "4*x/5 + 1"
     },
-    "formal_repr": "Add(l=Mul(l=Fraction(p=Integer(n=8), q=Integer(n=9)), r=Symbol(s='x')), r=Integer(n=2))"
+    "formal_repr": "Add(l=Mul(l=Fraction(p=Integer(n=4), q=Integer(n=5)), r=Symbol(s='x')), r=Integer(n=1))"
   },
   "components": {
     "x": "x",
-    "a": "\\dfrac{8}{9}",
-    "b": "2"
+    "a": "\\dfrac{4}{5}",
+    "b": "1"
   },
   "seed": 68,
   "generator": "spe_sujet1_auto_08_question",
   "success": true,
-  "stdout": "{'x': Symbol(s='x'), 'a': Fraction(p=Integer(n=8), q=Integer(n=9)), 'b': Integer(n=2), 'maths_object': Add(l=Mul(l=Fraction(p=Integer(n=8), q=Integer(n=9)), r=Symbol(s='x')), r=Integer(n=2)), 'statement': \"On a représenté ci-contre une droite (\\\\\\\\mathcal\\\\{D\\\\} dans un repère orthonormé. Donner l'équation de la droite \\\\\\\\mathcal\\\\{D\\\\} sous la forme $y=ax+b$\"}\n",
+  "stdout": "{'x': Symbol(s='x'), 'a': Fraction(p=Integer(n=4), q=Integer(n=5)), 'b': Integer(n=1), 'maths_object': Add(l=Mul(l=Fraction(p=Integer(n=4), q=Integer(n=5)), r=Symbol(s='x')), r=Integer(n=1)), 'statement': \"On a représenté ci-contre une droite (\\\\\\\\mathcal\\\\{D\\\\} dans un repère orthonormé. Donner l'équation de la droite \\\\\\\\mathcal\\\\{D\\\\} sous la forme $y=ax+b$\"}\n",
   "stderr": ""
 }
