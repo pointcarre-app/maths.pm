@@ -60,13 +60,12 @@ metatags:
 
 # Backend settings specific to Nagini
 # TODO : thinking about which ones you really need
-# backend_settings:
-  # nagini:
+backend_settings:
+  nagini:
     # Using esm.sh CDN which properly handles ES module imports
-    # endpoint: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.20/"
-    # js_url: "https://esm.sh/gh/pointcarre-app/nagini@v0.0.20/src/nagini.js"
-    # Worker URL still uses jsdelivr directly as it doesn't need ES module processing
-    # pyodide_worker_url: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.20/src/pyodide/worker/worker-dist.js"
+    endpoint: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.21/"
+    js_url: "https://esm.sh/gh/pointcarre-app/nagini@v0.0.21/src/nagini.js"
+    pyodide_worker_url: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.21/src/pyodide/worker/worker-dist.js"
   
   # # Add the script paths back
   # arpege_generator_script_paths:

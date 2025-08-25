@@ -40,6 +40,8 @@ function initializeTabs() {
 async function loadNaginiAndInitialize() {
     try {
         // Load Nagini
+
+        
         const naginiModule = await import('https://esm.sh/gh/pointcarre-app/nagini@v0.0.21/src/nagini.js?bundle');
         Nagini = naginiModule.Nagini;
         window.Nagini = Nagini;
@@ -116,6 +118,136 @@ function enableExecuteButton() {
 }
 
 /**
+ * Extract all form values from the Arpege form
+ * @returns {Object} Form data with validation and type conversion
+ */
+function extractFormValues() {
+    const form = document.getElementById('arpege-form');
+    if (!form) {
+        throw new Error('Form not found');
+    }
+    
+    // Extract number inputs
+    const studentCount = parseInt(document.getElementById('nb-eleves')?.value || '30', 10);
+    const questionCount = parseInt(document.getElementById('nb-questions')?.value || '12', 10);
+    
+    // Extract radio button values
+    const programLevel = document.querySelector('input[name="options"]:checked')?.getAttribute('aria-label') || null;
+    const specialization = document.querySelector('input[name="sujets0"]:checked')?.getAttribute('aria-label') || null;
+    
+    // Create structured form data object
+    const formData = {
+        // Student/Copy configuration
+        copies: {
+            count: studentCount,
+            isValid: studentCount >= 1 && studentCount <= 50
+        },
+        
+        // Question configuration
+        questions: {
+            perCopy: questionCount,
+            isValid: questionCount >= 1 && questionCount <= 12
+        },
+        
+        // Program level selection
+        program: {
+            level: programLevel, // "2nde" or "2nde & 1ère"
+            includesFirstYear: programLevel === "2nde & 1ère",
+            isValid: programLevel !== null
+        },
+        
+        // Specialization selection
+        track: {
+            type: specialization, // "Spé." or "Non Spé." or "Techno"
+            isSpeciality: specialization === "Spé.",
+            isValid: specialization !== null && specialization !== "Techno"
+        },
+        
+        // Global validation
+        isComplete: false,
+        errors: []
+    };
+    
+    // Validate all fields
+    validateFormData(formData);
+    
+    return formData;
+}
+
+/**
+ * Validate form data and populate error messages
+ * @param {Object} formData - The form data object to validate
+ */
+function validateFormData(formData) {
+    const errors = [];
+    
+    // Validate student count
+    if (!formData.copies.isValid) {
+        errors.push({
+            field: 'copies',
+            message: 'Le nombre de copies doit être entre 1 et 50'
+        });
+    }
+    
+    // Validate question count
+    if (!formData.questions.isValid) {
+        errors.push({
+            field: 'questions',
+            message: 'Le nombre de questions doit être entre 1 et 12'
+        });
+    }
+    
+    // Validate program level selection
+    if (!formData.program.isValid) {
+        errors.push({
+            field: 'program',
+            message: 'Veuillez sélectionner un niveau de programme'
+        });
+    }
+    
+    // Validate track selection
+    if (!formData.track.isValid) {
+        if (formData.track.type === "Techno") {
+            errors.push({
+                field: 'track',
+                message: 'La filière technologique n\'est pas encore disponible'
+            });
+        } else {
+            errors.push({
+                field: 'track',
+                message: 'Veuillez sélectionner une filière'
+            });
+        }
+    }
+    
+    formData.errors = errors;
+    formData.isComplete = errors.length === 0;
+}
+
+/**
+ * Get form configuration for generator execution
+ * @returns {Object} Simplified configuration object for generators
+ */
+function getGeneratorConfig() {
+    const formData = extractFormValues();
+    
+    if (!formData.isComplete) {
+        console.error('Form validation errors:', formData.errors);
+        return null;
+    }
+    
+    return {
+        nbStudents: formData.copies.count,
+        nbQuestions: formData.questions.perCopy,
+        programLevel: formData.program.includesFirstYear ? 'both' : 'seconde',
+        track: formData.track.isSpeciality ? 'speciality' : 'common',
+        // Additional config can be added here
+        timestamp: Date.now(),
+        sessionId: crypto.randomUUID?.() || Math.random().toString(36).substr(2, 9)
+    };
+}
+
+/**
  * Execute all generators
  */
 async function executeAllGenerators() {
@@ -123,6 +255,17 @@ async function executeAllGenerators() {
         alert("Nagini not ready. Please wait a few seconds and try again.");
         return;
     }
+    
+    // Extract and validate form data
+    const config = getGeneratorConfig();
+    if (!config) {
+        const formData = extractFormValues();
+        const errorMessages = formData.errors.map(e => e.message).join('\n');
+        alert(`Veuillez corriger les erreurs suivantes:\n${errorMessages}`);
+        return;
+    }
+    
+    console.log('Generator configuration:', config);
     
     const executeBtn = document.getElementById('execute-all-generators-btn');
     if (executeBtn) {
@@ -133,7 +276,16 @@ async function executeAllGenerators() {
     const testFiles = [
         'spe_sujet1_auto_01_question.py',
         'spe_sujet1_auto_02_question.py',
-        'spe_sujet1_auto_03_question.py'
+        'spe_sujet1_auto_03_question.py',
+        'spe_sujet1_auto_04_question.py',
+        'spe_sujet1_auto_05_question.py',
+        'spe_sujet1_auto_06_question.py',
+        'spe_sujet1_auto_07_question.py',
+        'spe_sujet1_auto_08_question.py',
+        'spe_sujet1_auto_09_question.py',
+        'spe_sujet1_auto_10_question.py',
+        'spe_sujet1_auto_11_question.py',
+        'spe_sujet1_auto_12_question.py',
     ];
     
     let successCount = 0;
@@ -228,7 +380,14 @@ export async function init() {
 }
 
 // Export functions for global access if needed
-export { executeAllGenerators };
+export { 
+    executeAllGenerators,
+    extractFormValues,
+    validateFormData,
+    getGeneratorConfig
+};
 
-// Make executeAllGenerators available globally for debugging
+// Make functions available globally for debugging
 window.executeAllGenerators = executeAllGenerators;
+window.extractFormValues = extractFormValues;
+window.getGeneratorConfig = getGeneratorConfig;
