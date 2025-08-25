@@ -78,17 +78,9 @@
 {% endblock modal_info_content %}
 
 {% block content %}
-  <div class="padding-alt-security mx-auto mb-14 mt-12 max-w-3xl ">
+  <div class="padding-alt-security mx-auto mb-14 mt-8 max-w-3xl ">
     {% include "sujets0/header.html" %}
-
-    {# <div class="card shadow-lg mx-auto py-6 card mt-12">
-      <h1 class="text-center text-2xl font-bold text-base-content/60 mb-1">Sujets 0</h1>
-      <h2 class="text-center text-xl font-bold mb-3">
-        Pour l'épreuve anticipée de mathématiques en classe de 1ère
-      </h2>
-      <div class="max-w-[400px] mx-auto">{% include "products/sujets0-figure-svg.html" %}</div>
-    </div> #}
-    <div class="grid grid-cols-3 gap-2 sm:gap-4 max-w-4xl mx-auto mt-12">
+    <div class="grid grid-cols-3 gap-2 sm:gap-4 max-w-3xl mx-auto">
       <button class="btn btn-sm md:btn-md  btn-neutral btn-outline btn-active" data-tab="generate">
         <svg xmlns="http://www.w3.org/2000/svg"
              class="h-5 w-5 hidden sm:block"
@@ -101,7 +93,7 @@
           <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
           <rect x="14" y="2" width="8" height="8" rx="1" />
         </svg>
-        <span class="font-normal">Générer<span class="hidden sm:inline">des exercices</span> </span>
+        <span class="font-normal">Générer<span class="hidden sm:inline">&nbsp;des exercices</span> </span>
       </button>
       <button class="btn btn-sm md:btn-md btn-outline btn-neutral" data-tab="documentation">
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -147,35 +139,16 @@
           <span class="sm:hidden">Sujets 0</span>
         </span>
       </button>
+
+
     </div>
 
     <div class="tab-alt-content card mt-6" id="generate-content">
       {% include "sujets0/generate-content.html" %}
-
-      <!-- Button to execute all generators -->
-      <div class="mt-6 p-4 border-t border-base-300">
-        <button id="execute-all-generators-btn"
-                class="btn btn-primary btn-outline btn-disabled"
-                disabled
-                title="Waiting for Nagini to load...">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               class="h-5 w-5 mr-2"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="2"
-               stroke-linecap="round"
-               stroke-linejoin="round">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-          </svg>
-          Générer
-        </button>
-        <span class="ml-3 text-sm text-base-content/60">Exécute 3 générateurs de questions</span>
-      </div>
-
       <!-- Container for generator execution results -->
       <div id="generator-results-container"></div>
     </div>
+
 
     <div class="space-y-6 tab-alt-content tab-alt-hidden" id="documentation-content">
       <div>
@@ -234,6 +207,8 @@
         </div>
       </div>
     </div>
+
+
   </div>
 
   <!-- Load Sujets0 main module -->
