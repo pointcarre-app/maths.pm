@@ -1,12 +1,25 @@
+<style>
+    @media (max-width: 639px) {
+
+        #nb-eleves {
+            width: calc(100% - 40px - 40px);
+        }
+
+        #nb-questions {
+            width: calc(100% - 40px - 40px);
+        }
+    }
+</style>
+
 <div class="flex card justify-center mb-6 ">
-  <form class="space-y-6 w-full" id="arpege-form">
+  <form class="w-full mt-8" id="arpege-form">
     <!-- Two main columns: numbers on left, radio buttons on right -->
     <div class="flex flex-col sm:flex-row sm:gap-12">
       <!-- Left column: Number inputs -->
       <div class="flex flex-col sm:gap-6 flex-1">
         <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
-            <div>Nombre de copies à générer</div>
+            <div class="font-light font-heading text-lg">Nombre de copies à générer</div>
             <div class="relative">
               <div class="badge badge-outline badge-sm cursor-help peer">?</div>
               <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50"
@@ -34,27 +47,34 @@
                    required
                    class="input join-item w-full"
                    aria-describedby="nb-eleves-help" />
-            <button type="button" class="btn join-item" onclick="document.getElementById('nb-eleves').stepDown()">
-              -
-            </button>
-            <button type="button" class="btn join-item" onclick="document.getElementById('nb-eleves').stepUp()">
-              +
-            </button>
+            <button type="button"
+                    class="btn join-item"
+                    onclick="document.getElementById('nb-eleves').stepDown()"
+                    style="width:40px;
+                           height:40px">-</button>
+            <button type="button"
+                    class="btn join-item"
+                    onclick="document.getElementById('nb-eleves').stepUp()"
+                    style="width:40px;
+                           height:40px">+</button>
           </div>
           <p class="label">Obligatoire, entre 1 et 50.</p>
         </fieldset>
 
         <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
-            <div>Nombre de questions par copie</div>
+            <div class="font-light font-heading text-lg">Nombre de questions par copie</div>
             <div class="relative">
               <div class="badge badge-outline badge-sm cursor-help peer">?</div>
-              <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50">
+              <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50"
+                   style="font-weight: 300 !important">
                 Nombre de questions
                 <br />
-                par copie générée
+                par copie (entre 1 et 12).
                 <br />
-                Maximum: 12
+                Une partie A d'un sujet 0 officiel
+                <br />
+                compte 12 questions.
               </div>
             </div>
           </legend>
@@ -83,25 +103,39 @@
       <div class="flex flex-col sm:gap-6 flex-1">
         <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
-            <div>Programmes officiels couverts</div>
+            <div class="font-light font-heading text-lg">Programmes officiels couverts</div>
             <div class="relative">
               <div class="badge badge-outline badge-sm cursor-help peer">?</div>
               <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50"
                    style="font-weight: 300 !important">
-                Restreindre la sélection des questions à celles des sujets 0 qui ne nécessitent pas (forcément) le programme de 1<sup>ère</sup>.
+                Restreindre ou non la sélection
+                <br />
+                des questions à celles des sujets 0
+                <br />
+                qui ne nécessitent pas (forcément)
+                <br />
+                le programme de 1<sup>ère</sup>.
               </div>
             </div>
           </legend>
           <div class="join">
-            <input class="join-item btn w-[50%] font-extralight" type="radio" name="options" aria-label="2nde" />
-            <input class="join-item btn w-[50%] font-extralight" type="radio" name="options" aria-label="2nde & 1ère" />
+            <input class="join-item btn btn-outline w-[50%] font-extralight"
+                   type="radio"
+                   name="options"
+                   aria-label="2nde" />
+            <input class="join-item btn btn-outline w-[50%] font-extralight"
+                   type="radio"
+                   name="options"
+                   aria-label="2nde & 1ère" />
           </div>
-          <p class="label">Obligatoire, entre 1 et 50.</p>
+          <p class="label" style="gap:0 !important">
+            Obligatoire, restreindre ou non au programme de 2<sup>nde</sup>.
+          </p>
         </fieldset>
 
         <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
-            <div>Filière / Spécialité</div>
+            <div class="font-light font-heading text-lg">Filière / Spécialité</div>
             <div class="relative">
               <div class="badge badge-outline badge-sm cursor-help peer">?</div>
               <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50">
@@ -114,16 +148,11 @@
             </div>
           </legend>
           <div class="join">
+            <input class="join-item btn w-[33.3%] font-light input-sm" type="radio" name="sujets0" aria-label="Spé." />
             <input class="join-item btn w-[33.3%] font-light input-sm"
                    type="radio"
                    name="sujets0"
-                   aria-label="Spé."
-                   checked />
-            <input class="join-item btn w-[33.3%] font-light input-sm"
-                   type="radio"
-                   name="sujets0"
-                   aria-label="Non Spé."
-                   disabled />
+                   aria-label="Non Spé." />
             <input class="join-item btn w-[33.3%] font-light input-sm"
                    type="radio"
                    name="sujets0"
@@ -137,10 +166,10 @@
 
     <fieldset class="fieldset">
       <!-- Button to execute all generators -->
-      <div class="mt-6 p-4 border-t border-base-300">
+      <div class="mt-6">
         <button id="execute-all-generators-btn"
                 type="submit"
-                class="btn btn-primary btn-outline btn-disabled"
+                class="btn btn-primary btn-outline btn-disabled w-full"
                 disabled
                 title="Waiting for Nagini to load...">
           <svg xmlns="http://www.w3.org/2000/svg"
@@ -155,18 +184,12 @@
           </svg>
           Générer
         </button>
-        <span class="ml-3 text-sm text-base-content/60">Exécute 3 générateurs de questions</span>
       </div>
+      {# <span class="ml-3 text-sm text-base-content/60">Exécute 3 générateurs de questions</span> #}
     </fieldset>
   </form>
 </div>
 
-<div class="p-4">
-  <div class="indicator">
-    <span id="nagini-dot" class="indicator-item badge badge-xs badge-warning"></span>
-    <span id="nagini-label" class="badge">Nagini loading…</span>
-  </div>
-</div>
 
 <div id="questions-preview-holder" class="my-8"></div>
 

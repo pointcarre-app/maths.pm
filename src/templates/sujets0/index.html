@@ -143,6 +143,22 @@
 
     </div>
 
+
+    <div class="card bg-base-300 p-6 mt-8">
+      <div class="card-header">
+        <h2 class="card-title">Génération d'exercices</h2>
+      </div>
+      <div class="card-body">
+        <details>
+          <summary>Chargement local des librairies</summary>
+          <div class="indicator my-4">
+            <span id="nagini-dot" class="indicator-item badge badge-xs badge-warning"></span>
+            <span id="nagini-label" class="badge">Nagini loading…</span>
+          </div>
+        </details>
+      </div>
+    </div>
+
     <div class="tab-alt-content card mt-6" id="generate-content">
       {% include "sujets0/generate-content.html" %}
       <!-- Container for generator execution results -->

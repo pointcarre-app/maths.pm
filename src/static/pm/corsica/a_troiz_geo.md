@@ -168,7 +168,7 @@ feedback_incorrect: "Réponse incorrecte."
 
 
 
-![Carte 3 : Carte de la Corse avec quadrillage $10$ $km$ par $10$ $km$](/static/pm/corsica/files/corsica_grid_cells_dichotomy_static.svg)
+![Carte 3 : Carte de la Corse avec quadrillage $10$ $km$ par $10$ $km$](/static/pm/corsica/files/corsica_grid_cells_dichotomy.svg)
 {: .mx-auto}
 
 
