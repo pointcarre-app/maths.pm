@@ -11,15 +11,15 @@
     }
 </style>
 
-<div class="flex card justify-center mb-6 ">
+<div class="flex card justify-center">
   <form class="w-full mt-8" id="arpege-form">
     <!-- Two main columns: numbers on left, radio buttons on right -->
-    <div class="flex flex-col sm:flex-row sm:gap-12">
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
       <!-- Left column: Number inputs -->
-      <div class="flex flex-col sm:gap-6 flex-1">
+      <div class="flex flex-col gap-4 sm:gap-8 flex-1">
         <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
-            <div class="font-light font-heading text-lg">Nombre de copies à générer</div>
+            <div class="font-light font-heading text-base md:text-lg">Copies à générer</div>
             <div class="relative">
               <div class="badge badge-outline badge-sm cursor-help peer">?</div>
               <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50"
@@ -63,7 +63,7 @@
 
         <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
-            <div class="font-light font-heading text-lg">Nombre de questions par copie</div>
+            <div class="font-light font-heading text-base md:text-lg">Questions par copie</div>
             <div class="relative">
               <div class="badge badge-outline badge-sm cursor-help peer">?</div>
               <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50"
@@ -100,14 +100,19 @@
       </div>
 
       <!-- Right column: Radio buttons -->
-      <div class="flex flex-col sm:gap-6 flex-1">
+      <div class="flex flex-col gap-4 sm:gap-8 flex-1">
         <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
-            <div class="font-light font-heading text-lg">Programmes officiels couverts</div>
+            <div class="font-light font-heading text-base md:text-lg">Programmes officiels couverts</div>
             <div class="relative">
               <div class="badge badge-outline badge-sm cursor-help peer">?</div>
               <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50"
                    style="font-weight: 300 !important">
+                <strong>La majorité des questions relèvent du
+                  <br />
+                programme de 2<sup>nde</sup>.</strong>
+                <br />
+                <br />
                 Restreindre ou non la sélection
                 <br />
                 des questions à celles des sujets 0
@@ -115,6 +120,8 @@
                 qui ne nécessitent pas (forcément)
                 <br />
                 le programme de 1<sup>ère</sup>.
+
+
               </div>
             </div>
           </legend>
@@ -135,15 +142,20 @@
 
         <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
-            <div class="font-light font-heading text-lg">Filière / Spécialité</div>
+            <div class="font-light font-heading text-base md:text-lg">Filière / Spécialité</div>
             <div class="relative">
               <div class="badge badge-outline badge-sm cursor-help peer">?</div>
-              <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50">
-                Spé = Spécialité Maths
+              <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50"
+                   style="font-weight: 300 !important">
+                Spé : Spécialité Maths
                 <br />
-                Non Spé = Tronc commun
+                Non Spé : Enseignement Spécifique
                 <br />
                 Techno = Filière technologique
+                <br />
+                Détails disponibles sur le site du ministère,
+                <br />
+                liens dans la sections "Consulter les sujets 0".
               </div>
             </div>
           </legend>
@@ -166,10 +178,10 @@
 
     <fieldset class="fieldset">
       <!-- Button to execute all generators -->
-      <div class="mt-6">
+      <div class="mt-8">
         <button id="execute-all-generators-btn"
-                type="submit"
-                class="btn btn-primary btn-outline btn-disabled w-full"
+                type="button"
+                class="btn btn-primary btn-disabled w-full"
                 disabled
                 title="Waiting for Nagini to load...">
           <svg xmlns="http://www.w3.org/2000/svg"
@@ -190,317 +202,5 @@
   </form>
 </div>
 
-
-<div id="questions-preview-holder" class="my-8"></div>
-
-<div id="questions-generated-at-runtime-holder" class="card-content" hidden></div>
-
-<script type="module">
-    // Use Nagini from parent template (already loaded globally)
-    const Nagini = window.Nagini;
-
-    import {
-        QuestionFactory
-    } from "/static/js/core/question-factory.js";
-
-    // Hardcoded configuration - no backend settings needed
-    const pyodideWorkerUrl = 'https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.20/src/pyodide/worker/worker-dist.js';
-
-    // Script paths for question generation from static/sujets0/generators
-    const pythonFileUrls = [
-        "/static/sujets0/generators/spe_sujet1_auto_01_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_02_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_03_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_04_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_05_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_06_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_07_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_08_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_09_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_10_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_11_question.py",
-        "/static/sujets0/generators/spe_sujet1_auto_12_question.py"
-    ];
-
-    // No teacher files for now
-    const teachersFilesToLoad = [];
-
-    const managerBackend = "pyodide";
-    const micropipPackages = [];
-    const packages = ["sympy", "pydantic"];
-
-    const includeNaginiResult = true;
-    const includeMetadata = false;
-
-    let generatedQuestions = [];
-
-    async function arpegeGenerator() {
-        console.log("➡️ Arpege:Generator");
-
-        // Check if Nagini is available
-        if (!Nagini) {
-            console.error("❌ Nagini not available!");
-            const errorDiv = document.createElement("div");
-            errorDiv.className = "alert alert-error mt-4";
-            errorDiv.innerHTML = "Nagini n'est pas encore chargé. Veuillez patienter et réessayer.";
-            document.getElementById("questions-preview-holder").appendChild(errorDiv);
-            return;
-        }
-
-        const nbQuestions = parseInt(document.getElementById('nb-questions').value) || 4;
-
-        const managerPromise = Nagini.createManager(
-            managerBackend,
-            packages,
-            micropipPackages,
-            teachersFilesToLoad,
-            pyodideWorkerUrl
-        );
-
-        const readyPromise = managerPromise.then((mgr) =>
-            Nagini.waitForReady(mgr).then(() => mgr)
-        );
-
-        readyPromise
-            .then(async (mgr) => {
-                displayIndicatorNaginiIsReady();
-                generatedQuestions = [];
-
-                // Clear preview holder before generating new questions
-                document.getElementById("questions-preview-holder").innerHTML = "";
-                document.getElementById("questions-generated-at-runtime-holder").innerHTML = "";
-
-                for (let i = 0; i < Math.min(nbQuestions, pythonFileUrls.length); i++) {
-                    const pythonFileUrl = pythonFileUrls[i];
-
-                    console.log(`➡️ Generating question from ${pythonFileUrl}`);
-
-                    try {
-                        const question = await QuestionFactory.createFromPyodide(
-                            pythonFileUrl,
-                            mgr,
-                            Nagini, // Pass Nagini class as parameter
-                            includeNaginiResult,
-                            includeMetadata
-                        );
-
-                        generatedQuestions.push(question);
-                        renderQuestion(question, document.getElementById("questions-generated-at-runtime-holder"));
-                    } catch (error) {
-                        console.error(`❌ Failed to generate question from ${pythonFileUrl}:`, error);
-                        const div = document.createElement("div");
-                        div.classList.add("mt-8");
-                        div.innerHTML = `
-            <div class="card card-error">
-              <div class="card-body shadow-lg mb-5">
-                    <div class="text-error">Erreur lors de la génération</div>
-                    <pre class="text-xs">${error}</pre>
-                </div>
-              </div>
-            </div>
-          `;
-                        document.getElementById("questions-generated-at-runtime-holder").appendChild(div);
-                    }
-                }
-                // Render preview after all questions are generated
-                renderQuestionsPreview(generatedQuestions);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    }
-
-    async function renderQuestion(question, containerEl) {
-        const naginiResult = question.naginiResult;
-        const div = document.createElement("div");
-        div.classList.add("mt-8");
-        div.innerHTML = `
-          <div class="card">
-            <div class="card-body bg-base-200 shadow-lg mb-5">
-                <div class="overflow-x-auto">
-                    <table class="table table-zebra table-sm">
-                        <tbody>
-                            <tr><td colspan="2" class="font-mono w-32 align-top text-right bg-primary/10">Metadata</td></tr>
-                            <tr><td class="font-mono w-32 align-top">Origin</td><td class="align-top"><code>${
-                             question.origin
-                            }</code></td></tr>
-                            <tr><td class="font-mono w-32 align-top">Python File</td><td class="font-mono text-xs align-top">${
-                                question.pythonFileUrl
-                            }</td></tr>
-                            <tr><td class="font-mono w-32 align-top">Beacon</td><td class="align-top">${
-                                question.beacon
-                            }</td></tr>
-                            <tr><td class="font-mono w-32 align-top">ID</td><td class="font-mono text-xs align-top">${
-                                question.id
-                            }</td></tr>
-                            <tr><td colspan="2" class="font-mono w-32 align-top text-right bg-primary/10">Question data</td></tr>
-                            <tr><td class="font-mono w-32 align-top">Statement</td><td id="statement-${question.id}" class="align-top">${
-                                question.statement
-                            }</td></tr>
-                            <tr><td class="font-mono w-32 align-top bg-base-300">Answer Latex</td><td class="align-top">$${
-                                question.answer.latex
-                            }$</td></tr>
-                            <tr><td class="font-mono w-32 align-top bg-base-300">Answer Simplified Latex</td><td class="align-top">$${
-                                question.answer.simplified_latex
-                            }$</td></tr>
-                            <tr><td class="font-mono w-32 align-top">Answer SymPy Expr Data</td><td class="align-top">
-                                <code>${question.answer.sympy_exp_data?.type || "N/A"}</code><br />
-                                <code>${question.answer.sympy_exp_data?.["sp.srepr"] || "N/A"}</code><br />
-                                <code>${question.answer.sympy_exp_data?.str || "N/A"}</code><br />
-                             </td></tr>
-                            <tr><td class="font-mono w-32 align-top">Answer Formal Repr</td><td class="align-top">${
-                                question.answer.formal_repr
-                            }</td></tr>
-                        </tbody>
-                    </table>
-                    <hr />
-                    <details>
-                        <summary class="font-mono pl-4">Stdout</summary>
-                        <pre style="padding: 1rem; border-radius: 0.5rem; overflow-x: auto; white-space: pre-wrap; font-family: monospace;">${
-                            naginiResult?.stdout
-                        }</pre>
-                    </details>
-                    <details>
-                        <summary class="font-mono pl-4">Stderr</summary>
-                        <pre style="padding: 1rem; border-radius: 0.5rem; overflow-x: auto; white-space: pre-wrap; font-family: monospace;">${
-                            naginiResult?.stderr
-                        }</pre>
-                    </details>
-                    <details>
-                        <summary class="font-mono pl-4">Complete Nagini Result</summary>
-                        <pre style="padding: 1rem; border-radius: 0.5rem; overflow-x: auto; white-space: pre-wrap; font-family: monospace;">${
-                            JSON.stringify(naginiResult, null, 2)
-                        }</pre>
-                    </details>
-                </div>
-            </div>
-          </div>
-        `;
-
-        containerEl.appendChild(div);
-
-        if (window.renderMathInElement) {
-            window.renderMathInElement(div, {
-                delimiters: [{
-                    left: "$$",
-                    right: "$$",
-                    display: true,
-                }, {
-                    left: "$",
-                    right: "$",
-                    display: false,
-                }, {
-                    left: "\\(",
-                    right: "\\)",
-                    display: false,
-                }, {
-                    left: "\\[",
-                    right: "\\]",
-                    display: true,
-                }, ],
-            });
-        }
-    }
-
-    /**
-     * Render a preview of the generated questions in the preview holder div.
-     * @param {Array} questions
-     */
-    function renderQuestionsPreview(questions) {
-        const previewHolder = document.getElementById("questions-preview-holder");
-        previewHolder.innerHTML = "";
-
-        if (!questions || questions.length === 0) {
-            previewHolder.innerHTML = '<div class="text-error">Aucune question générée.</div>';
-            return;
-        }
-
-        // Create a nice card for the preview
-        const card = document.createElement("div");
-        card.className = "card bg-base-100 shadow-lg";
-
-        const cardBody = document.createElement("div");
-        cardBody.className = "card-body";
-
-        const title = document.createElement("h3");
-        title.className = "card-title text-lg mb-4";
-        title.textContent = `${questions.length} question${questions.length > 1 ? 's' : ''} générée${questions.length > 1 ? 's' : ''}`;
-        cardBody.appendChild(title);
-
-        const list = document.createElement("ol");
-        list.style.paddingLeft = "1.5em";
-        list.style.fontSize = "1.1em";
-        list.style.lineHeight = "1.7";
-
-        questions.forEach((q, idx) => {
-            const li = document.createElement("li");
-            li.style.marginBottom = "1.5em";
-            li.innerHTML = q.statement;
-            list.appendChild(li);
-        });
-
-        cardBody.appendChild(list);
-        card.appendChild(cardBody);
-        previewHolder.appendChild(card);
-
-        // Render math if available
-        if (window.renderMathInElement) {
-            window.renderMathInElement(previewHolder, {
-                delimiters: [{
-                    left: "$$",
-                    right: "$$",
-                    display: true
-                }, {
-                    left: "$",
-                    right: "$",
-                    display: false
-                }, {
-                    left: "\\(",
-                    right: "\\)",
-                    display: false
-                }, {
-                    left: "\\[",
-                    right: "\\]",
-                    display: true
-                }, ],
-            });
-        }
-    }
-
-    function displayIndicatorNaginiIsReady() {
-        const naginiDot = document.getElementById("nagini-dot");
-        naginiDot.classList.replace("badge-warning", "badge-success");
-        const naginiLabel = document.getElementById("nagini-label");
-        naginiLabel.textContent = "Nagini ready";
-    }
-
-    // Wait for Nagini to be available before setting up event listeners
-    function setupEventListeners() {
-        document.getElementById('arpege-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            arpegeGenerator();
-        });
-    }
-
-    // Check if Nagini is already loaded, otherwise wait for it
-    if (window.Nagini) {
-        setupEventListeners();
-    } else {
-        // Poll for Nagini availability
-        const checkInterval = setInterval(() => {
-            if (window.Nagini) {
-                clearInterval(checkInterval);
-                console.log("✅ Nagini is now available in generate-content");
-                setupEventListeners();
-            }
-        }, 100);
-
-        // Stop checking after 10 seconds
-        setTimeout(() => {
-            clearInterval(checkInterval);
-            if (!window.Nagini) {
-                console.error("❌ Nagini failed to load after 10 seconds");
-            }
-        }, 10000);
-    }
-</script>
+<!-- Container for generator execution results from sujets0-main.js -->
+<div id="generator-results-container" class="mt-6"></div>

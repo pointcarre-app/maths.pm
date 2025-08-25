@@ -135,36 +135,43 @@
           <path d="M6 18v-7" />
         </svg>
         <span class="font-normal">
-          <span class="hidden sm:inline">Consulter les Sujets 0</span>
+          <span class="hidden sm:inline">Consulter les sujets 0</span>
           <span class="sm:hidden">Sujets 0</span>
         </span>
       </button>
-
-
     </div>
 
-
-    <div class="card bg-base-300 p-6 mt-8">
-      <div class="card-header">
-        <h2 class="card-title">Génération d'exercices</h2>
-      </div>
+    <div class="card max-w-3xl bg-base-200 mt-8 shadow">
       <div class="card-body">
-        <details>
-          <summary>Chargement local des librairies</summary>
-          <div class="indicator my-4">
+        <div class="font-heading text-xl mb-2 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="h-6 w-6 hidden sm:block"
+               viewBox="0 0 24 24"
+               fill="none"
+               stroke="currentColor"
+               stroke-width="1.5"
+               stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
+            <rect x="14" y="2" width="8" height="8" rx="1" />
+          </svg>
+          Journal de session de la génération d'exercices
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <div class="text-base mb-2">Chargement local des librairies</div>
+          <div class="indicator">
             <span id="nagini-dot" class="indicator-item badge badge-xs badge-warning"></span>
             <span id="nagini-label" class="badge">Nagini loading…</span>
           </div>
-        </details>
+
+        </div>
       </div>
     </div>
 
-    <div class="tab-alt-content card mt-6" id="generate-content">
+    <div class="tab-alt-content card" id="generate-content">
       {% include "sujets0/generate-content.html" %}
-      <!-- Container for generator execution results -->
-      <div id="generator-results-container"></div>
     </div>
-
 
     <div class="space-y-6 tab-alt-content tab-alt-hidden" id="documentation-content">
       <div>
@@ -223,8 +230,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 
   <!-- Load Sujets0 main module -->
