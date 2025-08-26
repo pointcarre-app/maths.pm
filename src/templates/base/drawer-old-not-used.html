@@ -27,13 +27,23 @@
     }
 </style>
 
-{# <div class="fixed left-0 top-0  h-screen w-[calc(260px+1rem)] bg-base-100 text-base-content z-40 transition-transform duration-300 shadow -translate-x-full" id="left-sidebar" style="border-right: 0.1px solid var(--color-accent) !important">
-  <ul class="menu p-4 min-h-full mt-12" style="width: 260px !important;">
+<div class="fixed left-0 top-0 h-screen w-[calc(260px+1rem)] bg-base-100 text-base-content z-40 transition-transform duration-300 shadow -translate-x-full"
+     id="left-sidebar"
+     style="border-right: 0.1px solid var(--color-accent) !important">
+  <ul class="menu p-4 min-h-full mt-12" style="width: 260px !important">
     <li>
       <a href="/dashboard" class="flex justify-between items-center" style="width: 100% !important">
         <span>Tableau de bord</span>
         <div class="p-1" style="border-radius: var(--radius-selector)">
-          <svg class="stroke-base-content" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="stroke-base-content"
+               xmlns="http://www.w3.org/2000/svg"
+               width="18"
+               height="18"
+               viewBox="0 0 24 24"
+               fill="none"
+               stroke-width="1.5"
+               stroke-linecap="round"
+               stroke-linejoin="round">
             <rect width="7" height="9" x="3" y="3" rx="1" />
             <rect width="7" height="5" x="14" y="3" rx="1" />
             <rect width="7" height="9" x="14" y="12" rx="1" />
@@ -60,13 +70,21 @@
             <span class="badge badge-soft badge-xs font-bold">2</span>
           </a>
         </li>
-
       </ul>
     </li>
     <li>
-      <a href="/pronoia"class="flex justify-between items-center" style="width: 100% !important;">
+      <a href="/pronoia" class="flex justify-between items-center" style="width: 100% !important">
         <span>S'entraîner pour le Bac</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-notebook-pen-icon lucide-notebook-pen">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="18"
+             height="18"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             class="lucide lucide-notebook-pen-icon lucide-notebook-pen">
           <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" />
           <path d="M2 6h4" />
           <path d="M2 10h4" />
@@ -99,74 +117,40 @@
         </li>
       </ul>
     </li>
-</ul>
+  </ul>
 </div>
-#}
 
-
-{# <button class="btn btn-circle btn-xl fixed bottom-4 left-4 z-50 spin-scale-hover bg-base-100" id="left-toggle" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2) !important; border:0 !important">
+<button class="btn btn-lg btn-outline btn-primary fixed bottom-4 sm:bottom-8 left-4 sm:left-8 z-50 sm:bg-base-200  shadow-lg hover:scale-105 transition-all duration-10"
+        id="left-toggle"
+        style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2) !important">
   <div class="w-8 h-8">{% include "base/logo-zelie-primary.html" %}</div>
-</button> #}
+  <span class="hidden sm:block hover:text-primary" style="font-size: 1.1rem;font-weight: 300;">Menu</span>
+</button>
 
-
-<div class="fixed  right-0 top-0 h-screen w-[calc(250px+1rem)] bg-base-200/90 backdrop-blur text-base-content z-40 transition-transform duration-300 overflow-y-auto translate-x-full"
-     id="right-sidebar">
-  <ul class="menu p-4 min-h-full mt-12" style="width: 250px !important;">
-
-
+{# <div class="fixed right-0 top-0 h-screen w-[calc(250px+1rem)] bg-base-200/90 backdrop-blur text-base-content z-40 transition-transform duration-300 overflow-y-auto translate-x-full" id="right-sidebar">
+  <ul class="menu p-4 min-h-full mt-12" style="width: 250px !important">
     <li>
-
-
-      <a href="/dashboard" class="flex justify-between items-center">
-
-
-        {# <span class="badge badge-secondary badge-soft badge-sm">18</span> #}
-      </a>
-
+      <a href="/dashboard" class="flex justify-between items-center"></a>
     </li>
 
     <li>
-      <a href="/doppel"
-         class="flex justify-between items-center hover:bg-primary hover:text-primary-content"
-         style="width: 100% !important;
-                background-color: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100))">
+      <a href="/doppel" class="flex justify-between items-center hover:bg-primary hover:text-primary-content" style="width: 100% !important; background-color: color-mix( in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100) )">
         <span>Data-brick</span>
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="18"
-             height="18"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="1.5"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             class="lucide lucide-cuboid-icon lucide-cuboid">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cuboid-icon lucide-cuboid">
           <path d="m21.12 6.4-6.05-4.06a2 2 0 0 0-2.17-.05L2.95 8.41a2 2 0 0 0-.95 1.7v5.82a2 2 0 0 0 .88 1.66l6.05 4.07a2 2 0 0 0 2.17.05l9.95-6.12a2 2 0 0 0 .95-1.7V8.06a2 2 0 0 0-.88-1.66Z" />
           <path d="M10 22v-8L2.25 9.15" />
           <path d="m10 14 11.77-6.87" />
         </svg>
       </a>
-      <ul id="doppel-all-files-list" style="margin-left: 0rem !important;">
+      <ul id="doppel-all-files-list" style="margin-left: 0rem !important">
         <!-- All files will be populated here consecutively -->
       </ul>
     </li>
 
     <li>
-      <a href="/doppel"
-         class="flex justify-between items-center hover:bg-primary hover:text-primary-content"
-         style="width: 100% !important;
-                background-color: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100))">
+      <a href="/doppel" class="flex justify-between items-center hover:bg-primary hover:text-primary-content" style="width: 100% !important; background-color: color-mix( in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100) )">
         <span>Doppel</span>
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="18"
-             height="18"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="1.5"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             class="lucide lucide-drama-icon lucide-drama">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-drama-icon lucide-drama">
           <path d="M10 11h.01" />
           <path d="M14 6h.01" />
           <path d="M18 6h.01" />
@@ -177,7 +161,7 @@
           <path d="M9.1 16.5c.3-1.1 1.4-1.7 2.4-1.4" />
         </svg>
       </a>
-      <ul id="doppel-all-files-list" style="margin-left: 0rem !important;">
+      <ul id="doppel-all-files-list" style="margin-left: 0rem !important">
         <!-- All files will be populated here consecutively -->
       </ul>
     </li>
@@ -187,71 +171,59 @@
       <div class="text-sm font-semibold mb-2">Thèmes</div>
       <ul class="">
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'bolt')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'bolt')">
             ⚡️ Bolt
           </button>
         </li>
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'purple')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'purple')">
             🟪 Purple
           </button>
         </li>
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'dark-black')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'dark-black')">
             ⚫️ DarkBlack
           </button>
         </li>
 
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'night')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'night')">
             🌒 Night
           </button>
         </li>
 
-
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'light')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'light')">
             Light
           </button>
         </li>
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'dark')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'dark')">
             Dark
           </button>
         </li>
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'zelie')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'zelie')">
             Zelie
           </button>
         </li>
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'cyberpunk')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'cyberpunk')">
             Cyberpunk
           </button>
         </li>
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'dracula')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'dracula')">
             Dracula
           </button>
         </li>
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'emerald')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'emerald')">
             Emerald
           </button>
         </li>
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full"
-                  onclick="document.documentElement.setAttribute('data-theme', 'nord')">
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'nord')">
             Nord
           </button>
         </li>
@@ -265,53 +237,38 @@
       </div>
     </li>
   </ul>
-
-
 </div>
 
-
-<button class="btn btn-circle hover:bg-transparent btn-lg fixed bottom-4 right-4 z-50 spin-scale-hover"
-        id="right-toggle">
-  <svg xmlns="http://www.w3.org/2000/svg"
-       width="18"
-       height="18"
-       viewBox="0 0 24 24"
-       fill="none"
-       stroke="currentColor"
-       stroke-width="1"
-       stroke-linecap="round"
-       stroke-linejoin="round">
+<button class="btn btn-circle hover:bg-transparent btn-lg fixed bottom-4 right-4 z-50 spin-scale-hover" id="right-toggle">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
     <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
     <circle cx="12" cy="12" r="3" />
   </svg>
-</button>
+</button> #}
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Sidebar toggle
-        const leftSidebar = document.getElementById('left-sidebar');
-        const rightSidebar = document.getElementById('right-sidebar');
-        const leftToggle = document.getElementById('left-toggle');
-        const rightToggle = document.getElementById('right-toggle');
+        const leftSidebar = document.getElementById("left-sidebar");
+        const rightSidebar = document.getElementById("right-sidebar");
+        const leftToggle = document.getElementById("left-toggle");
+        const rightToggle = document.getElementById("right-toggle");
 
         try {
-
-            leftToggle.addEventListener('click', () => {
-                leftSidebar.classList.toggle('-translate-x-full');
+            leftToggle.addEventListener("click", () => {
+                leftSidebar.classList.toggle("-translate-x-full");
             });
         } catch (e) {
-            console.log("no leftsidebar found")
+            console.log("no leftsidebar found");
             console.error(e);
         }
 
-
         try {
-
-            rightToggle.addEventListener('click', () => {
-                rightSidebar.classList.toggle('translate-x-full');
+            rightToggle.addEventListener("click", () => {
+                rightSidebar.classList.toggle("translate-x-full");
             });
         } catch (e) {
-            console.log("no rightsidebar found")
+            console.log("no rightsidebar found");
             console.error(e);
         }
 
@@ -326,7 +283,9 @@
             if (savedTheme) {
                 setTheme(savedTheme);
             } else {
-                const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                const prefersDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)"
+                ).matches;
                 setTheme(prefersDark ? "dark" : "light");
             }
         }
@@ -334,7 +293,9 @@
         initializeTheme();
 
         // Add event listeners to theme buttons - updated for new button structure
-        const themeButtons = document.querySelectorAll("button[onclick*='data-theme']");
+        const themeButtons = document.querySelectorAll(
+            "button[onclick*='data-theme']"
+        );
         themeButtons.forEach((button) => {
             const originalOnClick = button.getAttribute("onclick");
             button.removeAttribute("onclick");
@@ -346,10 +307,12 @@
         });
 
         // Listen for system theme changes
-        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-            if (!localStorage.getItem("theme")) {
-                setTheme(e.matches ? "dark" : "light");
-            }
-        });
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (e) => {
+                if (!localStorage.getItem("theme")) {
+                    setTheme(e.matches ? "dark" : "light");
+                }
+            });
     });
 </script>

@@ -78,12 +78,22 @@
 {% endblock modal_info_content %}
 
 {% block content %}
+
+
+  {% include "sujets0/drawer.html" %}
+
+
   <div class="padding-alt-security mx-auto mb-14 mt-8 max-w-3xl ">
     {% include "sujets0/header.html" %}
-    <div class="grid grid-cols-3 gap-2 sm:gap-4 max-w-3xl mx-auto">
-      <button class="btn btn-sm md:btn-md  btn-neutral btn-outline btn-active" data-tab="generate">
+
+
+    <div class="tab-alt-content card" id="generate-content">
+      {% include "sujets0/generate-content.html" %}
+
+
+      <div class="font-heading text-xl mt-12 mb-4 flex items-center gap-2">
         <svg xmlns="http://www.w3.org/2000/svg"
-             class="h-5 w-5 hidden sm:block"
+             class="h-6 w-6 hidden sm:block"
              viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
@@ -93,85 +103,34 @@
           <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
           <rect x="14" y="2" width="8" height="8" rx="1" />
         </svg>
-        <span class="font-normal">Générer<span class="hidden sm:inline">&nbsp;des exercices</span> </span>
-      </button>
-      <button class="btn btn-sm md:btn-md btn-outline btn-neutral" data-tab="documentation">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="h-5 w-5 hidden sm:block"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="1.5"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             class="lucide lucide-file-text-icon lucide-file-text">
-          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-          <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-          <path d="M10 9H8" />
-          <path d="M16 13H8" />
-          <path d="M16 17H8" />
-        </svg>
-        <span class="font-normal">
-          <span class="hidden sm:inline">Lire la documentation</span>
-          <span class="sm:hidden">Documentation</span>
-        </span>
-      </button>
-      <button class="btn btn-sm md:btn-md btn-outline btn-neutral" data-tab="subjects">
+        Journal de session de génération d'exercices
+      </div>
+      <div class="card max-w-3xl bg-base-200 mt-0 shadow">
+        <div class="card-body">
 
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="h-5 w-5 hidden sm:block"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="1.5"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             class="lucide lucide-landmark-icon lucide-landmark">
-          <path d="M10 18v-7" />
-          <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z" />
-          <path d="M14 18v-7" />
-          <path d="M18 18v-7" />
-          <path d="M3 22h18" />
-          <path d="M6 18v-7" />
-        </svg>
-        <span class="font-normal">
-          <span class="hidden sm:inline">Consulter les sujets 0</span>
-          <span class="sm:hidden">Sujets 0</span>
-        </span>
-      </button>
-    </div>
 
-    <div class="card max-w-3xl bg-base-200 mt-8 shadow">
-      <div class="card-body">
-        <div class="font-heading text-xl mb-2 flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               class="h-6 w-6 hidden sm:block"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="1.5"
-               stroke-linecap="round"
-               stroke-linejoin="round">
-            <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
-            <rect x="14" y="2" width="8" height="8" rx="1" />
-          </svg>
-          Journal de session de la génération d'exercices
-        </div>
+          <div class="flex flex-col gap-2">
+            <div class="text-base mb-2">Chargement local des librairies</div>
+            <div class="indicator">
+              <span id="nagini-dot" class="indicator-item badge badge-xs badge-warning"></span>
+              <span id="nagini-label" class="badge">Nagini loading…</span>
+            </div>
 
-        <div class="flex flex-col gap-2">
-          <div class="text-base mb-2">Chargement local des librairies</div>
-          <div class="indicator">
-            <span id="nagini-dot" class="indicator-item badge badge-xs badge-warning"></span>
-            <span id="nagini-label" class="badge">Nagini loading…</span>
+
+            <div class="text-base mt-4 mb-2">Génération d'exercices</div>
+
+
+            <!-- Container for validation status tables -->
+            <div id="validation-status-container" class="mt-4"></div>
+
           </div>
-
         </div>
       </div>
+
+      <!-- Container for generator results (questions) - stays below journal -->
+      <div id="generator-results-wrapper" class="mt-6"></div>
     </div>
 
-    <div class="tab-alt-content card" id="generate-content">
-      {% include "sujets0/generate-content.html" %}
-    </div>
 
     <div class="space-y-6 tab-alt-content tab-alt-hidden" id="documentation-content">
       <div>

@@ -797,12 +797,6 @@ L 624.089137 745.303303
   </g>
  </g>
 
-
-</svg>
-
-
-
-
   <!-- Post-processing script to color squares:
       full (all samples inside) -> var(--color-secondary)
       partial (some samples inside) -> var(--color-accent)
@@ -888,3 +882,6 @@ L 624.089137 745.303303
    });
  })();
  ]]></script>
+</svg>
+
+

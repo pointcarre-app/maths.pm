@@ -1,6 +1,5 @@
 <style>
     @media (max-width: 639px) {
-
         #nb-eleves {
             width: calc(100% - 40px - 40px);
         }
@@ -8,6 +7,23 @@
         #nb-questions {
             width: calc(100% - 40px - 40px);
         }
+    }
+
+    /* Error states for form fields */
+    .input-error {
+        border-color: hsl(var(--er)) !important;
+        border-width: 2px !important;
+    }
+
+    .ring-2.ring-error {
+        box-shadow: 0 0 0 2px hsl(var(--er)) !important;
+        border-radius: 0.5rem;
+    }
+
+    /* Smooth transition for error states */
+    .input,
+    .join {
+        transition: border-color 0.2s, box-shadow 0.2s;
     }
 </style>
 
@@ -164,14 +180,15 @@
             <input class="join-item btn w-[33.3%] font-light input-sm"
                    type="radio"
                    name="sujets0"
-                   aria-label="Non Spé." />
+                   aria-label="Non Spé."
+                   disabled />
             <input class="join-item btn w-[33.3%] font-light input-sm"
                    type="radio"
                    name="sujets0"
                    aria-label="Techno"
                    disabled />
           </div>
-          <p class="label">Obligatoire, entre 1 et 50.</p>
+          <p class="label">Obligatoire (choisir un programme officiel spécifique).</p>
         </fieldset>
       </div>
     </div>
@@ -201,6 +218,3 @@
     </fieldset>
   </form>
 </div>
-
-<!-- Container for generator execution results from sujets0-main.js -->
-<div id="generator-results-container" class="mt-6"></div>
