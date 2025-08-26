@@ -57,10 +57,39 @@ question = render_question(**components)
 # print(components | answer | question)
 
 
+# Create HTML version with two-step process
+if components["direction"].n == -1:
+    dir1, dir2 = "diminue", "augmente"
+else:
+    dir1, dir2 = "augmente", "diminue"
+
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            Le prix d'un article est noté $P$.
+        </div>
+        <div class="steps steps-vertical">
+            <div class="step step-primary">
+                <div class="text-sm">Ce prix {dir1} de <span class="badge badge-warning">${{p.latex()}}\\%$</span></div>
+            </div>
+            <div class="step step-primary">
+                <div class="text-sm">Puis {dir2} de <span class="badge badge-warning">${{p.latex()}}\\%$</span></div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-4]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

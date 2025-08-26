@@ -73,10 +73,51 @@ question = render_question(**components)
 # print(components | answer | question)
 
 
+# Create HTML version with table for notes
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <p class="text-sm mb-3">Voici une série de notes avec les coefficients associés :</p>
+        <div class="overflow-x-auto">
+            <table class="table table-compact w-full">
+                <thead>
+                    <tr>
+                        <th class="text-center">Note</th>
+                        <th class="text-center">Coefficient</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">{components["note1"].n}</td>
+                        <td class="text-center">{components["coef1"].n}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{components["note2"].n}</td>
+                        <td class="text-center">{components["coef2"].n}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{components["note3"].n}</td>
+                        <td class="text-center"><span class="badge badge-primary">$x$</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="alert alert-info mt-3">
+            <span>On note $m$ la moyenne de cette série. On veut que <span class="badge badge-warning">$m = {components["mean"].eval()}$</span></span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Que doit valoir $x$ ?
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-12]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

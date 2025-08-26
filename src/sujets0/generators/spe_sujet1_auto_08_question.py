@@ -57,10 +57,26 @@ question = render_question(**components)
 print(components | answer | question)
 
 
+# Create HTML version with graph reference
+statement_html = """
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            On a représenté ci-contre une droite $(\\mathcal{D})$ dans un repère orthonormé.
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Donner l'équation de la droite $\\mathcal{D}$ sous la forme <span class="badge badge-primary">$y=ax+b$</span>
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-8]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

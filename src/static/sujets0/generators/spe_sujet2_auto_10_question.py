@@ -103,10 +103,38 @@ question = render_question(**components)
 # print(components | answer | question)
 
 
+# Create HTML version with function definition
+func_def = tm.Equality(
+    l=components["f"](components["x"]),
+    r=(components["a1"] * components["x"] + components["b1"])
+    * (components["a2"] * components["x"] + components["b2"]),
+)
+
+statement_html = """
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            La fonction ${components["f"].name}$ est définie sur $\\mathbb{R}$ par :
+        </div>
+        <div class="alert alert-info mb-3">
+            <span class="text-lg">${func_def.latex()}$</span>
+        </div>
+        <div class="text-sm mb-3">
+            Sur l'intervalle : <span class="badge badge-primary">${components["interval"].latex()}$</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Quel est le signe de ${components["f"].name}$ sur cet intervalle ?
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

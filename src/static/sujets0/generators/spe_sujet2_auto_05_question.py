@@ -62,10 +62,29 @@ answer = solve(**components)
 question = render_question(**components)
 
 
+# Create HTML version with prime factorization
+statement_html = """
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            On considère le nombre :
+        </div>
+        <div class="alert alert-info">
+            <span class="text-lg">$N = {expr.latex()}$</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Simplifier $N$ tout en conservant la décomposition en facteurs premiers.
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

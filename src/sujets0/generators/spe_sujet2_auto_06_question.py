@@ -60,10 +60,36 @@ answer = solve(**components)
 question = render_question(**components)
 
 
+# Create HTML version with unit conversion
+statement_html = """
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            Un appareil a besoin d'une énergie de :
+        </div>
+        <div class="stats shadow mb-3">
+            <div class="stat">
+                <div class="stat-title">Energie requise</div>
+                <div class="stat-value text-primary">${k.latex()}$</div>
+                <div class="stat-desc">Joules (J)</div>
+            </div>
+        </div>
+        <div class="alert">
+            <span>Conversion : $1\\text{ kWh} = {factor.latex()}\\text{ J}$</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            A combien de kiloWatt-heure (kWh) cela correspond-il ?
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-6]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

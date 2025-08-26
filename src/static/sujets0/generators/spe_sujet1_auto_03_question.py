@@ -87,10 +87,28 @@ question = render_question(**components)
 #     }
 # )
 
+# Create HTML version with percentage highlight
+coef_display = components["coef"].simplified().as_decimal.latex()
+literal_dir = "augmenté" if components["direction"].n == 1 else "diminué"
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm">
+            Le prix d'un article est multiplié par <span class="badge badge-primary">${{coef_display}}$</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            De combien de pourcent le prix de cet article a-t-il {literal_dir} ?
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-3]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

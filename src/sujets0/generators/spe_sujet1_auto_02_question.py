@@ -82,10 +82,28 @@ question = render_question(**components)
 # )
 
 
+# Create HTML version with formula highlighted
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="alert alert-info mb-3">
+            <span>Relation : $F=a+\\dfrac{{b}}{{cd}}$</span>
+        </div>
+        <div class="text-sm">
+            Lorsque $a={components["a"].latex()}$, $b = {components["b"].latex()}$, $c = {components["c"].latex()}$, $d = {components["d"].latex()}$
+        </div>
+        <div class="text-sm font-semibold mt-2">
+            Quelle est la valeur de $F$ ?
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-2]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "mask": "F=",
         "answer": {
             "latex": answer["maths_object"].latex(),

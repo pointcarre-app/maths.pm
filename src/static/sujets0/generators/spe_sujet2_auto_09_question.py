@@ -67,10 +67,26 @@ question = render_question(**components)
 # print(components | answer | question)
 
 
+# Create HTML version with equation
+statement_html = """
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="alert alert-info mb-3">
+            <span>On note $\\mathcal{S}$ l'ensemble des solutions de l'équation <span class="badge badge-primary">${x.latex()}^2={n.latex()}$</span> sur $\\mathbb{R}$</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Calculer $\\mathcal{S}$
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-9]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

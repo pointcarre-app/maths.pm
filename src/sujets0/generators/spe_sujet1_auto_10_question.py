@@ -80,10 +80,30 @@ question = render_question(**components)
 print(components | answer | question)
 
 
+# Create HTML version with graph description
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            La courbe ci-contre représente la courbe d'équation $ax^2 + bx + c$.
+        </div>
+        <div class="alert alert-info">
+            <span>On suppose $|a| = 1$</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Donner l'équation de la parabole.
+        </div>
+        {f'<div class="text-xs text-base-content/60 mt-2 italic">Note: {question.get("graph_description", "")}</div>' if "graph_description" in question else ""}
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-10]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

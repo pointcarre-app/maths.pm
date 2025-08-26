@@ -118,10 +118,48 @@ answer = solve(**components)
 question = render_question(**components)
 
 
+# Create HTML version with functions in a table
+statement_html = """
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <p class="text-sm mb-3">Parmi les 3 fonctions :</p>
+        <div class="overflow-x-auto">
+            <table class="table table-compact w-full">
+                <thead>
+                    <tr>
+                        <th>Fonction</th>
+                        <th>Expression</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-mono">$f_1$</td>
+                        <td>${x.latex()} \\mapsto {expr1.latex()}$</td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono">$f_2$</td>
+                        <td>${x.latex()} \\mapsto {expr2.latex()}$</td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono">$f_3$</td>
+                        <td>${x.latex()} \\mapsto {expr3.latex()}$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Au sein des fonctions affines parmi $f_1, f_2, f_3$, quel est le coefficient directeur avec la plus grande valeur absolue ?
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

@@ -60,10 +60,29 @@ answer = solve(**components)
 question = render_question(**components)
 
 
+# Create HTML version with expression to expand
+statement_html = """
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            Quelle est l'expression développée de :
+        </div>
+        <div class="alert alert-info">
+            <span class="text-lg">${expr.latex()}$</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Développer et simplifier l'expression.
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-11]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

@@ -63,10 +63,42 @@ answer = solve(**components)
 question = render_question(**components)
 
 
+# Create HTML version with nested proportions
+literal_proportions = {
+    2: "la moitié",
+    3: "le tiers",
+    4: "le quart",
+}
+
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">Dans un lycée :</div>
+        <div class="stats stats-vertical shadow">
+            <div class="stat">
+                <div class="stat-title">Elèves internes</div>
+                <div class="stat-value text-primary">{literal_proportions[components["p1"].q.n]}</div>
+                <div class="stat-desc">des élèves</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">Gauchers parmi les internes</div>
+                <div class="stat-value text-secondary">{literal_proportions[components["p2"].q.n]}</div>
+                <div class="stat-desc">sont des gauchers</div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Calculer le pourcentage de gauchers internes par rapport à l'ensemble des élèves du lycée.
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-4]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

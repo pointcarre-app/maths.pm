@@ -99,10 +99,22 @@ question = render_question(**components)
 # print(type(answer["maths_object"].sympy_expr))
 # print(components | answer | question)
 
+# Create HTML version of the statement
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm">
+            {question["statement"]}
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-1]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

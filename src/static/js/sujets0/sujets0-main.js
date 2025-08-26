@@ -81,16 +81,16 @@ function getAllProductSettings() {
  * Initialize tab switching functionality
  */
 function initializeTabs() {
-    const tabButtons = document.querySelectorAll('[data-tab]');
+    const tabLinks = document.querySelectorAll('.tabs .tab');
     const tabContents = document.querySelectorAll('.tab-alt-content');
     
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
+    tabLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Update button states
-            tabButtons.forEach(btn => btn.classList.remove('btn-active'));
-            this.classList.add('btn-active');
+            // Update link states
+            tabLinks.forEach(lnk => lnk.classList.remove('tab-active'));
+            this.classList.add('tab-active');
             
             // Update content visibility
             const tabName = this.getAttribute('data-tab');
@@ -689,28 +689,30 @@ function displayStudentResults(studentIndex) {
         const bgColor = question.success ? 'bg-base-100' : 'bg-error/10';
         const borderColor = question.success ? 'border-primary' : 'border-error';
         
+  
+
         html += `
             <div class="card ${bgColor} border ${borderColor} shadow-sm">
                 <div class="card-body">
                     <div class="flex justify-between items-start mb-2">
-                        <h4 class="font-semibold text-sm">
-                            Question ${qIndex + 1}
-                            <span class="text-xs text-base-content/60 ml-2">
-                                (${question.generator})
+                            <span class="text-lg text-base-content/70 font-mono">
+                                ${question.generator}
                             </span>
-                        </h4>
-                        ${question.success 
-                            ? '<span class="badge badge-success badge-sm">✓</span>'
-                            : '<span class="badge badge-error badge-sm">✗</span>'
+                             <hr>
+
                         }
                     </div>
                     
                     ${question.success ? `
                         <div class="space-y-2">
-                            <div class="text-sm">
-                                <strong>Énoncé:</strong>
-                                <div class="mt-1">${question.statement || 'Pas d\'énoncé'}</div>
-                            </div>
+                            ${question.data?.statement_html ? `
+                                ${question.data.statement_html}
+                            ` : `
+                                <div class="text-sm">
+                                    <strong>Énoncé:</strong>
+                                    <div class="mt-1">${question.statement || 'Pas d\'énoncé'}</div>
+                                </div>
+                            `}
                             ${question.answer ? `
                                 <div class="text-sm">
                                     <strong>Réponse:</strong>
@@ -964,17 +966,11 @@ export async function init() {
     // Log generator levels from backend settings
     let generatorLevels = null;
     
-    // First try window.GENERATOR_LEVELS (from template)
-    if (window.GENERATOR_LEVELS) {
-        generatorLevels = window.GENERATOR_LEVELS;
-    } 
-    // Otherwise try to get from backend settings
-    else if (backendSettings?.generator_levels) {
+    // Get generator levels from backend settings (loaded from data-brick)
+    if (backendSettings?.generator_levels) {
         generatorLevels = backendSettings.generator_levels;
         window.GENERATOR_LEVELS = generatorLevels; // Make globally available
-    }
-    
-    if (generatorLevels) {
+        
         console.group('📊 Generator Levels from Backend');
         console.log('Generator levels loaded:', generatorLevels);
         
@@ -986,14 +982,27 @@ export async function init() {
         }
         console.log('Levels distribution:', levelCounts);
         
-        // List 1ERE level generators
+        // List 1ERE level generators (with notes where available)
         const firstYearGenerators = Object.entries(generatorLevels)
             .filter(([name, info]) => info.level === '1ERE')
-            .map(([name, info]) => ({name, note: info.note}));
+            .map(([name, info]) => ({
+                name, 
+                note: info.note || 'Pas de note spécifique'
+            }));
         console.log('1ère année generators:', firstYearGenerators);
+        
+        // List 2DE level generators with notes
+        const secondYearWithNotes = Object.entries(generatorLevels)
+            .filter(([name, info]) => info.level === '2DE' && info.note)
+            .map(([name, info]) => ({name, note: info.note}));
+        if (secondYearWithNotes.length > 0) {
+            console.log('2nde generators with notes:', secondYearWithNotes);
+        }
+        
         console.groupEnd();
     } else {
-        console.warn('⚠️ Generator levels not available from backend');
+        console.warn('⚠️ Generator levels not available from backend settings');
+        console.log('Available backend settings:', backendSettings);
     }
     
     // Initialize tabs

@@ -70,16 +70,7 @@
     {% endif %}
   {% endif %}
 
-  {# Backend settings disabled - we load Nagini manually in the content block #}
-
-  {# Pass generator levels to JavaScript #}
-  <script>
-      window.GENERATOR_LEVELS = {
-          {
-              generator_levels | tojson | safe
-          }
-      };
-  </script>
+  {# Backend settings loaded from data-brick in the content block #}
 {% endblock extra_head %}
 
 {% block modal_info_content %}
@@ -96,48 +87,10 @@
     {% include "sujets0/header.html" %}
 
 
+    {% include "sujets0/tabs.html" %}
+
     <div class="tab-alt-content card" id="generate-content">
       {% include "sujets0/generate-content.html" %}
-
-
-      <div class="font-heading text-xl mt-12 mb-4 flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="h-6 w-6 hidden sm:block"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="1.5"
-             stroke-linecap="round"
-             stroke-linejoin="round">
-          <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
-          <rect x="14" y="2" width="8" height="8" rx="1" />
-        </svg>
-        Journal de session de génération d'exercices
-      </div>
-      <div class="card max-w-3xl bg-base-200 mt-0 shadow">
-        <div class="card-body">
-
-
-          <div class="flex flex-col gap-2">
-            <div class="text-base mb-2">Chargement local des librairies</div>
-            <div class="indicator">
-              <span id="nagini-dot" class="indicator-item badge badge-xs badge-warning"></span>
-              <span id="nagini-label" class="badge">Nagini loading…</span>
-            </div>
-
-
-            <div class="text-base mt-4 mb-2">Génération d'exercices</div>
-
-
-            <!-- Container for validation status tables -->
-            <div id="validation-status-container" class="mt-4"></div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Container for generator results (questions) - stays below journal -->
-      <div id="generator-results-wrapper" class="mt-6"></div>
     </div>
 
 

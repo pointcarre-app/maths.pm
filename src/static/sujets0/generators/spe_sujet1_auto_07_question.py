@@ -68,10 +68,29 @@ question = render_question(**components)
 # print(components | answer | question)
 
 
+# Create HTML version with graph reference and equation
+statement_html = """
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            On a représenté ci-contre la parabole d'équation $y = x^2$.
+        </div>
+        <div class="alert">
+            <span>On note $(\\mathcal{J})$ l'inéquation, sur $\\mathbb{R}$, <span class="badge badge-primary">${relation.latex()}$</span></span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Donner la ou les inéquation(s) du premier degré équivalente à $\\mathcal{J}$.
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-7]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

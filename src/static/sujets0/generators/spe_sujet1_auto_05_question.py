@@ -40,7 +40,6 @@ def render_question(*, probabilities: list[tm.Fraction]):
     "On lance un dé à 4 faces. La probabilité d'obtenir chacune des faces est donnée dans le tableau suivant:\n- Face numéro 1: $\\\\dfrac\\{13\\}\\{24\\}$\n- Face numéro 2: $\\\\dfrac\\{13\\}\\{24\\}$\n- Face numéro 3: $\\\\dfrac\\{13\\}\\{24\\}$\n- Face numéro 4: $x$\n"
     """
 
-
     str_probabilities = []
 
     for p in probabilities[:-1]:
@@ -68,10 +67,51 @@ question = render_question(**components)
 # print(components | answer | question)
 
 
+# Create HTML version with a proper table
+str_probs = []
+for p in components["probabilities"][:-1]:
+    p_simple = p.simplified()
+    str_probs.append(p_simple.latex())
+
+statement_html = """
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <p class="text-sm mb-3">On lance un dé à 4 faces. La probabilité d'obtenir chacune des faces est donnée dans le tableau suivant:</p>
+        <div class="overflow-x-auto">
+            <table class="table table-compact w-full">
+                <thead>
+                    <tr>
+                        <th class="text-center">Face</th>
+                        <th class="text-center">1</th>
+                        <th class="text-center">2</th>
+                        <th class="text-center">3</th>
+                        <th class="text-center">4</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">Probabilité</td>
+                        <td class="text-center">${str_probs[0]}$</td>
+                        <td class="text-center">${str_probs[1]}$</td>
+                        <td class="text-center">${str_probs[2]}$</td>
+                        <td class="text-center"><span class="badge badge-primary">$x$</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Quelle est la valeur de $x$ ?
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-5]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

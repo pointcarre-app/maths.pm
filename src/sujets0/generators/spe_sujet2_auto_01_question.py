@@ -59,10 +59,29 @@ question = render_question(**components)
 # print(components | answer | question)
 
 
+# Create HTML version with probability tree description
+statement_html = f'''
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            On considère l'arbre de probabilité ci-dessous.
+        </div>
+        <div class="alert alert-info">
+            <span class="text-xs">Note: {question.get('graph_description', 'Un arbre de probabilité avec l\''événement A suivi de la probabilité conditionnelle de B')}</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Calculer la probabilité de B.
+        </div>
+    </div>
+</div>
+'''
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-1]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

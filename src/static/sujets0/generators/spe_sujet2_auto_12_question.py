@@ -61,10 +61,29 @@ answer = solve(**components)
 question = render_question(**components)
 
 
+# Create HTML version with physics formula
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            Si un point mobile suit une trajectoire circulaire de rayon $R$ (en mètre), son accélération centripète $a$ (en $m/s^2$) s'exprime en fonction de la vitesse $v$ (en $m/s$) de la manière suivante :
+        </div>
+        <div class="alert alert-info mb-3">
+            <span class="text-lg">${{expr.latex()}}$</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Exprimer $v$ en fonction de ${a.latex()}$ et ${r.latex()}$.
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-12]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

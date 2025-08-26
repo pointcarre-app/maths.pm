@@ -226,13 +226,26 @@ class Settings(BaseSettings):
         """
         Serialize product settings for template use.
         Each product's settings are JSON-encoded separately.
+        Handles null values properly (converting "null" strings to None).
         """
         serialized = {}
 
         for product_name, settings in self.products_settings.items():
-            serialized[product_name] = json.dumps(settings)
+            # Clean up null strings before serialization
+            cleaned_settings = self._clean_null_values(settings)
+            serialized[product_name] = json.dumps(cleaned_settings)
 
         return serialized
+
+    def _clean_null_values(self, obj):
+        """Recursively convert "null" strings to None for proper JSON serialization."""
+        if isinstance(obj, dict):
+            return {k: self._clean_null_values(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [self._clean_null_values(item) for item in obj]
+        elif obj == "null" or (isinstance(obj, str) and obj.lower() == "null"):
+            return None
+        return obj
 
     @computed_field
     @property

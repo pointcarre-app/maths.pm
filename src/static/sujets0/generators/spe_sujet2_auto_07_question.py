@@ -61,10 +61,46 @@ answer = solve(**components)
 question = render_question(**components)
 
 
+# Create HTML version with points table
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points :
+        </div>
+        <div class="overflow-x-auto">
+            <table class="table table-compact w-full">
+                <thead>
+                    <tr>
+                        <th class="text-center">Point</th>
+                        <th class="text-center">Coordonnées</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center font-mono">$A$</td>
+                        <td class="text-center">$({x1.latex()} ; {y1.latex()})$</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center font-mono">$B$</td>
+                        <td class="text-center">$({x2.latex()} ; {y2.latex()})$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Calculer le coefficient directeur de la droite $d$.
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-7]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

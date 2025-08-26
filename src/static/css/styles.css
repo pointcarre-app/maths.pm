@@ -92,7 +92,7 @@ h6 {
 /* Media query for wide screens */
 @media (min-width: 1078px) {
   .special-vertical-line {
-      opacity: 0.35 !important;
+      opacity: 0.25 !important;
       /* Make the special vertical line visible */
   }
 

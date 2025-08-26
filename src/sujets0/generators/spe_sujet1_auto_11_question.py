@@ -75,10 +75,30 @@ question = render_question(**components)
 # print(components | answer | question)
 
 
+# Create HTML version with point description
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            On a représenté ci-contre la courbe $\\mathcal{{C}}$ d'une fonction ${{f.name}}$.
+        </div>
+        <div class="alert">
+            <span>On note $A$ le point d'abscisse <span class="badge badge-primary">$x_A={{x.n}}$</span> tel que le point appartienne à la courbe $\\mathcal{{C}}$.</span>
+        </div>
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Ecrire l'inégalité correcte de la forme $x \\times f(x) \\; ? \\; 0$
+        </div>
+        {f'<div class="text-xs text-base-content/60 mt-2 italic">Note: {question.get("graph_description", "")}</div>' if "graph_description" in question else ""}
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-11]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

@@ -66,10 +66,27 @@ question = render_question(**components)
 print(components | answer | question)
 
 
+# Create HTML version with graph description
+statement_html = f"""
+<div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+        <div class="text-sm mb-3">
+            La courbe ci-contre représente une droite dont le coefficient directeur vaut 1, en valeur absolue.
+        </div>
+        {f'<div class="text-xs text-base-content/60 italic mb-2">Note: {question.get("graph_description", "")}</div>' if "graph_description" in question else ""}
+        <div class="divider"></div>
+        <div class="text-sm font-semibold">
+            Donner l'équation de la droite sous la forme <span class="badge badge-primary">$a{x.latex()} + b{y.latex()} + c = 0$</span>
+        </div>
+    </div>
+</div>
+"""
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-8]",
         "statement": question["statement"],
+        "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),
