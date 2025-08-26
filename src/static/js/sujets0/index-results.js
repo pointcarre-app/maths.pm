@@ -156,7 +156,7 @@ export function displayStudentResults(studentIndex) {
         
         // Create a simple display for question data
         const questionContent = `
-            <div class="card ${rowClass} shadow-sm mb-8">
+            <div class="card ${rowClass} shadow-sm mb-8 overflow-hidden">
                 <div class="card-header bg-base-200 p-2">
                     <h3 class="card-title font-mono text-base-content/70">${generatorName}</h3>
                 </div>
@@ -165,31 +165,70 @@ export function displayStudentResults(studentIndex) {
                         ${question.getBeacon() ? `
                             <div class="mb-4">
                                 <p class="font-bold mb-2">beacon</p>
-                                <code>${question.getBeacon() || ''}</code>
+                                <code class="break-words">${question.getBeacon() || ''}</code>
                             </div>
                         ` : ''}
                         
                         <div class="mb-4">
                             <p class="font-bold mb-2">statement</p>
-                            <div>${question.statement || 'Non disponible'}</div>
+                            <div class="break-words overflow-wrap-anywhere">${question.statement || 'Non disponible'}</div>
                         </div>
                         
                         ${question.getStatementHtml() ? `
                             <div class="mb-4">
                                 <p class="font-bold mb-2">statement_html</p>
-                                <div>${question.getStatementHtml()}</div>
+                                <div class="break-words overflow-wrap-anywhere">${question.getStatementHtml()}</div>
                             </div>
                         ` : ''}
                         
                         <div class="mb-4">
-                            <p class="font-bold mb-2">answer</p>
-                            <div><span class="font-mono">$${question.getBestAnswer()}$</span></div>
+                            <p class="font-bold mb-2">answers.latex (${question.getAllAnswers().length} total)</p>
+                            ${question.getAllAnswers().length > 0 ? 
+                                question.getAllAnswers().map((ans, idx) => `
+                                    <div class="mb-2 break-words overflow-wrap-anywhere">
+                                        ${question.getAllAnswers().length > 1 ? `<span class="badge badge-neutral mr-2">${idx + 1}</span>` : ''}
+                                        <span class="font-mono inline-block">$${ans}$</span>
+                                    </div>
+                                `).join('')
+                            : '<div class="text-base-content/50">No answers available</div>'}
                         </div>
+                        
+                        ${question.answer && question.answer.simplified_latex ? `
+                            <div class="mb-4">
+                                <p class="font-bold mb-2">answer.simplified_latex${Array.isArray(question.answer.simplified_latex) ? ` (${question.answer.simplified_latex.length} total)` : ''}</p>
+                                ${Array.isArray(question.answer.simplified_latex) ? 
+                                    question.answer.simplified_latex.map((simplified, idx) => `
+                                        <div class="mb-2 break-words overflow-wrap-anywhere">
+                                            ${question.answer.simplified_latex.length > 1 ? `<span class="badge badge-neutral mr-2">${idx + 1}</span>` : ''}
+                                            <span class="font-mono inline-block">$${simplified}$</span>
+                                        </div>
+                                    `).join('')
+                                : `
+                                    <div class="break-words overflow-wrap-anywhere">
+                                        <span class="font-mono inline-block">$${question.answer.simplified_latex}$</span>
+                                    </div>
+                                `}
+                            </div>
+                        ` : ''}
+                        
+                        ${question.answer && question.answer.formal_repr ? `
+                            <div class="mb-4">
+                                <p class="font-bold mb-2">answer.formal_repr</p>
+                                <code class="break-words text-xs">${question.answer.formal_repr}</code>
+                            </div>
+                        ` : ''}
+                        
+                        ${question.answer && question.answer.sympy_exp_data ? `
+                            <div class="mb-4">
+                                <p class="font-bold mb-2">answer.sympy_exp_data</p>
+                                <pre class="text-xs overflow-x-auto whitespace-pre-wrap break-words">${JSON.stringify(question.answer.sympy_exp_data, null, 2)}</pre>
+                            </div>
+                        ` : ''}
                         
                         ${question.getMask() ? `
                             <div class="mb-4">
                                 <p class="font-bold mb-2">mask</p>
-                                <code>${question.getMask()}</code>
+                                <code class="break-words">${question.getMask()}</code>
                             </div>
                         ` : ''}
                         
@@ -202,7 +241,7 @@ export function displayStudentResults(studentIndex) {
                                         Afficher les composants
                                     </div>
                                     <div class="collapse-content"> 
-                                        <pre class="text-xs overflow-x-auto">${JSON.stringify(question.components, null, 2)}</pre>
+                                        <pre class="text-xs overflow-x-auto whitespace-pre-wrap break-words">${JSON.stringify(question.components, null, 2)}</pre>
                                     </div>
                                 </div>
                             </div>

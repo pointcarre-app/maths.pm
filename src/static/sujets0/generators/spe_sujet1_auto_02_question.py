@@ -43,14 +43,14 @@ def solve(*, a, b, c, d):
 
 
 def render_question(*, a, b, c, d):
-    r"""[sujets0][spé][sujet-1][automatismes][question-2]
+    """[sujets0][spé][sujet-1][automatismes][question-2]
     >>> a, b, c, d = tm.Fraction(p=1, q=7), tm.Integer(n=7), tm.Integer(n=1), tm.Fraction(p=-1, q=5)
     >>> statement = render_question(a=a, b=b, c=c, d=d)
     >>> statement["statement"]
-    'On considère la relation $F=a+\\\\dfrac\\{b\\}\\{cd\\}$. Lorsque $a=\\\\dfrac\\{1\\}\\{7\\}$, $b = 7$, $c = 1$, $d = -\\\\dfrac\\{1\\}\\{5\\}$, quelle est la valeur de $F$ ?'
+    'Soit $F=a+\\\\dfrac\\{b\\}\\{cd\\}$. Lorsque $a=\\\\dfrac\\{1\\}\\{7\\}$, $b = 7$, $c = 1$, $d = -\\\\dfrac\\{1\\}\\{5\\}$, quelle est la valeur de $F$ ?'
     """
     # Create the question in French with proper LaTeX
-    statement = r"On considère la relation $F=a+\\dfrac\{b\}\{cd\}$. "
+    statement = "Soit $F=a+\\dfrac{b}{cd}$. "
     statement += f"Lorsque $a={a.latex()}$, $b = {b.latex()}$, $c = {c.latex()}$, $d = {d.latex()}$, quelle est la valeur de $F$ ?"
 
     return {"statement": statement}
@@ -84,20 +84,16 @@ question = render_question(**components)
 
 # Create HTML version with formula highlighted
 statement_html = f"""
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="alert alert-info mb-3">
-            <span>Relation : $F=a+\\dfrac{{b}}{{cd}}$</span>
-        </div>
-        <div class="text-sm">
-            Lorsque $a={components["a"].latex()}$, $b = {components["b"].latex()}$, $c = {components["c"].latex()}$, $d = {components["d"].latex()}$
-        </div>
-        <div class="text-sm font-semibold mt-2">
-            Quelle est la valeur de $F$ ?
-        </div>
-    </div>
+<div>
+    Soit $F=a+\\dfrac{{b}}{{cd}}$. Lorsque : 
+      $a={components["a"].latex()}$ ; $b = {components["b"].latex()}$ ; $c = {components["c"].latex()}$ ; $d = {components["d"].latex()}$<br><br> Quelle est la valeur de $F$ ?
 </div>
 """
+
+# <br><span class="italic">La réponse doit être exprimée sous forme d'une fraction irréductible ou d'entier.</span>
+
+# Define latex_0 for multiple possible answers
+latex_0 = answer["maths_object"].latex()
 
 missive(
     {
@@ -106,7 +102,7 @@ missive(
         "statement_html": statement_html,
         "mask": "F=",
         "answer": {
-            "latex": answer["maths_object"].latex(),
+            "latex": [latex_0],  # List to support multiple correct answers
             "simplified_latex": answer["maths_object"].simplified().latex(),
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),

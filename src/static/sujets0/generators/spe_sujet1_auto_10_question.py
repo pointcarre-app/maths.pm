@@ -99,13 +99,16 @@ statement_html = f"""
 </div>
 """
 
+# Define latex_0 for multiple possible answers
+latex_0 = answer["maths_object"].latex()
+
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-10]",
         "statement": question["statement"],
         "statement_html": statement_html,
         "answer": {
-            "latex": answer["maths_object"].latex(),
+            "latex": [latex_0],  # List to support multiple correct answers
             "simplified_latex": answer["maths_object"].simplified().latex(),
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),

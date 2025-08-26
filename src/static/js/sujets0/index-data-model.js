@@ -26,6 +26,7 @@ export class Component {
  */
 export class Answer {
     constructor(data = {}) {
+        // latex can now be an array or a single value
         this.latex = data.latex || null;
         this.simplified_latex = data.simplified_latex || null;
         this.sympy_exp_data = data.sympy_exp_data || null;
@@ -33,10 +34,26 @@ export class Answer {
     }
 
     /**
+     * Get all LaTeX representations as an array
+     * @returns {Array} Array of LaTeX strings
+     */
+    getAllLatex() {
+        if (Array.isArray(this.latex)) {
+            return this.latex;
+        } else if (this.latex) {
+            return [this.latex];
+        }
+        return [];
+    }
+
+    /**
      * Get the best available LaTeX representation
-     * @returns {string} The simplified LaTeX or regular LaTeX
+     * @returns {string} The first LaTeX from array, simplified LaTeX, or regular LaTeX
      */
     getBestLatex() {
+        if (Array.isArray(this.latex) && this.latex.length > 0) {
+            return this.latex[0];
+        }
         return this.simplified_latex || this.latex || '';
     }
 }
@@ -117,21 +134,42 @@ export class Question {
     }
 
     /**
+     * Get all possible answer representations
+     * @returns {Array} Array of all possible answers
+     */
+    getAllAnswers() {
+        if (!this.success || !this.answer) return [];
+        
+        if (typeof this.answer === 'string') {
+            return [this.answer];
+        }
+        
+        if (this.answer instanceof Answer) {
+            const allLatex = this.answer.getAllLatex();
+            // Debug logging for multi-answer support
+            if (allLatex.length > 1) {
+                console.log(`Question ${this.generator} has ${allLatex.length} answers:`, allLatex);
+            }
+            return allLatex;
+        }
+        
+        // Handle legacy format
+        if (Array.isArray(this.answer?.latex)) {
+            return this.answer.latex;
+        } else if (this.answer?.latex) {
+            return [this.answer.latex];
+        }
+        
+        return [];
+    }
+
+    /**
      * Get the best answer representation
      * @returns {string} The best available answer
      */
     getBestAnswer() {
-        if (!this.success || !this.answer) return '';
-        
-        if (typeof this.answer === 'string') {
-            return this.answer;
-        }
-        
-        if (this.answer instanceof Answer) {
-            return this.answer.getBestLatex();
-        }
-        
-        return this.answer?.simplified_latex || this.answer?.latex || '';
+        const allAnswers = this.getAllAnswers();
+        return allAnswers.length > 0 ? allAnswers[0] : '';
     }
 }
 

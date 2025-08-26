@@ -2,8 +2,12 @@
 ## High
 
 
+
+
 - [] Every domain / product yaml should have his own validation rules (using online mode to ensure hosted versions exists)
 
+
+### Sujets 0 
 
 - []  Correct the level for the questions in generators.
 
@@ -11,6 +15,9 @@
 
 
 - [] Add non sorted function with same generators (ie position of generator in final sheet will be random)
+
+- [] document the fact we adapted the stuff for the maths answer instead of MCQ
+
 
 
 ## Corsica

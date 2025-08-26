@@ -102,9 +102,15 @@ question = render_question(**components)
 # Create HTML version of the statement
 statement_html = f"""
 <div>
-    {question["statement"]}
+    {question["statement"]}<br>
 </div>
 """
+
+
+# <span class="italic">La réponse doit être exprimée sous forme d'une fraction irréductible ou d'entier.</span>
+
+# Define latex_0 for multiple possible answers
+latex_0 = answer["maths_object"].latex()
 
 missive(
     {
@@ -112,7 +118,7 @@ missive(
         "statement": question["statement"],
         "statement_html": statement_html,
         "answer": {
-            "latex": answer["maths_object"].latex(),
+            "latex": [latex_0],  # List to support multiple correct answers
             "simplified_latex": answer["maths_object"].simplified().latex(),
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),

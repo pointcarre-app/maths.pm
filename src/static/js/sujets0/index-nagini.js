@@ -120,8 +120,7 @@ teachers.defaults.SEED = ${seed}
                 return {
                     success: true,
                     statement: data.statement || data.question,
-                    answer: data.answer?.simplified_latex || data.answer?.latex || 
-                           data.answer?.simplified_answer || data.answer,
+                    answer: data.answer,  // Pass the entire answer object to preserve structure
                     data: data
                 };
             } catch (e) {
