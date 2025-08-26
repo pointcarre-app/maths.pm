@@ -79,4 +79,18 @@ def get_generator_level_info(generator_name):
     """Get level information for a generator, handling both with and without .py extension."""
     # Remove .py extension if present
     clean_name = generator_name.replace(".py", "") if generator_name else ""
+
+    # Try to get from product backend settings first, fallback to local GENERATOR_LEVELS
+    try:
+        from ..settings import settings
+
+        # Find sujets0 product
+        for product in settings.products:
+            if product.name == "sujets0" and product.backend_settings:
+                generator_levels = product.backend_settings.get("generator_levels", {})
+                if generator_levels and clean_name in generator_levels:
+                    return generator_levels[clean_name]
+    except:
+        pass
+
     return GENERATOR_LEVELS.get(clean_name, {"level": "N/A", "note": None})

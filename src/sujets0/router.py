@@ -8,7 +8,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 
 from ..settings import settings
-from .dispatch_2de_1ere import GENERATOR_LEVELS, get_generator_level_info
+from .dispatch_2de_1ere import get_generator_level_info
 
 # Create sujets0 router
 sujets0_router = APIRouter(tags=["sujets0"])
@@ -57,8 +57,10 @@ async def sujets0(request: Request):
                     if sujets0_product.backend_settings
                     else [],
                     "is_enabled": not sujets0_product.is_hidden,
-                    # Add generator levels information
-                    "generator_levels": GENERATOR_LEVELS,
+                    # Add generator levels information from product backend settings
+                    "generator_levels": sujets0_product.backend_settings.get("generator_levels", {})
+                    if sujets0_product.backend_settings
+                    else {},
                     "get_generator_level": get_generator_level_info,
                 }
             )
@@ -148,7 +150,9 @@ async def sujets0_ex_ante_generated(request: Request):
             "page": {"title": "Questions Pré-générées - Sujets 0"},
             "questions_index": filtered_index_data,
             "questions_base_url": "/static/sujets0/questions/",
-            "generator_levels": GENERATOR_LEVELS,
+            "generator_levels": sujets0_product.backend_settings.get("generator_levels", {})
+            if sujets0_product and sujets0_product.backend_settings
+            else {},
             "get_generator_level": get_generator_level_info,
         }
 
@@ -250,7 +254,9 @@ async def sujets0_ex_ante_generated_error_analysis(request: Request):
             "generators_with_errors": len(
                 [g for g in filtered_generators if g.get("failed", 0) > 0]
             ),
-            "generator_levels": GENERATOR_LEVELS,
+            "generator_levels": sujets0_product.backend_settings.get("generator_levels", {})
+            if sujets0_product and sujets0_product.backend_settings
+            else {},
             "get_generator_level": get_generator_level_info,
         }
 
@@ -409,7 +415,12 @@ async def sujets0_originals(request: Request, filiere_number: str):
             f_level_counts = {"2DE": 0, "1ERE": 0}
 
             # Count levels for this filiere's generators
-            for gen_name, gen_info in GENERATOR_LEVELS.items():
+            generator_levels = (
+                sujets0_product.backend_settings.get("generator_levels", {})
+                if sujets0_product and sujets0_product.backend_settings
+                else {}
+            )
+            for gen_name, gen_info in generator_levels.items():
                 if gen_name.startswith(f_pattern.replace("_*", "_")):
                     if gen_info["level"] in f_level_counts:
                         f_level_counts[gen_info["level"]] += 1
@@ -442,7 +453,9 @@ async def sujets0_originals(request: Request, filiere_number: str):
             "valid_filieres": valid_filieres,
             "has_official_data": bool(curriculum_data),
             "filiere_config": filiere_config,
-            "generator_levels": GENERATOR_LEVELS,
+            "generator_levels": sujets0_product.backend_settings.get("generator_levels", {})
+            if sujets0_product and sujets0_product.backend_settings
+            else {},
             "get_generator_level": get_generator_level_info,
         }
 
@@ -497,8 +510,10 @@ async def scenery(request: Request):
                     if sujets0_product.backend_settings
                     else [],
                     "is_enabled": not sujets0_product.is_hidden,
-                    # Add generator levels information
-                    "generator_levels": GENERATOR_LEVELS,
+                    # Add generator levels information from product backend settings
+                    "generator_levels": sujets0_product.backend_settings.get("generator_levels", {})
+                    if sujets0_product.backend_settings
+                    else {},
                     "get_generator_level": get_generator_level_info,
                 }
             )

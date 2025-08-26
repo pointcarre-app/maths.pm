@@ -67,6 +67,85 @@ backend_settings:
     js_url: "https://esm.sh/gh/pointcarre-app/nagini@v0.0.21/src/nagini.js"
     pyodide_worker_url: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.21/src/pyodide/worker/worker-dist.js"
   
+  # Generator difficulty levels for Sujets0
+  # Maps each generator to its appropriate education level (2DE or 1ERE)
+  generator_levels:
+    # SPE Sujet 1
+    spe_sujet1_auto_01_question: 
+      level: "2DE"
+      note: null
+    spe_sujet1_auto_02_question: 
+      level: "2DE"
+      note: null
+    spe_sujet1_auto_03_question: 
+      level: "2DE"
+      note: null
+    spe_sujet1_auto_04_question: 
+      level: "2DE"
+      note: null
+    spe_sujet1_auto_05_question: 
+      level: "2DE"
+      note: null
+    spe_sujet1_auto_06_question: 
+      level: "2DE"
+      note: null
+    spe_sujet1_auto_07_question: 
+      level: "1ERE"
+      note: "inéquation du second degré x² > n"
+    spe_sujet1_auto_08_question: 
+      level: "2DE"
+      note: null
+    spe_sujet1_auto_09_question: 
+      level: "2DE"
+      note: null
+    spe_sujet1_auto_10_question: 
+      level: "1ERE"
+      note: "polynome"
+    spe_sujet1_auto_11_question: 
+      level: "2DE"
+      note: null
+    spe_sujet1_auto_12_question: 
+      level: "2DE"
+      note: null
+      
+    # SPE Sujet 2
+    spe_sujet2_auto_01_question: 
+      level: "1ERE"
+      note: "probabilités conditionnelles"
+    spe_sujet2_auto_02_question: 
+      level: "2DE"
+      note: null
+    spe_sujet2_auto_03_question: 
+      level: "2DE"
+      note: null
+    spe_sujet2_auto_04_question:
+      level: "2DE"
+      note: "utilise compétence 1ERE mais reste accessible"
+    spe_sujet2_auto_05_question: 
+      level: "2DE"
+      note: null
+    spe_sujet2_auto_06_question: 
+      level: "2DE"
+      note: null
+    spe_sujet2_auto_07_question: 
+      level: "2DE"
+      note: null
+    spe_sujet2_auto_08_question: 
+      level: "2DE"
+      note: null
+    spe_sujet2_auto_09_question: 
+      level: "2DE"
+      note: null
+    spe_sujet2_auto_10_question:
+      level: "1ERE"
+      note: "signe d'expression factorisée du second degré"
+    spe_sujet2_auto_11_question: 
+      level: "2DE"
+      note: null
+    spe_sujet2_auto_12_question: 
+      level: "2DE"
+      note: null
+  
   # # Add the script paths back
   # arpege_generator_script_paths:
   #   - "/static/py/services/sujets0/spe_sujet1_auto_01_question.py"

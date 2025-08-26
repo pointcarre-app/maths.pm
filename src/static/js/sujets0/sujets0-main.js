@@ -855,8 +855,16 @@ async function executeAllGenerators() {
         'spe_sujet1_auto_12_question.py',
     ];
     
-    // Randomly select generators based on question count
-    const selectedGenerators = selectRandomItems(allGenerators, config.nbQuestions);
+    // Select generators based on question count
+    // If all 12 are selected, keep them in order; otherwise randomly select
+    let selectedGenerators;
+    if (config.nbQuestions === 12) {
+        // Keep all generators in their original order
+        selectedGenerators = [...allGenerators];
+    } else {
+        // Randomly select subset of generators
+        selectedGenerators = selectRandomItems(allGenerators, config.nbQuestions);
+    }
     generationResults.selectedGenerators = selectedGenerators;
     
     console.log(`Selected ${config.nbQuestions} generators:`, selectedGenerators);
@@ -944,11 +952,49 @@ window.navigateToStudent = navigateToStudent;
 export async function init() {
     console.log('🚀 Initializing Sujets0 Module');
     
+    // Load backend settings first
+    backendSettings = loadBackendSettings();
+    
     // Log all available settings on initialization
     console.group('📋 Available Product Settings');
     const allSettings = getAllProductSettings();
     console.log('All settings loaded:', Object.keys(allSettings));
     console.groupEnd();
+    
+    // Log generator levels from backend settings
+    let generatorLevels = null;
+    
+    // First try window.GENERATOR_LEVELS (from template)
+    if (window.GENERATOR_LEVELS) {
+        generatorLevels = window.GENERATOR_LEVELS;
+    } 
+    // Otherwise try to get from backend settings
+    else if (backendSettings?.generator_levels) {
+        generatorLevels = backendSettings.generator_levels;
+        window.GENERATOR_LEVELS = generatorLevels; // Make globally available
+    }
+    
+    if (generatorLevels) {
+        console.group('📊 Generator Levels from Backend');
+        console.log('Generator levels loaded:', generatorLevels);
+        
+        // Count by level
+        const levelCounts = {};
+        for (const [generator, info] of Object.entries(generatorLevels)) {
+            const level = info.level || 'N/A';
+            levelCounts[level] = (levelCounts[level] || 0) + 1;
+        }
+        console.log('Levels distribution:', levelCounts);
+        
+        // List 1ERE level generators
+        const firstYearGenerators = Object.entries(generatorLevels)
+            .filter(([name, info]) => info.level === '1ERE')
+            .map(([name, info]) => ({name, note: info.note}));
+        console.log('1ère année generators:', firstYearGenerators);
+        console.groupEnd();
+    } else {
+        console.warn('⚠️ Generator levels not available from backend');
+    }
     
     // Initialize tabs
     initializeTabs();
