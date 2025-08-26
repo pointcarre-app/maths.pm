@@ -1,0 +1,522 @@
+<div class="space-y-6">
+  <div>
+    <div class="font-heading text-xl mb-2">Documentation</div>
+    <div>
+      Consultez la documentation complète pour comprendre le fonctionnement de l'application et découvrir toutes les fonctionnalités disponibles.
+    </div>
+  </div>
+
+  <div>
+    <div class="font-heading text-xl mb-2">Génération d'exercices</div>
+    <div>
+      Cette application permet de générer des exercices inspirés des Sujets 0 du ministère de l'Éducation nationale. Ces exercices et leurs corrections sont générés aléatoirement grâce à un moteur de calcul formel.
+    </div>
+  </div>
+
+  <div>
+    <div class="font-heading text-xl mb-2">Structure des données générées</div>
+    <div class="space-y-4">
+      <p>
+        Les générateurs d'exercices produisent une structure de données uniforme via la fonction <code>missive()</code>. Cette structure contient les données suivantes :
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="table table-zebra table-compact w-full">
+          <thead>
+            <tr>
+              <th>Champ</th>
+              <th>Description</th>
+              <th>Format</th>
+              <th>Présent dans</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <code>beacon</code>
+              </td>
+              <td>Identifiant unique de l'exercice</td>
+              <td>Chaîne de caractères</td>
+              <td>Tous les générateurs</td>
+            </tr>
+            <tr>
+              <td>
+                <code>statement</code>
+              </td>
+              <td>Énoncé textuel de l'exercice (format LaTeX simple)</td>
+              <td>Chaîne de caractères</td>
+              <td>Tous les générateurs</td>
+            </tr>
+            <tr>
+              <td>
+                <code>statement_html</code>
+              </td>
+              <td>Version enrichie de l'énoncé avec mise en forme HTML</td>
+              <td>Chaîne HTML</td>
+              <td>Tous les générateurs</td>
+            </tr>
+            <tr>
+              <td>
+                <code>answer</code>
+              </td>
+              <td>Objet contenant les différents formats de la réponse</td>
+              <td>Objet JSON</td>
+              <td>Tous les générateurs</td>
+            </tr>
+            <tr>
+              <td>
+                <code>components</code>
+              </td>
+              <td>Variables utilisées pour générer l'exercice</td>
+              <td>Objet JSON</td>
+              <td>Tous les générateurs</td>
+            </tr>
+            <tr>
+              <td>
+                <code>mask</code>
+              </td>
+              <td>Préfixe à ajouter à la réponse (ex: "F=")</td>
+              <td>Chaîne de caractères</td>
+              <td>Certains générateurs (ex: 02)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        L'objet <code>answer</code> contient les champs suivants :
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="table table-zebra table-compact w-full">
+          <thead>
+            <tr>
+              <th>Champ</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <code>latex</code>
+              </td>
+              <td>Représentation LaTeX de la réponse</td>
+            </tr>
+            <tr>
+              <td>
+                <code>simplified_latex</code>
+              </td>
+              <td>Représentation LaTeX simplifiée (souvent préférée pour l'affichage)</td>
+            </tr>
+            <tr>
+              <td>
+                <code>sympy_exp_data</code>
+              </td>
+              <td>Représentation interne de l'expression pour le calcul formel</td>
+            </tr>
+            <tr>
+              <td>
+                <code>formal_repr</code>
+              </td>
+              <td>Représentation formelle de l'objet mathématique (format Python)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="font-heading text-xl mb-2">Types d'exercices et particularités</div>
+    <div class="space-y-4">
+      <p>Les générateurs produisent divers types d'exercices avec des structures spécifiques :</p>
+
+      <div class="overflow-x-auto">
+        <table class="table table-zebra table-compact w-full">
+          <thead>
+            <tr>
+              <th>Générateur</th>
+              <th>Type d'exercice</th>
+              <th>Particularités</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td>Inverse de multiplication</td>
+              <td>Expression simple sous forme de fraction</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>Calcul avec fractions</td>
+              <td>
+                Inclut un champ <code>mask</code> avec "F="
+              </td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>Pourcentage d'augmentation</td>
+              <td>
+                Utilise <code>as_decimal</code> pour l'affichage
+              </td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>Variations successives</td>
+              <td>Présentation sous forme d'étapes</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>Probabilités</td>
+              <td>Tableau de probabilités avec valeur à trouver</td>
+            </tr>
+            <tr>
+              <td>06</td>
+              <td>Équation avec fractions</td>
+              <td>Formule mise en évidence</td>
+            </tr>
+            <tr>
+              <td>07</td>
+              <td>Inéquation du second degré</td>
+              <td>Réponse sous forme de collection d'inéquations</td>
+            </tr>
+            <tr>
+              <td>08</td>
+              <td>Équation de droite</td>
+              <td>Référence à une représentation graphique</td>
+            </tr>
+            <tr>
+              <td>09</td>
+              <td>Fonctions et coefficients</td>
+              <td>Multiple expressions à analyser</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Équation de parabole</td>
+              <td>
+                Inclut <code>graph_description</code> pour l'affichage
+              </td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Inégalité avec fonction</td>
+              <td>
+                Inclut <code>graph_description</code> pour l'affichage
+              </td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Moyenne pondérée</td>
+              <td>Tableau de valeurs avec coefficients</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="font-heading text-xl mb-2">Affichage des résultats</div>
+    <div>
+      <p>Le rendu des exercices dans l'interface suit cette logique :</p>
+      <ul class="list-disc list-inside mb-2">
+        <li>
+          Si <code>statement_html</code> existe, il est utilisé prioritairement pour un affichage enrichi
+        </li>
+        <li>
+          Sinon, <code>statement</code> est utilisé avec un formatage minimal
+        </li>
+        <li>
+          Pour les réponses, <code>simplified_latex</code> est préféré pour l'affichage
+        </li>
+        <li>Le rendu LaTeX est effectué par KaTeX pour les formules mathématiques</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <div class="font-heading text-xl mb-2">Flux de données et traitement</div>
+    <div class="space-y-4">
+      <p>Voici le flux de données complet du système de génération :</p>
+
+      <ol class="list-decimal list-inside space-y-2">
+        <li>
+          <strong>Génération côté Python</strong> : Les générateurs produisent des données via <code>missive()</code>
+          <div class="ml-6 text-sm text-base-content/80">
+            <code>components → solve → question → missive</code>
+          </div>
+        </li>
+        <li>
+          <strong>Exécution via Nagini</strong> : <code>executeGeneratorWithSeed</code> dans <code>index-nagini.js</code> exécute le code Python et traite le résultat
+          <div class="ml-6 text-sm text-base-content/80">
+            Code Python → Exécution → Extraction du résultat JSON
+          </div>
+        </li>
+        <li>
+          <strong>Traitement des résultats</strong> : <code>executeAllGenerators</code> dans <code>index-generators.js</code> orchestre l'exécution
+          <div class="ml-6 text-sm text-base-content/80">
+            Validation du formulaire → Sélection des générateurs → Exécution → Stockage des résultats
+          </div>
+        </li>
+        <li>
+          <strong>Affichage</strong> : <code>displayStudentResults</code> dans <code>index-results.js</code> construit l'interface
+          <div class="ml-6 text-sm text-base-content/80">
+            Préparation HTML → Analyse des résultats → Construction des cartes → Rendu LaTeX
+          </div>
+        </li>
+      </ol>
+
+      <p class="text-sm bg-base-200 p-4 rounded-lg">
+        <strong>Note technique :</strong> Le traitement des données dans <code>index-results.js</code> gère plusieurs cas d'affichage et implémente une logique robuste pour traiter toutes les variations possibles des données renvoyées par les générateurs.
+      </p>
+
+      <h3 class="font-semibold mt-4">Gestion des erreurs</h3>
+      <p>Le système traite plusieurs cas d'erreur possibles :</p>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Questions manquantes ou mal formées</li>
+        <li>Générateurs défaillants (erreur Python)</li>
+        <li>Données incomplètes ou incorrectes</li>
+        <li>Problèmes de rendu LaTeX</li>
+      </ul>
+
+      <h3 class="font-semibold mt-4">Extension du système</h3>
+      <p>Pour ajouter un nouveau type d'exercice :</p>
+      <ol class="list-decimal list-inside space-y-1">
+        <li>Créer un nouveau générateur Python suivant la structure des existants</li>
+        <li>
+          S'assurer que la structure de <code>missive</code> est cohérente
+        </li>
+        <li>Tester avec différentes valeurs de seed pour vérifier la robustesse</li>
+        <li>Ajouter le générateur dans la liste des générateurs disponibles</li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <div class="font-heading text-xl mb-2">Fonctionnalités</div>
+    <div>
+      <ul class="list-disc list-inside mb-2">
+        <li>Génération automatique d'exercices QCM</li>
+        <li>Corrections détaillées avec explications</li>
+        <li>Moteur de calcul formel intégré</li>
+        <li>Exercices adaptés aux programmes officiels</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <div class="font-heading text-xl mb-2">Guide d'utilisation</div>
+    <div>
+      <ul class="list-disc list-inside mb-2">
+        <li>Comment générer des exercices</li>
+        <li>Personnaliser les paramètres</li>
+        <li>Exporter les résultats</li>
+        <li>Intégrer dans vos cours</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <div class="font-heading text-xl mb-2">Générateurs disponibles</div>
+    <div class="overflow-x-auto">
+      <table class="table table-zebra table-compact w-full">
+        <thead>
+          <tr>
+            <th>Générateur</th>
+            <th>Niveau</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>spe_sujet1_auto_01_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_02_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_03_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_04_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_05_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_06_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_07_question</td>
+            <td>
+              <span class="badge badge-secondary">1ERE</span>
+            </td>
+            <td>Inéquation du second degré x² > n</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_08_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_09_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_10_question</td>
+            <td>
+              <span class="badge badge-secondary">1ERE</span>
+            </td>
+            <td>Polynôme</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_11_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet1_auto_12_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_01_question</td>
+            <td>
+              <span class="badge badge-secondary">1ERE</span>
+            </td>
+            <td>Probabilités conditionnelles</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_02_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_03_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_04_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>Utilise compétence 1ERE mais reste accessible</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_05_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_06_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_07_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_08_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_09_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_10_question</td>
+            <td>
+              <span class="badge badge-secondary">1ERE</span>
+            </td>
+            <td>Signe d'expression factorisée du second degré</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_11_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>spe_sujet2_auto_12_question</td>
+            <td>
+              <span class="badge badge-primary">2DE</span>
+            </td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="space-y-6" id="subjects-content">
+  <div>
+    <div class="font-heading text-xl mb-2">Sujets 0 de juillet 2025</div>
+    <div>
+      Le ministère a publié :
+      <ul class="list-disc list-inside mb-2">
+        <li>2 sujets 0 pour l'enseignement de spécialité</li>
+        <li>3 sujets 0 pour l'enseignement spécifique</li>
+        <li>2 sujets 0 pour les filières technologiques</li>
+      </ul>
+      Chaque sujet est composé de 2 parties :
+      <ul class="list-disc list-inside mb-2">
+        <li>Partie 1 : QCM de 12 questions pour vérifier les automatismes</li>
+        <li>Partie 2 : 2 exercices entre l'application directe et la résolution de problèmes</li>
+      </ul>
+    </div>
+  </div>
+</div>

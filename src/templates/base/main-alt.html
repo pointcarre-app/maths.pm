@@ -115,11 +115,15 @@
       {% endblock content %}
     </main>
 
-    {% block footers %}
-    {% endblock footers %}
 
     <!-- Navbar active state management -->
     <script src="{{ request.url_for('static', path='js/navbar-active-state.js') }}"></script>
+
+
+    {% block footers %}
+      {% include "domains/maths-pm/footers.html" %}
+    {% endblock footers %}
+
 
   </body>
 </html>
@@ -140,4 +144,4 @@ Subscribe
           </button>
         </form>
       </section>
-       -->
+-->

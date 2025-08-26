@@ -101,12 +101,8 @@ question = render_question(**components)
 
 # Create HTML version of the statement
 statement_html = f"""
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm">
-            {question["statement"]}
-        </div>
-    </div>
+<div>
+    {question["statement"]}
 </div>
 """
 

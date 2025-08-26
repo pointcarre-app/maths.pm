@@ -94,63 +94,11 @@
     </div>
 
 
-    <div class="space-y-6 tab-alt-content tab-alt-hidden" id="documentation-content">
-      <div>
-        <div class="font-heading text-xl mb-2">Documentation</div>
-        <div>
-          Consultez la documentation complète pour comprendre le fonctionnement de l'application et découvrir toutes les fonctionnalités disponibles.
-        </div>
-      </div>
-
-      <div>
-        <div class="font-heading text-xl mb-2">Génération d'exercices</div>
-        <div>
-          Cette application permet de générer des exercices inspirés des Sujets 0 du ministère de l'Éducation nationale. Ces exercices et leurs corrections sont générés aléatoirement grâce à un moteur de calcul formel.
-        </div>
-      </div>
-      <div>
-        <div class="font-heading text-xl mb-2">Fonctionnalités</div>
-        <div>
-          <ul class="list-disc list-inside mb-2">
-            <li>Génération automatique d'exercices QCM</li>
-            <li>Corrections détaillées avec explications</li>
-            <li>Moteur de calcul formel intégré</li>
-            <li>Exercices adaptés aux programmes officiels</li>
-          </ul>
-        </div>
-      </div>
-
-      <div>
-        <div class="font-heading text-xl mb-2">Guide d'utilisation</div>
-        <div>
-          <ul class="list-disc list-inside mb-2">
-            <li>Comment générer des exercices</li>
-            <li>Personnaliser les paramètres</li>
-            <li>Exporter les résultats</li>
-            <li>Intégrer dans vos cours</li>
-          </ul>
-        </div>
-      </div>
+    <div class="tab-alt-content tab-alt-hidden" id="documentation-content">
+      {% include "sujets0/documentation.html" %}
     </div>
 
-    <div class="space-y-6 tab-alt-content tab-alt-hidden" id="subjects-content">
-      <div>
-        <div class="font-heading text-xl mb-2">Sujets 0 de juillet 2025</div>
-        <div>
-          Le ministère a publié :
-          <ul class="list-disc list-inside mb-2">
-            <li>2 sujets 0 pour l'enseignement de spécialité</li>
-            <li>3 sujets 0 pour l'enseignement spécifique</li>
-            <li>2 sujets 0 pour les filières technologiques</li>
-          </ul>
-          Chaque sujet est composé de 2 parties :
-          <ul class="list-disc list-inside mb-2">
-            <li>Partie 1 : QCM de 12 questions pour vérifier les automatismes</li>
-            <li>Partie 2 : 2 exercices entre l'application directe et la résolution de problèmes</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+
   </div>
 
   <!-- Load Sujets0 main module -->

@@ -32,7 +32,7 @@
   Configurer la génération d'exercices
 </div>
 
-<div class="flex card justify-center px-2 mt-0 sm:px-4 md:px-8 bg-base-200">
+<div class="flex card justify-center px-2 mt-0 sm:px-4 md:px-8 bg-base-200 shadow-sm">
   <form class="w-full my-4" id="arpege-form">
     <!-- Two main columns: numbers on left, radio buttons on right -->
     <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
@@ -122,13 +122,12 @@
 
       <!-- Right column: Radio buttons -->
       <div class="flex flex-col gap-4 sm:gap-8 flex-1">
-        <fieldset class="fieldset">
+        {# <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
             <div class="font-light font-heading text-base md:text-lg">Programmes officiels couverts</div>
             <div class="relative">
               <div class="badge badge-outline badge-sm cursor-help peer">?</div>
-              <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50"
-                   style="font-weight: 300 !important">
+              <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50" style="font-weight: 300 !important">
                 <strong>La majorité des questions relèvent du
                   <br />
                 programme de 2<sup>nde</sup>.</strong>
@@ -147,19 +146,13 @@
             </div>
           </legend>
           <div class="join">
-            <input class="join-item btn btn-outline w-[50%] font-extralight"
-                   type="radio"
-                   name="options"
-                   aria-label="2nde" />
-            <input class="join-item btn btn-outline w-[50%] font-extralight"
-                   type="radio"
-                   name="options"
-                   aria-label="2nde & 1ère" />
+            <input class="join-item btn btn-outline w-[50%] font-extralight" type="radio" name="options" aria-label="2nde" disabled />
+            <input class="join-item btn btn-outline w-[50%] font-extralight" type="radio" name="options" aria-label="2nde & 1ère" disabled />
           </div>
           <p class="label" style="gap:0 !important">
             Obligatoire, restreindre ou non au programme de 2<sup>nde</sup>.
           </p>
-        </fieldset>
+</fieldset> #}
 
         <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">

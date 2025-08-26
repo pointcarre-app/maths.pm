@@ -5,6 +5,13 @@
 - [] Every domain / product yaml should have his own validation rules (using online mode to ensure hosted versions exists)
 
 
+- []  Correct the level for the questions in generators.
+
+- [] Proposer une sélection manuelle par générateur (par filière)
+
+
+- [] Add non sorted function with same generators (ie position of generator in final sheet will be random)
+
 
 ## Corsica
 
