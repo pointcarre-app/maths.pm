@@ -35,17 +35,21 @@ def render_question(*, p, direction):
     >>> direction = tm.Integer(n=1)
     >>> statement = render_question(p=p, direction=direction)
     >>> statement["statement"]
-    "Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?"
+    "Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. A l'issue de ces deux variations, quelle est la variation relative du prix ?"
     """
     if direction == -1:
         dir1, dir2 = "diminue", "augmente"
     else:
         dir1, dir2 = "augmente", "diminue"
 
-    statement = f"""Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?"""
+    statement = f"""Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. A l'issue de ces deux variations, quelle est la variation relative du prix ?"""
 
+    statement_html = f"""
+<div>Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. À l'issue de ces deux variations, quelle est la variation relative ($V_r$) du prix ?</div>
+"""
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -63,39 +67,33 @@ if components["direction"].n == -1:
 else:
     dir1, dir2 = "augmente", "diminue"
 
-statement_html = f"""
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            Le prix d'un article est noté $P$.
-        </div>
-        <div class="steps steps-vertical">
-            <div class="step step-primary">
-                <div class="text-sm">Ce prix {dir1} de <span class="badge badge-warning">${{p.latex()}}\\%$</span></div>
-            </div>
-            <div class="step step-primary">
-                <div class="text-sm">Puis {dir2} de <span class="badge badge-warning">${{p.latex()}}\\%$</span></div>
-            </div>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?
-        </div>
-    </div>
-</div>
-"""
 
 # Define latex_0 for multiple possible answers
-latex_0 = answer["maths_object"].latex()
+latex_0 = answer["maths_object"].latex()  # Fraction form
+simplified_0 = answer["maths_object"].simplified().latex()  # Simplified fraction
+
+# Convert fraction to percentage by multiplying by 100
+# The answer is already a percentage variation (as a fraction), so multiply by 100 to get the percentage value
+percent_value = answer["maths_object"] * tm.Integer(n=100)
+percent_simplified = percent_value.simplified()
+
+# If it's a nice decimal, show it as decimal, otherwise keep as fraction
+if hasattr(percent_simplified, "as_decimal"):
+    latex_1 = percent_simplified.as_decimal.latex() + r"\%"
+    simplified_1 = percent_simplified.as_decimal.latex() + r"\%"  # Already simplified
+else:
+    latex_1 = percent_simplified.latex() + r"\%"
+    simplified_1 = percent_simplified.latex() + r"\%"  # Already simplified
 
 missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-4]",
         "statement": question["statement"],
-        "statement_html": statement_html,
+        "statement_html": question["statement_html"],
+        "mask": "V_r=",
         "answer": {
-            "latex": [latex_0],  # List to support multiple correct answers
-            "simplified_latex": answer["maths_object"].simplified().latex(),
+            "latex": [latex_0, latex_1],  # List to support multiple correct answers
+            "simplified_latex": [simplified_0, simplified_1],  # List of simplified versions
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),
         },

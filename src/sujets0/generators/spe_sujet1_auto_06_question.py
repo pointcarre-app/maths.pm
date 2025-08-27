@@ -1,5 +1,6 @@
 # # ruff: noqa : E402
 
+
 import teachers.maths as tm
 from teachers.defaults import SEED
 
@@ -39,10 +40,10 @@ def render_question(*, x, y, u):
     >>> x, y, u = tm.Symbol(s='x'), tm.Symbol(s='y'), tm.Symbol(s='u')
     >>> statement = render_question(x=x, y=y, u=u)
     >>> statement["statement"]
-    'On considère $x$, $y$, et $u$ des réels non nuls tels que $\\\\dfrac\\{1\\}\\{x\\}+ \\\\dfrac\\{1\\}\\{y\\} = \\\\dfrac\\{1\\}\\{u\\}$. Exprimer $u$ en fonction $x$ et $y$.'
+    'On considère $x$, $y$, et $u$ des réels non nuls tels que $\\dfrac{1}{x}+ \\dfrac{1}{y} = \\dfrac{1}{u}$. Exprimer $u$ en fonction $x$ et $y$.
     """
 
-    statement = r"On considère $x$, $y$, et $u$ des réels non nuls tels que $\\dfrac\{1\}\{x\}+ \\dfrac\{1\}\{y\} = \\dfrac\{1\}\{u\}$. Exprimer $u$ en fonction $x$ et $y$."
+    statement = "On considère $x$, $y$, et $u$ des réels non nuls tels que $\\dfrac{1}{x}+ \\dfrac{1}{y} = \\dfrac{1}{u}$. Exprimer $u$ en fonction $x$ et $y$."
 
     return {
         "statement": statement,
@@ -59,19 +60,10 @@ question = render_question(**components)
 
 # Create HTML version with highlighted equation
 statement_html = """
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            On considère $x$, $y$, et $u$ des réels non nuls tels que :
-        </div>
-        <div class="alert alert-info">
-            <span class="text-lg">$\\dfrac{1}{x}+ \\dfrac{1}{y} = \\dfrac{1}{u}$</span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Exprimer $u$ en fonction de $x$ et $y$.
-        </div>
-    </div>
+<div>
+    On considère $x$, $y$, et $u$ des réels non nuls tels que : 
+    <span>$\\dfrac{1}{x}+ \\dfrac{1}{y} = \\dfrac{1}{u}$</span><br><br>
+    Exprimer $u$ en fonction de $x$ et $y$.
 </div>
 """
 
@@ -83,6 +75,7 @@ missive(
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-6]",
         "statement": question["statement"],
         "statement_html": statement_html,
+        "mask": "u=",
         "answer": {
             "latex": [latex_0],  # List to support multiple correct answers
             "simplified_latex": answer["maths_object"].simplified().latex(),

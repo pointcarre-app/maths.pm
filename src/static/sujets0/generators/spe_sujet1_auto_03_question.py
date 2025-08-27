@@ -51,9 +51,7 @@ def render_question(*, p, direction, coef):
     """
     # was : coef.simplified().latex
     coef = coef.simplified().as_decimal
-    statement = (
-        f"Le prix d'un article est multiplié par ${coef.latex()}$. Calculer la variation relative."
-    )
+    statement = f"Le prix d'un article est multiplié par ${coef.latex()}$. Calculer la variation relative $V_r$ de ce prix."
     return {
         "statement": statement,
     }
@@ -93,7 +91,7 @@ literal_dir = "augmenté" if components["direction"].n == 1 else "diminué"
 # Create HTML version with formula highlighted
 statement_html = f"""
 <div>
-    Le prix d'un article est multiplié par ${coef_display}$. Calculer la variation relative.<br>
+    Le prix d'un article est multiplié par ${coef_display}$. Calculer la variation relative $V_r$ de ce prix.<br>
 </div>
 """
 
@@ -126,6 +124,7 @@ missive(
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-3]",
         "statement": question["statement"],
         "statement_html": statement_html,
+        "mask": "V_r=",
         "answer": {
             "latex": [latex_0, latex_1],  # List to support multiple correct answers
             "simplified_latex": [simplified_0, simplified_1],  # List of simplified versions

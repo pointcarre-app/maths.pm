@@ -241,3 +241,34 @@
 
 <!-- Container for generator results (questions) - stays below journal -->
 <div id="generator-results-wrapper" class="mt-6"></div>
+
+
+{# Temporary #}
+<script>
+    // Auto-select "Spé." radio button on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find and click the "Spé." radio button
+        const speRadioButton = document.querySelector('input[type="radio"][name="sujets0"][aria-label="Spé."]');
+        if (speRadioButton) {
+            speRadioButton.checked = true;
+            speRadioButton.click();
+        }
+
+        // Function to check and click the generate button when it's enabled
+        function checkAndClickGenerateButton() {
+            const generateButton = document.getElementById('execute-all-generators-btn');
+
+            if (generateButton && !generateButton.disabled && !generateButton.classList.contains('btn-disabled')) {
+                // Button is enabled, click it
+                generateButton.click();
+                console.log('Auto-clicked the Generate button');
+            } else {
+                // Button is still disabled, check again after a short delay
+                setTimeout(checkAndClickGenerateButton, 500);
+            }
+        }
+
+        // Start checking for the button to be enabled
+        checkAndClickGenerateButton();
+    });
+</script>

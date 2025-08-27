@@ -39,10 +39,10 @@ def render_question(*, x, a, b):
     >>> x, a, b = tm.Symbol(s="x"), tm.Fraction(p=tm.Integer(n=10), q=tm.Integer(n=1)), tm.Integer(n=7)
     >>> statement = render_question(x=x, a=a, b=b)
     >>> statement["statement"]
-    "On a représenté ci-contre une droite (\\\\mathcal\\{D\\} dans un repère orthonormé. Donner l'équation de la droite \\\\mathcal\\{D\\} sous la forme $y=ax+b$"
+    "On a représenté ci-contre une droite $\\mathcal{D}$ dans un repère orthonormé. Donner l'équation de la droite $\\mathcal{D}$ sous la forme $y=ax+b$"
     """
 
-    statement = r"On a représenté ci-contre une droite (\\mathcal\{D\} dans un repère orthonormé. Donner l'équation de la droite \\mathcal\{D\} sous la forme $y=ax+b$"
+    statement = r"On a représenté ci-contre une droite $\\mathcal{D}$ dans un repère orthonormé. Donner l'équation de la droite $\\mathcal{D}$ sous la forme $y=ax+b$"
 
     return {
         "statement": statement,
