@@ -71,6 +71,18 @@ export async function executeAllGenerators() {
         'spe_sujet1_auto_11_question.py',
         'spe_sujet1_auto_12_question.py',
     ];
+
+
+
+    // Mostly for documenting the temporary stuff below
+    const generatorsToGraphFileMap = {
+        'spe_sujet1_auto_07_question.py': ['q7_small'],
+        'spe_sujet1_auto_08_question.py': ['q8_small'],
+        'spe_sujet1_auto_09_question.py': ['q9_small'],
+        'spe_sujet1_auto_10_question.py': ['q10_small'],
+        'spe_sujet1_auto_11_question.py': ['q11_case_a_small', 'q11_case_b_small', 'q11_case_c_small'],
+        'spe_sujet1_auto_12_question.py': ['parabola_s1_a0', 'parabola_s1_am5', 'parabola_s1_ap5', 'parabola_sm1_a0', 'parabola_sm1_am5', 'parabola_sm1_ap10']
+    };
     
     // Select generators based on question count
     // If all 12 are selected, keep them in order; otherwise randomly select
@@ -137,7 +149,42 @@ export async function executeAllGenerators() {
         // Execute each selected generator for this student
         for (const generator of selectedGenerators) {
             const result = await executeGeneratorWithSeed(generator, seed);
+
+
+
+            
+            // `graph-${studentNum}-${generator}`
+
+            if (generator === 'spe_sujet1_auto_07_question.py') {
+
+                //console.log("result.data.components")
+                //console.log("result.data.components")
+                //console.log("result.data.components")
+                //console.log("result.data.components")
+                console.error(result.data.components)
+                console.error(result.data.components.n)
+
+                const Y_LABEL_FOR_HORIZONTAL_LINE = parseInt(result.data.components.n);
+                const svgAndDict = await buildPCAGraph('q7_small', {
+                    Y_LABEL_FOR_HORIZONTAL_LINE: Y_LABEL_FOR_HORIZONTAL_LINE, // Slope
+                });
+
+                const graphSvg = svgAndDict.svg;
+                const graphDict = svgAndDict.graphDict;
+
+                result.graphSvg = graphSvg;
+                result.graphDict = graphDict;
+
+                console.log("💫💫💫💫", `graph-${studentNum}-${generator}`, graphDict);
+
+            }
+
+            // Store graph dictionary as data attribute for access if needed
+            // container.dataset.graphDict = JSON.stringify(result.graphDict);
+
+
             questionResults.push(result);
+
         }
         
         // Create and store student exercise set using our data model

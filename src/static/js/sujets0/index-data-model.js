@@ -69,6 +69,8 @@ export class Question {
         this.statement = data.statement || null;
         this.data = data.data || null;
         this.answer = data.answer || null;
+        this.graphSvg = data.graphSvg || null;
+        this.graphDict = data.graphDict || null;
     }
 
     /**
@@ -84,7 +86,9 @@ export class Question {
             success: rawData.success,
             error: rawData.error,
             statement: rawData.statement,
-            data: rawData.data
+            data: rawData.data,
+            graphSvg: rawData.graphSvg,
+            graphDict: rawData.graphDict
         });
 
         // Process answer if successful

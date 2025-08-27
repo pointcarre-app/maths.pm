@@ -22,6 +22,9 @@ import {
     generatePaginationButtons 
 } from './index-results.js';
 
+
+import { buildPCAGraph, renderPCAGraph } from './index-graphs.js';
+
 // Initialize the module
 export async function init() {
     console.log('🚀 Initializing Sujets0 Module');
@@ -63,6 +66,8 @@ window.applyFormValidationStyles = applyFormValidationStyles;
 window.displayValidationTable = displayValidationTable;
 window.generationResults = generationResults; // Expose results for debugging
 window.displayStudentResults = displayStudentResults;
+window.renderPCAGraph = renderPCAGraph;
+window.buildPCAGraph = buildPCAGraph;
 
 // Export all functions that might be needed by other modules
 export {
@@ -78,5 +83,7 @@ export {
     displayStudentResults,
     navigateStudent,
     navigateToStudent,
-    generatePaginationButtons
+    generatePaginationButtons,
+    renderPCAGraph,
+    buildPCAGraph
 };

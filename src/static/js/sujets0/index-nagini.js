@@ -6,6 +6,8 @@
 import { displayIndicatorNaginiIsReady, showNaginiError, enableExecuteButton } from './index-ui.js';
 import { loadBackendSettings } from './index-settings.js';
 
+
+
 // Global state
 let Nagini = null;
 let naginiManager = null;
@@ -43,12 +45,12 @@ export async function loadNaginiAndInitialize(executeAllGenerators) {
         
         // Files for teachers module
         const teachersFiles = [
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/__init__.py", path: "teachers/__init__.py" },
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/generator.py", path: "teachers/generator.py" },
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/maths.py", path: "teachers/maths.py" },
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/formatting.py", path: "teachers/formatting.py" },
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/corrector.py", path: "teachers/corrector.py" },
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@0.0.20/src/teachers/defaults.py", path: "teachers/defaults.py" }
+            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/__init__.py", path: "teachers/__init__.py" },
+            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/generator.py", path: "teachers/generator.py" },
+            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/maths.py", path: "teachers/maths.py" },
+            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/formatting.py", path: "teachers/formatting.py" },
+            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/corrector.py", path: "teachers/corrector.py" },
+            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/defaults.py", path: "teachers/defaults.py" }
         ];
         
         console.log('🔨 Creating Nagini manager with worker:', pyodideWorkerUrl);
@@ -119,7 +121,7 @@ teachers.defaults.SEED = ${seed}
                 const data = JSON.parse(result.missive);
                 return {
                     success: true,
-                    statement: data.statement || data.question,
+                    statement: data.statement || data.question, //TODO:  why not only one ? and the html ?
                     answer: data.answer,  // Pass the entire answer object to preserve structure
                     data: data
                 };

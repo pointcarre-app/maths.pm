@@ -92,9 +92,11 @@ backend_settings:
     spe_sujet1_auto_07_question: 
       level: "1ERE"
       note: "inéquation du second degré x² > n"
+      has_graph_in_v4pyjs: true
     spe_sujet1_auto_08_question: 
       level: "2DE"
       note: null
+      has_graph_in_v4pyjs: true
     spe_sujet1_auto_09_question: 
       level: "2DE"
       note: null

@@ -9,7 +9,7 @@
 
 ### Sujets 0 
 
-- []  Correct the level for the questions in generators.
+- []  Correct the level for the questions in generators. (should be done in the yaml sujets0 )
 
 - [] Proposer une sélection manuelle par générateur (par filière)
 
@@ -20,6 +20,8 @@
 
 
 - [] Add in form possibility of adding cluz + big clue (ie video)
+
+- [] considérer sélection sur le niveau + mode MCQ 
 
 
 ## Corsica

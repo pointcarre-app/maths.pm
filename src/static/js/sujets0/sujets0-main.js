@@ -31,5 +31,7 @@ export {
     displayStudentResults,
     navigateStudent,
     navigateToStudent,
-    generatePaginationButtons
+    generatePaginationButtons,
+    renderPCAGraph,
+    buildPCAGraph
 } from './index-main.js';

@@ -155,106 +155,123 @@ export function displayStudentResults(studentIndex) {
         const generatorName = question.generator || `Question ${qIndex + 1}`;
         
         // Create a simple display for question data
-        const questionContent = `
-            <div class="card ${rowClass} shadow-sm mb-8 overflow-hidden">
-                <div class="card-header bg-base-200 p-2">
-                    <h3 class="card-title font-mono text-base-content/70">${generatorName}</h3>
-                </div>
-                <div class="card-body">
-                    ${question.success ? `
-                        ${question.getBeacon() ? `
-                            <div class="mb-4">
-                                <p class="font-bold mb-2">beacon</p>
-                                <code class="break-words">${question.getBeacon() || ''}</code>
-                            </div>
-                        ` : ''}
-                        
-                        <div class="mb-4">
-                            <p class="font-bold mb-2">statement</p>
-                            <div class="break-words overflow-wrap-anywhere">${question.statement || 'Non disponible'}</div>
-                        </div>
-                        
-                        ${question.getStatementHtml() ? `
-                            <div class="mb-4">
-                                <p class="font-bold mb-2">statement_html</p>
-                                <div class="break-words overflow-wrap-anywhere">${question.getStatementHtml()}</div>
-                            </div>
-                        ` : ''}
-                        
-                        <div class="mb-4">
-                            <p class="font-bold mb-2">answers.latex (${question.getAllAnswers().length} total)</p>
-                            ${question.getAllAnswers().length > 0 ? 
-                                question.getAllAnswers().map((ans, idx) => `
-                                    <div class="mb-2 break-words overflow-wrap-anywhere">
-                                        ${question.getAllAnswers().length > 1 ? `<span class="badge badge-neutral mr-2">${idx + 1}</span>` : ''}
-                                        <span class="font-mono inline-block">$${ans}$</span>
-                                    </div>
-                                `).join('')
-                            : '<div class="text-base-content/50">No answers available</div>'}
-                        </div>
-                        
-                        ${question.answer && question.answer.simplified_latex ? `
-                            <div class="mb-4">
-                                <p class="font-bold mb-2">answer.simplified_latex${Array.isArray(question.answer.simplified_latex) ? ` (${question.answer.simplified_latex.length} total)` : ''}</p>
-                                ${Array.isArray(question.answer.simplified_latex) ? 
-                                    question.answer.simplified_latex.map((simplified, idx) => `
-                                        <div class="mb-2 break-words overflow-wrap-anywhere">
-                                            ${question.answer.simplified_latex.length > 1 ? `<span class="badge badge-neutral mr-2">${idx + 1}</span>` : ''}
-                                            <span class="font-mono inline-block">$${simplified}$</span>
-                                        </div>
-                                    `).join('')
-                                : `
-                                    <div class="break-words overflow-wrap-anywhere">
-                                        <span class="font-mono inline-block">$${question.answer.simplified_latex}$</span>
-                                    </div>
-                                `}
-                            </div>
-                        ` : ''}
-                        
-                        ${question.answer && question.answer.formal_repr ? `
-                            <div class="mb-4">
-                                <p class="font-bold mb-2">answer.formal_repr</p>
-                                <code class="break-words text-xs">${question.answer.formal_repr}</code>
-                            </div>
-                        ` : ''}
-                        
-                        ${question.answer && question.answer.sympy_exp_data ? `
-                            <div class="mb-4">
-                                <p class="font-bold mb-2">answer.sympy_exp_data</p>
-                                <pre class="text-xs overflow-x-auto whitespace-pre-wrap break-words">${JSON.stringify(question.answer.sympy_exp_data, null, 2)}</pre>
-                            </div>
-                        ` : ''}
-                        
-                        ${question.getMask() ? `
-                            <div class="mb-4">
-                                <p class="font-bold mb-2">mask</p>
-                                <code class="break-words">${question.getMask()}</code>
-                            </div>
-                        ` : ''}
-                        
-                        ${question.components ? `
-                            <div class="mb-4">
-                                <p class="font-bold mb-2">components</p>
-                                <div class="collapse collapse-arrow">
-                                    <input type="checkbox" /> 
-                                    <div class="collapse-title text-sm font-medium">
-                                        Afficher les composants
-                                    </div>
-                                    <div class="collapse-content"> 
-                                        <pre class="text-xs overflow-x-auto whitespace-pre-wrap break-words">${JSON.stringify(question.components, null, 2)}</pre>
-                                    </div>
-                                </div>
-                            </div>
-                        ` : ''}
-                    ` : `
-                        <div class="mb-4">
-                            <p class="font-bold mb-2">Erreur</p>
-                            <div class="text-error">${question.error || 'Erreur inconnue'}</div>
-                        </div>
-                    `}
-                </div>
-            </div>
-        `;
+        let questionContent = '<div class="card ' + rowClass + ' shadow-sm mb-8 overflow-hidden">' +
+            '<div class="card-header bg-base-200 p-2">' +
+            '<h3 class="card-title font-mono text-base-content/70">' + generatorName + '</h3>' +
+            '</div>' +
+            '<div class="card-body">';
+
+        if (question.success) {
+            if (question.getBeacon()) {
+                questionContent += '<div class="mb-4">' +
+                    '<p class="font-bold mb-2">beacon</p>' +
+                    '<code class="break-words">' + (question.getBeacon() || '') + '</code>' +
+                    '</div>';
+            }
+
+            questionContent += '<div class="mb-4">' +
+                '<p class="font-bold mb-2">statement</p>' +
+                '<div class="break-words overflow-wrap-anywhere">' + (question.statement || 'Non disponible') + '</div>' +
+                '</div>';
+
+            if (question.getStatementHtml()) {
+                questionContent += '<div class="mb-4">' +
+                    '<p class="font-bold mb-2">statement_html</p>' +
+                    '<div class="break-words overflow-wrap-anywhere">' + question.getStatementHtml() + '</div>' +
+                    '</div>';
+            }
+
+
+            if (question.graphSvg) {
+                questionContent += '<div class="mb-4">' +
+                    '<p class="font-bold mb-2">graphSvg</p>' +
+                    '<div class="break-words overflow-wrap-anywhere">' + question.graphSvg + '</div>' +
+                    '</div>';
+            }
+
+
+
+
+
+            questionContent += '<div class="mb-4">' +
+                '<p class="font-bold mb-2">answers.latex (' + question.getAllAnswers().length + ' total)</p>';
+
+            if (question.getAllAnswers().length > 0) {
+                question.getAllAnswers().forEach((ans, idx) => {
+                    questionContent += '<div class="mb-2 break-words overflow-wrap-anywhere">' +
+                        (question.getAllAnswers().length > 1 ? '<span class="badge badge-neutral mr-2">' + (idx + 1) + '</span>' : '') +
+                        '<span class="font-mono inline-block">$' + ans + '$</span>' +
+                        '</div>';
+                });
+            } else {
+                questionContent += '<div class="text-base-content/50">No answers available</div>';
+            }
+
+            questionContent += '</div>';
+
+            if (question.answer && question.answer.simplified_latex) {
+                questionContent += '<div class="mb-4">' +
+                    '<p class="font-bold mb-2">answer.simplified_latex' + (Array.isArray(question.answer.simplified_latex) ? ' (' + question.answer.simplified_latex.length + ' total)' : '') + '</p>';
+
+                if (Array.isArray(question.answer.simplified_latex)) {
+                    question.answer.simplified_latex.forEach((simplified, idx) => {
+                        questionContent += '<div class="mb-2 break-words overflow-wrap-anywhere">' +
+                            (question.answer.simplified_latex.length > 1 ? '<span class="badge badge-neutral mr-2">' + (idx + 1) + '</span>' : '') +
+                            '<span class="font-mono inline-block">$' + simplified + '$</span>' +
+                            '</div>';
+                    });
+                } else {
+                    questionContent += '<div class="break-words overflow-wrap-anywhere">' +
+                        '<span class="font-mono inline-block">$' + question.answer.simplified_latex + '$</span>' +
+                        '</div>';
+                }
+
+                questionContent += '</div>';
+            }
+
+            if (question.answer && question.answer.formal_repr) {
+                questionContent += '<div class="mb-4">' +
+                    '<p class="font-bold mb-2">answer.formal_repr</p>' +
+                    '<code class="break-words text-xs">' + question.answer.formal_repr + '</code>' +
+                    '</div>';
+            }
+
+            if (question.answer && question.answer.sympy_exp_data) {
+                questionContent += '<div class="mb-4">' +
+                    '<p class="font-bold mb-2">answer.sympy_exp_data</p>' +
+                    '<pre class="text-xs overflow-x-auto whitespace-pre-wrap break-words">' + JSON.stringify(question.answer.sympy_exp_data, null, 2) + '</pre>' +
+                    '</div>';
+            }
+
+            if (question.getMask()) {
+                questionContent += '<div class="mb-4">' +
+                    '<p class="font-bold mb-2">mask</p>' +
+                    '<code class="break-words">' + question.getMask() + '</code>' +
+                    '</div>';
+            }
+
+            if (question.components) {
+                questionContent += '<div class="mb-4">' +
+                    '<p class="font-bold mb-2">components</p>' +
+                    '<div class="collapse collapse-arrow">' +
+                    '<input type="checkbox" />' +
+                    '<div class="collapse-title text-sm font-medium">' +
+                    'Afficher les composants' +
+                    '</div>' +
+                    '<div class="collapse-content">' +
+                    '<pre class="text-xs overflow-x-auto whitespace-pre-wrap break-words">' + JSON.stringify(question.components, null, 2) + '</pre>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+            }
+        } else {
+            questionContent += '<div class="mb-4">' +
+                '<p class="font-bold mb-2">Erreur</p>' +
+                '<div class="text-error">' + (question.error || 'Erreur inconnue') + '</div>' +
+                '</div>';
+        }
+
+        questionContent += '</div></div>';
         
         // Add to the main HTML
         html += questionContent;
@@ -311,6 +328,38 @@ export function displayStudentResults(studentIndex) {
     `;
     
     container.innerHTML = html;
+
+
+    // Render LaTeX with KaTeX
+    setTimeout(() => {
+        const foreignObjects = container.querySelectorAll('foreignObject');
+        foreignObjects.forEach((fo) => {
+            const divs = fo.querySelectorAll('div.svg-latex');
+            divs.forEach((div) => {
+                const latex = div.textContent.trim();
+                if (latex) {
+                    try {
+                        const bgColor = div.style.backgroundColor;
+                        const color = div.style.color;
+                        div.innerHTML = '';
+                        katex.render(latex, div, {
+                            throwOnError: false,
+                            displayMode: false,
+                        });
+                        if (bgColor) div.style.backgroundColor = bgColor;
+                        if (color) {
+                            div.querySelectorAll('.katex, .katex *').forEach(el => {
+                                el.style.color = color;
+                            });
+                        }
+                    } catch (e) {
+                        console.error('KaTeX error:', e);
+                        div.textContent = latex;
+                    }
+                }
+            });
+        });
+    }, 100);
     
     // Render LaTeX with KaTeX
     if (typeof renderMathInElement !== 'undefined') {

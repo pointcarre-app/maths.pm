@@ -10,7 +10,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """
 
     gen = tg.MathsGenerator(seed)
-    n = gen.random_integer(0, 100)
+    n = gen.random_integer(1, 11)  # for being nice with the graph + not degenerate case
     x = tm.Symbol(s="x")
     relation = x ** tm.Integer(n=2) > n
 
@@ -32,10 +32,14 @@ def solve(*, n, x, relation):
     (StrictGreaterThan(l=Symbol(s='x'), r=Integer(n=7)), StrictGreaterThan(l=Integer(n=-7), r=Symbol(s='x')))
     """
     answer = tm.MathsCollection(
-        elements=[x > n ** tm.Fraction(p=1, q=2), x < -(n ** tm.Fraction(p=1, q=2))]
+        elements=[x < -(n ** tm.Fraction(p=1, q=2)), x > n ** tm.Fraction(p=1, q=2)]
     )
     return {
         "maths_object": answer,
+        "left_interval_left_bound_latex": "-\\infty",
+        "left_interval_right_bound_latex": (-(n ** tm.Fraction(p=1, q=2))).simplified().latex(),
+        "right_interval_left_bound_latex": (n ** tm.Fraction(p=1, q=2)).simplified().latex(),
+        "right_interval_right_bound_latex": "\\infty",
     }
 
 
@@ -45,16 +49,15 @@ def render_question(*, n, x, relation):
     >>> relation = tm.StrictGreaterThan(l=tm.Pow(base=x, exp=tm.Integer(n=2)), r=n)
     >>> statement = render_question(n=n, x=x, relation=relation)
     >>> statement["statement"]
-    "On a représenté ci-contre la parabole d'équation $y = x^2$. On note (\\\\mathcal\\{J\\}) l'inéquation, sur \\\\mathbb\\{R\\}, $x^\\{2\\} > 49$. Donner la ou les inéquation(s) du premier degré équivalente à \\\\mathcal\\{J\\}."
+    "On a représenté ci-contre la parabole d'équation $y = x^2$. l'inéquation $x^2 > 49$, sur $mathbb{R}$. ."
     """
 
     statement = (
-        r"On a représenté ci-contre la parabole d'équation $y = x^2$. On note (\\mathcal\{J\}) l'inéquation, sur \\mathbb\{R\}, $"
+        "On a représenté ci-contre la parabole d'équation $y = x^2$.  Résoudre sur $\\mathbb{R}$ l'inéquation : "
+        + "$"
         + relation.latex()
-        + "$. "
+        + "$"
     )
-    statement += r"Donner la ou les inéquation(s) du premier degré équivalente à \\mathcal\{J\}."
-
     return {
         "statement": statement,
     }
@@ -69,25 +72,10 @@ question = render_question(**components)
 
 
 # Create HTML version with graph reference and equation
-statement_html = """
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            On a représenté ci-contre la parabole d'équation $y = x^2$.
-        </div>
-        <div class="alert">
-            <span>On note $(\\mathcal{J})$ l'inéquation, sur $\\mathbb{R}$, <span class="badge badge-primary">${relation.latex()}$</span></span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Donner la ou les inéquation(s) du premier degré équivalente à $\\mathcal{J}$.
-        </div>
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
 # Define latex_0 for multiple possible answers
-latex_0 = answer["maths_object"].latex()
+latex_0 = f"x \\in \\left] {answer['left_interval_left_bound_latex']}, {answer['left_interval_right_bound_latex']} \\right[ \\cup \\left] {answer['right_interval_left_bound_latex']}, {answer['right_interval_right_bound_latex']} \\right["
 
 missive(
     {
@@ -96,7 +84,7 @@ missive(
         "statement_html": statement_html,
         "answer": {
             "latex": [latex_0],  # List to support multiple correct answers
-            "simplified_latex": answer["maths_object"].simplified().latex(),
+            "simplified_latex": [latex_0],  # hmm hmm
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),
         },

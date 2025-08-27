@@ -25,6 +25,43 @@
     .join {
         transition: border-color 0.2s, box-shadow 0.2s;
     }
+
+    /* Graph Rendering Styles  for v4pyjs */
+
+
+    /* LaTeX Rendering Styles */
+    .svg-latex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        box-sizing: border-box;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+    }
+
+    foreignObject .katex {
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1 !important;
+        font-size: inherit !important;
+        color: inherit !important;
+        text-align: center;
+    }
+
+    foreignObject div {
+        height: 100%;
+        width: 100%;
+        color: inherit !important;
+    }
+
+    /* Essential text size for graph labels */
+    .text-2xs {
+        font-size: 0.625rem !important;
+        line-height: 1 !important;
+    }
 </style>
 
 
@@ -64,7 +101,7 @@
                    name="nb-eleves"
                    min="1"
                    max="50"
-                   value="30"
+                   value="1"
                    required
                    class="input join-item w-full"
                    aria-describedby="nb-eleves-help" />
