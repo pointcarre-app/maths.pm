@@ -30,6 +30,8 @@
 
 
     /* LaTeX Rendering Styles */
+
+
     .svg-latex {
         display: flex;
         align-items: center;
@@ -308,9 +310,9 @@
 
 
 <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/styles/index.css" />
+      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/styles/index.css" />
 <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/styles/print.css" />
+      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/styles/print.css" />
 
 <div class="font-heading text-lg sm:text-xl md:text-2xl mt-12 mb-4 flex items-center gap-2">
   Consulter les copies générées
@@ -320,12 +322,32 @@
 <!-- Preview section for Papyrus documents -->
 <div class="card bg-base-100 mt-4 mb-4 shadow">
   <div class="card-body">
-    {# <h2 class="card-title flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
-      </svg>
-      Aperçu de la copie
-    </h2> #}
+    <!-- Debug toggle button in top right corner -->
+    <div class="flex justify-end mb-2">
+      <label class="swap swap-flip text-sm">
+        <input type="checkbox" id="papyrus-debug-toggle" />
+        <div class="swap-off flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="h-4 w-4"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Debug Off
+        </div>
+        <div class="swap-on flex items-center gap-1 text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="h-4 w-4"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Debug On
+        </div>
+      </label>
+    </div>
     <!-- Container for rendering Papyrus content -->
     <div id="pages-container"
          class="border rounded p-4 bg-white papyrus-document"
@@ -339,18 +361,23 @@
 <!-- Additional styles for consistent preview and print -->
 <style>
     :root {
-        /* Default document settings as CSS variables - hardcoded defaults */
-        --papyrus-margin-top: 15mm;
-        --papyrus-margin-right: 15mm;
-        --papyrus-margin-bottom: 15mm;
-        --papyrus-margin-left: 15mm;
-        --papyrus-font-size-h1: 20px;
+        /* Default document settings as CSS variables - will be overridden by JavaScript */
+        /* IMPORTANT: These must match getDocumentSettings() in index-papyrus.js */
+        --papyrus-margin-top: 7mm;
+        /* Reduced for more content space */
+        --papyrus-margin-right: 8mm;
+        /* Reduced for more content space */
+        --papyrus-margin-bottom: 7mm;
+        /* Reduced for more content space */
+        --papyrus-margin-left: 8mm;
+        /* Reduced for more content space */
+        --papyrus-font-size-h1: 28px;
         --papyrus-font-size-h2: 24px;
         --papyrus-font-size-h3: 20px;
         --papyrus-font-size-h4: 18px;
         --papyrus-font-size-h5: 16px;
         --papyrus-font-size-h6: 14px;
-        --papyrus-font-size-body: 12px;
+        --papyrus-font-size-body: 15px;
     }
 
     /* Apply print styles to preview as well */
@@ -358,15 +385,83 @@
         font-family: 'Spectral', serif;
     }
 
-    /* Size A4 paper simulation for preview */
-    .papyrus-document .papyrus-page {
-        background-color: white;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        margin-bottom: 10mm;
+    /* Papyrus page structure - CLEAR RESPONSIBILITY:
+       - .page-wrapper: handles page dimensions and shadows (NO padding)
+       - .page-preview: structural container (NO padding)  
+       - .page-content: ONLY element with padding (document margins)
+    */
+    .page-wrapper {
         width: 210mm;
         min-height: 297mm;
-        padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
+        max-height: 297mm;
+        margin: 0 auto 10mm auto;
+        /* Only margin between pages */
+        padding: 0 !important;
+        /* NO padding here */
+        background: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
+
+    .page-preview {
+        width: 100%;
+        height: 297mm;
+        padding: 0 !important;
+        /* NO padding here */
+        margin: 0 !important;
+        /* NO margin here */
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    .page-content {
+        /* ONLY this element handles document margins via padding */
+        padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Ensure print consistency - MAINTAIN SAME STRUCTURE */
+    @media print {
+        @page {
+            margin: 0;
+            size: A4;
+        }
+
+        .page-wrapper {
+            margin: 0 !important;
+            /* No margin between pages in print */
+            padding: 0 !important;
+            /* Still NO padding */
+            box-shadow: none !important;
+            page-break-after: always;
+            width: 210mm !important;
+            height: 297mm !important;
+        }
+
+        .page-preview {
+            padding: 0 !important;
+            /* Still NO padding */
+            margin: 0 !important;
+            /* Still NO margin */
+            width: 100% !important;
+            height: 297mm !important;
+        }
+
+        .page-content {
+            /* ONLY element with padding - same as preview */
+            padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left) !important;
+            width: 100% !important;
+            height: 100% !important;
+            box-sizing: border-box !important;
+        }
     }
 
     /* Apply font sizes from variables */

@@ -4,23 +4,269 @@
  */
 
 import generationResults from './index-data-model.js';
-import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/preview/index.js';
-import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/print-manager.js';
+import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/preview/index.js';
+import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/print-manager.js';
 import { 
     initializeMargins, 
-    setMargins 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/margin-config.js';
+    setMargins,
+    getCurrentMargins
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/margin-config.js';
 import { 
     initializeFontSizes, // Default font sizes in px
     setFontSizes 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/font-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/font-config.js';
 
 import { 
     initializePageNumberConfig,
     setShowPageNumbers 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/page-number-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/page-number-config.js';
 
+/**
+ * Create a custom print stylesheet with current settings
+ * @returns {string} CSS string with print-specific styles
+ * 
+ * NOTE: Simplified to avoid conflicts with Papyrus's own margin system
+ */
+function createPrintStylesheet() {
+    const settings = getDocumentSettings();
+    
+    // Minimal styles - let Papyrus handle most of the layout
+    return `
+        @page {
+            margin: 0;
+            size: A4;
+        }
+        
+        @media print {
+            /* Ensure colors print */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Hide screen-only elements */
+            .no-print {
+                display: none !important;
+            }
+        }
+    `;
+}
 
+/**
+ * Log page dimensions for debugging
+ * @param {HTMLElement} container - The pages container
+ */
+function logPageDimensions(container) {
+    // Try different selectors for Papyrus pages
+    let pages = container.querySelectorAll('.papyrus-page');
+    
+    // If no .papyrus-page, try .page-wrapper (what Papyrus actually uses)
+    if (pages.length === 0) {
+        pages = container.querySelectorAll('.page-wrapper');
+        console.log('Using .page-wrapper elements as pages');
+    }
+    
+    // If still nothing, try .page-preview
+    if (pages.length === 0) {
+        pages = container.querySelectorAll('.page-preview');
+        console.log('Using .page-preview elements as pages');
+    }
+    
+    console.log('=== PAPYRUS PAGE DIMENSIONS DEBUG ===');
+    console.log(`Total pages found: ${pages.length}`);
+    
+    // Check the actual structure
+    const pageWrappers = container.querySelectorAll('.page-wrapper');
+    const pagePreviews = container.querySelectorAll('.page-preview');
+    const pageContents = container.querySelectorAll('.page-content');
+    
+    console.log(`Structure: ${pageWrappers.length} .page-wrapper, ${pagePreviews.length} .page-preview, ${pageContents.length} .page-content`);
+    console.log('PADDING RESPONSIBILITY: Only .page-content should have padding (the document margins)');
+    
+    if (pages.length === 0) {
+        console.warn('⚠️ NO page elements found! Checking container structure...');
+        console.log('Container classes:', container.className);
+        console.log('Container first child:', container.firstElementChild?.className);
+        console.log('Container HTML preview:', container.innerHTML.substring(0, 500) + '...');
+    }
+    
+    pages.forEach((page, index) => {
+        const rect = page.getBoundingClientRect();
+        const computedStyle = window.getComputedStyle(page);
+        
+        // Get actual dimensions
+        const heightPx = rect.height;
+        const widthPx = rect.width;
+        
+        // Convert to mm (1mm = 3.7795275591 pixels at 96 DPI)
+        const pxToMm = 1 / 3.7795275591;
+        const heightMm = heightPx * pxToMm;
+        const widthMm = widthPx * pxToMm;
+        
+        // Get padding values
+        const paddingTop = computedStyle.paddingTop;
+        const paddingBottom = computedStyle.paddingBottom;
+        const paddingLeft = computedStyle.paddingLeft;
+        const paddingRight = computedStyle.paddingRight;
+        
+        // Check padding at each level of the structure
+        console.log(`  - .page-wrapper padding: ${paddingTop} ${paddingRight} ${paddingBottom} ${paddingLeft}`);
+        
+        const pagePreview = page.querySelector('.page-preview');
+        if (pagePreview) {
+            const previewStyle = window.getComputedStyle(pagePreview);
+            console.log(`  - .page-preview padding: ${previewStyle.paddingTop} ${previewStyle.paddingRight} ${previewStyle.paddingBottom} ${previewStyle.paddingLeft}`);
+        }
+        
+        const pageContent = page.querySelector('.page-content');
+        if (pageContent) {
+            const contentStyle = window.getComputedStyle(pageContent);
+            const contentPaddingTop = parseFloat(contentStyle.paddingTop) * pxToMm;
+            const contentPaddingRight = parseFloat(contentStyle.paddingRight) * pxToMm;
+            const contentPaddingBottom = parseFloat(contentStyle.paddingBottom) * pxToMm;
+            const contentPaddingLeft = parseFloat(contentStyle.paddingLeft) * pxToMm;
+            
+            console.log(`  - .page-content padding (DOCUMENT MARGINS): T:${contentPaddingTop.toFixed(1)}mm R:${contentPaddingRight.toFixed(1)}mm B:${contentPaddingBottom.toFixed(1)}mm L:${contentPaddingLeft.toFixed(1)}mm`);
+            
+            const expectedSettings = getDocumentSettings();
+            if (Math.abs(contentPaddingTop - expectedSettings.margins.top) > 0.5 ||
+                Math.abs(contentPaddingRight - expectedSettings.margins.right) > 0.5 ||
+                Math.abs(contentPaddingBottom - expectedSettings.margins.bottom) > 0.5 ||
+                Math.abs(contentPaddingLeft - expectedSettings.margins.left) > 0.5) {
+                console.warn('    ⚠️ MISMATCH: Expected T:' + expectedSettings.margins.top + 'mm R:' + expectedSettings.margins.right + 'mm B:' + expectedSettings.margins.bottom + 'mm L:' + expectedSettings.margins.left + 'mm');
+            }
+        }
+        
+        // Get content height
+        const contentHeight = page.scrollHeight;
+        const contentHeightMm = contentHeight * pxToMm;
+        
+        console.log(`Page ${index + 1}:`);
+        console.log(`  - Dimensions: ${widthMm.toFixed(1)}mm × ${heightMm.toFixed(1)}mm (should be 210mm × 297mm)`);
+        console.log(`  - Pixels: ${widthPx}px × ${heightPx}px`);
+        console.log(`  - Padding: T:${paddingTop} R:${paddingRight} B:${paddingBottom} L:${paddingLeft}`);
+        console.log(`  - Content height: ${contentHeightMm.toFixed(1)}mm (${contentHeight}px)`);
+        console.log(`  - Overflow: ${contentHeightMm > 297 ? '⚠️ YES' : '✓ NO'}`);
+        
+        // Check if content overflows
+        if (heightMm > 297) {
+            console.warn(`  ⚠️ PAGE ${index + 1} EXCEEDS A4 HEIGHT by ${(heightMm - 297).toFixed(1)}mm`);
+        }
+        
+        // Check children for overflow
+        const children = page.children;
+        let totalChildrenHeight = 0;
+        for (let child of children) {
+            totalChildrenHeight += child.offsetHeight;
+        }
+        const totalChildrenHeightMm = totalChildrenHeight * pxToMm;
+        console.log(`  - Children total height: ${totalChildrenHeightMm.toFixed(1)}mm`);
+        
+        // Log individual element heights
+        const elements = page.querySelectorAll('[id^="question-"], [id="header-section"], [id="main-title"]');
+        console.log(`  - Elements on page: ${elements.length}`);
+        elements.forEach(elem => {
+            const elemHeight = elem.offsetHeight * pxToMm;
+            console.log(`    - ${elem.id}: ${elemHeight.toFixed(1)}mm`);
+        });
+    });
+    
+    // If only one page but content is too tall, that's the problem
+    if (pages.length === 1) {
+        const singlePage = pages[0];
+        const heightPx = singlePage.getBoundingClientRect().height;
+        const pxToMm = 1 / 3.7795275591;
+        const heightMm = heightPx * pxToMm;
+        
+        // Get current margin settings
+        const settings = getDocumentSettings();
+        const usableHeight = 297 - settings.margins.top - settings.margins.bottom;
+        
+        if (heightMm > 297) {
+            console.error(`⚠️⚠️ CRITICAL: Single page is ${heightMm.toFixed(1)}mm tall (exceeds A4 by ${(heightMm - 297).toFixed(1)}mm)`);
+            console.error(`With margins (${settings.margins.top}mm top, ${settings.margins.bottom}mm bottom), usable height is ${usableHeight}mm`);
+            console.error('Papyrus should have split this into multiple pages but did not!');
+            
+            // Check if we're in a single container situation
+            const contentDiv = singlePage.querySelector('.page-content') || singlePage;
+            const contentHeight = contentDiv.scrollHeight * pxToMm;
+            console.error(`Content height: ${contentHeight.toFixed(1)}mm - needs ${Math.ceil(contentHeight / usableHeight)} pages`);
+        }
+    }
+    
+    console.log('=== END PAGE DIMENSIONS DEBUG ===');
+}
+
+/**
+ * Render LaTeX in foreign objects within a DOM element
+ * @param {HTMLElement} container - The DOM element containing SVGs with foreign objects
+ */
+function renderLatexInForeignObjects(container) {
+    if (!container || typeof katex === 'undefined') {
+        if (typeof katex === 'undefined') {
+            console.warn('KaTeX not available, skipping LaTeX rendering');
+        }
+        return;
+    }
+    
+    // Find all foreign objects in the container
+    const foreignObjects = container.querySelectorAll('foreignObject');
+    
+    foreignObjects.forEach((fo) => {
+        const divs = fo.querySelectorAll('div.svg-latex');
+        divs.forEach((div) => {
+            const latex = div.textContent.trim();
+            if (latex) {
+                try {
+                    // Preserve original styles
+                    const bgColor = div.style.backgroundColor;
+                    const color = div.style.color;
+                    
+                    // Clear and render
+                    div.innerHTML = '';
+                    katex.render(latex, div, {
+                        throwOnError: false,
+                        displayMode: false,
+                    });
+                    
+                    // Restore styles
+                    if (bgColor) div.style.backgroundColor = bgColor;
+                    if (color) {
+                        div.querySelectorAll('.katex, .katex *').forEach(el => {
+                            el.style.color = color;
+                        });
+                    }
+                } catch (e) {
+                    console.error('KaTeX rendering error:', e);
+                    div.textContent = latex; // Fallback to raw LaTeX
+                }
+            }
+        });
+    });
+}
+
+/**
+ * Render LaTeX in foreign objects within an HTML string
+ * @param {string} htmlString - HTML string containing SVGs with foreign objects
+ * @returns {string} Processed HTML string with rendered LaTeX
+ */
+function renderLatexInHTMLString(htmlString) {
+    if (typeof katex === 'undefined') {
+        console.warn('KaTeX not available, returning original HTML');
+        return htmlString;
+    }
+    
+    // Create a temporary container to work with the HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlString;
+    
+    // Render LaTeX in the temporary container
+    renderLatexInForeignObjects(tempDiv);
+    
+    // Return the processed HTML
+    return tempDiv.innerHTML;
+}
 
 // Default font sizes in px
 // const DEFAULT_FONT_SIZES = {
@@ -34,8 +280,9 @@ import {
 // };
 import { 
     initializeSpaceBetweenDivs, 
-    setSpaceBetweenDivs 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/margin-config.js';
+    setSpaceBetweenDivs,
+    getCurrentSpaceBetweenDivs
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/margin-config.js';
 
 /**
  * Extract question number from generator name
@@ -51,6 +298,12 @@ function extractQuestionNumber(generator) {
  * Create the Papyrus JSON structure for a single student
  * @param {Object} studentExerciseSet - Student exercise set from generationResults
  * @returns {Array} Array of Papyrus JSON objects
+ * 
+ * MARGINS REMOVED TO LET PAPYRUS HANDLE ALL SPACING:
+ * - Header table: removed margin-bottom: 1rem
+ * - Main title: removed margin-bottom: 2rem and margin-top: 1rem  
+ * - Each question: removed margin-bottom: 2rem
+ * - All spacing is now controlled by Papyrus's setSpaceBetweenDivs()
  */
 export function createPapyrusJson(studentExerciseSet) {
     // Extract student info
@@ -59,71 +312,58 @@ export function createPapyrusJson(studentExerciseSet) {
     
     console.log(`Creating Papyrus JSON for student ${studentId} with seed ${seed}`);
     
-    // Initialize JSON array with header and title
+    // Initialize JSON array with header that repeats on each page
     const papyrusJson = [
-        // Header section with student info
+        // Header section with student info - REPEATING HEADER
+        // REMOVED: margin-bottom: 1rem from table
         {
             "id": "header-section",
-            "html": `<table style='width: 100%; border-collapse: collapse; border: 0.5px solid #e0e0e0;margin-bottom: 1rem !important;'>
+            "html": `<table style='width: 100%; border-collapse: collapse; border: 0.5px solid #e0e0e0;'>
                     <tr>
-                        <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Nom :</td>
-                        <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Classe :</td>
-                        <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Seed: ${seed}</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 50%;'>Nom :</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 25%;'>Classe :</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 25%;'>Copie n°${studentId} (${seed})</td>
                     </tr>
                     <tr>
-                        <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Prénom :</td>
-                        <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Date :</td>
-                        <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Spé</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 50%;'>Prénom :</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 25%;'>Date :</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 25%;'>Spécialité </td>
                     </tr>
                 </table>`,
             "classes": ["font-mono"],
-            "isPapyrusHeader": true
+            "isPapyrusHeader": true  // This tells Papyrus to repeat on each page
         },
         
-        // Title section
-        // TODO: anticipate h1 for SEO
+        // Title section - only on first page
+        // REMOVED: margin-bottom: 2rem and margin-top: 1rem
         {
             "id": "main-title",
             "html": "<h3>Bac 1<sup>ère</sup> Maths - Première Partie : Automatismes</h3>",
-            "style": "font-family: 'Spectral', serif; font-weight: bold; text-align: left; color: var(--color-base-content);margin-bottom: 2rem !important;margin-top: 1rem !important;"
-        },
-        // {
-        //     "id": "subtitle",
-        //     "html": "<div>Questions inspirées des Sujets 0</div>",
-        //     "style": "font-family: 'Spectral', serif; font-size: 18px; font-weight: 500; text-align: left; color: #5a6c7d; font-style: italic;"
-        // }
+            "style": "font-family: 'Spectral', serif; font-weight: bold; text-align: left; color: var(--color-base-content);"
+        }
     ];
     
-    // Process each question
+    // Process each question as a separate JSON item for proper pagination
     studentExerciseSet.questions.forEach((question, index) => {
         // Extract question number from generator name
-        // remove leading 0 of questionNum
         const questionNum = extractQuestionNumber(question.generator).replace(/^0+/, '');
-
                 
         // Get statement HTML, or fallback to regular statement
         const statementHtml = question.getStatementHtml() || question.statement;
         
         // Create the question HTML
         let questionHtml;
-        
-        // Process statementHtml first to inject question number
         let processedStatement;
         
-
-        // TODO: temporary cause will work for all as checked
-        // Special case: Check if statementHtml starts with the flex container structure
-
-
-
+        // Process statement to add question number
         if (statementHtml.startsWith("<div style='display: flex;")) {
-            // Insert question number inside the second div (the child div)
+            // Insert question number inside the flex child
             processedStatement = statementHtml.replace(
                 "<div style='flex: 1; min-width: 250px;'>",
                 `<div style='flex: 1; min-width: 250px;'>${questionNum})&nbsp;&nbsp;`
             );
         } else if (statementHtml.startsWith('<div>')) {
-            // Insert question number inside the first div with a non-breaking space
+            // Insert question number inside the first div
             processedStatement = statementHtml.replace('<div>', `<div>${questionNum})&nbsp;&nbsp;`);
         } else {
             // Wrap in div with question number
@@ -143,14 +383,18 @@ export function createPapyrusJson(studentExerciseSet) {
             questionHtml = processedStatement;
         }
         
-        // Add to papyrusJson
+        // Add each question as a separate JSON item
+        // This allows Papyrus to properly measure and paginate
+        // REMOVED: margin-bottom: 2rem from each question
         papyrusJson.push({
             "id": `question-${questionNum}`,
             "html": questionHtml,
-            // border-top: 1px solid #e0e0e0; padding-top: 0.25rem !important;
-            "style": "margin-bottom: 2rem !important;"
+            "style": "",  // No margins - let Papyrus handle spacing
+            "classes": []  // Can add classes if needed
         });
     });
+    
+    console.log(`Created ${papyrusJson.length} items for Papyrus (1 header, 1 title, ${studentExerciseSet.questions.length} questions)`);
     
     return papyrusJson;
 }
@@ -160,13 +404,14 @@ export function createPapyrusJson(studentExerciseSet) {
  * @returns {Object} The document settings
  */
 function getDocumentSettings() {
-    // Fixed hardcoded settings
+    // Fixed hardcoded settings - REDUCED margins for more content space
+    // IMPORTANT: These margins must match the CSS variables
     return {
         margins: {
-            top: 5,
-            right: 12,
-            bottom: 5,
-            left: 12
+            top: 7,     // Reduced from 10 to 7mm
+            right: 8,   // Reduced from 10 to 8mm
+            bottom: 7,  // Reduced from 10 to 7mm
+            left: 8     // Reduced from 10 to 8mm
         },
         fontSizes: {
             h1: 28,
@@ -177,7 +422,7 @@ function getDocumentSettings() {
             h6: 14,
             body: 15
         },
-        spacing: 2
+        spacing: 2.5  // Spacing between elements in mm
     };
 }
 
@@ -210,22 +455,29 @@ function configurePapyrus() {
     // Get settings from form or defaults
     const settings = getDocumentSettings();
     
-    // Apply settings to CSS variables
+    console.log('Configuring Papyrus with margins:', settings.margins);
+    console.log('Spacing between divs:', settings.spacing, 'mm');
+    
+    // Apply settings to CSS variables FIRST
     applySettingsToCss(settings);
     
     // Initialize configurations
     initializeMargins();
     initializeFontSizes();
     initializeSpaceBetweenDivs();
-    initializePageNumberConfig(); // Add this
+    initializePageNumberConfig();
     
-    // Set margins from settings
+    // Set margins from settings - these should match CSS variables
     setMargins({
         top: settings.margins.top,
         right: settings.margins.right,
         bottom: settings.margins.bottom,
         left: settings.margins.left
     });
+    
+    // Verify margins were set correctly
+    const currentMargins = getCurrentMargins();
+    console.log('Margins after setting:', currentMargins);
     
     // Set font sizes from settings
     setFontSizes({
@@ -241,8 +493,8 @@ function configurePapyrus() {
     // Set spacing between divs
     setSpaceBetweenDivs(settings.spacing);
     
-    // Enable page numbers (add this)
-    setShowPageNumbers(true); // Set to true to show page numbers
+    // Enable page numbers
+    setShowPageNumbers(true);
 }
 
 /**
@@ -305,7 +557,7 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
         return;
     }
     
-    // Configure Papyrus with consistent settings
+    // Configure Papyrus with consistent settings FIRST
     configurePapyrus();
     
     // Create Papyrus JSON
@@ -313,28 +565,73 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
     
     // Log the JSON to console for debugging
     console.log('Papyrus JSON for preview:', papyrusJson);
+    console.log(`JSON contains ${papyrusJson.length} items`);
     
-    // Set the JSON data to the input field
-    document.getElementById('json-input').value = JSON.stringify(papyrusJson);
+    // Set the JSON data to the input field (Papyrus reads from here)
+    const jsonInput = document.getElementById('json-input');
+    jsonInput.value = JSON.stringify(papyrusJson, null, 2);
     
-    // Generate pages
+    // Set up Papyrus globals (required for proper pagination)
+    if (!window.contentModel) {
+        window.contentModel = { 
+            items: [],
+            loadFromJSON: function(json) { this.items = json; },
+            updateMargins: function(margins) { this.margins = margins; }
+        };
+    }
+    
+    // Make getCurrentSpaceBetweenDivs available globally (Papyrus expects this)
+    if (!window.getCurrentSpaceBetweenDivs) {
+        window.getCurrentSpaceBetweenDivs = getCurrentSpaceBetweenDivs;
+    }
+    
+    // Set papyrus debug mode based on toggle state
+    const debugToggle = document.getElementById('papyrus-debug-toggle');
+    window.papyrusDebugMode = debugToggle ? debugToggle.checked : false;
+    
+    // CRITICAL: Clear the container before Papyrus generates pages
+    const pagesContainer = document.getElementById('pages-container');
+    pagesContainer.innerHTML = '';
+    
+    // Generate pages - let Papyrus fully control the rendering
+    console.log('Calling Papyrus generatePages()...');
+    console.log('Current spacing:', getCurrentSpaceBetweenDivs(), 'mm');
+    console.log('Container before:', pagesContainer.innerHTML.length, 'chars');
+    
     generatePages();
     
-    // Wait for rendering
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // Wait longer for Papyrus to complete pagination
+    console.log('Waiting for Papyrus to complete pagination...');
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Make sure pages container is visible
-    const pagesContainer = document.getElementById('pages-container');
+    console.log('Container after:', pagesContainer.innerHTML.length, 'chars');
     pagesContainer.style.display = 'block';
+    
+    // Log page dimensions for debugging
+    logPageDimensions(pagesContainer);
+    
+    // CRITICAL: Render LaTeX in foreign objects AFTER pages are built
+    renderLatexInForeignObjects(pagesContainer);
     
     // Update the current student indicator in the pagination
     updatePaginationButtons(studentIndex);
     
+    // Store current index for debug toggle
+    generationResults.currentStudentIndex = studentIndex;
+    
     // Trigger print if requested
     if (triggerPrint) {
-        // Use the same CSS for both preview and print
-        const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/styles/print.css";
-        printPage(pagesContainer.innerHTML, styleSheet);
+        // Wait a bit more to ensure LaTeX is rendered
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        // Get the fully rendered content
+        const renderedContent = pagesContainer.innerHTML;
+        
+        // Use Papyrus's print function directly with the stylesheet
+        const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/styles/print.css";
+        
+        // Print using Papyrus's function - it handles margins internally
+        printPage(renderedContent, styleSheet);
     }
 }
 
@@ -381,6 +678,13 @@ export async function printAllCopies() {
         // Get the rendered content
         const pagesContainer = document.getElementById('pages-container');
         if (pagesContainer) {
+            // Log dimensions for this student
+            console.log(`\n--- Student ${i + 1} Page Dimensions ---`);
+            logPageDimensions(pagesContainer);
+            
+            // IMPORTANT: Render LaTeX in the DOM before getting innerHTML
+            renderLatexInForeignObjects(pagesContainer);
+            
             // Add student content to the combined content
             allContent += pagesContainer.innerHTML;
             
@@ -391,8 +695,10 @@ export async function printAllCopies() {
         }
     }
     
-    // Print all content with consistent styling
-    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/styles/print.css";
+    // Use Papyrus's print function with the combined content
+    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/styles/print.css";
+    
+    // Print using Papyrus's function - it handles margins internally
     printPage(allContent, styleSheet);
     
     // Return to the first student after printing
@@ -486,6 +792,21 @@ export function initDocumentSettingsForm() {
     
     // Apply basic configuration without trying to render a preview
     configurePapyrus();
+    
+    // Set up debug toggle event listener
+    const debugToggle = document.getElementById('papyrus-debug-toggle');
+    if (debugToggle) {
+        debugToggle.addEventListener('change', function() {
+            window.papyrusDebugMode = debugToggle.checked;
+            console.log('Debug mode:', window.papyrusDebugMode ? 'ON' : 'OFF');
+            
+            // Regenerate preview with debug mode change if we have data
+            if (generationResults.students && generationResults.students.length > 0) {
+                const currentIndex = generationResults.currentStudentIndex || 0;
+                previewStudentCopy(currentIndex, false);
+            }
+        });
+    }
     
     // Display a placeholder message in the preview container
     const pagesContainer = document.getElementById('pages-container');

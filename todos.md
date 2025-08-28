@@ -24,6 +24,8 @@
 
 - [] considérer sélection sur le niveau + mode MCQ 
 
+- [] spe_sujet1_auto_06_question.py: make better for equiv relation de conjugaisons avec coeff entiers relatifs
+
 
 ### For Teachers
 
