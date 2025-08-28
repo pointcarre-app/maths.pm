@@ -380,11 +380,11 @@
     :root {
         /* Default document settings as CSS variables - will be overridden by JavaScript */
         /* IMPORTANT: These must match getDocumentSettings() in index-papyrus.js */
-        --papyrus-margin-top: 7mm;
-        /* Reduced for more content space */
+        --papyrus-margin-top: 3mm;
+        /* Small top margin for breathing room */
         --papyrus-margin-right: 8mm;
-        /* Reduced for more content space */
-        --papyrus-margin-bottom: 7mm;
+        /* Side margins for readability */
+        --papyrus-margin-bottom: 3mm;
         /* Reduced for more content space */
         --papyrus-margin-left: 8mm;
         /* Reduced for more content space */
@@ -438,8 +438,8 @@
     .page-content {
         /* ONLY this element handles document margins via padding */
         padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
-        height: 100%;
-        width: 100%;
+        height: 297mm;
+        width: 210mm;
         box-sizing: border-box;
         overflow: hidden;
         position: relative;
@@ -461,9 +461,39 @@
         .page-content {
             padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
         }
+
+        /* Ensure headings have no margins in print */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0 !important;
+        }
+
+        /* Ensure consistent spacing for all elements */
+        #main-title {
+            margin: 0 !important;
+        }
+
+        /* Remove any default paragraph margins */
+        p {
+            margin: 0;
+        }
     }
 
-    /* Apply font sizes from variables */
+    /* Apply font sizes from variables and remove default margins */
+    .papyrus-document h1,
+    .papyrus-document h2,
+    .papyrus-document h3,
+    .papyrus-document h4,
+    .papyrus-document h5,
+    .papyrus-document h6 {
+        margin: 0;
+        /* Remove all default heading margins */
+    }
+
     .papyrus-document h1 {
         font-size: var(--papyrus-font-size-h1);
     }

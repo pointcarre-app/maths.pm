@@ -1,6 +1,19 @@
 /**
  * Papyrus Integration Module for Sujets0
  * Handles conversion of exercise data to Papyrus JSON format for printing
+ * 
+ * ARCHITECTURE:
+ * - Papyrus creates proper A4 pages with automatic pagination
+ * - Page structure: .page-wrapper > .page-preview > .page-content
+ * - ONLY .page-content has padding (document margins)
+ * - Margins: 3mm top/bottom, 8mm left/right for optimal space usage
+ * - Each element has 1rem padding-bottom for spacing
+ * - Chrome print: Set margins to "None" in print dialog (@page rule handles this)
+ * 
+ * IMPORTANT FIXES:
+ * - All heading margins are explicitly set to 0 to prevent browser defaults
+ * - We override both --papyrus-margin-* and --page-margin-* variables
+ * - Print media queries ensure consistent spacing between preview and print
  */
 
 import generationResults from './index-data-model.js';
@@ -302,16 +315,14 @@ export function createPapyrusJson(studentExerciseSet) {
                 </table>`,
             "classes": ["font-mono"],
             "isPapyrusHeader": true,  // This tells Papyrus to repeat on each page
-            "style": "padding-bottom: 1rem;"
+                         "style": "padding-bottom: 1rem;"
         },
         
         // Title section - only on first page
-        // REMOVED: margin-bottom: 2rem and margin-top: 1rem
         {
             "id": "main-title",
-            "html": "<h3>Bac 1<sup>ère</sup> Maths - Première Partie : Automatismes</h3>",
-            "style": "font-family: 'Spectral', serif; font-weight: bold; text-align: left; color: var(--color-base-content); padding-bottom: 1rem;"
-
+            "html": "<h3 style='margin: 0;'>Bac 1<sup>ère</sup> Maths - Première Partie : Automatismes</h3>",
+            "style": "font-family: 'Spectral', serif; font-weight: bold; text-align: left; color: var(--color-base-content); padding-bottom: 1rem; margin: 0;"
         }
     ];
     
@@ -361,7 +372,7 @@ export function createPapyrusJson(studentExerciseSet) {
         papyrusJson.push({
             "id": `question-${questionNum}`,
             "html": questionHtml,
-            "style": "padding-bottom: 1rem;",  // No margins - let Papyrus handle spacing
+             "style": "padding-bottom: 1rem;",  // No margins - let Papyrus handle spacing
             "classes": []  // Can add classes if needed
         });
     });
@@ -380,10 +391,10 @@ function getDocumentSettings() {
     // IMPORTANT: These margins must match the CSS variables
     return {
         margins: {
-            top: 0,     // Reduced from 10 to 7mm
-            right: 8,   // Reduced from 10 to 8mm
-            bottom: 0,  // Reduced from 10 to 7mm
-            left: 8     // Reduced from 10 to 8mm
+            top: 3,     // Small top margin for breathing room
+            right: 8,   // Side margins for readability
+            bottom: 3,  // Small bottom margin for page numbers
+            left: 8     // Side margins for readability
         },
         fontSizes: {
             h1: 28,
@@ -403,11 +414,19 @@ function getDocumentSettings() {
  * @param {Object} settings - The document settings
  */
 function applySettingsToCss(settings) {
+    // Override our custom variables
     document.documentElement.style.setProperty('--papyrus-margin-top', `${settings.margins.top}mm`);
     document.documentElement.style.setProperty('--papyrus-margin-right', `${settings.margins.right}mm`);
     document.documentElement.style.setProperty('--papyrus-margin-bottom', `${settings.margins.bottom}mm`);
     document.documentElement.style.setProperty('--papyrus-margin-left', `${settings.margins.left}mm`);
     
+    // Also override Papyrus's default variables if they exist
+    document.documentElement.style.setProperty('--page-margin-top', `${settings.margins.top}mm`);
+    document.documentElement.style.setProperty('--page-margin-right', `${settings.margins.right}mm`);
+    document.documentElement.style.setProperty('--page-margin-bottom', `${settings.margins.bottom}mm`);
+    document.documentElement.style.setProperty('--page-margin-left', `${settings.margins.left}mm`);
+    
+    // Font sizes
     document.documentElement.style.setProperty('--papyrus-font-size-h1', `${settings.fontSizes.h1}px`);
     document.documentElement.style.setProperty('--papyrus-font-size-h2', `${settings.fontSizes.h2}px`);
     document.documentElement.style.setProperty('--papyrus-font-size-h3', `${settings.fontSizes.h3}px`);
@@ -415,8 +434,15 @@ function applySettingsToCss(settings) {
     document.documentElement.style.setProperty('--papyrus-font-size-h5', `${settings.fontSizes.h5}px`);
     document.documentElement.style.setProperty('--papyrus-font-size-h6', `${settings.fontSizes.h6}px`);
     document.documentElement.style.setProperty('--papyrus-font-size-body', `${settings.fontSizes.body}px`);
-
-
+    
+    // Also set default font-size variables if Papyrus uses them
+    document.documentElement.style.setProperty('--font-size-h1', `${settings.fontSizes.h1}px`);
+    document.documentElement.style.setProperty('--font-size-h2', `${settings.fontSizes.h2}px`);
+    document.documentElement.style.setProperty('--font-size-h3', `${settings.fontSizes.h3}px`);
+    document.documentElement.style.setProperty('--font-size-h4', `${settings.fontSizes.h4}px`);
+    document.documentElement.style.setProperty('--font-size-h5', `${settings.fontSizes.h5}px`);
+    document.documentElement.style.setProperty('--font-size-h6', `${settings.fontSizes.h6}px`);
+    document.documentElement.style.setProperty('--font-size-body', `${settings.fontSizes.body}px`);
 }
 
 /**
@@ -608,6 +634,9 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
 /**
  * Print a specific student's exercise sheet
  * @param {number} studentIndex - Index of the student to print
+ * 
+ * NOTE: Chrome users should set print margins to "None" in the print dialog
+ * for best results. The @page CSS rule should handle this automatically.
  */
 export async function printStudentCopy(studentIndex) {
     // First preview, then print
@@ -642,8 +671,8 @@ export async function printAllCopies() {
         // Generate pages in the normal container
         generatePages();
         
-        // Wait for rendering
-        await new Promise(resolve => setTimeout(resolve, 300));
+        // Wait longer for Papyrus to complete rendering
+        await new Promise(resolve => setTimeout(resolve, 500));
         
         // Get the rendered content
         const pagesContainer = document.getElementById('pages-container');
@@ -658,10 +687,8 @@ export async function printAllCopies() {
             // Add student content to the combined content
             allContent += pagesContainer.innerHTML;
             
-            // Add a page break between students
-            if (i < generationResults.students.length - 1) {
-                allContent += '<div style="page-break-after: always;"></div>';
-            }
+            // NO NEED for extra page break - Papyrus pages are already complete A4 pages
+            // Each .page-wrapper is a full page with proper dimensions
         }
     }
     
