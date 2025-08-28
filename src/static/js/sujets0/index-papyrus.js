@@ -12,18 +12,19 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/margin-config.js';
 import { 
     initializeFontSizes, // Default font sizes in px
-    export const DEFAULT_FONT_SIZES = {
-        h1: 32,
-        h2: 28,
-        h3: 24,
-        h4: 20,
-        h5: 18,
-        h6: 16,
-        body: 16
-    };
-    
     setFontSizes 
 } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/font-config.js';
+
+// Default font sizes in px
+const DEFAULT_FONT_SIZES = {
+    h1: 32,
+    h2: 28,
+    h3: 24,
+    h4: 20,
+    h5: 18,
+    h6: 16,
+    body: 16
+};
 import { 
     initializeSpaceBetweenDivs, 
     setSpaceBetweenDivs 
@@ -239,11 +240,29 @@ function configurePapyrus() {
  * Update document settings and refresh preview
  */
 export async function updateDocumentSettings() {
-    // Get current student index
-    const currentIndex = generationResults.currentStudentIndex || 0;
+    // Configure Papyrus with settings
+    configurePapyrus();
     
-    // Update settings and refresh preview
-    await previewStudentCopy(currentIndex, false);
+    // Only try to refresh preview if we have student data
+    if (generationResults.students && generationResults.students.length > 0) {
+        // Get current student index
+        const currentIndex = generationResults.currentStudentIndex || 0;
+        
+        // Update settings and refresh preview
+        await previewStudentCopy(currentIndex, false);
+    } else {
+        // Just update the placeholder
+        const pagesContainer = document.getElementById('pages-container');
+        if (pagesContainer) {
+            pagesContainer.innerHTML = `
+                <div style="padding: 20px; text-align: center; color: #4a5568; border: 1px dashed #cbd5e0; margin: 20px;">
+                    <h3>Print Preview</h3>
+                    <p>Generate exercises first to see a preview here.</p>
+                </div>
+            `;
+            pagesContainer.style.display = 'block';
+        }
+    }
 }
 
 /**
@@ -252,6 +271,25 @@ export async function updateDocumentSettings() {
  * @param {boolean} triggerPrint - Whether to trigger the print dialog
  */
 export async function previewStudentCopy(studentIndex, triggerPrint = false) {
+    // Check if students array exists and has data
+    if (!generationResults.students || !Array.isArray(generationResults.students) || generationResults.students.length === 0) {
+        console.error('No student data available. Make sure exercises are generated before preview.');
+        
+        // Display an error message in the preview container if it exists
+        const pagesContainer = document.getElementById('pages-container');
+        if (pagesContainer) {
+            pagesContainer.innerHTML = `
+                <div style="padding: 20px; text-align: center; color: #e53e3e; border: 1px solid #e53e3e; margin: 20px;">
+                    <h3>No student data available</h3>
+                    <p>Please generate exercises before attempting to preview.</p>
+                </div>
+            `;
+            pagesContainer.style.display = 'block';
+        }
+        
+        return;
+    }
+    
     const student = generationResults.students[studentIndex];
     if (!student) {
         console.error(`No student found at index ${studentIndex}`);
@@ -455,8 +493,20 @@ export function initDocumentSettingsForm() {
     if (fontSizeH3) fontSizeH3.value = 20;
     if (fontSizeBody) fontSizeBody.value = 12;
     
-    // Apply settings immediately
-    updateDocumentSettings();
+    // Apply basic configuration without trying to render a preview
+    configurePapyrus();
+    
+    // Display a placeholder message in the preview container
+    const pagesContainer = document.getElementById('pages-container');
+    if (pagesContainer) {
+        pagesContainer.innerHTML = `
+            <div style="padding: 20px; text-align: center; color: #4a5568; border: 1px dashed #cbd5e0; margin: 20px;">
+                <h3>Print Preview</h3>
+                <p>Generate exercises first to see a preview here.</p>
+            </div>
+        `;
+        pagesContainer.style.display = 'block';
+    }
 }
 
 // Expose functions globally for use in HTML
