@@ -111,36 +111,129 @@ export function createPapyrusJson(studentExerciseSet) {
 }
 
 /**
+ * Get document settings from form inputs or defaults
+ * @returns {Object} The document settings
+ */
+function getDocumentSettings() {
+    // Default settings
+    const settings = {
+        margins: {
+            top: 15,
+            right: 15,
+            bottom: 15,
+            left: 15
+        },
+        fontSizes: {
+            h1: 28,
+            h2: 24,
+            h3: 20,
+            h4: 18,
+            h5: 16,
+            h6: 14,
+            body: 12
+        },
+        spacing: 8
+    };
+    
+    // Try to get values from form inputs
+    try {
+        // Margins
+        const marginTop = document.getElementById('margin-top');
+        const marginRight = document.getElementById('margin-right');
+        const marginBottom = document.getElementById('margin-bottom');
+        const marginLeft = document.getElementById('margin-left');
+        
+        if (marginTop) settings.margins.top = parseInt(marginTop.value) || 15;
+        if (marginRight) settings.margins.right = parseInt(marginRight.value) || 15;
+        if (marginBottom) settings.margins.bottom = parseInt(marginBottom.value) || 15;
+        if (marginLeft) settings.margins.left = parseInt(marginLeft.value) || 15;
+        
+        // Font sizes
+        const fontSizeH1 = document.getElementById('font-size-h1');
+        const fontSizeH3 = document.getElementById('font-size-h3');
+        const fontSizeBody = document.getElementById('font-size-body');
+        
+        if (fontSizeH1) settings.fontSizes.h1 = parseInt(fontSizeH1.value) || 28;
+        if (fontSizeH3) {
+            settings.fontSizes.h3 = parseInt(fontSizeH3.value) || 20;
+            // Derive h2 between h1 and h3
+            settings.fontSizes.h2 = Math.round((settings.fontSizes.h1 + settings.fontSizes.h3) / 2);
+        }
+        if (fontSizeBody) settings.fontSizes.body = parseInt(fontSizeBody.value) || 12;
+    } catch (error) {
+        console.error('Error getting document settings:', error);
+    }
+    
+    return settings;
+}
+
+/**
+ * Apply document settings to CSS variables
+ * @param {Object} settings - The document settings
+ */
+function applySettingsToCss(settings) {
+    document.documentElement.style.setProperty('--papyrus-margin-top', `${settings.margins.top}mm`);
+    document.documentElement.style.setProperty('--papyrus-margin-right', `${settings.margins.right}mm`);
+    document.documentElement.style.setProperty('--papyrus-margin-bottom', `${settings.margins.bottom}mm`);
+    document.documentElement.style.setProperty('--papyrus-margin-left', `${settings.margins.left}mm`);
+    
+    document.documentElement.style.setProperty('--papyrus-font-size-h1', `${settings.fontSizes.h1}px`);
+    document.documentElement.style.setProperty('--papyrus-font-size-h2', `${settings.fontSizes.h2}px`);
+    document.documentElement.style.setProperty('--papyrus-font-size-h3', `${settings.fontSizes.h3}px`);
+    document.documentElement.style.setProperty('--papyrus-font-size-h4', `${settings.fontSizes.h4}px`);
+    document.documentElement.style.setProperty('--papyrus-font-size-h5', `${settings.fontSizes.h5}px`);
+    document.documentElement.style.setProperty('--papyrus-font-size-h6', `${settings.fontSizes.h6}px`);
+    document.documentElement.style.setProperty('--papyrus-font-size-body', `${settings.fontSizes.body}px`);
+}
+
+/**
  * Configure Papyrus with consistent settings for preview and print
  * @private
  */
 function configurePapyrus() {
+    // Get settings from form or defaults
+    const settings = getDocumentSettings();
+    
+    // Apply settings to CSS variables
+    applySettingsToCss(settings);
+    
     // Initialize configurations
     initializeMargins();
     initializeFontSizes();
     initializeSpaceBetweenDivs();
     
-    // Set standard margins (in mm)
+    // Set margins from settings
     setMargins({
-        top: 15,
-        right: 15,
-        bottom: 15,
-        left: 15
+        top: settings.margins.top,
+        right: settings.margins.right,
+        bottom: settings.margins.bottom,
+        left: settings.margins.left
     });
     
-    // Set font sizes (in px)
+    // Set font sizes from settings
     setFontSizes({
-        h1: 28,
-        h2: 24,
-        h3: 20,
-        h4: 18,
-        h5: 16,
-        h6: 14,
-        body: 12
+        h1: settings.fontSizes.h1,
+        h2: settings.fontSizes.h2,
+        h3: settings.fontSizes.h3,
+        h4: settings.fontSizes.h4,
+        h5: settings.fontSizes.h5,
+        h6: settings.fontSizes.h6,
+        body: settings.fontSizes.body
     });
     
     // Set spacing between divs
-    setSpaceBetweenDivs(8);
+    setSpaceBetweenDivs(settings.spacing);
+}
+
+/**
+ * Update document settings and refresh preview
+ */
+export async function updateDocumentSettings() {
+    // Get current student index
+    const currentIndex = generationResults.currentStudentIndex || 0;
+    
+    // Update settings and refresh preview
+    await previewStudentCopy(currentIndex, false);
 }
 
 /**
@@ -261,14 +354,31 @@ export function createPaginationButtons() {
     // Clear existing buttons
     paginationContainer.innerHTML = '';
     
+    // Create a title for the pagination area
+    const title = document.createElement('div');
+    title.className = 'flex items-center gap-2 font-medium mb-2';
+    title.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+        </svg>
+        Naviguer entre les copies (${generationResults.students.length})
+    `;
+    paginationContainer.appendChild(title);
+    
+    // Create button container
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'flex flex-wrap gap-1 mb-2';
+    paginationContainer.appendChild(buttonContainer);
+    
     // Create buttons for each student
     generationResults.students.forEach((student, index) => {
         const button = document.createElement('button');
-        button.className = 'btn btn-sm';
-        button.textContent = `Élève ${student.id}`;
+        button.className = 'btn btn-xs btn-outline';
+        button.textContent = `${student.id}`;
         button.onclick = () => previewStudentCopy(index);
+        button.title = `Voir la copie de l'élève ${student.id}`;
         
-        paginationContainer.appendChild(button);
+        buttonContainer.appendChild(button);
     });
 }
 
@@ -280,14 +390,63 @@ export function updatePaginationButtons(currentIndex) {
     const paginationContainer = document.getElementById('student-pagination');
     if (!paginationContainer) return;
     
+    // Find the button container (second child after the title)
+    const buttonContainer = paginationContainer.querySelector('div:nth-child(2)');
+    if (!buttonContainer) return;
+    
     // Update button states
-    Array.from(paginationContainer.children).forEach((button, index) => {
+    Array.from(buttonContainer.children).forEach((button, index) => {
         if (index === currentIndex) {
+            button.classList.remove('btn-outline');
             button.classList.add('btn-primary');
         } else {
             button.classList.remove('btn-primary');
+            button.classList.add('btn-outline');
         }
     });
+    
+    // Update the title to show current student
+    const title = paginationContainer.querySelector('div:first-child');
+    if (title) {
+        const currentStudent = generationResults.students[currentIndex];
+        if (currentStudent) {
+            title.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+                </svg>
+                Élève ${currentStudent.id} (${currentIndex + 1}/${generationResults.students.length})
+            `;
+        }
+    }
+}
+
+/**
+ * Initialize document settings form
+ */
+export function initDocumentSettingsForm() {
+    // Get the update button
+    const updateButton = document.getElementById('update-document-settings');
+    if (updateButton) {
+        updateButton.addEventListener('click', updateDocumentSettings);
+    }
+    
+    // Set initial form values from CSS variables
+    const marginTop = document.getElementById('margin-top');
+    const marginRight = document.getElementById('margin-right');
+    const marginBottom = document.getElementById('margin-bottom');
+    const marginLeft = document.getElementById('margin-left');
+    const fontSizeH1 = document.getElementById('font-size-h1');
+    const fontSizeH3 = document.getElementById('font-size-h3');
+    const fontSizeBody = document.getElementById('font-size-body');
+    
+    // Initialize with default values from CSS variables
+    if (marginTop) marginTop.value = 15;
+    if (marginRight) marginRight.value = 15;
+    if (marginBottom) marginBottom.value = 15;
+    if (marginLeft) marginLeft.value = 15;
+    if (fontSizeH1) fontSizeH1.value = 28;
+    if (fontSizeH3) fontSizeH3.value = 20;
+    if (fontSizeBody) fontSizeBody.value = 12;
 }
 
 // Expose functions globally for use in HTML
@@ -295,3 +454,4 @@ window.previewStudentCopy = previewStudentCopy;
 window.printStudentCopy = printStudentCopy;
 window.printAllCopies = printAllCopies;
 window.createPaginationButtons = createPaginationButtons;
+window.updateDocumentSettings = updateDocumentSettings;

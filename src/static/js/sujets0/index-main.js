@@ -22,7 +22,7 @@ import {
     generatePaginationButtons 
 } from './index-results.js';
 import { buildPCAGraph, renderPCAGraph } from './index-graphs.js';
-import { printStudentCopy, printAllCopies } from './index-papyrus.js';
+import { printStudentCopy, printAllCopies, initDocumentSettingsForm } from './index-papyrus.js';
 
 // Initialize the module
 export async function init() {
@@ -43,6 +43,9 @@ export async function init() {
     
     // Initialize tabs
     initializeTabs();
+    
+    // Initialize document settings form
+    initDocumentSettingsForm();
     
     // Load Nagini and initialize
     await loadNaginiAndInitialize(executeAllGenerators);
