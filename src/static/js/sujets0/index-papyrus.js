@@ -15,6 +15,13 @@ import {
     setFontSizes 
 } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/font-config.js';
 
+import { 
+    initializePageNumberConfig,
+    setShowPageNumbers 
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/page-number-config.js';
+
+
+
 // Default font sizes in px
 // const DEFAULT_FONT_SIZES = {
 //     h1: 32,
@@ -57,7 +64,7 @@ export function createPapyrusJson(studentExerciseSet) {
         // Header section with student info
         {
             "id": "header-section",
-            "html": `<table style='width: 100%; border-collapse: collapse; border: 0.5px solid #e0e0e0;'>
+            "html": `<table style='width: 100%; border-collapse: collapse; border: 0.5px solid #e0e0e0;margin-bottom: 1rem !important;'>
                     <tr>
                         <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Nom :</td>
                         <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Classe :</td>
@@ -210,6 +217,7 @@ function configurePapyrus() {
     initializeMargins();
     initializeFontSizes();
     initializeSpaceBetweenDivs();
+    initializePageNumberConfig(); // Add this
     
     // Set margins from settings
     setMargins({
@@ -232,6 +240,9 @@ function configurePapyrus() {
     
     // Set spacing between divs
     setSpaceBetweenDivs(settings.spacing);
+    
+    // Enable page numbers (add this)
+    setShowPageNumbers(true); // Set to true to show page numbers
 }
 
 /**
