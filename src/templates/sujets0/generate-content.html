@@ -313,9 +313,9 @@
       href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/styles/print.css" />
 
 
-<!-- Document settings controls -->
+<!-- Document settings controls (hidden but used by JS) -->
 <div class="hidden">
-  <!-- Hidden form with default values for consistent styling -->
+  <!-- Hidden form with default values that match the CSS variables -->
   <input type="number" id="margin-top" value="15" />
   <input type="number" id="margin-right" value="15" />
   <input type="number" id="margin-bottom" value="15" />
@@ -326,18 +326,24 @@
   <button id="update-document-settings" style="display: none;"></button>
 </div>
 
+
+<div class="font-heading text-lg sm:text-xl md:text-2xl mt-12 mb-4 flex items-center gap-2">
+  Consulter les copies générées
+</div>
+
+
 <!-- Preview section for Papyrus documents -->
 <div class="card bg-base-100 mt-4 mb-4 shadow">
   <div class="card-body">
-    <h2 class="card-title flex items-center gap-2">
+    {# <h2 class="card-title flex items-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
         <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
       </svg>
       Aperçu de la copie
-    </h2>
+    </h2> #}
     <!-- Container for rendering Papyrus content -->
     <div id="pages-container"
-         class="border rounded p-4 bg-white papyrus-document shadow-inner"
+         class="border rounded p-4 bg-white papyrus-document"
          style="min-height: 500px;
                 overflow: auto">
       <!-- Content will be added here by Papyrus -->
@@ -348,7 +354,7 @@
 <!-- Additional styles for consistent preview and print -->
 <style>
     :root {
-        /* Default document settings as CSS variables - MUST match values in hidden form above */
+        /* Default document settings as CSS variables - hardcoded defaults */
         --papyrus-margin-top: 15mm;
         --papyrus-margin-right: 15mm;
         --papyrus-margin-bottom: 15mm;
