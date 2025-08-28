@@ -407,10 +407,4 @@ export async function executeAllGenerators() {
     executeBtn.disabled = false;
     executeBtn.textContent = "Générer";
   }
-  
-  // Create pagination buttons and show preview of first student
-  if (window.createPaginationButtons && window.previewStudentCopy) {
-    window.createPaginationButtons();
-    window.previewStudentCopy(0);
-  }
 }

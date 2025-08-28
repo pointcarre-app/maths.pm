@@ -4,8 +4,8 @@
  */
 
 import generationResults from './index-data-model.js';
-import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.1/src/core/preview/index.js';
-import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.1/src/core/print-manager.js';
+import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/preview/index.js';
+import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/print-manager.js';
 
 /**
  * Extract question number from generator name
@@ -99,11 +99,10 @@ export function createPapyrusJson(studentExerciseSet) {
 }
 
 /**
- * Preview a specific student's exercise sheet
- * @param {number} studentIndex - Index of the student to preview
- * @param {boolean} triggerPrint - Whether to trigger the print dialog
+ * Print a specific student's exercise sheet
+ * @param {number} studentIndex - Index of the student to print
  */
-export async function previewStudentCopy(studentIndex, triggerPrint = false) {
+export async function printStudentCopy(studentIndex) {
     const student = generationResults.students[studentIndex];
     if (!student) {
         console.error(`No student found at index ${studentIndex}`);
@@ -114,7 +113,7 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
     const papyrusJson = createPapyrusJson(student);
     
     // Log the JSON to console for debugging
-    console.log('Papyrus JSON for preview:', papyrusJson);
+    console.log('Papyrus JSON for printing:', papyrusJson);
     
     // Set the JSON data to the input field
     document.getElementById('json-input').value = JSON.stringify(papyrusJson);
@@ -125,76 +124,21 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
     // Wait for rendering
     await new Promise(resolve => setTimeout(resolve, 500));
     
-    // Make sure pages container is visible
-    document.getElementById('pages-container').style.display = 'block';
-    
-    // Update the current student indicator in the pagination
-    updatePaginationButtons(studentIndex);
-    
-    // Trigger print if requested
-    if (triggerPrint) {
-        printPage();
-    }
+    // Trigger print
+    printPage(document.getElementById('pages-container').innerHTML, "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/styles/print.css");
 }
 
 /**
- * Print the currently displayed student copy
- */
-export async function printCurrentCopy() {
-    printPage();
-}
-
-/**
- * Print all student copies (one by one)
+ * Print all student copies
  */
 export async function printAllCopies() {
     // Just log how many copies would be printed
     console.log(`Would print all ${generationResults.students.length} copies`);
     
     // For now, just print the first student's copy
-    await previewStudentCopy(0, true);
-}
-
-/**
- * Create pagination buttons for all students
- */
-export function createPaginationButtons() {
-    const paginationContainer = document.getElementById('student-pagination');
-    if (!paginationContainer) return;
-    
-    // Clear existing buttons
-    paginationContainer.innerHTML = '';
-    
-    // Create buttons for each student
-    generationResults.students.forEach((student, index) => {
-        const button = document.createElement('button');
-        button.className = 'btn btn-sm';
-        button.textContent = `Élève ${student.id}`;
-        button.onclick = () => previewStudentCopy(index);
-        
-        paginationContainer.appendChild(button);
-    });
-}
-
-/**
- * Update pagination buttons to highlight current student
- * @param {number} currentIndex - Index of the current student
- */
-export function updatePaginationButtons(currentIndex) {
-    const paginationContainer = document.getElementById('student-pagination');
-    if (!paginationContainer) return;
-    
-    // Update button states
-    Array.from(paginationContainer.children).forEach((button, index) => {
-        if (index === currentIndex) {
-            button.classList.add('btn-primary');
-        } else {
-            button.classList.remove('btn-primary');
-        }
-    });
+    await printStudentCopy(0);
 }
 
 // Expose functions globally for use in HTML
-window.previewStudentCopy = previewStudentCopy;
-window.printCurrentCopy = printCurrentCopy;
+window.printStudentCopy = printStudentCopy;
 window.printAllCopies = printAllCopies;
