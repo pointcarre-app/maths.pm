@@ -4,20 +4,30 @@
  */
 
 import generationResults from './index-data-model.js';
-import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/preview/index.js';
-import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/print-manager.js';
+import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/preview/index.js';
+import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/print-manager.js';
 import { 
     initializeMargins, 
     setMargins 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/margin-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/margin-config.js';
 import { 
-    initializeFontSizes, 
+    initializeFontSizes, // Default font sizes in px
+    export const DEFAULT_FONT_SIZES = {
+        h1: 32,
+        h2: 28,
+        h3: 24,
+        h4: 20,
+        h5: 18,
+        h6: 16,
+        body: 16
+    };
+    
     setFontSizes 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/font-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/font-config.js';
 import { 
     initializeSpaceBetweenDivs, 
     setSpaceBetweenDivs 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/margin-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/margin-config.js';
 
 /**
  * Extract question number from generator name
@@ -276,7 +286,7 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
     // Trigger print if requested
     if (triggerPrint) {
         // Use the same CSS for both preview and print
-        const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/styles/print.css";
+        const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/styles/print.css";
         printPage(pagesContainer.innerHTML, styleSheet);
     }
 }
@@ -335,7 +345,7 @@ export async function printAllCopies() {
     }
     
     // Print all content with consistent styling
-    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/styles/print.css";
+    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/styles/print.css";
     printPage(allContent, styleSheet);
     
     // Return to the first student after printing

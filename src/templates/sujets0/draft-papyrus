@@ -3,22 +3,22 @@
     // Import PCA Papyrus modules
     import {
         generatePages
-    } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/preview/index.js';
+    } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/preview/index.js';
     import {
         printPage
-    } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/print-manager.js';
+    } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/print-manager.js';
     import {
         initializeMargins,
         setMargins
-    } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/margin-config.js';
+    } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/margin-config.js';
     import {
         initializeFontSizes,
         setFontSizes
-    } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/font-config.js';
+    } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/font-config.js';
     import {
         initializeSpaceBetweenDivs,
         setSpaceBetweenDivs
-    } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/margin-config.js';
+    } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/margin-config.js';
 
 
 
