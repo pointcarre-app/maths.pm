@@ -91,5 +91,9 @@ missive(
             "a": components["a"].latex(),
             "b": components["b"].latex(),
         },
+        "components_evaluated": {
+            "a": float(components["a"].sympy_expr.evalf()),
+            "b": float(components["b"].sympy_expr.evalf()),
+        },
     }
 )

@@ -110,6 +110,13 @@ export class Question {
             );
         }
 
+        // Process components_evaluated if available
+        if (rawData.data?.components_evaluated) {
+            question.components_evaluated = Object.entries(rawData.data.components_evaluated).map(
+                ([key, value]) => new Component(key, value)
+            );
+        }
+
         return question;
     }
 

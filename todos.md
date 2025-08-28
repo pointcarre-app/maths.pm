@@ -24,6 +24,11 @@
 - [] considérer sélection sur le niveau + mode MCQ 
 
 
+### For Teachers
+
+
+- Extract and finish hypercube (for fork v4.py.js from fork vector_graph)
+
 ## Corsica
 
 - [ ]  Latex or at least repositionn 10km 10km on square svg

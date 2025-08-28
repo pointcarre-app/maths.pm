@@ -155,18 +155,47 @@ export async function executeAllGenerators() {
             
             // `graph-${studentNum}-${generator}`
 
+
+
+
+            // TODO : always validate type of the argument
+
             if (generator === 'spe_sujet1_auto_07_question.py') {
 
                 //console.log("result.data.components")
                 //console.log("result.data.components")
                 //console.log("result.data.components")
                 //console.log("result.data.components")
-                console.error(result.data.components)
-                console.error(result.data.components.n)
 
                 const Y_LABEL_FOR_HORIZONTAL_LINE = parseInt(result.data.components.n);
                 const svgAndDict = await buildPCAGraph('q7_small', {
                     Y_LABEL_FOR_HORIZONTAL_LINE: Y_LABEL_FOR_HORIZONTAL_LINE, // Slope
+                });
+
+                const graphSvg = svgAndDict.svg;
+                const graphDict = svgAndDict.graphDict;
+
+                result.graphSvg = graphSvg;
+                result.graphDict = graphDict;
+
+                console.log("💫💫💫💫", `graph-${studentNum}-${generator}`, graphDict);
+
+            }
+
+
+            else if (generator === 'spe_sujet1_auto_08_question.py') {
+                console.log("💫💫💫💫", `graph-${studentNum}-${generator}`, result.data.components_evaluated);
+
+                // console.log(result.data.components)
+                // console.log(result.data.components.a)
+                // console.log(result.data.components.b)
+            
+
+                const A_FLOAT_FOR_AFFINE_LINE = parseFloat(result.data.components_evaluated.a);
+                const B_FLOAT_FOR_AFFINE_LINE = parseFloat(result.data.components_evaluated.b);
+                const svgAndDict = await buildPCAGraph('q8_small', {
+                    A_FLOAT_FOR_AFFINE_LINE: A_FLOAT_FOR_AFFINE_LINE,
+                    B_FLOAT_FOR_AFFINE_LINE: B_FLOAT_FOR_AFFINE_LINE,
                 });
 
                 const graphSvg = svgAndDict.svg;

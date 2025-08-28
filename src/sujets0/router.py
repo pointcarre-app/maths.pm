@@ -522,3 +522,16 @@ async def scenery(request: Request):
 
     except Exception as e:
         return HTMLResponse(f"Error: {e}", status_code=500)
+
+
+#############################
+# Drafts
+#############################
+
+
+@sujets0_router.get("/sujets0/v4pyjs", response_class=HTMLResponse)
+async def v4pyjs_test(request: Request):
+    """
+    V4PyJS test page - Testing environment for V4PyJS.
+    """
+    return settings.templates.TemplateResponse("sujets0/v4pyjs.html", {"request": request})

@@ -1,7 +1,7 @@
 // Import PCAGraphLoader from CDN
 import {
     PCAGraphLoader
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/v4.py.js@v0.0.18-unstable/scenery/packaged/PCAGraphLoader.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/v4.py.js@v0.0.24/scenery/packaged/PCAGraphLoader.js';
 
 // Make PCAGraphLoader available globally for use in your application
 // window.PCAGraphLoader = PCAGraphLoader;
