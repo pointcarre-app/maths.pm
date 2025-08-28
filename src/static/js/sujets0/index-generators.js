@@ -3,10 +3,10 @@
  * Handles generator execution logic and management
  */
 
-import { executeGeneratorWithSeed } from './index-nagini.js';
-import { getGeneratorConfig, displayValidationTable } from './index-form.js';
-import { displayStudentResults } from './index-results.js';
-import generationResults, { StudentExerciseSet } from './index-data-model.js';
+import { executeGeneratorWithSeed } from "./index-nagini.js";
+import { getGeneratorConfig, displayValidationTable } from "./index-form.js";
+import { displayStudentResults } from "./index-results.js";
+import generationResults, { StudentExerciseSet } from "./index-data-model.js";
 
 // Export the generationResults for backward compatibility
 export { generationResults };
@@ -18,113 +18,130 @@ export { generationResults };
  * @returns {Array} Selected items
  */
 export function selectRandomItems(array, n) {
-    const shuffled = [...array].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, n);
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, n);
 }
 
 /**
  * Execute all generators with pagination
  */
 export async function executeAllGenerators() {
-    // Check if Nagini is ready (indirectly)
-    if (!window.Nagini) {
-        // Display error in validation table
-        const errorData = {
-            copies: { count: '-', isValid: false },
-            questions: { perCopy: '-', isValid: false },
-            program: { level: null, isValid: false },
-            track: { type: null, isValid: false },
-            isComplete: false,
-            errors: [{ field: 'system', message: 'Nagini n\'est pas prêt. Veuillez patienter quelques secondes.' }]
-        };
-        displayValidationTable(errorData);
-        return;
-    }
-    
-    // Extract and validate form data (this will display the validation table)
-    const config = getGeneratorConfig();
-    if (!config) {
-        // Validation table already displayed by getGeneratorConfig
-        return;
-    }
-    
-    console.log('Generator configuration:', config);
-    generationResults.config = config;
-    
-    const executeBtn = document.getElementById('execute-all-generators-btn');
-    if (executeBtn) {
-        executeBtn.disabled = true;
-        executeBtn.textContent = 'Génération en cours...';
-    }
-    
-    const allGenerators = [
-        'spe_sujet1_auto_01_question.py',
-        'spe_sujet1_auto_02_question.py',
-        'spe_sujet1_auto_03_question.py',
-        'spe_sujet1_auto_04_question.py',
-        'spe_sujet1_auto_05_question.py',
-        'spe_sujet1_auto_06_question.py',
-        'spe_sujet1_auto_07_question.py',
-        'spe_sujet1_auto_08_question.py',
-        'spe_sujet1_auto_09_question.py',
-        'spe_sujet1_auto_10_question.py',
-        'spe_sujet1_auto_11_question.py',
-        'spe_sujet1_auto_12_question.py',
-    ];
-
-
-
-    // Mostly for documenting the temporary stuff below
-    const generatorsToGraphFileMap = {
-        'spe_sujet1_auto_07_question.py': ['q7_small'],
-        'spe_sujet1_auto_08_question.py': ['q8_small'],
-        'spe_sujet1_auto_09_question.py': ['q9_small'],
-        'spe_sujet1_auto_10_question.py': ['q10_small'],
-        'spe_sujet1_auto_11_question.py': ['q11_case_a_small', 'q11_case_b_small', 'q11_case_c_small'],
-        'spe_sujet1_auto_12_question.py': ['parabola_s1_a0', 'parabola_s1_am5', 'parabola_s1_ap5', 'parabola_sm1_a0', 'parabola_sm1_am5', 'parabola_sm1_ap10']
+  // Check if Nagini is ready (indirectly)
+  if (!window.Nagini) {
+    // Display error in validation table
+    const errorData = {
+      copies: { count: "-", isValid: false },
+      questions: { perCopy: "-", isValid: false },
+      program: { level: null, isValid: false },
+      track: { type: null, isValid: false },
+      isComplete: false,
+      errors: [
+        {
+          field: "system",
+          message:
+            "Nagini n'est pas prêt. Veuillez patienter quelques secondes.",
+        },
+      ],
     };
-    
-    // Select generators based on question count
-    // If all 12 are selected, keep them in order; otherwise randomly select
-    let selectedGenerators;
-    if (config.nbQuestions === 12) {
-        // Keep all generators in their original order
-        selectedGenerators = [...allGenerators];
+    displayValidationTable(errorData);
+    return;
+  }
+
+  // Extract and validate form data (this will display the validation table)
+  const config = getGeneratorConfig();
+  if (!config) {
+    // Validation table already displayed by getGeneratorConfig
+    return;
+  }
+
+  console.log("Generator configuration:", config);
+  generationResults.config = config;
+
+  const executeBtn = document.getElementById("execute-all-generators-btn");
+  if (executeBtn) {
+    executeBtn.disabled = true;
+    executeBtn.textContent = "Génération en cours...";
+  }
+
+  const allGenerators = [
+    "spe_sujet1_auto_01_question.py",
+    "spe_sujet1_auto_02_question.py",
+    "spe_sujet1_auto_03_question.py",
+    "spe_sujet1_auto_04_question.py",
+    "spe_sujet1_auto_05_question.py",
+    "spe_sujet1_auto_06_question.py",
+    "spe_sujet1_auto_07_question.py",
+    "spe_sujet1_auto_08_question.py",
+    "spe_sujet1_auto_09_question.py",
+    "spe_sujet1_auto_10_question.py",
+    "spe_sujet1_auto_11_question.py",
+    "spe_sujet1_auto_12_question.py",
+  ];
+
+  // Mostly for documenting the temporary stuff below
+  const generatorsToGraphFileMap = {
+    "spe_sujet1_auto_07_question.py": ["q7_small"],
+    "spe_sujet1_auto_08_question.py": ["q8_small"],
+    "spe_sujet1_auto_09_question.py": ["q9_small"],
+    "spe_sujet1_auto_10_question.py": ["q10_small"],
+    "spe_sujet1_auto_11_question.py": [
+      "q11_case_a_small",
+      "q11_case_b_small",
+      "q11_case_c_small",
+    ],
+    "spe_sujet1_auto_12_question.py": [
+      "parabola_s1_a0",
+      "parabola_s1_am5",
+      "parabola_s1_ap5",
+      "parabola_sm1_a0",
+      "parabola_sm1_am5",
+      "parabola_sm1_ap10",
+    ],
+  };
+
+  // Select generators based on question count
+  // If all 12 are selected, keep them in order; otherwise randomly select
+  let selectedGenerators;
+  if (config.nbQuestions === 12) {
+    // Keep all generators in their original order
+    selectedGenerators = [...allGenerators];
+  } else {
+    // Randomly select subset of generators
+    selectedGenerators = selectRandomItems(allGenerators, config.nbQuestions);
+  }
+  generationResults.selectedGenerators = selectedGenerators;
+
+  console.log(`Selected ${config.nbQuestions} generators:`, selectedGenerators);
+
+  // Reset results using the data model
+  generationResults.reset();
+  generationResults.setConfig(config);
+  generationResults.setSelectedGenerators(selectedGenerators);
+
+  // Get or create results container in the wrapper area
+  let resultsContainer = document.getElementById("generator-results-container");
+  const wrapper = document.getElementById("generator-results-wrapper");
+
+  if (!resultsContainer) {
+    resultsContainer = document.createElement("div");
+    resultsContainer.id = "generator-results-container";
+
+    // Place it in the wrapper that's below the journal
+    if (wrapper) {
+      wrapper.appendChild(resultsContainer);
     } else {
-        // Randomly select subset of generators
-        selectedGenerators = selectRandomItems(allGenerators, config.nbQuestions);
+      // Fallback to after validation container if wrapper not found
+      const validationContainer = document.getElementById(
+        "validation-status-container"
+      );
+      if (validationContainer && validationContainer.parentNode) {
+        validationContainer.parentNode.appendChild(resultsContainer);
+      }
     }
-    generationResults.selectedGenerators = selectedGenerators;
-    
-    console.log(`Selected ${config.nbQuestions} generators:`, selectedGenerators);
-    
-    // Reset results using the data model
-    generationResults.reset();
-    generationResults.setConfig(config);
-    generationResults.setSelectedGenerators(selectedGenerators);
-    
-    // Get or create results container in the wrapper area
-    let resultsContainer = document.getElementById('generator-results-container');
-    const wrapper = document.getElementById('generator-results-wrapper');
-    
-    if (!resultsContainer) {
-        resultsContainer = document.createElement('div');
-        resultsContainer.id = 'generator-results-container';
-        
-        // Place it in the wrapper that's below the journal
-        if (wrapper) {
-            wrapper.appendChild(resultsContainer);
-        } else {
-            // Fallback to after validation container if wrapper not found
-            const validationContainer = document.getElementById('validation-status-container');
-            if (validationContainer && validationContainer.parentNode) {
-                validationContainer.parentNode.appendChild(resultsContainer);
-            }
-        }
-    }
-    
-    resultsContainer.className = 'mt-6';
-    resultsContainer.innerHTML = `
+  }
+
+  resultsContainer.className = "mt-6";
+  resultsContainer.innerHTML = `
         <div class="alert alert-info">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -133,106 +150,197 @@ export async function executeAllGenerators() {
         </div>
         <progress class="progress progress-primary w-full mt-4" value="0" max="${config.nbStudents}"></progress>
     `;
-    
-    // Process each student
-    for (let studentNum = 1; studentNum <= config.nbStudents; studentNum++) {
-        // const seed = studentNum; // Use student number as seed
-        const seed = Math.floor(Math.random() * 1_000); // Random seed
-        const questionResults = [];
-        
-        // Update progress
-        const progressBar = resultsContainer.querySelector('progress');
-        if (progressBar) {
-            progressBar.value = studentNum - 1;
-        }
-        
-        // Execute each selected generator for this student
-        for (const generator of selectedGenerators) {
-            const result = await executeGeneratorWithSeed(generator, seed);
+
+  // Process each student
+  for (let studentNum = 1; studentNum <= config.nbStudents; studentNum++) {
+    // const seed = studentNum; // Use student number as seed
+    const seed = Math.floor(Math.random() * 1_000); // Random seed
+    const questionResults = [];
+
+    // Update progress
+    const progressBar = resultsContainer.querySelector("progress");
+    if (progressBar) {
+      progressBar.value = studentNum - 1;
+    }
+
+    // Execute each selected generator for this student
+    for (const generator of selectedGenerators) {
+      try {
+        const result = await executeGeneratorWithSeed(generator, seed);
+        // TODO : always validate type of the argument
+
+        if (generator === "spe_sujet1_auto_07_question.py") {
+          //console.log("result.data.components")
+          //console.log("result.data.components")
+          //console.log("result.data.components")
+          //console.log("result.data.components")
+
+          const Y_LABEL_FOR_HORIZONTAL_LINE = parseInt(
+            result.data.components.n
+          );
+          const svgAndDict = await buildPCAGraph("q7_small", {
+            Y_LABEL_FOR_HORIZONTAL_LINE: Y_LABEL_FOR_HORIZONTAL_LINE, // Slope
+          });
+
+          const graphSvg = svgAndDict.svg;
+          const graphDict = svgAndDict.graphDict;
+
+          result.graphSvg = graphSvg;
+          result.graphDict = graphDict;
+
+          console.log(
+            "💫💫💫💫",
+            `graph-${studentNum}-${generator}`,
+            graphDict
+          );
+        } else if (generator === "spe_sujet1_auto_08_question.py") {
+          console.log(
+            "💫💫💫💫",
+            `graph-${studentNum}-${generator}`,
+            result.data.components_evaluated
+          );
+
+          const A_FLOAT_FOR_AFFINE_LINE = parseFloat(
+            result.data.components_evaluated.a
+          );
+          const B_FLOAT_FOR_AFFINE_LINE = parseFloat(
+            result.data.components_evaluated.b
+          );
+          const svgAndDict = await buildPCAGraph("q8_small", {
+            A_FLOAT_FOR_AFFINE_LINE: A_FLOAT_FOR_AFFINE_LINE,
+            B_FLOAT_FOR_AFFINE_LINE: B_FLOAT_FOR_AFFINE_LINE,
+          });
+
+          const graphSvg = svgAndDict.svg;
+          const graphDict = svgAndDict.graphDict;
+
+          result.graphSvg = graphSvg;
+          result.graphDict = graphDict;
+
+          console.log(
+            "💫💫💫💫",
+            `graph-${studentNum}-${generator}`,
+            graphDict
+          );
+        } else if (generator === "spe_sujet1_auto_10_question.py") {
+          console.log(
+            "💫💫💫💫",
+            `graph-${studentNum}-${generator}`,
+            result.data.components
+          );
+
+          // Very bad naming discrepancy in graph # TODO sel
+          // in spe_sujet1_auto_10_question.py, c is the ordonnée à l'origine
+          // y=ax^2 + c avec |a| = 1 et c réel
+          // A_SHIFT_MAGNITUDE est en fait la valeur absolue de c .....
+          const aFromParabola = parseInt(result.data.components.a);
+          const cFromParabola = parseInt(result.data.components.c);
 
 
+          let PARABOLA_GRAPH_KEY;
+          let A_SHIFT_MAGNITUDE;
 
-            
-            // `graph-${studentNum}-${generator}`
+          if (aFromParabola > 0) {
+            A_SHIFT_MAGNITUDE = cFromParabola;
 
-
-
-
-            // TODO : always validate type of the argument
-
-            if (generator === 'spe_sujet1_auto_07_question.py') {
-
-                //console.log("result.data.components")
-                //console.log("result.data.components")
-                //console.log("result.data.components")
-                //console.log("result.data.components")
-
-                const Y_LABEL_FOR_HORIZONTAL_LINE = parseInt(result.data.components.n);
-                const svgAndDict = await buildPCAGraph('q7_small', {
-                    Y_LABEL_FOR_HORIZONTAL_LINE: Y_LABEL_FOR_HORIZONTAL_LINE, // Slope
-                });
-
-                const graphSvg = svgAndDict.svg;
-                const graphDict = svgAndDict.graphDict;
-
-                result.graphSvg = graphSvg;
-                result.graphDict = graphDict;
-
-                console.log("💫💫💫💫", `graph-${studentNum}-${generator}`, graphDict);
-
+            if (cFromParabola > 0) {
+              // p for plus
+              PARABOLA_GRAPH_KEY = "parabola_s1_ap";
+            } else if (cFromParabola < 0) {
+              // m for minus
+              PARABOLA_GRAPH_KEY = "parabola_s1_am";
+            } else if (cFromParabola === 0) {
+              // 0 for zero
+              PARABOLA_GRAPH_KEY = "parabola_s1_a0";
+            } else {
+              throw new Error(`cFromParabola ${cFromParabola} is not valid`);
             }
 
+            const svgAndDict = await buildPCAGraph(PARABOLA_GRAPH_KEY, {
+              A_SHIFT_MAGNITUDE: A_SHIFT_MAGNITUDE,
+            });
 
-            else if (generator === 'spe_sujet1_auto_08_question.py') {
-                console.log("💫💫💫💫", `graph-${studentNum}-${generator}`, result.data.components_evaluated);
+            const graphSvg = svgAndDict.svg;
+            const graphDict = svgAndDict.graphDict;
 
-                // console.log(result.data.components)
-                // console.log(result.data.components.a)
-                // console.log(result.data.components.b)
-            
+            result.graphSvg = graphSvg;
+            result.graphDict = graphDict;
 
-                const A_FLOAT_FOR_AFFINE_LINE = parseFloat(result.data.components_evaluated.a);
-                const B_FLOAT_FOR_AFFINE_LINE = parseFloat(result.data.components_evaluated.b);
-                const svgAndDict = await buildPCAGraph('q8_small', {
-                    A_FLOAT_FOR_AFFINE_LINE: A_FLOAT_FOR_AFFINE_LINE,
-                    B_FLOAT_FOR_AFFINE_LINE: B_FLOAT_FOR_AFFINE_LINE,
-                });
+            console.log(
+              "💫💫💫💫",
+              `graph-${studentNum}-${generator}`,
+              graphDict
+            );
 
-                const graphSvg = svgAndDict.svg;
-                const graphDict = svgAndDict.graphDict;
+          } else {
+            A_SHIFT_MAGNITUDE = -cFromParabola;
 
-                result.graphSvg = graphSvg;
-                result.graphDict = graphDict;
+            if (cFromParabola > 0) {
+              // p for plus
+              PARABOLA_GRAPH_KEY = "parabola_sm1_ap";
+            } else if (cFromParabola < 0) {
+              // m for minus  
+              PARABOLA_GRAPH_KEY = "parabola_sm1_am";
+            } else if (cFromParabola === 0) {
+              // 0 for zero
+              PARABOLA_GRAPH_KEY = "parabola_sm1_a0";
+            } else {
+              throw new Error(`cFromParabola ${cFromParabola} is not valid`);
+            }   
 
-                console.log("💫💫💫💫", `graph-${studentNum}-${generator}`, graphDict);
+            const svgAndDict = await buildPCAGraph(PARABOLA_GRAPH_KEY, {
+              A_SHIFT_MAGNITUDE: A_SHIFT_MAGNITUDE,
+            });
 
-            }
+            const graphSvg = svgAndDict.svg;
+            const graphDict = svgAndDict.graphDict;
 
-            // Store graph dictionary as data attribute for access if needed
-            // container.dataset.graphDict = JSON.stringify(result.graphDict);
+            result.graphSvg = graphSvg;
+            result.graphDict = graphDict;
+
+            console.log(
+              "💫💫💫💫",
+              `graph-${studentNum}-${generator}`,
+              graphDict
+            );
+          }
 
 
-            questionResults.push(result);
 
+          // const A_SHIFT_MAGNITUDE
         }
-        
-        // Create and store student exercise set using our data model
-        const studentExerciseSet = StudentExerciseSet.fromGeneratorResults(
-            studentNum,
-            seed,
-            questionResults,
-            selectedGenerators
-        );
-        
-        generationResults.addStudent(studentExerciseSet);
+
+        questionResults.push(result);
+        // Store graph dictionary as data attribute for access if needed
+        // container.dataset.graphDict = JSON.stringify(result.graphDict);
+      } catch (error) {
+        console.error(error);
+        questionResults.push({
+          success: false,
+          error: error.message,
+          stdout: "",
+          stderr: "",
+        });
+      }
     }
-    
-    // Display first student's results
-    displayStudentResults(0);
-    
-    // Re-enable button
-    if (executeBtn) {
-        executeBtn.disabled = false;
-        executeBtn.textContent = 'Générer';
-    }
+
+    // Create and store student exercise set using our data model
+    const studentExerciseSet = StudentExerciseSet.fromGeneratorResults(
+      studentNum,
+      seed,
+      questionResults,
+      selectedGenerators
+    );
+
+    generationResults.addStudent(studentExerciseSet);
+  }
+
+  // Display first student's results
+  displayStudentResults(0);
+
+  // Re-enable button
+  if (executeBtn) {
+    executeBtn.disabled = false;
+    executeBtn.textContent = "Générer";
+  }
 }

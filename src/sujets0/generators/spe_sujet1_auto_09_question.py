@@ -106,8 +106,31 @@ def render_question(*, x, c1, a2, b2, c2, a3, b3, c3, expr1, expr2, expr3):
     'Parmi les 3 fonctions $$f1: x \\\\mapsto x^\\\\{2\\\\} -\\\\left(x + 2\\\\right)^\\\\{2\\\\}$$, $$f2: x \\\\mapsto \\\\\\\\dfrac\\\\{1\\\\}\\\\{7\\\\}x --9 + \\\\\\\\dfrac\\\\{1\\\\}\\\\{5^\\\\{\\\\\\\\dfrac\\\\{1\\\\}\\\\{2\\\\}\\\\}\\\\}$$, $$f3: x \\\\mapsto \\\\\\\\dfrac\\\\{\\\\\\\\dfrac\\\\{9\\\\}\\\\{8\\\\}x + 2\\\\}\\\\{0,5\\\\}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?'
     """
 
-    statement = f"Parmi les 3 fonctions $$f1: {x.latex()} \\mapsto {expr1.latex()}$$, $$f2: {x.latex()} \\mapsto {expr2.latex()}$$, $$f3: {x.latex()} \\mapsto {expr3.latex()}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?"
-
+    statement = f"""
+<div>
+    <div>Parmi les 3 fonctions :</div><br>
+    <table style="margin: 0; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">$f$</th>
+                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">$f_1$</th>
+                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">$f_2$</th>
+                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">$f_3$</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">$f(x)$</td>
+                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">${expr1.latex()}$</td>
+                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">${expr2.latex()}$</td>
+                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">${expr3.latex()}$</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div>Identifier les fonctions qui sont affines. Quelle est la valeur coefficient directeur (de ces fonctions qui sont bien affines) avec la plus grande valeur absolue ?</div>
+</div>
+"""
     return {
         "statement": statement,
     }
@@ -119,41 +142,8 @@ question = render_question(**components)
 
 
 # Create HTML version with functions in a table
-statement_html = """
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <p class="text-sm mb-3">Parmi les 3 fonctions :</p>
-        <div class="overflow-x-auto">
-            <table class="table table-compact w-full">
-                <thead>
-                    <tr>
-                        <th>Fonction</th>
-                        <th>Expression</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="font-mono">$f_1$</td>
-                        <td>${x.latex()} \\mapsto {expr1.latex()}$</td>
-                    </tr>
-                    <tr>
-                        <td class="font-mono">$f_2$</td>
-                        <td>${x.latex()} \\mapsto {expr2.latex()}$</td>
-                    </tr>
-                    <tr>
-                        <td class="font-mono">$f_3$</td>
-                        <td>${x.latex()} \\mapsto {expr3.latex()}$</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Au sein des fonctions affines parmi $f_1, f_2, f_3$, quel est le coefficient directeur avec la plus grande valeur absolue ?
-        </div>
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
+
 
 # Define latex_0 for multiple possible answers
 latex_0 = answer["maths_object"].latex()

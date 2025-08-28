@@ -185,7 +185,7 @@ export function displayStudentResults(studentIndex) {
             if (question.graphSvg) {
                 questionContent += '<div class="mb-4">' +
                     '<p class="font-bold mb-2">graphSvg</p>' +
-                    '<div class="break-words overflow-wrap-anywhere">' + question.graphSvg + '</div>' +
+                    '<div class="break-words overflow-wrap-anywhere bg-base-100">' + question.graphSvg + '</div>' +
                     '</div>';
             }
 

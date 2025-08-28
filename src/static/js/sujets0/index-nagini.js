@@ -42,15 +42,19 @@ export async function loadNaginiAndInitialize(executeAllGenerators) {
         const naginiModule = await import(naginiJsUrl);
         Nagini = naginiModule.Nagini;
         window.Nagini = Nagini;
+
+
+
+        const teachersGitTag = 'v0.0.22';
         
         // Files for teachers module
         const teachersFiles = [
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/__init__.py", path: "teachers/__init__.py" },
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/generator.py", path: "teachers/generator.py" },
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/maths.py", path: "teachers/maths.py" },
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/formatting.py", path: "teachers/formatting.py" },
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/corrector.py", path: "teachers/corrector.py" },
-            { url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.21/src/teachers/defaults.py", path: "teachers/defaults.py" }
+            { url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/__init__.py`, path: "teachers/__init__.py" },
+            { url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/generator.py`, path: "teachers/generator.py" },
+            { url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/maths.py`, path: "teachers/maths.py" },
+            { url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/formatting.py`, path: "teachers/formatting.py" },
+            { url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/corrector.py`, path: "teachers/corrector.py" },
+            { url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/defaults.py`, path: "teachers/defaults.py" }
         ];
         
         console.log('🔨 Creating Nagini manager with worker:', pyodideWorkerUrl);

@@ -45,11 +45,11 @@ def render_question(*, x, a, c):
     >>> a, c, x = tm.Integer(n=1), tm.Integer(n=-7), tm.Symbol(s='x')
     >>> statement = render_question(x=x, a=a, c=c)
     >>> statement["statement"]
-    "La courbe ci-contre représente la courbe d\'équation $ax^2 + bx + c$. On suppose $\\\\\\\\lvert a \\\\\\\\rvert = 1$. Donner l\'équation de la parabole."
+    "La courbe ci-contre représente la courbe d\'équation $y=ax^2 + bx + c$. On suppose $\\\\\\\\lvert a \\\\\\\\rvert = 1$. Donner l\'équation de la parabole."
     >>> statement["graph_description"]
     "Une parabole d'équation $x^2-7$, avec simplement la valeur l'ordonée à l'origine"
     """
-    statement = r"La courbe ci-contre représente la courbe d'équation $ax^2 + bx + c$. On suppose $\\lvert a \\rvert = 1$. Donner l'équation de la parabole."
+    statement = f"$a$ et $c$ sont des nombres réels. Ci-contre, on a représenté la parabole d'équation $y=ax^2 + c$. On suppose $|a| = 1$ et que le point M(0; {c.n}) appartient à la parabole. Donner l'équation de la parabole."
     if a.n == 1 and c.n > 0:
         graph_description = (
             f"Une parabole d'équation $x^2+{c.n}$, avec simplement la valeur l'ordonée à l'origine"
@@ -81,23 +81,7 @@ print(components | answer | question)
 
 
 # Create HTML version with graph description
-statement_html = f"""
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            La courbe ci-contre représente la courbe d'équation $ax^2 + bx + c$.
-        </div>
-        <div class="alert alert-info">
-            <span>On suppose $|a| = 1$</span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Donner l'équation de la parabole.
-        </div>
-        {f'<div class="text-xs text-base-content/60 mt-2 italic">Note: {question.get("graph_description", "")}</div>' if "graph_description" in question else ""}
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
 # Define latex_0 for multiple possible answers
 latex_0 = answer["maths_object"].latex()

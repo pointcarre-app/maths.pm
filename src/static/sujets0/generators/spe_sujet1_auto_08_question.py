@@ -42,7 +42,7 @@ def render_question(*, x, a, b):
     "On a représenté ci-contre une droite $\\mathcal{D}$ dans un repère orthonormé. Donner l'équation de la droite $\\mathcal{D}$ sous la forme $y=ax+b$"
     """
 
-    statement = r"On a représenté ci-contre une droite $\\mathcal{D}$ dans un repère orthonormé. Donner l'équation de la droite $\\mathcal{D}$ sous la forme $y=ax+b$"
+    statement = "On a représenté ci-contre une droite $\\mathcal{D}$ dans un repère orthonormé. Donner l'équation de la droite $\\mathcal{D}$ sous la forme $y=ax+b$."
 
     return {
         "statement": statement,
@@ -58,19 +58,7 @@ print(components | answer | question)
 
 
 # Create HTML version with graph reference
-statement_html = """
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            On a représenté ci-contre une droite $(\\mathcal{D})$ dans un repère orthonormé.
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Donner l'équation de la droite $\\mathcal{D}$ sous la forme <span class="badge badge-primary">$y=ax+b$</span>
-        </div>
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
 # Define latex_0 for multiple possible answers
 latex_0 = answer["maths_object"].latex()
