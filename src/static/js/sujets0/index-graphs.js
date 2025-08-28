@@ -1,7 +1,7 @@
 // Import PCAGraphLoader from CDN
 import {
     PCAGraphLoader
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/v4.py.js@v0.0.24/scenery/packaged/PCAGraphLoader.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/v4.py.js@v0.0.25/scenery/packaged/PCAGraphLoader.js';
 
 // Make PCAGraphLoader available globally for use in your application
 // window.PCAGraphLoader = PCAGraphLoader;
@@ -16,7 +16,8 @@ export async function buildPCAGraph(graphKey, config = {}) {
         if (!window._pcaLoader) {
             window._pcaLoader = new PCAGraphLoader({
                 debug: false,
-                graphConfig: config
+                graphConfig: config,
+                pcaVersion: "v0.0.25"
             });
             await window._pcaLoader.initialize();
         } else if (config && Object.keys(config).length > 0) {

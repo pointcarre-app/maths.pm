@@ -4,31 +4,31 @@
  */
 
 import generationResults from './index-data-model.js';
-import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/preview/index.js';
-import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/print-manager.js';
+import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/preview/index.js';
+import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/print-manager.js';
 import { 
     initializeMargins, 
     setMargins 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/margin-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/margin-config.js';
 import { 
     initializeFontSizes, // Default font sizes in px
     setFontSizes 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/font-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/font-config.js';
 
 // Default font sizes in px
-const DEFAULT_FONT_SIZES = {
-    h1: 32,
-    h2: 28,
-    h3: 24,
-    h4: 20,
-    h5: 18,
-    h6: 16,
-    body: 16
-};
+// const DEFAULT_FONT_SIZES = {
+//     h1: 32,
+//     h2: 28,
+//     h3: 24,
+//     h4: 20,
+//     h5: 18,
+//     h6: 16,
+//     body: 18
+// };
 import { 
     initializeSpaceBetweenDivs, 
     setSpaceBetweenDivs 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/core/margin-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/core/margin-config.js';
 
 /**
  * Extract question number from generator name
@@ -66,7 +66,7 @@ export function createPapyrusJson(studentExerciseSet) {
                     <tr>
                         <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Prénom :</td>
                         <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Date :</td>
-                        <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>2nde&1ère|Spé</td>
+                        <td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Spé</td>
                     </tr>
                 </table>`,
             "classes": ["font-mono"],
@@ -74,47 +74,74 @@ export function createPapyrusJson(studentExerciseSet) {
         },
         
         // Title section
+        // TODO: anticipate h1 for SEO
         {
             "id": "main-title",
-            "html": "<div>Bac 1ère Spé. Maths : Partie 1 automatismes</div>",
-            "style": "font-family: 'Spectral', serif; font-size: 24px; font-weight: bold; text-align: left; color: #2c3e50;"
+            "html": "<h3>Bac 1<sup>ère</sup> Maths - Première Partie : Automatismes</h3>",
+            "style": "font-family: 'Spectral', serif; font-weight: bold; text-align: left; color: var(--color-base-content);margin-bottom: 2rem !important;margin-top: 1rem !important;"
         },
-        {
-            "id": "subtitle",
-            "html": "<div>Questions inspirées des Sujets 0</div>",
-            "style": "font-family: 'Spectral', serif; font-size: 18px; font-weight: 500; text-align: left; color: #5a6c7d; font-style: italic;"
-        }
+        // {
+        //     "id": "subtitle",
+        //     "html": "<div>Questions inspirées des Sujets 0</div>",
+        //     "style": "font-family: 'Spectral', serif; font-size: 18px; font-weight: 500; text-align: left; color: #5a6c7d; font-style: italic;"
+        // }
     ];
     
     // Process each question
     studentExerciseSet.questions.forEach((question, index) => {
         // Extract question number from generator name
-        const questionNum = extractQuestionNumber(question.generator);
-        
+        // remove leading 0 of questionNum
+        const questionNum = extractQuestionNumber(question.generator).replace(/^0+/, '');
+
+                
         // Get statement HTML, or fallback to regular statement
         const statementHtml = question.getStatementHtml() || question.statement;
         
         // Create the question HTML
         let questionHtml;
         
+        // Process statementHtml first to inject question number
+        let processedStatement;
+        
+
+        // TODO: temporary cause will work for all as checked
+        // Special case: Check if statementHtml starts with the flex container structure
+
+
+
+        if (statementHtml.startsWith("<div style='display: flex;")) {
+            // Insert question number inside the second div (the child div)
+            processedStatement = statementHtml.replace(
+                "<div style='flex: 1; min-width: 250px;'>",
+                `<div style='flex: 1; min-width: 250px;'>${questionNum})&nbsp;&nbsp;`
+            );
+        } else if (statementHtml.startsWith('<div>')) {
+            // Insert question number inside the first div with a non-breaking space
+            processedStatement = statementHtml.replace('<div>', `<div>${questionNum})&nbsp;&nbsp;`);
+        } else {
+            // Wrap in div with question number
+            processedStatement = `<div>${questionNum}) ${statementHtml}</div>`;
+        }
+        
         // If there's a graph SVG, use a layout that prioritizes the graph
         if (question.graphSvg) {
             questionHtml = `
                 <div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
-                    <div style='flex: 1; min-width: 250px;'>${questionNum}) ${statementHtml}</div>
+                    <div style='flex: 1; min-width: 250px;'>${processedStatement}</div>
                     <div style='flex: 0 1 auto;'>${question.graphSvg}</div>
                 </div>
             `;
         } else {
             // Simple layout for questions without graphs
-            questionHtml = `<div>${questionNum}) ${statementHtml}</div>`;
+            questionHtml = processedStatement;
         }
         
         // Add to papyrusJson
         papyrusJson.push({
             "id": `question-${questionNum}`,
             "html": questionHtml,
-            "classes": []
+            // border-top: 1px solid #e0e0e0; padding-top: 0.25rem !important;
+            "style": "margin-bottom: 2rem !important;"
         });
     });
     
@@ -126,13 +153,13 @@ export function createPapyrusJson(studentExerciseSet) {
  * @returns {Object} The document settings
  */
 function getDocumentSettings() {
-    // Default settings
-    const settings = {
+    // Fixed hardcoded settings
+    return {
         margins: {
-            top: 15,
-            right: 15,
-            bottom: 15,
-            left: 15
+            top: 5,
+            right: 12,
+            bottom: 5,
+            left: 12
         },
         fontSizes: {
             h1: 28,
@@ -141,41 +168,10 @@ function getDocumentSettings() {
             h4: 18,
             h5: 16,
             h6: 14,
-            body: 12
+            body: 15
         },
-        spacing: 8
+        spacing: 2
     };
-    
-    // Try to get values from form inputs
-    try {
-        // Margins
-        const marginTop = document.getElementById('margin-top');
-        const marginRight = document.getElementById('margin-right');
-        const marginBottom = document.getElementById('margin-bottom');
-        const marginLeft = document.getElementById('margin-left');
-        
-        if (marginTop) settings.margins.top = parseInt(marginTop.value) || 15;
-        if (marginRight) settings.margins.right = parseInt(marginRight.value) || 15;
-        if (marginBottom) settings.margins.bottom = parseInt(marginBottom.value) || 15;
-        if (marginLeft) settings.margins.left = parseInt(marginLeft.value) || 15;
-        
-        // Font sizes
-        const fontSizeH1 = document.getElementById('font-size-h1');
-        const fontSizeH3 = document.getElementById('font-size-h3');
-        const fontSizeBody = document.getElementById('font-size-body');
-        
-        if (fontSizeH1) settings.fontSizes.h1 = parseInt(fontSizeH1.value) || 28;
-        if (fontSizeH3) {
-            settings.fontSizes.h3 = parseInt(fontSizeH3.value) || 20;
-            // Derive h2 between h1 and h3
-            settings.fontSizes.h2 = Math.round((settings.fontSizes.h1 + settings.fontSizes.h3) / 2);
-        }
-        if (fontSizeBody) settings.fontSizes.body = parseInt(fontSizeBody.value) || 12;
-    } catch (error) {
-        console.error('Error getting document settings:', error);
-    }
-    
-    return settings;
 }
 
 /**
@@ -195,6 +191,8 @@ function applySettingsToCss(settings) {
     document.documentElement.style.setProperty('--papyrus-font-size-h5', `${settings.fontSizes.h5}px`);
     document.documentElement.style.setProperty('--papyrus-font-size-h6', `${settings.fontSizes.h6}px`);
     document.documentElement.style.setProperty('--papyrus-font-size-body', `${settings.fontSizes.body}px`);
+
+
 }
 
 /**
@@ -324,7 +322,7 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
     // Trigger print if requested
     if (triggerPrint) {
         // Use the same CSS for both preview and print
-        const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/styles/print.css";
+        const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/styles/print.css";
         printPage(pagesContainer.innerHTML, styleSheet);
     }
 }
@@ -383,7 +381,7 @@ export async function printAllCopies() {
     }
     
     // Print all content with consistent styling
-    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.5/src/styles/print.css";
+    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.6/src/styles/print.css";
     printPage(allContent, styleSheet);
     
     // Return to the first student after printing
@@ -474,24 +472,6 @@ export function updatePaginationButtons(currentIndex) {
 export function initDocumentSettingsForm() {
     // Automatically apply default settings without requiring user interaction
     console.log('Initializing document settings with default values');
-    
-    // Ensure the hidden form has the correct default values
-    const marginTop = document.getElementById('margin-top');
-    const marginRight = document.getElementById('margin-right');
-    const marginBottom = document.getElementById('margin-bottom');
-    const marginLeft = document.getElementById('margin-left');
-    const fontSizeH1 = document.getElementById('font-size-h1');
-    const fontSizeH3 = document.getElementById('font-size-h3');
-    const fontSizeBody = document.getElementById('font-size-body');
-    
-    // Ensure default values are set
-    if (marginTop) marginTop.value = 15;
-    if (marginRight) marginRight.value = 15;
-    if (marginBottom) marginBottom.value = 15;
-    if (marginLeft) marginLeft.value = 15;
-    if (fontSizeH1) fontSizeH1.value = 28;
-    if (fontSizeH3) fontSizeH3.value = 20;
-    if (fontSizeBody) fontSizeBody.value = 12;
     
     // Apply basic configuration without trying to render a preview
     configurePapyrus();

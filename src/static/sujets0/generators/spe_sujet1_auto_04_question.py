@@ -44,9 +44,7 @@ def render_question(*, p, direction):
 
     statement = f"""Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. A l'issue de ces deux variations, quelle est la variation relative du prix ?"""
 
-    statement_html = f"""
-<div>Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. À l'issue de ces deux variations, quelle est la variation relative ($V_r$) du prix ?</div>
-"""
+    statement_html = f"""<div>Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. À l'issue de ces deux variations, quelle est la variation relative ($V_r$) du prix ?</div>"""
     return {
         "statement": statement,
         "statement_html": statement_html,
@@ -57,6 +55,8 @@ components = generate_components(None)
 answer = solve(**components)
 question = render_question(**components)
 
+
+statement_html = question["statement_html"]
 
 # print(components | answer | question)
 
@@ -89,7 +89,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-4]",
         "statement": question["statement"],
-        "statement_html": question["statement_html"],
+        "statement_html": statement_html,
         "mask": "V_r=",
         "answer": {
             "latex": [latex_0, latex_1],  # List to support multiple correct answers

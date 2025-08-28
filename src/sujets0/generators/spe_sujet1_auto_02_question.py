@@ -14,11 +14,11 @@ def generate_components(difficulty, seed=SEED):
     # Non degenerate cases
     p = tm.Integer(n=1)
     q = gen.random_integer(1, 10)
-    a = tm.Fraction(p=p, q=q)
+    a = tm.Fraction(p=p, q=q)  # so need : a.simplified().latex()}
     # a = tm.Fraction(p=tm.Integer(n=1), q=gen.random_integer(1, 10))
     b = gen.random_integer(1, 10)
     c = gen.random_integer(1, 10)
-    d = tm.Fraction(p=tm.Integer(n=-1), q=gen.random_integer(1, 10))
+    d = tm.Fraction(p=tm.Integer(n=-1), q=gen.random_integer(2, 10))  # so doesnt need
 
     return {
         "a": a,
@@ -51,8 +51,7 @@ def render_question(*, a, b, c, d):
     """
     # Create the question in French with proper LaTeX
     statement = "Soit $F=a+\\dfrac{b}{cd}$. "
-    statement += f"Lorsque $a={a.latex()}$, $b = {b.latex()}$, $c = {c.latex()}$, $d = {d.latex()}$, quelle est la valeur de $F$ ?"
-
+    statement += f"Lorsque $a={a.simplified().latex()}$, $b = {b.latex()}$, $c = {c.latex()}$, $d = {d.latex()}$, quelle est la valeur de $F$ ?"
     return {"statement": statement}
 
 
@@ -83,12 +82,8 @@ question = render_question(**components)
 
 
 # Create HTML version with formula highlighted
-statement_html = f"""
-<div>
-    Soit $F=a+\\dfrac{{b}}{{cd}}$. Lorsque : 
-      $a={components["a"].latex()}$ ; $b = {components["b"].latex()}$ ; $c = {components["c"].latex()}$ ; $d = {components["d"].latex()}$<br><br> Quelle est la valeur de $F$ ?
-</div>
-"""
+statement_html = f"""<div>Soit $F=a+\\dfrac{{b}}{{cd}}$. 
+Lorsque : $a={components["a"].simplified().latex()}$ ; $b = {components["b"].latex()}$ ; $c = {components["c"].latex()}$ ; $d = {components["d"].latex()}$, quelle est la valeur de $F$ ?</div>"""
 
 # <br><span class="italic">La réponse doit être exprimée sous forme d'une fraction irréductible ou d'entier.</span>
 

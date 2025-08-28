@@ -53,10 +53,10 @@ def render_question(*, n, x, relation):
     """
 
     statement = (
-        "On a représenté ci-contre la parabole d'équation $y = x^2$.  Résoudre sur $\\mathbb{R}$ l'inéquation : "
+        f"On a représenté ci-contre la parabole d'équation $y = x^2$ ainsi que la droite d'équation $y = {n.latex()}$. Résoudre sur $\\mathbb{{R}}$ l'inéquation : "
         + "$"
         + relation.latex()
-        + "$"
+        + "$."
     )
     return {
         "statement": statement,

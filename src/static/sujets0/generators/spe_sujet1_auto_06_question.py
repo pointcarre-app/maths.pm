@@ -59,11 +59,8 @@ question = render_question(**components)
 
 
 # Create HTML version with highlighted equation
-statement_html = """
-<div>
-    On considère $x$, $y$, et $u$ des réels non nuls tels que : 
-    <span>$\\dfrac{1}{x}+ \\dfrac{1}{y} = \\dfrac{1}{u}$</span><br><br>
-    Exprimer $u$ en fonction de $x$ et $y$.
+statement_html = """<div>On considère $x$, $y$, et $u$ des réels non nuls tels que : 
+    <span>$\\dfrac{1}{x}+ \\dfrac{1}{y} = \\dfrac{1}{u}$</span>. Exprimer $u$ en fonction de $x$ et $y$.
 </div>
 """
 

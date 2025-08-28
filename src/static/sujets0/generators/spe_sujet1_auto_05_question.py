@@ -54,31 +54,30 @@ def render_question(*, probabilities: list[tm.Fraction]):
     # NOTE mad: long string still need to be one line, otherwise doctest execution with backend executor are broken because of the try indentation it makes
     statement = f"""On lance un dé à 4 faces. La probabilité d'obtenir chacune des faces est donnée dans ce tableau suivant :\n- Face numéro 1: ${str_probabilities[0]}$\n- Face numéro 2: ${str_probabilities[1]}$\n- Face numéro 3: ${str_probabilities[2]}$\n- Face numéro 4: $x$\n"""
 
-    statement_html = f"""
-<div>
-    <div>On lance un dé à 4 faces. La probabilité d'obtenir chacune des faces est donnée dans ce tableau :</div><br>
-    <table style="margin: 0; border-collapse: collapse;">
-        <thead>
-            <tr>
-                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">Face</th>
-                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">1</th>
-                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">2</th>
-                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">3</th>
-                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">4</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">Probabilité</td>
-                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">${str_probabilities[0]}$</td>
-                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">${str_probabilities[1]}$</td>
-                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">${str_probabilities[2]}$</td>
-                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">$x$</td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <div>Quelle est la valeur de $x$ ?</div>
+    statement_html = f"""<div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
+    <div style='flex: 1; min-width: 250px;'>On lance un dé à 4 faces. La probabilité d'obtenir chacune des faces est donnée dans le tableau ci-contre. Calculer $x$.</div>
+    <div style='flex: 0 1 auto;'>    
+        <table style="margin: 0; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">Face</th>
+                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">1</th>
+                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">2</th>
+                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">3</th>
+                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">Probabilité</td>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">${str_probabilities[0]}$</td>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">${str_probabilities[1]}$</td>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">${str_probabilities[2]}$</td>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">$x$</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 """
 

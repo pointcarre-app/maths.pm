@@ -49,7 +49,7 @@ def render_question(*, x, a, c):
     >>> statement["graph_description"]
     "Une parabole d'équation $x^2-7$, avec simplement la valeur l'ordonée à l'origine"
     """
-    statement = f"$a$ et $c$ sont des nombres réels. Ci-contre, on a représenté la parabole d'équation $y=ax^2 + c$. On suppose $|a| = 1$ et que le point $M(0; {c.n})$ appartient à la parabole. Donner l'équation de la parabole."
+    statement = f"$a$ et $c$ sont des nombres réels. Ci-contre, on a représenté la parabole d'équation $y=ax^2 + c$. On suppose que $|a| = 1$. Le point $M(0; {c.n})$ appartient à la parabole. Donner l'équation de la parabole."
     if a.n == 1 and c.n > 0:
         graph_description = (
             f"Une parabole d'équation $x^2+{c.n}$, avec simplement la valeur l'ordonée à l'origine"

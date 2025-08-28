@@ -54,6 +54,7 @@ def render_question(*, p, direction, coef):
     statement = f"Le prix d'un article est multiplié par ${coef.latex()}$. Calculer la variation relative $V_r$ de ce prix."
     return {
         "statement": statement,
+        "statement_html": f"<div>{statement}</div>",
     }
 
 
@@ -89,11 +90,8 @@ literal_dir = "augmenté" if components["direction"].n == 1 else "diminué"
 
 
 # Create HTML version with formula highlighted
-statement_html = f"""
-<div>
-    Le prix d'un article est multiplié par ${coef_display}$. Calculer la variation relative $V_r$ de ce prix.<br>
-</div>
-"""
+statement_html = f"""<div>Le prix d'un article est multiplié par ${coef_display}$. 
+Calculer la variation relative $V_r$ de ce prix.<br></div>"""
 
 
 # <span class="italic">La réponse doit être exprimée sous forme d'une fraction irréductible ou d'entier.</span>

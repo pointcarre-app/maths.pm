@@ -106,43 +106,39 @@ def render_question(*, x, c1, a2, b2, c2, a3, b3, c3, expr1, expr2, expr3):
     'Parmi les 3 fonctions $$f1: x \\\\mapsto x^\\\\{2\\\\} -\\\\left(x + 2\\\\right)^\\\\{2\\\\}$$, $$f2: x \\\\mapsto \\\\\\\\dfrac\\\\{1\\\\}\\\\{7\\\\}x --9 + \\\\\\\\dfrac\\\\{1\\\\}\\\\{5^\\\\{\\\\\\\\dfrac\\\\{1\\\\}\\\\{2\\\\}\\\\}\\\\}$$, $$f3: x \\\\mapsto \\\\\\\\dfrac\\\\{\\\\\\\\dfrac\\\\{9\\\\}\\\\{8\\\\}x + 2\\\\}\\\\{0,5\\\\}$$ Au sein des fonctions affines parmis $f1, f2, f3$, quel est le coefficient directeur avec la plus grande valeur absolue ?'
     """
 
-    statement = f"""
-<div>
-    <div>Parmi les 3 fonctions :</div><br>
-    <table style="margin: 0; border-collapse: collapse;">
-        <thead>
-            <tr>
-                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">$f$</th>
-                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">$f_1$</th>
-                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">$f_2$</th>
-                <th style="padding: 8px; text-align: center; border: 1px solid currentColor;">$f_3$</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">$f(x)$</td>
-                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">${expr1.latex()}$</td>
-                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">${expr2.latex()}$</td>
-                <td style="padding: 8px; text-align: center; border: 1px solid currentColor;">${expr3.latex()}$</td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <div>Identifier les fonctions qui sont affines. Quelle est la valeur coefficient directeur (de ces fonctions qui sont bien affines) avec la plus grande valeur absolue ?</div>
+    statement_html = f"""<div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
+    <div style='flex: 1; min-width: 250px;'>Parmi les 3 fonctions ci-dessous, identifier les fonctions qui sont affines. Quelle est la valeur du coefficient directeur (de ces fonctions qui sont bien affines) avec la plus grande valeur absolue ?</div>
+    <div style='flex: 0 1 auto;'>  
+        <table style="margin: 0; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">$f$</th>
+                    <th style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">$f_1$</th>
+                    <th style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">$f_2$</th>
+                    <th style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">$f_3$</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">$f(x)$</td>
+                    <td style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">${expr1.latex()}$</td>
+                    <td style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">${expr2.latex()}$</td>
+                    <td style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">${expr3.latex()}$</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 """
     return {
-        "statement": statement,
+        "statement": statement_html,
+        "statement_html": statement_html,
     }
 
 
 components = generate_components(None)
 answer = solve(**components)
 question = render_question(**components)
-
-
-# Create HTML version with functions in a table
-statement_html = f"<div>{question['statement']}</div>"
 
 
 # Define latex_0 for multiple possible answers
@@ -152,7 +148,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-9]",
         "statement": question["statement"],
-        "statement_html": statement_html,
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": [latex_0],  # List to support multiple correct answers
             "simplified_latex": answer["maths_object"].simplified().latex(),

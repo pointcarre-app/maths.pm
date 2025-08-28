@@ -272,7 +272,7 @@
                                         <td style="width: 50%; vertical-align: top;"><div>Classe :</div><div>Date :</div></td>
                                         <td style="width: 50%; vertical-align: top;">
                                             <div style="border: 1px solid #eef2f4; border-radius: 0.25rem; padding: 0.1em 0.5em; font-size: 0.8em; font-weight: 100; display: inline-block; margin-bottom: 2px;">BolzanoBleu</div>
-                                            <div style="border: 1px solid #eef2f4; border-radius: 0.25rem; padding: 0.1em 0.5em; font-size: 0.8em; font-weight: 100; display: inline-block;">2nde&1ère|Spé</div>
+                                            <div style="border: 1px solid #eef2f4; border-radius: 0.25rem; padding: 0.1em 0.5em; font-size: 0.8em; font-weight: 100; display: inline-block;">Spé</div>
                                         </td>
                                     </tr>
                                 </tbody>

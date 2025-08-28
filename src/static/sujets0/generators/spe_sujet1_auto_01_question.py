@@ -100,11 +100,7 @@ question = render_question(**components)
 # print(components | answer | question)
 
 # Create HTML version of the statement
-statement_html = f"""
-<div>
-    {question["statement"]}<br>
-</div>
-"""
+statement_html = f"""<div>{question["statement"]}<br></div>"""
 
 
 # <span class="italic">La réponse doit être exprimée sous forme d'une fraction irréductible ou d'entier.</span>
