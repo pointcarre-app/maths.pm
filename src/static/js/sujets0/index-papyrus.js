@@ -421,16 +421,13 @@ export function updatePaginationButtons(currentIndex) {
 }
 
 /**
- * Initialize document settings form
+ * Initialize document settings
  */
 export function initDocumentSettingsForm() {
-    // Get the update button
-    const updateButton = document.getElementById('update-document-settings');
-    if (updateButton) {
-        updateButton.addEventListener('click', updateDocumentSettings);
-    }
+    // Automatically apply default settings without requiring user interaction
+    console.log('Initializing document settings with default values');
     
-    // Set initial form values from CSS variables
+    // Ensure the hidden form has the correct default values
     const marginTop = document.getElementById('margin-top');
     const marginRight = document.getElementById('margin-right');
     const marginBottom = document.getElementById('margin-bottom');
@@ -439,7 +436,7 @@ export function initDocumentSettingsForm() {
     const fontSizeH3 = document.getElementById('font-size-h3');
     const fontSizeBody = document.getElementById('font-size-body');
     
-    // Initialize with default values from CSS variables
+    // Ensure default values are set
     if (marginTop) marginTop.value = 15;
     if (marginRight) marginRight.value = 15;
     if (marginBottom) marginBottom.value = 15;
@@ -447,6 +444,9 @@ export function initDocumentSettingsForm() {
     if (fontSizeH1) fontSizeH1.value = 28;
     if (fontSizeH3) fontSizeH3.value = 20;
     if (fontSizeBody) fontSizeBody.value = 12;
+    
+    // Apply settings immediately
+    updateDocumentSettings();
 }
 
 // Expose functions globally for use in HTML

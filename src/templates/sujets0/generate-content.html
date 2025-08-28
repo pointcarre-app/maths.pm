@@ -314,116 +314,16 @@
 
 
 <!-- Document settings controls -->
-<div class="collapse collapse-arrow bg-base-100 w-full mt-4 shadow">
-  <input type="checkbox" class="collapse-toggle" />
-  <div class="collapse-title font-medium flex items-center gap-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-    </svg>
-    Paramètres du document
-  </div>
-  <div class="collapse-content">
-    <div class="card bg-base-200 shadow-sm p-2">
-      <div class="card-body p-4">
-        <!-- Margins section -->
-        <div class="divider divider-start text-sm font-semibold mb-2">Marges (mm)</div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div class="form-control">
-            <div class="join">
-              <span class="join-item btn btn-sm btn-outline no-animation">Haut</span>
-              <input type="number"
-                     id="margin-top"
-                     class="join-item input input-sm input-bordered w-20"
-                     value="15"
-                     min="0"
-                     max="50" />
-            </div>
-          </div>
-          <div class="form-control">
-            <div class="join">
-              <span class="join-item btn btn-sm btn-outline no-animation">Droite</span>
-              <input type="number"
-                     id="margin-right"
-                     class="join-item input input-sm input-bordered w-20"
-                     value="15"
-                     min="0"
-                     max="50" />
-            </div>
-          </div>
-          <div class="form-control">
-            <div class="join">
-              <span class="join-item btn btn-sm btn-outline no-animation">Bas</span>
-              <input type="number"
-                     id="margin-bottom"
-                     class="join-item input input-sm input-bordered w-20"
-                     value="15"
-                     min="0"
-                     max="50" />
-            </div>
-          </div>
-          <div class="form-control">
-            <div class="join">
-              <span class="join-item btn btn-sm btn-outline no-animation">Gauche</span>
-              <input type="number"
-                     id="margin-left"
-                     class="join-item input input-sm input-bordered w-20"
-                     value="15"
-                     min="0"
-                     max="50" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Font sizes section -->
-        <div class="divider divider-start text-sm font-semibold mb-2 mt-4">Tailles de texte (px)</div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <div class="form-control">
-            <div class="join">
-              <span class="join-item btn btn-sm btn-outline no-animation">Titre</span>
-              <input type="number"
-                     id="font-size-h1"
-                     class="join-item input input-sm input-bordered w-20"
-                     value="28"
-                     min="12"
-                     max="36" />
-            </div>
-          </div>
-          <div class="form-control">
-            <div class="join">
-              <span class="join-item btn btn-sm btn-outline no-animation">Sous-titre</span>
-              <input type="number"
-                     id="font-size-h3"
-                     class="join-item input input-sm input-bordered w-20"
-                     value="20"
-                     min="12"
-                     max="28" />
-            </div>
-          </div>
-          <div class="form-control">
-            <div class="join">
-              <span class="join-item btn btn-sm btn-outline no-animation">Texte</span>
-              <input type="number"
-                     id="font-size-body"
-                     class="join-item input input-sm input-bordered w-20"
-                     value="12"
-                     min="10"
-                     max="16" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Update button -->
-        <div class="flex justify-end mt-4">
-          <button id="update-document-settings" class="btn btn-sm btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-            </svg>
-            Appliquer
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="hidden">
+  <!-- Hidden form with default values for consistent styling -->
+  <input type="number" id="margin-top" value="15" />
+  <input type="number" id="margin-right" value="15" />
+  <input type="number" id="margin-bottom" value="15" />
+  <input type="number" id="margin-left" value="15" />
+  <input type="number" id="font-size-h1" value="28" />
+  <input type="number" id="font-size-h3" value="20" />
+  <input type="number" id="font-size-body" value="12" />
+  <button id="update-document-settings" style="display: none;"></button>
 </div>
 
 <!-- Preview section for Papyrus documents -->
@@ -448,7 +348,7 @@
 <!-- Additional styles for consistent preview and print -->
 <style>
     :root {
-        /* Default document settings as CSS variables */
+        /* Default document settings as CSS variables - MUST match values in hidden form above */
         --papyrus-margin-top: 15mm;
         --papyrus-margin-right: 15mm;
         --papyrus-margin-bottom: 15mm;
