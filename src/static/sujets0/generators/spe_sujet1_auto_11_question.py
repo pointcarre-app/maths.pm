@@ -54,12 +54,14 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     case["f"] = tm.Function(name="f")
 
     root1, root2, root3 = case["root1"], case["root2"], case["root3"]
+    zero = tm.Integer(n=0)
     min_root = min(root1.n, root2.n, root3.n)
     max_root = max(root1.n, root2.n, root3.n)
     # + 1 because enough room right but not left
 
     x = tm.Integer(n=random.randint(min_root, max_root + 1))  # last one included
-    while x in [root1, root2, root3]:
+    # Zero creates an issue cause strict inequality is not possible anymore (0=0)
+    while x in [root1, root2, root3, zero]:
         x = tm.Integer(n=random.randint(min_root, max_root + 1))  # terminaison is ensured
     case["x"] = x
 
