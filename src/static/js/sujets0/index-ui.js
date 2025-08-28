@@ -34,27 +34,21 @@ export function initializeTabs() {
  * Show error message if Nagini fails to load
  */
 export function showNaginiError() {
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'alert alert-error mt-4';
-    errorDiv.innerHTML = `
-        <strong>⚠️ Nagini Loading Error</strong><br />
-        Failed to load Python engine. Please refresh the page.
-    `;
-    document.querySelector('.padding-alt-security')?.appendChild(errorDiv);
+    // Create a brief notification at the top of the page
+    const executeBtn = document.getElementById('execute-all-generators-btn');
+    if (executeBtn) {
+        executeBtn.title = "Failed to load Python engine. Please refresh the page.";
+        executeBtn.innerHTML = `<strong>⚠️ Nagini Loading Error</strong>`;
+    }
 }
 
 /**
- * Update Nagini status indicator
+ * Update Nagini status indicator (now only affects the execute button)
  */
 export function displayIndicatorNaginiIsReady() {
-    const naginiDot = document.getElementById("nagini-dot");
-    if (naginiDot) {
-        naginiDot.classList.replace("badge-warning", "badge-success");
-    }
-    const naginiLabel = document.getElementById("nagini-label");
-    if (naginiLabel) {
-        naginiLabel.textContent = "Nagini ready";
-    }
+    // Journal de session section has been removed
+    // This function is now simplified to a no-op as the visual indicators are gone
+    // Functionality is preserved through enableExecuteButton
 }
 
 /**

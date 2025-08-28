@@ -118,6 +118,31 @@ export async function executeAllGenerators() {
   generationResults.setConfig(config);
   generationResults.setSelectedGenerators(selectedGenerators);
 
+  // Update the status message and progress bar
+  const generationMessage = document.getElementById("generation-message");
+  const generationTime = document.getElementById("generation-time");
+  const generationProgress = document.getElementById("generation-progress");
+  const generationStatus = document.getElementById("generation-status");
+  
+  if (generationMessage) {
+    generationMessage.textContent = `Génération de ${config.nbStudents} copies avec ${config.nbQuestions} questions...`;
+  }
+  
+  if (generationTime) {
+    generationTime.textContent = new Date().toLocaleTimeString('fr-FR');
+  }
+  
+  if (generationProgress) {
+    generationProgress.value = 0;
+    generationProgress.max = config.nbStudents;
+    generationProgress.classList.remove("progress-success");
+  }
+  
+  if (generationStatus) {
+    generationStatus.classList.remove("bg-success/20");
+    generationStatus.classList.add("bg-base-200");
+  }
+
   // Get or create results container in the wrapper area
   let resultsContainer = document.getElementById("generator-results-container");
   const wrapper = document.getElementById("generator-results-wrapper");
@@ -126,30 +151,17 @@ export async function executeAllGenerators() {
     resultsContainer = document.createElement("div");
     resultsContainer.id = "generator-results-container";
 
-    // Place it in the wrapper that's below the journal
+    // Place it in the wrapper
     if (wrapper) {
       wrapper.appendChild(resultsContainer);
     } else {
-      // Fallback to after validation container if wrapper not found
-      const validationContainer = document.getElementById(
-        "validation-status-container"
-      );
-      if (validationContainer && validationContainer.parentNode) {
-        validationContainer.parentNode.appendChild(resultsContainer);
-      }
+      // Fallback to body if wrapper not found
+      document.body.appendChild(resultsContainer);
     }
   }
 
-  resultsContainer.className = "mt-6";
-  resultsContainer.innerHTML = `
-        <div class="alert alert-info">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span>Génération de ${config.nbStudents} copies avec ${config.nbQuestions} questions chacune...</span>
-        </div>
-        <progress class="progress progress-primary w-full mt-4" value="0" max="${config.nbStudents}"></progress>
-    `;
+  resultsContainer.className = "mt-4";
+  resultsContainer.innerHTML = ``;
 
   // Process each student
   for (let studentNum = 1; studentNum <= config.nbStudents; studentNum++) {
@@ -158,9 +170,9 @@ export async function executeAllGenerators() {
     const questionResults = [];
 
     // Update progress
-    const progressBar = resultsContainer.querySelector("progress");
-    if (progressBar) {
-      progressBar.value = studentNum - 1;
+    const generationProgress = document.getElementById("generation-progress");
+    if (generationProgress) {
+      generationProgress.value = studentNum - 1;
     }
 
     // Execute each selected generator for this student
@@ -358,6 +370,21 @@ export async function executeAllGenerators() {
     );
 
     generationResults.addStudent(studentExerciseSet);
+  }
+
+  // Update progress status to complete
+  if (generationProgress) {
+    generationProgress.value = config.nbStudents;
+    generationProgress.classList.add("progress-success");
+  }
+  
+  if (generationMessage) {
+    generationMessage.textContent = `Génération terminée : ${config.nbStudents} copies avec ${config.nbQuestions} questions`;
+  }
+  
+  if (generationStatus) {
+    generationStatus.classList.remove("bg-base-200");
+    generationStatus.classList.add("bg-success/20");
   }
 
   // Display first student's results

@@ -139,93 +139,22 @@ export function applyFormValidationStyles(formData) {
 }
 
 /**
- * Display validation status in a table
+ * Display validation status in a table (no-op since journal section is removed)
  * @param {Object} formData - The form data with validation results
  */
 export function displayValidationTable(formData) {
-    // Find or create validation container
-    let validationContainer = document.getElementById('validation-status-container');
-    if (!validationContainer) {
-        // Insert after "Génération d'exercices" heading
-        const targetElement = document.querySelector('#journal-content .text-base.mt-4.mb-2');
-        if (targetElement) {
-            validationContainer = document.createElement('div');
-            validationContainer.id = 'validation-status-container';
-            validationContainer.className = 'mt-4';
-            targetElement.parentNode.insertBefore(validationContainer, targetElement.nextSibling);
-        }
+    // Journal de session has been removed, so no validation table is shown
+    // We still perform validation, but don't display the results in a table
+    
+    // If form is invalid, we can show an alert or toast notification instead
+    if (!formData.isComplete) {
+        console.error('Form validation errors:', formData.errors);
+        
+        // Just log errors to console, form validation visual indicators are still applied
+        formData.errors.forEach(error => {
+            console.warn(`Form error: ${error.field} - ${error.message}`);
+        });
     }
-    
-    if (!validationContainer) return;
-    
-    // Build status table HTML
-    const timestamp = new Date().toLocaleTimeString('fr-FR');
-    const statusRows = [
-        {
-            field: 'Nombre de copies',
-            value: formData.copies.count,
-            status: formData.copies.isValid,
-            error: formData.errors.find(e => e.field === 'copies')?.message
-        },
-        {
-            field: 'Questions par copie',
-            value: formData.questions.perCopy,
-            status: formData.questions.isValid,
-            error: formData.errors.find(e => e.field === 'questions')?.message
-        },
-        // Program level row removed as it's no longer in the UI
-        {
-            field: 'Filière',
-            value: formData.track.type || 'Non sélectionnée',
-            status: formData.track.isValid,
-            error: formData.errors.find(e => e.field === 'track')?.message
-        }
-    ];
-    
-    const tableHtml = `
-        <div class="overflow-x-auto">
-            <table class="table table-sm w-full" style="border-radius:var(--radius-box); border: 1px solid var(--color-base-content);">
-                <thead>
-                    <tr>
-                        <th colspan="3" class="text-left bg-base-200 font-mono">
-                            Tentative de génération - ${timestamp}
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>Paramètre</th>
-                        <th>Valeur</th>
-                        <th>Statut</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${statusRows.map(row => `
-                        <tr class="${!row.status ? 'bg-error/10' : ''}">
-                            <td>${row.field}</td>
-                            <td>${row.value}</td>
-                            <td>
-                                ${row.status 
-                                    ? '<span class="badge badge-success badge-sm">✓</span>' 
-                                    : `<span class="text-error text-sm">${row.error || 'Invalide'}</span>`
-                                }
-                            </td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="3" class="text-center ${formData.isComplete ? 'bg-success/20' : 'bg-error/20'}">
-                            ${formData.isComplete 
-                                ? '✓ Formulaire valide - Génération en cours...' 
-                                : '✗ Veuillez corriger les erreurs ci-dessus'
-                            }
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    `;
-    
-    validationContainer.innerHTML = tableHtml;
 }
 
 /**

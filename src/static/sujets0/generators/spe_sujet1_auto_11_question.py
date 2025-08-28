@@ -27,8 +27,8 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     cases = [
         {
             "root1": tm.Integer(n=-4),
-            "root2": tm.Integer(n=7),
-            "root3": tm.Integer(n=8),
+            "root2": tm.Integer(n=2),
+            "root3": tm.Integer(n=5),
             # "x": tm.Integer(n=-2),
             "case": "case_a",
         },
