@@ -28,6 +28,7 @@ flowchart TD
         results["index-results.js\nResults display"]
         graphs["index-graphs.js\nGraph rendering"]
         dataModel["index-data-model.js\nData structures"]
+        papyrus["index-papyrus.js\nPDF generation & printing"]
     end
 
     subgraph "Specialized Modules"
@@ -45,6 +46,7 @@ flowchart TD
     indexMain --> generators
     indexMain --> results
     indexMain --> graphs
+    indexMain --> papyrus
     
     generators --> nagini
     generators --> dataModel
@@ -54,6 +56,7 @@ flowchart TD
     
     form --> settings
     nagini --> settings
+    papyrus --> dataModel
     
     results --> dataModel
     
@@ -64,6 +67,7 @@ flowchart TD
     generators -- "Generation results" --> results
     generators -- "Graph data" --> graphs
     dataModel -- "Data structures" --> results
+    dataModel -- "Exercise data" --> papyrus
 ```
 
 ## Module Descriptions
@@ -81,6 +85,7 @@ flowchart TD
 - **index-results.js**: Handles the display of generated exercise results, including pagination.
 - **index-graphs.js**: Builds and renders mathematical graphs for visualizations.
 - **index-data-model.js**: Defines data structures for storing generator results.
+- **index-papyrus.js**: Transforms exercise data into Papyrus JSON format for PDF generation and printing.
 
 ### Specialized Modules
 - **pre-generated-viewer.js**: Tool for viewing pre-generated content.

@@ -21,9 +21,8 @@ import {
     navigateToStudent, 
     generatePaginationButtons 
 } from './index-results.js';
-
-
 import { buildPCAGraph, renderPCAGraph } from './index-graphs.js';
+import { previewStudentCopy, printCurrentCopy, printAllCopies, createPaginationButtons } from './index-papyrus.js';
 
 // Initialize the module
 export async function init() {
@@ -68,6 +67,10 @@ window.generationResults = generationResults; // Expose results for debugging
 window.displayStudentResults = displayStudentResults;
 window.renderPCAGraph = renderPCAGraph;
 window.buildPCAGraph = buildPCAGraph;
+window.previewStudentCopy = previewStudentCopy;
+window.printCurrentCopy = printCurrentCopy;
+window.printAllCopies = printAllCopies;
+window.createPaginationButtons = createPaginationButtons;
 
 // Export all functions that might be needed by other modules
 export {

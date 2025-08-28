@@ -386,6 +386,18 @@ export async function executeAllGenerators() {
     generationStatus.classList.remove("bg-base-200");
     generationStatus.classList.add("bg-success/20");
   }
+  
+  // Enable print buttons
+  const printCurrentBtn = document.getElementById("print-current-copy-btn");
+  const printAllBtn = document.getElementById("print-all-copies-btn");
+  
+  if (printCurrentBtn) {
+    printCurrentBtn.disabled = false;
+  }
+  
+  if (printAllBtn) {
+    printAllBtn.disabled = false;
+  }
 
   // Display first student's results
   displayStudentResults(0);
@@ -394,5 +406,11 @@ export async function executeAllGenerators() {
   if (executeBtn) {
     executeBtn.disabled = false;
     executeBtn.textContent = "Générer";
+  }
+  
+  // Create pagination buttons and show preview of first student
+  if (window.createPaginationButtons && window.previewStudentCopy) {
+    window.createPaginationButtons();
+    window.previewStudentCopy(0);
   }
 }
