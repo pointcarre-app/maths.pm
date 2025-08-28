@@ -2,6 +2,7 @@
 ## High
 
 
+- [] Ensure `random.seed` is used in all the generators
 
 
 - [] Every domain / product yaml should have his own validation rules (using online mode to ensure hosted versions exists)

@@ -1,6 +1,6 @@
-import teachers.generator as tg
 import teachers.maths as tm
 from teachers.defaults import SEED
+import random
 
 
 def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
@@ -9,20 +9,86 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     {'root1': Integer(n=-4), 'root2': Integer(n=7), 'root3': Integer(n=8), 'x': Integer(n=-2), 'f': Function(name=f)}
     """
 
-    gen = tg.MathsGenerator(seed)
+    # Case A
+    # ROOT1 = -4
+    # ROOT2 = 2
+    # ROOT3 = 5
 
-    root1 = gen.random_integer(-7, -5)
-    root2 = gen.random_integer(-1, 3)
-    root3 = gen.random_integer(root2.n + 3, 10)
-    x = gen.random_integer(-10, 10)
+    # Case B
+    # ROOT1 = -4
+    # ROOT2 = 3
+    # ROOT3 = 5
+
+    # Case C
+    # ROOT1 = -4
+    # ROOT2 = 2
+    # ROOT3 = 4
+
+    cases = [
+        {
+            "root1": tm.Integer(n=-4),
+            "root2": tm.Integer(n=7),
+            "root3": tm.Integer(n=8),
+            # "x": tm.Integer(n=-2),
+            "case": "case_a",
+        },
+        {
+            "root1": tm.Integer(n=-4),
+            "root2": tm.Integer(n=3),
+            "root3": tm.Integer(n=5),
+            # "x": tm.Integer(n=-2),
+            "case": "case_b",
+        },
+        {
+            "root1": tm.Integer(n=-4),
+            "root2": tm.Integer(n=2),
+            "root3": tm.Integer(n=4),
+            # "x": tm.Integer(n=-2),
+            "case": "case_c",
+        },
+    ]
+
+    random.seed(seed)
+    case = random.choice(cases)
+
+    case["f"] = tm.Function(name="f")
+
+    root1, root2, root3 = case["root1"], case["root2"], case["root3"]
+    min_root = min(root1.n, root2.n, root3.n)
+    max_root = max(root1.n, root2.n, root3.n)
+    # + 1 because enough room right but not left
+
+    x = tm.Integer(n=random.randint(min_root, max_root + 1))  # last one included
     while x in [root1, root2, root3]:
-        x = gen.random_integer(-10, 10)
-    f = tm.Function(name="f")
+        x = tm.Integer(n=random.randint(min_root, max_root + 1))  # terminaison is ensured
+    case["x"] = x
 
-    return {"root1": root1, "root2": root2, "root3": root3, "x": x, "f": f}
+    return case
+
+    # x = tm.Integer(n=random.randint(min_root, max_root + 1))
+    # TODO : generate smarter generation (fractions for instance)
+
+    # Old version
+    # But graph are very restricted (3 cases)
+
+    # x = gen.random_integer(-10, 10)
+    # while x in [root1, root2, root3]:
+    #     x = gen.random_integer(-10, 10)
+
+    # gen = tg.MathsGenerator(seed)
+
+    # root1 = gen.random_integer(-7, -5)
+    # root2 = gen.random_integer(-1, 3)
+    # root3 = gen.random_integer(root2.n + 3, 10)
+    # x = gen.random_integer(-10, 10)
+    # while x in [root1, root2, root3]:
+    #     x = gen.random_integer(-10, 10)
+    # f = tm.Function(name="f")
+
+    # return {"root1": root1, "root2": root2, "root3": root3, "x": x, "f": f}
 
 
-def solve(*, x, root1, root2, root3, f):
+def solve(*, x, root1, root2, root3, f, case=None):
     """[sujets0][spé][sujet-1][automatismes][question-11]
     >>> root1, root2, root3 = tm.Integer(n=-4), tm.Integer(n=7), tm.Integer(n=8),
     >>> x= tm.Integer(n=-2)
@@ -40,7 +106,7 @@ def solve(*, x, root1, root2, root3, f):
     return {"maths_object": maths_object}
 
 
-def render_question(*, x, root1, root2, root3, f):
+def render_question(*, x, root1, root2, root3, f, case=None):
     r"""[sujets0][spé][sujet-1][automatismes][question-11]
     >>> root1, root2, root3 = tm.Integer(n=-4), tm.Integer(n=7), tm.Integer(n=8),
     >>> x = tm.Integer(n=-2)
@@ -51,13 +117,10 @@ def render_question(*, x, root1, root2, root3, f):
     """
 
     statement = (
-        r"""On a représenté ci-contre la courbe $\\mathcal\{C\}$ d'une fonction ${"""
-        + f.name
-        + """}$.\nOn note $A$ le point d'abscisse $x_A="""
-        + str(x.n)
-        + r"""$ tel que le point appartienne à la courbe $\\mathcal\{C\}$."""
-        + "\n"
-        + r"""Ecrire l'inégalité correcte de la forme $x\\times f(x) ? 0$"""
+        "On a représenté ci-contre la courbe $\\mathcal{C}$ "
+        + f"d'une fonction ${f.name}$.\nOn note $A$ le point d'abscisse $x_A={x.n}$ tel que le point appartienne à la courbe $\\mathcal{{C}}$."
+        + "<br>"
+        + """Parmi les deux inégalités suivantes : <br>$x_a \\times f(x_a) > 0$ et $x_a \\times f(x_a) < 0$<br>Laquelle est correcte ?"""
     )
     graph_description = f"La courbe d'équation y=(x-{root1.n})(x-{root2.n})(x-{root3.n})"
 
@@ -76,23 +139,7 @@ question = render_question(**components)
 
 
 # Create HTML version with point description
-statement_html = f"""
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            On a représenté ci-contre la courbe $\\mathcal{{C}}$ d'une fonction ${{f.name}}$.
-        </div>
-        <div class="alert">
-            <span>On note $A$ le point d'abscisse <span class="badge badge-primary">$x_A={{x.n}}$</span> tel que le point appartienne à la courbe $\\mathcal{{C}}$.</span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Ecrire l'inégalité correcte de la forme $x \\times f(x) \\; ? \\; 0$
-        </div>
-        {f'<div class="text-xs text-base-content/60 mt-2 italic">Note: {question.get("graph_description", "")}</div>' if "graph_description" in question else ""}
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
 # Define latex_0 for multiple possible answers
 latex_0 = answer["maths_object"].latex()
@@ -114,6 +161,7 @@ missive(
             "root3": components["root3"].latex(),
             "x": components["x"].latex(),
             "f": components["f"].name,
+            "case": components["case"],
         },
     }
 )

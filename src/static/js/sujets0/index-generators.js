@@ -238,10 +238,11 @@ export async function executeAllGenerators() {
 
 
           let PARABOLA_GRAPH_KEY;
-          let A_SHIFT_MAGNITUDE;
+          // Because each graph then deal with it for displaying the minus if necessary
+          let A_SHIFT_MAGNITUDE = Math.abs(cFromParabola);
 
           if (aFromParabola > 0) {
-            A_SHIFT_MAGNITUDE = cFromParabola;
+            // A_SHIFT_MAGNITUDE = cFromParabola;
 
             if (cFromParabola > 0) {
               // p for plus
@@ -273,7 +274,7 @@ export async function executeAllGenerators() {
             );
 
           } else {
-            A_SHIFT_MAGNITUDE = -cFromParabola;
+            // A_SHIFT_MAGNITUDE = -cFromParabola;
 
             if (cFromParabola > 0) {
               // p for plus
@@ -305,11 +306,35 @@ export async function executeAllGenerators() {
             );
           }
 
-
-
           // const A_SHIFT_MAGNITUDE
         }
 
+        else if (generator === "spe_sujet1_auto_11_question.py") {
+          let caseFromGenerator = result.data.components.case;
+          let svgAndDict;
+
+          if (caseFromGenerator === "case_a") {
+             svgAndDict = await buildPCAGraph("q11_case_a_small", {});
+          } else if (caseFromGenerator === "case_b") {
+             svgAndDict = await buildPCAGraph("q11_case_b_small", {});
+          } else if (caseFromGenerator === "case_c") {
+             svgAndDict = await buildPCAGraph("q11_case_c_small", {});
+          } else {
+            throw new Error(`caseFromGenerator ${caseFromGenerator} is not valid`);
+          }
+          const graphSvg = svgAndDict.svg;
+          const graphDict = svgAndDict.graphDict;
+
+          result.graphSvg = graphSvg;
+          result.graphDict = graphDict;
+
+          console.log(
+            "💫💫💫💫",
+            `graph-${studentNum}-${generator}`,
+            graphDict
+          );
+        }
+        
         questionResults.push(result);
         // Store graph dictionary as data attribute for access if needed
         // container.dataset.graphDict = JSON.stringify(result.graphDict);
