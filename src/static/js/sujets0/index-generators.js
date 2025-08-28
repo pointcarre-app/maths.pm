@@ -398,6 +398,16 @@ export async function executeAllGenerators() {
   if (printAllBtn) {
     printAllBtn.disabled = false;
   }
+  
+  // Create pagination buttons for student preview
+  if (typeof window.createPaginationButtons === 'function') {
+    window.createPaginationButtons();
+    
+    // Preview the first student
+    if (typeof window.previewStudentCopy === 'function') {
+      window.previewStudentCopy(0);
+    }
+  }
 
   // Display first student's results
   displayStudentResults(0);

@@ -6,6 +6,18 @@
 import generationResults from './index-data-model.js';
 import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/preview/index.js';
 import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/print-manager.js';
+import { 
+    initializeMargins, 
+    setMargins 
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/margin-config.js';
+import { 
+    initializeFontSizes, 
+    setFontSizes 
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/font-config.js';
+import { 
+    initializeSpaceBetweenDivs, 
+    setSpaceBetweenDivs 
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/core/margin-config.js';
 
 /**
  * Extract question number from generator name
@@ -99,21 +111,58 @@ export function createPapyrusJson(studentExerciseSet) {
 }
 
 /**
- * Print a specific student's exercise sheet
- * @param {number} studentIndex - Index of the student to print
+ * Configure Papyrus with consistent settings for preview and print
+ * @private
  */
-export async function printStudentCopy(studentIndex) {
+function configurePapyrus() {
+    // Initialize configurations
+    initializeMargins();
+    initializeFontSizes();
+    initializeSpaceBetweenDivs();
+    
+    // Set standard margins (in mm)
+    setMargins({
+        top: 15,
+        right: 15,
+        bottom: 15,
+        left: 15
+    });
+    
+    // Set font sizes (in px)
+    setFontSizes({
+        h1: 28,
+        h2: 24,
+        h3: 20,
+        h4: 18,
+        h5: 16,
+        h6: 14,
+        body: 12
+    });
+    
+    // Set spacing between divs
+    setSpaceBetweenDivs(8);
+}
+
+/**
+ * Preview a specific student's exercise sheet
+ * @param {number} studentIndex - Index of the student to preview
+ * @param {boolean} triggerPrint - Whether to trigger the print dialog
+ */
+export async function previewStudentCopy(studentIndex, triggerPrint = false) {
     const student = generationResults.students[studentIndex];
     if (!student) {
         console.error(`No student found at index ${studentIndex}`);
         return;
     }
     
+    // Configure Papyrus with consistent settings
+    configurePapyrus();
+    
     // Create Papyrus JSON
     const papyrusJson = createPapyrusJson(student);
     
     // Log the JSON to console for debugging
-    console.log('Papyrus JSON for printing:', papyrusJson);
+    console.log('Papyrus JSON for preview:', papyrusJson);
     
     // Set the JSON data to the input field
     document.getElementById('json-input').value = JSON.stringify(papyrusJson);
@@ -124,21 +173,125 @@ export async function printStudentCopy(studentIndex) {
     // Wait for rendering
     await new Promise(resolve => setTimeout(resolve, 500));
     
-    // Trigger print
-    printPage(document.getElementById('pages-container').innerHTML, "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/styles/print.css");
+    // Make sure pages container is visible
+    const pagesContainer = document.getElementById('pages-container');
+    pagesContainer.style.display = 'block';
+    
+    // Update the current student indicator in the pagination
+    updatePaginationButtons(studentIndex);
+    
+    // Trigger print if requested
+    if (triggerPrint) {
+        // Use the same CSS for both preview and print
+        const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/styles/print.css";
+        printPage(pagesContainer.innerHTML, styleSheet);
+    }
+}
+
+/**
+ * Print a specific student's exercise sheet
+ * @param {number} studentIndex - Index of the student to print
+ */
+export async function printStudentCopy(studentIndex) {
+    // First preview, then print
+    await previewStudentCopy(studentIndex, true);
 }
 
 /**
  * Print all student copies
  */
 export async function printAllCopies() {
-    // Just log how many copies would be printed
-    console.log(`Would print all ${generationResults.students.length} copies`);
+    // Log how many copies will be printed
+    console.log(`Printing all ${generationResults.students.length} copies`);
     
-    // For now, just print the first student's copy
-    await printStudentCopy(0);
+    // Configure Papyrus with consistent settings first
+    configurePapyrus();
+    
+    // Store all student content
+    let allContent = '';
+    
+    // For each student
+    for (let i = 0; i < generationResults.students.length; i++) {
+        // Generate JSON for this student
+        const student = generationResults.students[i];
+        if (!student) continue;
+        
+        // Create Papyrus JSON
+        const papyrusJson = createPapyrusJson(student);
+        
+        // Update the JSON input field to generate the preview
+        document.getElementById('json-input').value = JSON.stringify(papyrusJson);
+        
+        // Generate pages in the normal container
+        generatePages();
+        
+        // Wait for rendering
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
+        // Get the rendered content
+        const pagesContainer = document.getElementById('pages-container');
+        if (pagesContainer) {
+            // Add student content to the combined content
+            allContent += pagesContainer.innerHTML;
+            
+            // Add a page break between students
+            if (i < generationResults.students.length - 1) {
+                allContent += '<div style="page-break-after: always;"></div>';
+            }
+        }
+    }
+    
+    // Print all content with consistent styling
+    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.4/src/styles/print.css";
+    printPage(allContent, styleSheet);
+    
+    // Return to the first student after printing
+    setTimeout(() => {
+        previewStudentCopy(0, false);
+    }, 1000);
+}
+
+/**
+ * Create pagination buttons for all students
+ */
+export function createPaginationButtons() {
+    const paginationContainer = document.getElementById('student-pagination');
+    if (!paginationContainer) return;
+    
+    // Clear existing buttons
+    paginationContainer.innerHTML = '';
+    
+    // Create buttons for each student
+    generationResults.students.forEach((student, index) => {
+        const button = document.createElement('button');
+        button.className = 'btn btn-sm';
+        button.textContent = `Élève ${student.id}`;
+        button.onclick = () => previewStudentCopy(index);
+        
+        paginationContainer.appendChild(button);
+    });
+}
+
+/**
+ * Update pagination buttons to highlight current student
+ * @param {number} currentIndex - Index of the current student
+ */
+export function updatePaginationButtons(currentIndex) {
+    const paginationContainer = document.getElementById('student-pagination');
+    if (!paginationContainer) return;
+    
+    // Update button states
+    Array.from(paginationContainer.children).forEach((button, index) => {
+        if (index === currentIndex) {
+            button.classList.add('btn-primary');
+        } else {
+            button.classList.remove('btn-primary');
+        }
+    });
 }
 
 // Expose functions globally for use in HTML
+window.previewStudentCopy = previewStudentCopy;
 window.printStudentCopy = printStudentCopy;
 window.printAllCopies = printAllCopies;
+window.createPaginationButtons = createPaginationButtons;
