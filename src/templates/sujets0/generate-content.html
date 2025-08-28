@@ -278,6 +278,23 @@
   <!-- Buttons will be dynamically added here -->
 </div>
 
+<!-- Print Instructions -->
+<div class="alert alert-info mt-4 mb-4">
+  <svg xmlns="http://www.w3.org/2000/svg"
+       fill="none"
+       viewBox="0 0 24 24"
+       class="stroke-current shrink-0 w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+    </path>
+  </svg>
+  <div>
+    <h3 class="font-bold">Note d'impression</h3>
+    <div class="text-xs">
+      L'impression est configurée pour utiliser automatiquement les bonnes marges. Si Chrome affiche une boîte de dialogue, les marges devraient déjà être définies sur "Aucune".
+    </div>
+  </div>
+</div>
+
 
 <script>
     // Auto-select "Spé." radio button on page load
@@ -428,39 +445,21 @@
         position: relative;
     }
 
-    /* Ensure print consistency - MAINTAIN SAME STRUCTURE */
-    @media print {
-        @page {
-            margin: 0;
-            size: A4;
-        }
+    /* Simple print settings */
+    @page {
+        margin: 0;
+        size: A4;
+    }
 
+    @media print {
         .page-wrapper {
             margin: 0 !important;
-            /* No margin between pages in print */
-            padding: 0 !important;
-            /* Still NO padding */
             box-shadow: none !important;
             page-break-after: always;
-            width: 210mm !important;
-            height: 297mm !important;
-        }
-
-        .page-preview {
-            padding: 0 !important;
-            /* Still NO padding */
-            margin: 0 !important;
-            /* Still NO margin */
-            width: 100% !important;
-            height: 297mm !important;
         }
 
         .page-content {
-            /* ONLY element with padding - same as preview */
-            padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left) !important;
-            width: 100% !important;
-            height: 100% !important;
-            box-sizing: border-box !important;
+            padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
         }
     }
 

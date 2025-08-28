@@ -21,37 +21,7 @@ import {
     setShowPageNumbers 
 } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/page-number-config.js';
 
-/**
- * Create a custom print stylesheet with current settings
- * @returns {string} CSS string with print-specific styles
- * 
- * NOTE: Simplified to avoid conflicts with Papyrus's own margin system
- */
-function createPrintStylesheet() {
-    const settings = getDocumentSettings();
-    
-    // Minimal styles - let Papyrus handle most of the layout
-    return `
-        @page {
-            margin: 0;
-            size: A4;
-        }
-        
-        @media print {
-            /* Ensure colors print */
-            * {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                color-adjust: exact !important;
-            }
-            
-            /* Hide screen-only elements */
-            .no-print {
-                display: none !important;
-            }
-        }
-    `;
-}
+
 
 /**
  * Log page dimensions for debugging
@@ -331,7 +301,8 @@ export function createPapyrusJson(studentExerciseSet) {
                     </tr>
                 </table>`,
             "classes": ["font-mono"],
-            "isPapyrusHeader": true  // This tells Papyrus to repeat on each page
+            "isPapyrusHeader": true,  // This tells Papyrus to repeat on each page
+            "style": "padding-bottom: 1rem;"
         },
         
         // Title section - only on first page
@@ -339,7 +310,8 @@ export function createPapyrusJson(studentExerciseSet) {
         {
             "id": "main-title",
             "html": "<h3>Bac 1<sup>ère</sup> Maths - Première Partie : Automatismes</h3>",
-            "style": "font-family: 'Spectral', serif; font-weight: bold; text-align: left; color: var(--color-base-content);"
+            "style": "font-family: 'Spectral', serif; font-weight: bold; text-align: left; color: var(--color-base-content); padding-bottom: 1rem;"
+
         }
     ];
     
@@ -389,7 +361,7 @@ export function createPapyrusJson(studentExerciseSet) {
         papyrusJson.push({
             "id": `question-${questionNum}`,
             "html": questionHtml,
-            "style": "",  // No margins - let Papyrus handle spacing
+            "style": "padding-bottom: 1rem;",  // No margins - let Papyrus handle spacing
             "classes": []  // Can add classes if needed
         });
     });
@@ -408,9 +380,9 @@ function getDocumentSettings() {
     // IMPORTANT: These margins must match the CSS variables
     return {
         margins: {
-            top: 7,     // Reduced from 10 to 7mm
+            top: 0,     // Reduced from 10 to 7mm
             right: 8,   // Reduced from 10 to 8mm
-            bottom: 7,  // Reduced from 10 to 7mm
+            bottom: 0,  // Reduced from 10 to 7mm
             left: 8     // Reduced from 10 to 8mm
         },
         fontSizes: {
@@ -422,7 +394,7 @@ function getDocumentSettings() {
             h6: 14,
             body: 15
         },
-        spacing: 2.5  // Spacing between elements in mm
+        spacing: 0  // Spacing between elements in mm
     };
 }
 
@@ -627,10 +599,8 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
         // Get the fully rendered content
         const renderedContent = pagesContainer.innerHTML;
         
-        // Use Papyrus's print function directly with the stylesheet
+        // Use Papyrus's print function directly
         const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/styles/print.css";
-        
-        // Print using Papyrus's function - it handles margins internally
         printPage(renderedContent, styleSheet);
     }
 }
@@ -697,8 +667,6 @@ export async function printAllCopies() {
     
     // Use Papyrus's print function with the combined content
     const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/styles/print.css";
-    
-    // Print using Papyrus's function - it handles margins internally
     printPage(allContent, styleSheet);
     
     // Return to the first student after printing
