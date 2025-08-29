@@ -51,7 +51,7 @@ def render_question(*, p, direction, coef):
     """
     # was : coef.simplified().latex
     coef = coef.simplified().as_decimal
-    statement = f"Le prix d'un article est multiplié par ${coef.latex()}$. Calculer la variation relative $V_r$ de ce prix."
+    statement = f"Le prix d'un article est multiplié par ${coef.latex().replace('.', ',')}$. Calculer la variation relative $V_r$ de ce prix."
     return {
         "statement": statement,
         "statement_html": f"<div>{statement}</div>",

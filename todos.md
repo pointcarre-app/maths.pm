@@ -27,6 +27,15 @@
 - [] spe_sujet1_auto_06_question.py: make better for equiv relation de conjugaisons avec coeff entiers relatifs
 
 
+# TODO Sel:
+- [] spe_sujet1_auto_03_question.py :  
+> "Le prix d'un article est multiplié par `${coef.latex().replace('.', ',')}$`. Calculer la variation relative $V_r$ de ce prix.
+Donc il faut proposer un corrigé: 
+- qui invoque avec simplicité ce qu'est la variation relative: ie la hausse ou la baisse en pourcentage par rapport à la valeur initiale: ie 0.86 = (1-14)/100 = 14% de baisse Donc $V_r = 0.86
+- la méthode full calcul: on pose le prix $p$ et $v_r=\dfrac{p -0.86p}{p} = 0.14$ donc $V_r = 0.14 = 14\\%$
+- La méthode last resort : tu peux prendre un prix de 100 et faire le calcul, ça marchera (monde linéaire)
+- $V_r=\dfrac{100 - 86}{100} = 0.14 = 14\\%$
+
 ### For Teachers
 
 

@@ -71,6 +71,9 @@ export class Question {
         this.answer = data.answer || null;
         this.graphSvg = data.graphSvg || null;
         this.graphDict = data.graphDict || null;
+        // PNG conversion data
+        this.graphPng = data.graphPng || null;
+        this.graphDimensions = data.graphDimensions || null;
     }
 
     /**

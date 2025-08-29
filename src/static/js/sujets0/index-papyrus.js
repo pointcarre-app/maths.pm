@@ -17,22 +17,23 @@
  */
 
 import generationResults from './index-data-model.js';
-import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/preview/index.js';
-import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/print-manager.js';
+import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/preview/index.js';
+import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/print-manager.js';
+import { convertSvgToPng } from './index-svg-converter.js';
 import { 
     initializeMargins, 
     setMargins,
     getCurrentMargins
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/margin-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/margin-config.js';
 import { 
     initializeFontSizes, // Default font sizes in px
     setFontSizes 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/font-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/font-config.js';
 
 import { 
     initializePageNumberConfig,
     setShowPageNumbers 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/page-number-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/page-number-config.js';
 
 
 
@@ -265,7 +266,31 @@ import {
     initializeSpaceBetweenDivs, 
     setSpaceBetweenDivs,
     getCurrentSpaceBetweenDivs
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/core/margin-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/margin-config.js';
+
+/**
+ * Get fallback dimensions for different graph types
+ * Used when graphDict is not available or doesn't contain dimensions
+ * @param {string} generator - The generator name
+ * @returns {Object} Width and height for the graph
+ */
+function getGraphDimensions(generator) {
+    // Define fallback sizes for different graph types
+    // These are only used if graphDict.svg dimensions are not available
+    const dimensions = {
+        'spe_sujet1_auto_07_question': { width: 340, height: 340 },
+        'spe_sujet1_auto_08_question': { width: 340, height: 340 },
+        'spe_sujet1_auto_09_question': { width: 340, height: 340 },
+        'spe_sujet1_auto_10_question': { width: 340, height: 340 },
+        'spe_sujet1_auto_11_question': { width: 340, height: 340 },
+        'spe_sujet1_auto_12_question': { width: 340, height: 340 }
+    };
+    
+    // Extract base generator name without .py extension
+    const baseName = generator.replace('.py', '');
+    
+    return dimensions[baseName] || { width: 340, height: 340 }; // Default size matching typical SVG output
+}
 
 /**
  * Extract question number from generator name
@@ -280,15 +305,22 @@ function extractQuestionNumber(generator) {
 /**
  * Create the Papyrus JSON structure for a single student
  * @param {Object} studentExerciseSet - Student exercise set from generationResults
- * @returns {Array} Array of Papyrus JSON objects
+ * @returns {Promise<Array>} Array of Papyrus JSON objects
  * 
  * MARGINS REMOVED TO LET PAPYRUS HANDLE ALL SPACING:
  * - Header table: removed margin-bottom: 1rem
  * - Main title: removed margin-bottom: 2rem and margin-top: 1rem  
  * - Each question: removed margin-bottom: 2rem
  * - All spacing is now controlled by Papyrus's setSpaceBetweenDivs()
+ * 
+ * SVG TO PNG CONVERSION:
+ * - Graphs with foreignObjects are converted to high-quality PNGs
+ * - 2x scaling for print quality (effectively 144 DPI on screen, 288 DPI in print)
+ * - Uses actual dimensions from graphDict.svg (typically 340x340)
+ * - Falls back to default dimensions if graphDict not available
+ * - Scales down proportionally to max 200px for display while keeping full resolution in PNG
  */
-export function createPapyrusJson(studentExerciseSet) {
+export async function createPapyrusJson(studentExerciseSet) {
     // Extract student info
     const studentId = studentExerciseSet.id;
     const seed = studentExerciseSet.seed;
@@ -327,7 +359,8 @@ export function createPapyrusJson(studentExerciseSet) {
     ];
     
     // Process each question as a separate JSON item for proper pagination
-    studentExerciseSet.questions.forEach((question, index) => {
+    // Now using for...of to support async operations
+    for (const [index, question] of studentExerciseSet.questions.entries()) {
         // Extract question number from generator name
         const questionNum = extractQuestionNumber(question.generator).replace(/^0+/, '');
                 
@@ -353,14 +386,69 @@ export function createPapyrusJson(studentExerciseSet) {
             processedStatement = `<div>${questionNum}) ${statementHtml}</div>`;
         }
         
-        // If there's a graph SVG, use a layout that prioritizes the graph
+        // If there's a graph, use the pre-converted PNG or convert on the fly
         if (question.graphSvg) {
-            questionHtml = `
-                <div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
-                    <div style='flex: 1; min-width: 250px;'>${processedStatement}</div>
-                    <div style='flex: 0 1 auto;'>${question.graphSvg}</div>
-                </div>
-            `;
+            // Check if PNG was already pre-converted
+            let pngDataUrl = question.graphPng;
+            let dimensions = question.graphDimensions;
+            
+            if (!pngDataUrl) {
+                // Fallback: convert on the fly (shouldn't normally happen)
+                console.warn(`PNG not pre-converted for question ${questionNum}, converting now...`);
+                
+                // Get dimensions
+                if (question.graphDict && question.graphDict.svg) {
+                    dimensions = {
+                        width: question.graphDict.svg.width || 200,
+                        height: question.graphDict.svg.height || 150
+                    };
+                } else {
+                    dimensions = getGraphDimensions(question.generator);
+                }
+                
+                // Try to convert SVG to PNG
+                pngDataUrl = await convertSvgToPng(question.graphSvg, {
+                    width: dimensions.width,
+                    height: dimensions.height,
+                    scale: 2 // 2x for high quality
+                });
+            } else {
+                console.log(`Using pre-converted PNG for question ${questionNum}`);
+            }
+            
+            if (pngDataUrl) {
+                // Use PNG image with size constraints for large graphs
+                // Scale down proportionally if either dimension is larger than 200px
+                const maxDisplaySize = 200;
+                let displayWidth = dimensions.width;
+                let displayHeight = dimensions.height;
+                
+                if (dimensions.width > maxDisplaySize || dimensions.height > maxDisplaySize) {
+                    const scale = Math.min(maxDisplaySize / dimensions.width, maxDisplaySize / dimensions.height);
+                    displayWidth = Math.round(dimensions.width * scale);
+                    displayHeight = Math.round(dimensions.height * scale);
+                }
+                
+                questionHtml = `
+                    <div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
+                        <div style='flex: 1; min-width: 250px;'>${processedStatement}</div>
+                        <div style='flex: 0 1 auto;'>
+                            <img src="${pngDataUrl}" 
+                                 style="width: ${displayWidth}px; height: ${displayHeight}px; object-fit: contain; display: block;"
+                                 alt="Graphique question ${questionNum}" />
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Fallback to original SVG if conversion failed
+                console.warn(`⚠️ Failed to convert SVG to PNG for question ${questionNum}, using original SVG`);
+                questionHtml = `
+                    <div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
+                        <div style='flex: 1; min-width: 250px;'>${processedStatement}</div>
+                        <div style='flex: 0 1 auto;'>${question.graphSvg}</div>
+                    </div>
+                `;
+            }
         } else {
             // Simple layout for questions without graphs
             questionHtml = processedStatement;
@@ -375,7 +463,7 @@ export function createPapyrusJson(studentExerciseSet) {
              "style": "padding-bottom: 1rem;",  // No margins - let Papyrus handle spacing
             "classes": []  // Can add classes if needed
         });
-    });
+    }
     
     console.log(`Created ${papyrusJson.length} items for Papyrus (1 header, 1 title, ${studentExerciseSet.questions.length} questions)`);
     
@@ -558,8 +646,8 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
     // Configure Papyrus with consistent settings FIRST
     configurePapyrus();
     
-    // Create Papyrus JSON
-    const papyrusJson = createPapyrusJson(student);
+    // Create Papyrus JSON (now async due to SVG to PNG conversion)
+    const papyrusJson = await createPapyrusJson(student);
     
     // Log the JSON to console for debugging
     console.log('Papyrus JSON for preview:', papyrusJson);
@@ -626,7 +714,7 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
         const renderedContent = pagesContainer.innerHTML;
         
         // Use Papyrus's print function directly
-        const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/styles/print.css";
+        const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css";
         printPage(renderedContent, styleSheet);
     }
 }
@@ -653,53 +741,98 @@ export async function printAllCopies() {
     // Configure Papyrus with consistent settings first
     configurePapyrus();
     
+    // Show print preparation message in the preview area
+    const pagesContainer = document.getElementById('pages-container');
+    const originalContent = pagesContainer.innerHTML;
+    
+    // Replace preview with progress message
+    pagesContainer.innerHTML = `
+        <div style="padding: 60px; text-align: center; background: rgba(255,255,255,0.98); border-radius: 8px;">
+            <h3 style="margin-bottom: 20px;">📄 Préparation de l'impression...</h3>
+            <progress id="print-prep-progress" style="width: 100%; height: 30px;" max="${generationResults.students.length}" value="0"></progress>
+            <p id="print-prep-status" style="margin-top: 15px; color: #666;">
+                Traitement copie 1 sur ${generationResults.students.length}
+            </p>
+            <p style="color: #999; margin-top: 20px; font-size: 14px;">
+                ⏱️ Cela peut prendre quelques secondes...
+            </p>
+        </div>
+    `;
+    
+    // Create a hidden container for processing
+    const hiddenContainer = document.createElement('div');
+    hiddenContainer.id = 'hidden-print-container';
+    hiddenContainer.style.position = 'absolute';
+    hiddenContainer.style.left = '-9999px';
+    hiddenContainer.style.top = '-9999px';
+    hiddenContainer.style.width = '210mm';
+    document.body.appendChild(hiddenContainer);
+    
     // Store all student content
     let allContent = '';
     
     // For each student
     for (let i = 0; i < generationResults.students.length; i++) {
+        // Update progress
+        const progressBar = document.getElementById('print-prep-progress');
+        const statusText = document.getElementById('print-prep-status');
+        if (progressBar) progressBar.value = i;
+        if (statusText) statusText.textContent = `Traitement copie ${i + 1} sur ${generationResults.students.length}`;
+        
         // Generate JSON for this student
         const student = generationResults.students[i];
         if (!student) continue;
         
-        // Create Papyrus JSON
-        const papyrusJson = createPapyrusJson(student);
+        // Create Papyrus JSON (uses pre-converted PNGs, should be fast)
+        const papyrusJson = await createPapyrusJson(student);
         
-        // Update the JSON input field to generate the preview
+        // Update the JSON input field
         document.getElementById('json-input').value = JSON.stringify(papyrusJson);
         
-        // Generate pages in the normal container
+        // Generate pages in the hidden container
+        hiddenContainer.innerHTML = '';
+        
+        // Temporarily swap containers for Papyrus
+        const originalPagesContainer = document.getElementById('pages-container');
+        hiddenContainer.id = 'pages-container';
+        originalPagesContainer.id = 'pages-container-temp';
+        
+        // Generate pages (will use hidden container)
         generatePages();
         
-        // Wait longer for Papyrus to complete rendering
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // Wait a bit for Papyrus to complete
+        await new Promise(resolve => setTimeout(resolve, 200));
         
-        // Get the rendered content
-        const pagesContainer = document.getElementById('pages-container');
-        if (pagesContainer) {
-            // Log dimensions for this student
-            console.log(`\n--- Student ${i + 1} Page Dimensions ---`);
-            logPageDimensions(pagesContainer);
-            
-            // IMPORTANT: Render LaTeX in the DOM before getting innerHTML
-            renderLatexInForeignObjects(pagesContainer);
-            
-            // Add student content to the combined content
-            allContent += pagesContainer.innerHTML;
-            
-            // NO NEED for extra page break - Papyrus pages are already complete A4 pages
-            // Each .page-wrapper is a full page with proper dimensions
-        }
+        // Swap IDs back
+        hiddenContainer.id = 'hidden-print-container';
+        originalPagesContainer.id = 'pages-container';
+        
+        // IMPORTANT: Render LaTeX in the DOM before getting innerHTML
+        renderLatexInForeignObjects(hiddenContainer);
+        
+        // Add student content to the combined content
+        allContent += hiddenContainer.innerHTML;
     }
     
+    // Clean up hidden container
+    document.body.removeChild(hiddenContainer);
+    
+    // Update progress to complete
+    pagesContainer.innerHTML = `
+        <div style="padding: 60px; text-align: center; background: rgba(255,255,255,0.98); border-radius: 8px;">
+            <h3 style="color: #22c55e; margin-bottom: 20px;">✅ Impression prête!</h3>
+            <p style="color: #666;">La boîte de dialogue d'impression va s'ouvrir...</p>
+        </div>
+    `;
+    
     // Use Papyrus's print function with the combined content
-    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/styles/print.css";
+    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css";
     printPage(allContent, styleSheet);
     
-    // Return to the first student after printing
+    // Restore original preview after a delay
     setTimeout(() => {
-        previewStudentCopy(0, false);
-    }, 1000);
+        pagesContainer.innerHTML = originalContent;
+    }, 2000);
 }
 
 /**

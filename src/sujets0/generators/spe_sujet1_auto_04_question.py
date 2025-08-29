@@ -44,7 +44,7 @@ def render_question(*, p, direction):
 
     statement = f"""Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. A l'issue de ces deux variations, quelle est la variation relative du prix ?"""
 
-    statement_html = f"""<div>Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. À l'issue de ces deux variations, quelle est la variation relative ($V_r$) du prix ?</div>"""
+    statement_html = f"""<div>Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. À l'issue de ces deux variations, quelle est la variation relative $V_r$ du prix ?</div>"""
     return {
         "statement": statement,
         "statement_html": statement_html,

@@ -7,6 +7,7 @@ import { executeGeneratorWithSeed } from "./index-nagini.js";
 import { getGeneratorConfig, displayValidationTable } from "./index-form.js";
 import { displayStudentResults } from "./index-results.js";
 import generationResults, { StudentExerciseSet } from "./index-data-model.js";
+import { convertAllGraphsToPng } from "./index-svg-converter.js";
 
 // Export the generationResults for backward compatibility
 export { generationResults };
@@ -122,10 +123,9 @@ export async function executeAllGenerators() {
   const generationMessage = document.getElementById("generation-message");
   const generationTime = document.getElementById("generation-time");
   const generationProgress = document.getElementById("generation-progress");
-  const generationStatus = document.getElementById("generation-status");
   
   if (generationMessage) {
-    generationMessage.textContent = `Génération de ${config.nbStudents} copies avec ${config.nbQuestions} questions...`;
+    generationMessage.textContent = `Génération en cours : ${config.nbStudents} copies, ${config.nbQuestions} questions`;
   }
   
   if (generationTime) {
@@ -135,12 +135,6 @@ export async function executeAllGenerators() {
   if (generationProgress) {
     generationProgress.value = 0;
     generationProgress.max = config.nbStudents;
-    generationProgress.classList.remove("progress-success");
-  }
-  
-  if (generationStatus) {
-    generationStatus.classList.remove("bg-success/20");
-    generationStatus.classList.add("bg-base-200");
   }
 
   // Get or create results container in the wrapper area
@@ -375,19 +369,70 @@ export async function executeAllGenerators() {
   // Update progress status to complete
   if (generationProgress) {
     generationProgress.value = config.nbStudents;
-    generationProgress.classList.add("progress-success");
   }
   
   if (generationMessage) {
-    generationMessage.textContent = `Génération terminée : ${config.nbStudents} copies avec ${config.nbQuestions} questions`;
+    generationMessage.textContent = `Génération terminée : ${config.nbStudents} copies, ${config.nbQuestions} questions`;
   }
   
-  if (generationStatus) {
-    generationStatus.classList.remove("bg-base-200");
-    generationStatus.classList.add("bg-success/20");
+  // Convert all SVGs to PNGs for faster printing
+  const conversionMessage = document.getElementById("conversion-message");
+  const conversionTime = document.getElementById("conversion-time");
+  const conversionProgress = document.getElementById("conversion-progress");
+  
+  if (conversionTime) {
+    conversionTime.textContent = new Date().toLocaleTimeString('fr-FR');
   }
   
-  // Enable print buttons
+  // Count total graphs to convert
+  let totalGraphs = 0;
+  generationResults.students.forEach(student => {
+    student.questions.forEach(question => {
+      if (question.graphSvg) totalGraphs++;
+    });
+  });
+  
+  if (totalGraphs > 0) {
+    if (conversionMessage) {
+      conversionMessage.textContent = `Conversion de ${totalGraphs} graphiques...`;
+    }
+    
+    if (conversionProgress) {
+      conversionProgress.value = 0;
+      conversionProgress.max = totalGraphs;
+    }
+    
+    // Convert all graphs with progress callback
+    await convertAllGraphsToPng(generationResults, (converted, total) => {
+      if (conversionProgress) {
+        conversionProgress.value = converted;
+      }
+      if (conversionMessage) {
+        conversionMessage.textContent = `Conversion des graphiques : ${converted}/${total}`;
+      }
+    });
+    
+    // Update conversion status to complete
+    if (conversionMessage) {
+      conversionMessage.textContent = `Conversion terminée`;
+    }
+    
+    if (conversionProgress) {
+      conversionProgress.value = totalGraphs;
+    }
+  } else {
+    // No graphs to convert, ready immediately
+    if (conversionMessage) {
+      conversionMessage.textContent = `Pas de graphiques à convertir`;
+    }
+    
+    if (conversionProgress) {
+      conversionProgress.value = 100;
+      conversionProgress.max = 100;
+    }
+  }
+  
+  // Enable print buttons after conversion
   const printCurrentBtn = document.getElementById("print-current-copy-btn");
   const printAllBtn = document.getElementById("print-all-copies-btn");
   

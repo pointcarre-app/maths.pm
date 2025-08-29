@@ -71,10 +71,10 @@
   Configurer la génération d'exercices
 </div>
 
-<div class="flex card justify-center px-2 mt-0 sm:px-4 md:px-8 bg-base-200 shadow-sm">
-  <form class="w-full my-4" id="arpege-form">
+<div class="flex card justify-center p-4 mt-0 sm:p-6 md:p-12 bg-base-200 shadow-sm">
+  <form class="w-full max-w-[720px] mx-auto" id="arpege-form">
     <!-- Two main columns: numbers on left, radio buttons on right -->
-    <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+    <div class=" flex flex-col sm:flex-row gap-4 sm:gap-8">
       <!-- Left column: Number inputs -->
       <div class="flex flex-col gap-4 sm:gap-8 flex-1">
         <fieldset class="fieldset">
@@ -204,7 +204,7 @@
                 <br />
                 Non Spé : Enseignement Spécifique
                 <br />
-                Techno = Filière technologique
+                Techno : Filière technologique
                 <br />
                 Détails disponibles sur le site du ministère,
                 <br />
@@ -253,46 +253,47 @@
 </div>
 
 
-<!-- Status message and progress bar that persists -->
-<div id="generation-status" class="mt-6 p-4 bg-base-200 rounded-lg shadow-sm">
-  <div class="flex flex-col gap-2">
+<!-- Section title for status -->
+<div class="font-heading text-lg sm:text-xl md:text-2xl mt-12 mb-4 flex items-center gap-2">
+  Statut de la génération
+</div>
+
+<!-- Generation progress -->
+<div id="generation-status" class="card bg-base-100 shadow-sm">
+  <div class="card-body py-3">
     <div class="flex justify-between items-center">
-      <div id="generation-message" class="font-medium">En attente de génération...</div>
-      <div id="generation-time" class="text-sm opacity-70"></div>
+      <div id="generation-message" class="text-sm">En attente de génération...</div>
+      <div id="generation-time" class="text-xs opacity-60"></div>
     </div>
     <progress id="generation-progress" class="progress w-full" value="0" max="100"></progress>
-    <div class="flex justify-end mt-2">
-      <button id="print-current-copy-btn"
-              onclick="printStudentCopy(generationResults.currentStudentIndex)"
-              class="btn btn-sm btn-outline"
-              disabled>Imprimer cette copie</button>
-      <button id="print-all-copies-btn" onclick="printAllCopies()" class="btn btn-sm btn-outline ml-2" disabled>
-        Imprimer toutes les copies
-      </button>
-    </div>
   </div>
+</div>
+
+<!-- Conversion progress -->
+<div id="conversion-status" class="card bg-base-100 shadow-sm mt-4">
+  <div class="card-body py-3">
+    <div class="flex justify-between items-center">
+      <div id="conversion-message" class="text-sm">En attente de conversion...</div>
+      <div id="conversion-time" class="text-xs opacity-60"></div>
+    </div>
+    <progress id="conversion-progress" class="progress w-full" value="0" max="100"></progress>
+  </div>
+</div>
+
+<!-- Print buttons -->
+<div class="flex justify-end mt-4 gap-2">
+  <button id="print-current-copy-btn"
+          onclick="printStudentCopy(generationResults.currentStudentIndex)"
+          class="btn btn-sm btn-outline"
+          disabled>🖨️ Imprimer cette copie</button>
+  <button id="print-all-copies-btn" onclick="printAllCopies()" class="btn btn-sm btn-outline" disabled>
+    📑 Imprimer toutes les copies
+  </button>
 </div>
 
 <!-- Student pagination buttons for preview -->
 <div id="student-pagination" class="flex flex-wrap gap-2 mt-4 mb-4 justify-center">
   <!-- Buttons will be dynamically added here -->
-</div>
-
-<!-- Print Instructions -->
-<div class="alert alert-info mt-4 mb-4">
-  <svg xmlns="http://www.w3.org/2000/svg"
-       fill="none"
-       viewBox="0 0 24 24"
-       class="stroke-current shrink-0 w-6 h-6">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-    </path>
-  </svg>
-  <div>
-    <h3 class="font-bold">Note d'impression</h3>
-    <div class="text-xs">
-      L'impression est configurée pour utiliser automatiquement les bonnes marges. Si Chrome affiche une boîte de dialogue, les marges devraient déjà être définies sur "Aucune".
-    </div>
-  </div>
 </div>
 
 
@@ -327,9 +328,9 @@
 
 
 <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/styles/index.css" />
+      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/index.css" />
 <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.7/src/styles/print.css" />
+      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css" />
 
 <div class="font-heading text-lg sm:text-xl md:text-2xl mt-12 mb-4 flex items-center gap-2">
   Consulter les copies générées
