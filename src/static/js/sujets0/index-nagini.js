@@ -88,7 +88,22 @@ export async function loadNaginiAndInitialize(executeAllGenerators) {
  * @returns {Object} Execution result
  */
 export async function executeGeneratorWithSeed(filename, seed) {
-    const url = `/static/sujets0/generators/${filename}`;
+    // Detect if we're on GitHub Pages or similar static hosting and adjust the URL accordingly
+    let basePath = '';
+    
+    // Method 1: Check if we're on GitHub Pages
+    if (window.location.hostname === 'pointcarre-app.github.io') {
+        basePath = '/maths.pm';
+        console.log('🌐 GitHub Pages detected, using base path:', basePath);
+    }
+    // Method 2: Check if we're already in a subdirectory (more generic)
+    else if (window.location.pathname.startsWith('/maths.pm/')) {
+        basePath = '/maths.pm';
+        console.log('📁 Subdirectory deployment detected, using base path:', basePath);
+    }
+    
+    const url = `${basePath}/static/sujets0/generators/${filename}`;
+    console.log('📦 Loading generator from:', url);
     
     try {
         const response = await fetch(url);
