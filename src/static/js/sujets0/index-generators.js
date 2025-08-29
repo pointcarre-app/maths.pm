@@ -124,17 +124,40 @@ export async function executeAllGenerators() {
   const generationTime = document.getElementById("generation-time");
   const generationProgress = document.getElementById("generation-progress");
   
+  // Get conversion elements early to reset them
+  const conversionMessageEl = document.getElementById("conversion-message");
+  const conversionTimeEl = document.getElementById("conversion-time");
+  const conversionProgressEl = document.getElementById("conversion-progress");
+  
+  // Temps de début pour calculer la durée d'exécution
+  const startTime = performance.now();
+  generationResults.startTime = startTime;
+  
   if (generationMessage) {
     generationMessage.textContent = `Génération en cours : ${config.nbStudents} copies, ${config.nbQuestions} questions`;
   }
   
   if (generationTime) {
-    generationTime.textContent = new Date().toLocaleTimeString('fr-FR');
+    generationTime.textContent = "0.0s";
   }
   
   if (generationProgress) {
     generationProgress.value = 0;
     generationProgress.max = config.nbStudents;
+  }
+
+  // Réinitialiser la barre de conversion également
+  if (conversionMessageEl) {
+    conversionMessageEl.textContent = "En attente de conversion...";
+  }
+  
+  if (conversionTimeEl) {
+    conversionTimeEl.textContent = "0.0s";
+  }
+  
+  if (conversionProgressEl) {
+    conversionProgressEl.value = 0;
+    conversionProgressEl.max = 100;
   }
 
   // Get or create results container in the wrapper area
@@ -165,8 +188,15 @@ export async function executeAllGenerators() {
 
     // Update progress
     const generationProgress = document.getElementById("generation-progress");
+    const generationTime = document.getElementById("generation-time");
     if (generationProgress) {
       generationProgress.value = studentNum - 1;
+    }
+    
+    // Mettre à jour le temps d'exécution
+    if (generationTime) {
+      const elapsedTime = (performance.now() - generationResults.startTime) / 1000;
+      generationTime.textContent = `${elapsedTime.toFixed(1)}s`;
     }
 
     // Execute each selected generator for this student
@@ -375,13 +405,19 @@ export async function executeAllGenerators() {
     generationMessage.textContent = `Génération terminée : ${config.nbStudents} copies, ${config.nbQuestions} questions`;
   }
   
-  // Convert all SVGs to PNGs for faster printing
-  const conversionMessage = document.getElementById("conversion-message");
-  const conversionTime = document.getElementById("conversion-time");
-  const conversionProgress = document.getElementById("conversion-progress");
+  if (generationTime) {
+    const elapsedTime = (performance.now() - generationResults.startTime) / 1000;
+    generationTime.textContent = `${elapsedTime.toFixed(1)}s`;
+  }
   
-  if (conversionTime) {
-    conversionTime.textContent = new Date().toLocaleTimeString('fr-FR');
+  // Convert all SVGs to PNGs for faster printing - references were created earlier
+  
+  // Enregistrer le temps de début de la conversion
+  const conversionStartTime = performance.now();
+  generationResults.conversionStartTime = conversionStartTime;
+  
+  if (conversionTimeEl) {
+    conversionTimeEl.textContent = "0.0s";
   }
   
   // Count total graphs to convert
@@ -393,42 +429,51 @@ export async function executeAllGenerators() {
   });
   
   if (totalGraphs > 0) {
-    if (conversionMessage) {
-      conversionMessage.textContent = `Conversion de ${totalGraphs} graphiques...`;
+    if (conversionMessageEl) {
+      conversionMessageEl.textContent = `Conversion de ${totalGraphs} graphiques...`;
     }
     
-    if (conversionProgress) {
-      conversionProgress.value = 0;
-      conversionProgress.max = totalGraphs;
+    if (conversionProgressEl) {
+      conversionProgressEl.value = 0;
+      conversionProgressEl.max = totalGraphs;
     }
     
     // Convert all graphs with progress callback
     await convertAllGraphsToPng(generationResults, (converted, total) => {
-      if (conversionProgress) {
-        conversionProgress.value = converted;
+      if (conversionProgressEl) {
+        conversionProgressEl.value = converted;
       }
-      if (conversionMessage) {
-        conversionMessage.textContent = `Conversion des graphiques : ${converted}/${total}`;
+      if (conversionMessageEl) {
+        conversionMessageEl.textContent = `Conversion des graphiques : ${converted}/${total}`;
+      }
+      if (conversionTimeEl) {
+        const elapsedTime = (performance.now() - generationResults.conversionStartTime) / 1000;
+        conversionTimeEl.textContent = `${elapsedTime.toFixed(1)}s`;
       }
     });
     
     // Update conversion status to complete
-    if (conversionMessage) {
-      conversionMessage.textContent = `Conversion des graphiques terminée : ${totalGraphs} / ${totalGraphs}`;
+    if (conversionMessageEl) {
+      conversionMessageEl.textContent = `Conversion des graphiques terminée : ${totalGraphs} / ${totalGraphs}`;
     }
     
-    if (conversionProgress) {
-      conversionProgress.value = totalGraphs;
+    if (conversionProgressEl) {
+      conversionProgressEl.value = totalGraphs;
+    }
+    
+    if (conversionTimeEl) {
+      const elapsedTime = (performance.now() - generationResults.conversionStartTime) / 1000;
+      conversionTimeEl.textContent = `${elapsedTime.toFixed(1)}s`;
     }
   } else {
     // No graphs to convert, ready immediately
-    if (conversionMessage) {
-      conversionMessage.textContent = `Pas de graphiques à convertir`;
+    if (conversionMessageEl) {
+      conversionMessageEl.textContent = `Pas de graphiques à convertir`;
     }
     
-    if (conversionProgress) {
-      conversionProgress.value = 100;
-      conversionProgress.max = 100;
+    if (conversionProgressEl) {
+      conversionProgressEl.value = 100;
+      conversionProgressEl.max = 100;
     }
   }
   
@@ -455,7 +500,7 @@ export async function executeAllGenerators() {
   }
 
   // Display first student's results
-  displayStudentResults(0);
+  // displayStudentResults(0);
 
   // Re-enable button
   if (executeBtn) {

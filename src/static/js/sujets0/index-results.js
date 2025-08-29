@@ -82,7 +82,7 @@ export function generatePaginationButtons(current, total) {
 export function navigateToStudent(studentIndex) {
     if (studentIndex >= 0 && studentIndex < generationResults.students.length) {
         generationResults.currentStudentIndex = studentIndex;
-        displayStudentResults(studentIndex);
+        //displayStudentResults(studentIndex);
     }
 }
 
@@ -94,7 +94,7 @@ export function navigateStudent(direction) {
     const newIndex = generationResults.currentStudentIndex + direction;
     if (newIndex >= 0 && newIndex < generationResults.students.length) {
         generationResults.currentStudentIndex = newIndex;
-        displayStudentResults(newIndex);
+        // displayStudentResults(newIndex);
     }
 }
 

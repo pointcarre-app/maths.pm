@@ -6,6 +6,9 @@
     }
 </style>
 
+<!-- Toast container for notifications -->
+<div id="toast-container" class="toast toast-top toast-center"></div>
+
 <!-- Toggle buttons -->
 <style>
     @keyframes spin-then-scale {
@@ -326,11 +329,11 @@
 </div>
 
 
-<button class="btn btn-lg btn-outline btn-primary fixed bottom-4 sm:bottom-8 left-4 sm:left-8 z-50 sm:bg-base-200  shadow-lg hover:scale-105 transition-all duration-10 hover:text-primary"
+<button class="btn btn-lg btn-outline btn-primary fixed bottom-4 sm:bottom-8 left-4 sm:left-8 z-50 bg-base-200  shadow-lg hover:scale-105 transition-all duration-10 hover:text-primary"
         id="left-toggle"
         style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2) !important">
-  <div class="w-6 h-6">{% include "base/logo-zelie-primary.html" %}</div>
-  <span class="hidden sm:block" style="font-size: 1rem;font-weight: 300;">Menu</span>
+  <div class="w-6 h-6 hidden sm:block">{% include "base/logo-zelie-primary-menu.html" %}</div>
+  <span style ="font-size: 0.95rem;font-weight: 300;font-family: var(--font-mono)">Menu</span>
 </button>
 
 {# <div class="fixed right-0 top-0 h-screen w-[calc(250px+1rem)] bg-base-200/90 backdrop-blur text-base-content z-40 transition-transform duration-300 overflow-y-auto translate-x-full" id="right-sidebar">
@@ -523,6 +526,9 @@
 
         // Check if the current path is '/sujets0'
         if (window.location.pathname === '/sujets0') {
+            // Get current theme before changing it
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+
             // Set theme to 'bolt'
             setTheme('bolt');
 
@@ -531,23 +537,46 @@
                 button.disabled = true;
             });
 
-            // Show a toast notification
-            const toast = document.createElement('div');
-            toast.textContent = 'Le thème pour la génération de PDF est forcément Bolt.';
-            toast.style.position = 'fixed';
-            toast.style.bottom = '20px';
-            toast.style.right = '20px';
-            toast.style.backgroundColor = '#333';
-            toast.style.color = '#fff';
-            toast.style.padding = '10px';
-            toast.style.borderRadius = '5px';
-            toast.style.zIndex = '1000';
-            document.body.appendChild(toast);
+            // Only show toast if theme wasn't already 'bolt'
+            if (currentTheme !== 'bolt') {
+                // Show a toast notification using daisyUI
+                const toastContainer = document.getElementById('toast-container');
 
-            // Remove the toast after 3 seconds
-            setTimeout(() => {
-                document.body.removeChild(toast);
-            }, 3000);
+                // Clear any existing toasts
+                toastContainer.innerHTML = '';
+
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-info';
+
+                const message = document.createElement('span');
+                message.textContent = 'Le thème pour la génération de PDF est forcément Bolt.';
+
+                alert.appendChild(message);
+                toastContainer.appendChild(alert);
+
+                // Remove the toast after 3 seconds
+                setTimeout(() => {
+                    toastContainer.innerHTML = '';
+                }, 3000);
+            }
+
+            // Set up mutation observer to keep theme as 'bolt'
+            const observeTheme = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'data-theme') {
+                        const newTheme = document.documentElement.getAttribute('data-theme');
+                        if (newTheme !== 'bolt') {
+                            setTheme('bolt');
+                            console.log('Theme forcé à Bolt pour la génération de PDF');
+                        }
+                    }
+                });
+            });
+
+            // Start observing theme changes
+            observeTheme.observe(document.documentElement, {
+                attributes: true
+            });
         }
     });
 </script>

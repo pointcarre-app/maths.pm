@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="bolt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warning Color Contrast Test</title>
+    <link rel="stylesheet" href="/static/css/root.css" />
+    <style>
+        body {
+            font-family: var(--font-sans);
+            margin: 2rem;
+            background-color: var(--color-base-100);
+        }
+
+        .test-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .test-box {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contrast-sample {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .badge-soft {
+            background-color: color-mix(in oklab, var(--color-warning, var(--color-base-content)) 8%, var(--color-base-100));
+            color: var(--color-warning);
+        }
+
+        .badge-solid {
+            background-color: var(--color-warning);
+            color: var(--color-warning-content);
+        }
+
+        .color-warning-text {
+            color: var(--color-warning);
+        }
+
+        .white-bg {
+            background-color: white;
+            padding: 1rem;
+        }
+
+        .bg-warning-ghost {
+            background-color: color-mix(in oklab, var(--color-warning, var(--color-base-content)) 8%, var(--color-base-100));
+            padding: 1rem;
+        }
+
+        .theme-selector {
+            margin-bottom: 2rem;
+        }
+
+        .color-values {
+            font-family: monospace;
+            margin-bottom: 1rem;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Warning Color Contrast Test</h1>
+
+    <div class="theme-selector">
+      <button onclick="document.documentElement.setAttribute('data-theme', 'bolt')">Bolt Theme</button>
+      <button onclick="document.documentElement.setAttribute('data-theme', 'zelie')">Zelie Theme</button>
+      <button onclick="document.documentElement.setAttribute('data-theme', 'night')">Night Theme</button>
+      <button onclick="document.documentElement.setAttribute('data-theme', 'dark-black')">
+        Dark-black Theme
+      </button>
+    </div>
+
+    <div class="color-values">
+      Current warning color: <span id="warning-value"></span>
+      <br />
+      Warning ghost color: <span id="warning-ghost-value"></span>
+    </div>
+
+    <div class="test-container">
+      <div>
+        <h2>Text on White Background</h2>
+        <div class="test-box white-bg">
+          <p class="color-warning-text">This text is in the warning color on a white background.</p>
+          <p>
+            This is <span class="color-warning-text">warning text</span> inline with normal text.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h2>Badges</h2>
+        <div class="test-box white-bg">
+          <div class="contrast-sample">
+            <span class="badge badge-soft">Soft Warning Badge</span>
+            <span class="badge badge-solid">Solid Warning Badge</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2>Warning Color on Ghost Background</h2>
+        <div class="test-box bg-warning-ghost">
+          <p class="color-warning-text">This text is in the warning color on a warning-ghost background.</p>
+          <p>
+            This is <span class="color-warning-text">warning text</span> inline with normal text on ghost background.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        function updateColorValues() {
+            // Get computed styles
+            const styles = getComputedStyle(document.documentElement);
+            const warningColor = styles.getPropertyValue('--color-warning').trim();
+
+            // Calculate warning ghost color
+            const baseColor = styles.getPropertyValue('--color-base-100').trim();
+            const warningGhostDesc = `color-mix(in oklab, ${warningColor} 8%, ${baseColor})`;
+
+            // Update the display
+            document.getElementById('warning-value').textContent = warningColor;
+            document.getElementById('warning-ghost-value').textContent = warningGhostDesc;
+        }
+
+        // Run on page load and when theme changes
+        document.addEventListener('DOMContentLoaded', updateColorValues);
+        const themeButtons = document.querySelectorAll('.theme-selector button');
+        themeButtons.forEach(button => {
+            button.addEventListener('click', updateColorValues);
+        });
+    </script>
+  </body>
+</html>

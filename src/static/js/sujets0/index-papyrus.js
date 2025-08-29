@@ -335,19 +335,19 @@ export async function createPapyrusJson(studentExerciseSet) {
             "id": "header-section",
             "html": `<table style='width: 100%; border-collapse: collapse; border: 0.5px solid #e0e0e0;'>
                     <tr>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 50%;'>Nom :</td>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 25%;'>Classe :</td>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 25%;'>Copie n°${studentId} (${seed})</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 50%;'>Nom :</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 25%;'>Classe :</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 25%;'>Copie n°${studentId} (${seed})</td>
                     </tr>
                     <tr>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 50%;'>Prénom :</td>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 25%;'>Date :</td>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.5rem; vertical-align: middle; width: 25%;'>Spécialité </td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 50%;'>Prénom :</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 25%;'>Date :</td>
+                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 25%;'>Spécialité </td>
                     </tr>
                 </table>`,
             "classes": ["font-mono"],
             "isPapyrusHeader": true,  // This tells Papyrus to repeat on each page
-                         "style": "padding-bottom: 1rem;"
+            "style": "padding-bottom: 1rem;"
         },
         
         // Title section - only on first page
@@ -357,12 +357,24 @@ export async function createPapyrusJson(studentExerciseSet) {
             "style": "font-family: 'Spectral', serif; font-weight: bold; text-align: left; color: var(--color-base-content); padding-bottom: 1rem; margin: 0;"
         }
     ];
+
+
+
+
+    // TODO: dynamically but in config not here
+    // There is in the css static/css/root  .css a data-theme="bolt" : take the color of the --color-base-content
+    // --color-base-content: oklch(22% 0.015 240);  /* Deep charcoal with slight blue undertone */
+    
     
     // Process each question as a separate JSON item for proper pagination
     // Now using for...of to support async operations
     for (const [index, question] of studentExerciseSet.questions.entries()) {
-        // Extract question number from generator name
-        const questionNum = extractQuestionNumber(question.generator).replace(/^0+/, '');
+        // Use sequential numbering (1, 2, 3...) instead of extracting from generator name
+        // This ensures proper incremental numbering when less than 12 questions are selected
+        const questionNum = index + 1;
+        
+        // Also extract original question number for reference (can be used for debugging)
+        const originalQuestionNum = extractQuestionNumber(question.generator).replace(/^0+/, '');
                 
         // Get statement HTML, or fallback to regular statement
         const statementHtml = question.getStatementHtml() || question.statement;
@@ -460,7 +472,7 @@ export async function createPapyrusJson(studentExerciseSet) {
         papyrusJson.push({
             "id": `question-${questionNum}`,
             "html": questionHtml,
-             "style": "padding-bottom: 1.25rem; color: var(--color-base-content) !important;",  // No margins - let Papyrus handle spacing
+             "style": "padding-bottom: 1.25rem; color: oklch(22% 0.015 240) !important;",  // No margins - let Papyrus handle spacing
             // "classes": ["text-base-content"]  // Can add classes if needed
         });
     }
@@ -603,8 +615,7 @@ export async function updateDocumentSettings() {
         if (pagesContainer) {
             pagesContainer.innerHTML = `
                 <div style="padding: 20px; text-align: center; color: #4a5568; border: 1px dashed #cbd5e0; margin: 20px;">
-                    <h3>Print Preview</h3>
-                    <p>Generate exercises first to see a preview here.</p>
+                    <h3>Affichage des fichiers PDFs</h3>
                 </div>
             `;
             pagesContainer.style.display = 'block';
@@ -643,79 +654,93 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
         return;
     }
     
+    // Store current index right away
+    generationResults.currentStudentIndex = studentIndex;
+    
+    // Show loading indicator immediately
+    const pagesContainer = document.getElementById('pages-container');
+    pagesContainer.innerHTML = `
+        <div style="padding: 30px; text-align: center; background: rgba(255,255,255,0.98); border-radius: 8px; margin: 20px;">
+            <h3 style="margin-bottom: 15px;">Chargement en cours...</h3>
+            <progress class="progress w-full" style="height: 10px;"></progress>
+        </div>
+    `;
+    pagesContainer.style.display = 'block';
+    
     // Configure Papyrus with consistent settings FIRST
     configurePapyrus();
     
-    // Create Papyrus JSON (now async due to SVG to PNG conversion)
-    const papyrusJson = await createPapyrusJson(student);
-    
-    // Log the JSON to console for debugging
-    console.log('Papyrus JSON for preview:', papyrusJson);
-    console.log(`JSON contains ${papyrusJson.length} items`);
-    
-    // Set the JSON data to the input field (Papyrus reads from here)
-    const jsonInput = document.getElementById('json-input');
-    jsonInput.value = JSON.stringify(papyrusJson, null, 2);
-    
-    // Set up Papyrus globals (required for proper pagination)
-    if (!window.contentModel) {
-        window.contentModel = { 
-            items: [],
-            loadFromJSON: function(json) { this.items = json; },
-            updateMargins: function(margins) { this.margins = margins; }
-        };
-    }
-    
-    // Make getCurrentSpaceBetweenDivs available globally (Papyrus expects this)
-    if (!window.getCurrentSpaceBetweenDivs) {
-        window.getCurrentSpaceBetweenDivs = getCurrentSpaceBetweenDivs;
-    }
-    
-    // Set papyrus debug mode based on toggle state
-    const debugToggle = document.getElementById('papyrus-debug-toggle');
-    window.papyrusDebugMode = debugToggle ? debugToggle.checked : false;
-    
-    // CRITICAL: Clear the container before Papyrus generates pages
-    const pagesContainer = document.getElementById('pages-container');
-    pagesContainer.innerHTML = '';
-    
-    // Generate pages - let Papyrus fully control the rendering
-    console.log('Calling Papyrus generatePages()...');
-    console.log('Current spacing:', getCurrentSpaceBetweenDivs(), 'mm');
-    console.log('Container before:', pagesContainer.innerHTML.length, 'chars');
-    
-    generatePages();
-    
-    // Wait longer for Papyrus to complete pagination
-    console.log('Waiting for Papyrus to complete pagination...');
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log('Container after:', pagesContainer.innerHTML.length, 'chars');
-    pagesContainer.style.display = 'block';
-    
-    // Log page dimensions for debugging
-    logPageDimensions(pagesContainer);
-    
-    // CRITICAL: Render LaTeX in foreign objects AFTER pages are built
-    renderLatexInForeignObjects(pagesContainer);
-    
-    // Update the current student indicator in the pagination
-    updatePaginationButtons(studentIndex);
-    
-    // Store current index for debug toggle
-    generationResults.currentStudentIndex = studentIndex;
-    
-    // Trigger print if requested
-    if (triggerPrint) {
-        // Wait a bit more to ensure LaTeX is rendered
-        await new Promise(resolve => setTimeout(resolve, 200));
+    try {
+        // Create Papyrus JSON (now async due to SVG to PNG conversion)
+        const papyrusJson = await createPapyrusJson(student);
         
-        // Get the fully rendered content
-        const renderedContent = pagesContainer.innerHTML;
+        // Log the JSON to console for debugging
+        console.log(`JSON contains ${papyrusJson.length} items`);
         
-        // Use Papyrus's print function directly
-        const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css";
-        printPage(renderedContent, styleSheet);
+        // Set the JSON data to the input field (Papyrus reads from here)
+        const jsonInput = document.getElementById('json-input');
+        jsonInput.value = JSON.stringify(papyrusJson, null, 2);
+        
+        // Set up Papyrus globals (required for proper pagination)
+        if (!window.contentModel) {
+            window.contentModel = { 
+                items: [],
+                loadFromJSON: function(json) { this.items = json; },
+                updateMargins: function(margins) { this.margins = margins; }
+            };
+        }
+        
+        // Make getCurrentSpaceBetweenDivs available globally (Papyrus expects this)
+        if (!window.getCurrentSpaceBetweenDivs) {
+            window.getCurrentSpaceBetweenDivs = getCurrentSpaceBetweenDivs;
+        }
+        
+        // Set papyrus debug mode based on toggle state
+        const debugToggle = document.getElementById('papyrus-debug-toggle');
+        window.papyrusDebugMode = debugToggle ? debugToggle.checked : false;
+        
+        // CRITICAL: Clear the container before Papyrus generates pages
+        pagesContainer.innerHTML = '';
+        
+        // Generate pages - let Papyrus fully control the rendering
+        console.log('Calling Papyrus generatePages()...');
+        console.log('Current spacing:', getCurrentSpaceBetweenDivs(), 'mm');
+        
+        generatePages();
+        
+        // Wait longer for Papyrus to complete pagination
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        pagesContainer.style.display = 'block';
+        
+        // Log page dimensions for debugging
+        if (window.papyrusDebugMode) {
+            logPageDimensions(pagesContainer);
+        }
+        
+        // CRITICAL: Render LaTeX in foreign objects AFTER pages are built
+        renderLatexInForeignObjects(pagesContainer);
+        
+        // Trigger print if requested
+        if (triggerPrint) {
+            // Wait a bit more to ensure LaTeX is rendered
+            await new Promise(resolve => setTimeout(resolve, 200));
+            
+            // Get the fully rendered content
+            const renderedContent = pagesContainer.innerHTML;
+            
+            // Use Papyrus's print function directly
+            const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css";
+            printPage(renderedContent, styleSheet);
+        }
+    } catch (error) {
+        console.error('Error generating preview:', error);
+        pagesContainer.innerHTML = `
+            <div style="padding: 20px; text-align: center; color: #e53e3e; border: 1px solid #e53e3e; margin: 20px;">
+                <h3>Error generating preview</h3>
+                <p>${error.message || 'Unknown error'}</p>
+            </div>
+        `;
     }
 }
 
@@ -853,9 +878,14 @@ export function createPaginationButtons() {
     // Create buttons for each student
     generationResults.students.forEach((student, index) => {
         const button = document.createElement('button');
-        button.className = index === 0 ? 'btn btn-xs btn-primary' : 'btn btn-xs btn-outline';
+        button.className = index === 0 ? 'btn btn-xs sm:btn-sm btn-primary' : 'btn btn-xs sm:btn-sm btn-outline';
         button.textContent = `${student.id}`;
-        button.onclick = () => previewStudentCopy(index);
+        button.onclick = () => {
+            // Immediately update UI before the heavy processing
+            updatePaginationButtons(index);
+            // Then start the content generation process
+            setTimeout(() => previewStudentCopy(index), 10);
+        };
         button.title = `Voir la copie de l'élève ${student.id}`;
         
         buttonContainer.appendChild(button);
@@ -873,9 +903,11 @@ export function createPaginationButtons() {
     if (generationResults.students.length > 0) {
         const printCurrentBtn = document.getElementById('print-current-copy-btn');
         const printAllBtn = document.getElementById('print-all-copies-btn');
+        const teacherManifestBtn = document.getElementById('teacher-manifest-btn');
         
         if (printCurrentBtn) printCurrentBtn.disabled = false;
         if (printAllBtn) printAllBtn.disabled = false;
+        if (teacherManifestBtn) teacherManifestBtn.disabled = false;
     }
 }
 
@@ -893,10 +925,7 @@ function updateStudentBadge(studentIndex) {
     
     if (currentStudent) {
         studentBadge.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-            </svg>
-            Élève ${currentStudent.id} (${validIndex + 1}/${generationResults.students.length})
+            Copies - Copie ${validIndex + 1}/${generationResults.students.length}
         `;
     }
 }
@@ -958,11 +987,124 @@ export function initDocumentSettingsForm() {
     if (pagesContainer) {
         pagesContainer.innerHTML = `
             <div style="padding: 20px; text-align: center; color: #4a5568; border: 1px dashed #cbd5e0; margin: 20px;">
-                <h3>Print Preview</h3>
-                <p>Generate exercises first to see a preview here.</p>
+                <h3>Affichage des fichiers PDFs</h3>
+                <p>En attente de la génération de copies.</p>
             </div>
         `;
         pagesContainer.style.display = 'block';
+    }
+}
+
+/**
+ * Generate teacher manifest URL with compressed data
+ * @returns {string} The full URL with encoded data in hash fragment
+ */
+function generateTeacherManifestURL() {
+    console.log('Generating teacher manifest URL...');
+    
+    if (!generationResults || !generationResults.students || generationResults.students.length === 0) {
+        console.error('No student data available for manifest');
+        return null;
+    }
+    
+    try {
+        // Generate filename based on current date and configuration
+        const now = new Date();
+        const dateStr = now.toISOString().split('T')[0]; // YYYY-MM-DD
+        const timeStr = now.toTimeString().split(':').slice(0, 2).join('h'); // HHhMM
+        const nbStudents = generationResults.students.length;
+        const nbQuestions = generationResults.students[0]?.questions.length || 0;
+        const filename = `fiche_reponses_${nbStudents}copies_${nbQuestions}questions_${dateStr}_${timeStr}`;
+        
+        // Build compact manifest structure
+        const manifest = {
+            v: 1,  // Version for future compatibility
+            ts: Date.now(),  // Timestamp
+            filename: filename,  // Suggested filename for saving/printing
+            cfg: {
+                n: nbStudents,  // Number of students
+                q: nbQuestions  // Questions per student
+            },
+            data: []
+        };
+        
+        // Extract data for each student
+        generationResults.students.forEach(student => {
+            const studentData = [
+                student.id,  // Student ID
+                student.seed,  // Seed
+                []  // Questions array
+            ];
+            
+            // Extract each question's answers
+            student.questions.forEach(question => {
+                let answer = null;
+                let simplified = null;
+                let generator = question.generator || 'unknown_generator';
+                
+                // Get regular answer(s)
+                try {
+                    const answers = question.getAllAnswers();
+                    if (answers && answers.length > 0) {
+                        answer = answers.length === 1 ? answers[0] : answers;
+                    }
+                } catch (e) {
+                    console.error('Error getting answers:', e);
+                }
+                
+                // Get simplified answer(s)
+                try {
+                    if (question.answer && question.answer.simplified_latex) {
+                        const simplifiedLatex = question.answer.simplified_latex;
+                        simplified = Array.isArray(simplifiedLatex) ? 
+                            (simplifiedLatex.length === 1 ? simplifiedLatex[0] : simplifiedLatex) : 
+                            simplifiedLatex;
+                    }
+                } catch (e) {
+                    console.error('Error getting simplified answers:', e);
+                }
+                
+                // Add question data [answer, simplified, generator]
+                studentData[2].push([answer, simplified, generator]);
+            });
+            
+            manifest.data.push(studentData);
+        });
+        
+        // Compress the manifest
+        const jsonString = JSON.stringify(manifest);
+        console.log('Manifest size (uncompressed):', jsonString.length, 'bytes');
+        
+        // Use LZ-String compression
+        const compressed = LZString.compressToBase64(jsonString);
+        console.log('Manifest size (compressed):', compressed.length, 'bytes');
+        
+        // Check URL length (browsers typically support up to 2048 chars, but some support more)
+        const fullURL = `/sujets0/teacher-manifest#${compressed}`;
+        console.log('Full URL length:', fullURL.length, 'chars');
+        
+        if (fullURL.length > 8000) {
+            console.warn('URL is very long and may not work in all browsers');
+        }
+        
+        return fullURL;
+        
+    } catch (error) {
+        console.error('Error generating manifest URL:', error);
+        return null;
+    }
+}
+
+/**
+ * Open teacher manifest in new tab
+ */
+function openTeacherManifest() {
+    const url = generateTeacherManifestURL();
+    if (url) {
+        // Open in new tab
+        window.open(url, '_blank');
+    } else {
+        alert('Impossible de générer la fiche enseignant. Générez d\'abord les copies.');
     }
 }
 
@@ -972,3 +1114,5 @@ window.printStudentCopy = printStudentCopy;
 window.printAllCopies = printAllCopies;
 window.createPaginationButtons = createPaginationButtons;
 window.updateDocumentSettings = updateDocumentSettings;
+window.generateTeacherManifestURL = generateTeacherManifestURL;
+window.openTeacherManifest = openTeacherManifest;

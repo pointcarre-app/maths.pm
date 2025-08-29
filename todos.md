@@ -8,6 +8,9 @@
 - [] Every domain / product yaml should have his own validation rules (using online mode to ensure hosted versions exists)
 
 
+- [ ] Seed from the form but need 100% lvl of certainty of reproducibility (careful random.seed in generators (or done above already ? ))
+
+
 ### Sujets 0 
 
 - []  Correct the level for the questions in generators. (should be done in the yaml sujets0 )
@@ -85,3 +88,13 @@ Donc il faut proposer un corrigé:
 
 
 - [] should be -soft ? pretty sure
+
+
+
+
+
+
+
+
+
+

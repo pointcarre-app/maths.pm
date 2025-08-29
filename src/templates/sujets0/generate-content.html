@@ -26,6 +26,12 @@
         transition: border-color 0.2s, box-shadow 0.2s;
     }
 
+    .input-sujets0,
+    .btn-sujets0 {
+        height: 32px;
+    }
+
+
     /* Graph Rendering Styles  for v4pyjs */
 
 
@@ -76,10 +82,10 @@
     <!-- Two main columns: numbers on left, radio buttons on right -->
     <div class=" flex flex-col sm:flex-row gap-4 sm:gap-8">
       <!-- Left column: Number inputs -->
-      <div class="flex flex-col gap-4 sm:gap-8 flex-1">
+      <div class="flex flex-col gap-4 sm:gap-8 flex-1 sm:max-md:w-5/12">
         <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
-            <div class="font-light font-heading text-base md:text-lg">Copies à générer</div>
+            <div class="font-light font-heading text-base md:text-lg">Nombre de copies à générer</div>
             <div class="relative">
               <div class="badge badge-outline badge-sm cursor-help peer">?</div>
               <div class="absolute bottom-full right-0 mb-2 px-3 py-2 bg-base-300 text-base-content text-sm rounded shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-50"
@@ -97,28 +103,26 @@
                    style="font-weight: 300 !important">tooltiptext</div>
             </div>
           </legend>
-          <div class="join w-full">
+          <div class="join w-2/3 sm:w-full">
             <input type="number"
                    id="nb-eleves"
                    name="nb-eleves"
                    min="1"
                    max="50"
-                   value="1"
+                   value="2"
                    required
-                   class="input join-item w-full"
+                   class="input input-sujets0 join-item w-full"
                    aria-describedby="nb-eleves-help" />
             <button type="button"
-                    class="btn join-item"
+                    class="btn btn-sujets0 join-item"
                     onclick="document.getElementById('nb-eleves').stepDown()"
-                    style="width:40px;
-                           height:40px">-</button>
+                    style="width:40px">-</button>
             <button type="button"
-                    class="btn join-item"
+                    class="btn btn-sujets0 join-item"
                     onclick="document.getElementById('nb-eleves').stepUp()"
-                    style="width:40px;
-                           height:40px">+</button>
+                    style="width:40px">+</button>
           </div>
-          <p class="label">Obligatoire, entre 1 et 50.</p>
+          <p class="label">Le nombre de copies à générer, entre 1 et 50.</p>
         </fieldset>
 
         <fieldset class="fieldset">
@@ -138,29 +142,31 @@
               </div>
             </div>
           </legend>
-          <div class="join w-full">
+          <div class="join w-2/3 sm:w-full">
             <input type="number"
                    id="nb-questions"
                    name="nb-questions"
                    min="1"
                    max="12"
-                   value="12"
+                   value="6"
                    required
-                   class="input join-item w-full"
+                   class="input input-sujets0 join-item w-full"
                    aria-describedby="nb-questions-help" />
-            <button type="button" class="btn join-item" onclick="document.getElementById('nb-questions').stepDown()">
-              -
-            </button>
-            <button type="button" class="btn join-item" onclick="document.getElementById('nb-questions').stepUp()">
-              +
-            </button>
+            <button type="button"
+                    class="btn btn-sujets0 join-item"
+                    onclick="document.getElementById('nb-questions').stepDown()"
+                    style="width:40px">-</button>
+            <button type="button"
+                    class="btn btn-sujets0 join-item"
+                    onclick="document.getElementById('nb-questions').stepUp()"
+                    style="width:40px">+</button>
           </div>
           <p class="label">Obligatoire, entre 1 et 12.</p>
         </fieldset>
       </div>
 
       <!-- Right column: Radio buttons -->
-      <div class="flex flex-col gap-4 sm:gap-8 flex-1">
+      <div class="flex flex-col gap-4 sm:gap-6 md:gap-8 flex-1 sm:max-md:w-7/12">
         {# <fieldset class="fieldset">
           <legend class="fieldset-legend w-full flex justify-between items-center">
             <div class="font-light font-heading text-base md:text-lg">Programmes officiels couverts</div>
@@ -213,13 +219,20 @@
             </div>
           </legend>
           <div class="join">
-            <input class="join-item btn w-[33.3%] font-light" type="radio" name="sujets0" aria-label="Spé." />
-            <input class="join-item btn w-[33.3%] font-light"
+            <input class="join-item btn sm:w-[33.3%] font-light btn-sujets0"
+                   type="radio"
+                   name="sujets0"
+                   aria-label="Spé." />
+            <input class="join-item btn sm:w-[33.3%] font-light btn-sujets0"
                    type="radio"
                    name="sujets0"
                    aria-label="Non Spé."
                    disabled />
-            <input class="join-item btn w-[33.3%] font-light" type="radio" name="sujets0" aria-label="Techno" disabled />
+            <input class="join-item btn sm:w-[33.3%] font-light btn-sujets0"
+                   type="radio"
+                   name="sujets0"
+                   aria-label="Techno"
+                   disabled />
           </div>
           <p class="label">Obligatoire (choisir un programme officiel spécifique).</p>
         </fieldset>
@@ -280,17 +293,6 @@
   </div>
 </div>
 
-<!-- Print buttons -->
-<div class="flex justify-end mt-4 gap-2">
-  <button id="print-current-copy-btn"
-          onclick="printStudentCopy(generationResults.currentStudentIndex)"
-          class="btn btn-sm btn-outline"
-          disabled>🖨️ Imprimer cette copie</button>
-  <button id="print-all-copies-btn" onclick="printAllCopies()" class="btn btn-sm btn-outline" disabled>
-    📑 Imprimer toutes les copies
-  </button>
-</div>
-
 
 <script>
     // Auto-select "Spé." radio button on page load
@@ -327,19 +329,22 @@
 <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css" />
 
+<!-- LZ-String for compression (for teacher manifest) -->
+<script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+
 <div class="font-heading text-lg sm:text-xl md:text-2xl mt-12 mb-4 flex items-center gap-2">
   Consulter les copies générées
 </div>
 
 <!-- Preview section for Papyrus documents -->
-<div class="card bg-base-100 mt-4 mb-4 shadow">
-  <div class="card-body">
+<div class="mt-4 mb-4">
+  <div class="">
     <!-- Debug toggle button in top right corner -->
     <div class="flex flex-col mb-2">
 
       <fieldset class="fieldset bg-base-100 border-base-300 rounded-box w-full border p-4 mb-4">
         <legend class="fieldset-legend">
-          <span class="badge badge-soft badge-sm">Aide</span>
+          <span class="badge badge-soft" style="font-family: var(--font-heading) !important">Aide</span>
         </legend>
         <label class="label">
           <input class="toggle toggle-error" type="checkbox" id="papyrus-debug-toggle" />
@@ -347,20 +352,36 @@
         </label>
       </fieldset>
 
-      <fieldset class="fieldset bg-base-100 border-base-300 rounded-box w-full border p-4">
+      <fieldset class="fieldset bg-base-100 border-base-300 rounded-box w-full border p-4 mb-4">
         <legend class="fieldset-legend w-full flex items-center">
-          <span class="badge badge-soft badge-sm flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z">
-              </path>
-            </svg>
-            Élève 1 (1/1)
-          </span>
+          <span class="badge badge-soft flex items-center gap-2"
+                style="font-family: var(--font-heading) !important">Copies - Copie 1/1</span>
         </legend>
-        <div id="student-pagination" class="flex flex-wrap gap-2 mt-4 mb-4 justify-center">
+        <div id="student-pagination" class="flex flex-wrap gap-2 mt-4 mb-4">
           <div class="flex flex-wrap gap-1 mb-2">
             <button class="btn btn-xs btn-primary" title="Voir la copie de l'élève 1">1</button>
           </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset bg-base-100 border-base-300 rounded-box w-full border p-4 mb-4">
+        <legend class="fieldset-legend">
+          <span class="badge badge-soft badge-sm">Impression & Export</span>
+        </legend>
+        <!-- Print buttons -->
+        <div class="flex justify-start mt-2 gap-2 pb-4 flex-wrap">
+          <button id="print-current-copy-btn"
+                  onclick="printStudentCopy(generationResults.currentStudentIndex)"
+                  class="btn btn-sm sm:btn-md"
+                  disabled>🖨️ Imprimer cette copie</button>
+          <button id="print-all-copies-btn"
+                  onclick="printAllCopies()"
+                  class="btn btn-sm sm:btn-md btn-secondary"
+                  disabled>📑 Imprimer toutes les copies</button>
+          <button id="teacher-manifest-btn"
+                  onclick="openTeacherManifest()"
+                  class="btn btn-sm sm:btn-md btn-accent"
+                  disabled>📊 Fiche réponses enseignant</button>
         </div>
       </fieldset>
     </div>
@@ -530,12 +551,13 @@
 <!-- Hidden tabs container (required by DocumentManager) -->
 <div id="document-tabs" style="display: none;"></div>
 
-
 <!-- Collapsible section for detailed results -->
+{# 
+Also commented all usaged of : displayStudentResults()
 <div class="collapse collapse-arrow bg-base-200 w-full mt-12">
   <input type="checkbox" class="collapse-toggle" />
   <div class="collapse-title text-xs">Informations détaillées pour développeur</div>
   <div class="collapse-content">
     <div id="generator-results-wrapper" class="mt-2"></div>
   </div>
-</div>
+</div> #}

@@ -1,0 +1,468 @@
+{# <ti{{ page.title }} #}
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    {% include "base/imports.html" %}
+
+    <style>
+        /* Main container width */
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Print header - hidden on screen */
+        .print-header {
+            display: none;
+        }
+
+        /* Print styles for A4 - only show table */
+        @media print {
+
+            /* Hide everything by default */
+            body * {
+                visibility: hidden;
+            }
+
+            /* Show only the print area and its contents */
+            #manifest-container,
+            #manifest-container * {
+                visibility: visible;
+            }
+
+            #manifest-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                max-width: none !important;
+                padding: 20px;
+            }
+
+            /* Hide elements marked as no-print */
+            .no-print,
+            .no-print * {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+            /* Show print header */
+            .print-header {
+                display: block !important;
+                visibility: visible !important;
+            }
+
+            /* Print table styles */
+            table {
+                font-size: 9pt !important;
+                width: 100% !important;
+            }
+
+            thead {
+                display: table-header-group;
+            }
+
+            tr {
+                page-break-inside: avoid;
+            }
+
+            th {
+                background-color: #f0f0f0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .table tr:nth-child(even) td {
+                background-color: #f9f9f9 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* Math rendering - smaller in cells */
+        td .math-content {
+            font-size: 0.85em;
+        }
+
+        /* Sticky header */
+        .table-wrapper {
+            max-height: calc(100vh - 300px);
+            overflow-y: auto;
+            border-radius: var(--rounded-box);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        }
+
+        .table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: hsl(var(--b2));
+        }
+
+        /* Better padding for table cells */
+        .table td {
+            padding: 0.75rem 1rem;
+            vertical-align: middle;
+        }
+
+        /* Custom scrollbar */
+        .table-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-track {
+            background: hsl(var(--b1));
+            border-radius: 4px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: hsl(var(--bc) / 0.3);
+            border-radius: 4px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb:hover {
+            background: hsl(var(--bc) / 0.5);
+        }
+    </style>
+
+
+    <!-- LZ-String for compression - load before any script that uses it -->
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="padding-alt-security mx-auto mb-14 mt-8 max-w-4xl no-print">
+      <!-- Header -->
+      <div class="mb-8 text-center">
+        <p class="text-base-content/70 text-lg">sujets_0</p>
+      </div>
+
+      <!-- Info Alert -->
+      <div role="alert" class="alert alert-info alert-soft border-1 mb-6 rounded-box">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             fill="none"
+             viewBox="0 0 24 24"
+             class="h-6 w-6 shrink-0 stroke-current">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+          </path>
+        </svg>
+        <span id="manifest-info">Chargement des informations...</span>
+      </div>
+
+      <!-- Controls Card -->
+      <div class="card bg-base-200 shadow-sm mb-6">
+        <div class="card-body py-4">
+          <div class="flex flex-wrap gap-2 justify-between items-center">
+            <div class="flex flex-wrap gap-2">
+              <button class="btn btn-sm" onclick="window.print()">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-4 w-4"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                Imprimer
+              </button>
+              <button class="btn btn-sm btn-outline" onclick="copyURL()">📋 Copier l'URL</button>
+            </div>
+            <button class="btn btn-sm btn-ghost" onclick="window.history.back()">← Retour</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main table container - this is what gets printed -->
+    <div id="manifest-container" class="table-container">
+      <div class="flex justify-center items-center min-h-[200px]">
+        <span class="loading loading-spinner loading-lg"></span>
+      </div>
+    </div>
+
+    <script>
+        // Global variables
+        let manifestData = null;
+
+        // Parse and display manifest on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            parseAndDisplayManifest();
+        });
+
+        /**
+         * Parse the URL hash and display the manifest
+         */
+        function parseAndDisplayManifest() {
+            const container = document.getElementById('manifest-container');
+
+            try {
+                // Get the hash fragment (without the #)
+                const hash = window.location.hash.slice(1);
+
+                if (!hash) {
+                    container.innerHTML = `
+                <div class="card bg-error/10 border border-error/20 mx-auto max-w-md mt-8">
+                    <div class="card-body text-center">
+                        <h2 class="card-title justify-center text-error">⚠️ Aucune donnée trouvée</h2>
+                        <p>Cette page nécessite des données encodées dans l'URL.</p>
+                        <p class="text-sm opacity-70">Veuillez générer un lien depuis la page de génération d'exercices.</p>
+                        <div class="card-actions justify-center mt-4">
+                            <button onclick="window.history.back()" class="btn btn-sm">← Retour</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+                    return;
+                }
+
+                // Decompress the data
+                const decompressed = LZString.decompressFromBase64(hash);
+                if (!decompressed) {
+                    throw new Error("Impossible de décompresser les données");
+                }
+
+                // Parse JSON
+                manifestData = JSON.parse(decompressed);
+                console.log('Manifest data loaded:', manifestData);
+
+                // Update document title with filename
+                if (manifestData.filename) {
+                    document.title = `Fiche Réponses - ${manifestData.filename}`;
+                }
+
+                // Display info
+                const infoEl = document.getElementById('manifest-info');
+                if (infoEl && manifestData.cfg) {
+                    const timestamp = new Date(manifestData.ts).toLocaleString('fr-FR');
+                    const filename = manifestData.filename || `fiche_reponses_${manifestData.cfg.n}copies_${manifestData.cfg.q}questions`;
+                    infoEl.innerHTML = `
+                    <strong>${manifestData.cfg.n} copies</strong> générées avec 
+                    <strong>${manifestData.cfg.q} questions</strong> par copie • 
+                    <span class="text-sm opacity-70">${timestamp}</span>
+                    <br />
+                    <span class="text-xs opacity-60">📄 ${filename}</span>
+                `;
+                }
+
+                // Render the table
+                renderManifestTable();
+
+            } catch (error) {
+                console.error('Error parsing manifest:', error);
+                container.innerHTML = `
+            <div class="card bg-error/10 border border-error/20 mx-auto max-w-md mt-8">
+                <div class="card-body">
+                    <h2 class="card-title text-error">❌ Erreur de chargement</h2>
+                    <p>${error.message}</p>
+                    <details class="collapse collapse-arrow bg-base-200 mt-4">
+                        <summary class="collapse-title text-sm font-medium">Détails techniques</summary>
+                        <div class="collapse-content">
+                            <pre class="text-xs overflow-x-auto">${error.stack}</pre>
+                        </div>
+                    </details>
+                    <div class="card-actions justify-end mt-4">
+                        <button onclick="window.history.back()" class="btn btn-sm">← Retour</button>
+                    </div>
+                </div>
+            </div>
+        `;
+            }
+        }
+
+        /**
+         * Render the manifest table
+         */
+        function renderManifestTable() {
+            const container = document.getElementById('manifest-container');
+
+            if (!manifestData || !manifestData.data) {
+                container.innerHTML = `
+                <div class="alert alert-warning max-w-md mx-auto mt-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span>Pas de données à afficher</span>
+                </div>
+              `;
+                return;
+            }
+
+            // Create the table HTML with DaisyUI classes
+            const filename = manifestData.filename || `fiche_reponses_${manifestData.cfg.n}copies_${manifestData.cfg.q}questions`;
+            const timestamp = new Date(manifestData.ts).toLocaleString('fr-FR');
+
+            let html = `
+        <div>
+            <!-- Print header - only visible when printing -->
+            <div class="print-header mb-4 text-center">
+                <h1 class="text-xl font-bold">Fiche de Réponses Enseignant</h1>
+                <p class="text-sm font-mono">${filename}</p>
+                <p class="text-xs opacity-70">
+                    ${manifestData.cfg.n} copies × ${manifestData.cfg.q} questions • ${timestamp}
+                </p>
+                <p class="text-xs opacity-50 mt-1">
+                    Avec générateurs sources
+                </p>
+                <hr class="my-2" />
+            </div>
+            
+            <!-- Screen header - hidden when printing -->
+            <div class="card bg-base-100 shadow-xl no-print mb-4">
+                <div class="card-body py-3">
+                    <h2 class="card-title text-sm">
+                        Fiche de réponses - ${manifestData.cfg.n} copies × ${manifestData.cfg.q} questions
+                    </h2>
+                    <p class="text-xs opacity-60">📄 ${filename}</p>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table class="table table-zebra table-pin-rows">
+                    <thead>
+                        <tr class="bg-base-200">
+                            <th style="width: 30%">Copie / Question</th>
+                            <th style="width: 35%">Réponse</th>
+                            <th style="width: 35%">Réponse simplifiée</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    `;
+
+            // Iterate through students
+            manifestData.data.forEach(([studentId, seed, questions]) => {
+                questions.forEach((questionData, qIndex) => {
+                    const questionNum = qIndex + 1;
+                    const isFirstQuestion = qIndex === 0;
+
+                    // Handle answer (can be array or single value)
+                    let answer = '<span class="text-base-content/40">—</span>';
+                    let simplified = '<span class="text-base-content/40">—</span>';
+                    let generator = 'unknown_generator';
+
+                    if (questionData && questionData.length >= 2) {
+                        // Extract answer, simplified, and generator
+                        const [answerData, simplifiedData, generatorData] = questionData;
+                        // Remove .py extension if present for cleaner display
+                        generator = (generatorData || 'unknown_generator').replace('.py', '');
+
+                        // Handle answer
+                        if (answerData !== null && answerData !== undefined) {
+                            if (Array.isArray(answerData)) {
+                                answer = answerData.map(a => `<span class="math-content">$${a}$</span>`).join(' &nbsp;  ;  &nbsp; ');
+                            } else {
+                                answer = `<span class="math-content">$${answerData}$</span>`;
+                            }
+                        }
+
+                        // Handle simplified
+                        if (simplifiedData !== null && simplifiedData !== undefined) {
+                            if (Array.isArray(simplifiedData)) {
+                                simplified = simplifiedData.map(s => `<span class="math-content">$${s}$</span>`).join(' &nbsp; ; &nbsp; ');
+                            } else {
+                                simplified = `<span class="math-content text-primary font-medium">$${simplifiedData}$</span>`;
+                            }
+                        }
+                    }
+
+                    // Format the student/question info cell
+                    const studentQuestionInfo = `
+                    <div>
+                        <div class="font-semibold">
+                            Copie <strong>${studentId}</strong> 
+                            <span class="text-base-content/60">(${seed})</span> 
+                            - Q°${questionNum}
+                        </div>
+                        <div class="text-xs text-base-content/50 font-mono mt-1">
+                            📄 ${generator}
+                        </div>
+                    </div>
+                `;
+
+                    // Add row with better styling
+                    html += `
+                <tr ${isFirstQuestion ? 'class="border-t-2 border-base-300"' : ''}>
+                    <td>${studentQuestionInfo}</td>
+                    <td>${answer}</td>
+                    <td>${simplified}</td>
+                </tr>
+            `;
+                });
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+
+            container.innerHTML = html;
+
+            // Render LaTeX
+            renderMathInElement(container, {
+                delimiters: [{
+                    left: '$$',
+                    right: '$$',
+                    display: true
+                }, {
+                    left: '$',
+                    right: '$',
+                    display: false
+                }, {
+                    left: '\\(',
+                    right: '\\)',
+                    display: false
+                }, {
+                    left: '\\[',
+                    right: '\\]',
+                    display: true
+                }],
+                throwOnError: false
+            });
+        }
+
+        /**
+         * Copy the current URL to clipboard
+         */
+        function copyURL() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                // Show success toast
+                showToast('URL copiée dans le presse-papiers!', 'success');
+            }).catch(err => {
+                console.error('Erreur lors de la copie:', err);
+                // Fallback for older browsers
+                const input = document.createElement('input');
+                input.value = window.location.href;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                showToast('URL copiée dans le presse-papiers!', 'success');
+            });
+        }
+
+        /**
+         * Show a toast notification
+         */
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${type} fixed bottom-4 right-4 w-auto max-w-sm shadow-lg z-50`;
+            toast.innerHTML = `
+              <div>
+                  <span>${message}</span>
+              </div>
+          `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+
+  </body>
+</html>

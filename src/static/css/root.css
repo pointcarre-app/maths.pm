@@ -117,17 +117,17 @@
   /* --color-neutral-content: oklch(25% 0.01 240); Dark gray for neutral text */
   
   /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
-  /* Information blue - clear and professional */
-  --color-info: oklch(55% 0.20 220);           /* Clear information blue */
-  --color-info-content: oklch(97% 0.02 220);   /* Nearly white for info text */
+  /* Information blue - strong and high contrast */
+  --color-info: oklch(45% 0.35 255);           /* Vibrant, stronger blue */
+  --color-info-content: oklch(100% 0 0);       /* Pure white for maximum contrast */
   
   /* Success green - positive and encouraging */
-  --color-success: oklch(58% 0.18 140);        /* Positive success green */
+  --color-success: oklch(62% 0.22 140);        /* Positive success green */
   --color-success-content: oklch(97% 0.02 140); /* Nearly white for success text */
   
-  /* Warning orange - attention-grabbing but not alarming */
-  --color-warning: oklch(68% 0.15 65);         /* Warm warning orange */
-  --color-warning-content: oklch(25% 0.05 65); /* Dark text for warning (better readability on orange) */
+  /* Warning yellow - attention-grabbing with strong contrast on white */
+  --color-warning: oklch(60% 0.30 65);         /* Strong yellow-amber warning color */
+  --color-warning-content: oklch(15% 0.05 65); /* Dark text for warning (better readability) */
   
   /* Error red - clear danger indication */
   --color-error: oklch(62% 0.22 15);           /* Strong error red */
@@ -410,8 +410,8 @@
   --color-success: oklch(52% 0.20 158);       /* Success green */
   --color-success-content: oklch(100% 0 0);   /* White text on success */
   
-  --color-warning: oklch(56% 0.25 43);        /* Warning yellow */
-  --color-warning-content: oklch(15% 0.05 43); /* Dark text on warning */
+  --color-warning: oklch(60% 0.30 65);        /* Strong yellow-amber warning color */
+  --color-warning-content: oklch(15% 0.05 65); /* Dark text on warning */
   
   --color-error: oklch(71% 0.25 0);           /* Error red */
   --color-error-content: oklch(100% 0 0);     /* White text on error */
@@ -458,8 +458,9 @@
   --color-success: oklch(62% 0.20 158);       /* Lighter success green */
   --color-success-content: oklch(15% 0.05 158); /* Dark text on success */
   
-  --color-warning: oklch(66% 0.25 43);        /* Lighter warning yellow */
-  --color-warning-content: oklch(15% 0.05 43); /* Dark text on warning */
+  /* Adjusted warning color to be more yellow and less reddish */
+  --color-warning: oklch(60% 0.15 65);        /* Strong yellow-amber warning color */
+  --color-warning-content: oklch(15% 0.05 65); /* Dark text on warning */
   
   --color-error: oklch(81% 0.25 0);           /* Lighter error red */
   --color-error-content: oklch(15% 0.05 0);   /* Dark text on error */

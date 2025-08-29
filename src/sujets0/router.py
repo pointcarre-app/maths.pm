@@ -280,6 +280,38 @@ async def sujets0_ex_ante_generated_error_analysis(request: Request):
         return HTMLResponse(f"Error: {e}", status_code=500)
 
 
+@sujets0_router.get("/sujets0/teacher-manifest", response_class=HTMLResponse)
+async def sujets0_teacher_manifest(request: Request):
+    """
+    Teacher manifest - Display answer sheet from URL-encoded data.
+
+    All data is passed via URL hash fragment and decoded client-side.
+    This allows teachers to share/bookmark complete answer sheets.
+    """
+    try:
+        context = {
+            "request": request,
+            "page": {"title": "Fiche Réponses - Enseignant"},
+        }
+
+        # Add product context for consistent styling
+        if sujets0_product:
+            context.update(
+                {
+                    "product_name": sujets0_product.name,
+                    "product_title": "Fiche Réponses",
+                    "product_description": "Tableau des réponses pour toutes les copies",
+                    "product_metatags": sujets0_product.metatags,
+                    "current_product": sujets0_product,
+                }
+            )
+
+        return settings.templates.TemplateResponse("sujets0/teacher_manifest.html", context)
+
+    except Exception as e:
+        return HTMLResponse(f"Error: {e}", status_code=500)
+
+
 @sujets0_router.get("/sujets0/originals/{filiere_number}", response_class=HTMLResponse)
 async def sujets0_originals(request: Request, filiere_number: str):
     """
