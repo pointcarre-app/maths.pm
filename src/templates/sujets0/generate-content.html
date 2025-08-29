@@ -342,29 +342,32 @@
   <div class="card-body">
     <!-- Debug toggle button in top right corner -->
     <div class="flex justify-end mb-2">
-      <label class="swap swap-flip text-sm">
-        <input type="checkbox" id="papyrus-debug-toggle" />
+
+      <fieldset class="fieldset bg-base-100 border-base-300 rounded-box w-64 border p-4">
+        <legend class="fieldset-legend">
+          <span class="badge badge-soft badge-sm">Aide</span>
+        </legend>
+        <label class="label">
+          <input class="toggle toggle-error" type="checkbox" id="papyrus-debug-toggle" />
+          Debug PDF
+        </label>
+      </fieldset>
+
+
+      {# <label class="swap swap-flip text-sm">
         <div class="swap-off flex items-center gap-1">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               class="h-4 w-4"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           Debug Off
         </div>
         <div class="swap-on flex items-center gap-1 text-primary">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               class="h-4 w-4"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           Debug On
         </div>
-      </label>
+      </label> #}
     </div>
     <!-- Container for rendering Papyrus content -->
     <div id="pages-container"
@@ -457,6 +460,7 @@
             margin: 0 !important;
             box-shadow: none !important;
             page-break-after: always;
+            color: var(--color-base-content) !important;
         }
 
         .page-content {

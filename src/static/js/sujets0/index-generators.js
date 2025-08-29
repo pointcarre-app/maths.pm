@@ -414,7 +414,7 @@ export async function executeAllGenerators() {
     
     // Update conversion status to complete
     if (conversionMessage) {
-      conversionMessage.textContent = `Conversion terminée`;
+      conversionMessage.textContent = `Conversion des graphiques terminée : ${totalGraphs} / ${totalGraphs}`;
     }
     
     if (conversionProgress) {

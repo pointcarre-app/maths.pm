@@ -460,8 +460,8 @@ export async function createPapyrusJson(studentExerciseSet) {
         papyrusJson.push({
             "id": `question-${questionNum}`,
             "html": questionHtml,
-             "style": "padding-bottom: 1rem;",  // No margins - let Papyrus handle spacing
-            "classes": []  // Can add classes if needed
+             "style": "padding-bottom: 1rem; color: var(--color-base-content) !important;",  // No margins - let Papyrus handle spacing
+            // "classes": ["text-base-content"]  // Can add classes if needed
         });
     }
     
@@ -580,7 +580,7 @@ function configurePapyrus() {
     setSpaceBetweenDivs(settings.spacing);
     
     // Enable page numbers
-    setShowPageNumbers(true);
+    // setShowPageNumbers(true);
 }
 
 /**
