@@ -57,7 +57,7 @@ def render_question(*, note1, note2, note3, coef1, coef2, coef3, mean):
     """
 
     statement = f"""Voici une série de notes avec les coefficients associés\n-{note1.n} coefficient {coef1.n}\n-{note2.n} coefficient {coef2.n}\n-{note3.n} coefficient $x$\nOn note $m$ la moyenne de cette série. Que doit valoir $x$ pour que $m = """
-    statement += str(mean.eval())
+    statement += str(mean.simplified().latex())
     statement += "$ ?"
 
     return {
@@ -74,41 +74,31 @@ question = render_question(**components)
 
 
 # Create HTML version with table for notes
-statement_html = f"""
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <p class="text-sm mb-3">Voici une série de notes avec les coefficients associés :</p>
-        <div class="overflow-x-auto">
-            <table class="table table-compact w-full">
-                <thead>
-                    <tr>
-                        <th class="text-center">Note</th>
-                        <th class="text-center">Coefficient</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center">{components["note1"].n}</td>
-                        <td class="text-center">{components["coef1"].n}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">{components["note2"].n}</td>
-                        <td class="text-center">{components["coef2"].n}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">{components["note3"].n}</td>
-                        <td class="text-center"><span class="badge badge-primary">$x$</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="alert alert-info mt-3">
-            <span>On note $m$ la moyenne de cette série. On veut que <span class="badge badge-warning">$m = {components["mean"].eval()}$</span></span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Que doit valoir $x$ ?
-        </div>
+statement_html = f"""<div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
+    <div style='flex: 1; min-width: 250px;'>Voici une série de notes avec les coefficients associés. On note $m$ la moyenne de cette série. Quelle valeur de $x$ mène à $m = {components["mean"].simplified().latex()}$ ?</div>
+    <div style='flex: 0 1 auto;'>    
+        <table style="margin: 0; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">Note</th>
+                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">Coefficient</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">{components["note1"].n}</td>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">{components["coef1"].n}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">{components["note2"].n}</td>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">{components["coef2"].n}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">{components["note3"].n}</td>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">$x$</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 """

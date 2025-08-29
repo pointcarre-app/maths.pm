@@ -460,7 +460,7 @@ export async function createPapyrusJson(studentExerciseSet) {
         papyrusJson.push({
             "id": `question-${questionNum}`,
             "html": questionHtml,
-             "style": "padding-bottom: 1rem; color: var(--color-base-content) !important;",  // No margins - let Papyrus handle spacing
+             "style": "padding-bottom: 1.25rem; color: var(--color-base-content) !important;",  // No margins - let Papyrus handle spacing
             // "classes": ["text-base-content"]  // Can add classes if needed
         });
     }
@@ -845,17 +845,6 @@ export function createPaginationButtons() {
     // Clear existing buttons
     paginationContainer.innerHTML = '';
     
-    // Create a title for the pagination area
-    const title = document.createElement('div');
-    title.className = 'flex items-center gap-2 font-medium mb-2';
-    title.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-        </svg>
-        Naviguer entre les copies (${generationResults.students.length})
-    `;
-    paginationContainer.appendChild(title);
-    
     // Create button container
     const buttonContainer = document.createElement('div');
     buttonContainer.className = 'flex flex-wrap gap-1 mb-2';
@@ -864,13 +853,52 @@ export function createPaginationButtons() {
     // Create buttons for each student
     generationResults.students.forEach((student, index) => {
         const button = document.createElement('button');
-        button.className = 'btn btn-xs btn-outline';
+        button.className = index === 0 ? 'btn btn-xs btn-primary' : 'btn btn-xs btn-outline';
         button.textContent = `${student.id}`;
         button.onclick = () => previewStudentCopy(index);
         button.title = `Voir la copie de l'élève ${student.id}`;
         
         buttonContainer.appendChild(button);
     });
+    
+    // Set the initial student index if it's not already set
+    if (generationResults.currentStudentIndex === undefined && generationResults.students.length > 0) {
+        generationResults.currentStudentIndex = 0;
+    }
+    
+    // Update the badge in the legend to show current student count
+    updateStudentBadge(generationResults.currentStudentIndex || 0);
+    
+    // Enable the print buttons if we have students
+    if (generationResults.students.length > 0) {
+        const printCurrentBtn = document.getElementById('print-current-copy-btn');
+        const printAllBtn = document.getElementById('print-all-copies-btn');
+        
+        if (printCurrentBtn) printCurrentBtn.disabled = false;
+        if (printAllBtn) printAllBtn.disabled = false;
+    }
+}
+
+/**
+ * Updates the student badge in the legend with current student information
+ * @param {number} studentIndex - Index of the student to display
+ */
+function updateStudentBadge(studentIndex) {
+    const studentBadge = document.querySelectorAll('.fieldset-legend .badge.badge-soft')[1];
+    if (!studentBadge || !generationResults.students || generationResults.students.length === 0) return;
+    
+    // Make sure we have a valid index
+    const validIndex = Math.min(Math.max(0, studentIndex), generationResults.students.length - 1);
+    const currentStudent = generationResults.students[validIndex];
+    
+    if (currentStudent) {
+        studentBadge.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+            </svg>
+            Élève ${currentStudent.id} (${validIndex + 1}/${generationResults.students.length})
+        `;
+    }
 }
 
 /**
@@ -881,8 +909,8 @@ export function updatePaginationButtons(currentIndex) {
     const paginationContainer = document.getElementById('student-pagination');
     if (!paginationContainer) return;
     
-    // Find the button container (second child after the title)
-    const buttonContainer = paginationContainer.querySelector('div:nth-child(2)');
+    // Find the button container
+    const buttonContainer = paginationContainer.querySelector('div.flex.flex-wrap.gap-1');
     if (!buttonContainer) return;
     
     // Update button states
@@ -896,19 +924,8 @@ export function updatePaginationButtons(currentIndex) {
         }
     });
     
-    // Update the title to show current student
-    const title = paginationContainer.querySelector('div:first-child');
-    if (title) {
-        const currentStudent = generationResults.students[currentIndex];
-        if (currentStudent) {
-            title.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-                </svg>
-                Élève ${currentStudent.id} (${currentIndex + 1}/${generationResults.students.length})
-            `;
-        }
-    }
+    // Update the student badge with the current student info
+    updateStudentBadge(currentIndex);
 }
 
 /**
