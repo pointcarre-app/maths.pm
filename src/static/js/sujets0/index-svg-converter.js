@@ -7,6 +7,14 @@
 import domtoimage from 'https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/+esm';
 
 /**
+ * Detect if browser is Safari
+ * @returns {boolean} True if Safari, false otherwise
+ */
+export function isSafari() {
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+}
+
+/**
  * Convert SVG to PNG using Canvas API (CORS-safe method)
  * @param {string} svgString - The SVG HTML string
  * @param {number} width - Width of the output image
@@ -124,6 +132,13 @@ function renderLatexInForeignObjects(container) {
  * @returns {Promise<string>} PNG data URL
  */
 export async function convertSvgToPng(svgString, options = {}) {
+    // For Safari, skip PNG conversion entirely to avoid security issues
+    // The calling code will fall back to using SVG directly
+    if (isSafari()) {
+        console.log('Safari detected, skipping PNG conversion (will use SVG directly)');
+        return null;
+    }
+    
     // Default options for high quality
     const scale = options.scale || 2; // 2x for high DPI
     let width = options.width || 200;

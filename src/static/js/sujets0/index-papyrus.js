@@ -19,7 +19,7 @@
 import generationResults from './index-data-model.js';
 import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/preview/index.js';
 import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/print-manager.js';
-import { convertSvgToPng } from './index-svg-converter.js';
+import { convertSvgToPng, isSafari } from './index-svg-converter.js';
 import { 
     initializeMargins, 
     setMargins,
@@ -454,10 +454,42 @@ export async function createPapyrusJson(studentExerciseSet) {
             } else {
                 // Fallback to original SVG if conversion failed
                 console.warn(`⚠️ Failed to convert SVG to PNG for question ${questionNum}, using original SVG`);
+                
+                // For Safari, inject critical styles inline to ensure they work
+                let svgWithStyles = question.graphSvg;
+                
+                // Check if this is Safari - apply inline styles for critical classes
+                if (typeof isSafari !== 'undefined' && isSafari()) {
+                    // Map of CSS classes to their inline styles
+                    const classToStyles = {
+                        'text-2xs': 'font-size: 0.625rem !important; line-height: 1 !important;',
+                        'text-xs': 'font-size: 0.75rem !important; line-height: 1rem !important;',
+                        'text-sm': 'font-size: 0.875rem !important; line-height: 1.25rem !important;',
+                        'text-base': 'font-size: 1rem !important; line-height: 1.5rem !important;'
+                    };
+                    
+                    // Apply inline styles for each class found
+                    for (const [className, styles] of Object.entries(classToStyles)) {
+                        if (svgWithStyles.includes(className)) {
+                            // Handle elements with only the class
+                            const classOnlyRegex = new RegExp(`class\\s*=\\s*["']${className}["']`, 'g');
+                            svgWithStyles = svgWithStyles.replace(classOnlyRegex, `class="${className}" style="${styles}"`);
+                            
+                            // Handle elements with the class among others (no existing style)
+                            const classAmongOthersRegex = new RegExp(`(class\\s*=\\s*["'][^"']*\\b)${className}(\\b[^"']*["'])(?![^>]*style)`, 'g');
+                            svgWithStyles = svgWithStyles.replace(classAmongOthersRegex, `$1${className}$2 style="${styles}"`);
+                            
+                            // Handle elements that already have style attribute
+                            const withStyleRegex = new RegExp(`(<[^>]+class\\s*=\\s*["'][^"']*\\b${className}\\b[^"']*["'][^>]*style\\s*=\\s*["'])([^"']*)(["'])`, 'g');
+                            svgWithStyles = svgWithStyles.replace(withStyleRegex, `$1$2; ${styles}$3`);
+                        }
+                    }
+                }
+                
                 questionHtml = `
                     <div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
                         <div style='flex: 1; min-width: 250px;'>${processedStatement}</div>
-                        <div style='flex: 0 1 auto;'>${question.graphSvg}</div>
+                        <div style='flex: 0 1 auto;'>${svgWithStyles}</div>
                     </div>
                 `;
             }
