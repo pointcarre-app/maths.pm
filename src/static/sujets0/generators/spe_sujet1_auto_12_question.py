@@ -77,25 +77,25 @@ question = render_question(**components)
 statement_html = f"""<div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
     <div style='flex: 1; min-width: 250px;'>Voici une série de notes avec les coefficients associés. On note $m$ la moyenne de cette série. Quelle valeur de $x$ mène à $m = {components["mean"].simplified().latex()}$ ?</div>
     <div style='flex: 0 1 auto;'>    
-        <table style="margin: 0; border-collapse: collapse;">
+        <table style="margin: 0; border-collapse: collapse; table-layout: fixed; width: auto;">
             <thead>
                 <tr>
-                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">Note</th>
-                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">Coefficient</th>
+                    <th style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333; min-width: 60px;">Note</th>
+                    <th style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333; min-width: 80px;">Coefficient</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">{components["note1"].n}</td>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">{components["coef1"].n}</td>
+                    <td style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333;">{components["note1"].n}</td>
+                    <td style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333;">{components["coef1"].n}</td>
                 </tr>
                 <tr>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">{components["note2"].n}</td>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">{components["coef2"].n}</td>
+                    <td style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333;">{components["note2"].n}</td>
+                    <td style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333;">{components["coef2"].n}</td>
                 </tr>
                 <tr>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">{components["note3"].n}</td>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">$x$</td>
+                    <td style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333;">{components["note3"].n}</td>
+                    <td style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333;">$x$</td>
                 </tr>
             </tbody>
         </table>

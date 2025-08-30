@@ -109,21 +109,21 @@ def render_question(*, x, c1, a2, b2, c2, a3, b3, c3, expr1, expr2, expr3):
     statement_html = f"""<div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
     <div style='flex: 1; min-width: 250px;'>Parmi les 3 fonctions ci-dessous, identifier les fonctions qui sont affines. Quelle est la valeur du coefficient directeur (de ces fonctions qui sont bien affines) avec la plus grande valeur absolue ?</div>
     <div style='flex: 0 1 auto;'>  
-        <table style="margin: 0; border-collapse: collapse;">
+        <table style="margin: 0; border-collapse: collapse; table-layout: fixed; width: auto;">
             <thead>
                 <tr>
-                    <th style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">$f$</th>
-                    <th style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">$f_1$</th>
-                    <th style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">$f_2$</th>
-                    <th style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">$f_3$</th>
+                    <th style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; min-width: 40px;">$f$</th>
+                    <th style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; min-width: 80px;">$f_1$</th>
+                    <th style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; min-width: 80px;">$f_2$</th>
+                    <th style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; min-width: 80px;">$f_3$</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">$f(x)$</td>
-                    <td style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">${expr1.latex()}$</td>
-                    <td style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">${expr2.latex()}$</td>
-                    <td style="padding: 4px; font-size:0.8rem!important; text-align: center; border: 1px solid currentColor;">${expr3.latex()}$</td>
+                    <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333;">$f(x)$</td>
+                    <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${expr1.latex()}$</td>
+                    <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${expr2.latex()}$</td>
+                    <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${expr3.latex()}$</td>
                 </tr>
             </tbody>
         </table>

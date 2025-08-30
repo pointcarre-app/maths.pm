@@ -17,10 +17,14 @@
 .font-mono { font-family: 'JetBrains Mono', monospace; }
 
 @media print {
-    /* Apply page breaks to the wrapper, not the content */
+    /* Apply page breaks only between pages to avoid trailing blank page in Safari */
     .page-wrapper {
-        page-break-after: always;
         page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    .page-wrapper + .page-wrapper {
+        page-break-before: always;
+        break-before: page;
     }
 
     .page-preview {
@@ -32,11 +36,11 @@
         box-shadow: none;
     }
 
-    /* Page number styling for print */
+    /* Page number styling for print - use absolute so it doesn't create a new page in Safari */
     .page-number-bottom {
-        position: fixed;
-        bottom: 3mm; /* Very close to the page edge */
-        right: 3mm; /* Very close to the page edge */
+        position: absolute;
+        bottom: 3mm;
+        right: 3mm;
         font-size: 8pt;
         color: #555;
         background: rgba(255, 255, 255, 0.9);

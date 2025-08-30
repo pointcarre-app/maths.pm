@@ -57,23 +57,23 @@ def render_question(*, probabilities: list[tm.Fraction]):
     statement_html = f"""<div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
     <div style='flex: 1; min-width: 250px;'>On lance un dé à 4 faces. La probabilité d'obtenir chacune des faces est donnée dans le tableau ci-contre. Calculer $x$.</div>
     <div style='flex: 0 1 auto;'>    
-        <table style="margin: 0; border-collapse: collapse;">
+        <table style="margin: 0; border-collapse: collapse; table-layout: fixed; width: auto;">
             <thead>
                 <tr>
-                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">Face</th>
-                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">1</th>
-                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">2</th>
-                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">3</th>
-                    <th style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">4</th>
+                    <th style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333; min-width: 70px;">Face</th>
+                    <th style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333; min-width: 50px;">1</th>
+                    <th style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333; min-width: 50px;">2</th>
+                    <th style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333; min-width: 50px;">3</th>
+                    <th style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333; min-width: 50px;">4</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">Probabilité</td>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">${str_probabilities[0]}$</td>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">${str_probabilities[1]}$</td>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">${str_probabilities[2]}$</td>
-                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid currentColor;">$x$</td>
+                    <td style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333;">Probabilité</td>
+                    <td style="padding: 4px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${str_probabilities[0]}$</td>
+                    <td style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${str_probabilities[1]}$</td>
+                    <td style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${str_probabilities[2]}$</td>
+                    <td style="padding: 2px; font-size:0.85rem !important; text-align: center; border: 1px solid #333333;">$x$</td>
                 </tr>
             </tbody>
         </table>

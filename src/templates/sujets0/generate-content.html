@@ -172,7 +172,7 @@
                    name="nb-questions"
                    min="1"
                    max="12"
-                   value="6"
+                   value="12"
                    required
                    class="input input-sujets0 join-item w-full"
                    aria-describedby="nb-questions-help" />
@@ -296,7 +296,7 @@
 </div>
 
 <!-- Generation progress -->
-<div id="generation-status" class="card bg-base-100 shadow-sm">
+<div id="generation-status" class="card bg-base-100 shadow-sm mb-4">
   <div class="card-body py-3">
     <div class="flex justify-between items-center">
       <div id="generation-message" class="text-sm">En attente de génération...</div>
@@ -409,6 +409,18 @@
         </div>
       </fieldset>
     </div>
+
+    <!-- Print progress status -->
+    <div id="print-all-status" class="card bg-base-100 shadow-sm mt-4 mb-4">
+      <div class="card-body py-3">
+        <div class="flex justify-between items-center">
+          <div id="print-all-message" class="text-sm">En attente d'impression groupée...</div>
+          <div id="print-all-time" class="text-xs opacity-60"></div>
+        </div>
+        <progress id="print-all-progress" class="progress w-full" value="0" max="100"></progress>
+      </div>
+    </div>
+
     <!-- Container for rendering Papyrus content -->
     <div id="pages-container"
          class="border rounded p-4 bg-white papyrus-document"

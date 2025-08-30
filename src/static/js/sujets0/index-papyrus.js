@@ -17,23 +17,23 @@
  */
 
 import generationResults from './index-data-model.js';
-import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/preview/index.js';
-import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/print-manager.js';
+import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/preview/index.js';
+import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/print-manager.js';
 import { convertSvgToPng, isSafari } from './index-svg-converter.js';
 import { 
     initializeMargins, 
     setMargins,
     getCurrentMargins
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/margin-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/margin-config.js';
 import { 
     initializeFontSizes, // Default font sizes in px
     setFontSizes 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/font-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/font-config.js';
 
 import { 
     initializePageNumberConfig,
     setShowPageNumbers 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/page-number-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/page-number-config.js';
 
 
 
@@ -189,6 +189,45 @@ function logPageDimensions(container) {
 function applySafariSVGStyles(container) {
     if (!container || !isSafari()) return;
     
+    // First, ensure all SVG elements have explicit dimensions
+    const svgElements = container.querySelectorAll('svg');
+    svgElements.forEach(svg => {
+        // Get current dimensions from attributes or viewBox
+        let width = svg.getAttribute('width');
+        let height = svg.getAttribute('height');
+        
+        // If no width/height, try to extract from viewBox
+        if (!width || !height) {
+            const viewBox = svg.getAttribute('viewBox');
+            if (viewBox) {
+                const parts = viewBox.split(' ');
+                if (parts.length === 4) {
+                    width = parts[2];
+                    height = parts[3];
+                }
+            }
+        }
+        
+        // Default to 340x340 if still no dimensions
+        width = width || 340;
+        height = height || 340;
+        
+        // Remove any units (px, %, etc) and ensure it's a number
+        width = parseFloat(width);
+        height = parseFloat(height);
+        
+        // Apply inline styles with explicit pixel dimensions
+        const currentStyle = svg.getAttribute('style') || '';
+        if (!currentStyle.includes('width:')) {
+            svg.style.width = `${width}px`;
+        }
+        if (!currentStyle.includes('height:')) {
+            svg.style.height = `${height}px`;
+        }
+        
+        console.log(`Safari: Set SVG dimensions to ${width}x${height}px`);
+    });
+    
     // Find all elements with text-2xs class within SVGs
     const textElements = container.querySelectorAll('svg .text-2xs');
     textElements.forEach(el => {
@@ -210,7 +249,7 @@ function applySafariSVGStyles(container) {
         el.style.lineHeight = '1.25rem';
     });
     
-    console.log(`Applied Safari SVG styles to ${textElements.length + textXsElements.length + textSmElements.length} elements`);
+    console.log(`Applied Safari SVG styles to ${svgElements.length} SVGs and ${textElements.length + textXsElements.length + textSmElements.length} text elements`);
 }
 
 /**
@@ -297,7 +336,7 @@ import {
     initializeSpaceBetweenDivs, 
     setSpaceBetweenDivs,
     getCurrentSpaceBetweenDivs
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/core/margin-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/margin-config.js';
 
 /**
  * Get fallback dimensions for different graph types
@@ -489,8 +528,42 @@ export async function createPapyrusJson(studentExerciseSet) {
                 // For Safari, inject critical styles inline to ensure they work
                 let svgWithStyles = question.graphSvg;
                 
-                // Check if this is Safari - apply inline styles for critical classes
+                // Check if this is Safari - apply inline styles for critical classes AND size
                 if (typeof isSafari !== 'undefined' && isSafari()) {
+                    // First, ensure SVG has explicit size in pixels
+                    // Get dimensions from graphDict or use fallback
+                    let svgDimensions;
+                    if (question.graphDict && question.graphDict.svg) {
+                        svgDimensions = {
+                            width: question.graphDict.svg.width || 340,
+                            height: question.graphDict.svg.height || 340
+                        };
+                    } else {
+                        svgDimensions = getGraphDimensions(question.generator);
+                    }
+                    
+                    // Add or update width and height inline styles on the SVG element
+                    // First check if the SVG already has style attribute
+                    if (svgWithStyles.match(/<svg[^>]*style\s*=/)) {
+                        // SVG has style attribute, append to it
+                        svgWithStyles = svgWithStyles.replace(
+                            /(<svg[^>]*style\s*=\s*["'])([^"']*)(["'])/,
+                            `$1$2; width: ${svgDimensions.width}px !important; height: ${svgDimensions.height}px !important;$3`
+                        );
+                    } else {
+                        // SVG doesn't have style attribute, add one
+                        svgWithStyles = svgWithStyles.replace(
+                            /<svg([^>]*)>/,
+                            `<svg$1 style="width: ${svgDimensions.width}px !important; height: ${svgDimensions.height}px !important;">`
+                        );
+                    }
+                    
+                    // Also ensure width and height attributes are set (as backup)
+                    svgWithStyles = svgWithStyles.replace(
+                        /<svg([^>]*?)(?:\s+width\s*=\s*["'][^"']*["'])?([^>]*?)(?:\s+height\s*=\s*["'][^"']*["'])?([^>]*)>/,
+                        `<svg$1 width="${svgDimensions.width}" height="${svgDimensions.height}"$2$3>`
+                    );
+                    
                     // Map of CSS classes to their inline styles
                     const classToStyles = {
                         'text-2xs': 'font-size: 0.625rem !important; line-height: 1 !important;',
@@ -515,6 +588,8 @@ export async function createPapyrusJson(studentExerciseSet) {
                             svgWithStyles = svgWithStyles.replace(withStyleRegex, `$1$2; ${styles}$3`);
                         }
                     }
+                    
+                    console.log(`Safari: Applied explicit dimensions ${svgDimensions.width}x${svgDimensions.height}px to SVG for question ${questionNum}`);
                 }
                 
                 questionHtml = `
@@ -568,7 +643,7 @@ function getDocumentSettings() {
             h6: 14,
             body: 15
         },
-        spacing: 0  // Spacing between elements in mm
+        spacing: 0  // Spacing between elements in mm // TODO sel: not sure reflected in Papyrus
     };
 }
 
@@ -789,34 +864,23 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
         
         // Trigger print if requested
         if (triggerPrint) {
-            // Wait a bit more to ensure LaTeX is rendered
+            // Wait for LaTeX rendering to complete
             await new Promise(resolve => setTimeout(resolve, 200));
             
-            // Get the fully rendered content
-            const renderedContent = pagesContainer.innerHTML;
-            
-            // For Safari, apply inline styles before using Papyrus print
+            // Apply Safari inline styles if needed (for SVG text rendering)
             if (isSafari()) {
-                console.log('Safari detected, applying inline styles before Papyrus print');
-                
-                // Apply styles to ensure SVG text renders correctly
+                console.log('Safari: Applying inline styles to SVGs');
                 applySafariSVGStyles(pagesContainer);
-                
-                // Clean up any existing print iframes from previous attempts
-                const existingIframes = document.querySelectorAll('iframe[style*="position: absolute"]');
-                existingIframes.forEach(iframe => {
-                    if (iframe.style.left === '-9999px' || iframe.style.visibility === 'hidden') {
-                        iframe.remove();
-                        console.log('Removed orphaned print iframe');
-                    }
-                });
-                
-                // Give Safari a moment to apply the styles and clean up
-                await new Promise(resolve => setTimeout(resolve, 200));
+                // Minimal delay for style application
+                await new Promise(resolve => setTimeout(resolve, 100));
             }
             
+            // Get the fully rendered content after styles are applied
+            const renderedContent = pagesContainer.innerHTML;
+            
             // Use Papyrus's print function for all browsers
-            const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css";
+            // Papyrus v0.0.10+ handles iframe creation, cleanup, and browser quirks
+            const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/print.css";
             printPage(renderedContent, styleSheet);
         }
     } catch (error) {
@@ -852,23 +916,24 @@ export async function printAllCopies() {
     // Configure Papyrus with consistent settings first
     configurePapyrus();
     
-    // Show print preparation message in the preview area
-    const pagesContainer = document.getElementById('pages-container');
-    const originalContent = pagesContainer.innerHTML;
+    // Get progress elements
+    const printMessage = document.getElementById('print-all-message');
+    const printProgress = document.getElementById('print-all-progress');
+    const printTime = document.getElementById('print-all-time');
     
-    // Replace preview with progress message
-    pagesContainer.innerHTML = `
-        <div style="padding: 60px; text-align: center; background: rgba(255,255,255,0.98); border-radius: 8px;">
-            <h3 style="margin-bottom: 20px;">📄 Préparation de l'impression...</h3>
-            <progress id="print-prep-progress" style="width: 100%; height: 30px;" max="${generationResults.students.length}" value="0"></progress>
-            <p id="print-prep-status" style="margin-top: 15px; color: #666;">
-                Traitement copie 1 sur ${generationResults.students.length}
-            </p>
-            <p style="color: #999; margin-top: 20px; font-size: 14px;">
-                ⏱️ Cela peut prendre quelques secondes...
-            </p>
-        </div>
-    `;
+    // Initialize the progress card
+    if (printProgress) {
+        printProgress.max = generationResults.students.length;
+        printProgress.value = 0;
+    }
+    if (printMessage) {
+        printMessage.textContent = `Traitement copie 1 sur ${generationResults.students.length}`;
+    }
+    if (printTime) {
+        printTime.textContent = '⏱️ Cela peut prendre quelques secondes...';
+    }
+    
+    const startTime = Date.now();
     
     // Create a hidden container for processing
     const hiddenContainer = document.createElement('div');
@@ -885,10 +950,14 @@ export async function printAllCopies() {
     // For each student
     for (let i = 0; i < generationResults.students.length; i++) {
         // Update progress
-        const progressBar = document.getElementById('print-prep-progress');
-        const statusText = document.getElementById('print-prep-status');
-        if (progressBar) progressBar.value = i;
-        if (statusText) statusText.textContent = `Traitement copie ${i + 1} sur ${generationResults.students.length}`;
+        if (printProgress) printProgress.value = i;
+        if (printMessage) printMessage.textContent = `Traitement copie ${i + 1} sur ${generationResults.students.length}`;
+        
+        // Update elapsed time
+        if (printTime) {
+            const elapsed = Math.round((Date.now() - startTime) / 1000);
+            printTime.textContent = `${elapsed}s écoulées`;
+        }
         
         // Generate JSON for this student
         const student = generationResults.students[i];
@@ -934,49 +1003,35 @@ export async function printAllCopies() {
     document.body.removeChild(hiddenContainer);
     
     // Update progress to complete
-    pagesContainer.innerHTML = `
-        <div style="padding: 60px; text-align: center; background: rgba(255,255,255,0.98); border-radius: 8px;">
-            <h3 style="color: #22c55e; margin-bottom: 20px;">✅ Impression prête!</h3>
-            <p style="color: #666;">La boîte de dialogue d'impression va s'ouvrir...</p>
-        </div>
-    `;
+    if (printProgress) printProgress.value = generationResults.students.length;
+    if (printMessage) printMessage.textContent = `✅ Impression prête! La boîte de dialogue d'impression va s'ouvrir...`;
+    if (printTime) {
+        const elapsed = Math.round((Date.now() - startTime) / 1000);
+        printTime.textContent = `Terminé en ${elapsed}s`;
+    }
     
-    // Apply Safari styles if needed
+    // Apply Safari inline styles if needed (for SVG text rendering)
     if (isSafari()) {
-        console.log('Safari: Applying inline styles to all copies before printing');
+        console.log('Safari: Applying inline styles to all copies');
         
-        // Clean up any existing print iframes from previous attempts
-        const existingIframes = document.querySelectorAll('iframe[style*="position: absolute"]');
-        existingIframes.forEach(iframe => {
-            if (iframe.style.left === '-9999px' || iframe.style.visibility === 'hidden') {
-                iframe.remove();
-                console.log('Removed orphaned print iframe');
-            }
-        });
-        
-        // Temporarily update the pages container to apply styles
-        const originalPreview = pagesContainer.innerHTML;
-        pagesContainer.innerHTML = allContent;
-        applySafariSVGStyles(pagesContainer);
-        
-        // Get the styled content
-        allContent = pagesContainer.innerHTML;
-        
-        // Restore original preview
-        pagesContainer.innerHTML = originalPreview;
-        
-        // Give Safari a moment to clean up
-        await new Promise(resolve => setTimeout(resolve, 200));
+        // Temporarily apply styles to the combined content
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = allContent;
+        applySafariSVGStyles(tempDiv);
+        allContent = tempDiv.innerHTML;
     }
     
     // Use Papyrus's print function for all browsers
-    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css";
+    // Papyrus v0.0.10+ handles iframe creation, cleanup, and browser quirks
+    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/print.css";
     printPage(allContent, styleSheet);
     
-    // Restore original preview after a delay
+    // Reset the progress card to waiting state after 3 seconds
     setTimeout(() => {
-        pagesContainer.innerHTML = originalContent;
-    }, 2000);
+        if (printMessage) printMessage.textContent = 'En attente d\'impression groupée...';
+        if (printProgress) printProgress.value = 0;
+        if (printTime) printTime.textContent = '';
+    }, 3000);
 }
 
 /**

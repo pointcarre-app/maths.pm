@@ -162,10 +162,13 @@ async def cleanup_service_worker_issues():
         logger.warning(f"⚠️  Failed to cleanup service worker: {e}")
 
 
-async def download_safari_css_files():
+async def download_safari_css_files(force_download: bool = False):
     """
     Download external CSS files locally for Safari CORS compatibility.
     These files will be served from the same origin to avoid CORS issues.
+
+    Args:
+        force_download: If True, always download. If False, check if files exist first.
     """
     try:
         safari_css_dir = settings.static_dir / "css" / "safari-local"
@@ -182,9 +185,19 @@ async def download_safari_css_files():
             # KaTeX
             "katex.min.css": "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css",
             # Papyrus styles
-            "papyrus-index.css": "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/index.css",
-            "papyrus-print.css": "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css",
+            "papyrus-index.css": "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/index.css",
+            "papyrus-print.css": "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/print.css",
         }
+
+        # Check if we should skip download (files already exist)
+        if not force_download:
+            # Check if all CSS files already exist
+            all_exist = all((safari_css_dir / filename).exists() for filename in css_urls.keys())
+            if all_exist:
+                logger.info("🦁 Safari CSS files already exist, skipping download")
+                return
+            else:
+                logger.info("🦁 Some Safari CSS files missing, downloading...")
 
         # Font files directory for actual font files (woff2, etc.)
         fonts_dir = safari_css_dir / "fonts"
@@ -267,15 +280,38 @@ async def lifespan(app: FastAPI):
     if settings.jupyterlite_enabled:
         await async_build_jupyterlite()
 
-    # 2) Download CSS files for Safari CORS compatibility (optional, non-blocking)
-    # Skip in CI/GitHub Actions to avoid network issues during build
-    if os.environ.get("CI") != "true" and os.environ.get("GITHUB_ACTIONS") != "true":
+    # 2) Download CSS files for Safari CORS compatibility
+    # Strategy:
+    # - In GitHub Actions/CI: ALWAYS download (force_download=True) for deployment
+    # - Locally: Check DOWNLOAD_SAFARI_CSS env var (default: False to skip)
+    # - Can override with DOWNLOAD_SAFARI_CSS=true for local testing
+
+    is_ci = os.environ.get("CI") == "true" or os.environ.get("GITHUB_ACTIONS") == "true"
+    should_download = os.environ.get("DOWNLOAD_SAFARI_CSS", "").lower() in ["true", "1", "yes"]
+
+    if is_ci:
+        # In CI/GitHub Actions: ALWAYS download for deployment
+        logger.info("🚀 GitHub Actions detected: Downloading Safari CSS files for deployment")
         try:
-            await download_safari_css_files()
+            await download_safari_css_files(force_download=True)
+        except Exception as e:
+            logger.error(f"❌ Safari CSS download failed in CI (critical): {e}")
+            # In CI, this is more critical as it affects the deployed site
+            raise
+    elif should_download:
+        # Local development with explicit download request
+        logger.info("📦 Local environment: Downloading Safari CSS files (DOWNLOAD_SAFARI_CSS=true)")
+        try:
+            await download_safari_css_files(force_download=True)
         except Exception as e:
             logger.warning(f"⚠️  Safari CSS download failed (non-critical): {e}")
     else:
-        logger.info("📦 Skipping Safari CSS download in CI environment")
+        # Local development: Check if files exist, download if missing
+        logger.info("💻 Local environment: Checking Safari CSS files...")
+        try:
+            await download_safari_css_files(force_download=False)
+        except Exception as e:
+            logger.warning(f"⚠️  Safari CSS check/download failed (non-critical): {e}")
 
     # 3) Copy entire pms/ to static/pm/ for stable static references
     try:

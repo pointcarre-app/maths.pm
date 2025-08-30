@@ -1,0 +1,101 @@
+/**
+ * Safari-specific fixes for tables containing KaTeX during print
+ * This file addresses table rendering issues in Safari when printing
+ */
+
+/* Safari print media fixes for tables with KaTeX */
+@media print {
+    /* Ensure tables maintain fixed layout during print */
+    table {
+        table-layout: fixed !important;
+        border-collapse: collapse !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    
+    /* Force table cells to respect their content */
+    th, td {
+        /* Prevent text wrapping unless explicitly set */
+        white-space: nowrap !important;
+        /* Ensure borders are visible */
+        border-color: #333333 !important;
+        /* Maintain minimum padding */
+        padding: 4px !important;
+        /* Force text alignment */
+        text-align: center !important;
+        /* Prevent cell overflow */
+        overflow: hidden !important;
+    }
+    
+    /* KaTeX specific fixes for Safari print */
+    .katex {
+        /* Ensure KaTeX formulas don't break table layout */
+        display: inline-block !important;
+        white-space: nowrap !important;
+        /* Prevent formula overflow */
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+    
+    /* Ensure KaTeX display mode works in tables */
+    .katex-display {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Fix for table cells containing KaTeX */
+    td:has(.katex), th:has(.katex) {
+        /* Ensure proper sizing */
+        min-width: auto !important;
+        width: auto !important;
+        /* Prevent content from breaking layout */
+        overflow: hidden !important;
+    }
+    
+    /* Specific fix for flex containers with tables */
+    div[style*="flex"] table {
+        /* Ensure table doesn't grow beyond container */
+        max-width: 100% !important;
+        width: auto !important;
+    }
+    
+    /* Override currentColor issues */
+    table * {
+        color: #333333 !important;
+        border-color: #333333 !important;
+    }
+    
+    /* Ensure table font sizes are preserved */
+    table th,
+    table td {
+        font-size: 0.8rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    /* Fix for tables in Papyrus pages */
+    .page-content table,
+    .page-preview table {
+        /* Ensure table respects page boundaries */
+        max-width: calc(100% - 2mm) !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* Additional non-print fixes for Safari */
+@supports (-webkit-appearance: none) {
+    /* Safari-specific table fixes */
+    table {
+        /* Force GPU acceleration for better rendering */
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    /* Fix border rendering issues */
+    th, td {
+        /* Use border-box for predictable sizing */
+        box-sizing: border-box !important;
+        /* Ensure borders render properly */
+        -webkit-border-horizontal-spacing: 0;
+        -webkit-border-vertical-spacing: 0;
+    }
+}
