@@ -65,10 +65,34 @@
         color: inherit !important;
     }
 
-    /* Essential text size for graph labels */
+    /* Essential text size for graph labels - duplicated for Safari compatibility */
     .text-2xs {
         font-size: 0.625rem !important;
         line-height: 1 !important;
+    }
+
+    /* Additional text size classes for Safari */
+    .text-xs {
+        font-size: 0.75rem !important;
+        line-height: 1rem !important;
+    }
+
+    .text-sm {
+        font-size: 0.875rem !important;
+        line-height: 1.25rem !important;
+    }
+
+    /* Safari-specific print fixes */
+    @media print {
+        .text-2xs {
+            font-size: 0.625rem !important;
+            line-height: 1 !important;
+        }
+
+        svg .text-2xs {
+            font-size: 0.625rem !important;
+            line-height: 1 !important;
+        }
     }
 </style>
 

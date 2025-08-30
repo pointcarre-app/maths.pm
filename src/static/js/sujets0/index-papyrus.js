@@ -183,6 +183,37 @@ function logPageDimensions(container) {
 }
 
 /**
+ * Apply inline styles to SVG elements for Safari compatibility
+ * @param {HTMLElement} container - The DOM element containing SVGs
+ */
+function applySafariSVGStyles(container) {
+    if (!container || !isSafari()) return;
+    
+    // Find all elements with text-2xs class within SVGs
+    const textElements = container.querySelectorAll('svg .text-2xs');
+    textElements.forEach(el => {
+        // Apply inline styles directly
+        el.style.fontSize = '0.625rem';
+        el.style.lineHeight = '1';
+    });
+    
+    // Also check for other common text size classes
+    const textXsElements = container.querySelectorAll('svg .text-xs');
+    textXsElements.forEach(el => {
+        el.style.fontSize = '0.75rem';
+        el.style.lineHeight = '1rem';
+    });
+    
+    const textSmElements = container.querySelectorAll('svg .text-sm');
+    textSmElements.forEach(el => {
+        el.style.fontSize = '0.875rem';
+        el.style.lineHeight = '1.25rem';
+    });
+    
+    console.log(`Applied Safari SVG styles to ${textElements.length + textXsElements.length + textSmElements.length} elements`);
+}
+
+/**
  * Render LaTeX in foreign objects within a DOM element
  * @param {HTMLElement} container - The DOM element containing SVGs with foreign objects
  */
@@ -753,6 +784,9 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
         // CRITICAL: Render LaTeX in foreign objects AFTER pages are built
         renderLatexInForeignObjects(pagesContainer);
         
+        // Apply Safari-specific SVG styles if needed
+        applySafariSVGStyles(pagesContainer);
+        
         // Trigger print if requested
         if (triggerPrint) {
             // Wait a bit more to ensure LaTeX is rendered
@@ -761,7 +795,27 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
             // Get the fully rendered content
             const renderedContent = pagesContainer.innerHTML;
             
-            // Use Papyrus's print function directly
+            // For Safari, apply inline styles before using Papyrus print
+            if (isSafari()) {
+                console.log('Safari detected, applying inline styles before Papyrus print');
+                
+                // Apply styles to ensure SVG text renders correctly
+                applySafariSVGStyles(pagesContainer);
+                
+                // Clean up any existing print iframes from previous attempts
+                const existingIframes = document.querySelectorAll('iframe[style*="position: absolute"]');
+                existingIframes.forEach(iframe => {
+                    if (iframe.style.left === '-9999px' || iframe.style.visibility === 'hidden') {
+                        iframe.remove();
+                        console.log('Removed orphaned print iframe');
+                    }
+                });
+                
+                // Give Safari a moment to apply the styles and clean up
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+            
+            // Use Papyrus's print function for all browsers
             const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css";
             printPage(renderedContent, styleSheet);
         }
@@ -867,6 +921,11 @@ export async function printAllCopies() {
         // IMPORTANT: Render LaTeX in the DOM before getting innerHTML
         renderLatexInForeignObjects(hiddenContainer);
         
+        // Apply Safari SVG styles if needed
+        if (isSafari()) {
+            applySafariSVGStyles(hiddenContainer);
+        }
+        
         // Add student content to the combined content
         allContent += hiddenContainer.innerHTML;
     }
@@ -882,7 +941,35 @@ export async function printAllCopies() {
         </div>
     `;
     
-    // Use Papyrus's print function with the combined content
+    // Apply Safari styles if needed
+    if (isSafari()) {
+        console.log('Safari: Applying inline styles to all copies before printing');
+        
+        // Clean up any existing print iframes from previous attempts
+        const existingIframes = document.querySelectorAll('iframe[style*="position: absolute"]');
+        existingIframes.forEach(iframe => {
+            if (iframe.style.left === '-9999px' || iframe.style.visibility === 'hidden') {
+                iframe.remove();
+                console.log('Removed orphaned print iframe');
+            }
+        });
+        
+        // Temporarily update the pages container to apply styles
+        const originalPreview = pagesContainer.innerHTML;
+        pagesContainer.innerHTML = allContent;
+        applySafariSVGStyles(pagesContainer);
+        
+        // Get the styled content
+        allContent = pagesContainer.innerHTML;
+        
+        // Restore original preview
+        pagesContainer.innerHTML = originalPreview;
+        
+        // Give Safari a moment to clean up
+        await new Promise(resolve => setTimeout(resolve, 200));
+    }
+    
+    // Use Papyrus's print function for all browsers
     const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css";
     printPage(allContent, styleSheet);
     
