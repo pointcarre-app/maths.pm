@@ -7,9 +7,9 @@ The application downloads external CSS files locally to avoid CORS issues with S
 
 ### GitHub Actions / CI Environment
 - **Detection**: `CI=true` or `GITHUB_ACTIONS=true` environment variables
-- **Behavior**: ALWAYS downloads CSS files with `force_download=True`
-- **Purpose**: Ensures the deployed site has all necessary CSS files locally
-- **Error Handling**: Failures are treated as critical and will stop the deployment
+- **Behavior**: SKIP downloads - uses files already committed to git repository
+- **Purpose**: Files are already in `src/static/css/safari-local/` in the repository
+- **Error Handling**: No downloads needed, no failures possible
 
 ### Local Development (Default)
 - **Detection**: No CI environment variables detected
@@ -59,13 +59,15 @@ The `download_safari_css_files()` function in `src/app.py`:
 - When `force_download=False`, checks if all files exist before downloading
 - Downloads CSS files and their referenced font files
 - Rewrites font URLs in CSS to use local copies
+- **Important**: All CSS and font files are now committed to the git repository
+- CI/GitHub Actions skip downloads entirely since files are already present
 
 ## Troubleshooting
 
 ### Files not downloading in GitHub Actions
-- Check the workflow logs for error messages
-- Ensure the GitHub Actions environment has network access
-- The deployment will fail if downloads fail (by design)
+- GitHub Actions no longer downloads files - they are committed to the repository
+- If files are missing, ensure they are properly committed to git
+- Check that `src/static/css/safari-local/` directory exists in the repository
 
 ### Files downloading every time locally
 - Check if `DOWNLOAD_SAFARI_CSS` environment variable is set

@@ -280,27 +280,24 @@ async def lifespan(app: FastAPI):
     if settings.jupyterlite_enabled:
         await async_build_jupyterlite()
 
-    # 2) Download CSS files for Safari CORS compatibility
+        # 2) Download CSS files for Safari CORS compatibility
     # Strategy:
-    # - In GitHub Actions/CI: ALWAYS download (force_download=True) for deployment
-    # - Locally: Check DOWNLOAD_SAFARI_CSS env var (default: False to skip)
-    # - Can override with DOWNLOAD_SAFARI_CSS=true for local testing
+    # - In GitHub Actions/CI: SKIP downloads (files are already in git repository)
+    # - Locally: Check DOWNLOAD_SAFARI_CSS env var (default: check and download if missing)
+    # - Can override with DOWNLOAD_SAFARI_CSS=true for force download
 
     is_ci = os.environ.get("CI") == "true" or os.environ.get("GITHUB_ACTIONS") == "true"
     should_download = os.environ.get("DOWNLOAD_SAFARI_CSS", "").lower() in ["true", "1", "yes"]
 
     if is_ci:
-        # In CI/GitHub Actions: ALWAYS download for deployment
-        logger.info("🚀 GitHub Actions detected: Downloading Safari CSS files for deployment")
-        try:
-            await download_safari_css_files(force_download=True)
-        except Exception as e:
-            logger.error(f"❌ Safari CSS download failed in CI: {e}")
-            # Continue anyway - the build should not fail due to CSS downloads
-            # The static files may already exist from previous builds
+        # In CI/GitHub Actions: Skip downloads - files are already committed to git
+        logger.info("🚀 GitHub Actions detected: Using Safari CSS files from repository")
+        # No download needed - files are in src/static/css/safari-local/
     elif should_download:
         # Local development with explicit download request
-        logger.info("📦 Local environment: Downloading Safari CSS files (DOWNLOAD_SAFARI_CSS=true)")
+        logger.info(
+            "📦 Local environment: Force downloading Safari CSS files (DOWNLOAD_SAFARI_CSS=true)"
+        )
         try:
             await download_safari_css_files(force_download=True)
         except Exception as e:
