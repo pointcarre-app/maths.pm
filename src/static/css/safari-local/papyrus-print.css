@@ -16,6 +16,28 @@
 .font-body { font-family: 'Lexend', sans-serif; }
 .font-mono { font-family: 'JetBrains Mono', monospace; }
 
+/* Safari-specific font size adjustments for print consistency */
+@supports (-webkit-appearance: none) {
+    /* Safari detected - apply font size reduction */
+    .papyrus-document {
+        font-size: 13px !important; /* Reduced from 15px */
+    }
+    
+    .papyrus-document h1 { font-size: 24px !important; }
+    .papyrus-document h2 { font-size: 20px !important; }
+    .papyrus-document h3 { font-size: 17px !important; }
+    .papyrus-document h4 { font-size: 15px !important; }
+    .papyrus-document h5 { font-size: 14px !important; }
+    .papyrus-document h6 { font-size: 12px !important; }
+    
+    /* Ensure body text uses reduced size */
+    .papyrus-document p,
+    .papyrus-document div,
+    .papyrus-document span {
+        font-size: 13px !important;
+    }
+}
+
 @media print {
     /* Apply page breaks only between pages to avoid trailing blank page in Safari */
     .page-wrapper {
@@ -50,5 +72,27 @@
         border: 0.5pt solid #ddd;
         border-radius: 2pt;
         padding: 2pt 4pt;
+    }
+    
+    /* Safari-specific print font sizes - CRITICAL for consistency */
+    @supports (-webkit-appearance: none) {
+        body,
+        .papyrus-document,
+        .page-content {
+            font-size: 13px !important;
+        }
+        
+        /* Override all text elements in print */
+        p, div, span, td, th, li {
+            font-size: 13px !important;
+        }
+        
+        /* Headings with specific sizes */
+        h1 { font-size: 24px !important; }
+        h2 { font-size: 20px !important; }
+        h3 { font-size: 17px !important; }
+        h4 { font-size: 15px !important; }
+        h5 { font-size: 14px !important; }
+        h6 { font-size: 12px !important; }
     }
 } 

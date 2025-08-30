@@ -627,6 +627,36 @@ export async function createPapyrusJson(studentExerciseSet) {
 function getDocumentSettings() {
     // Fixed hardcoded settings - REDUCED margins for more content space
     // IMPORTANT: These margins must match the CSS variables
+    
+    // Check if Safari - Safari renders fonts larger in print context
+    const isSafariBrowser = typeof isSafari !== 'undefined' ? isSafari() : 
+                           /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    
+    // Base font sizes
+    let fontSizes = {
+        h1: 28,
+        h2: 24,
+        h3: 20,
+        h4: 18,
+        h5: 16,
+        h6: 14,
+        body: 15
+    };
+    
+    // Safari font size adjustment: reduce by ~15% to match Chrome output
+    if (isSafariBrowser) {
+        console.log('🦁 Safari detected: Applying font size reduction for print consistency');
+        fontSizes = {
+            h1: 24,     // was 28
+            h2: 20,     // was 24  
+            h3: 17,     // was 20
+            h4: 15,     // was 18
+            h5: 14,     // was 16
+            h6: 12,     // was 14
+            body: 13    // was 15 - THIS IS THE KEY ADJUSTMENT
+        };
+    }
+    
     return {
         margins: {
             top: 3,     // Small top margin for breathing room
@@ -634,15 +664,7 @@ function getDocumentSettings() {
             bottom: 3,  // Small bottom margin for page numbers
             left: 8     // Side margins for readability
         },
-        fontSizes: {
-            h1: 28,
-            h2: 24,
-            h3: 20,
-            h4: 18,
-            h5: 16,
-            h6: 14,
-            body: 15
-        },
+        fontSizes: fontSizes,
         spacing: 0  // Spacing between elements in mm // TODO sel: not sure reflected in Papyrus
     };
 }
