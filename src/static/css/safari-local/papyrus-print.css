@@ -43,6 +43,9 @@
     .page-wrapper {
         page-break-inside: avoid;
         break-inside: avoid;
+        width: 210mm;
+        min-height: 297mm;
+        max-height: 297mm;
     }
     .page-wrapper + .page-wrapper {
         page-break-before: always;

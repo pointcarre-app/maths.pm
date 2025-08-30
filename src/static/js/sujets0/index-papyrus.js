@@ -929,8 +929,8 @@ export async function printStudentCopy(studentIndex) {
 }
 
 /**
- * Print all student copies - Option 2: Use existing rendered content
- * This approach reuses the preview rendering, ensuring WYSIWYG consistency
+ * Print all student copies - Optimized version using hidden container
+ * This approach uses Papyrus rendering in a hidden container to avoid visible re-rendering
  */
 export async function printAllCopies() {
     // Log how many copies will be printed
@@ -956,41 +956,89 @@ export async function printAllCopies() {
         printMessage.textContent = `Traitement copie 1 sur ${generationResults.students.length}`;
     }
     if (printTime) {
-        printTime.textContent = '⏱️ Cela peut prendre quelques secondes...';
+        printTime.textContent = '⏱️ Préparation de l\'impression...';
     }
     
     const startTime = Date.now();
     
-    // Store all student content using the visible container
-    let allContent = '';
-    const pagesContainer = document.getElementById('pages-container');
+    // Create a hidden container for rendering
+    const hiddenContainer = document.createElement('div');
+    hiddenContainer.id = 'pages-container-hidden';
+    hiddenContainer.className = 'papyrus-document';
+    hiddenContainer.style.cssText = 'position: absolute; left: -9999px; top: -9999px; width: 210mm; visibility: hidden;';
+    document.body.appendChild(hiddenContainer);
     
-    // For each student, render in the visible container and accumulate HTML
-    for (let i = 0; i < generationResults.students.length; i++) {
-        // Update progress
-        if (printProgress) printProgress.value = i;
-        if (printMessage) printMessage.textContent = `Traitement copie ${i + 1} sur ${generationResults.students.length}`;
+    // Store all student content
+    let allContent = '';
+    
+    // Save original container
+    const originalContainer = document.getElementById('pages-container');
+    
+    try {
+        // Temporarily swap containers for Papyrus to render in hidden one
+        originalContainer.id = 'pages-container-temp';
+        hiddenContainer.id = 'pages-container';
         
-        // Update elapsed time
-        if (printTime) {
-            const elapsed = Math.round((Date.now() - startTime) / 1000);
-            printTime.textContent = `${elapsed}s écoulées`;
+        // For each student, render in the hidden container
+        for (let i = 0; i < generationResults.students.length; i++) {
+            // Update progress
+            if (printProgress) printProgress.value = i;
+            if (printMessage) printMessage.textContent = `Traitement copie ${i + 1} sur ${generationResults.students.length}`;
+            
+            // Update elapsed time
+            if (printTime) {
+                const elapsed = Math.round((Date.now() - startTime) / 1000);
+                printTime.textContent = `${elapsed}s écoulées`;
+            }
+            
+            // Skip if no student data
+            const student = generationResults.students[i];
+            if (!student) continue;
+            
+            // Create Papyrus JSON for this student
+            const papyrusJson = await createPapyrusJson(student);
+            
+            // Set the JSON data to the input field (Papyrus reads from here)
+            const jsonInput = document.getElementById('json-input');
+            jsonInput.value = JSON.stringify(papyrusJson, null, 2);
+            
+            // Set up Papyrus globals
+            if (!window.contentModel) {
+                window.contentModel = { 
+                    items: [],
+                    loadFromJSON: function(json) { this.items = json; },
+                    updateMargins: function(margins) { this.margins = margins; }
+                };
+            }
+            window.contentModel.loadFromJSON(papyrusJson);
+            
+            // Use Papyrus's render function
+            await window.renderContent();
+            
+            // Apply Safari fixes if needed
+            if (isSafari()) {
+                applySafariSVGStyles(hiddenContainer);
+            }
+            
+            // Small delay for rendering to stabilize
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            // Get the fully rendered HTML
+            allContent += hiddenContainer.innerHTML;
+            
+            // Clear for next student
+            hiddenContainer.innerHTML = '';
         }
         
-        // Skip if no student data
-        const student = generationResults.students[i];
-        if (!student) continue;
+    } finally {
+        // Restore original container IDs
+        hiddenContainer.id = 'pages-container-hidden';
+        originalContainer.id = 'pages-container';
         
-        // Use previewStudentCopy to render this student in the visible container
-        // This ensures all Safari fixes and styles are applied consistently
-        await previewStudentCopy(i, false); // false = don't trigger print
-        
-        // Wait a bit for rendering to complete (especially for LaTeX and SVGs)
-        await new Promise(resolve => setTimeout(resolve, 300));
-        
-        // Get the fully rendered HTML from the visible container
-        // This already has all Safari fixes, LaTeX rendering, and styles applied
-        allContent += pagesContainer.innerHTML;
+        // Remove hidden container
+        if (hiddenContainer.parentNode) {
+            hiddenContainer.parentNode.removeChild(hiddenContainer);
+        }
     }
     
     // Update progress to complete
@@ -1001,11 +1049,9 @@ export async function printAllCopies() {
         printTime.textContent = `Terminé en ${elapsed}s`;
     }
     
-    // No need for additional Safari processing - it was already applied during preview
-    console.log('All copies rendered using existing preview function');
+    console.log('All copies rendered in hidden container');
     
     // Use Papyrus's print function with the accumulated content
-    // All Safari fixes and styles are already in the HTML
     const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css";
     printPage(allContent, styleSheet);
     
@@ -1020,6 +1066,8 @@ export async function printAllCopies() {
         if (printTime) printTime.textContent = '';
     }, 3000);
 }
+
+
 
 /**
  * Create pagination buttons for all students

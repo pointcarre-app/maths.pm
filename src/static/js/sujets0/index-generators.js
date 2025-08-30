@@ -8,6 +8,7 @@ import { getGeneratorConfig, displayValidationTable } from "./index-form.js";
 import { displayStudentResults } from "./index-results.js";
 import generationResults, { StudentExerciseSet } from "./index-data-model.js";
 import { convertAllGraphsToPng } from "./index-svg-converter.js";
+import { buildPCAGraph } from "./index-graphs.js";
 
 // Export the generationResults for backward compatibility
 export { generationResults };
@@ -26,7 +27,7 @@ export function selectRandomItems(array, n) {
 /**
  * Execute all generators with pagination
  */
-export async function executeAllGenerators() {
+export async function executeAllGenerators(formData, progressCallback) {
   // Check if Nagini is ready (indirectly)
   if (!window.Nagini) {
     // Display error in validation table
@@ -49,13 +50,32 @@ export async function executeAllGenerators() {
   }
 
   // Extract and validate form data (this will display the validation table)
-  const config = getGeneratorConfig();
+  // Get generator configuration
+  // If formData is provided (refactored version), use it
+  let config;
+  if (formData && formData.nbEleves && formData.nbQuestions) {
+    config = {
+      isValid: true,
+      nbEleves: formData.nbEleves,
+      nbQuestions: formData.nbQuestions,
+      sujets0: formData.specialty || 'Spé.',
+      options: formData.options || null
+    };
+  } else {
+    // Use the original form-based config
+    config = getGeneratorConfig();
+  }
+  
   if (!config) {
     // Validation table already displayed by getGeneratorConfig
     return;
   }
 
   console.log("Generator configuration:", config);
+  
+  // Normalize the config to use nbStudents internally
+  config.nbStudents = config.nbEleves || config.nbStudents || 2;
+  
   generationResults.config = config;
 
   const executeBtn = document.getElementById("execute-all-generators-btn");
@@ -191,6 +211,13 @@ export async function executeAllGenerators() {
     const generationTime = document.getElementById("generation-time");
     if (generationProgress) {
       generationProgress.value = studentNum - 1;
+    }
+    
+    // Call progress callback if provided (for refactored version)
+    if (progressCallback) {
+      const currentProgress = (studentNum - 1) * config.nbQuestions;
+      const totalProgress = config.nbStudents * config.nbQuestions;
+      progressCallback(currentProgress, totalProgress, `Étudiant ${studentNum}/${config.nbStudents}`);
     }
     
     // Mettre à jour le temps d'exécution
@@ -507,4 +534,14 @@ export async function executeAllGenerators() {
     executeBtn.disabled = false;
     executeBtn.textContent = "Générer";
   }
+  
+  // Set total questions
+  generationResults.totalQuestions = config.nbQuestions;
+  
+  // Return the results for the refactored code
+  return {
+    students: generationResults.students,
+    totalQuestions: config.nbQuestions,
+    currentStudentIndex: generationResults.currentStudentIndex || 0
+  };
 }

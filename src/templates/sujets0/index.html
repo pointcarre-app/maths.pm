@@ -116,7 +116,7 @@
         </svg>
         <span>Lorsque vous arrivez sur la page et pour vous faire gagner du temps, le générateur s'exécute automatiquement. Quelques questions sont générées pour deux copies (i.e. deux élèves).</span>
       </div>
-      {% include "sujets0/generate-content.html" %}
+      {% include "sujets0/generate-content-refactored.html" %}
     </div>
 
 
@@ -127,11 +127,11 @@
 
   </div>
 
-  <!-- Load Sujets0 main module -->
+  <!-- Load Sujets0 main module - REFACTORED VERSION -->
   <script type="module">
       import {
           init
-      } from '/static/js/sujets0/sujets0-main.js';
+      } from '/static/js/sujets0/sujets0-main-refactored.js';
 
       // Initialize the module when DOM is ready
       if (document.readyState === 'loading') {

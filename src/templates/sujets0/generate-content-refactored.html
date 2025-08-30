@@ -1,0 +1,346 @@
+<!-- Sujets0 Generate Content - REFACTORED with unified UI -->
+
+<!-- Configuration Section -->
+<div class="font-heading text-lg sm:text-xl md:text-2xl mt-12 mb-4">
+  Configurer la génération d'exercices
+</div>
+
+<div class="card bg-base-200 shadow-sm p-4 sm:p-6 md:p-8">
+  <form id="arpege-form" class="w-full max-w-[720px] mx-auto">
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+
+      <!-- Left column: Number inputs -->
+      <div class="flex flex-col gap-4 sm:gap-6 flex-1">
+        <!-- Number of copies -->
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">
+            <span class="font-light font-heading text-base md:text-lg">Nombre de copies</span>
+            <span class="badge badge-outline badge-sm ml-2"
+                  data-tooltip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">?</span>
+          </legend>
+          <div class="join w-full">
+            <input type="number"
+                   id="nb-eleves"
+                   name="nb-eleves"
+                   min="1"
+                   max="50"
+                   value="2"
+                   required
+                   class="input input-bordered join-item flex-1 h-10" />
+            <button type="button"
+                    class="btn btn-square join-item h-10 w-10"
+                    onclick="document.getElementById('nb-eleves').stepDown()">−</button>
+            <button type="button"
+                    class="btn btn-square join-item h-10 w-10"
+                    onclick="document.getElementById('nb-eleves').stepUp()">+</button>
+          </div>
+          <p class="label-text-alt mt-1">Entre 1 et 50 copies</p>
+        </fieldset>
+
+        <!-- Questions per copy -->
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">
+            <span class="font-light font-heading text-base md:text-lg">Questions par copie</span>
+            <span class="badge badge-outline badge-sm ml-2"
+                  data-tooltip="Une partie A d'un sujet 0 officiel compte 12 questions">?</span>
+          </legend>
+          <div class="join w-full">
+            <input type="number"
+                   id="nb-questions"
+                   name="nb-questions"
+                   min="1"
+                   max="12"
+                   value="12"
+                   required
+                   class="input input-bordered join-item flex-1 h-10" />
+            <button type="button"
+                    class="btn btn-square join-item h-10 w-10"
+                    onclick="document.getElementById('nb-questions').stepDown()">−</button>
+            <button type="button"
+                    class="btn btn-square join-item h-10 w-10"
+                    onclick="document.getElementById('nb-questions').stepUp()">+</button>
+          </div>
+          <p class="label-text-alt mt-1">Entre 1 et 12 questions</p>
+        </fieldset>
+      </div>
+
+      <!-- Right column: Specialty selection -->
+      <div class="flex flex-col gap-4 sm:gap-6 flex-1">
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">
+            <span class="font-light font-heading text-base md:text-lg">Filière / Spécialité</span>
+            <span class="badge badge-outline badge-sm ml-2"
+                  data-tooltip="Spé: Spécialité Maths | Non Spé: Enseignement Spécifique | Techno: Filière technologique">?</span>
+          </legend>
+          <div class="join w-full">
+            <input type="radio" name="sujets0" value="spe" class="join-item btn h-10 flex-1" aria-label="Spé." checked />
+            <input type="radio"
+                   name="sujets0"
+                   value="non-spe"
+                   class="join-item btn h-10 flex-1"
+                   aria-label="Non Spé."
+                   disabled />
+            <input type="radio"
+                   name="sujets0"
+                   value="techno"
+                   class="join-item btn h-10 flex-1"
+                   aria-label="Techno"
+                   disabled />
+          </div>
+          <p class="label-text-alt mt-1">Choisir un programme officiel</p>
+        </fieldset>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Action Bar - All buttons in one place -->
+<div class="card bg-base-100 shadow-sm mt-6 p-4">
+  <div class="flex flex-wrap gap-2 justify-center">
+    <!-- Generate button -->
+    <button id="execute-all-generators-btn" type="button" class="btn btn-primary" disabled>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+      Générer
+    </button>
+
+    <!-- Print current copy -->
+    <button id="print-current-btn"
+            type="button"
+            class="btn btn-outline"
+            onclick="printStudentCopy(sujets0State.getState().currentStudentIndex)"
+            disabled>🖨️ Imprimer cette copie</button>
+
+    <!-- Print all copies -->
+    <button id="print-all-btn" type="button" class="btn btn-secondary" onclick="printAllCopies()" disabled>
+      📑 Imprimer toutes les copies
+    </button>
+
+    <!-- Teacher manifest -->
+    <button id="teacher-manifest-btn"
+            type="button"
+            class="btn btn-accent"
+            onclick="openTeacherManifest()"
+            disabled>📊 Fiche enseignant</button>
+  </div>
+</div>
+
+<!-- Unified Status Bar -->
+<div id="unified-status-bar"
+     class="mt-6 transition-opacity duration-300 opacity-0"
+     style="display: none">
+  <!-- Progress content will be dynamically inserted here -->
+</div>
+
+<!-- Preview Section -->
+<div class="font-heading text-lg sm:text-xl md:text-2xl mt-12 mb-4">Aperçu des copies</div>
+
+<div class="card bg-base-100 shadow-sm">
+  <!-- Preview controls -->
+  <div class="card-body pb-2">
+    <div class="flex flex-col sm:flex-row gap-4">
+      <!-- Student navigation -->
+      <div class="flex-1">
+        <div class="text-sm font-medium mb-2">
+          <span data-student-legend>Copies - Copie 1/1</span>
+        </div>
+        <div id="student-pagination" class="flex flex-wrap gap-1">
+          <!-- Pagination buttons will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Debug toggle -->
+      <div class="flex items-center gap-2">
+        <label class="label cursor-pointer">
+          <span class="label-text mr-2">Mode debug</span>
+          <input type="checkbox" id="papyrus-debug-toggle" class="toggle toggle-sm" />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document preview -->
+  <div class="divider my-0"></div>
+  <div class="card-body pt-4">
+    <div id="pages-container" class="papyrus-document bg-white rounded-lg min-h-[500px] overflow-auto">
+      <!-- Papyrus content will be rendered here -->
+    </div>
+  </div>
+</div>
+
+<!-- Hidden elements required by Papyrus -->
+<textarea id="json-input" class="hidden"></textarea>
+<div id="document-tabs" class="hidden"></div>
+
+<!-- Styles for document preview -->
+<style>
+    /* Tooltips */
+    [data-tooltip] {
+        cursor: help;
+        position: relative;
+    }
+
+    [data-tooltip]:hover::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        background: hsl(var(--b3));
+        color: hsl(var(--bc));
+        font-size: 0.875rem;
+        font-weight: normal;
+        border-radius: 0.25rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        white-space: nowrap;
+        z-index: 50;
+        pointer-events: none;
+    }
+
+    /* Papyrus document structure */
+    :root {
+        --papyrus-margin-top: 3mm;
+        --papyrus-margin-right: 8mm;
+        --papyrus-margin-bottom: 3mm;
+        --papyrus-margin-left: 8mm;
+        --papyrus-font-size-h1: 28px;
+        --papyrus-font-size-h2: 24px;
+        --papyrus-font-size-h3: 20px;
+        --papyrus-font-size-h4: 18px;
+        --papyrus-font-size-h5: 16px;
+        --papyrus-font-size-h6: 14px;
+        --papyrus-font-size-body: 15px;
+    }
+
+    .papyrus-document {
+        font-family: 'Spectral', serif;
+    }
+
+    .page-wrapper {
+        width: 210mm;
+        min-height: 297mm;
+        max-height: 297mm;
+        margin: 0 auto 10mm auto;
+        padding: 0;
+        background: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
+
+    .page-preview {
+        width: 100%;
+        height: 297mm;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    .page-content {
+        padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
+        height: 297mm;
+        width: 210mm;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Debug mode */
+    .debug-mode .page-wrapper {
+        border: 2px solid red;
+    }
+
+    .debug-mode .page-preview {
+        border: 2px solid blue;
+    }
+
+    .debug-mode .page-content {
+        border: 2px solid green;
+    }
+
+    /* Print styles */
+    @page {
+        margin: 0;
+        size: A4;
+    }
+
+    @media print {
+        .page-wrapper {
+            margin: 0;
+            box-shadow: none;
+            page-break-after: always;
+        }
+
+        .page-content {
+            padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            margin: 0;
+        }
+    }
+
+    /* Safari-specific styles */
+    @supports (-webkit-appearance: none) {
+        .text-2xs {
+            font-size: 0.625rem !important;
+            line-height: 1 !important;
+        }
+
+        .text-xs {
+            font-size: 0.75rem !important;
+            line-height: 1rem !important;
+        }
+
+        .text-sm {
+            font-size: 0.875rem !important;
+            line-height: 1.25rem !important;
+        }
+    }
+</style>
+
+<!-- Load Papyrus styles -->
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/index.css" />
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css" />
+
+<!-- LZ-String for teacher manifest compression -->
+<script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+
+<!-- Auto-generate on load script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-select "Spé." radio button
+        const speRadio = document.querySelector('input[name="sujets0"][value="spe"]');
+        if (speRadio) {
+            speRadio.checked = true;
+        }
+
+        // Auto-click generate when ready
+        function checkAndAutoGenerate() {
+            const generateBtn = document.getElementById('execute-all-generators-btn');
+            if (generateBtn && !generateBtn.disabled) {
+                console.log('Auto-clicking generate button');
+                generateBtn.click();
+            } else {
+                setTimeout(checkAndAutoGenerate, 500);
+            }
+        }
+
+        // Start checking after a short delay
+        setTimeout(checkAndAutoGenerate, 1000);
+    });
+</script>
