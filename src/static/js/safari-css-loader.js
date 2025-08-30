@@ -29,8 +29,8 @@
         'cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css': '/static/css/safari-local/katex.min.css',
         
         // Papyrus
-        'cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/index.css': '/static/css/safari-local/papyrus-index.css',
-        'cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/print.css': '/static/css/safari-local/papyrus-print.css',
+        'cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/index.css': '/static/css/safari-local/papyrus-index.css',
+        'cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css': '/static/css/safari-local/papyrus-print.css',
     };
     
     // Replace existing link tags
@@ -95,8 +95,8 @@ export function getSafariCSSPath(cdnUrl) {
         'cdn.jsdelivr.net/npm/daisyui@5/themes.css': '/static/css/safari-local/daisyui-themes.css',
         'cdn.jsdelivr.net/npm/daisyui@5': '/static/css/safari-local/daisyui.css',
         'cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css': '/static/css/safari-local/katex.min.css',
-        'cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/index.css': '/static/css/safari-local/papyrus-index.css',
-        'cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/print.css': '/static/css/safari-local/papyrus-print.css',
+        'cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/index.css': '/static/css/safari-local/papyrus-index.css',
+        'cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css': '/static/css/safari-local/papyrus-print.css',
     };
     
     for (const [cdnPattern, localPath] of Object.entries(cssMapping)) {

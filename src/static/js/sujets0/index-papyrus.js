@@ -17,23 +17,23 @@
  */
 
 import generationResults from './index-data-model.js';
-import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/preview/index.js';
-import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/print-manager.js';
+import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/core/preview/index.js';
+import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/core/print-manager.js';
 import { convertSvgToPng, isSafari } from './index-svg-converter.js';
 import { 
     initializeMargins, 
     setMargins,
     getCurrentMargins
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/margin-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/core/margin-config.js';
 import { 
     initializeFontSizes, // Default font sizes in px
     setFontSizes 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/font-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/core/font-config.js';
 
 import { 
     initializePageNumberConfig,
     setShowPageNumbers 
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/page-number-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/core/page-number-config.js';
 
 
 
@@ -336,7 +336,7 @@ import {
     initializeSpaceBetweenDivs, 
     setSpaceBetweenDivs,
     getCurrentSpaceBetweenDivs
-} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/core/margin-config.js';
+} from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/core/margin-config.js';
 
 /**
  * Get fallback dimensions for different graph types
@@ -879,8 +879,8 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
             const renderedContent = pagesContainer.innerHTML;
             
             // Use Papyrus's print function for all browsers
-            // Papyrus v0.0.10+ handles iframe creation, cleanup, and browser quirks
-            const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/print.css";
+            // Papyrus v0.0.11+ handles iframe creation, cleanup, and browser quirks
+            const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css";
             printPage(renderedContent, styleSheet);
         }
     } catch (error) {
@@ -1022,8 +1022,8 @@ export async function printAllCopies() {
     }
     
     // Use Papyrus's print function for all browsers
-    // Papyrus v0.0.10+ handles iframe creation, cleanup, and browser quirks
-    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/print.css";
+    // Papyrus v0.0.11+ handles iframe creation, cleanup, and browser quirks
+    const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css";
     printPage(allContent, styleSheet);
     
     // Reset the progress card to waiting state after 3 seconds

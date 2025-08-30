@@ -185,8 +185,8 @@ async def download_safari_css_files(force_download: bool = False):
             # KaTeX
             "katex.min.css": "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css",
             # Papyrus styles
-            "papyrus-index.css": "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/index.css",
-            "papyrus-print.css": "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.10/src/styles/print.css",
+            "papyrus-index.css": "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/index.css",
+            "papyrus-print.css": "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css",
         }
 
         # Check if we should skip download (files already exist)
