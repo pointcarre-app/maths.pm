@@ -3,6 +3,15 @@
 
 
 
+[v0.0.2]
+
+- Sujets0:
+    - Safari:
+        - svg working
+        - text-2xs injection (TODO sel: generalize) 
+        - button print multiple use if multiple generation / 🔴 empty page at the end when printing
+
+
 [v0.0.1]
 
 - Sujets0: 
