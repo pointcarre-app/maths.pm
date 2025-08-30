@@ -4,6 +4,8 @@ const naginiGitTag = "v0.0.21";
 
 
 export const configSujets0DataOnly = {
+
+    domtoimageUrl: 'https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/+esm',
     // For having a seed for generating the seeds per copy
     // In between 0 and 100 - 14 
     rootSeed: 14,
@@ -78,3 +80,19 @@ export async function loadModuleDynamically(url) {
         throw error;
     }
 }
+
+
+/**
+ * Detect if browser is Safari
+ * @returns {boolean} True if Safari, false otherwise
+ */
+export function isSafari() {
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  }
+  
+
+
+
+
+
+

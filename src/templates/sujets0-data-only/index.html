@@ -1,10 +1,91 @@
-<!-- Load Sujets0 main module - REFACTORED VERSION -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sujets0 Data Only</title>
+
+    {# Use local KaTeX CSS to avoid cross-origin CSSOM access issues for dom-to-image #}
+    {# <link rel="stylesheet" href="{{ url_for('static', path='js/sujets0-data-only/katex.min.css') }}" /> #}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    {# <link rel="stylesheet" href="{{ url_for('static', path='js/sujets0-data-only/data-only.css') }}" /> #}
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style>
+        /* Graph container styles */
+        .graph-svg-container {
+            position: relative;
+            display: block;
+            overflow: visible;
+        }
 
+        .graph-svg-container svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Foreign object positioning fix */
+        .graph-svg-container foreignObject {
+            overflow: visible;
+        }
+
+        .graph-svg-container foreignObject>div {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* LaTeX in SVG styles */
+        .svg-latex {
+            font-size: 14px;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .svg-latex .katex {
+            font-size: inherit;
+            font-family: 'KaTeX_Main', sans-serif;
+        }
+
+        /* Safari-specific fixes */
+        /*@supports (-webkit-appearance: none) {*/
+        /*.graph-svg-container svg text.text-2xs {*/
+        /*font-size: 0.625rem !important;*/
+        /*line-height: 1 !important;*/
+        /*}*/
+        /**/
+        /*.graph-svg-container svg text.text-xs {*/
+        /*font-size: 0.75rem !important;*/
+        /*line-height: 1rem !important;*/
+        /*}*/
+        /**/
+        /*.graph-svg-container svg text.text-sm {*/
+        /*font-size: 0.875rem !important;*/
+        /*line-height: 1.25rem !important;*/
+        /*}*/
+        /*}*/
+
+        /* Print styles */
+        /*@media print {*/
+        /*.graph-svg-container {*/
+        /*page-break-inside: avoid;*/
+        /*}*/
+        /**/
+        /*.graph-svg-container svg {*/
+        /*width: 100% !important;*/
+        /*height: auto !important;*/
+        /*}*/
+        /*}*/
+    </style>
+</head>
+
+<body>
 
 <script type="module">
     import {
@@ -14,3 +95,6 @@
     // Initialize once
     init();
 </script>
+
+</body>
+</html>

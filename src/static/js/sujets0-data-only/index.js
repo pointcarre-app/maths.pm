@@ -1,21 +1,22 @@
-import { configSujets0DataOnly, loadModuleDynamically } from "./config.js";
+import { configSujets0DataOnly, loadModuleDynamically, isSafari} from "./config.js";
 
-// Import dom-to-image for SVG to PNG conversion
-import domtoimage from 'https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/+esm';
+// Dynamically load dom-to-image for SVG to PNG conversion
+let domtoimage;
+
+(async () => {
+  try {
+    const module = await loadModuleDynamically(configSujets0DataOnly.domtoimageUrl);
+    domtoimage = module.default;
+  } catch (error) {
+    console.error('Failed to load dom-to-image module:', error);
+  }
+})();
 
 // Global state
 let PCAGraphLoader = null;
 let Nagini = null;
 let naginiManager = null;
-let backendSettings = null;
 
-/**
- * Detect if browser is Safari
- * @returns {boolean} True if Safari, false otherwise
- */
-function isSafari() {
-  return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-}
 
 export async function buildPCAGraph(graphKey, config = {}) {
   try {
@@ -531,7 +532,7 @@ export async function prerenderLatexInAllResultsWithGraph(results) {
 async function convertSvgToPngWithDomToImage(svgString, options = {}) {
   try {
     // Default options for high quality
-    const scale = options.scale || 2; // 2x for high DPI
+    const scale = options.scale || 1; // 2x for high DPI
     let width = options.width || 340;
     let height = options.height || 340;
     
@@ -584,9 +585,27 @@ async function convertSvgToPngWithDomToImage(svgString, options = {}) {
     
     // Wait a bit for rendering to complete
     await new Promise(resolve => setTimeout(resolve, 100));
-    
 
+
+    // Fetch content of this url : https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/fonts/KaTeX_Math-Italic.ttf
+    // And then base64 encode it
+    const KatexMathFontData = await fetch('https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/fonts/KaTeX_Math-Italic.ttf').then(response => response.arrayBuffer()).then(buffer => btoa(String.fromCharCode(...new Uint8Array(buffer))));
+    
     let pngDataUrl;
+    // Inject inline KaTeX font CSS to avoid cross-origin stylesheet access
+    const styleTag = document.createElement('style');
+    styleTag.setAttribute('data-temp-katex-css', 'true');
+    styleTag.textContent = `
+      @font-face {
+        font-family: 'KaTeX_Main';
+        src: url('data:font/woff2;base64,${KatexMathFontData}') format('tff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+      .katex { font-family: 'KaTeX_Main', serif; font-weight: 300 !important;}
+    `;
+    tempDiv.appendChild(styleTag);
     try {
       // Convert to PNG using dom-to-image with CORS-safe options
       pngDataUrl = await domtoimage.toPng(tempSvgElement, {
@@ -603,25 +622,28 @@ async function convertSvgToPngWithDomToImage(svgString, options = {}) {
         cacheBust: true,
         imagePlaceholder: undefined,
         // Skip external stylesheets that cause CORS issues
-        filter: (node) => {
-          // Filter out link elements that reference external stylesheets
-          if (node.tagName === 'LINK' && node.rel === 'stylesheet') {
-            const href = node.href || '';
-            // Skip external stylesheets
-            if (href.includes('fonts.googleapis.com') || 
-                href.includes('cdn.jsdelivr.net') ||
-                href.includes('cdnjs.cloudflare.com')) {
-              return false;
-            }
-          }
-          return true;
-        }
+        // filter: (node) => {
+        //   // Filter out link elements that reference external stylesheets
+        //   if (node.tagName === 'LINK' && node.rel === 'stylesheet') {
+        //     const href = node.href || '';
+        //     // Skip external stylesheets
+        //     if (href.includes('fonts.googleapis.com') || 
+        //         href.includes('cdn.jsdelivr.net') ||
+        //         href.includes('cdnjs.cloudflare.com')) {
+        //       return false;
+        //     }
+        //   }
+        //   return true;
+        // }
       });
     } catch (error) {
       console.error('Error converting SVG to PNG:', error);
     }
     
     // Clean up
+    if (styleTag && styleTag.parentNode) {
+      styleTag.parentNode.removeChild(styleTag);
+    }
     document.body.removeChild(tempDiv);
     
     return pngDataUrl;
@@ -661,7 +683,7 @@ async function convertAllGraphsToPng(results) {
           {
             width: dimensions.width,
             height: dimensions.height,
-            scale: 2 // 2x for high quality
+            // scale: 2 // 2x for high quality
           }
         );
         
@@ -680,6 +702,110 @@ async function convertAllGraphsToPng(results) {
   }
   
   console.log(`✅ Converted ${convertedCount} graphs to PNG`);
+  return results;
+}
+
+export function createDataTable(results) {
+  const table = document.createElement('table');
+  table.style.width = '1200px';
+  table.style.borderCollapse = 'collapse';
+
+  results.forEach(result => {
+    const row = table.insertRow();
+
+    // Statement cell
+    const statementCell = row.insertCell();
+    statementCell.style.width = '300px';
+    statementCell.style.border = '1px solid black';
+    statementCell.textContent = result.statement || 'N/A';
+
+    // SVG cell
+    const svgCell = row.insertCell();
+    svgCell.style.width = '300px';
+    svgCell.style.border = '1px solid black';
+    if (result.graphSvgWithRenderedLatex) {
+      const svgElement = document.createElement('div');
+      svgElement.classList.add('graph-svg-container');
+      svgElement.innerHTML = result.graphSvgWithRenderedLatex;
+      svgCell.appendChild(svgElement);
+    } else {
+      svgCell.textContent = 'N/A';
+    }
+
+    // PNG cell
+    const pngCell = row.insertCell();
+    pngCell.style.width = '300px';
+    pngCell.style.border = '1px solid black';
+    if (result.graphPng) {
+      const imgElement = document.createElement('img');
+      imgElement.src = result.graphPng;
+      imgElement.style.width = '100%';
+      pngCell.appendChild(imgElement);
+    } else {
+      pngCell.textContent = 'N/A';
+    }
+
+    // Answer cell
+    const answerCell = row.insertCell();
+    answerCell.style.width = '300px';
+    answerCell.style.border = '1px solid black';
+    answerCell.textContent = result.answer || 'N/A';
+  });
+
+  return table;
+}
+
+async function updatePngColumnAfterRender(results) {
+  const table = createDataTable(results);
+  document.body.appendChild(table);
+
+  // Convert SVGs to PNGs for non-Safari browsers after table is rendered
+  if (!isSafari()) {
+    console.log('🎨 Converting SVGs to PNGs for non-Safari browser after table render...');
+    let convertedCount = 0;
+
+    for (const result of results) {
+      if (hasGraph(result) && result.graphSvgWithRenderedLatex) {
+        try {
+          // Get dimensions from graphDict if available
+          const dimensions = {
+            width: result.graphDict?.svg?.width || 340,
+            height: result.graphDict?.svg?.height || 340
+          };
+
+          // Convert the pre-rendered SVG to PNG
+          const pngDataUrl = await convertSvgToPngWithDomToImage(
+            result.graphSvgWithRenderedLatex,
+            {
+              width: dimensions.width,
+              height: dimensions.height,
+              scale: 2 // 2x for high quality
+            }
+          );
+
+          if (pngDataUrl) {
+            // Update the PNG column in the table
+            const rowIndex = results.indexOf(result);
+            const pngCell = table.rows[rowIndex].cells[2];
+            const imgElement = document.createElement('img');
+            imgElement.src = pngDataUrl;
+            imgElement.style.width = `${dimensions.width}px`;
+            imgElement.style.height = `${dimensions.height}px`;
+            pngCell.innerHTML = ''; // Clear existing content
+            pngCell.appendChild(imgElement);
+            convertedCount++;
+          } else {
+            console.warn('Failed to convert graph to PNG for result:', result);
+          }
+        } catch (error) {
+          console.error('Error converting graph to PNG:', error);
+        }
+      }
+    }
+
+    console.log(`✅ Converted ${convertedCount} graphs to PNG after table render`);
+  }
+
   return results;
 }
 
@@ -717,9 +843,8 @@ export async function init() {
     );
     console.log("✅ Pre-rendering LaTeX complete!", resultsLatexRendered);
     
-    // Step 2: Convert SVGs to PNGs for non-Safari browsers
-    const finalResults = await convertAllGraphsToPng(resultsLatexRendered);
-    console.log("✅ PNG conversion complete!", finalResults);
+    // Step 2: Convert SVGs to PNGs for non-Safari browsers after table render
+    const finalResults = await updatePngColumnAfterRender(resultsLatexRendered);
 
     return finalResults;
   } else {
@@ -728,3 +853,5 @@ export async function init() {
 
   return naginiReady;
 }
+
+
