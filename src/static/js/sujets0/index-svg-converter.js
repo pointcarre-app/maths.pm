@@ -78,6 +78,96 @@ async function convertSvgToPngCanvas(svgString, width, height, scale = 2) {
 }
 
 /**
+ * Pre-render LaTeX in an SVG string
+ * @param {string} svgString - The SVG string with raw LaTeX in foreignObjects
+ * @returns {Promise<string>} The SVG string with rendered LaTeX
+ */
+export async function prerenderLatexInSvg(svgString) {
+    // If KaTeX is not available, return original
+    if (typeof katex === 'undefined') {
+        console.warn('KaTeX not available, cannot pre-render LaTeX');
+        return svgString;
+    }
+    
+    try {
+        // Parse the SVG
+        const parser = new DOMParser();
+        const svgDoc = parser.parseFromString(svgString, 'image/svg+xml');
+        const svgElement = svgDoc.querySelector('svg');
+        
+        if (!svgElement) {
+            return svgString;
+        }
+        
+        // Find all foreign objects with LaTeX
+        const foreignObjects = svgElement.querySelectorAll('foreignObject');
+        let hasUnrenderedLatex = false;
+        let renderedCount = 0;
+        
+        foreignObjects.forEach((fo) => {
+            const divs = fo.querySelectorAll('div.svg-latex');
+            divs.forEach((div) => {
+                // Check if already rendered (has .katex class)
+                if (div.querySelector('.katex')) {
+                    // Already rendered, skip
+                    return;
+                }
+                
+                const latex = div.textContent.trim();
+                if (latex) {
+                    hasUnrenderedLatex = true;
+                    try {
+                        // Preserve original styles
+                        const bgColor = div.style.backgroundColor;
+                        const color = div.style.color;
+                        
+                        // Render LaTeX to HTML string
+                        const rendered = katex.renderToString(latex, {
+                            throwOnError: false,
+                            displayMode: false
+                        });
+                        
+                        // Set the rendered HTML
+                        div.innerHTML = rendered;
+                        renderedCount++;
+                        
+                        // Restore styles
+                        if (bgColor) div.style.backgroundColor = bgColor;
+                        if (color) {
+                            // Apply color to all KaTeX elements
+                            const katexElements = div.querySelectorAll('.katex, .katex *');
+                            katexElements.forEach(el => {
+                                el.style.color = color;
+                            });
+                        }
+                    } catch (e) {
+                        console.error('KaTeX rendering error:', e);
+                        // Keep original LaTeX text on error
+                    }
+                }
+            });
+        });
+        
+        // If no unrendered LaTeX was found, return original
+        if (!hasUnrenderedLatex) {
+            return svgString;
+        }
+        
+        if (renderedCount > 0) {
+            console.log(`Pre-rendered ${renderedCount} LaTeX expressions in SVG`);
+        }
+        
+        // Serialize back to string
+        const serializer = new XMLSerializer();
+        return serializer.serializeToString(svgElement);
+        
+    } catch (error) {
+        console.error('Error pre-rendering LaTeX in SVG:', error);
+        return svgString;
+    }
+}
+
+/**
  * Render LaTeX in foreign objects within a DOM element
  * @param {HTMLElement} container - The DOM element containing SVGs with foreign objects
  */
@@ -138,6 +228,8 @@ export async function convertSvgToPng(svgString, options = {}) {
         console.log('Safari detected, skipping PNG conversion (will use SVG directly)');
         return null;
     }
+    
+    // Don't pre-render LaTeX here - it will be done after display
     
     // Default options for high quality
     const scale = options.scale || 2; // 2x for high DPI
@@ -295,7 +387,8 @@ export async function convertAllGraphsToPng(generationResults, onProgress) {
                     height: question.graphDict?.svg?.height || 340
                 };
                 
-                // Convert SVG to PNG
+                // Don't pre-render - just convert the raw SVG
+                // LaTeX will be rendered after display
                 const pngDataUrl = await convertSvgToPng(question.graphSvg, {
                     width: dimensions.width,
                     height: dimensions.height,

@@ -20,6 +20,7 @@ import generationResults from './index-data-model.js';
 import { generatePages } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/core/preview/index.js';
 import { printPage } from 'https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/core/print-manager.js';
 import { convertSvgToPng, isSafari } from './index-svg-converter.js';
+import { createGraphDisplay, postProcessGraphs, renderAllSvgLatexSequentially } from './graph-display-fix.js';
 import { 
     initializeMargins, 
     setMargins,
@@ -405,14 +406,14 @@ export async function createPapyrusJson(studentExerciseSet) {
             "id": "header-section",
             "html": `<table style='width: 100%; border-collapse: collapse; border: 0.5px solid #e0e0e0;'>
                     <tr>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 50%;'>Nom :</td>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 25%;'>Classe :</td>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 25%;'>Copie n°${studentId} (${seed})</td>
+                        <td style='font-size:12px !important; border: 0.5px solid #e0e0e0; padding: 2px; vertical-align: middle; width: 50%;'>Nom :</td>
+                        <td style='font-size:12px !important; border: 0.5px solid #e0e0e0; padding: 2px; vertical-align: middle; width: 25%;'>Classe :</td>
+                        <td style='font-size:12px !important; border: 0.5px solid #e0e0e0; padding: 2px; vertical-align: middle; width: 25%;'>Copie n°${studentId} (${seed})</td>
                     </tr>
                     <tr>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 50%;'>Prénom :</td>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 25%;'>Date :</td>
-                        <td style='font-size:0.85rem !important; border: 0.5px solid #e0e0e0; padding: 0.25rem; vertical-align: middle; width: 25%;'>Spécialité </td>
+                        <td style='font-size:12px !important; border: 0.5px solid #e0e0e0; padding: 2px; vertical-align: middle; width: 50%;'>Prénom :</td>
+                        <td style='font-size:12px !important; border: 0.5px solid #e0e0e0; padding: 2px; vertical-align: middle; width: 25%;'>Date :</td>
+                        <td style='font-size:12px !important; border: 0.5px solid #e0e0e0; padding: 2px; vertical-align: middle; width: 25%;'>Spécialité </td>
                     </tr>
                 </table>`,
             "classes": ["font-mono"],
@@ -424,7 +425,7 @@ export async function createPapyrusJson(studentExerciseSet) {
         {
             "id": "main-title",
             "html": "<h3 style='margin: 0;'>Bac 1<sup>ère</sup> Maths - Première Partie : Automatismes</h3>",
-            "style": "font-family: 'Spectral', serif; font-weight: bold; text-align: left; color: var(--color-base-content); padding-bottom: 1rem; margin: 0;"
+            "style": "font-family: 'Spectral', serif; font-weight: bold; text-align: left; color: var(--color-base-content); padding-bottom: 16px; margin: 0;"
         }
     ];
 
@@ -468,8 +469,17 @@ export async function createPapyrusJson(studentExerciseSet) {
             processedStatement = `<div>${questionNum}) ${statementHtml}</div>`;
         }
         
-        // If there's a graph, use the pre-converted PNG or convert on the fly
+        // If there's a graph, use the new display function
         if (question.graphSvg) {
+            // Use the new graph display function
+            questionHtml = createGraphDisplay(question, processedStatement, questionNum);
+        } else {
+            // Simple layout for questions without graphs
+            questionHtml = processedStatement;
+        }
+        
+        // Skip the old implementation
+        if (false) { // Keep old code for reference but skip it
             // Check if PNG was already pre-converted
             let pngDataUrl = question.graphPng;
             let dimensions = question.graphDimensions;
@@ -602,7 +612,7 @@ export async function createPapyrusJson(studentExerciseSet) {
         } else {
             // Simple layout for questions without graphs
             questionHtml = processedStatement;
-        }
+        } // End of if statement for old implementation
         
         // Add each question as a separate JSON item
         // This allows Papyrus to properly measure and paginate
@@ -878,11 +888,15 @@ export async function previewStudentCopy(studentIndex, triggerPrint = false) {
             logPageDimensions(pagesContainer);
         }
         
-        // CRITICAL: Render LaTeX in foreign objects AFTER pages are built
-        renderLatexInForeignObjects(pagesContainer);
-        
         // Apply Safari-specific SVG styles if needed
         applySafariSVGStyles(pagesContainer);
+        
+        // Post-process graphs for proper display
+        postProcessGraphs(pagesContainer);
+        
+        // CRITICAL: Render LaTeX in foreign objects AFTER pages are built
+        // Sequential rendering to avoid multiple renders
+        await renderAllSvgLatexSequentially(5); // 5ms delay between each LaTeX expression
         
         // Trigger print if requested
         if (triggerPrint) {

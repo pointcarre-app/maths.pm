@@ -304,7 +304,7 @@ export class PapyrusManager {
     print(content, styleSheet) {
         // Use Papyrus print manager which handles Safari iframe issues
         const printStyleSheet = styleSheet || 
-            "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css";
+            "/static/css/papyrus-print.css";
         
         printPage(content, printStyleSheet);
     }
@@ -347,7 +347,7 @@ export class PapyrusManager {
                 left: 8
             },
             fontSizes: fontSizes,
-            spacing: 3
+            spacing: 0
         };
     }
     

@@ -127,9 +127,7 @@
 </div>
 
 <!-- Unified Status Bar -->
-<div id="unified-status-bar"
-     class="mt-6 transition-opacity duration-300 opacity-0"
-     style="display: none">
+<div id="unified-status-bar" class="mt-6 transition-opacity duration-300 opacity-0 hidden">
   <!-- Progress content will be dynamically inserted here -->
 </div>
 
@@ -151,18 +149,19 @@
       </div>
 
       <!-- Debug toggle -->
-      <div class="flex items-center gap-2">
+      {# Broken since refactor #}
+      {# <div class="flex items-center gap-2">
         <label class="label cursor-pointer">
           <span class="label-text mr-2">Mode debug</span>
           <input type="checkbox" id="papyrus-debug-toggle" class="toggle toggle-sm" />
         </label>
-      </div>
+      </div> #}
     </div>
   </div>
 
   <!-- Document preview -->
   <div class="divider my-0"></div>
-  <div class="card-body pt-4">
+  <div class="pt-4">
     <div id="pages-container" class="papyrus-document bg-white rounded-lg min-h-[500px] overflow-auto">
       <!-- Papyrus content will be rendered here -->
     </div>
@@ -312,10 +311,12 @@
 </style>
 
 <!-- Load Papyrus styles -->
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/index.css" />
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css" />
+{# <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css" /> #}
+
+<!-- Graph display fix styles -->
+<link rel="stylesheet" href="{{ url_for('static', path='css/graph-display-fix.css') }}" />
+
 
 <!-- LZ-String for teacher manifest compression -->
 <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
@@ -343,4 +344,74 @@
         // Start checking after a short delay
         setTimeout(checkAndAutoGenerate, 1000);
     });
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+<script>
+    setTimeout(() => {
+        element = document.getElementById('pages-container');
+
+        function getAppliedCSS(element) {
+            const sheets = Array.from(document.styleSheets);
+            const rules = [];
+
+            [element, ...element.querySelectorAll('*')].forEach(el => {
+                sheets.forEach(sheet => {
+                    try {
+                        Array.from(sheet.cssRules).forEach(rule => {
+                            if (rule.selectorText && el.matches(rule.selectorText)) {
+                                rules.push(rule.cssText);
+                            }
+                        });
+                    } catch (e) {} // Cross-origin stylesheets
+                });
+            });
+
+            return [...new Set(rules)].join('\n');
+        }
+        console.log(getAppliedCSS(element));
+
+
+
+
+        async function exportPDF() {
+            const canvas = await html2canvas(element, {
+                height: element.scrollHeight, // Full height
+                width: element.scrollWidth,
+                useCORS: true
+            });
+
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const imgData = canvas.toDataURL('image/png');
+
+            const pageWidth = 210; // A4 width in mm
+            const pageHeight = 297; // A4 height in mm
+            const imgWidth = pageWidth;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+            let heightLeft = imgHeight;
+            let position = 0;
+
+            // First page
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            // Additional pages
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            pdf.save('export.pdf');
+        }
+
+        exportPDF();
+
+    }, 10_000);
 </script>

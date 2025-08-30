@@ -118,6 +118,28 @@
         border-radius: 2pt;
         padding: 2pt 4pt;
     }
+
+    body,
+    .papyrus-document,
+    .page-content {
+        font-size: 16px !important;
+    }
+    
+    /* Override all text elements in print */
+    p, div, span, td, th, li {
+        font-size: 13px !important;
+    }
+    
+    /* Headings with specific sizes */
+    h1 { font-size: 24px !important; }
+    h2 { font-size: 20px !important; }
+    h3 { font-size: 17px !important; }
+    h4 { font-size: 15px !important; }
+    h5 { font-size: 14px !important; }
+    h6 { font-size: 12px !important; }
+}
+
+
     
     /* Safari-specific print font sizes - CRITICAL for consistency */
     @supports (-webkit-appearance: none) {

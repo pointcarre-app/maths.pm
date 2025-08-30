@@ -433,38 +433,6 @@
 
 <!-- Additional styles for consistent preview and print -->
 <style>
-    :root {
-        /* Default document settings as CSS variables - will be overridden by JavaScript */
-        /* IMPORTANT: These must match getDocumentSettings() in index-papyrus.js */
-        --papyrus-margin-top: 3mm;
-        /* Small top margin for breathing room */
-        --papyrus-margin-right: 8mm;
-
-
-
-        --papyrus-margin-bottom: 0mm;
-        /* Reduced for more content space */
-        --papyrus-margin-left: 8mm;
-        /* Reduced for more content space */
-        --papyrus-font-size-h1: 28px;
-        --papyrus-font-size-h2: 24px;
-        --papyrus-font-size-h3: 20px;
-        --papyrus-font-size-h4: 18px;
-        --papyrus-font-size-h5: 16px;
-        --papyrus-font-size-h6: 14px;
-        --papyrus-font-size-body: 15px;
-    }
-
-    /* Apply print styles to preview as well */
-    .papyrus-document {
-        font-family: 'Spectral', serif;
-    }
-
-    /* Papyrus page structure - CLEAR RESPONSIBILITY:
-       - .page-wrapper: handles page dimensions and shadows (NO padding)
-       - .page-preview: structural container (NO padding)  
-       - .page-content: ONLY element with padding (document margins)
-    */
     .page-wrapper {
         width: 210mm;
         min-height: 297mm;
