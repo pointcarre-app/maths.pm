@@ -907,11 +907,15 @@ export async function printStudentCopy(studentIndex) {
 }
 
 /**
- * Print all student copies
+ * Print all student copies - Option 2: Use existing rendered content
+ * This approach reuses the preview rendering, ensuring WYSIWYG consistency
  */
 export async function printAllCopies() {
     // Log how many copies will be printed
     console.log(`Printing all ${generationResults.students.length} copies`);
+    
+    // Save the current student index to restore later
+    const originalStudentIndex = generationResults.currentStudentIndex || 0;
     
     // Configure Papyrus with consistent settings first
     configurePapyrus();
@@ -935,19 +939,11 @@ export async function printAllCopies() {
     
     const startTime = Date.now();
     
-    // Create a hidden container for processing
-    const hiddenContainer = document.createElement('div');
-    hiddenContainer.id = 'hidden-print-container';
-    hiddenContainer.style.position = 'absolute';
-    hiddenContainer.style.left = '-9999px';
-    hiddenContainer.style.top = '-9999px';
-    hiddenContainer.style.width = '210mm';
-    document.body.appendChild(hiddenContainer);
-    
-    // Store all student content
+    // Store all student content using the visible container
     let allContent = '';
+    const pagesContainer = document.getElementById('pages-container');
     
-    // For each student
+    // For each student, render in the visible container and accumulate HTML
     for (let i = 0; i < generationResults.students.length; i++) {
         // Update progress
         if (printProgress) printProgress.value = i;
@@ -959,48 +955,21 @@ export async function printAllCopies() {
             printTime.textContent = `${elapsed}s écoulées`;
         }
         
-        // Generate JSON for this student
+        // Skip if no student data
         const student = generationResults.students[i];
         if (!student) continue;
         
-        // Create Papyrus JSON (uses pre-converted PNGs, should be fast)
-        const papyrusJson = await createPapyrusJson(student);
+        // Use previewStudentCopy to render this student in the visible container
+        // This ensures all Safari fixes and styles are applied consistently
+        await previewStudentCopy(i, false); // false = don't trigger print
         
-        // Update the JSON input field
-        document.getElementById('json-input').value = JSON.stringify(papyrusJson);
+        // Wait a bit for rendering to complete (especially for LaTeX and SVGs)
+        await new Promise(resolve => setTimeout(resolve, 300));
         
-        // Generate pages in the hidden container
-        hiddenContainer.innerHTML = '';
-        
-        // Temporarily swap containers for Papyrus
-        const originalPagesContainer = document.getElementById('pages-container');
-        hiddenContainer.id = 'pages-container';
-        originalPagesContainer.id = 'pages-container-temp';
-        
-        // Generate pages (will use hidden container)
-        generatePages();
-        
-        // Wait a bit for Papyrus to complete
-        await new Promise(resolve => setTimeout(resolve, 200));
-        
-        // Swap IDs back
-        hiddenContainer.id = 'hidden-print-container';
-        originalPagesContainer.id = 'pages-container';
-        
-        // IMPORTANT: Render LaTeX in the DOM before getting innerHTML
-        renderLatexInForeignObjects(hiddenContainer);
-        
-        // Apply Safari SVG styles if needed
-        if (isSafari()) {
-            applySafariSVGStyles(hiddenContainer);
-        }
-        
-        // Add student content to the combined content
-        allContent += hiddenContainer.innerHTML;
+        // Get the fully rendered HTML from the visible container
+        // This already has all Safari fixes, LaTeX rendering, and styles applied
+        allContent += pagesContainer.innerHTML;
     }
-    
-    // Clean up hidden container
-    document.body.removeChild(hiddenContainer);
     
     // Update progress to complete
     if (printProgress) printProgress.value = generationResults.students.length;
@@ -1010,24 +979,20 @@ export async function printAllCopies() {
         printTime.textContent = `Terminé en ${elapsed}s`;
     }
     
-    // Apply Safari inline styles if needed (for SVG text rendering)
-    if (isSafari()) {
-        console.log('Safari: Applying inline styles to all copies');
-        
-        // Temporarily apply styles to the combined content
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = allContent;
-        applySafariSVGStyles(tempDiv);
-        allContent = tempDiv.innerHTML;
-    }
+    // No need for additional Safari processing - it was already applied during preview
+    console.log('All copies rendered using existing preview function');
     
-    // Use Papyrus's print function for all browsers
-    // Papyrus v0.0.11+ handles iframe creation, cleanup, and browser quirks
+    // Use Papyrus's print function with the accumulated content
+    // All Safari fixes and styles are already in the HTML
     const styleSheet = "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.11/src/styles/print.css";
     printPage(allContent, styleSheet);
     
-    // Reset the progress card to waiting state after 3 seconds
-    setTimeout(() => {
+    // Restore the original student view after a short delay
+    setTimeout(async () => {
+        // Restore the original student's preview
+        await previewStudentCopy(originalStudentIndex, false);
+        
+        // Reset the progress card to waiting state
         if (printMessage) printMessage.textContent = 'En attente d\'impression groupée...';
         if (printProgress) printProgress.value = 0;
         if (printTime) printTime.textContent = '';
