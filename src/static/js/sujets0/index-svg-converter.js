@@ -3,7 +3,71 @@
  * Handles conversion of SVG graphs to high-quality PNG images
  */
 
+// Import dom-to-image as fallback for local development
 import domtoimage from 'https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/+esm';
+
+/**
+ * Convert SVG to PNG using Canvas API (CORS-safe method)
+ * @param {string} svgString - The SVG HTML string
+ * @param {number} width - Width of the output image
+ * @param {number} height - Height of the output image
+ * @param {number} scale - Scale factor for high DPI
+ * @returns {Promise<string>} PNG data URL
+ */
+async function convertSvgToPngCanvas(svgString, width, height, scale = 2) {
+    return new Promise((resolve, reject) => {
+        try {
+            // Create a Blob from the SVG string
+            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(svgBlob);
+            
+            // Create an image element
+            const img = new Image();
+            
+            // Set up the canvas
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions with scale
+            canvas.width = width * scale;
+            canvas.height = height * scale;
+            
+            // Handle image load
+            img.onload = function() {
+                try {
+                    // Fill white background
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    // Draw the SVG image scaled up
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    // Convert to PNG data URL
+                    const pngDataUrl = canvas.toDataURL('image/png', 1.0);
+                    
+                    // Clean up
+                    URL.revokeObjectURL(url);
+                    
+                    resolve(pngDataUrl);
+                } catch (err) {
+                    URL.revokeObjectURL(url);
+                    reject(err);
+                }
+            };
+            
+            // Handle image error
+            img.onerror = function() {
+                URL.revokeObjectURL(url);
+                reject(new Error('Failed to load SVG image'));
+            };
+            
+            // Start loading the image
+            img.src = url;
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
 
 /**
  * Render LaTeX in foreign objects within a DOM element
@@ -66,16 +130,11 @@ export async function convertSvgToPng(svgString, options = {}) {
     let height = options.height || 150;
     
     try {
-        // Create a temporary container
-        const tempDiv = document.createElement('div');
-        tempDiv.style.position = 'absolute';
-        tempDiv.style.left = '-9999px';
-        tempDiv.style.top = '-9999px';
-        tempDiv.innerHTML = svgString;
-        document.body.appendChild(tempDiv);
+        // Parse the SVG to get dimensions
+        const parser = new DOMParser();
+        const svgDoc = parser.parseFromString(svgString, 'image/svg+xml');
+        const svgElement = svgDoc.querySelector('svg');
         
-        // Get the SVG element
-        const svgElement = tempDiv.querySelector('svg');
         if (!svgElement) {
             throw new Error('No SVG element found in the provided string');
         }
@@ -100,24 +159,83 @@ export async function convertSvgToPng(svgString, options = {}) {
             svgElement.setAttribute('viewBox', `0 0 ${width} ${height}`);
         }
         
+        // Apply inline styles to ensure they're captured
+        svgElement.style.backgroundColor = 'white';
+        svgElement.style.fontFamily = "'Lexend', sans-serif";
+        
+        // Serialize back to string
+        const serializer = new XMLSerializer();
+        const updatedSvgString = serializer.serializeToString(svgElement);
+        
+        // First, try the Canvas method (CORS-safe)
+        try {
+            const pngDataUrl = await convertSvgToPngCanvas(updatedSvgString, width, height, scale);
+            if (pngDataUrl) {
+                return pngDataUrl;
+            }
+        } catch (canvasError) {
+            console.warn('Canvas conversion failed, trying dom-to-image fallback:', canvasError);
+        }
+        
+        // Fallback to dom-to-image (mainly for local development where CORS is not an issue)
+        // Create a temporary container
+        const tempDiv = document.createElement('div');
+        tempDiv.style.position = 'absolute';
+        tempDiv.style.left = '-9999px';
+        tempDiv.style.top = '-9999px';
+        tempDiv.innerHTML = updatedSvgString;
+        document.body.appendChild(tempDiv);
+        
+        const tempSvgElement = tempDiv.querySelector('svg');
+        
         // Render LaTeX in foreign objects if they exist
         renderLatexInForeignObjects(tempDiv);
         
         // Wait a bit for rendering to complete
         await new Promise(resolve => setTimeout(resolve, 100));
         
-        // Convert to PNG using dom-to-image
-        const pngDataUrl = await domtoimage.toPng(svgElement, {
-            width: width * scale,
-            height: height * scale,
-            style: {
-                transform: `scale(${scale})`,
-                transformOrigin: 'top left',
-                width: `${width}px`,
-                height: `${height}px`
-            },
-            quality: 1.0
-        });
+        // Suppress console errors temporarily during conversion
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        console.error = () => {};
+        console.warn = () => {};
+        
+        let pngDataUrl;
+        try {
+            // Convert to PNG using dom-to-image with CORS-safe options
+            pngDataUrl = await domtoimage.toPng(tempSvgElement, {
+                width: width * scale,
+                height: height * scale,
+                style: {
+                    transform: `scale(${scale})`,
+                    transformOrigin: 'top left',
+                    width: `${width}px`,
+                    height: `${height}px`
+                },
+                quality: 1.0,
+                // Add options to handle CORS issues
+                cacheBust: true,
+                imagePlaceholder: undefined,
+                // Skip external stylesheets that cause CORS issues
+                filter: (node) => {
+                    // Filter out link elements that reference external stylesheets
+                    if (node.tagName === 'LINK' && node.rel === 'stylesheet') {
+                        const href = node.href || '';
+                        // Skip external stylesheets
+                        if (href.includes('fonts.googleapis.com') || 
+                            href.includes('cdn.jsdelivr.net') ||
+                            href.includes('cdnjs.cloudflare.com')) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            });
+        } finally {
+            // Restore console methods
+            console.error = originalError;
+            console.warn = originalWarn;
+        }
         
         // Clean up
         document.body.removeChild(tempDiv);
