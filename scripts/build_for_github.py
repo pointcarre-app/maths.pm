@@ -127,16 +127,30 @@ async def build_static_site():
     logger.info("Starting server...")
     server_thread = threading.Thread(target=run_server, daemon=True)
     server_thread.start()
-    time.sleep(5)  # Wait for server to start
+
+    # Wait for server to start with retries
+    max_retries = 10
+    retry_delay = 2
+    server_ready = False
 
     async with httpx.AsyncClient(timeout=60.0) as client:
-        # Check server is running
-        try:
-            health = await client.get("http://127.0.0.1:8000/api/health")
-            logger.info(f"Server running: {health.status_code}")
-        except Exception as e:
-            logger.error(f"Server not responding: {e}")
-            return False
+        for i in range(max_retries):
+            try:
+                health = await client.get("http://127.0.0.1:8000/api/health")
+                if health.status_code == 200:
+                    logger.info(f"Server is ready (attempt {i + 1})")
+                    server_ready = True
+                    break
+            except Exception:
+                if i < max_retries - 1:
+                    logger.info(f"Waiting for server... (attempt {i + 1}/{max_retries})")
+                    time.sleep(retry_delay)
+                else:
+                    logger.error(f"Server failed to start after {max_retries} attempts")
+
+        if not server_ready:
+            logger.error("Server is not responding - build cannot continue")
+            sys.exit(1)
 
         # HARDCODED ROUTES - ALL OF THEM
         routes = []

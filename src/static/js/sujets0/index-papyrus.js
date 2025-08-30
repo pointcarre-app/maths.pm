@@ -700,8 +700,8 @@ function configurePapyrus() {
     // Initialize configurations
     initializeMargins();
     initializeFontSizes();
-    initializeSpaceBetweenDivs();
-    initializePageNumberConfig();
+    // initializeSpaceBetweenDivs();
+    // initializePageNumberConfig();
     
     // Set margins from settings - these should match CSS variables
     setMargins({

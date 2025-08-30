@@ -25,6 +25,9 @@
     .page-wrapper + .page-wrapper {
         page-break-before: always;
         break-before: page;
+        /* For Safari */
+        position: relative;
+        overflow: hidden; /* Prevent content overflow */
     }
 
     .page-preview {

@@ -12,6 +12,8 @@
   - Force download with `force_download=True` parameter in CI environments
   - Downloads Google Fonts, DaisyUI, KaTeX, and Papyrus styles locally
   - Documentation: `notes/SAFARI_CSS_DOWNLOAD.md`
+  - Fixed: CI build no longer fails if CSS downloads fail (logs error but continues)
+  - Added: Better server startup retry logic in GitHub Actions build script
   - 🔴 empty page at the end when printing... safari...
 
 ## [v0.0.2]
