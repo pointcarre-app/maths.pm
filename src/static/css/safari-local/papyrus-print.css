@@ -1,0 +1,47 @@
+/**
+ * Static print styles - for clean, predictable PDF output.
+ */
+
+/* body { */
+    /* margin: 0; */
+    /* padding: 0; */
+    /* background: white; */
+    /* font-family: 'Lexend', sans-serif; Default body font */
+    /* line-height: 1.5; */
+    /* color: #1a1a1a; */
+/* } */
+
+/* Define font families */
+.font-heading { font-family: 'Spectral', serif; }
+.font-body { font-family: 'Lexend', sans-serif; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+@media print {
+    /* Apply page breaks to the wrapper, not the content */
+    .page-wrapper {
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
+
+    .page-preview {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0; /* All padding/margins are controlled by the application's preview */
+        border: none;
+        box-shadow: none;
+    }
+
+    /* Page number styling for print */
+    .page-number-bottom {
+        position: fixed;
+        bottom: 3mm; /* Very close to the page edge */
+        right: 3mm; /* Very close to the page edge */
+        font-size: 8pt;
+        color: #555;
+        background: rgba(255, 255, 255, 0.9);
+        border: 0.5pt solid #ddd;
+        border-radius: 2pt;
+        padding: 2pt 4pt;
+    }
+} 

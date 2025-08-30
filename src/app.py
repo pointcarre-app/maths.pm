@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+import asyncio
+import httpx
 
 # --- Centralized Logging Configuration ---
 # Configure logging BEFORE importing settings to catch all logs
@@ -160,6 +162,101 @@ async def cleanup_service_worker_issues():
         logger.warning(f"⚠️  Failed to cleanup service worker: {e}")
 
 
+async def download_safari_css_files():
+    """
+    Download external CSS files locally for Safari CORS compatibility.
+    These files will be served from the same origin to avoid CORS issues.
+    """
+    try:
+        safari_css_dir = settings.static_dir / "css" / "safari-local"
+        safari_css_dir.mkdir(parents=True, exist_ok=True)
+
+        # CSS files to download
+        css_urls = {
+            # Google Fonts (multiple font families)
+            "fonts-comfortaa.css": "https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap",
+            "fonts-lexend.css": "https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap",
+            # DaisyUI
+            "daisyui.css": "https://cdn.jsdelivr.net/npm/daisyui@5/dist/full.css",
+            "daisyui-themes.css": "https://cdn.jsdelivr.net/npm/daisyui@5/themes.css",
+            # KaTeX
+            "katex.min.css": "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css",
+            # Papyrus styles
+            "papyrus-index.css": "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/index.css",
+            "papyrus-print.css": "https://cdn.jsdelivr.net/gh/pointcarre-app/papyrus@v0.0.8/src/styles/print.css",
+        }
+
+        # Font files directory for actual font files (woff2, etc.)
+        fonts_dir = safari_css_dir / "fonts"
+        fonts_dir.mkdir(parents=True, exist_ok=True)
+
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            # Download CSS files
+            download_tasks = []
+            for filename, url in css_urls.items():
+                download_tasks.append(
+                    download_css_file(client, url, safari_css_dir / filename, fonts_dir)
+                )
+
+            # Execute all downloads concurrently
+            results = await asyncio.gather(*download_tasks, return_exceptions=True)
+
+            # Count successful downloads
+            successful = sum(1 for r in results if not isinstance(r, Exception))
+
+            if successful > 0:
+                logger.info(f"🦁 Safari CSS files downloaded ({successful}/{len(css_urls)} files)")
+            else:
+                logger.warning("⚠️  No Safari CSS files downloaded")
+
+    except Exception as e:
+        logger.warning(f"⚠️  Failed to download Safari CSS files: {e}")
+
+
+async def download_css_file(client, url, dest_path, fonts_dir):
+    """
+    Download a single CSS file and optionally download referenced font files.
+    """
+    try:
+        response = await client.get(url)
+        if response.status_code == 200:
+            content = response.text
+
+            # For font CSS files, also download the actual font files
+            if "fonts.googleapis" in url or "fonts.gstatic" in url:
+                # Parse and download font files referenced in the CSS
+                import re
+
+                font_urls = re.findall(r"url\((https://[^)]+)\)", content)
+
+                for font_url in font_urls:
+                    font_filename = font_url.split("/")[-1].split("?")[0]
+                    font_dest = fonts_dir / font_filename
+
+                    # Download font file
+                    font_response = await client.get(font_url)
+                    if font_response.status_code == 200:
+                        font_content = font_response.content
+                        with open(font_dest, "wb") as f:
+                            f.write(font_content)
+
+                    # Update CSS to use local font path
+                    relative_font_path = f"./fonts/{font_filename}"
+                    content = content.replace(font_url, relative_font_path)
+
+            # Write CSS file
+            with open(dest_path, "w", encoding="utf-8") as f:
+                f.write(content)
+
+            return True
+        else:
+            logger.warning(f"⚠️  Failed to download {url}: HTTP {response.status_code}")
+            return False
+    except Exception as e:
+        logger.warning(f"⚠️  Error downloading {url}: {e}")
+        return False
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
@@ -170,7 +267,10 @@ async def lifespan(app: FastAPI):
     if settings.jupyterlite_enabled:
         await async_build_jupyterlite()
 
-    # 2) Copy entire pms/ to static/pm/ for stable static references
+    # 2) Download CSS files for Safari CORS compatibility
+    await download_safari_css_files()
+
+    # 3) Copy entire pms/ to static/pm/ for stable static references
     try:
         pms_dir = settings.base_dir / "pms"
         static_pm_dir = settings.static_dir / "pm"
@@ -201,7 +301,7 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"⚠️ Failed copying PM files: {e}")
 
-    # 3) Copy sujets0/generators to static/sujets0/generators
+    # 4) Copy sujets0/generators to static/sujets0/generators
     try:
         generators_dir = settings.base_dir / "src" / "sujets0" / "generators"
         static_generators_dir = settings.static_dir / "sujets0" / "generators"
@@ -231,7 +331,7 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"⚠️ Failed copying sujets0 generators: {e}")
 
-    # 4) Copy entire official_curriculums/ to static/official_curriculums/
+    # 5) Copy entire official_curriculums/ to static/official_curriculums/
     try:
         official_curriculums_dir = settings.base_dir / "official_curriculums"
         static_official_curriculums_dir = settings.static_dir / "official_curriculums"
@@ -265,7 +365,7 @@ async def lifespan(app: FastAPI):
         logger.warning(f"⚠️ Failed copying official_curriculums: {e}")
 
     logger.info(
-        "✅ All static files copied: JupyterLite (optional), PM, Sujets0, Official curriculums"
+        "✅ All static files copied: JupyterLite (optional), Safari CSS, PM, Sujets0, Official curriculums"
     )
 
     yield
