@@ -177,7 +177,7 @@ async def download_safari_css_files():
             "fonts-comfortaa.css": "https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap",
             "fonts-lexend.css": "https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap",
             # DaisyUI
-            "daisyui.css": "https://cdn.jsdelivr.net/npm/daisyui@5/dist/full.css",
+            "daisyui.css": "https://cdn.jsdelivr.net/npm/daisyui@5",
             "daisyui-themes.css": "https://cdn.jsdelivr.net/npm/daisyui@5/themes.css",
             # KaTeX
             "katex.min.css": "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css",
@@ -190,7 +190,7 @@ async def download_safari_css_files():
         fonts_dir = safari_css_dir / "fonts"
         fonts_dir.mkdir(parents=True, exist_ok=True)
 
-        async with httpx.AsyncClient(timeout=30.0) as client:
+        async with httpx.AsyncClient(timeout=10.0) as client:
             # Download CSS files
             download_tasks = []
             for filename, url in css_urls.items():
@@ -267,8 +267,15 @@ async def lifespan(app: FastAPI):
     if settings.jupyterlite_enabled:
         await async_build_jupyterlite()
 
-    # 2) Download CSS files for Safari CORS compatibility
-    await download_safari_css_files()
+    # 2) Download CSS files for Safari CORS compatibility (optional, non-blocking)
+    # Skip in CI/GitHub Actions to avoid network issues during build
+    if os.environ.get("CI") != "true" and os.environ.get("GITHUB_ACTIONS") != "true":
+        try:
+            await download_safari_css_files()
+        except Exception as e:
+            logger.warning(f"⚠️  Safari CSS download failed (non-critical): {e}")
+    else:
+        logger.info("📦 Skipping Safari CSS download in CI environment")
 
     # 3) Copy entire pms/ to static/pm/ for stable static references
     try:
@@ -365,7 +372,7 @@ async def lifespan(app: FastAPI):
         logger.warning(f"⚠️ Failed copying official_curriculums: {e}")
 
     logger.info(
-        "✅ All static files copied: JupyterLite (optional), Safari CSS, PM, Sujets0, Official curriculums"
+        "✅ All static files copied: JupyterLite (optional), PM, Sujets0, Official curriculums"
     )
 
     yield
