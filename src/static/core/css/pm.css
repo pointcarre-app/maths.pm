@@ -42,6 +42,45 @@
 .fragment-wrapper[data-f_type="svg_"] {
   margin-bottom: 2.25rem;
 }
+.fragment[data-f_type="svg_"] {
+  position: relative;
+  display: block;
+  overflow: visible;
+}
+
+
+ 
+
+.fragment[data-f_type="svg_"] svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Foreign object positioning fix */
+.fragment[data-f_type="svg_"]  foreignObject {
+    overflow: visible;
+}
+
+.fragment[data-f_type="svg_"] foreignObject>div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* LaTeX in SVG styles */
+.svg-latex {
+    /*font-size: 14px;*/
+    line-height: 1.2;
+    text-align: center;
+}
+
+.svg-latex .katex {
+    font-size: inherit;
+    font-family: 'KaTeX_Main', sans-serif;
+}
 
 
 

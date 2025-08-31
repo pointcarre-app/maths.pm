@@ -171,6 +171,7 @@ async function executeGeneratorWithSeed(filename, seed) {
                 return {
                     success: true,
                     statement: data.statement || data.question,
+                    statementHtml: data.statement_html,
                     answer: data.answer,
                     data: data,
                     stdout: result.stdout,
@@ -263,6 +264,67 @@ async function attachGraphToResult(result, generator) {
         }
     } catch (error) {
         console.error(`Failed to attach graph for ${generator}:`, error);
+    }
+}
+
+// SVG KaTeX Processing (inspired by index-graphs.js)
+async function processKatexInSvg(svgString) {
+    if (typeof katex === 'undefined') {
+        console.warn('KaTeX not available for SVG processing');
+        return svgString;
+    }
+    
+    try {
+        const parser = new DOMParser();
+        const svgDoc = parser.parseFromString(svgString, 'image/svg+xml');
+        const svgElement = svgDoc.querySelector('svg');
+        if (!svgElement) return svgString;
+        
+        // Find all foreignObject elements
+        const foreignObjects = svgElement.querySelectorAll('foreignObject');
+        
+        foreignObjects.forEach((fo) => {
+            // Find div.svg-latex elements (exactly like index-graphs.js)
+            const latexDivs = fo.querySelectorAll('div.svg-latex');
+            
+            
+            latexDivs.forEach((div) => {
+                div.classList.add('svg-latex');
+                const latex = div.textContent.trim();
+                if (!latex) return;
+                
+                try {
+                    // Preserve original styling
+                    const bgColor = div.style.backgroundColor;
+                    const color = div.style.color;
+                    
+                    // Clear and render KaTeX directly (like index-graphs.js line 94-98)
+                    div.innerHTML = '';
+                    katex.render(latex, div, {
+                        throwOnError: false,
+                        displayMode: false
+                    });
+                    
+                    // Restore colors (like index-graphs.js line 99-105)
+                    if (bgColor) div.style.backgroundColor = bgColor;
+                    if (color) {
+                        div.querySelectorAll('.katex, .katex *').forEach(el => {
+                            el.style.color = color;
+                        });
+                    }
+                } catch (e) {
+                    console.error('KaTeX error in SVG:', e);
+                    div.textContent = latex; // Fallback to original
+                }
+            });
+        });
+        
+        // Serialize back to string with processed KaTeX
+        const serializer = new XMLSerializer();
+        return serializer.serializeToString(svgElement);
+    } catch (error) {
+        console.error('SVG KaTeX processing failed:', error);
+        return svgString; // Return original on error
     }
 }
 
@@ -376,9 +438,9 @@ async function executeAllGenerators() {
                 // Attach graphs where needed
                 await attachGraphToResult(result, generator);
                 
-                // Keep SVG as-is, PM system will handle LaTeX
+                // Process KaTeX directly in SVG foreignObjects
                 if (result.graphSvg) {
-                    result.graphSvgWithRenderedLatex = result.graphSvg;
+                    result.graphSvgWithRenderedLatex = await processKatexInSvg(result.graphSvg);
                 }
                 
                 questionResults.push(result);
@@ -424,7 +486,7 @@ function generateFragmentsFromResults(results) {
         byStudent[student].forEach((result) => {
             // Statement fragment using statementHtml
             const statementHtml = result.success ? 
-                `${result.generatorNum}) ${result.statement}` : 
+                `${result.generatorNum}) ${result.statementHtml}` : 
                 `${result.generatorNum}) Erreur de génération`;
             
             fragments.push(PMFragmentGenerator.createParagraph(statementHtml));
@@ -435,8 +497,8 @@ function generateFragmentsFromResults(results) {
             }
             
             // SVG fragment if available
-            if (result.graphSvg) {
-                fragments.push(PMFragmentGenerator.createSvg(result.graphSvg, result.graphDict));
+            if (result.graphSvgWithRenderedLatex) {
+                fragments.push(PMFragmentGenerator.createSvg(result.graphSvgWithRenderedLatex, result.graphDict));
             }
             
             // Divider between questions
@@ -525,11 +587,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Inject fragments into PM system
         injectFragmentsIntoPM(fragments);
         
+        // Fire unified LaTeX rendering for all content (static + dynamic)
+        setTimeout(() => {
+            console.log('🎯 Triggering unified LaTeX rendering for all content');
+            document.dispatchEvent(new CustomEvent('render-math-now'));
+        }, 100);
+        
         // Expose for debugging
         window.sujets0Results = results;
         window.sujets0State = STATE;
         
-        console.log('🎉 Questions generated as PM fragments!');
+        console.log('🎉 Questions generated as PM fragments with processed SVGs!');
         
     } catch (error) {
         console.error('❌ Sujets0 Question Generator failed:', error);
@@ -539,14 +607,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         loadingDiv.replaceWith(errorElement);
     }
 
-    console.log('📜 Sujets0 Question Generator script loaded and ready');
-
-
-    // At the very end, after injectFragmentsIntoPM():
-    setTimeout(() => {
-        document.dispatchEvent(new CustomEvent('render-math-now'));
-    }, 50); // Small delay for DOM settling
-
-
 });
+
+console.log('📜 Sujets0 Question Generator script loaded and ready');
 
