@@ -16,15 +16,59 @@ console.log('🎯 Sujets0 Question Generator loading...');
 // Write a function to extract the config from the URL query parameters
 function extractConfigFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
-    const nbStudents = urlParams.get('nbStudents') || 2;
-    const nbQuestions = urlParams.get('nbQuestions') || 12;
+    let nbStudents = parseInt(urlParams.get('nbStudents')) || 2;
+    let nbQuestions = parseInt(urlParams.get('nbQuestions')) || 12;
     const curriculum = urlParams.get('curriculum') || 'Spé';
+    
+    // Cap values at their limits and show toasts
+    if (nbStudents > 50) {
+        nbStudents = 50;
+        setTimeout(() => showToast('📊 Nombre de copies limité à 50 (maximum autorisé)', 'warning'), 100);
+    }
+    if (nbStudents < 1) {
+        nbStudents = 1;
+        setTimeout(() => showToast('📊 Nombre de copies ajusté à 1 (minimum requis)', 'warning'), 100);
+    }
+    
+    if (nbQuestions > 12) {
+        nbQuestions = 12;
+        setTimeout(() => showToast('📝 Nombre de questions limité à 12 (maximum de générateurs disponibles)', 'warning'), 200);
+    }
+    if (nbQuestions < 1) {
+        nbQuestions = 1;
+        setTimeout(() => showToast('📝 Nombre de questions ajusté à 1 (minimum requis)', 'warning'), 200);
+    }
+    
     return { nbStudents, nbQuestions, curriculum };
 }
 
 
 
 const configFromUrl = extractConfigFromUrl();
+
+
+function showToast(message, type = 'error') {
+    const toast = document.createElement('div');
+    toast.className = `alert alert-${type} fixed top-4 left-1/2 transform -translate-x-1/2 w-auto max-w-md shadow-lg z-50`;
+    toast.innerHTML = `
+      <div>
+          <span>${message}</span>
+      </div>
+    `;
+    document.body.appendChild(toast);
+    
+    // Auto-remove toast after 5 seconds
+    setTimeout(() => {
+        if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+        }
+    }, 5000);
+}
+
+// Config validation and capping is now handled in extractConfigFromUrl()
+
+
+
 
 console.log("🟪🟪🟪 url config", extractConfigFromUrl());
 
@@ -497,10 +541,11 @@ function addPrintButton(container) {
                           d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
                     </path>
                 </svg>
-                Imprimer les questions
+                Imprimer
             </button>
             <div class="text-xs text-gray-600 print-hide text-right">
                  Optimisé pour Chrome ✅<br>
+                 Corrigé enseignant inclus 📝<br>
                  Activer les "Graphiques d'arrière-plan" 💡<br>
                  Possibilité d'ajuster les marges 🛠️
             </div>
@@ -960,7 +1005,9 @@ class PMFragmentRenderer {
 async function executeAllGenerators() {
     console.log('🚀 Starting question generation...');
     
+    // Select generators up to the requested amount (capped at 12)
     const selectedGenerators = CONFIG.generators.slice(0, CONFIG.nbQuestions);
+    console.log(`📝 Selected ${selectedGenerators.length} generators`);
     const questionResults = [];
     
     for (let studentNum = 1; studentNum <= CONFIG.nbStudents; studentNum++) {

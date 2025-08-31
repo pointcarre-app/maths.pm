@@ -71,7 +71,7 @@
   /* Only slightly different from base-100 but noticeable for layering */
   /* --color-base-200: oklch(97% 0.005 120);      Very light warm gray */
 
-  --color-base-200: oklch(97.5% 0.005 200);      /* Very light warm gray : SEL*/
+  --color-base-200: oklch(98.5% 0.001 190);      /* Very light warm gray : SEL*/
   
   /* More pronounced but still very light for borders, dividers */
   --color-base-300: oklch(94% 0.008 120);      /* Light warm gray */
