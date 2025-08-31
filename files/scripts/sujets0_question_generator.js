@@ -267,7 +267,77 @@ async function attachGraphToResult(result, generator) {
     }
 }
 
-// SVG KaTeX Processing (inspired by index-graphs.js)
+// SVG Inline Styles Mapping (from pm.css and utility classes)
+const SVG_INLINE_STYLES = {
+    svg: {
+        'display': 'block',
+        'max-width': '100%',
+        'height': 'auto'
+    },
+    foreignObject: {
+        'overflow': 'visible'
+    },
+    'foreignObject > div': {
+        'width': '100%',
+        'height': '100%',
+        'display': 'flex',
+        'align-items': 'center',
+        'justify-content': 'center'
+    },
+    '.svg-latex': {
+        'line-height': '1.2',
+        'text-align': 'center'
+    },
+    '.svg-latex .katex': {
+        'font-family': "'KaTeX_Main', sans-serif"
+    },
+    // Font size utility classes
+    '.text-sm': {
+        'font-size': '0.875rem',
+        'line-height': '1.25rem'
+    },
+    '.text-xs': {
+        'font-size': '0.75rem',
+        'line-height': '1rem'
+    },
+    '.text-2xs': {
+        'font-size': '0.625rem',
+        'line-height': '1rem'
+    }
+};
+
+// Helper function to apply inline styles to an element
+function applyInlineStyles(element, styles) {
+    Object.entries(styles).forEach(([property, value]) => {
+        // Convert kebab-case to camelCase for style properties
+        const camelProperty = property.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+        element.style[camelProperty] = value;
+    });
+}
+
+// Helper function to apply styles based on CSS classes
+function applyStylesFromClasses(element) {
+    const classList = Array.from(element.classList);
+    
+    classList.forEach(className => {
+        const styleKey = `.${className}`;
+        if (SVG_INLINE_STYLES[styleKey]) {
+            applyInlineStyles(element, SVG_INLINE_STYLES[styleKey]);
+        }
+    });
+    
+    // Also apply to nested elements with these classes
+    ['text-sm', 'text-xs', 'text-2xs'].forEach(textClass => {
+        const elements = element.querySelectorAll(`.${textClass}`);
+        elements.forEach(el => {
+            if (SVG_INLINE_STYLES[`.${textClass}`]) {
+                applyInlineStyles(el, SVG_INLINE_STYLES[`.${textClass}`]);
+            }
+        });
+    });
+}
+
+// SVG KaTeX Processing with Inline Styles (inspired by index-graphs.js)
 async function processKatexInSvg(svgString) {
     if (typeof katex === 'undefined') {
         console.warn('KaTeX not available for SVG processing');
@@ -280,10 +350,26 @@ async function processKatexInSvg(svgString) {
         const svgElement = svgDoc.querySelector('svg');
         if (!svgElement) return svgString;
 
+        // Apply inline styles to SVG element
         svgElement.classList.add('graph-svg-container');
+        applyInlineStyles(svgElement, SVG_INLINE_STYLES.svg);
+        console.log('🎨 Applied inline styles to SVG element');
         
-        // Find all foreignObject elements
+        // Find all foreignObject elements and apply styles
         const foreignObjects = svgElement.querySelectorAll('foreignObject');
+        
+        foreignObjects.forEach((fo) => {
+            // Apply inline styles to foreignObject
+            applyInlineStyles(fo, SVG_INLINE_STYLES.foreignObject);
+            
+            // Apply styles to direct child divs of foreignObject
+            const childDivs = fo.querySelectorAll(':scope > div');
+            childDivs.forEach(div => {
+                applyInlineStyles(div, SVG_INLINE_STYLES['foreignObject > div']);
+                // Apply font size classes if present
+                applyStylesFromClasses(div);
+            });
+        });
         
         foreignObjects.forEach((fo) => {
             // Find div.svg-latex elements (exactly like index-graphs.js)
@@ -292,6 +378,11 @@ async function processKatexInSvg(svgString) {
             
             latexDivs.forEach((div) => {
                 div.classList.add('svg-latex');
+                // Apply inline styles to svg-latex elements
+                applyInlineStyles(div, SVG_INLINE_STYLES['.svg-latex']);
+                // Apply font size classes if present
+                applyStylesFromClasses(div);
+                
                 const latex = div.textContent.trim();
                 if (!latex) return;
                 
@@ -305,6 +396,22 @@ async function processKatexInSvg(svgString) {
                     katex.render(latex, div, {
                         throwOnError: false,
                         displayMode: false
+                    });
+                    
+                    // Apply inline styles to rendered KaTeX elements
+                    const katexElements = div.querySelectorAll('.katex');
+                    katexElements.forEach(katexEl => {
+                        applyInlineStyles(katexEl, SVG_INLINE_STYLES['.svg-latex .katex']);
+                        
+                        // Apply font family AND size to all nested elements in KaTeX
+                        katexEl.querySelectorAll('*').forEach(nestedEl => {
+                            nestedEl.style.fontFamily = "'KaTeX_Main', sans-serif";
+                            // Inherit font size from parent div (which has text-2xs, text-xs, etc.)
+                            nestedEl.style.fontSize = 'inherit';
+                        });
+                        
+                        // Also ensure the katex root element inherits size
+                        katexEl.style.fontSize = 'inherit';
                     });
                     
                     // Restore colors (like index-graphs.js line 99-105)
@@ -321,13 +428,239 @@ async function processKatexInSvg(svgString) {
             });
         });
         
-        // Serialize back to string with processed KaTeX
+        // Final pass: apply font size classes to any remaining elements in the entire SVG
+        ['text-sm', 'text-xs', 'text-2xs'].forEach(textClass => {
+            const elements = svgElement.querySelectorAll(`.${textClass}`);
+            elements.forEach(el => {
+                if (SVG_INLINE_STYLES[`.${textClass}`]) {
+                    applyInlineStyles(el, SVG_INLINE_STYLES[`.${textClass}`]);
+                    
+                    // AGGRESSIVE: Force font size on all nested elements too
+                    const fontSize = SVG_INLINE_STYLES[`.${textClass}`]['font-size'];
+                    const lineHeight = SVG_INLINE_STYLES[`.${textClass}`]['line-height'];
+                    
+                    el.querySelectorAll('*').forEach(nestedEl => {
+                        nestedEl.style.fontSize = fontSize;
+                        nestedEl.style.lineHeight = lineHeight;
+                    });
+                    
+                    console.log(`🎨 Applied ${textClass} inline styles (${fontSize}) to element and all children`);
+                }
+            });
+        });
+        
+        // Serialize back to string with processed KaTeX and inlined styles
         const serializer = new XMLSerializer();
         return serializer.serializeToString(svgElement);
     } catch (error) {
         console.error('SVG KaTeX processing failed:', error);
         return svgString; // Return original on error
     }
+}
+
+// Print functionality
+function addPrintButton(container) {
+    const printButtonContainer = document.createElement('div');
+    printButtonContainer.className = 'print-button-container mb-4 text-right';
+    printButtonContainer.innerHTML = `
+        <div class="flex flex-col items-end gap-2">
+            <button id="print-questions-btn" class="btn btn-primary btn-sm print-hide">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                          d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
+                    </path>
+                </svg>
+                Imprimer les questions (marges nulles)
+            </button>
+            <div class="text-xs text-gray-600 print-hide">
+                💡 Dans la boîte de dialogue d'impression, sélectionnez "Marges: Aucune"
+            </div>
+        </div>
+    `;
+    
+    container.insertBefore(printButtonContainer, container.firstChild);
+    
+    // Add click handler
+    const printBtn = printButtonContainer.querySelector('#print-questions-btn');
+    printBtn.addEventListener('click', handlePrint);
+}
+
+function handlePrint() {
+    // Create print-specific styles if they don't exist
+    addPrintStyles();
+    
+    // Mark the container for printing
+    const pmContainer = document.querySelector('.pm-container .max-w-\\[640px\\]');
+    if (pmContainer) {
+        pmContainer.classList.add('print-target');
+    }
+    
+    // Try to use the modern print API with no margins
+    if (window.navigator && window.navigator.userAgent.includes('Chrome')) {
+        // For Chrome, we can try to influence print settings via CSS
+        // The print dialog will open but user may need to select "More settings" > "Margins" > "None"
+        console.log('💡 Chrome detected: Please select "More settings" > "Margins" > "None" in print dialog');
+    }
+    
+    // Trigger print dialog
+    window.print();
+    
+    // Clean up after print dialog closes
+    setTimeout(() => {
+        if (pmContainer) {
+            pmContainer.classList.remove('print-target');
+        }
+    }, 1000);
+}
+
+function addPrintStyles() {
+    const existingStyles = document.querySelector('#sujets0-print-styles');
+    if (existingStyles) return;
+    
+    const printStyles = document.createElement('style');
+    printStyles.id = 'sujets0-print-styles';
+    printStyles.textContent = `
+        @media print {
+            /* Remove all default margins and padding */
+            @page {
+                margin: 0 !important;
+                padding: 0 !important;
+                size: A4;
+            }
+            
+            /* Hide everything by default */
+            body * {
+                visibility: hidden;
+            }
+            
+            /* Show only the print target and its children */
+            .print-target,
+            .print-target * {
+                visibility: visible;
+            }
+            
+            /* Position the print target with minimal margins */
+            .print-target {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 10px !important;
+            }
+            
+            /* Remove body margins */
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            /* Hide print button and other UI elements */
+            .print-hide,
+            .print-button-container,
+            .navbar,
+            .footer,
+            .sidebar-fixed {
+                display: none !important;
+            }
+            
+            /* Page break before each h2 */
+            .fragment-wrapper[data-f_type="h2_"] {
+                page-break-before: always;
+            }
+            
+            /* Avoid breaking inside divisions/questions */
+            .fragment-wrapper {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            /* Special handling for question blocks with graphs */
+            .fragment-wrapper[data-f_type="p_"] {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            /* Ensure graphs don't get cut */
+            .graph-svg-container {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            /* Adjust font sizes for print */
+            body {
+                font-size: 12pt;
+                line-height: 1.4;
+            }
+            
+            /* Specific paragraph and content font sizes */
+            .print-target p,
+            .print-target .fragment p,
+            .print-target .fragment-wrapper p,
+            .print-target div {
+                font-size: 12pt !important;
+                line-height: 1.5 !important;
+            }
+            
+            /* Question text in flex containers */
+            .print-target .fragment-wrapper[data-f_type="p_"] div[style*="display: flex"] > div,
+            .print-target .fragment-wrapper[data-f_type="p_"] div > div {
+                font-size: 12pt !important;
+                line-height: 1.5 !important;
+            }
+            
+            /* Headers */
+            h1, .print-target h1 { font-size: 18pt !important; }
+            h2, .print-target h2 { font-size: 16pt !important; }
+            h3, .print-target h3 { font-size: 14pt !important; }
+            
+            /* Math expressions */
+            .katex, .print-target .katex {
+                font-size: 12pt !important;
+            }
+            
+            /* Ensure SVGs scale properly */
+            svg {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* Preserve flex layouts for print - keep question and graph side by side */
+            .fragment-wrapper[data-f_type="p_"] div[style*="display: flex"] {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 15px !important;
+                align-items: flex-start !important;
+            }
+            
+            .fragment-wrapper[data-f_type="p_"] div[style*="display: flex"] > div {
+                margin-bottom: 0 !important;
+            }
+            
+            /* Ensure text content has proper width in flex */
+            .fragment-wrapper[data-f_type="p_"] div[style*="display: flex"] > div:first-child {
+                flex: 1 1 250px !important;
+                min-width: 250px !important;
+            }
+            
+            /* Ensure graph containers maintain their size */
+            .fragment-wrapper[data-f_type="p_"] div[style*="display: flex"] .graph-svg-container {
+                flex: 0 1 auto !important;
+                max-width: 300px !important;
+            }
+            
+            /* Note: SVG styles are now inlined directly into SVG elements for better print compatibility */
+            /* Container wrapper still needs this for layout */
+            .graph-svg-container {
+                position: relative !important;
+                display: block !important;
+                overflow: hidden !important;
+            }
+        }
+    `;
+    
+    document.head.appendChild(printStyles);
 }
 
 // Helper function to inject question number into statementHtml
@@ -359,17 +692,17 @@ function injectQuestionNumber(statementHtml, questionNum) {
         const textLocation = findFirstTextLocation(firstDiv);
         if (textLocation) {
             // Prepend question number to the found text node
-            textLocation.textNode.textContent = `${questionNum}) ${textLocation.textNode.textContent}`;
+            textLocation.textNode.textContent = `${questionNum})  ${textLocation.textNode.textContent}`;
         } else {
             // If no text found, insert at the beginning of the first div
-            const questionText = document.createTextNode(`${questionNum}) `);
+            const questionText = document.createTextNode(`${questionNum})  `);
             firstDiv.insertBefore(questionText, firstDiv.firstChild);
         }
         return tempDiv.innerHTML;
     }
     
     // Fallback: if no div found, just prepend the question number
-    return `${questionNum}) ${statementHtml}`;
+    return `${questionNum})  ${statementHtml}`;
 }
 
 // PM Fragment Generation System
@@ -538,6 +871,8 @@ function generateFragmentsFromResults(results) {
     
     for (const student of Object.keys(byStudent)) {
         // Student header if multiple students
+
+        
         if (Object.keys(byStudent).length > 1) {
             fragments.push(PMFragmentGenerator.createH2(`Copie n°${student}`, ['font-mono']));
         }
@@ -584,10 +919,10 @@ function generateFragmentsFromResults(results) {
                         </div>
                     </div>
                 `;
-                fragments.push(PMFragmentGenerator.createParagraph(combinedHtml));
+                fragments.push(PMFragmentGenerator.createParagraph(combinedHtml, ["py-2"]));
             } else {
                 // Standard layout without graph
-                fragments.push(PMFragmentGenerator.createParagraph(processedStatementHtml));
+                fragments.push(PMFragmentGenerator.createParagraph(processedStatementHtml, ["py-"]));
             }
             
             // Answer fragment if available
@@ -596,7 +931,7 @@ function generateFragmentsFromResults(results) {
             // }
             
             // Divider between questions
-            fragments.push(PMFragmentGenerator.createDivider());
+            // fragments.push(PMFragmentGenerator.createDivider());
         });
     }
     
@@ -610,6 +945,9 @@ function injectFragmentsIntoPM(fragments) {
         console.error('PM container not found');
         return;
     }
+    
+    // Add print button before fragments
+    addPrintButton(pmContainer);
     
     // Inject each fragment
     fragments.forEach(fragment => {
