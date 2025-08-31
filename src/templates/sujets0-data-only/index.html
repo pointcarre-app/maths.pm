@@ -3,15 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+          content="Sujets0 data-only demo: runs generators, builds PCA graphs, renders LaTeX, and exports PNGs." />
+    <meta name="keywords" content="maths.pm, sujets0, nagini, pyodide, PCA, KaTeX, SVG, PNG" />
 
     <title>Sujets0 Data Only</title>
 
     {# Use local KaTeX CSS to avoid cross-origin CSSOM access issues for dom-to-image #}
-    {# <link rel="stylesheet" href="{{ url_for('static', path='js/sujets0-data-only/katex.min.css') }}" /> #}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-    {# <link rel="stylesheet" href="{{ url_for('static', path='js/sujets0-data-only/data-only.css') }}" /> #}
+    <link rel="stylesheet" href="{{ url_for('static', path='js/sujets0-data-only/data-only.css') }}" />
 
 
     <style>
@@ -43,7 +45,7 @@
 
         /* LaTeX in SVG styles */
         .svg-latex {
-            font-size: 14px;
+            /*font-size: 14px;*/
             line-height: 1.2;
             text-align: center;
         }
