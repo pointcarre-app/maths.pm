@@ -733,19 +733,58 @@ class FragmentBuilder:
                                 except Exception:
                                     pass
 
-                    # New: scriptPCAVersion YAML block → script_module_ fragment
-                    elif "scriptPCAVersion" in data:
+                    # New: fType: script_module_ YAML block → script_module_ fragment
+                    elif data.get("fType") == "script_module_":
                         f_type = "script_module_"
                         html = ""
-                        # Validate required fields
-                        if "content" not in data:
-                            raise ValueError("SCRIPT_MODULE requires 'content' field")
+
+                        # Support both inline content and file references
+                        if "content" in data:
+                            # Inline script content
+                            if isinstance(data["content"], str):
+                                # Decode HTML entities in script content to prevent syntax errors
+                                data["content"] = html_module.unescape(data["content"])
+                        elif "src" in data:
+                            # External script file reference
+                            script_src = data["src"]
+                            if script_src.startswith("/"):
+                                script_src = script_src[1:]
+
+                            # Try different path resolutions
+                            possible_paths = [
+                                settings.base_dir / script_src,
+                                settings.static_dir / script_src.replace("static/", "")
+                                if script_src.startswith("static/")
+                                else None,
+                                settings.base_dir / "pms" / script_src.replace("static/pm/", "")
+                                if "static/pm/" in script_src
+                                else None,
+                                settings.base_dir / "files" / script_src,  # Look in files directory
+                            ]
+
+                            script_content = None
+                            for path in possible_paths:
+                                if path and path.exists() and path.is_file():
+                                    try:
+                                        script_content = path.read_text(encoding="utf-8")
+                                        break
+                                    except Exception as e:
+                                        print(f"Error reading script file {path}: {e}")
+
+                            if script_content:
+                                data["content"] = script_content
+                                # Remove src key after successful loading to avoid validation conflict
+                                data.pop("src", None)
+                            else:
+                                raise ValueError(f"Could not load script file: {data['src']}")
+                        else:
+                            raise ValueError(
+                                "SCRIPT_MODULE requires either 'content' or 'src' field"
+                            )
+
                         # Set default type to 'module' if not specified
                         if "type" not in data:
                             data["type"] = "module"
-                        # Decode HTML entities in script content to prevent syntax errors
-                        if "content" in data and isinstance(data["content"], str):
-                            data["content"] = html_module.unescape(data["content"])
 
                 except Exception as e:
                     print(f"Error parsing YAML: {e}")

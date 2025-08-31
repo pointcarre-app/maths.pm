@@ -231,11 +231,20 @@ class Fragment(BaseModel):
         elif f_type == FType.SCRIPT_MODULE:
             if html != "":
                 raise ValueError("SCRIPT_MODULE should have empty html")
-            required_keys = {"content"}
-            optional_keys = {"type", "version", "scriptPCAVersion"}
-            allowed_keys = required_keys | optional_keys
-            if not required_keys.issubset(set(data.keys())):
-                raise ValueError("SCRIPT_MODULE requires 'content' key in data")
+            # Either content (inline) or src (file reference) is required
+            content_keys = {"content"}
+            file_keys = {"src"}
+            optional_keys = {"type", "version", "fType"}
+            allowed_keys = content_keys | file_keys | optional_keys
+
+            # Must have either content OR src, but not both
+            has_content = content_keys.issubset(set(data.keys()))
+            has_src = file_keys.issubset(set(data.keys()))
+
+            if not (has_content or has_src):
+                raise ValueError("SCRIPT_MODULE requires either 'content' or 'src' key in data")
+            if has_content and has_src:
+                raise ValueError("SCRIPT_MODULE cannot have both 'content' and 'src' keys")
             if not set(data.keys()).issubset(allowed_keys):
                 extra_keys = set(data.keys()) - allowed_keys
                 raise ValueError(f"SCRIPT_MODULE has unexpected keys: {extra_keys}")

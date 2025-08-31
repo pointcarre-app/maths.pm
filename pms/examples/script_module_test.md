@@ -49,7 +49,7 @@ This table will be targeted by our script module:
 The following YAML block contains a JavaScript module that will execute when the page loads:
 
 ```yaml
-scriptPCAVersion: 1
+fType: script_module_
 type: module
 content: |
   // Script Module Test - Dynamic Content Addition
@@ -190,8 +190,9 @@ When this page loads, you should see:
 
 ### Fragment Type
 - **Type**: `script_module_`
-- **YAML Key**: `scriptPCAVersion: 1`
+- **YAML Key**: `fType: script_module_`
 - **Script Type**: ES6 Module (`type="module"`)
+- **Content**: Inline (`content: |`) or File Reference (`src: path/to/file.js`)
 
 ### DOM Targeting
 - Uses `data-f_type` attributes to find fragments
@@ -204,3 +205,58 @@ When this page loads, you should see:
 - Compatible with Content Security Policy
 
 This demonstrates the power and flexibility of the new SCRIPT_MODULE fragment type for creating dynamic, interactive PM pages.
+
+---
+
+## File Reference Example
+
+The following example shows how to reference an external JavaScript file instead of embedding the script inline:
+
+### Enhanced Data Table
+
+This table will be enhanced by an external script file:
+
+| Framework | Type | Performance | Learning Curve | Best For |
+|-----------|------|-------------|----------------|----------|
+| React | Library | High | Medium | SPAs, Component-based UIs |
+| Vue.js | Framework | High | Easy | Progressive enhancement |
+| Angular | Framework | High | Steep | Enterprise applications |
+| Svelte | Compiler | Very High | Easy | Performance-critical apps |
+| Next.js | Meta-framework | Very High | Medium | Full-stack React apps |
+
+### External Script Module
+
+```yaml
+fType: script_module_
+type: module
+src: files/scripts/table_enhancer.js
+```
+
+This script will:
+- Add sortable columns (click headers to sort)
+- Enable row highlighting and selection
+- Display table statistics
+- Provide export functionality
+- Allow adding sample rows
+
+### Comparison: Inline vs File Reference
+
+| Approach | Use Case | Advantages | Disadvantages |
+|----------|----------|------------|---------------|
+| **Inline Content** | Simple scripts, page-specific logic | Easy to maintain, no external dependencies | Can make markdown files large |
+| **File Reference** | Complex scripts, reusable modules | Better organization, reusability, syntax highlighting | Requires external file management |
+
+### Best Practices
+
+1. **Use inline content for:**
+   - Simple DOM manipulations
+   - Page-specific interactions
+   - Quick prototypes
+
+2. **Use file references for:**
+   - Complex functionality
+   - Reusable components
+   - Scripts shared across multiple pages
+   - When you need proper IDE support and debugging
+
+This dual approach gives you maximum flexibility in how you organize and maintain your interactive PM content.
