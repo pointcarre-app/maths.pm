@@ -12,6 +12,19 @@ window.delayMathRendering = true;
 
 console.log('🎯 Sujets0 Question Generator loading...');
 
+
+// Write a function to extract the config from the URL query parameters
+function extractConfigFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const nbStudents = urlParams.get('nbStudents') || 2;
+    const nbQuestions = urlParams.get('nbQuestions') || 12;
+    return { nbStudents, nbQuestions };
+}
+
+
+console.log("🟪🟪🟪 url config", extractConfigFromUrl());
+
+
 // Configuration constants
 const CONFIG = {
     teachersGitTag: 'v0.0.22',
