@@ -4,6 +4,12 @@
  * with KaTeX rendering and graph generation support
  */
 
+
+// At the very top:
+window.delayMathRendering = true;
+
+
+
 console.log('🎯 Sujets0 Question Generator loading...');
 
 // Configuration constants
@@ -113,7 +119,16 @@ async function loadPCAGraphLoader() {
         console.log('📊 Loading PCA Graph Loader...');
         const module = await import(CONFIG.v4PyJsPCAGraphLoaderUrl);
         STATE.pca.loaderClass = module.PCAGraphLoader;
-        STATE.pca.loaderInstance = new module.PCAGraphLoader();
+        
+        // Initialize the loader with proper config
+        const instance = new module.PCAGraphLoader({
+            debug: false,
+            graphConfig: {},
+            pcaVersion: CONFIG.v4PyJsGitTag
+        });
+        
+        await instance.initialize();
+        STATE.pca.loaderInstance = instance;
         console.log('✅ PCA Graph Loader ready');
         return true;
     } catch (error) {
@@ -179,14 +194,20 @@ async function executeGeneratorWithSeed(filename, seed) {
 
 async function buildPCAGraph(graphKey, params = {}) {
     if (!STATE.pca.loaderInstance) {
-        throw new Error('PCA Graph Loader not initialized');
+        console.warn('PCA Graph Loader not initialized, skipping graph generation');
+        return { svg: null, graphDict: null };
     }
     
     try {
-        const result = await STATE.pca.loaderInstance.loadGraph(graphKey, params);
+        // Update config if params provided
+        if (params && Object.keys(params).length > 0) {
+            STATE.pca.loaderInstance.updateConfig(params);
+        }
+        
+        const result = await STATE.pca.loaderInstance.renderGraph(graphKey);
         return {
             svg: result.svg,
-            graphDict: result.graphDict
+            graphDict: result.graphDict || result
         };
     } catch (error) {
         console.error(`Failed to build graph ${graphKey}:`, error);
@@ -198,12 +219,14 @@ async function attachGraphToResult(result, generator) {
     try {
         if (generator === 'spe_sujet1_auto_07_question.py') {
             const Y_LABEL_FOR_HORIZONTAL_LINE = parseInt(result.data.components.n);
+            console.log(`🎨 Generating graph q7_small with Y_LABEL_FOR_HORIZONTAL_LINE=${Y_LABEL_FOR_HORIZONTAL_LINE}`);
             const svgAndDict = await buildPCAGraph('q7_small', { Y_LABEL_FOR_HORIZONTAL_LINE });
             result.graphSvg = svgAndDict.svg;
             result.graphDict = svgAndDict.graphDict;
         } else if (generator === 'spe_sujet1_auto_08_question.py') {
             const A_FLOAT_FOR_AFFINE_LINE = parseFloat(result.data.components_evaluated.a);
             const B_FLOAT_FOR_AFFINE_LINE = parseFloat(result.data.components_evaluated.b);
+            console.log(`🎨 Generating graph q8_small with A=${A_FLOAT_FOR_AFFINE_LINE}, B=${B_FLOAT_FOR_AFFINE_LINE}`);
             const svgAndDict = await buildPCAGraph('q8_small', { A_FLOAT_FOR_AFFINE_LINE, B_FLOAT_FOR_AFFINE_LINE });
             result.graphSvg = svgAndDict.svg;
             result.graphDict = svgAndDict.graphDict;
@@ -243,96 +266,88 @@ async function attachGraphToResult(result, generator) {
     }
 }
 
-// KaTeX rendering functions
-async function prerenderLatexInSvg(svgString) {
-    if (typeof katex === 'undefined') {
-        return svgString;
+// PM Fragment Generation System
+class PMFragmentGenerator {
+    static createParagraph(content, classes = []) {
+        return {
+            f_type: { value: 'p_' },
+            html: content,
+            data: {},
+            class_list: classes,
+            classes: classes.join(' ')
+        };
     }
     
-    try {
-        const parser = new DOMParser();
-        const svgDoc = parser.parseFromString(svgString, 'image/svg+xml');
-        const svgElement = svgDoc.querySelector('svg');
-        if (!svgElement) return svgString;
-        
-        const foreignObjects = svgElement.querySelectorAll('foreignObject');
-        let hasUnrenderedLatex = false;
-        
-        foreignObjects.forEach((fo) => {
-            const divs = fo.querySelectorAll('div.svg-latex');
-            divs.forEach((div) => {
-                if (div.querySelector('.katex')) return;
-                const latex = div.textContent.trim();
-                if (!latex) return;
-                hasUnrenderedLatex = true;
-                try {
-                    const bgColor = div.style.backgroundColor;
-                    const color = div.style.color;
-                    const rendered = katex.renderToString(latex, {
-                        throwOnError: false,
-                        displayMode: false
-                    });
-                    div.innerHTML = rendered;
-                    if (bgColor) div.style.backgroundColor = bgColor;
-                    if (color) {
-                        const katexEls = div.querySelectorAll('.katex, .katex *');
-                        katexEls.forEach((el) => {
-                            el.style.color = color;
-                        });
-                    }
-                } catch (e) {
-                    // keep original
-                }
-            });
-        });
-        
-        if (!hasUnrenderedLatex) return svgString;
-        
-        // Inject KaTeX fonts
-        await injectKatexFont(svgElement);
-        
-        const serializer = new XMLSerializer();
-        return serializer.serializeToString(svgElement);
-    } catch (error) {
-        return svgString;
+    static createH2(content, classes = []) {
+        const slug = content.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        return {
+            f_type: { value: 'h2_' },
+            html: content,
+            data: { id_href: slug },
+            class_list: classes,
+            classes: classes.join(' '),
+            slug: slug
+        };
+    }
+    
+    static createSvg(svgContent, graphDict = {}, classes = []) {
+        return {
+            f_type: { value: 'svg_' },
+            html: '',
+            data: {
+                src: '',
+                content: svgContent
+            },
+            class_list: classes,
+            classes: classes.join(' ')
+        };
+    }
+    
+    static createDivider(classes = []) {
+        return {
+            f_type: { value: 'hr_' },
+            html: '',
+            data: {},
+            class_list: classes,
+            classes: classes.join(' ')
+        };
     }
 }
 
-async function injectKatexFont(svgElement) {
-    try {
-        const KATEX_VERSION = '0.16.9';
-        const KATEX_MATH_ITALIC_URL = `https://cdn.jsdelivr.net/npm/katex@${KATEX_VERSION}/dist/fonts/KaTeX_Math-Italic.woff2`;
+class PMFragmentRenderer {
+    static renderFragment(fragment) {
+        const wrapper = document.createElement('div');
+        wrapper.className = `fragment-wrapper ${fragment.classes}`;
+        wrapper.setAttribute('data-f_type', fragment.f_type.value);
         
-        if (!window._katexMathItalicDataUrl) {
-            const resp = await fetch(KATEX_MATH_ITALIC_URL, { cache: 'force-cache' });
-            if (resp.ok) {
-                const buffer = await resp.arrayBuffer();
-                const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
-                window._katexMathItalicDataUrl = `data:font/woff2;base64,${base64}`;
-            }
+        const fragmentDiv = document.createElement('div');
+        fragmentDiv.className = 'fragment';
+        fragmentDiv.setAttribute('data-f_type', fragment.f_type.value);
+        
+        // Render based on fragment type (matching PM templates exactly)
+        switch (fragment.f_type.value) {
+            case 'p_':
+                fragmentDiv.innerHTML = fragment.html;
+                break;
+                
+            case 'h2_':
+                fragmentDiv.innerHTML = `<h2 id="${fragment.data.id_href || ''}">${fragment.html}</h2>`;
+                break;
+                
+            case 'svg_':
+                fragmentDiv.innerHTML = fragment.data.content;
+                break;
+                
+            case 'hr_':
+                fragmentDiv.innerHTML = '<hr>';
+                break;
+                
+            default:
+                fragmentDiv.innerHTML = fragment.html;
         }
         
-        if (window._katexMathItalicDataUrl) {
-            const css = `
-@font-face {
-  font-family: 'KaTeX_Math';
-  font-style: italic;
-  src: url('${window._katexMathItalicDataUrl}') format('woff2');
-  font-display: swap;
-}
-.katex { font-family: 'KaTeX_Math', 'KaTeX_Main', serif; }
-.katex * { font-family: inherit !important; }
-.text-sm { font-size: 0.875rem !important; line-height: 1.25rem !important; }
-.text-xs { font-size: 0.75rem !important; line-height: 1rem !important; }
-.svg-latex .katex { font-size: inherit; }
-`;
-            
-            const svgStyle = svgElement.ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'style');
-            svgStyle.textContent = css;
-            svgElement.insertBefore(svgStyle, svgElement.firstChild);
-        }
-    } catch (error) {
-        console.warn('Failed to inject KaTeX font:', error);
+        wrapper.appendChild(fragmentDiv);
+        return wrapper;
     }
 }
 
@@ -361,9 +376,9 @@ async function executeAllGenerators() {
                 // Attach graphs where needed
                 await attachGraphToResult(result, generator);
                 
-                // Prerender LaTeX in SVGs
+                // Keep SVG as-is, PM system will handle LaTeX
                 if (result.graphSvg) {
-                    result.graphSvgWithRenderedLatex = await prerenderLatexInSvg(result.graphSvg);
+                    result.graphSvgWithRenderedLatex = result.graphSvg;
                 }
                 
                 questionResults.push(result);
@@ -386,116 +401,67 @@ async function executeAllGenerators() {
     return questionResults;
 }
 
-// UI rendering functions
-function createResultsTable(results) {
-    const container = document.createElement('div');
-    container.className = 'sujets0-results-container mt-6 p-4 bg-white rounded-lg border';
+// Pure PM Fragment Generation - No Custom UI
+function generateFragmentsFromResults(results) {
+    const fragments = [];
     
-    container.innerHTML = `
-        <div class="mb-4">
-            <h3 class="text-xl font-bold text-gray-800 mb-2">📋 Sujets 0 - Questions générées</h3>
-            <div class="text-sm text-gray-600">
-                <span class="font-medium">${results.length}</span> questions générées pour 
-                <span class="font-medium">${CONFIG.nbStudents}</span> étudiants
-            </div>
-        </div>
-        
-        <div class="overflow-x-auto">
-            <table class="min-w-full border-collapse border border-gray-300">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="border border-gray-300 px-3 py-2 text-left text-sm font-medium text-gray-700">Q#</th>
-                        <th class="border border-gray-300 px-3 py-2 text-left text-sm font-medium text-gray-700">Étudiant</th>
-                        <th class="border border-gray-300 px-3 py-2 text-left text-sm font-medium text-gray-700">Énoncé</th>
-                        <th class="border border-gray-300 px-3 py-2 text-left text-sm font-medium text-gray-700">Réponse</th>
-                        <th class="border border-gray-300 px-3 py-2 text-left text-sm font-medium text-gray-700">Graphique</th>
-                        <th class="border border-gray-300 px-3 py-2 text-left text-sm font-medium text-gray-700">Statut</th>
-                    </tr>
-                </thead>
-                <tbody id="results-tbody">
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="mt-4 text-xs text-gray-500">
-            Générateur: Sujets0 Question Generator v1.0 | Seed racine: ${CONFIG.rootSeed}
-        </div>
-    `;
+    // Header fragment
+    fragments.push(PMFragmentGenerator.createH2('Questions générées'));
     
-    const tbody = container.querySelector('#results-tbody');
+    // Group by student
+    const byStudent = results.reduce((acc, r) => {
+        const key = r && r.student != null ? String(r.student) : 'N/A';
+        (acc[key] ||= []).push(r);
+        return acc;
+    }, {});
     
-    results.forEach((result, index) => {
-        const row = document.createElement('tr');
-        row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+    for (const student of Object.keys(byStudent)) {
+        // Student header if multiple students
+        if (Object.keys(byStudent).length > 1) {
+            fragments.push(PMFragmentGenerator.createH2(`Élève ${student}`));
+        }
         
-        const statusClass = result.success ? 'text-green-600' : 'text-red-600';
-        const statusIcon = result.success ? '✅' : '❌';
-        
-        row.innerHTML = `
-            <td class="border border-gray-300 px-3 py-2 text-sm font-mono">${result.generatorNum || '?'}</td>
-            <td class="border border-gray-300 px-3 py-2 text-sm text-center">${result.student || '?'}</td>
-            <td class="border border-gray-300 px-3 py-2 text-sm statement-cell" style="max-width: 300px;">
-                <div class="statement-wrapper">
-                    ${result.success ? (result.statement || 'N/A') : 'Erreur de génération'}
-                </div>
-            </td>
-            <td class="border border-gray-300 px-3 py-2 text-sm answer-cell" style="max-width: 200px;">
-                <div class="answer-wrapper">
-                    ${result.success ? (result.answer || 'N/A') : '—'}
-                </div>
-            </td>
-            <td class="border border-gray-300 px-3 py-2 text-sm text-center">
-                ${result.graphSvg ? 
-                    `<div class="graph-container" style="max-width: 150px; max-height: 150px; overflow: hidden;">
-                        ${result.graphSvgWithRenderedLatex || result.graphSvg}
-                    </div>` : 
-                    '—'
-                }
-            </td>
-            <td class="border border-gray-300 px-3 py-2 text-sm ${statusClass}">
-                ${statusIcon} ${result.success ? 'OK' : 'Erreur'}
-            </td>
-        `;
-        
-        tbody.appendChild(row);
-    });
+        byStudent[student].forEach((result) => {
+            // Statement fragment using statementHtml
+            const statementHtml = result.success ? 
+                `${result.generatorNum}) ${result.statement}` : 
+                `${result.generatorNum}) Erreur de génération`;
+            
+            fragments.push(PMFragmentGenerator.createParagraph(statementHtml));
+            
+            // Answer fragment if available
+            if (result.success && result.answer) {
+                fragments.push(PMFragmentGenerator.createParagraph(`**Réponse:** ${result.answer}`));
+            }
+            
+            // SVG fragment if available
+            if (result.graphSvg) {
+                fragments.push(PMFragmentGenerator.createSvg(result.graphSvg, result.graphDict));
+            }
+            
+            // Divider between questions
+            fragments.push(PMFragmentGenerator.createDivider());
+        });
+    }
     
-    return container;
+    return fragments;
 }
 
-function renderKaTeX(container) {
-    if (window.renderMathInElement) {
-        try {
-            window.renderMathInElement(container, {
-                delimiters: [
-                    { left: '$$', right: '$$', display: true },
-                    { left: '$', right: '$', display: false },
-                    { left: '\\(', right: '\\)', display: false },
-                    { left: '\\[', right: '\\]', display: true }
-                ],
-                throwOnError: false
-            });
-        } catch (e) {
-            console.error('KaTeX rendering failed:', e);
-        }
-    } else {
-        // Retry after delay
-        setTimeout(() => {
-            if (window.renderMathInElement) {
-                try {
-                    window.renderMathInElement(container, {
-                        delimiters: [
-                            { left: '$$', right: '$$', display: true },
-                            { left: '$', right: '$', display: false }
-                        ],
-                        throwOnError: false
-                    });
-                } catch (e) {
-                    console.error('KaTeX rendering failed (delayed):', e);
-                }
-            }
-        }, 500);
+function injectFragmentsIntoPM(fragments) {
+    // Find PM's main content container
+    const pmContainer = document.querySelector('.pm-container .max-w-\\[640px\\]');
+    if (!pmContainer) {
+        console.error('PM container not found');
+        return;
     }
+    
+    // Inject each fragment
+    fragments.forEach(fragment => {
+        const renderedFragment = PMFragmentRenderer.renderFragment(fragment);
+        pmContainer.appendChild(renderedFragment);
+    });
+    
+    console.log(`✅ Injected ${fragments.length} fragments into PM system`);
 }
 
 // Main initialization and execution
@@ -540,42 +506,47 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         
         progressEl.textContent = '📊 Chargement du générateur de graphiques...';
-        await loadPCAGraphLoader();
+        const pcaReady = await loadPCAGraphLoader();
+        if (!pcaReady) {
+            console.warn('PCA Graph Loader failed to initialize - graphs will be skipped');
+        }
         
         progressEl.textContent = '🚀 Génération des questions en cours...';
         
         // Generate questions
         const results = await executeAllGenerators();
         
-        // Create and render results table
-        const resultsTable = createResultsTable(results);
-        loadingDiv.replaceWith(resultsTable);
+        // Generate pure PM fragments
+        const fragments = generateFragmentsFromResults(results);
         
-        // Render KaTeX in the results
-        renderKaTeX(resultsTable);
+        // Remove loading
+        loadingDiv.remove();
         
-        // Expose results globally for debugging
+        // Inject fragments into PM system
+        injectFragmentsIntoPM(fragments);
+        
+        // Expose for debugging
         window.sujets0Results = results;
         window.sujets0State = STATE;
         
-        console.log('🎉 Sujets0 Question Generator completed successfully!');
-        console.log(`Generated ${results.length} questions:`, results);
+        console.log('🎉 Questions generated as PM fragments!');
         
     } catch (error) {
         console.error('❌ Sujets0 Question Generator failed:', error);
-        loadingDiv.innerHTML = `
-            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-                <div class="flex items-center space-x-2 text-red-800 font-medium mb-2">
-                    <span>❌</span>
-                    <span>Erreur lors de la génération des questions</span>
-                </div>
-                <div class="text-sm text-red-600">${error.message}</div>
-                <div class="mt-2 text-xs text-red-500">
-                    Vérifiez la console pour plus de détails.
-                </div>
-            </div>
-        `;
+        // Create error fragment
+        const errorFragment = PMFragmentGenerator.createParagraph(`❌ Erreur: ${error.message}`);
+        const errorElement = PMFragmentRenderer.renderFragment(errorFragment);
+        loadingDiv.replaceWith(errorElement);
     }
+
+    console.log('📜 Sujets0 Question Generator script loaded and ready');
+
+
+    // At the very end, after injectFragmentsIntoPM():
+    setTimeout(() => {
+        document.dispatchEvent(new CustomEvent('render-math-now'));
+    }, 50); // Small delay for DOM settling
+
+
 });
 
-console.log('📜 Sujets0 Question Generator script loaded and ready');
