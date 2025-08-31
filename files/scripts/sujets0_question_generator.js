@@ -279,6 +279,8 @@ async function processKatexInSvg(svgString) {
         const svgDoc = parser.parseFromString(svgString, 'image/svg+xml');
         const svgElement = svgDoc.querySelector('svg');
         if (!svgElement) return svgString;
+
+        svgElement.classList.add('graph-svg-container');
         
         // Find all foreignObject elements
         const foreignObjects = svgElement.querySelectorAll('foreignObject');
@@ -328,6 +330,48 @@ async function processKatexInSvg(svgString) {
     }
 }
 
+// Helper function to inject question number into statementHtml
+function injectQuestionNumber(statementHtml, questionNum) {
+    if (!statementHtml || !questionNum) return statementHtml;
+    
+    // Create a temporary DOM element to parse the HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = statementHtml;
+    
+    // Recursive function to find the first text node in the DOM tree
+    function findFirstTextLocation(element) {
+        for (let child of element.childNodes) {
+            if (child.nodeType === Node.TEXT_NODE && child.textContent.trim()) {
+                // Found a non-empty text node
+                return { textNode: child, parent: element };
+            } else if (child.nodeType === Node.ELEMENT_NODE) {
+                // Recursively search in child elements
+                const result = findFirstTextLocation(child);
+                if (result) return result;
+            }
+        }
+        return null;
+    }
+    
+    // Find the first div and then search for the first text content within it
+    const firstDiv = tempDiv.querySelector('div');
+    if (firstDiv) {
+        const textLocation = findFirstTextLocation(firstDiv);
+        if (textLocation) {
+            // Prepend question number to the found text node
+            textLocation.textNode.textContent = `${questionNum}) ${textLocation.textNode.textContent}`;
+        } else {
+            // If no text found, insert at the beginning of the first div
+            const questionText = document.createTextNode(`${questionNum}) `);
+            firstDiv.insertBefore(questionText, firstDiv.firstChild);
+        }
+        return tempDiv.innerHTML;
+    }
+    
+    // Fallback: if no div found, just prepend the question number
+    return `${questionNum}) ${statementHtml}`;
+}
+
 // PM Fragment Generation System
 class PMFragmentGenerator {
     static createParagraph(content, classes = []) {
@@ -342,12 +386,13 @@ class PMFragmentGenerator {
     
     static createH2(content, classes = []) {
         const slug = content.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        const allClasses = [...classes, "text-xl", "mb-4"];
         return {
             f_type: { value: 'h2_' },
             html: content,
             data: { id_href: slug },
-            class_list: classes,
-            classes: classes.join(' '),
+            class_list: allClasses,
+            classes: allClasses.join(' '),
             slug: slug
         };
     }
@@ -366,12 +411,13 @@ class PMFragmentGenerator {
     }
     
     static createDivider(classes = []) {
+        const allClasses = [...classes, "my-4", "border-base-300"];
         return {
             f_type: { value: 'hr_' },
             html: '',
             data: {},
-            class_list: classes,
-            classes: classes.join(' ')
+            class_list: allClasses,
+            classes: allClasses.join(' ')
         };
     }
 }
@@ -389,22 +435,35 @@ class PMFragmentRenderer {
         // Render based on fragment type (matching PM templates exactly)
         switch (fragment.f_type.value) {
             case 'p_':
+                // Apply classes to the fragment div for paragraphs
+                if (fragment.classes) {
+                    fragmentDiv.className += ` ${fragment.classes}`;
+                }
                 fragmentDiv.innerHTML = fragment.html;
                 break;
                 
             case 'h2_':
-                fragmentDiv.innerHTML = `<h2 id="${fragment.data.id_href || ''}">${fragment.html}</h2>`;
+                const h2Classes = fragment.classes ? ` class="${fragment.classes}"` : '';
+                fragmentDiv.innerHTML = `<h2 id="${fragment.data.id_href || ''}"${h2Classes}>${fragment.html}</h2>`;
                 break;
                 
             case 'svg_':
+                // Apply classes to the fragment div for SVGs
+                if (fragment.classes) {
+                    fragmentDiv.className += ` ${fragment.classes}`;
+                }
                 fragmentDiv.innerHTML = fragment.data.content;
                 break;
                 
             case 'hr_':
-                fragmentDiv.innerHTML = '<hr>';
+                const hrClasses = fragment.classes ? ` class="${fragment.classes}"` : '';
+                fragmentDiv.innerHTML = `<hr${hrClasses}>`;
                 break;
                 
             default:
+                if (fragment.classes) {
+                    fragmentDiv.className += ` ${fragment.classes}`;
+                }
                 fragmentDiv.innerHTML = fragment.html;
         }
         
@@ -468,7 +527,7 @@ function generateFragmentsFromResults(results) {
     const fragments = [];
     
     // Header fragment
-    fragments.push(PMFragmentGenerator.createH2('Questions générées'));
+    fragments.push(PMFragmentGenerator.createParagraph('<span class="font-mono">Spécialité Maths - 12 questions par copie</span>'));
     
     // Group by student
     const byStudent = results.reduce((acc, r) => {
@@ -480,26 +539,61 @@ function generateFragmentsFromResults(results) {
     for (const student of Object.keys(byStudent)) {
         // Student header if multiple students
         if (Object.keys(byStudent).length > 1) {
-            fragments.push(PMFragmentGenerator.createH2(`Élève ${student}`));
+            fragments.push(PMFragmentGenerator.createH2(`Copie n°${student}`, ['font-mono']));
         }
         
         byStudent[student].forEach((result) => {
-            // Statement fragment using statementHtml
-            const statementHtml = result.success ? 
-                `${result.generatorNum}) ${result.statementHtml}` : 
-                `${result.generatorNum}) Erreur de génération`;
+            // Preprocess statementHtml to inject question number properly
+            let processedStatementHtml;
+            if (result.success) {
+                processedStatementHtml = injectQuestionNumber(result.statementHtml, result.generatorNum);
+            } else {
+                processedStatementHtml = `${result.generatorNum}) Erreur de génération`;
+            }
             
-            fragments.push(PMFragmentGenerator.createParagraph(statementHtml));
+            // Check if we have a graph to display alongside the question
+            if (result.success && result.graphSvgWithRenderedLatex) {
+                // DEBUG: Log what we're working with
+                console.log('DEBUG processedStatementHtml:', processedStatementHtml);
+                
+                // For flex layout, we need to extract the content from the div and put the question number inside the flex text container
+                // Use DOM parsing for more reliable content extraction
+                let textContent;
+                try {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(`<html><body>${processedStatementHtml}</body></html>`, 'text/html');
+                    const firstDiv = doc.querySelector('div');
+                    textContent = firstDiv ? firstDiv.innerHTML : processedStatementHtml;
+                    console.log('DEBUG extracted textContent:', textContent);
+                } catch (e) {
+                    console.log('DEBUG DOM parsing failed, using fallback');
+                    // Fallback to regex if DOM parsing fails
+                    const contentMatch = processedStatementHtml.match(/^<div[^>]*>(.*)<\/div>$/s);
+                    textContent = contentMatch ? contentMatch[1] : processedStatementHtml;
+                    console.log('DEBUG regex textContent:', textContent);
+                }
+                
+                // Create combined layout with question text and graph side by side
+                const combinedHtml = `
+                    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+                        <div style="flex: 1; min-width: 250px;">
+                            ${textContent}
+                        </div>
+                        <div class="graph-svg-container" style="flex: 0 1 auto;">
+                            ${result.graphSvgWithRenderedLatex}
+                        </div>
+                    </div>
+                `;
+                fragments.push(PMFragmentGenerator.createParagraph(combinedHtml));
+            } else {
+                // Standard layout without graph
+                fragments.push(PMFragmentGenerator.createParagraph(processedStatementHtml));
+            }
             
             // Answer fragment if available
-            if (result.success && result.answer) {
-                fragments.push(PMFragmentGenerator.createParagraph(`**Réponse:** ${result.answer}`));
-            }
-            
-            // SVG fragment if available
-            if (result.graphSvgWithRenderedLatex) {
-                fragments.push(PMFragmentGenerator.createSvg(result.graphSvgWithRenderedLatex, result.graphDict));
-            }
+            // if (result.success && result.answer) {
+            //     fragments.push(PMFragmentGenerator.createParagraph(`**Réponse:** ${result.answer}`));
+            // }
             
             // Divider between questions
             fragments.push(PMFragmentGenerator.createDivider());

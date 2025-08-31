@@ -1,7 +1,7 @@
 
 
 
-# Sujets 0 - Première partie : Automatismes
+# Bac 1<sup>ère</sup> - Première partie : Automatismes
 
 
 

@@ -96,16 +96,16 @@
 
 {% block content %}
   <!-- djlint:off -->
-                                            {# styles moved to @css/pm.css #}
+                                              {# styles moved to @css/pm.css #}
 
-                                            <div class="sidebar-fixed hidden xl:block">
-                                              <div class="w-72 flex flex-col card">
+                                              <div class="sidebar-fixed hidden xl:block">
+                                                <div class="w-72 flex flex-col card">
       <div id="toc" class="p-4 flex-none text-left text-base-content/80">{{ pm.toc.html | safe }}</div>
     </div>
   </div>
 
   <div class="pm-container lg:text-lg w-full md:max-w-3xl lg:max-w-4xl xl:max-w-4xl mx-auto">
-    <div class="bg-base-100 shadow-2xl mt-12 px-4 py-4">
+    <div class="bg-base-100  mt-12 px-4 py-4">
       <!-- Main Content -->
       <div class="max-w-[640px] mx-auto md:py-12 bg-base-100">
         {% if product_settings %}
