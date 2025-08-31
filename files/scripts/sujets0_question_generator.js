@@ -524,7 +524,7 @@ function addPrintStyles() {
             /* Remove all default margins and padding */
             @page {
                 margin: 0 !important;
-                padding: 0 !important;
+                padding: 1cm !important;
                 size: A4;
             }
             
@@ -565,9 +565,30 @@ function addPrintStyles() {
                 display: none !important;
             }
             
-            /* Page break before each h2 */
-            .fragment-wrapper[data-f_type="h2_"] {
+            /* Page break before each h2 EXCEPT the teacher copy */
+            .fragment-wrapper[data-f_type="h2_"]:not(:first-of-type) {
                 page-break-before: always;
+            }
+            
+            /* Keep header and first content together */
+            .fragment-wrapper:first-child,
+            .fragment-wrapper:first-child + .fragment-wrapper,
+            .fragment-wrapper:nth-child(2) {
+                page-break-before: avoid;
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            
+            /* Keep table together with previous content - multiple approaches for browser compatibility */
+            .fragment-wrapper[data-f_type="p_"] table {
+                page-break-before: avoid !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Alternative approach: keep first few fragments together */
+            .fragment-wrapper:nth-child(-n+3) {
+                page-break-after: avoid !important;
             }
             
             /* Avoid breaking inside divisions/questions */
@@ -855,12 +876,79 @@ async function executeAllGenerators() {
     return questionResults;
 }
 
+// Helper function to format answers for teacher table
+function formatAnswersForTeacherTable(result, answerType) {
+    if (!result.success || !result.answer) {
+        return 'Erreur';
+    }
+    
+    const answers = result.answer[answerType];
+    
+    // Handle both array and single answer formats
+    if (Array.isArray(answers)) {
+        // Join multiple answers with semicolon and non-breaking spaces
+        return answers.map(answer => `$${answer}$`).join('&nbsp;;&nbsp;');
+    } else {
+        // Single answer format (some sujet2 generators)
+        return `$${answers}$`;
+    }
+}
+
 // Pure PM Fragment Generation - No Custom UI
 function generateFragmentsFromResults(results) {
     const fragments = [];
     
     // Header fragment
     fragments.push(PMFragmentGenerator.createParagraph('<span class="font-mono">Spécialité Maths - 12 questions par copie</span>'));
+    
+    // Create Teacher Copy section first
+    
+    // Generate teacher answer table
+    let tableHtml = `
+        <table class="table table-zebra w-full border border-gray-300">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Étudiant</th>
+                    <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Question</th>
+                    <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Réponse LaTeX</th>
+                    <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Réponse Simplifiée</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    
+    // Sort results by student, then by question number
+    const sortedResults = results.slice().sort((a, b) => {
+        if (a.student !== b.student) {
+            return a.student - b.student;
+        }
+        return a.generatorNum - b.generatorNum;
+    });
+    
+    // Add table rows
+    sortedResults.forEach(result => {
+        const latexAnswers = formatAnswersForTeacherTable(result, 'latex');
+        const simplifiedAnswers = formatAnswersForTeacherTable(result, 'simplified_latex');
+        
+        tableHtml += `
+            <tr>
+                <td class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">${result.student || 'N/A'}</td>
+                <td class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">${result.generatorNum || 'N/A'}</td>
+                <td class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">${latexAnswers}</td>
+                <td class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">${simplifiedAnswers}</td>
+            </tr>
+        `;
+    });
+    
+    tableHtml += `
+            </tbody>
+        </table>
+    `;
+    
+    fragments.push(PMFragmentGenerator.createParagraph(tableHtml));
+    
+    // Add separator between teacher section and student copies
+    fragments.push(PMFragmentGenerator.createDivider());
     
     // Group by student
     const byStudent = results.reduce((acc, r) => {
@@ -874,7 +962,7 @@ function generateFragmentsFromResults(results) {
 
         
         if (Object.keys(byStudent).length > 1) {
-            fragments.push(PMFragmentGenerator.createH2(`Copie n°${student}`, ['font-mono']));
+            fragments.push(PMFragmentGenerator.createH2(`Bac 1ère - Première Partie : Automatismes - n°${student}`, ['font-mono']));
         }
         
         byStudent[student].forEach((result) => {

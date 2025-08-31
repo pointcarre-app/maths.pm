@@ -1,0 +1,50 @@
+/* Tables */
+table.fragment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.fragment-table tr th {
+  font-weight: 400;
+}
+
+table.fragment-table tr th:first-child,
+table.fragment-table tr td:first-child {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+table.fragment-table th,
+table.fragment-table td {
+  border-bottom: 1px solid hsl(var(--bc) / 0.15);
+  padding: 0.5rem 0.6rem;
+  vertical-align: top;
+}
+
+table.fragment-table thead th {
+  font-weight: 400;
+}
+
+/* Markdown tables */
+.fragment table {
+  width: 100%;
+  border-collapse: collapse;
+  /* margin: 1rem 0; */
+  margin: 0 !important;
+}
+
+.fragment table th,
+.fragment table td {
+  border: 1px solid hsl(var(--bc) / 0.2);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.fragment table th {
+  background-color: hsl(var(--b2));
+  font-weight: 600;
+}
+
+.fragment table tr:nth-child(even) {
+  background-color: hsl(var(--b2) / 0.3);
+}

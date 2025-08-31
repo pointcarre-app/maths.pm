@@ -229,7 +229,7 @@ h4.fragment {
 }
 
 .fragment-wrapper[data-f_type="h2_"]  {
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 
@@ -277,7 +277,7 @@ blockquote.fragment {
   color: hsl(var(--bc) / 0.8);
 }
 
-/* Tables */
+Tables
 table.fragment-table {
   width: 100%;
   border-collapse: collapse;
@@ -305,19 +305,19 @@ table.fragment-table thead th {
 }
 
 /* Markdown tables */
-.fragment table {
+.fragment-table table {
   width: 100%;
   border-collapse: collapse;
   /* margin: 1rem 0; */
   margin: 0 !important;
 }
 
-.fragment table th,
-.fragment table td {
+/* .fragment-table table th,
+.fragment-table table td {
   border: 1px solid hsl(var(--bc) / 0.2);
   padding: 0.5rem 0.75rem;
   text-align: left;
-}
+} */
 
 .fragment table th {
   background-color: hsl(var(--b2));
@@ -931,40 +931,40 @@ pm-number-input button.btn-soft:hover {
 
 /* Sujets 0 */
 
-        /* Graph container styles */
-        .graph-svg-container {
-          position: relative;
-          display: block;
-          overflow: hidden;
-      }
+  /* Graph container styles */
+  .graph-svg-container {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
 
-      .graph-svg-container svg {
-          display: block;
-          max-width: 100%;
-          height: auto;
-      }
+.graph-svg-container svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
 
-      /* Foreign object positioning fix */
-      .graph-svg-container foreignObject {
-          overflow: visible;
-      }
+/* Foreign object positioning fix */
+.graph-svg-container foreignObject {
+    overflow: visible;
+}
 
-      .graph-svg-container foreignObject>div {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-      }
+.graph-svg-container foreignObject>div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-      /* LaTeX in SVG styles */
-      .svg-latex {
-          /*font-size: 14px;*/
-          line-height: 1.2;
-          text-align: center;
-      }
+/* LaTeX in SVG styles */
+.svg-latex {
+    /*font-size: 14px;*/
+    line-height: 1.2;
+    text-align: center;
+}
 
-      .svg-latex .katex {
-          font-size: inherit;
-          font-family: 'KaTeX_Main', sans-serif;
-      }
+.svg-latex .katex {
+    font-size: inherit;
+    font-family: 'KaTeX_Main', sans-serif;
+}
