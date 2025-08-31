@@ -16,7 +16,32 @@
     <link rel="stylesheet" href="{{ url_for('static', path='js/sujets0-data-only/data-only.css') }}" />
 
 
+    {# *,
+        :after,
+        ::backdrop,
+        :before,
+        ::file-selector-button {
+            box-sizing: border-box;
+            border: 0 solid;
+            margin: 0;
+            padding: 0;
+} #}
+
+
     <style>
+        html {
+            background-color: #E7E7E7;
+
+        }
+
+        body {
+            background-color: white;
+            /*max-width: 210mm;*/
+            margin: auto;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
         /* Graph container styles */
         .graph-svg-container {
             position: relative;
@@ -88,6 +113,9 @@
 </head>
 
 <body>
+
+
+<div id="container-papyrus"></div>
 
 <script type="module">
     import {

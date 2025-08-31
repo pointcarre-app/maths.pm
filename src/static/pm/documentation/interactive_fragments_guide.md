@@ -471,3 +471,39 @@ Styling
 
 Examples
 - See `pms/examples/number_input_example.md` for ready-to-copy snippets.
+
+
+Here's a markdown example with inline LaTeX using KaTeX syntax:
+
+## Mathematical Examples
+
+### Basic Operations
+The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$ where $a \neq 0$.
+
+### Greek Letters and Symbols
+Einstein's famous equation: $E = mc^2$ where $c$ is the speed of light.
+The area of a circle is $A = \pi r^2$ and circumference is $C = 2\pi r$.
+
+### Fractions and Superscripts
+- Simple fraction: $\frac{1}{2}$
+- Complex fraction: $\frac{a + b}{c - d}$
+- Exponents: $x^{2n+1}$ and $e^{i\pi} + 1 = 0$
+
+### Summations and Integrals
+The sum $\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$ and the integral $\int_{0}^{\infty} e^{-x} dx = 1$.
+
+### Sets and Logic
+- Set notation: $A \cup B$, $A \cap B$, $A \subseteq B$
+- Logic symbols: $\forall x \in \mathbb{R}, \exists y$ such that $x < y$
+
+### Matrices (inline)
+Identity matrix: $I = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$
+
+### Special Functions
+- Trigonometry: $\sin(\theta) + \cos(\theta) = \sqrt{2}\sin(\theta + \frac{\pi}{4})$
+- Logarithms: $\log_2(8) = 3$ and $\ln(e) = 1$
+
+### Accents and Decorations
+Vector notation: $\vec{v} = \langle x, y, z \rangle$ and $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$
+
+This demonstrates various inline LaTeX expressions that render beautifully in markdown with KaTeX support.

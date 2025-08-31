@@ -1,5 +1,6 @@
 import { S0 } from "./state.js";
 
+
 /**
  * Build a Papyrus blocks array from sujets0-data-only results.
  * - The first item is a header block with a table (isPapyrusHeader=true)
@@ -73,6 +74,8 @@ export function buildPapyrusBlocks(results, options = {}) {
     const num = index + 1;
     const questionId = `question-${num}-block`;
     const rawStatementHtml = (result?.data?.statement_html ?? "").trim();
+    // Very-early KaTeX rendering in statement HTML (do not touch SVGs)
+    // const statementHtml = renderKatexInHtml(rawStatementHtml);
 
     let html;
     if (result?.graphSvgWithRenderedLatex) {
@@ -109,6 +112,7 @@ export function buildPapyrusBlocks(results, options = {}) {
         }
       }
     }
+    
 
     blocks.push({ id: questionId, html, classes: [], style: "" });
   });
@@ -461,6 +465,8 @@ function inlineSvgStylesBasedOnCssRules(svgString) {
       { sel: '.text-xs', fs: '0.75rem', lh: '1rem' },
       { sel: '.text-2xs', fs: '0.625rem', lh: '1' },
     ];
+
+    
     for (const { sel, fs, lh } of map) {
       const nodes = svg.querySelectorAll(sel);
       nodes.forEach((n) => {
@@ -543,4 +549,88 @@ function buildSingleDivWithIdAndNumber(rawStatementHtml, num) {
   }
 }
 
+
+/**
+ * Render KaTeX within HTML string while preserving existing HTML and skipping SVGs.
+ * - Uses window.katex.renderToString similarly to papyrus-manager fallback.
+ * - Renders $$...$$ as displayMode and $...$ as inline.
+ * - Skips inside <svg>, <script>, <style>, <pre>, <code>, and existing .katex.
+ * @param {string} html
+ * @returns {string}
+ */
+function renderKatexInHtml(html) {
+  try {
+    if (!html) return html;
+    if (!(window && window.katex && typeof window.katex.renderToString === 'function')) {
+      return html;
+    }
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(`<div class="__k_container">${html}</div>`, 'text/html');
+    const container = doc.body.firstElementChild;
+    if (!container) return html;
+
+    const SKIP_TAGS = new Set(['svg', 'script', 'style', 'pre', 'code', 'textarea']);
+
+    function shouldSkipElement(el) {
+      if (!el || !el.tagName) return false;
+      const tag = el.tagName.toLowerCase();
+      if (SKIP_TAGS.has(tag)) return true;
+      if (el.closest && (el.closest('svg') || el.closest('.katex'))) return true;
+      if (el.classList && el.classList.contains('katex')) return true;
+      return false;
+    }
+
+    function processTextNode(textNode) {
+      const text = textNode.nodeValue;
+      if (!text || !/\$/.test(text)) return;
+
+      const parts = splitByMath(text);
+      if (!parts || parts.length === 1) return;
+
+      const frag = doc.createDocumentFragment();
+      for (const part of parts) {
+        if (part.isMath) {
+          try {
+            const isBlock = part.text.startsWith('$$');
+            const tex = part.text.replace(/^\$\$?|\$\$?$/g, '');
+            const rendered = window.katex.renderToString(tex, {
+              throwOnError: false,
+              displayMode: isBlock
+            });
+            const span = doc.createElement('span');
+            span.innerHTML = rendered;
+            frag.appendChild(span);
+          } catch (_) {
+            frag.appendChild(doc.createTextNode(part.text));
+          }
+        } else {
+          frag.appendChild(doc.createTextNode(part.text));
+        }
+      }
+      textNode.parentNode.replaceChild(frag, textNode);
+    }
+
+    function walk(node) {
+      if (!node) return;
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        if (shouldSkipElement(node)) return;
+        const children = Array.from(node.childNodes);
+        for (const child of children) {
+          walk(child);
+        }
+        return;
+      }
+      if (node.nodeType === Node.TEXT_NODE) {
+        // Avoid touching texts that reside in attributes or within katex rendered structures
+        if (node.parentElement && shouldSkipElement(node.parentElement)) return;
+        processTextNode(node);
+      }
+    }
+
+    walk(container);
+    return container.innerHTML;
+  } catch (_) {
+    return html;
+  }
+}
 

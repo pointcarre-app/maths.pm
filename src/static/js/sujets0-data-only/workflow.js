@@ -22,10 +22,20 @@ export async function executeAllGenerators(configOverrides = {}) {
 
   for (let studentNum = 1; studentNum <= config.nbStudents; studentNum++) {
     const seed = configSujets0DataOnly.rootSeed + studentNum;
+
+    var generatorNum = 1;
     for (const generator of selectedGenerators) {
       try {
         const result = await executeGeneratorWithSeed(generator, seed);
 
+
+
+        result.student = studentNum;
+        result.seed = seed;
+        result.generator = generator;
+        result.generatorNum = generatorNum;
+        generatorNum++;
+        
         // Attach graphs where needed
         if (generator === "spe_sujet1_auto_07_question.py") {
           const Y_LABEL_FOR_HORIZONTAL_LINE = parseInt(

@@ -3,56 +3,153 @@ import { S0, setInState, getFromState } from "./state.js";
 import { convertAllGraphsToPng, convertAllGraphsToPng_canvg, prerenderLatexInAllResultsWithGraph, setDomToImage } from "./graphics.js";
 
 export function createDataTable(results) {
-  const table = document.createElement("table");
-  table.style.width = "1500px;";
-  table.style.borderCollapse = "collapse";
+  // Replace table with a simple stacked div layout
+  const container = document.createElement("div");
+  container.className = "results-container";
+  container.style.margin = "auto";
 
   results.forEach((result) => {
-    const row = table.insertRow();
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "result-row";
+    rowDiv.style.backgroundColor = "white";
+    rowDiv.style.borderLeft = "1px solid #A3A2A3";
+    rowDiv.style.padding = "8px 10px";
+    rowDiv.style.margin = "12px auto"; // spacing between old rows
 
-    const statementCell = row.insertCell();
-    statementCell.style.width = "300px";
-    statementCell.style.border = "1px solid black";
-    statementCell.textContent = result.statement || "N/A";
+    const statementHtml = (
+      result?.data?.statement_html ??
+      result?.statement_html ??
+      result?.statementHtml ??
+      result?.statement ??
+      "N/A"
+    );
 
-    const svgCell = row.insertCell();
-    svgCell.style.width = "300px";
-    svgCell.style.border = "1px solid black";
+    const statementWrapper = createPrefixedStatementNode(
+      statementHtml,
+      String(result.generatorNum) + ")\u00A0"
+    );
+    rowDiv.appendChild(statementWrapper);
+
+    // Render inline math inside the statement using KaTeX auto-render if available
+    if (typeof window !== "undefined" && typeof window.renderMathInElement === "function") {
+      try {
+        window.renderMathInElement(statementWrapper, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true },
+          ],
+          throwOnError: false,
+        });
+      } catch (_) { /* ignore */ }
+    }
+
     if (result.graphSvgWithRenderedLatex) {
       const svgElement = document.createElement("div");
       svgElement.classList.add("graph-svg-container");
+      svgElement.style.marginTop = "8px";
       svgElement.innerHTML = result.graphSvgWithRenderedLatex;
-      svgCell.appendChild(svgElement);
-    } else {
-      svgCell.textContent = "N/A";
+      rowDiv.appendChild(svgElement);
     }
 
-    //const pngCell = row.insertCell();
-    //pngCell.style.width = "300px";
-    //pngCell.style.border = "1px solid black";
-    //if (result.graphPng) {
-      //const imgElement = document.createElement("img");
-      //imgElement.src = result.graphPng;
-      //imgElement.style.width = "100%";
-      //pngCell.appendChild(imgElement);
-    //} else {
-      //pngCell.textContent = "N/A";
-    //}
-
-    const answerCell = row.insertCell();
-    answerCell.style.width = "300px";
-    answerCell.style.border = "1px solid black";
-    answerCell.textContent = JSON.stringify(result.answer) || "N/A";
+    container.appendChild(rowDiv);
   });
 
-  setInState("ui.tableElement", table);
-  return table;
+  setInState("ui.tableElement", container);
+  return container;
 }
 
+
 export async function renderResultsTable(results) {
-  const table = createDataTable(results);
-  document.body.appendChild(table);
-  if (!isSafari()) {
+  // Group results by student (fallback to 'N/A' if missing)
+  const byStudent = results.reduce((acc, r) => {
+    const key = r && r.student != null ? String(r.student) : 'N/A';
+    (acc[key] ||= []).push(r);
+    return acc;
+  }, {});
+
+  const tables = [];
+  for (const student of Object.keys(byStudent)) {
+    // Optional: add a small heading per student
+    // const h = document.createElement('h3');
+    // h.textContent = `Élève ${student}`;
+    // document.body.appendChild(h);
+
+    const table = createDataTable(byStudent[student]);
+    document.body.appendChild(table);
+
+
+
+    // If you later re-enable PNG conversion, do it per table:
+    // if (!isSafari()) await appendPngFromRenderedSvgColumn(table, byStudent[student]);
+
+    tables.push(table);
+  }
+  return tables; // caller doesn't use return, so array is fine
+}
+
+export function renderPapyrusBlocks(papyrusBlocks, container) {
+  const items = Array.isArray(papyrusBlocks)
+    ? papyrusBlocks
+    : (typeof papyrusBlocks === 'string'
+        ? (JSON.parse(papyrusBlocks) || [])
+        : []);
+
+  if (!container) {
+    container = document.getElementById('container-papyrus');
+  }
+  if (!container) return '';
+  // Ensure preview appears below existing content
+  try { if (container.parentNode !== document.body || container !== document.body.lastElementChild) document.body.appendChild(container); } catch (_) {}
+
+  let html = '<div class="page-wrapper"><div class="page-preview"><div class="page-content">';
+
+  for (const item of items) {
+    if (item && item.html) {
+      html += item.html;
+    } else if (item && item.svg) {
+      // Do not modify SVGs; just inject as-is with optional wrapper style
+      html += `<div style="${item.style || ''} ">${item.svg}</div>`;
+    } else if (item && item.pngDataUrl) {
+      html += `<img src="${item.pngDataUrl}" style="${item.style || ''} " alt="Graph">`;
+    } else if (item && item.katex) {
+      if (window.katex && typeof window.katex.renderToString === 'function') {
+        try {
+          const rendered = window.katex.renderToString(item.katex, {
+            throwOnError: false,
+            displayMode: true,
+          });
+          html += `<div style="${item.style || ''} ">${rendered}</div>`;
+        } catch (_) {
+          html += `<div style="${item.style || ''} ">$$${item.katex}$$</div>`;
+        }
+      } else {
+        html += `<div style="${item.style || ''} ">$$${item.katex}$$</div>`;
+      }
+    }
+
+    if (item && item.marginBottom) {
+      html += `<div style="height: ${item.marginBottom}"></div>`;
+    }
+
+    if (item && item.pageBreak === 'after') {
+      html += '</div></div></div>';
+      html += '<div class="page-wrapper"><div class="page-preview"><div class="page-content">';
+    }
+
+    
+  }
+
+  html += '</div></div></div>';
+  container.innerHTML = html;
+  return html;
+}
+
+// export async function renderResultsTable(results) {
+//   const table = createDataTable(results);
+//   document.body.appendChild(table);
+//   if (!isSafari()) {
     // Using the original dom-to-image pipeline (stable for foreignObject/KaTeX)
     // Alternative canvg-based path kept below but disabled due to foreignObject limitations.
     
@@ -63,7 +160,7 @@ export async function renderResultsTable(results) {
     //results.forEach((result, idx) => {
       //if (result.graphPng) {
         //const pngCell = table.rows[idx].cells[2];
-        //const imgElement = document.createElement("img");
+        //const imgElement = document.createElement('img');
         //imgElement.src = result.graphPng;
         //imgElement.style.width = `${result.graphDimensions.width}px`;
         //imgElement.style.height = `${result.graphDimensions.height}px`;
@@ -77,9 +174,9 @@ export async function renderResultsTable(results) {
     // Alternative html-to-image column renderer kept below but disabled due to external stylesheet CORS inlining.
     //await appendPngFromRenderedSvgColumn(table, results); // dom-to-image version
     // await appendPngFromRenderedSvgColumn_htmlToImage(table, results); // html-to-image version (disabled)
-  }
-  return table;
-}
+//   }
+//   return table;
+// }
 
 
 async function ensureDomToImage() {
@@ -324,6 +421,68 @@ function injectTextSizeStyles(container) {
 }
 
 
+// --- Prefix the first textual content inside a statement wrapper ---
+
+function createPrefixedStatementNode(statementHtml, prefix) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'statement-wrapper';
+  wrapper.innerHTML = statementHtml;
+  if (wrapper.dataset.prefixInjected !== 'true') {
+    const didInject = prependPrefixToFirstText(wrapper, prefix);
+    wrapper.dataset.prefixInjected = didInject ? 'true' : 'false';
+  }
+  return wrapper;
+}
+
+function prependPrefixToFirstText(root, prefix) {
+  if (!root) return false;
+  // If already present on an early text node, avoid double prefix
+  const walker = document.createTreeWalker(
+    root,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode(node) {
+        if (!node || !node.nodeValue) return NodeFilter.FILTER_REJECT;
+        // Skip whitespace-only text nodes
+        if (!/\S/.test(node.nodeValue)) return NodeFilter.FILTER_SKIP;
+        // Skip if inside skippable ancestors (script/style/svg/math/noscript/textarea or .katex)
+        if (hasSkippableAncestor(node)) return NodeFilter.FILTER_SKIP;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    }
+  );
+
+  let firstText = walker.nextNode();
+  if (!firstText) {
+    // No text content at all → insert at very beginning
+    root.insertBefore(document.createTextNode(prefix), root.firstChild || null);
+    return true;
+  }
+
+  // Idempotency: avoid doubling the prefix
+  if (typeof firstText.nodeValue === 'string' && firstText.nodeValue.startsWith(prefix)) {
+    return false;
+  }
+  firstText.nodeValue = prefix + firstText.nodeValue;
+  return true;
+}
+
+function hasSkippableAncestor(node) {
+  let current = node.parentNode;
+  while (current && current.nodeType === 1) { // ELEMENT_NODE
+    const tag = current.tagName ? current.tagName.toLowerCase() : '';
+    if (tag === 'script' || tag === 'style' || tag === 'svg' || tag === 'math' || tag === 'noscript' || tag === 'textarea') {
+      return true;
+    }
+    if (current.classList && current.classList.contains('katex')) {
+      return true;
+    }
+    current = current.parentNode;
+  }
+  return false;
+}
+
+
 // --- KaTeX Math Italic dynamic font injection helpers (local to ui.js) ---
 
 const KATEX_VERSION = '0.16.9';
@@ -357,7 +516,6 @@ async function injectKatexMathItalicStyle(container) {
   font-display: swap;
 }
 .katex { font-family: 'KaTeX_Math', 'KaTeX_Main', serif; }
-.katex * { font-family: inherit !important; }
 `;
     container.appendChild(style);
     return style;
@@ -376,5 +534,4 @@ async function ensureKatexFontReady() {
     // ignore
   }
 }
-
 
