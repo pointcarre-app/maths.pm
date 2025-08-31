@@ -41,6 +41,7 @@ export async function init() {
   const papyrusBlocks = buildPapyrusBlocksFromS0();
   window.papyrusBlocks = papyrusBlocks;
   window.papyrusBlocksJSON = serializePapyrusBlocks(papyrusBlocks);
+  console.log(window.papyrusBlocksJSON);
 
   // Expose for debugging/extension
   window.S0 = S0;

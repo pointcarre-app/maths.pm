@@ -1,0 +1,29 @@
+ra/* Safari-specific fixes */
+/*@supports (-webkit-appearance: none) {*/
+/*.graph-svg-container svg text.text-2xs {*/
+/*font-size: 0.625rem !important;*/
+/*line-height: 1 !important;*/
+/*}*/
+/**/
+/*.graph-svg-container svg text.text-xs {*/
+/*font-size: 0.75rem !important;*/
+/*line-height: 1rem !important;*/
+/*}*/
+/**/
+/*.graph-svg-container svg text.text-sm {*/
+/*font-size: 0.875rem !important;*/
+/*line-height: 1.25rem !important;*/
+/*}*/
+/*}*/
+
+/* Print styles */
+/*@media print {*/
+/*.graph-svg-container {*/
+/*page-break-inside: avoid;*/
+/*}*/
+/**/
+/*.graph-svg-container svg {*/
+/*width: 100% !important;*/
+/*height: auto !important;*/
+/*}*/
+/*}*/
