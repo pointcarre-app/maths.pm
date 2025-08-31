@@ -34,3 +34,6 @@ class FType(Enum):
     CODEX = "codex_"
     # Number input fragments
     NUMBER = "number_"
+
+    # Script fragments
+    SCRIPT_MODULE = "script_module_"

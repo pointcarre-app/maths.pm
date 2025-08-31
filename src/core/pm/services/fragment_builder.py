@@ -733,6 +733,20 @@ class FragmentBuilder:
                                 except Exception:
                                     pass
 
+                    # New: scriptPCAVersion YAML block → script_module_ fragment
+                    elif "scriptPCAVersion" in data:
+                        f_type = "script_module_"
+                        html = ""
+                        # Validate required fields
+                        if "content" not in data:
+                            raise ValueError("SCRIPT_MODULE requires 'content' field")
+                        # Set default type to 'module' if not specified
+                        if "type" not in data:
+                            data["type"] = "module"
+                        # Decode HTML entities in script content to prevent syntax errors
+                        if "content" in data and isinstance(data["content"], str):
+                            data["content"] = html_module.unescape(data["content"])
+
                 except Exception as e:
                     print(f"Error parsing YAML: {e}")
                     f_type = "code_"

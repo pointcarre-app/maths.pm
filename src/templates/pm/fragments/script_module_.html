@@ -1,0 +1,5 @@
+<div class="fragment" data-f_type="{{ fragment.f_type.value }}">
+  <script type="{{ fragment.data.type if fragment.data.type else 'module' }}">
+    {{ fragment.data.content | safe }}
+  </script>
+</div>

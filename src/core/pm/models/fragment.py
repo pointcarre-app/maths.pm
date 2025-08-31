@@ -228,6 +228,18 @@ class Fragment(BaseModel):
             if html != "":
                 raise ValueError("Graph should have empty html")
 
+        elif f_type == FType.SCRIPT_MODULE:
+            if html != "":
+                raise ValueError("SCRIPT_MODULE should have empty html")
+            required_keys = {"content"}
+            optional_keys = {"type", "version", "scriptPCAVersion"}
+            allowed_keys = required_keys | optional_keys
+            if not required_keys.issubset(set(data.keys())):
+                raise ValueError("SCRIPT_MODULE requires 'content' key in data")
+            if not set(data.keys()).issubset(allowed_keys):
+                extra_keys = set(data.keys()) - allowed_keys
+                raise ValueError(f"SCRIPT_MODULE has unexpected keys: {extra_keys}")
+
         return values
 
     def to_dict(self) -> dict[str, Any]:
