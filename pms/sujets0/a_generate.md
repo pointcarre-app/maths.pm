@@ -1,7 +1,7 @@
 
 
 
-# Bac 1<sup>ère</sup> - Première partie : Automatismes
+# Générer des première partie pour le Bac de 1<sup>ère</sup> 
 
 
 

@@ -18,9 +18,13 @@ function extractConfigFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     const nbStudents = urlParams.get('nbStudents') || 2;
     const nbQuestions = urlParams.get('nbQuestions') || 12;
-    return { nbStudents, nbQuestions };
+    const curriculum = urlParams.get('curriculum') || 'Spé';
+    return { nbStudents, nbQuestions, curriculum };
 }
 
+
+
+const configFromUrl = extractConfigFromUrl();
 
 console.log("🟪🟪🟪 url config", extractConfigFromUrl());
 
@@ -31,8 +35,9 @@ const CONFIG = {
     naginiGitTag: 'v0.0.21',
     v4PyJsGitTag: 'v0.0.27',
     rootSeed: 14,
-    nbStudents: 2,
-    nbQuestions: 12,
+    nbStudents: configFromUrl.nbStudents,
+    nbQuestions: configFromUrl.nbQuestions,
+    curriculum: configFromUrl.curriculum,
     
     // CDN URLs
     naginiJsUrl: 'https://esm.sh/gh/pointcarre-app/nagini@v0.0.21/src/nagini.js?bundle',
@@ -166,6 +171,15 @@ async function executeGeneratorWithSeed(filename, seed) {
         
         let pythonCode = await response.text();
         
+
+        // Also random.Seed in some generators... TODO sel
+        // seems better here only
+        // Technically the same seed
+        // But this doesnt run in doppel:backend..
+        // so duplication for safety locally + ?? 
+        // compare wiyh a new doppel
+
+
         // Inject seed
         const seedInjection = `\nimport random\nrandom.seed(${seed})\n\n# Override the default SEED\nimport teachers.defaults\nteachers.defaults.SEED = ${seed}\n\n`;
         
@@ -493,7 +507,20 @@ function addPrintButton(container) {
         </div>
     `;
     
-    container.insertBefore(printButtonContainer, container.firstChild);
+    // Create Table of Contents container
+    const tocContainer = document.createElement('div');
+    tocContainer.className = 'toc-container w-full mb-4 print-hide';
+    tocContainer.innerHTML = `
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
+            <h3 class="text-sm font-semibold text-gray-700 mb-2">📑 Sommaire</h3>
+            <div id="toc-links" class="max-h-[300px] overflow-y-auto space-y-1">
+                <div class="text-xs text-gray-500 italic">Le sommaire sera généré après le chargement des questions...</div>
+            </div>
+        </div>
+    `;
+    
+    container.appendChild(printButtonContainer);
+    container.appendChild(tocContainer);
     
     // Add click handler
     const printBtn = printButtonContainer.querySelector('#print-questions-btn');
@@ -574,6 +601,7 @@ function addPrintStyles() {
             /* Hide print button and other UI elements */
             .print-hide,
             .print-button-container,
+            .toc-container,
             .navbar,
             .footer,
             .sidebar-fixed {
@@ -697,6 +725,93 @@ function addPrintStyles() {
     `;
     
     document.head.appendChild(printStyles);
+}
+
+// Table of Contents functionality
+function populateTableOfContents() {
+    const tocLinksContainer = document.querySelector('#toc-links');
+    if (!tocLinksContainer) {
+        console.warn('TOC container not found');
+        return;
+    }
+    
+    // Clear the placeholder text
+    tocLinksContainer.innerHTML = '';
+    
+    let linkCount = 0;
+    
+    // First, add the teacher table if it exists
+    const teacherTable = document.querySelector('#teacher-answer-table');
+    if (teacherTable) {
+        const linkElement = document.createElement('div');
+        linkElement.className = 'toc-link-wrapper';
+        linkElement.innerHTML = `
+            <a href="#teacher-answer-table" class="toc-link block px-2 py-1 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded transition-colors duration-150 border-l-2 border-transparent hover:border-blue-300">
+                📋 Corrigé Enseignant
+            </a>
+        `;
+        
+        tocLinksContainer.appendChild(linkElement);
+        linkCount++;
+        
+        // Add smooth scroll behavior to the link
+        const link = linkElement.querySelector('a');
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            teacherTable.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Update URL hash without jumping
+            history.pushState(null, null, '#teacher-answer-table');
+        });
+    }
+    
+    // Then, find all H2 elements that were generated as fragments
+    const h2Elements = document.querySelectorAll('.fragment-wrapper[data-f_type="h2_"] h2[id]');
+    
+    // Create links for each H2
+    h2Elements.forEach((h2, index) => {
+        const id = h2.getAttribute('id');
+        const text = h2.textContent.trim();
+        
+        if (id && text) {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'toc-link-wrapper';
+            linkElement.innerHTML = `
+                <a href="#${id}" class="toc-link block px-2 py-1 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded transition-colors duration-150 border-l-2 border-transparent hover:border-blue-300">
+                    ${text}
+                </a>
+            `;
+            
+            tocLinksContainer.appendChild(linkElement);
+            linkCount++;
+            
+            // Add smooth scroll behavior to the link
+            const link = linkElement.querySelector('a');
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetElement = document.querySelector(`#${id}`);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Update URL hash without jumping
+                    history.pushState(null, null, `#${id}`);
+                }
+            });
+        }
+    });
+    
+    // Show message if no links found
+    if (linkCount === 0) {
+        tocLinksContainer.innerHTML = '<div class="text-xs text-gray-500 italic">Aucun titre trouvé</div>';
+    }
+    
+    console.log(`✅ TOC populated with ${linkCount} links (${teacherTable ? '1 table + ' : ''}${h2Elements.length} sections)`);
 }
 
 // Helper function to inject question number into statementHtml
@@ -918,18 +1033,20 @@ function generateFragmentsFromResults(results) {
     
     // Create Teacher Copy section first
     
-    // Generate teacher answer table
+    // Generate teacher answer table with ID for TOC
     let tableHtml = `
-        <table class="table table-zebra w-full border border-gray-300">
-            <thead>
-                <tr class="bg-gray-100">
-                    <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Étudiant</th>
-                    <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Question</th>
-                    <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Réponse LaTeX</th>
-                    <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Réponse Simplifiée</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div id="teacher-answer-table">
+            <h3 class="text-lg font-semibold mb-3 text-gray-800">📋 Corrigé Enseignant</h3>
+            <table class="table table-zebra w-full border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Étudiant</th>
+                        <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Question</th>
+                        <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Réponse LaTeX</th>
+                        <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Réponse Simplifiée</th>
+                    </tr>
+                </thead>
+                <tbody>
     `;
     
     // Sort results by student, then by question number
@@ -956,8 +1073,9 @@ function generateFragmentsFromResults(results) {
     });
     
     tableHtml += `
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     `;
     
     fragments.push(PMFragmentGenerator.createParagraph(tableHtml));
@@ -1049,14 +1167,23 @@ function injectFragmentsIntoPM(fragments) {
         return;
     }
     
-    // Add print button before fragments
-    addPrintButton(pmContainer);
-    
-    // Inject each fragment
-    fragments.forEach(fragment => {
-        const renderedFragment = PMFragmentRenderer.renderFragment(fragment);
-        pmContainer.appendChild(renderedFragment);
-    });
+    // Inject first fragment (header) first
+    if (fragments.length > 0) {
+        const headerFragment = PMFragmentRenderer.renderFragment(fragments[0]);
+        pmContainer.appendChild(headerFragment);
+        
+        // Add print button and TOC after the header
+        addPrintButton(pmContainer);
+        
+        // Inject remaining fragments
+        fragments.slice(1).forEach(fragment => {
+            const renderedFragment = PMFragmentRenderer.renderFragment(fragment);
+            pmContainer.appendChild(renderedFragment);
+        });
+    } else {
+        // Fallback: add print button at the beginning if no fragments
+        addPrintButton(pmContainer);
+    }
     
     console.log(`✅ Injected ${fragments.length} fragments into PM system`);
 }
@@ -1121,6 +1248,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // Inject fragments into PM system
         injectFragmentsIntoPM(fragments);
+        
+        // Populate table of contents after fragments are rendered
+        setTimeout(() => {
+            populateTableOfContents();
+        }, 50);
         
         // Fire unified LaTeX rendering for all content (static + dynamic)
         setTimeout(() => {

@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+
+
+## [v0.0.4]
+
+- Generation using `/pm` ok for sujet 1 Spé Maths + priting with chrome
+
+
 ## [v0.0.3]
 
 ### Infrastructure

@@ -50,6 +50,13 @@ export async function executeGeneratorWithSeed(filename, seed) {
 
     let pythonCode = await response.text();
 
+    // Also random.Seed in some generators... TODO sel
+    // seems better here only
+    // Technically the same seed
+    // But this doesnt run in doppel:backend..
+    // so duplication for safety locally + ?? 
+    // compare wiyh a new doppel
+
     const seedInjection = `\nimport random\nrandom.seed(${seed})\n\n# Override the default SEED\nimport teachers.defaults\nteachers.defaults.SEED = ${seed}\n\n`;
 
     pythonCode = pythonCode.replace(
