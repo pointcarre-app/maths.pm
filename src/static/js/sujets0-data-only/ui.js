@@ -27,22 +27,22 @@ export function createDataTable(results) {
       svgCell.textContent = "N/A";
     }
 
-    const pngCell = row.insertCell();
-    pngCell.style.width = "300px";
-    pngCell.style.border = "1px solid black";
-    if (result.graphPng) {
-      const imgElement = document.createElement("img");
-      imgElement.src = result.graphPng;
-      imgElement.style.width = "100%";
-      pngCell.appendChild(imgElement);
-    } else {
-      pngCell.textContent = "N/A";
-    }
+    //const pngCell = row.insertCell();
+    //pngCell.style.width = "300px";
+    //pngCell.style.border = "1px solid black";
+    //if (result.graphPng) {
+      //const imgElement = document.createElement("img");
+      //imgElement.src = result.graphPng;
+      //imgElement.style.width = "100%";
+      //pngCell.appendChild(imgElement);
+    //} else {
+      //pngCell.textContent = "N/A";
+    //}
 
     const answerCell = row.insertCell();
     answerCell.style.width = "300px";
     answerCell.style.border = "1px solid black";
-    answerCell.textContent = result.answer || "N/A";
+    answerCell.textContent = JSON.stringify(result.answer) || "N/A";
   });
 
   setInState("ui.tableElement", table);
@@ -55,25 +55,27 @@ export async function renderResultsTable(results) {
   if (!isSafari()) {
     // Using the original dom-to-image pipeline (stable for foreignObject/KaTeX)
     // Alternative canvg-based path kept below but disabled due to foreignObject limitations.
-    await convertAllGraphsToPng(results); // dom-to-image version
+    
+    // await convertAllGraphsToPng(results); // dom-to-image version
+
     // await convertAllGraphsToPng_canvg(results); // canvg version (disabled)
     // Update PNG column after conversion
-    results.forEach((result, idx) => {
-      if (result.graphPng) {
-        const pngCell = table.rows[idx].cells[2];
-        const imgElement = document.createElement("img");
-        imgElement.src = result.graphPng;
-        imgElement.style.width = `${result.graphDimensions.width}px`;
-        imgElement.style.height = `${result.graphDimensions.height}px`;
-        pngCell.innerHTML = "";
-        pngCell.appendChild(imgElement);
-      }
-    });
+    //results.forEach((result, idx) => {
+      //if (result.graphPng) {
+        //const pngCell = table.rows[idx].cells[2];
+        //const imgElement = document.createElement("img");
+        //imgElement.src = result.graphPng;
+        //imgElement.style.width = `${result.graphDimensions.width}px`;
+        //imgElement.style.height = `${result.graphDimensions.height}px`;
+        //pngCell.innerHTML = "";
+        //pngCell.appendChild(imgElement);
+      //}
+    //});
 
     // Also create a new column with PNGs converted directly from rendered SVGs
     // Using the original dom-to-image table-column renderer.
     // Alternative html-to-image column renderer kept below but disabled due to external stylesheet CORS inlining.
-    await appendPngFromRenderedSvgColumn(table, results); // dom-to-image version
+    //await appendPngFromRenderedSvgColumn(table, results); // dom-to-image version
     // await appendPngFromRenderedSvgColumn_htmlToImage(table, results); // html-to-image version (disabled)
   }
   return table;

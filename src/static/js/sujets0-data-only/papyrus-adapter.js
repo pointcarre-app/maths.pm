@@ -21,11 +21,11 @@ export function buildPapyrusBlocks(results, options = {}) {
       labelRight: options?.header?.labelRight ?? "BolzanoBleu",
       labelFirstname: options?.header?.labelFirstname ?? "Prénom :",
       labelDate: options?.header?.labelDate ?? "Date :",
-      labelRight2: options?.header?.labelRight2 ?? "2nde&1ère|Spé",
+      labelRight2: options?.header?.labelRight2 ?? "Spé",
       classes: options?.header?.classes ?? ["font-mono"],
       style: options?.header?.style ?? "",
     },
-    title: options?.title ?? "Bac 1ère Spé. Maths : Partie 1 automatismes",
+    title: options?.title ?? "Bac 1ère - Première Partie : Automatismes",
     subtitle: options?.subtitle ?? "Questions inspirées des Sujets 0",
   };
 
@@ -84,6 +84,7 @@ export function buildPapyrusBlocks(results, options = {}) {
       const rightColStyle = `flex: 0 1 auto;${width ? ` width: ${width}px;` : ''}${height ? ` height: ${height}px;` : ''}`;
 
       let sizedSvg = ensureSvgDimensionsInString(result.graphSvgWithRenderedLatex, width, height);
+      // sizedSvg = ensureKatexFontFaceInSvg(sizedSvg);
       sizedSvg = inlineSvgStylesBasedOnCssRules(sizedSvg);
       const leftCol = buildLeftColumnHtml(rawStatementHtml, num, leftColStyle);
       html = (
@@ -286,11 +287,36 @@ function transformPreWrappedTwoColumns(rawStatementHtml, num) {
 
   const left = innerDivs[0];
   const prefix = `${num}) `;
-  const leftText = (left.textContent || '').trim();
-  if (!/^\d+\)\s/.test(leftText)) {
-    const span = (outer.ownerDocument || document).createElement('span');
-    span.textContent = prefix;
-    left.insertBefore(span, left.firstChild);
+  // Clean leading numbering/whitespace in the outer left div so we don't duplicate
+  try {
+    while (left.firstChild && left.firstChild.nodeType === Node.TEXT_NODE) {
+      const txt = left.firstChild.textContent || '';
+      if (!txt.trim()) { left.removeChild(left.firstChild); continue; }
+      if (/^\s*\d+\)\s*/.test(txt)) { left.removeChild(left.firstChild); continue; }
+      break;
+    }
+  } catch (_) { /* ignore */ }
+
+  // Choose the actual content container (prefer a single inner div if present)
+  let target = left;
+  try {
+    // Skip leading whitespace-only text for accurate child count
+    while (target.firstChild && target.firstChild.nodeType === Node.TEXT_NODE && !target.firstChild.textContent.trim()) {
+      target.removeChild(target.firstChild);
+    }
+    if (target.childNodes && target.childNodes.length >= 1 && target.firstElementChild && target.firstElementChild.tagName && target.firstElementChild.tagName.toLowerCase() === 'div') {
+      target = target.firstElementChild;
+    }
+  } catch (_) { /* ignore */ }
+
+  // If the target already starts with a numbering, do nothing; else insert NBSP+NBSP and prefix
+  const existingText = (target.textContent || '').trim();
+  if (!/^\d+\)\s/.test(existingText)) {
+    const nbspNode = (outer.ownerDocument || document).createTextNode('\u00A0');
+    const prefixNode = (outer.ownerDocument || document).createTextNode(prefix);
+    target.insertBefore(nbspNode, target.firstChild);
+    target.insertBefore(prefixNode, target.firstChild);
+    
   }
   left.setAttribute('id', `question-${num}`);
 
@@ -330,7 +356,34 @@ function buildLeftColumnHtml(rawStatementHtml, num, leftColStyle) {
       // fallthrough to simple wrapper
     }
   }
-  // Fallback simple wrapper
+  // Fallbacks when statement_html is not a flex wrapper
+  try {
+    const temp = document.createElement('div');
+    temp.innerHTML = (rawStatementHtml || '').trim();
+    const only = temp.firstElementChild;
+    if (only && only.tagName && only.tagName.toLowerCase() === 'div') {
+      // Ensure it's not already a flex container
+      const st = (only.getAttribute('style') || '').replace(/\s+/g, ' ').trim();
+      const isFlex = /display:\s*flex/i.test(st);
+      if (!isFlex) {
+        // Inject numbering inside the inner div, then apply id and merge style
+        const text = (only.textContent || '').trim();
+        if (!/^\d+\)\s/.test(text)) {
+          const prefixNode = document.createTextNode(`${num}) `);
+          const nbspNode = document.createTextNode('\u00A0\u00A0');
+          only.insertBefore(prefixNode, only.firstChild);
+          only.insertBefore(nbspNode, only.firstChild.nextSibling);
+        }
+        // id and style
+        only.setAttribute('id', `question-${num}`);
+        const mergedStyle = st ? `${st}; ${leftColStyle}` : leftColStyle;
+        only.setAttribute('style', mergedStyle);
+        return only.outerHTML;
+      }
+    }
+  } catch (_) { /* ignore */ }
+
+  // Last-resort simple wrapper
   return `<div id='question-${num}' style='${leftColStyle}'>${num}) ${rawStatementHtml}</div>`;
 }
 
@@ -352,14 +405,16 @@ function inlineSvgStylesBasedOnCssRules(svgString) {
     const svg = doc.querySelector('svg');
     if (!svg) return svgString;
 
-    // svg element styles
+    // svg element styles: lock to attribute dimensions to avoid responsive rescaling
     try {
       const s = svg.style;
       if (s) {
-        if (!s.display) s.display = 'block';
-        if (!s.maxWidth) s.maxWidth = '100%';
-        // Keep height:auto for layout parity even if width/height attrs exist
-        if (!s.height) s.height = 'auto';
+        const attrW = svg.getAttribute('width');
+        const attrH = svg.getAttribute('height');
+        if (attrW) s.width = /px$/.test(attrW) ? attrW : `${parseInt(attrW, 10)}px`;
+        if (attrH) s.height = /px$/.test(attrH) ? attrH : `${parseInt(attrH, 10)}px`;
+        // Do not set max-width/height:auto; force fixed sizing
+        if (s.maxWidth) s.maxWidth = '';
       }
     } catch (_) {}
 
@@ -368,11 +423,16 @@ function inlineSvgStylesBasedOnCssRules(svgString) {
     foreignObjects.forEach((fo) => {
       try {
         fo.style.overflow = 'visible';
-        // foreignObject > div
+        // Lock foreignObject to its attribute width/height in px
+        const foW = fo.getAttribute('width');
+        const foH = fo.getAttribute('height');
+        if (foW) fo.style.width = /px$/.test(foW) ? foW : `${parseInt(foW, 10)}px`;
+        if (foH) fo.style.height = /px$/.test(foH) ? foH : `${parseInt(foH, 10)}px`;
+        // foreignObject > div content should fill its box
         const div = fo.querySelector(':scope > div');
         if (div && div.style) {
-          if (!div.style.width) div.style.width = '100%';
-          if (!div.style.height) div.style.height = '100%';
+          div.style.width = '100%';
+          div.style.height = '100%';
           if (!div.style.display) div.style.display = 'flex';
           if (!div.style.alignItems) div.style.alignItems = 'center';
           if (!div.style.justifyContent) div.style.justifyContent = 'center';
@@ -385,9 +445,8 @@ function inlineSvgStylesBasedOnCssRules(svgString) {
     svgLatexNodes.forEach((node) => {
       try {
         const st = node.style;
-        if (!st.fontSize) st.fontSize = '14px';
-        if (!st.lineHeight) st.lineHeight = '1.2';
         if (!st.textAlign) st.textAlign = 'center';
+        // font-size will be set by size utility classes below; avoid forcing 14px
       } catch (_) {}
     });
     // .svg-latex .katex
@@ -396,7 +455,7 @@ function inlineSvgStylesBasedOnCssRules(svgString) {
       try { if (!node.style.fontSize) node.style.fontSize = 'inherit'; } catch (_) {}
     });
 
-    // Text size utility classes
+    // Text size utility classes (keep rem so re-render environments can scale consistently)
     const map = [
       { sel: '.text-sm', fs: '0.875rem', lh: '1.25rem' },
       { sel: '.text-xs', fs: '0.75rem', lh: '1rem' },
@@ -412,6 +471,40 @@ function inlineSvgStylesBasedOnCssRules(svgString) {
       });
     }
 
+    const serializer = new XMLSerializer();
+    return serializer.serializeToString(svg);
+  } catch (_) {
+    return svgString;
+  }
+}
+
+/**
+ * Ensure KaTeX_Math font-face is present inside the SVG <style> so math glyph metrics
+ * are stable regardless of page CSS. Accepts an SVG string and returns updated string.
+ */
+function ensureKatexFontFaceInSvg(svgString) {
+  try {
+    if (!svgString) return svgString;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(svgString, 'image/svg+xml');
+    const svg = doc.querySelector('svg');
+    if (!svg) return svgString;
+
+    const hasKatexFace = /font-family:\s*'KaTeX_Math'/.test(svgString) || /@font-face\s*\{[^}]*KaTeX_Math/i.test(svgString);
+    if (hasKatexFace) {
+      const serializer = new XMLSerializer();
+      return serializer.serializeToString(svg);
+    }
+
+    // Inject minimal @font-face using the same data URL as ui.js (cached globally when prerender ran)
+    const styleEl = doc.createElementNS('http://www.w3.org/2000/svg', 'style');
+    const dataUrl = window?._katexMathItalicDataUrl || '';
+    styleEl.textContent = `
+@font-face { font-family: 'KaTeX_Math'; font-style: italic; src: url('${dataUrl}') format('woff2'); font-display: swap; }
+.katex { font-family: 'KaTeX_Math', 'KaTeX_Main', serif; }
+.katex * { font-family: inherit !important; }
+`;
+    svg.insertBefore(styleEl, svg.firstChild);
     const serializer = new XMLSerializer();
     return serializer.serializeToString(svg);
   } catch (_) {
@@ -440,7 +533,7 @@ function buildSingleDivWithIdAndNumber(rawStatementHtml, num) {
     const text = (only.textContent || '').trim();
     if (!/^\d+\)\s/.test(text)) {
       const span = document.createElement('span');
-      span.textContent = prefix;
+      span.innerHTML = prefix + '&nbsp;&nbsp;';
       only.insertBefore(span, only.firstChild);
     }
     only.setAttribute('id', `question-${num}`);
