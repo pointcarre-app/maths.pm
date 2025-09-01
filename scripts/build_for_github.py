@@ -190,6 +190,7 @@ async def build_static_site():
         routes.extend(
             [
                 "/",  # CRITICAL - Main index
+                "/ressources",
                 "/readme",
                 "/settings",
                 "/kill-service-workers",

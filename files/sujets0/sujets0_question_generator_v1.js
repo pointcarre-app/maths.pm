@@ -7,6 +7,9 @@
 // At the very top:
 window.delayMathRendering = true;
 
+
+// TODO : create config.js like in /sujets0-data-only/config.js
+
 console.log("🎯 Sujets0 Question Generator loading...");
 
 // Write a function to extract the config from the URL query parameters

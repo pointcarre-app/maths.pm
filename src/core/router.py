@@ -30,6 +30,30 @@ from typing import Any
 import orjson
 
 
+# Create sujets0 router
+core_router = APIRouter(tags=["core"])
+
+
+@core_router.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    """Main page - displays all resources for the current domain"""
+    products_for_template = [p.to_template_context() for p in settings.products]
+    return settings.templates.TemplateResponse(
+        "index.html",
+        {"request": request, "page": {"title": "Homepage"}, "products": products_for_template},
+    )
+
+
+@core_router.get("/ressources", response_class=HTMLResponse)
+async def ressources(request: Request):
+    """Main page - displays all resources for the current domain"""
+    products_for_template = [p.to_template_context() for p in settings.products]
+    return settings.templates.TemplateResponse(
+        "ressources.html",
+        {"request": request, "page": {"title": "Homepage"}, "products": products_for_template},
+    )
+
+
 class ORJSONPrettyResponse(JSONResponse):
     def render(self, content: Any) -> bytes:
         return orjson.dumps(
@@ -37,9 +61,6 @@ class ORJSONPrettyResponse(JSONResponse):
             option=orjson.OPT_NON_STR_KEYS | orjson.OPT_SERIALIZE_NUMPY | orjson.OPT_INDENT_2,
         )
 
-
-# Create sujets0 router
-core_router = APIRouter(tags=["core"])
 
 # Product configuration is already logged in settings.py
 
@@ -68,16 +89,6 @@ async def get_pm_root(request: Request):
         "tree": tree,
     }
     return settings.templates.TemplateResponse("pm/dir.html", context)
-
-
-@core_router.get("/", response_class=HTMLResponse)
-async def index(request: Request):
-    """Main page - displays all resources for the current domain"""
-    products_for_template = [p.to_template_context() for p in settings.products]
-    return settings.templates.TemplateResponse(
-        "index.html",
-        {"request": request, "page": {"title": "Homepage"}, "products": products_for_template},
-    )
 
 
 # TODO : only when starting the app

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Define the paths where the button should be in outline mode
     const activeOnPaths = [
-        '/',           // Root/home page
+        // '/',           // Root/home page
         '/ressources'  // Resources page
     ];
     

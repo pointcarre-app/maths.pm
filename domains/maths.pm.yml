@@ -151,7 +151,7 @@ templating:
   footer_template: "domains/maths-pm/footers.html"
   navbar_title: "Maths.pm"
   button_primary_text: "Ressources"
-  button_primary_href: "/"
+  button_primary_href: "/ressources"
   button_ghost_text: "Contact"
   button_ghost_href: "/contact"
 

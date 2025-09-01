@@ -112,20 +112,17 @@
 
     {% include "sujets0/drawer.html" %}
 
-    <main class="container mx-auto">
+    <main class="mx-auto">
       {% block content %}
       {% endblock content %}
     </main>
 
-
     <!-- Navbar active state management -->
     <script src="{{ request.url_for('static', path='js/navbar-active-state.js') }}"></script>
 
-
     {% block footers %}
-      {% include "domains/maths-pm/footers.html" %}
+      {% include  DOMAIN_CONFIG['templating']['footer_template'] %}
     {% endblock footers %}
-
 
   </body>
 </html>

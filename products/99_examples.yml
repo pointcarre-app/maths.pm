@@ -1,4 +1,5 @@
 name: examples
+hidden: true
 title_html: Examples & Documentation
 subtitle_html: Interactive examples and test cases
 description: "Collection of examples demonstrating various PM fragment features, including i-radio interactive questions."
