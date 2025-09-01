@@ -167,16 +167,21 @@
         // Build the target URL - adapt based on hosting environment
         const baseUrl = `${window.location.protocol}//${window.location.host}`;
 
-        // Check if we're on GitHub Pages (.github.io domain)
-        const isGitHubPages = window.location.hostname.includes('.github.io');
+        // Check deployment environment
+        const hostname = window.location.hostname;
+        const isLegacyGitHubPages = hostname.includes('.github.io');
+        const isProduction = hostname === 'maths.pm' || isLegacyGitHubPages;
 
         // Construct the appropriate path based on hosting environment
         let targetPath;
-        if (isGitHubPages) {
-            // GitHub Pages: include /maths.pm prefix and use .html extension
+        if (isLegacyGitHubPages) {
+            // Legacy GitHub Pages: include /maths.pm prefix and use .html extension
             targetPath = `/maths.pm/pm/sujets0/a_generate.html`;
+        } else if (isProduction) {
+            // Production (maths.pm): direct path with .html extension
+            targetPath = `/pm/sujets0/a_generate.html`;
         } else {
-            // Local/other hosting: direct path with .md extension
+            // Local development: direct path with .md extension
             targetPath = `/pm/sujets0/a_generate.md`;
         }
 
