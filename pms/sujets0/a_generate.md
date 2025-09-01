@@ -3,9 +3,8 @@
 
 # Bac de 1<sup>ère</sup> - Première partie - Automatismes
 
-Générer des questions similaires mais avec des valeurs différentes, ainsi qu'une table de correction.
+Générer des séries de copies avec les mêmes questions inspirées des sujets 0 du ministèren mais avec des valeurs différentes. Un tableau de corrigés pour l'enseignant est inclus.
 {: .pm-subtitle}
-
 
 
 ```yaml
