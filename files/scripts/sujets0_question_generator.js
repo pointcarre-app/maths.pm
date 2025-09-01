@@ -1148,7 +1148,7 @@ class PMFragmentGenerator {
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
-    const allClasses = [...classes, "text-xl", "mb-4"];
+    const allClasses = [...classes, "text-xl", "mb-4" , 'pt-2',  'border-top-1', 'border-base-300'];
     return {
       f_type: { value: "h2_" },
       html: content,

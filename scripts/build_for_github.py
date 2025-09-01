@@ -182,6 +182,7 @@ async def build_static_site():
         routes.extend(
             [
                 "/sujets0",
+                "/sujets0-form",
                 "/corsica/",
                 "/nagini",
             ]
