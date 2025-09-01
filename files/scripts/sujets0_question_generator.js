@@ -1008,33 +1008,40 @@ function populateTableOfContents() {
 
   let linkCount = 0;
 
-  // First, add the teacher table if it exists
+  // Always add the teacher table link (since it's always printed)
   const teacherTable = document.querySelector("#teacher-answer-table");
-  if (teacherTable) {
-    const linkElement = document.createElement("div");
-    linkElement.className = "toc-link-wrapper";
-    linkElement.innerHTML = `
+  const linkElement = document.createElement("div");
+  linkElement.className = "toc-link-wrapper";
+  linkElement.innerHTML = `
             <a href="#teacher-answer-table" class="toc-link block px-2 py-1 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded transition-colors duration-150 border-l-2 border-transparent hover:border-blue-300">
                 Corrigé Enseignant
             </a>
         `;
 
-    tocLinksContainer.appendChild(linkElement);
-    linkCount++;
+  tocLinksContainer.appendChild(linkElement);
+  linkCount++;
 
-    // Add smooth scroll behavior to the link
-    const link = linkElement.querySelector("a");
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
+  // Add smooth scroll behavior to the link
+  const link = linkElement.querySelector("a");
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    // If the table exists, scroll to it, otherwise scroll to top
+    if (teacherTable) {
       teacherTable.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
+    } else {
+      // Fallback: scroll to top of page if table not found
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
 
-      // Update URL hash without jumping
-      history.pushState(null, null, "#teacher-answer-table");
-    });
-  }
+    // Update URL hash without jumping
+    history.pushState(null, null, "#teacher-answer-table");
+  });
 
   // Then, find all H2 elements that were generated as fragments
   const h2Elements = document.querySelectorAll(
