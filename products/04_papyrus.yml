@@ -1,4 +1,5 @@
 name: papyrus
+hidden: true    
 product_type: "repo"
 title_html: Papyrus
 subtitle_html: PDF builder for math content
