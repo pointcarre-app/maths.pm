@@ -811,6 +811,12 @@ function addPrintStyles() {
                 display: none !important;
             }
             
+            /* Hide the native disclosure triangle for print */
+            .teacher-answer-details summary::-webkit-details-marker,
+            .teacher-answer-details summary::marker {
+                display: none !important;
+            }
+            
             /* Preserve flex layouts for print - keep question and graph side by side */
             .fragment-wrapper[data-f_type="p_"] div[style*="display: flex"] {
                 display: flex !important;
@@ -846,6 +852,53 @@ function addPrintStyles() {
     `;
     
     document.head.appendChild(printStyles);
+}
+
+// Add screen styles for the details/summary animation
+function addScreenStyles() {
+    const existingStyles = document.querySelector('#sujets0-screen-styles');
+    if (existingStyles) return;
+    
+    const screenStyles = document.createElement('style');
+    screenStyles.id = 'sujets0-screen-styles';
+    screenStyles.textContent = `
+        /* Teacher answer details styling */
+        .teacher-answer-details summary {
+            position: relative;
+            list-style: none;
+            padding-left: 1.5rem;
+            transition: color 0.2s ease;
+        }
+        
+        /* Hide default browser markers */
+        .teacher-answer-details summary::-webkit-details-marker,
+        .teacher-answer-details summary::marker {
+            display: none;
+        }
+        
+        /* Custom arrow */
+        .teacher-answer-details summary::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 0.875rem;
+            transition: transform 0.3s ease;
+            transform-origin: center;
+        }
+        
+        /* Rotate arrow when open */
+        .teacher-answer-details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        
+        /* Hover effects */
+        .teacher-answer-details summary:hover::before {
+            color: #4b5563;
+        }
+    `;
+    
+    document.head.appendChild(screenStyles);
 }
 
 // Table of Contents functionality
@@ -1160,8 +1213,8 @@ function generateFragmentsFromResults(results) {
     let tableHtml = `
         <div id="teacher-answer-table">
             <details class="teacher-answer-details">
-                <summary class="text-lg font-semibold mb-3 text-gray-800 cursor-pointer hover:text-gray-600 flex items-center gap-2">
-                    <span class="text-sm">▶</span> Corrigé Enseignant
+                <summary class="text-lg mb-3 text-gray-800 cursor-pointer hover:text-gray-600 select-none">
+                    Corrigé Enseignant
                 </summary>
                 <div class="mt-3">
                     <table class="table table-zebra w-full border border-gray-300">
@@ -1398,6 +1451,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const progressEl = loadingDiv.querySelector('#loading-progress');
     
     try {
+        // Add screen styles for details/summary animation
+        addScreenStyles();
+        
         // Initialize core components
         progressEl.textContent = '📦 Chargement de Nagini...';
         const naginiReady = await loadNagini();
