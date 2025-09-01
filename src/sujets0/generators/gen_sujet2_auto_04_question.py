@@ -12,15 +12,13 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     gen = tg.MathsGenerator(seed)
 
     p0 = gen.random_integer(1, 10) * tm.Integer(n=10)
-    direction = gen.random_element_from([-1,1])
+    direction = gen.random_element_from([-1, 1])
     x = (gen.random_integer(1, 9) * tm.Integer(n=10)) / tm.Integer(n=100)
-    
-    direction = tm.Integer(n=direction)
 
+    direction = tm.Integer(n=direction)
 
     p1 = (tm.Integer(n=1) + direction * x) * p0
 
-        
     p0 = p0.simplified()
     x = x.simplified()
     p1 = p1.simplified()
@@ -56,16 +54,14 @@ def render_question(*, p0, p1, direction, x):
     'Suite à une augmentation de $10 \\\\%$, un article coûte $77$ euros. Quel était son prix initial ?'
     """
 
-    literal_direction = {
-        -1: "diminution",
-        1: "augmentation"
-    }
-
+    literal_direction = {-1: "diminution", 1: "augmentation"}
 
     statement = f"Suite à une {literal_direction[direction.n]} de ${x.as_percent.latex()} \\%$, un article coûte ${p1.latex()}$ euros. Quel était son prix initial ?"
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -81,6 +77,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-4]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

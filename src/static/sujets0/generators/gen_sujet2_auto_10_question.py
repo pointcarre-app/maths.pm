@@ -18,7 +18,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
         a = gen.random_integer(-9, 9)
         b = gen.random_integer(-9, 9)
         c = gen.random_integer(-9, 9)
-    
+
     x = tm.Symbol(s="x")
     x0 = gen.random_integer(-9, 9)
 
@@ -57,11 +57,12 @@ def render_question(*, x, x0, f, a, b, c):
 
     expr = a * x ** tm.Integer(n=2) + b * x + c
 
-
     statement = f"On définit la function ${f.latex()}$ par ${f(x).latex()}={expr.latex()}$. Calculer l'image de ${x0.latex()}$ par ${f.latex()}$."
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -77,6 +78,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

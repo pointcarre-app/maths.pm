@@ -14,7 +14,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     x = gen.random_integer(1, 99) * tm.Integer(n=10)
     x = x.simplified()
 
-    factor = gen.random_integer(1,9) * tm.Integer(n=100)
+    factor = gen.random_integer(1, 9) * tm.Integer(n=100)
     factor = factor.simplified()
     factor = tm.Integer(n=1000) / factor
 
@@ -51,9 +51,11 @@ def render_question(*, x, factor):
     mass = mass.simplified().as_decimal
 
     statement = f"On considère un liquide pour lequel 1L pèse {mass.latex()} g. Combien pèse {x.latex()} mL de ce liquide ?"
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -66,6 +68,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-8]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

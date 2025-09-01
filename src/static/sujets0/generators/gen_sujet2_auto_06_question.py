@@ -53,8 +53,10 @@ def render_question(*, x1, y1, x2, y2):
     """
 
     statement = f"Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A({x1.latex()};{y1.latex()})$ et $B({x2.latex()};{y2.latex()})$. Calculer le coefficient directeur de la droite $d$."
+    statement_html = f"<div>{statement}</div>"
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -67,6 +69,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

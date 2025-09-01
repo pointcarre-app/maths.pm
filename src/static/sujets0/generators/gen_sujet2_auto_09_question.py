@@ -15,7 +15,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     h = tm.Symbol(s="h")
     expr = tm.Equality(
         l=v,
-        r=tm.Fraction(p=1, q=3) * tm.Pi() * r**tm.Integer(n=2) * h,
+        r=tm.Fraction(p=1, q=3) * tm.Pi() * r ** tm.Integer(n=2) * h,
     )
     # expr = tm.Equality(l=a, r=tm.Fraction(p=tm.Pow(base=v, exp=tm.Integer(n=2)), q=r))
 
@@ -47,8 +47,10 @@ def render_question(*, v, h, r, expr):
     """
 
     statement = f"Le volume ${v.latex()}$ d'un cône de hauteur ${h.latex()}$ et de rayon ${r.latex()}$ est ${expr.latex()}$. Isoler $h$."
+    statement_html = f"<div>{statement}</div>"
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -61,6 +63,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-9]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

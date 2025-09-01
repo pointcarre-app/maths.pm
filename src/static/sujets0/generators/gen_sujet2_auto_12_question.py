@@ -11,7 +11,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     gen = tg.MathsGenerator(seed)
 
-    center = gen.random_integer(-50, 50) 
+    center = gen.random_integer(-50, 50)
 
     disp_low = gen.random_integer(0, 9)
     disp_high = gen.random_integer(10, 50)
@@ -20,10 +20,8 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     l_high = [center - disp_high, center, center, center + disp_high]
     l_low = [e.simplified() for e in l_low]
     l_high = [e.simplified() for e in l_high]
-    
+
     ix = gen.random_element_from([0, 1])
-
-
 
     if ix == 0:
         a = tm.MathsCollection(elements=l_low)
@@ -31,7 +29,6 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     else:
         a = tm.MathsCollection(elements=l_high)
         b = tm.MathsCollection(elements=l_low)
-
 
     return {
         "center": center,
@@ -51,7 +48,7 @@ def solve(*, center, disp_low, disp_high, a, b):
     >>> answer["maths_object"].simplified()
     Symbol(s='A')
     """
-    if a[0].n < b[0].n :
+    if a[0].n < b[0].n:
         maths_object = tm.Symbol(s="A")
     else:
         maths_object = tm.Symbol(s="B")
@@ -66,13 +63,15 @@ def render_question(*, center, disp_low, disp_high, a, b):
     'On considère les deux séries $A=-13 ; -1 ; -1 ; 11$  et $B=-7 ; -1 ; -1 ; 5$. Quelle est celle avec le plus grand écart type ?'
     """
 
-    a_latex= " ; ".join(e.latex() for e in a.elements)
-    b_latex= " ; ".join(e.latex() for e in b.elements)
+    a_latex = " ; ".join(e.latex() for e in a.elements)
+    b_latex = " ; ".join(e.latex() for e in b.elements)
 
     statement = f"On considère les deux séries $A={a_latex}$  et $B={b_latex}$. Quelle est celle avec le plus grand écart type ?"
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -88,6 +87,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),
@@ -95,7 +95,6 @@ missive(
             "formal_repr": repr(answer["maths_object"]),
         },
         "components": {
-            
             "a": components["a"].latex(),
             "b": components["b"].latex(),
             "center": components["center"].latex(),

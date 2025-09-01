@@ -12,7 +12,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """
     gen = tg.MathsGenerator(seed)
 
-    a = gen.random_integer(-50, 50) / gen.random_integer(1, 10) 
+    a = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
     b = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
     c = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
 
@@ -51,10 +51,11 @@ def render_question(*, a, b, c, expr):
     'Calculer $-\\\\dfrac{1}{7} -9\\\\dfrac{15}{8}$.'
     """
 
-
     statement = f"Calculer ${expr.latex()}$."
+    statement_html = f"<div>{statement}</div>"
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -78,6 +79,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "mask": "",
         "answer": {
             "latex": answer["maths_object"].latex(),
@@ -92,5 +94,3 @@ missive(
         },
     }
 )
-
-

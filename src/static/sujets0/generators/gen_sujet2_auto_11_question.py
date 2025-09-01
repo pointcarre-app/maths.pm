@@ -16,12 +16,12 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     a = tm.Integer(n=0)
 
-    while a.n == 0 :
+    while a.n == 0:
         a = gen.random_integer(-9, 9)
 
-    x = tm.Symbol(s='x')
+    x = tm.Symbol(s="x")
 
-    b = - a * (x1 + x2)
+    b = -a * (x1 + x2)
     b = b.simplified()
 
     c = a * x1 * x2
@@ -65,9 +65,11 @@ def render_question(*, a, b, c, x, x1, x2, f, expr):
     """
 
     statement = f"Soit ${f.latex()}$ une fonction définie sur $\\mathbb{{R}}$ par ${f.latex()}({x.latex()}) = {expr.latex()}$. Parmis la série A: -2; -1, 0, 1, 2, quel est l'antécédent de 0 par la fonction $f$ ?"
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -83,6 +85,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-11]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

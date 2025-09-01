@@ -33,7 +33,7 @@ def solve(*, n1, n2, p):
     >>> answer["maths_object"].simplified()
     Fraction(p=Integer(n=657), q=Integer(n=5))
     """
-    maths_object = (p * n2)
+    maths_object = p * n2
     return {
         "maths_object": maths_object,
     }
@@ -49,10 +49,14 @@ def render_question(*, n1, n2, p):
 
     p1 = (p * n1).simplified().as_decimal
 
-    statement = f"{n1.latex()} articles coûtent {p1.latex()} euros. Combien coûtent {n2.latex()} articles ?"
+    statement = (
+        f"{n1.latex()} articles coûtent {p1.latex()} euros. Combien coûtent {n2.latex()} articles ?"
+    )
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -68,6 +72,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

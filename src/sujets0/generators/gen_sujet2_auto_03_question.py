@@ -27,7 +27,7 @@ def solve(*, n):
     >>> answer["maths_object"].simplified()
     Integer(n=400)
     """
-    maths_object = (n-tm.Integer(n=1)).simplified().as_percent
+    maths_object = (n - tm.Integer(n=1)).simplified().as_percent
     return {
         "maths_object": maths_object,
     }
@@ -48,11 +48,14 @@ def render_question(*, n):
         5: "quintuplé",
     }
 
-
-    statement = f"Le prix d'un article a {literal_n[n.n]}. De combien a-t-il augmenté en pourcentage ?"
+    statement = (
+        f"Le prix d'un article a {literal_n[n.n]}. De combien a-t-il augmenté en pourcentage ?"
+    )
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -68,6 +71,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-3]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),
