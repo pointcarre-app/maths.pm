@@ -1,5 +1,6 @@
 name: jupyterlite
 title_html: JupyterLite
+# hidden: true
 # is_hidden: true
 is_beta: true
 subtitle_html: Environnement de calcul interactif

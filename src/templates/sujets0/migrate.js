@@ -99,7 +99,7 @@
                             <tr><td class="font-mono w-32 align-top">Beacon (from question script)</td><td class="align-top">${
                                 question.beacon
                             }</td></tr>
-                            <tr><td class="font-mono w-32 align-top">ID</td><td class="font-mono text-xs align-top">${
+                            <tr><td class="font-mono w-32 align-top">n°copie-seed-n°q°</td><td class="font-mono text-xs align-top">${
                                 question.id
                             }</td></tr>
                             <tr><td colspan="2" class="font-mono w-32 align-top text-right bg-primary/10">Question data</td></tr>

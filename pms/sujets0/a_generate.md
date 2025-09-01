@@ -10,5 +10,5 @@ Générer des séries de copies avec les mêmes questions inspirées des sujets 
 ```yaml
 fType: script_module_
 type: module
-src: files/scripts/sujets0_question_generator.js
+src: files/sujets0/sujets0_question_generator_v1.js
 ```
