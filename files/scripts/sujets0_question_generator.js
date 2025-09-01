@@ -1257,7 +1257,7 @@ async function executeAllGenerators() {
   const questionResults = [];
 
   for (let studentNum = 1; studentNum <= CONFIG.nbStudents; studentNum++) {
-    const seed = CONFIG.rootSeed + studentNum;
+    const seed = CONFIG.rootSeed + studentNum * Math.floor(Math.random() * 137);
 
     let generatorNum = 1;
     for (const generator of selectedGenerators) {
