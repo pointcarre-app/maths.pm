@@ -1,8 +1,18 @@
 #!/usr/bin/env python3
 """
-GitHub Pages static site builder with HARDCODED routes.
+Static site builder with HARDCODED routes for multiple deployment targets.
 This script explicitly builds ALL routes to ensure nothing is missed.
-Specifically designed for deployment to https://pointcarre-app.github.io/maths.pm/
+
+Deployment targets:
+- Modern (maths.pm): Clean URLs without /maths.pm prefix (DEFAULT)
+- Legacy GitHub Pages: https://pointcarre-app.github.io/maths.pm/ (set LEGACY_GITHUB_PAGES=true)
+
+Usage:
+  # For modern deployment (maths.pm) - DEFAULT
+  python scripts/build_for_github.py
+
+  # For legacy GitHub Pages (pointcarre-app.github.io/maths.pm)
+  LEGACY_GITHUB_PAGES=true python scripts/build_for_github.py
 """
 
 import asyncio
@@ -34,7 +44,7 @@ def run_server():
         sys.exit(1)
 
 
-async def fetch_and_save(client, route, output_dir, base_path="/maths.pm"):
+async def fetch_and_save(client, route, output_dir, base_path="/maths.pm", modern_paths=False):
     """Fetch a route and save it to disk with proper path conversion"""
     try:
         url = f"http://127.0.0.1:8000{route}"
@@ -78,8 +88,9 @@ async def fetch_and_save(client, route, output_dir, base_path="/maths.pm"):
             content = content.replace("https://127.0.0.1:8000/", "/")
             content = content.replace("https://localhost:8000/", "/")
 
-            # Fix all absolute paths to include base_path
-            if base_path:
+            # Fix all absolute paths to include base_path (only for legacy GitHub Pages)
+            if base_path and not modern_paths:
+                # Legacy GitHub Pages deployment: add /maths.pm prefix
                 content = content.replace('href="/', f'href="{base_path}/')
                 content = content.replace("href='/", f"href='{base_path}/")
                 content = content.replace('src="/', f'src="{base_path}/')
@@ -93,6 +104,8 @@ async def fetch_and_save(client, route, output_dir, base_path="/maths.pm"):
                 content = content.replace('from "/static/', f'from "{base_path}/static/')
                 content = content.replace("from '@js/", f"from '{base_path}/static/js/")
                 content = content.replace('from "@js/', f'from "{base_path}/static/js/')
+            # Modern deployment (maths.pm): keep original paths
+            # No transformations needed - paths stay as /sujets0-form, /static/css/main.css, etc.
 
             # Convert PM links from .md to .html and remove ?format=html
             # This ensures links work in the static site
@@ -117,6 +130,24 @@ async def build_static_site():
     """Build the static site with ALL routes hardcoded"""
 
     output_dir = Path("dist")
+
+    # Detect deployment type
+    # DEFAULT: GitHub Pages with custom domain (maths.pm) - no /maths.pm prefix needed
+    # LEGACY: Old GitHub Pages format (pointcarre-app.github.io/maths.pm) - needs /maths.pm prefix
+    import os
+
+    legacy_github_pages = os.environ.get("LEGACY_GITHUB_PAGES", "false").lower() == "true"
+
+    if legacy_github_pages:
+        logger.info(
+            "📄 Legacy GitHub Pages deployment (pointcarre-app.github.io/maths.pm) - applying /maths.pm path transformations"
+        )
+        base_path = "/maths.pm"
+        use_legacy_paths = True
+    else:
+        logger.info("🌐 Modern deployment (maths.pm) - using clean paths without /maths.pm prefix")
+        base_path = ""  # No base path for modern deployment
+        use_legacy_paths = False
 
     # Clean and create output directory
     if output_dir.exists():
@@ -227,7 +258,9 @@ async def build_static_site():
         # Fetch all routes
         results = []
         for route in routes:
-            success = await fetch_and_save(client, route, output_dir)
+            success = await fetch_and_save(
+                client, route, output_dir, base_path, not use_legacy_paths
+            )
             results.append({"route": route, "success": success})
 
         # Copy static files DIRECTLY
