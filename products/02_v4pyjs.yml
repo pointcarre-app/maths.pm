@@ -1,4 +1,5 @@
 name: v4pyjs
+hidden: true
 product_type: "repo"
 title_html: v4.py.js
 subtitle_html: KaTeX-compatible SVG from Python/JS
