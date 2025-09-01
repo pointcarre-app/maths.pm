@@ -556,8 +556,8 @@ function addPrintButton(container) {
     const tocContainer = document.createElement('div');
     tocContainer.className = 'toc-container w-full mb-4 print-hide';
     tocContainer.innerHTML = `
+        <h3 class="text-lg font-semibold mb-3 text-gray-800">📑 Sommaire</h3>
         <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
-            <h3 class="text-sm font-semibold text-gray-700 mb-2">📑 Sommaire</h3>
             <div id="toc-links" class="max-h-[300px] overflow-y-auto space-y-1">
                 <div class="text-xs text-gray-500 italic">Le sommaire sera généré après le chargement des questions...</div>
             </div>
@@ -582,6 +582,15 @@ function handlePrint() {
         pmContainer.classList.add('print-target');
     }
     
+    // Force open teacher details for printing
+    const teacherDetails = document.querySelector('.teacher-answer-details');
+    const wasOpen = teacherDetails ? teacherDetails.open : false;
+    
+    if (teacherDetails && !wasOpen) {
+        teacherDetails.open = true;
+        console.log('🖨️ Temporarily opened teacher details for printing');
+    }
+    
     // Try to use the modern print API with no margins
     if (window.navigator && window.navigator.userAgent.includes('Chrome')) {
         // For Chrome, we can try to influence print settings via CSS
@@ -596,6 +605,12 @@ function handlePrint() {
     setTimeout(() => {
         if (pmContainer) {
             pmContainer.classList.remove('print-target');
+        }
+        
+        // Restore original details state
+        if (teacherDetails && !wasOpen) {
+            teacherDetails.open = false;
+            console.log('🖨️ Restored teacher details to closed state');
         }
     }, 1000);
 }
@@ -658,25 +673,66 @@ function addPrintStyles() {
                 page-break-before: always;
             }
             
-            /* Keep header and first content together */
+            /* Keep header and teacher table together - more specific targeting */
             .fragment-wrapper:first-child,
             .fragment-wrapper:first-child + .fragment-wrapper,
-            .fragment-wrapper:nth-child(2) {
-                page-break-before: avoid;
-                page-break-after: avoid;
-                page-break-inside: avoid;
+            .fragment-wrapper:nth-child(2),
+            .fragment-wrapper:nth-child(3) {
+                page-break-before: avoid !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
             }
             
-            /* Keep table together with previous content - multiple approaches for browser compatibility */
-            .fragment-wrapper[data-f_type="p_"] table {
+            /* Force teacher answer details to be open when printing */
+            .teacher-answer-details {
+                display: block !important;
+            }
+            
+            .teacher-answer-details summary {
+                display: none !important;
+            }
+            
+            .teacher-answer-details > div {
+                display: block !important;
+                margin-top: 0 !important;
+            }
+            
+            /* Specifically target the teacher answer table to stay with header */
+            #teacher-answer-table,
+            .teacher-table-section,
+            .fragment-wrapper.teacher-table-section,
+            .fragment-wrapper:has(#teacher-answer-table),
+            .fragment-wrapper[data-f_type="p_"]:has(#teacher-answer-table) {
                 page-break-before: avoid !important;
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
             }
             
-            /* Alternative approach: keep first few fragments together */
-            .fragment-wrapper:nth-child(-n+3) {
+            /* Keep table together with previous content - multiple approaches for browser compatibility */
+            .fragment-wrapper[data-f_type="p_"] table,
+            table {
+                page-break-before: avoid !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Force first several fragments to stay together - multiple approaches */
+            .fragment-wrapper:nth-child(-n+4) {
+                page-break-before: avoid !important;
                 page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+            
+            /* Alternative approach: explicitly target the sequence we want together */
+            .fragment-wrapper:first-of-type ~ .fragment-wrapper.teacher-table-section {
+                page-break-before: avoid !important;
+                break-before: avoid !important;
+            }
+            
+            /* Ensure the divider after teacher table doesn't force a break */
+            .fragment-wrapper[data-f_type="hr_"]:nth-child(-n+5) {
+                page-break-before: avoid !important;
+                page-break-after: auto;
             }
             
             /* Avoid breaking inside divisions/questions */
@@ -721,18 +777,38 @@ function addPrintStyles() {
             
             /* Headers */
             h1, .print-target h1 { font-size: 18pt !important; }
-            h2, .print-target h2 { font-size: 16pt !important; }
+            h2, .print-target h2 { foformat: Copy-Seed-Q#nt-size: 16pt !important; }
             h3, .print-target h3 { font-size: 14pt !important; }
             
             /* Math expressions */
             .katex, .print-target .katex {
                 font-size: 12pt !important;
+                color: black;
             }
             
             /* Ensure SVGs scale properly */
             svg {
                 max-width: 100%;
                 height: auto;
+            }
+
+            /* Utilities */
+            .text-primary {
+                color: black;
+            }
+
+            .text-secondary {
+                color: black;
+            }
+
+            .text-accent {
+                color: black;
+            }
+            
+            /* Hide details styling for print */
+            .teacher-answer-details[open] summary::before,
+            .teacher-answer-details summary::before {
+                display: none !important;
             }
             
             /* Preserve flex layouts for print - keep question and graph side by side */
@@ -792,7 +868,7 @@ function populateTableOfContents() {
         linkElement.className = 'toc-link-wrapper';
         linkElement.innerHTML = `
             <a href="#teacher-answer-table" class="toc-link block px-2 py-1 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded transition-colors duration-150 border-l-2 border-transparent hover:border-blue-300">
-                📋 Corrigé Enseignant
+                Corrigé Enseignant
             </a>
         `;
         
@@ -1083,14 +1159,19 @@ function generateFragmentsFromResults(results) {
     // Generate teacher answer table with ID for TOC
     let tableHtml = `
         <div id="teacher-answer-table">
-            <h3 class="text-lg font-semibold mb-3 text-gray-800">📋 Corrigé Enseignant</h3>
-            <table class="table table-zebra w-full border border-gray-300">
+            <details class="teacher-answer-details">
+                <summary class="text-lg font-semibold mb-3 text-gray-800 cursor-pointer hover:text-gray-600 flex items-center gap-2">
+                    <span class="text-sm">▶</span> Corrigé Enseignant
+                </summary>
+                <div class="mt-3">
+                    <table class="table table-zebra w-full border border-gray-300">
                 <thead>
                     <tr class="bg-gray-100">
-                        <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Étudiant</th>
-                        <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Question</th>
-                        <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Réponse LaTeX</th>
-                        <th class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">Réponse Simplifiée</th>
+                        <th class="border border-gray-300 px-3 py-2" style="text-align:left !important; width: 25%; min-width: 200px;">
+                            ID
+                        </th>
+                        <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Réponse</th>
+                        <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Simplifiée</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1109,23 +1190,36 @@ function generateFragmentsFromResults(results) {
         const latexAnswers = formatAnswersForTeacherTable(result, 'latex');
         const simplifiedAnswers = formatAnswersForTeacherTable(result, 'simplified_latex');
         
+        // Create combined column content: [StudentNum]-([seed])-[QuestionNum]<br>generator
+        const studentNum = result.student || 'N/A';
+        const seed = result.seed || 'N/A';
+        const questionNum = result.generatorNum || 'N/A';
+        const generator = result.generator || 'N/A';
+        
+        // Generate the correct URL for the generator file
+        const basePath = getBasePath();
+        const generatorUrl = `${basePath}/static/sujets0/generators/${generator}`;
+        
+        const combinedInfo = `${studentNum}-(${seed})-${questionNum}<br><a href="${generatorUrl}" target="_blank" class="font-mono text-xs text-blue-600 hover:text-base-content underline">${generator}</a>`;
+        
         tableHtml += `
             <tr>
-                <td class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">${result.student || 'N/A'}</td>
-                <td class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">${result.generatorNum || 'N/A'}</td>
-                <td class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">${latexAnswers}</td>
-                <td class="border border-gray-300 px-3 py-2" style="text-align:text-right !important;">${simplifiedAnswers}</td>
+                <td class="border border-gray-300 px-3 py-2" style="text-align:left !important; vertical-align:top !important; line-height:1.3;">${combinedInfo}</td>
+                <td class="border border-gray-300 px-3 py-2" style="text-align:right !important; vertical-align:middle !important;">${latexAnswers}</td>
+                <td class="border border-gray-300 px-3 py-2" style="text-align:right !important; vertical-align:middle !important;">${simplifiedAnswers}</td>
             </tr>
         `;
     });
     
     tableHtml += `
                 </tbody>
-            </table>
+                    </table>
+                </div>
+            </details>
         </div>
     `;
     
-    fragments.push(PMFragmentGenerator.createParagraph(tableHtml));
+    fragments.push(PMFragmentGenerator.createParagraph(tableHtml, ['teacher-table-section']));
     
     // Add separator between teacher section and student copies
     fragments.push(PMFragmentGenerator.createDivider());
@@ -1239,6 +1333,42 @@ function injectFragmentsIntoPM(fragments) {
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('🎯 Sujets0 Question Generator starting...');
     
+    // Force Bolt theme for exercise generation and show toast if needed
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme !== 'bolt') {
+        // Set theme to 'bolt'
+        document.documentElement.setAttribute('data-theme', 'bolt');
+        localStorage.setItem('theme', 'bolt');
+        
+        // Show toast notification
+        setTimeout(() => {
+            showToast('⚡ Le thème Bolt est obligatoire pour l\'impression des exercices', 'info');
+        }, 500);
+        
+        console.log('🎨 Thème forcé à Bolt pour la génération d\'exercices');
+    }
+    
+    // Set up mutation observer to keep theme as 'bolt' during exercise generation
+    const observeTheme = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'data-theme') {
+                const newTheme = document.documentElement.getAttribute('data-theme');
+                if (newTheme !== 'bolt') {
+                    document.documentElement.setAttribute('data-theme', 'bolt');
+                    localStorage.setItem('theme', 'bolt');
+                    showToast('⚡ Le thème Bolt doit rester activé pour l\'impression des exercices', 'warning');
+                    console.log('🎨 Thème forcé à Bolt pour maintenir la génération d\'exercices');
+                }
+            }
+        });
+    });
+    
+    // Start observing theme changes
+    observeTheme.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+    });
+    
     // Find target container (look for existing table or create after current script)
     let targetContainer = document.querySelector('[data-f_type="table_"]');
     if (!targetContainer) {
@@ -1306,6 +1436,25 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log('🎯 Triggering unified LaTeX rendering for all content');
             document.dispatchEvent(new CustomEvent('render-math-now'));
         }, 100);
+        
+        // Add listener for native browser print (Ctrl+P)
+        window.addEventListener('beforeprint', () => {
+            const teacherDetails = document.querySelector('.teacher-answer-details');
+            if (teacherDetails && !teacherDetails.open) {
+                teacherDetails.open = true;
+                teacherDetails.setAttribute('data-was-closed-for-print', 'true');
+                console.log('🖨️ Auto-opened teacher details for native print');
+            }
+        });
+        
+        window.addEventListener('afterprint', () => {
+            const teacherDetails = document.querySelector('.teacher-answer-details');
+            if (teacherDetails && teacherDetails.getAttribute('data-was-closed-for-print')) {
+                teacherDetails.open = false;
+                teacherDetails.removeAttribute('data-was-closed-for-print');
+                console.log('🖨️ Restored teacher details after native print');
+            }
+        });
         
         // Expose for debugging
         window.sujets0Results = results;

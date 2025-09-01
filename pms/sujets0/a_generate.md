@@ -1,7 +1,10 @@
 
 
 
-# Générer des première partie pour le Bac de 1<sup>ère</sup> 
+# Bac de 1<sup>ère</sup> - Première partie - Automatismes
+
+Générer des questions similaires mais avec des valeurs différentes, ainsi qu'une table de correction.
+{: .pm-subtitle}
 
 
 
