@@ -7,7 +7,6 @@
 // At the very top:
 window.delayMathRendering = true;
 
-
 // TODO : create config.js like in /sujets0-data-only/config.js
 
 console.log("🎯 Sujets0 Question Generator loading...");
@@ -599,18 +598,32 @@ function addPrintButton(container) {
   // Create Table of Contents container
   const tocAndPrintButtonContainer = document.createElement("div");
   tocAndPrintButtonContainer.className =
-    "toc-container w-full mb-4 print-hide mt-6 p-2 sm:p-6 bg-base-200";
+    "toc-container w-full mb-4 print-hide mt-6";
   tocAndPrintButtonContainer.innerHTML = `
-    <h3 class="text-lg font-semibold mb-3 text-gray-800">📑 Au sujet de d'impression</h3>
-    <div class="alert alert-info alert-outline">
-        <ul class="list-disc list-inside">
-            <li>Optimisé pour Chrome ✅</li>   
-            <li>Corrigé enseignant inclus 📝</li>
-            <li>Activer les "Graphiques d'arrière-plan" 💡</li>
-            <li>Possibilité d'ajuster les marges  📏</li>
+  <style>
+  .list-sujets0-questions-generator-report li {
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  </style>
+    <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800 mt-6">ℹ️ Au sujet de de la génération</h3>
+    <div class="p-0 mb-7 text-sm">
+        <ul class="list-none list-sujets0-questions-generator-report">
+            <li>📝 Corrigé enseignant inclus</li>
+            <li>🔬 Reproductibilité grâce à la <code>seed</code> <span class="italic">(graîne)</span></li>
         </ul>
     </div>
-    <h3 class="text-lg font-semibold mb-3 text-gray-800 mt-6">📑 Sommaire</h3>
+    <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800">📑 Au sujet de d'impression</h3>
+    <div class="p-0 mb-7 text-sm">
+        <ul class="list-none list-sujets0-questions-generator-report">
+            <li>✅ Optimisé pour Firefox & Chrome</li>   
+            <li>📝 Corrigé enseignant inclus</li>
+            <li>💡 Activer les "Graphiques d'arrière-plan" (ne peut être fait que manuellement)</li>
+            <li>📏 Possibilité d'ajuster les marges (mais normalement non nécessaire)</li>
+            <li>❌ Ne fonctionne pas sur Safari <a class="underline underline-offset-1 hover:underline-offset-4" href="">(malgré toute la bonne volonté du monde)</a></li>
+        </ul>
+    </div>
+    <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800 mt-6">📑 Sommaire</h3>
     <div class="border border-gray-200 rounded-lg p-3">
         <div id="toc-links" class="max-h-[300px] overflow-y-auto space-y-1">
             <div class="text-xs text-gray-500 italic">Le sommaire sera généré après le chargement des questions...</div>
@@ -629,7 +642,9 @@ function addPrintButton(container) {
 </div>`;
   container.appendChild(tocAndPrintButtonContainer);
   // Add click handler
-  const printBtn = tocAndPrintButtonContainer.querySelector("#print-questions-btn");
+  const printBtn = tocAndPrintButtonContainer.querySelector(
+    "#print-questions-btn"
+  );
   printBtn.addEventListener("click", handlePrint);
 }
 
@@ -920,6 +935,86 @@ function addPrintStyles() {
 }
 
 // Add screen styles for the details/summary animation
+// Transform loading indicator to success state
+function transformLoadingToSuccess(loadingDiv, results) {
+  // Update to very light success state using custom ghost color
+  loadingDiv.className = loadingDiv.className
+    .replace("bg-blue-50", "")
+    .replace("border-blue-200", "border-success");
+  
+  // Apply custom soft success background using CSS custom properties
+  loadingDiv.style.backgroundColor = "var(--color-success-ghost, color-mix(in oklab, var(--color-success) 8%, var(--color-base-100)))";
+
+  // Get references to elements
+  const spinner = loadingDiv.querySelector("#loading-spinner");
+  const message = loadingDiv.querySelector("#loading-message");
+  const progress = loadingDiv.querySelector("#loading-progress");
+
+  // Replace spinner with success icon
+  if (spinner) {
+    spinner.className = "w-6 h-6 text-success";
+    spinner.innerHTML = `
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+        </path>
+      </svg>
+    `;
+  }
+
+  // Update message
+  if (message) {
+    message.className = "text-success font-medium";
+    message.textContent = "Questions générées avec succès !";
+  }
+
+  // Update progress with summary
+  if (progress && results) {
+    progress.className = "mt-2 text-sm text-success min-h-[20px]";
+    const successCount = results.filter(r => r.success).length;
+    const totalCount = results.length;
+    // • ${CONFIG.nbStudents} copies • ${CONFIG.nbQuestions} questions par copie
+    progress.textContent = `${successCount}/${totalCount} questions générées`;
+  }
+}
+
+// Transform loading indicator to error state
+function transformLoadingToError(loadingDiv, error) {
+  // Update classes to error state (DaisyUI)
+  loadingDiv.className = loadingDiv.className
+    .replace("bg-blue-50", "bg-error")
+    .replace("border-blue-200", "border-error");
+
+  // Get references to elements
+  const spinner = loadingDiv.querySelector("#loading-spinner");
+  const message = loadingDiv.querySelector("#loading-message");
+  const progress = loadingDiv.querySelector("#loading-progress");
+
+  // Replace spinner with error icon
+  if (spinner) {
+    spinner.className = "w-6 h-6 text-error-content";
+    spinner.innerHTML = `
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+        </path>
+      </svg>
+    `;
+  }
+
+  // Update message
+  if (message) {
+    message.className = "text-error-content font-medium";
+    message.textContent = "Erreur lors de la génération";
+  }
+
+  // Update progress with error details
+  if (progress && error) {
+    progress.className = "mt-2 text-sm text-error-content min-h-[20px]";
+    progress.textContent = `❌ ${error.message}`;
+  }
+}
+
 function addScreenStyles() {
   const existingStyles = document.querySelector("#sujets0-screen-styles");
   if (existingStyles) return;
@@ -1038,7 +1133,7 @@ function populateTableOfContents() {
       // Fallback: scroll to top of page if table not found
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
 
@@ -1158,7 +1253,14 @@ class PMFragmentGenerator {
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
-    const allClasses = [...classes, "text-xl", "mb-4" , 'pt-2',  'border-top-1', 'border-base-300'];
+    const allClasses = [
+      ...classes,
+      "text-xl",
+      "mb-4",
+      "pt-2",
+      "border-top-1",
+      "border-base-300",
+    ];
     return {
       f_type: { value: "h2_" },
       html: content,
@@ -1331,13 +1433,15 @@ function generateFragmentsFromResults(results) {
   // Header fragment
   fragments.push(
     PMFragmentGenerator.createParagraph(`
-        <div class="mb-2">
-            <span class="font-mono">
-                <span class="badge badge-outline badge-secondary">${CONFIG.curriculum}</span>  
-                <span class="badge badge-outline badge-secondary ml-1">${CONFIG.nbStudents} copies</span>
-                <span class="badge badge-outline badge-secondary ml-1">${CONFIG.nbQuestions} questions par copie</span>
-            </span>
-        </div>`)
+
+  <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800 mt-6">⚙️ Paramètres</h3>
+    <div class="p-0 mb-7 text-sm">
+        <ul class="list-none list-sujets0-questions-generator-report">
+            <li class="font-mono"><span class="badge badge-outline badge-secondary">Programme : ${CONFIG.curriculum}</span></li>
+            <li class="font-mono"><span class="badge badge-outline badge-secondary">Copies : ${CONFIG.nbStudents}</span></li>
+            <li class="font-mono"><span class="badge badge-outline badge-secondary">Q° par copie : ${CONFIG.nbQuestions}</span></li>
+        </ul>
+    </div`)
   );
 
   // Create Teacher Copy section first
@@ -1542,38 +1646,38 @@ function injectFragmentsIntoPM(fragments) {
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("🎯 Sujets0 Question Generator starting...");
 
-  // Force Bolt theme for exercise generation and show toast if needed
+  // Force anchor theme for exercise generation and show toast if needed
   const currentTheme = document.documentElement.getAttribute("data-theme");
-  if (currentTheme !== "bolt") {
-    // Set theme to 'bolt'
-    document.documentElement.setAttribute("data-theme", "bolt");
-    localStorage.setItem("theme", "bolt");
+  if (currentTheme !== "anchor") {
+    // Set theme to 'anchor'
+    document.documentElement.setAttribute("data-theme", "anchor");
+    localStorage.setItem("theme", "anchor");
 
     // Show toast notification
     setTimeout(() => {
       showToast(
-        "⚡ Le thème Bolt est obligatoire pour l'impression des exercices",
+        "⚡ Le thème anchor est obligatoire pour l'impression des exercices",
         "info"
       );
     }, 500);
 
-    console.log("🎨 Thème forcé à Bolt pour la génération d'exercices");
+    console.log("🎨 Thème forcé à anchor pour la génération d'exercices");
   }
 
-  // Set up mutation observer to keep theme as 'bolt' during exercise generation
+  // Set up mutation observer to keep theme as 'anchor' during exercise generation
   const observeTheme = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.attributeName === "data-theme") {
         const newTheme = document.documentElement.getAttribute("data-theme");
-        if (newTheme !== "bolt") {
-          document.documentElement.setAttribute("data-theme", "bolt");
-          localStorage.setItem("theme", "bolt");
+        if (newTheme !== "anchor") {
+          document.documentElement.setAttribute("data-theme", "anchor");
+          localStorage.setItem("theme", "anchor");
           showToast(
-            "⚡ Le thème Bolt doit rester activé pour l'impression des exercices",
+            "⚡ Le thème anchor doit rester activé pour l'impression des exercices",
             "warning"
           );
           console.log(
-            "🎨 Thème forcé à Bolt pour maintenir la génération d'exercices"
+            "🎨 Thème forcé à anchor pour maintenir la génération d'exercices"
           );
         }
       }
@@ -1600,16 +1704,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Show loading indicator
+  // Show loading indicator with consistent height
   const loadingDiv = document.createElement("div");
   loadingDiv.className =
-    "sujets0-loading mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200";
+    "sujets0-loading mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200 min-h-[80px] print-hide";
   loadingDiv.innerHTML = `
         <div class="flex items-center space-x-3">
-            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-            <div class="text-blue-800 font-medium">Chargement du générateur de questions...</div>
+            <div id="loading-spinner" class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+            <div id="loading-message" class="text-blue-800 font-medium">Chargement du générateur de questions...</div>
         </div>
-        <div id="loading-progress" class="mt-2 text-sm text-blue-600"></div>
+        <div id="loading-progress" class="mt-2 text-sm text-blue-600 min-h-[20px]"></div>
     `;
 
   targetContainer.insertAdjacentElement("afterend", loadingDiv);
@@ -1645,8 +1749,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Generate pure PM fragments
     const fragments = generateFragmentsFromResults(results);
 
-    // Remove loading
-    loadingDiv.remove();
+    // Transform loading to success state
+    transformLoadingToSuccess(loadingDiv, results);
 
     // Inject fragments into PM system
     injectFragmentsIntoPM(fragments);
@@ -1691,12 +1795,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("🎉 Questions generated as PM fragments with processed SVGs!");
   } catch (error) {
     console.error("❌ Sujets0 Question Generator failed:", error);
-    // Create error fragment
-    const errorFragment = PMFragmentGenerator.createParagraph(
-      `❌ Erreur: ${error.message}`
-    );
-    const errorElement = PMFragmentRenderer.renderFragment(errorFragment);
-    loadingDiv.replaceWith(errorElement);
+    // Transform loading to error state
+    transformLoadingToError(loadingDiv, error);
   }
 });
 

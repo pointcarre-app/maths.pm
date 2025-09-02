@@ -1,4 +1,5 @@
 name: wall
+product_type: "draft"
 hidden: true
 title_html: Wall
 subtitle_html: Affichage de contenus scientifiques

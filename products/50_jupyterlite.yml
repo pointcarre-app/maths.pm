@@ -2,6 +2,7 @@ name: jupyterlite
 title_html: JupyterLite
 # hidden: true
 # is_hidden: true
+product_type: "repo_from_other_org"
 is_beta: true
 subtitle_html: Environnement de calcul interactif
 description: "Thank you to the JupyterLite team for the incredible work. Here, we make accessible via in-browser JupyterLab two kernels accessible: Python and p5.js."

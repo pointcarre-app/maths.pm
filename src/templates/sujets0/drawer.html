@@ -115,12 +115,12 @@
       <ul class="">
         <li>
           <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'bolt')"
+                  onclick="document.documentElement.setAttribute('data-theme', 'anchor')"
                   style="margin-bottom: 0.25rem;
                          padding-left: 0.75rem;
                          justify-content: flex-start;
                          font-weight: 300;
-                         font-size: 0.875rem">⚡️ Bolt</button>
+                         font-size: 0.875rem">⚓️ Anchor</button>
         </li>
         <li>
           <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
@@ -380,8 +380,8 @@
       <div class="text-sm font-semibold mb-2">Thèmes</div>
       <ul class="">
         <li>
-          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'bolt')">
-            ⚡️ Bolt
+          <button class="btn btn-sm bg-base-200/50 hover:bg-primary hover:text-primary-content w-full" onclick="document.documentElement.setAttribute('data-theme', 'anchor')">
+            ⚡️ anchor
           </button>
         </li>
         <li>
@@ -529,16 +529,16 @@
             // Get current theme before changing it
             const currentTheme = document.documentElement.getAttribute('data-theme');
 
-            // Set theme to 'bolt'
-            setTheme('bolt');
+            // Set theme to 'anchor'
+            setTheme('anchor');
 
             // Disable theme buttons
             themeButtons.forEach((button) => {
                 button.disabled = true;
             });
 
-            // Only show toast if theme wasn't already 'bolt'
-            if (currentTheme !== 'bolt') {
+            // Only show toast if theme wasn't already 'anchor'
+            if (currentTheme !== 'anchor') {
                 // Show a toast notification using daisyUI
                 const toastContainer = document.getElementById('toast-container');
 
@@ -549,7 +549,7 @@
                 alert.className = 'alert alert-info';
 
                 const message = document.createElement('span');
-                message.textContent = 'Le thème pour la génération de PDF est forcément Bolt.';
+                message.textContent = 'Le thème pour la génération de PDF est forcément anchor.';
 
                 alert.appendChild(message);
                 toastContainer.appendChild(alert);
@@ -560,14 +560,14 @@
                 }, 3000);
             }
 
-            // Set up mutation observer to keep theme as 'bolt'
+            // Set up mutation observer to keep theme as 'anchor'
             const observeTheme = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.attributeName === 'data-theme') {
                         const newTheme = document.documentElement.getAttribute('data-theme');
-                        if (newTheme !== 'bolt') {
-                            setTheme('bolt');
-                            console.log('Theme forcé à Bolt pour la génération de PDF');
+                        if (newTheme !== 'anchor') {
+                            setTheme('anchor');
+                            console.log('Theme forcé à anchor pour la génération de PDF');
                         }
                     }
                 });

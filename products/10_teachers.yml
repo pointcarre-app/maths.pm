@@ -1,4 +1,5 @@
 name: teachers
+product_type: "repo"
 title_html: Teachers
 # is_hidden: true
 is_beta: true

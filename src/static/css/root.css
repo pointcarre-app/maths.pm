@@ -40,12 +40,13 @@
   --color-secondary-ghost: color-mix(in oklab, var(--color-secondary, var(--color-base-content)) 8%, var(--color-base-100));
   --color-accent-ghost: color-mix(in oklab, var(--color-accent, var(--color-base-content)) 8%, var(--color-base-100));
   --color-base-content-ghost: color-mix(in oklab, var(--color-base-content, var(--color-base-content)) 8%, var(--color-base-100));
-
-
+  --color-success-ghost: color-mix(in oklab, var(--color-success, var(--color-base-content)) 8%, var(--color-base-100));
+  --color-warning-ghost: color-mix(in oklab, var(--color-warning, var(--color-base-content)) 8%, var(--color-base-100));
+  --color-error-ghost: color-mix(in oklab, var(--color-error, var(--color-base-content)) 8%, var(--color-base-100));
+  --color-info-ghost: color-mix(in oklab, var(--color-info, var(--color-base-content)) 8%, var(--color-base-100));
 
   --color-base-content-ghost-variant: color-mix(in oklab, var(--color-base-content, var(--color-base-content)) 2%, var(--color-base-100));
   
-
   --scrollbar-color: var(--color-primary-content);
   --scrollbar-color-bg: var(--color-primary-content);
 
@@ -59,8 +60,8 @@
 
 
 
-/**************** Custom DaisyUI Theme - Excellent Light=Bolt (DaisyUI v5 format) ****************/
-[data-theme="bolt"] {
+/**************** Custom DaisyUI Theme - Excellent Light=anchor (DaisyUI v5 format) ****************/
+[data-theme="anchor"] {
   color-scheme: light;
   
   /* ===== BASE COLORS (BACKGROUNDS) ===== */

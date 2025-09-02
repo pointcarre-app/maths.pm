@@ -9,12 +9,22 @@ Uses Pydantic Settings for type-safe configuration management
 import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+from enum import Enum
 
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import Field, computed_field
 from pydantic_settings import BaseSettings
-from strictyaml import Any as YamlAny, Map, MapPattern, Optional as StrictOptional, Seq, Str, load
+from strictyaml import (
+    Any as YamlAny,
+    Enum as YamlEnum,
+    Map,
+    MapPattern,
+    Optional as StrictOptional,
+    Seq,
+    Str,
+    load,
+)
 
 import logging
 import yaml
@@ -23,6 +33,15 @@ from .models import ProductModel, DomainModel, ProductSettings
 
 # Get the logger instance from the app
 logger = logging.getLogger("maths_pm")
+
+
+class ProductType(str, Enum):
+    """Enum for valid product types"""
+
+    REPO = "repo"
+    REPO_FROM_OTHER_ORG = "repo_from_other_org"
+    SECONDAIRE = "secondaire"
+    DRAFT = "draft"
 
 
 # Global constants - defined once and used throughout
@@ -34,7 +53,9 @@ product_schema = Map(
     {
         "name": Str(),
         "title_html": Str(),
-        StrictOptional("product_type"): Str(),  # New field for product type (e.g., "repo")
+        StrictOptional("product_type"): YamlEnum(
+            [e.value for e in ProductType]
+        ),  # solide actually: strictyaml
         StrictOptional("font_class"): Str(),
         StrictOptional("hidden"): Str(),  # Alternative to is_hidden for backward compatibility
         StrictOptional("is_hidden"): Str(),

@@ -1,4 +1,5 @@
 name: mason
+product_type: "draft"
 hidden: true
 title_html: Mason
 subtitle_html: LitElement components with KaTeX integration

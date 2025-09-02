@@ -433,7 +433,7 @@ export async function createPapyrusJson(studentExerciseSet) {
 
 
     // TODO: dynamically but in config not here
-    // There is in the css static/css/root  .css a data-theme="bolt" : take the color of the --color-base-content
+    // There is in the css static/css/root  .css a data-theme="anchor" : take the color of the --color-base-content
     // --color-base-content: oklch(22% 0.015 240);  /* Deep charcoal with slight blue undertone */
     
     

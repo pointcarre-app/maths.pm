@@ -3,7 +3,7 @@ product_type: "secondaire"
 title_html: Maths.Corsica
 font_class: "font-handwritten"
 subtitle_html: Maths & Corse
-description: "Quelques exemples mathématiques autour de la Corse : géométrie, trigonométrie, Python. Niveaux troisième et seconde."
+description: "Quelques applications mathématiques pour les classes de 3<sup>ème</sup> et 2<sup>nde</sup> autour de la Corse : géométrie, trigonométrie et algorithmie."
 local_path: /corsica
 # source_link: 
 color: accent

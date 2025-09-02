@@ -2,6 +2,7 @@
 # TODO TODO TODO 
 # Should only be a domain (and + core maybe hence some frontend stuff + databrick + event maangement + DOPPEL)
 name: mathspm
+product_type: "draft"
 hidden: true
 title_html: Maths.pm (tools)
 subtitle_html: Tools for maths teaching (FR & EN)

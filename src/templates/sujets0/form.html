@@ -7,95 +7,117 @@
 
 <div class="card bg-base-200 shadow-sm p-4 sm:p-6 md:p-8">
   <form id="arpege-form" class="w-full max-w-[720px] mx-auto">
-    <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+    <!-- 2x2 Grid Layout -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
 
-      <!-- Left column: Number inputs -->
-      <div class="flex flex-col gap-4 sm:gap-6 flex-1">
-        <!-- Number of copies -->
-        <fieldset class="fieldset">
-          <legend class="fieldset-legend">
-            <span class="font-light font-heading text-base md:text-lg">Nombre de copies</span>
-            <div class="tooltip tooltip-top"
-                 data-tip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">
-              <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
-            </div>
-          </legend>
-          <div class="join w-full">
-            <input type="number"
-                   id="nb-eleves"
-                   name="nb-eleves"
-                   min="1"
-                   max="50"
-                   value="2"
-                   required
-                   class="input input-bordered join-item flex-1 h-10" />
-            <button type="button"
-                    class="btn btn-square join-item h-10 w-10"
-                    onclick="document.getElementById('nb-eleves').stepDown()">−</button>
-            <button type="button"
-                    class="btn btn-square join-item h-10 w-10"
-                    onclick="document.getElementById('nb-eleves').stepUp()">+</button>
+      <!-- Top Left: Number of copies -->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          <span class="font-light font-heading text-base md:text-lg">Nombre de copies</span>
+          <div class="tooltip tooltip-top"
+               data-tip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">
+            <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
           </div>
-          <p class="label-text-alt mt-1">Entre 1 et 50 copies</p>
-        </fieldset>
+        </legend>
+        <div class="join w-full">
+          <input type="number"
+                 id="nb-eleves"
+                 name="nb-eleves"
+                 min="1"
+                 max="50"
+                 value="2"
+                 required
+                 class="input input-bordered join-item flex-1 h-10" />
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('nb-eleves').stepDown()">−</button>
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('nb-eleves').stepUp()">+</button>
+        </div>
+        <p class="label-text-alt mt-1">Entre 1 et 50 copies</p>
+      </fieldset>
 
-        <!-- Questions per copy -->
-        <fieldset class="fieldset">
-          <legend class="fieldset-legend">
-            <span class="font-light font-heading text-base md:text-lg">Questions par copie</span>
-            <div class="tooltip tooltip-top" data-tip="Une partie A d'un sujet 0 officiel compte 12 questions">
-              <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
-            </div>
-          </legend>
-          <div class="join w-full">
-            <input type="number"
-                   id="nb-questions"
-                   name="nb-questions"
-                   min="1"
-                   max="12"
-                   value="12"
-                   required
-                   class="input input-bordered join-item flex-1 h-10" />
-            <button type="button"
-                    class="btn btn-square join-item h-10 w-10"
-                    onclick="document.getElementById('nb-questions').stepDown()">−</button>
-            <button type="button"
-                    class="btn btn-square join-item h-10 w-10"
-                    onclick="document.getElementById('nb-questions').stepUp()">+</button>
+      <!-- Top Right: Specialty selection -->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          <span class="font-light font-heading text-base md:text-lg">Filière / Spécialité</span>
+          <div class="tooltip tooltip-top"
+               data-tip="Spé pour spécialité maths, Non Spé pour enseignement spécifique et Techno pour filières technologiques">
+            <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help">?</span>
           </div>
-          <p class="label-text-alt mt-1">Entre 1 et 12 questions</p>
-        </fieldset>
-      </div>
+        </legend>
+        <div class="join w-full">
+          <input type="radio" name="sujets0" value="spe" class="join-item btn h-10 flex-1" aria-label="Spé." checked />
+          <input type="radio"
+                 name="sujets0"
+                 value="non-spe"
+                 class="join-item btn h-10 flex-1"
+                 aria-label="Non Spé."
+                 disabled />
+          <input type="radio"
+                 name="sujets0"
+                 value="techno"
+                 class="join-item btn h-10 flex-1"
+                 aria-label="Techno"
+                 disabled />
+        </div>
+        <p class="label-text-alt mt-1">Choisir un programme officiel</p>
+      </fieldset>
 
-      <!-- Right column: Specialty selection -->
-      <div class="flex flex-col gap-4 sm:gap-6 flex-1">
-        <fieldset class="fieldset">
-          <legend class="fieldset-legend">
-            <span class="font-light font-heading text-base md:text-lg">Filière / Spécialité</span>
-            <div class="tooltip tooltip-top"
-                 data-tip="Spé pour spécialité maths, Non Spé pour enseignement spécifique et Techno pour filières technologiques">
-              <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help">?</span>
-            </div>
-          </legend>
-          <div class="join w-full">
-            <input type="radio" name="sujets0" value="spe" class="join-item btn h-10 flex-1" aria-label="Spé." checked />
-            <input type="radio"
-                   name="sujets0"
-                   value="non-spe"
-                   class="join-item btn h-10 flex-1"
-                   aria-label="Non Spé."
-                   disabled />
-            <input type="radio"
-                   name="sujets0"
-                   value="techno"
-                   class="join-item btn h-10 flex-1"
-                   aria-label="Techno"
-                   disabled />
+      <!-- Bottom Left: Questions per copy -->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          <span class="font-light font-heading text-base md:text-lg">Questions par copie</span>
+          <div class="tooltip tooltip-top" data-tip="Une partie A d'un sujet 0 officiel compte 12 questions">
+            <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
           </div>
-          <p class="label-text-alt mt-1">Choisir un programme officiel</p>
-        </fieldset>
-      </div>
+        </legend>
+        <div class="join w-full">
+          <input type="number"
+                 id="nb-questions"
+                 name="nb-questions"
+                 min="1"
+                 max="12"
+                 value="12"
+                 required
+                 class="input input-bordered join-item flex-1 h-10" />
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('nb-questions').stepDown()">−</button>
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('nb-questions').stepUp()">+</button>
+        </div>
+        <p class="label-text-alt mt-1">Entre 1 et 12 questions</p>
+      </fieldset>
 
+      <!-- Bottom Right: Seed number -->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          <span class="font-light font-heading text-base md:text-lg">Graine aléatoire</span>
+          <div class="tooltip tooltip-top" data-tip="Numéro de graine pour la génération aléatoire des valeurs">
+            <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+          </div>
+        </legend>
+        <div class="join w-full">
+          <input type="number"
+                 id="seed"
+                 name="seed"
+                 min="1"
+                 max="100"
+                 value="9"
+                 required
+                 class="input input-bordered join-item flex-1 h-10" />
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('seed').stepDown()">−</button>
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('seed').stepUp()">+</button>
+        </div>
+        <p class="label-text-alt mt-1">Entre 1 et 100</p>
+      </fieldset>
 
     </div>
     <button id="big-generate-btn"
@@ -121,6 +143,7 @@
         // Get form values
         const nbStudents = document.getElementById('nb-eleves')?.value || 2;
         const nbQuestions = document.getElementById('nb-questions')?.value || 12;
+        const seed = document.getElementById('seed')?.value || 9;
 
         // Get selected curriculum from radio buttons
         const curriculumRadio = document.querySelector('input[name="sujets0"]:checked');
@@ -145,6 +168,7 @@
         return {
             nbStudents,
             nbQuestions,
+            seed,
             curriculum
         };
     }
@@ -156,6 +180,7 @@
         // Validate the configuration
         const nbStudents = parseInt(config.nbStudents);
         const nbQuestions = parseInt(config.nbQuestions);
+        const seed = parseInt(config.seed);
 
         if (isNaN(nbStudents) || nbStudents < 1 || nbStudents > 50) {
             alert('⚠️ Le nombre de copies doit être entre 1 et 50');
@@ -164,6 +189,11 @@
 
         if (isNaN(nbQuestions) || nbQuestions < 1 || nbQuestions > 12) {
             alert('⚠️ Le nombre de questions doit être entre 1 et 12');
+            return;
+        }
+
+        if (isNaN(seed) || seed < 1 || seed > 100) {
+            alert('⚠️ La graine aléatoire doit être entre 1 et 100');
             return;
         }
 
@@ -190,7 +220,7 @@
             targetPath = `/pm/sujets0/a_generate.md`;
         }
 
-        const targetUrl = `${baseUrl}${targetPath}?format=html&nbStudents=${config.nbStudents}&nbQuestions=${config.nbQuestions}&curriculum=${encodeURIComponent(config.curriculum)}#teacher-answer-table`;
+        const targetUrl = `${baseUrl}${targetPath}?format=html&nbStudents=${config.nbStudents}&nbQuestions=${config.nbQuestions}&seed=${config.seed}&curriculum=${encodeURIComponent(config.curriculum)}#teacher-answer-table`;
 
         console.log('🚀 Navigating to:', targetUrl);
 

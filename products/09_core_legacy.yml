@@ -1,4 +1,5 @@
 name: core_legacy
+product_type: "draft"
 hidden: true
 title_html: Core Legacy
 subtitle_html: Legacy core codebase
