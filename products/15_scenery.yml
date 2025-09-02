@@ -18,6 +18,8 @@ domains:
 owner_rdb: "POINTCARRE.APP"
 owner_url: "https://github.com/pointcarre-app"
 
+figure_svg: "scenery-figure-svg.html"
+
 # backend_settings: removed - optional field, not needed when empty
 
 

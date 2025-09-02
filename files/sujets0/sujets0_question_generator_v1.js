@@ -610,7 +610,7 @@ function addPrintButton(container) {
     <div class="p-0 mb-7 text-sm">
         <ul class="list-none list-sujets0-questions-generator-report">
             <li>📝 Corrigé enseignant inclus</li>
-            <li>🔬 Reproductibilité grâce à la <code>seed</code> <span class="italic">(graîne)</span></li>
+            <li>🔬 Reproductibilité grâce à la <code>seed</code> <span class="italic">(graine)</span></li>
         </ul>
     </div>
     <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800">📑 Au sujet de d'impression</h3>
