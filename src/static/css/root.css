@@ -89,9 +89,8 @@
   /* Ensures maximum contrast against dark purple background */
   --color-primary-content: oklch(97% 0.02 285); /* Nearly white with purple hint */
   
-  --color-secondary: oklch(0.4663 0.2626 340.55);
-
-  
+  /* --color-secondary: oklch(0.563 0.2 340.55); */
+  /* --color-secondary: oklch(0.25 0.2 340.55);   */
   --color-secondary-content: oklch(97% 0.02 240); /* Nearly white with blue hint */
   
   /* (Rich gold) */

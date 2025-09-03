@@ -1,81 +1,104 @@
 <div class="mt-12 sm:mt-24">
-  <div class="text-left border-b border-base-content/10 p-4 sm:p-8"
+  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 sm:p-8 max-w-4xl mx-auto md:card"
        style="background-color: var(--color-primary-ghost) !important;
               color: var(--color-primary) !important">
     <div class="max-w-3xl mx-auto py-12">
-      <div class="mb-6">
-        <span class="font-handwritten text-3xl sm:text-3xl md:text-5xl">Maths.pm</span>
-        &nbsp;
-        <span class="font-base text-lg sm:text-xl md:text-3xl">ne collecte aucune donnée.</span>
+      <div class="mb-8">
+        <span class="font-handwritten text-3xl sm:text-3xl md:text-5xl">Maths.pm</span><span class="font-base text-lg sm:text-xl md:text-3xl">&nbsp;ne collecte aucune donnée.</span>
       </div>
-      <div class="text-lg text-left mb-6">
-        <span class="font-handwritten text-xl">Maths.pm</span> ne collecte pas
-        le moindre cookie, n'écrit aucune ligne de "log", n'utilise aucune base
-        de données. Tout se passe
-        <a class="underline underline-offset-1 hover:underline-offset-4"
-           href="{{ request.url_for('get_pm_root') }}">localement</a>
-        - <strong class="italic">nihil omnino</strong>.
+
+      <div class="text-lg text-left mb-6 font-light">
+        {# <span class="font-handwritten text-xl">Maths.pm</span> ne collecte
+pas aucune donnée - <span class="italic"></span>. #}Aucun cookie collecté, aucune ligne de log d'écrite, pas l'ombre d'une base de données distante - <span class="italic">nihil omnino</span>.
+        <br />
+        Toutes les exécutions de code se font localement. Nous expliquons notre démarche sur cette
+        <a class="underline underline-offset-2 hover:underline-offset-4 font-light"
+           href="{{ request.url_for('get_pm_root') }}">page</a>.
       </div>
-      <div>
-        <a class="text-sm sm:text-lg underline underline-offset-1 hover:underline-offset-4"
-           href="{{ request.url_for('get_pm_root') }}">Nos engagements</a>
-      </div>
+      <div></div>
 
       <hr class="my-8 bd-base-content" />
 
       <div>
-        <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-4" href="/about">Limites de confidentialité (impact de l'hébergeur)</a>
+        <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-3" href="/about">Limites de confidentialité (impact de l'hébergeur)</a>
       </div>
       <div>
-        <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-4" href="/about">Aspects technologiques</a>
+        <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-3" href="/about">Aspects technologiques</a>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="bg-base-200">
-    <footer class="text-base-content max-w-6xl mx-auto py-12 sticky top-[100vh] grid grid-cols-1 sm:grid-cols-4 gap-8">
-      <!-- Logo Section -->
+<div class="mt-12">
+  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto md:card"
+       style="background-color: var(--color-secondary-ghost) !important;
+              color: var(--color-secondary) !important">
+    <div class="max-w-3xl mx-auto py-12">
+      <div class="mb-8">
+        <span class="font-base text-lg sm:text-xl md:text-3xl">
+          Chez
+          <span class="text-xl sm:text-2xl md:text-4xl font-heading"><span class="">Pointcarre</span>.app</span>,
+          nous nous engageons en faveur des
+          <a class="underline underline-offset-2 hover:underline-offset-4"
+             href="{{ request.url_for('get_pm_root') }}">communs numériques</a>.</span>
+      </div>
 
-      <aside class="">
-        <div class="font-handwritten text-4xl mb-4 mt-[-0.5rem]">Maths.pm, par</div>
-        <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
-          <p class="w-8 h-8">{% include "base/logo-zelie-primary.html" %}</p>
-          <p class="font-heading">
-            <span class="text-xl"><span class="">pointcarre</span>.app</span>
-          </p>
-        </a>
-      </aside>
 
-      <!-- Navigation Menu -->
-      <nav class="flex flex-col">
-        <h6 class="footer-title font-body">Navigation</h6>
-        <a href="" class="link link-hover">Accueil</a>
-        <a href="" class="link link-hover">Plan du site</a>
-        <a href="/about" class="link link-hover">À propos</a>
-        <a href="/contact" class="link link-hover">Contact</a>
-      </nav>
+      <hr class="my-8 bd-base-content" />
 
-      <!-- Legal Links -->
-      <nav class="flex flex-col">
-        <h6 class="footer-title font-body">Légal</h6>
-        <a href="/privacy" class="link link-hover">Mentions légales</a>
-        <a href="/privacy" class="link link-hover">RGPD</a>
-        <a href="/terms" class="link link-hover">CGU</a>
-        <a href="/licenses" class="link link-hover"><span class="italic">Open Source</span></a>
-      </nav>
-
-      <!-- Legal Links -->
-      <nav class="flex flex-col">
-        <h6 class="footer-title font-body">Légal</h6>
-        <a href="/privacy" class="link link-hover">Mentions légales</a>
-        <a href="/privacy" class="link link-hover">RGPD</a>
-        <a href="/terms" class="link link-hover">CGU</a>
-        <a href="/licenses" class="link link-hover"><span class="italic">Open Source</span></a>
-      </nav>
-    </footer>
+      <div>
+        <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-4" href="/about">Ressources pédagogiques</a>
+      </div>
+      <div>
+        <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-4" href="/about">Logiciels Libres & Infrastructure 🇫🇷</a>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="bg-base-200 text-base-content text-center border-t border-base-content/10">
-    {% include "base/licenses.html" %}
-  </div>
+<div class="bg-base-200 mt-12 px-4 sm:px-0">
+  <footer class="text-base-content max-w-6xl mx-auto py-12 sticky top-[100vh] grid grid-cols-1 sm:grid-cols-4 gap-8">
+    <!-- Logo Section -->
+
+    <aside class="">
+      <div class="font-handwritten text-4xl mb-4 mt-[-0.5rem]">Maths.pm, par</div>
+      <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
+        <p class="w-10 h-10">{% include "base/logo-zelie-primary.html" %}</p>
+        <p class="font-heading">
+          <span class="text-2xl"><span class="">pointcarre</span>.app</span>
+        </p>
+      </a>
+    </aside>
+
+    <!-- Navigation Menu -->
+    <nav class="flex flex-col">
+      <h6 class="footer-title font-body">Navigation</h6>
+      <a href="" class="link link-hover">Accueil</a>
+      <a href="" class="link link-hover">Plan du site</a>
+      <a href="/about" class="link link-hover">À propos</a>
+      <a href="/contact" class="link link-hover">Contact</a>
+    </nav>
+
+    <!-- Legal Links -->
+    <nav class="flex flex-col">
+      <h6 class="footer-title font-body">Légal</h6>
+      <a href="/privacy" class="link link-hover">Mentions légales</a>
+      <a href="/privacy" class="link link-hover">RGPD</a>
+      <a href="/terms" class="link link-hover">CGU</a>
+      <a href="/licenses" class="link link-hover"><span class="italic">Open Source</span></a>
+    </nav>
+
+    <!-- Legal Links -->
+    <nav class="flex flex-col">
+      <h6 class="footer-title font-body">Légal</h6>
+      <a href="/privacy" class="link link-hover">Mentions légales</a>
+      <a href="/privacy" class="link link-hover">RGPD</a>
+      <a href="/terms" class="link link-hover">CGU</a>
+      <a href="/licenses" class="link link-hover"><span class="italic">Open Source</span></a>
+    </nav>
+  </footer>
+</div>
+
+<div class="bg-base-200 text-base-content text-center border-t border-base-content/10">
+  {% include "base/licenses.html" %}
 </div>
