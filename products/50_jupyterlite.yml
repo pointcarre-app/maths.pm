@@ -5,7 +5,8 @@ title_html: JupyterLite
 product_type: "repo_from_other_org"
 is_beta: true
 subtitle_html: Environnement de calcul interactif
-description: "Thank you to the JupyterLite team for the incredible work. Here, we make accessible via in-browser JupyterLab two kernels accessible: Python and p5.js."
+description: "Merci à l'équipe de JupyterLite pour leur travail incroyable. Ici, via JupyterLab, nous rendons accessibles deux kernels : Python et p5.js."
+# description_en: "Thank you to the JupyterLite team for the incredible work. Here, via JupyterLab, we make accessible two kernels: Python and p5.js."
 local_path: /jupyterlite/
 color: warning
 figure_png: /static/icons/jupyterlite-large.png

@@ -3,6 +3,9 @@
 
 
 
+
+
+
 /**************** Padding-responsiveness ****************/
 
 
@@ -28,14 +31,54 @@
 
 
 
+/* Breakpoint prefix	Minimum width	CSS
+sm	40rem (640px)	@media (width >= 40rem) { ... }
+md	48rem (768px)	@media (width >= 48rem) { ... }
+lg	64rem (1024px)	@media (width >= 64rem) { ... }
+xl	80rem (1280px)	@media (width >= 80rem) { ... }
+2xl	96rem (1536px)	@media (width >= 96rem) { ... } */
+
+
+
+
+@media (width >= 40rem) {
+  .main-alt-navbar {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+
+@media (width >= 48rem) {
+  .main-alt-navbar {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+
+@media (width >= 64rem) {
+  .main-alt-navbar {
+    padding-left: 6rem !important;
+    padding-right: 6rem !important;
+  }
+}
+
+
+@media (width >= 80rem) {
+  .main-alt-navbar {
+    padding-left: 12rem !important;
+    padding-right: 12rem !important;
+  }
+}
+
+
 
 /**************** Main navbar ****************/
 
 /* Base styles for all screen sizes */
 .main-alt-navbar {
   height: 72px !important;
-  padding-left: 2rem !important;
-  padding-right: 2rem !important;
   min-height: unset !important;
   border-bottom: 0.1px solid var(--color-primary) !important;
 }
@@ -382,4 +425,20 @@
   margin-top: 1.7777778em;
   margin-bottom: 1.7777778em;
   padding: 1em 1.3333333em;
+}
+
+
+
+
+
+
+
+/* ///resources */
+
+.badge:has(sup) {
+  padding-top: 0.25rem;
+}
+
+.badge {
+  padding-top: 0.15rem;
 }
