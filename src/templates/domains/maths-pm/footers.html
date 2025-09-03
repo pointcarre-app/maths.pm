@@ -30,9 +30,7 @@ pas aucune donnée - <span class="italic"></span>. #}Aucun cookie collecté, auc
 </div>
 
 <div class="mt-12">
-  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto md:card"
-       style="background-color: var(--color-secondary-ghost) !important;
-              color: var(--color-secondary) !important">
+  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto md:card bg-base-200 shadow">
     <div class="max-w-3xl mx-auto py-12">
       <div class="mb-8">
         <span class="font-base text-lg sm:text-xl md:text-3xl">
@@ -42,25 +40,41 @@ pas aucune donnée - <span class="italic"></span>. #}Aucun cookie collecté, auc
           <a class="underline underline-offset-2 hover:underline-offset-4"
              href="{{ request.url_for('get_pm_root') }}">communs numériques</a>.</span>
       </div>
-
-
       <hr class="my-8 bd-base-content" />
-
       <div>
         <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-4" href="/about">Ressources pédagogiques</a>
       </div>
       <div>
         <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-4" href="/about">Logiciels Libres & Infrastructure 🇫🇷</a>
       </div>
+      <hr class="my-8 bd-base-content" />
+      {% include "base/licenses.html" %}
     </div>
   </div>
 </div>
 
-<div class="bg-base-200 mt-12 px-4 sm:px-0">
-  <footer class="text-base-content max-w-6xl mx-auto py-12 sticky top-[100vh] grid grid-cols-1 sm:grid-cols-4 gap-8">
+
+<div class="bg-base-100 mt-12 px-4 sm:px-0">
+
+  <div class="flex items-center justify-center flex-col pt-12">
+    <div class="font-handwritten text-4xl mb-4 mt-[-0.5rem]">Maths.pm, par</div>
+    <div>
+      <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
+        <p class="w-10 h-10">{% include "base/logo-zelie-primary.html" %}</p>
+        <p class="font-heading">
+          <span class="text-2xl"><span class="">pointcarre</span>.app</span>
+        </p>
+      </a>
+    </div>
+  </div>
+
+  <hr class="my-8 bd-base-content" />
+
+  <footer class="text-base-content max-w-4xl mx-auto pt-4 pb-12 sticky top-[100vh] grid grid-cols-1 sm:grid-cols-3 gap-8">
     <!-- Logo Section -->
 
-    <aside class="">
+
+    {# <aside class="">
       <div class="font-handwritten text-4xl mb-4 mt-[-0.5rem]">Maths.pm, par</div>
       <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
         <p class="w-10 h-10">{% include "base/logo-zelie-primary.html" %}</p>
@@ -68,37 +82,34 @@ pas aucune donnée - <span class="italic"></span>. #}Aucun cookie collecté, auc
           <span class="text-2xl"><span class="">pointcarre</span>.app</span>
         </p>
       </a>
-    </aside>
+</aside> #}
 
     <!-- Navigation Menu -->
     <nav class="flex flex-col">
       <h6 class="footer-title font-body">Navigation</h6>
-      <a href="" class="link link-hover">Accueil</a>
+      <a href="" class="link link-hover">Page d'accueil</a>
       <a href="" class="link link-hover">Plan du site</a>
-      <a href="/about" class="link link-hover">À propos</a>
-      <a href="/contact" class="link link-hover">Contact</a>
+      <a href="" class="link link-hover">Bibliothèque des ressources</a>
+      <a href="/about" class="link link-hover">Site de Pointcarre.app</a>
     </nav>
 
     <!-- Legal Links -->
     <nav class="flex flex-col">
-      <h6 class="footer-title font-body">Légal</h6>
-      <a href="/privacy" class="link link-hover">Mentions légales</a>
-      <a href="/privacy" class="link link-hover">RGPD</a>
-      <a href="/terms" class="link link-hover">CGU</a>
-      <a href="/licenses" class="link link-hover"><span class="italic">Open Source</span></a>
+      <h6 class="footer-title font-body">Communs numériques</h6>
+      <a href="/privacy" class="link link-hover">Pour le secondaire</a>
+      <a href="/privacy" class="link link-hover">Pour le supérieur</a>
+      <a href="/terms" class="link link-hover">Logiciels Libres</a>
+      <a href="/licenses" class="link link-hover">Infrastructure 🇫🇷</a>
     </nav>
 
     <!-- Legal Links -->
     <nav class="flex flex-col">
-      <h6 class="footer-title font-body">Légal</h6>
+      <h6 class="footer-title font-body">À Propos</h6>
+      <a href="/privacy" class="link link-hover">Notre mission</a>
+      <a href="/privacy" class="link link-hover">Nos engagements</a>
       <a href="/privacy" class="link link-hover">Mentions légales</a>
-      <a href="/privacy" class="link link-hover">RGPD</a>
-      <a href="/terms" class="link link-hover">CGU</a>
-      <a href="/licenses" class="link link-hover"><span class="italic">Open Source</span></a>
+      <a href="/privacy" class="link link-hover">RGPD & Confidentialité</a>
+
     </nav>
   </footer>
-</div>
-
-<div class="bg-base-200 text-base-content text-center border-t border-base-content/10">
-  {% include "base/licenses.html" %}
 </div>
