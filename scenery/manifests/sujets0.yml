@@ -18,7 +18,6 @@ cases:
       curriculum: Spé   
     count_fragments: 5
 
-
   C:
     query_parameters:
       nbStudents: "5"
@@ -28,15 +27,14 @@ cases:
       curriculum: Spé   
     count_fragments: 5
 
-
-  # D:
-  #   query_parameters:
-  #     nbStudents: "5"
-  #     nbQuestions: "5"
-  #     seed: "9"
-  #     format: html
-  #     curriculum: Spé   
-  #   count_fragments: 25
+  D:
+    query_parameters:
+      nbStudents: "5"
+      nbQuestions: "5"
+      seed: "9"
+      format: html
+      curriculum: Spé   
+    count_fragments: 25
 
 scene:
   method: GET

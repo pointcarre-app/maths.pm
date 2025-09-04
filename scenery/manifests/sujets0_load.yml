@@ -1,0 +1,25 @@
+
+cases:
+
+  D:
+    query_parameters:
+      nbStudents: "5"
+      nbQuestions: "5"
+      seed: "9"
+      format: html
+      curriculum: Spé   
+    count_fragments: 25
+
+scene:
+  method: GET
+  url: /pm/sujets0/a_generate.html
+  query_parameters: !case query_parameters 
+  directives:
+    - status_code: 200
+    - dom_element:
+        find_all:
+          class: fragment-wrapper
+        attribute:
+          name: data-f_type
+          value: p_
+        count: !case count_fragments
