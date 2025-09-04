@@ -2,7 +2,8 @@ name: estafette
 product_type: "repo"
 title_html: Estafette
 subtitle_html: French Tech should be more than a buzzword 🇫🇷
-description: "High-level API for typical deployment scenarios using containers, s3 buckets, and mailing services. Big thanks to Brevo, OVH, Scaleway, and Scalingo."
+# description: "High-level API for typical deployment scenarios using containers, s3 buckets, and mailing services. Big thanks to Brevo, OVH, Scaleway, and Scalingo."
+description: "API pour scénarios de déploiement classiques utilisant des conteneurs, des buckets S3 et des services de messagerie. Merci à Brevo, OVH, Scaleway et Scalingo."
 local_path: "#"
 source_link: https://github.com/pointcarre-app/estafette
 color: info

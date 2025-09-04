@@ -11,7 +11,7 @@ local_path: /jupyterlite/
 color: warning
 figure_png: /static/icons/jupyterlite-large.png
 classes_formatted:
-  - ""
+  - "Open Source"
 tags:
   - jupyter
   - python
