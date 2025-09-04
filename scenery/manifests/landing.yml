@@ -1,0 +1,7 @@
+# https://maths.pm/pm/sujets0/a_generate.html?format=html&nbStudents=2&nbQuestions=12&seed=9&curriculum=Sp%C3%A9
+
+scene:
+  method: GET
+  url: ""
+  directives:
+    - status_code: 200
