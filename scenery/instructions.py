@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 #     ...
 
 def get_pm_sujets0_a_generate_html(django_testcase, url, data, query_parameters):
-    print("Waiting...")
+    # print("Waiting...")
     wait = WebDriverWait(django_testcase.driver, 60)  # 10 second timeout
     wait.until(
         EC.presence_of_element_located((By.ID, "loading-message"))
@@ -30,7 +30,6 @@ def get_pm_sujets0_a_generate_html(django_testcase, url, data, query_parameters)
 
     if int(query_parameters["nbStudents"]) > 1:
         fragment_wrappers = django_testcase.driver.find_elements(By.CSS_SELECTOR, '.fragment-wrapper[data-f_type="h2_"]')
-        print("HERE", len(fragment_wrappers))
         for wrapper in fragment_wrappers:
             django_testcase.driver.execute_script("arguments[0].remove();", wrapper)
     
