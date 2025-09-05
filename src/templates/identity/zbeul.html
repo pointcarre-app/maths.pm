@@ -1,0 +1,1052 @@
+<style>
+    .pulse-animation {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+    }
+
+    .bounce-in {
+        animation: bounceIn 0.6s ease-out;
+    }
+
+    @keyframes bounceIn {
+        0% {
+            transform: scale(0.3);
+            opacity: 0;
+        }
+
+        50% {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
+
+
+<div class="container mx-auto p-6 max-w-6xl">
+  <h1 class="text-4xl font-bold text-center mb-8 text-primary">
+    🎮 Gamification Components avec DaisyUI
+  </h1>
+
+  <!-- 1. BADGES ET STICKERS -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <div class="badge badge-primary">1</div>
+      Badges et Stickers
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">🎁 Récompenses Récents</h3>
+
+          <div class="space-y-3">
+            <div class="alert alert-success">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   class="stroke-current shrink-0 h-6 w-6"
+                   fill="none"
+                   viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <h4 class="font-bold">Mission Accomplie!</h4>
+                <div class="text-xs">+250 XP • Badge "Expert" débloqué</div>
+              </div>
+            </div>
+
+            <div class="alert alert-info">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   class="stroke-current shrink-0 h-6 w-6"
+                   fill="none"
+                   viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+              </svg>
+              <div>
+                <h4 class="font-bold">Série de 5 jours!</h4>
+                <div class="text-xs">Bonus multiplicateur x2 activé</div>
+              </div>
+            </div>
+
+            <div class="alert alert-warning">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   class="stroke-current shrink-0 h-6 w-6"
+                   fill="none"
+                   viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.664-.833-2.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+              <div>
+                <h4 class="font-bold">Niveau Supérieur Proche!</h4>
+                <div class="text-xs">Plus que 350 XP pour le niveau 11</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider">Récompenses Disponibles</div>
+
+          <div class="flex flex-wrap gap-2">
+            <div class="tooltip" data-tip="Débloquer avec 500 XP">
+              <div class="btn btn-outline btn-sm btn-disabled">🏆 Trophée Or</div>
+            </div>
+            <div class="tooltip" data-tip="Prêt à débloquer!">
+              <div class="btn btn-primary btn-sm bounce-in">⭐ Badge Étoile</div>
+            </div>
+            <div class="tooltip" data-tip="Récompense spéciale">
+              <div class="btn btn-secondary btn-sm">🎁 Surprise</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">📊 Feedback en Temps Réel</h3>
+
+          <!-- Statistiques rapides -->
+          <div class="stats stats-vertical shadow">
+            <div class="stat">
+              <div class="stat-figure text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     class="inline-block w-8 h-8 stroke-current">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                  </path>
+                </svg>
+              </div>
+              <div class="stat-title">Précision Aujourd'hui</div>
+              <div class="stat-value text-primary">89%</div>
+              <div class="stat-desc">↗︎ +12% depuis hier</div>
+            </div>
+
+            <div class="stat">
+              <div class="stat-figure text-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     class="inline-block w-8 h-8 stroke-current">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
+                  </path>
+                </svg>
+              </div>
+              <div class="stat-title">Vitesse Moyenne</div>
+              <div class="stat-value text-secondary">42</div>
+              <div class="stat-desc">actions/minute</div>
+            </div>
+          </div>
+
+          <!-- Graphique de performance -->
+          <div class="mt-4">
+            <h4 class="font-semibold mb-2">Performance Cette Semaine</h4>
+            <div class="flex items-end gap-1 h-20">
+              <div class="bg-primary w-8 h-12 rounded-t"></div>
+              <div class="bg-primary w-8 h-16 rounded-t"></div>
+              <div class="bg-primary w-8 h-10 rounded-t"></div>
+              <div class="bg-primary w-8 h-20 rounded-t"></div>
+              <div class="bg-primary w-8 h-14 rounded-t"></div>
+              <div class="bg-primary w-8 h-18 rounded-t"></div>
+              <div class="bg-secondary w-8 h-20 rounded-t pulse-animation"></div>
+            </div>
+            <div class="flex justify-between text-xs mt-1 opacity-60">
+              <span>Lun</span>
+              <span>Mar</span>
+              <span>Mer</span>
+              <span>Jeu</span>
+              <span>Ven</span>
+              <span>Sam</span>
+              <span>Dim</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. NOTIFICATIONS ET MODAL -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <div class="badge badge-primary">9</div>
+      Notifications et Interactions
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">🔔 Centre de Notifications</h3>
+
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 p-3 bg-success/10 rounded-lg border border-success/20">
+              <div class="w-3 h-3 rounded-full bg-success"></div>
+              <div class="flex-1">
+                <div class="font-semibold text-sm">Nouveau badge débloqué!</div>
+                <div class="text-xs opacity-60">Il y a 2 minutes</div>
+              </div>
+              <div class="text-2xl">🏆</div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 bg-info/10 rounded-lg border border-info/20">
+              <div class="w-3 h-3 rounded-full bg-info"></div>
+              <div class="flex-1">
+                <div class="font-semibold text-sm">Ami vous a défié</div>
+                <div class="text-xs opacity-60">Il y a 5 minutes</div>
+              </div>
+              <div class="text-2xl">⚔️</div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 bg-warning/10 rounded-lg border border-warning/20">
+              <div class="w-3 h-3 rounded-full bg-warning"></div>
+              <div class="flex-1">
+                <div class="font-semibold text-sm">Série en danger</div>
+                <div class="text-xs opacity-60">Il y a 1 heure</div>
+              </div>
+              <div class="text-2xl">⚠️</div>
+            </div>
+          </div>
+
+          <div class="card-actions justify-end">
+            <button class="btn btn-ghost btn-sm">Tout marquer lu</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">🎮 Actions Rapides</h3>
+
+          <div class="grid grid-cols-2 gap-3">
+            <button class="btn btn-primary" onclick="achievement_modal.showModal()">
+              🏆
+              <br />
+              Succès
+            </button>
+            <button class="btn btn-secondary" onclick="challenge_modal.showModal()">
+              ⚔️
+              <br />
+              Défier
+            </button>
+            <button class="btn btn-accent" onclick="reward_modal.showModal()">
+              🎁
+              <br />
+              Récompenses
+            </button>
+            <button class="btn btn-info" onclick="stats_modal.showModal()">
+              📊
+              <br />
+              Stats
+            </button>
+          </div>
+
+          <div class="divider">Status en ligne</div>
+
+          <div class="flex items-center gap-3">
+            <div class="avatar online">
+              <div class="w-12 rounded-full bg-primary text-primary-content flex items-center justify-center">
+                V
+              </div>
+            </div>
+            <div>
+              <div class="font-bold">Vous</div>
+              <div class="text-sm opacity-60">En ligne • Niveau 10</div>
+            </div>
+            <div class="flex-1"></div>
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-sm">⚙️</div>
+              <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                <li>
+                  <a>🔕 Mode silencieux</a>
+                </li>
+                <li>
+                  <a>👥 Inviter des amis</a>
+                </li>
+                <li>
+                  <a>⚙️ Paramètres</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODALS -->
+  <!-- Modal Achievement -->
+  <dialog id="achievement_modal" class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <div class="text-center">
+        <div class="text-6xl mb-4 bounce-in">🏆</div>
+        <h3 class="font-bold text-lg">Bravo! Nouveau Succès Débloqué!</h3>
+        <div class="py-4">
+          <div class="badge badge-success badge-lg">🎯 PRÉCISION PARFAITE</div>
+          <p class="mt-2">100% de réussite sur 10 exercices consécutifs</p>
+          <div class="text-2xl font-bold text-primary mt-2">+500 XP</div>
+        </div>
+        <div class="modal-action justify-center">
+          <button class="btn btn-primary" onclick="achievement_modal.close()">Génial!</button>
+          <button class="btn btn-ghost" onclick="achievement_modal.close()">Partager</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal Challenge -->
+  <dialog id="challenge_modal" class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <h3 class="font-bold text-lg mb-4">⚔️ Défier un Ami</h3>
+      <div class="space-y-4">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Choisir un ami</span>
+          </label>
+          <select class="select select-bordered">
+            <option>Alice (Niveau 15)</option>
+            <option>Bob (Niveau 12)</option>
+            <option>Charlie (Niveau 8)</option>
+          </select>
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Type de défi</span>
+          </label>
+          <div class="flex gap-2">
+            <input type="radio" name="challenge-type" class="radio radio-primary" checked />
+            <span>Vitesse</span>
+            <input type="radio" name="challenge-type" class="radio radio-secondary" />
+            <span>Précision</span>
+            <input type="radio" name="challenge-type" class="radio radio-accent" />
+            <span>Endurance</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-action">
+        <button class="btn btn-primary">Lancer le Défi</button>
+        <button class="btn btn-ghost" onclick="challenge_modal.close()">Annuler</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal Rewards -->
+  <dialog id="reward_modal" class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <h3 class="font-bold text-lg mb-4">🎁 Vos Récompenses</h3>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="card bg-success/10 border border-success/20">
+          <div class="card-body p-4 text-center">
+            <div class="text-4xl">🏅</div>
+            <div class="font-bold">Badge Expert</div>
+            <div class="text-xs opacity-60">Débloqué aujourd'hui</div>
+          </div>
+        </div>
+        <div class="card bg-warning/10 border border-warning/20">
+          <div class="card-body p-4 text-center">
+            <div class="text-4xl">⭐</div>
+            <div class="font-bold">Étoile d'Or</div>
+            <div class="text-xs opacity-60">Série de 7 jours</div>
+          </div>
+        </div>
+        <div class="card bg-info/10 border border-info/20">
+          <div class="card-body p-4 text-center">
+            <div class="text-4xl">🎯</div>
+            <div class="font-bold">Précision</div>
+            <div class="text-xs opacity-60">100% de réussite</div>
+          </div>
+        </div>
+        <div class="card bg-error/10 border border-error/20">
+          <div class="card-body p-4 text-center">
+            <div class="text-4xl">🔥</div>
+            <div class="font-bold">Vitesse</div>
+            <div class="text-xs opacity-60">Record battu</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-action">
+        <button class="btn btn-ghost" onclick="reward_modal.close()">Fermer</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal Stats -->
+  <dialog id="stats_modal" class="modal">
+    <div class="modal-box max-w-2xl">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <h3 class="font-bold text-lg mb-4">📊 Statistiques Détaillées</h3>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="stats stats-vertical shadow">
+          <div class="stat">
+            <div class="stat-title">Total XP</div>
+            <div class="stat-value text-primary">1,650</div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">Niveau</div>
+            <div class="stat-value text-secondary">10</div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">Badges</div>
+            <div class="stat-value text-accent">12</div>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2">Progression Hebdomadaire</h4>
+          <div class="space-y-2">
+            <div>
+              <div class="flex justify-between text-sm">
+                <span>Lundi</span>
+                <span>240 XP</span>
+              </div>
+              <progress class="progress progress-primary w-full" value="80" max="100"></progress>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm">
+                <span>Mardi</span>
+                <span>180 XP</span>
+              </div>
+              <progress class="progress progress-primary w-full" value="60" max="100"></progress>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm">
+                <span>Mercredi</span>
+                <span>320 XP</span>
+              </div>
+              <progress class="progress progress-secondary w-full" value="100" max="100"></progress>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-action">
+        <button class="btn btn-ghost" onclick="stats_modal.close()">Fermer</button>
+      </div>
+    </div>
+  </dialog>
+
+
+  <section>
+    <div class="flex flex-wrap gap-2 mb-4">
+      <div class="badge badge-success badge-lg">🏆 Expert</div>
+      <div class="badge badge-warning badge-lg">⭐ Débutant</div>
+      <div class="badge badge-info badge-lg">🎯 Précis</div>
+      <div class="badge badge-error badge-lg">🔥 Streak 7j</div>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <div class="badge badge-outline">🥇 1er place</div>
+      <div class="badge badge-outline">💎 Premium</div>
+      <div class="badge badge-outline">⚡ Rapide</div>
+    </div>
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h3 class="card-title">Collection de Badges</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="text-center">
+            <div class="avatar">
+              <div class="w-16 rounded-full bg-success text-success-content flex items-center justify-center text-2xl">
+                🏅
+              </div>
+            </div>
+            <p class="text-xs mt-1">Complété</p>
+          </div>
+          <div class="text-center opacity-50">
+            <div class="avatar">
+              <div class="w-16 rounded-full bg-base-300 flex items-center justify-center text-2xl">🔒</div>
+            </div>
+            <p class="text-xs mt-1">Verrouillé</p>
+          </div>
+          <div class="text-center pulse-animation">
+            <div class="avatar">
+              <div class="w-16 rounded-full bg-warning text-warning-content flex items-center justify-center text-2xl">
+                ⭐
+              </div>
+            </div>
+            <p class="text-xs mt-1">En cours</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 2. SYSTÈME DE CLASSEMENT -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <div class="badge badge-primary">2</div>
+      Système de Classement
+    </h2>
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h3 class="card-title mb-4">🏆 Leaderboard</h3>
+        <div class="overflow-x-auto">
+          <table class="table table-zebra w-full">
+            <thead>
+              <tr>
+                <th>Rang</th>
+                <th>Joueur</th>
+                <th>Points</th>
+                <th>Badges</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-warning/20">
+                <td>
+                  <div class="badge badge-warning">🥇 1</div>
+                </td>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="avatar">
+                      <div class="mask mask-squircle w-12 h-12 bg-primary text-primary-content flex items-center justify-center">
+                        A
+                      </div>
+                    </div>
+                    <div>
+                      <div class="font-bold">Alice</div>
+                      <div class="text-sm opacity-50">Niveau 15</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="font-bold text-warning">2,450 pts</div>
+                </td>
+                <td>
+                  <div class="flex gap-1">
+                    <div class="badge badge-xs badge-success">🏆</div>
+                    <div class="badge badge-xs badge-info">⭐</div>
+                  </div>
+                </td>
+                <td>
+                  <div class="badge badge-success">En ligne</div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="badge badge-neutral">🥈 2</div>
+                </td>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="avatar">
+                      <div class="mask mask-squircle w-12 h-12 bg-secondary text-secondary-content flex items-center justify-center">
+                        B
+                      </div>
+                    </div>
+                    <div>
+                      <div class="font-bold">Bob</div>
+                      <div class="text-sm opacity-50">Niveau 12</div>
+                    </div>
+                  </div>
+                </td>
+                <td>1,890 pts</td>
+                <td>
+                  <div class="flex gap-1">
+                    <div class="badge badge-xs badge-warning">⚡</div>
+                  </div>
+                </td>
+                <td>
+                  <div class="badge badge-ghost">Hors ligne</div>
+                </td>
+              </tr>
+              <tr class="bg-primary/10">
+                <td>
+                  <div class="badge badge-primary">🥉 3</div>
+                </td>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="avatar">
+                      <div class="mask mask-squircle w-12 h-12 bg-accent text-accent-content flex items-center justify-center">
+                        V
+                      </div>
+                    </div>
+                    <div>
+                      <div class="font-bold">Vous</div>
+                      <div class="text-sm opacity-50">Niveau 10</div>
+                    </div>
+                  </div>
+                </td>
+                <td>1,650 pts</td>
+                <td>
+                  <div class="flex gap-1">
+                    <div class="badge badge-xs badge-info">🎯</div>
+                  </div>
+                </td>
+                <td>
+                  <div class="badge badge-success">En ligne</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CHALLENGES ET DÉFIS -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <div class="badge badge-primary">3</div>
+      Challenges et Défis
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="card bg-gradient-to-br from-success to-success-focus text-success-content shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">
+            🎯 Défi Quotidien
+            <div class="badge badge-warning">NOUVEAU</div>
+          </h3>
+          <p>Complétez 5 exercices aujourd'hui</p>
+          <div class="card-actions justify-between items-center">
+            <div class="text-2xl font-bold">500 XP</div>
+            <button class="btn btn-warning btn-sm">Commencer</button>
+          </div>
+          <div class="divider my-2"></div>
+          <div class="flex justify-between text-sm">
+            <span>Progression</span>
+            <span>2/5</span>
+          </div>
+          <progress class="progress progress-warning" value="40" max="100"></progress>
+        </div>
+      </div>
+
+      <div class="card bg-gradient-to-br from-info to-info-focus text-info-content shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">
+            ⚡ Défi Vitesse
+            <div class="badge badge-error">URGENT</div>
+          </h3>
+          <p>Terminez en moins de 2 minutes</p>
+          <div class="card-actions justify-between items-center">
+            <div class="text-2xl font-bold">750 XP</div>
+            <button class="btn btn-error btn-sm">Go!</button>
+          </div>
+          <div class="divider my-2"></div>
+          <div class="flex justify-between text-sm">
+            <span>Temps restant</span>
+            <span class="countdown font-mono text-sm">
+              <span style="--value:1;"></span>:
+              <span style="--value:45;"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-gradient-to-br from-warning to-warning-focus text-warning-content shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">🔥 Série Parfaite</h3>
+          <p>7 jours consécutifs sans erreur</p>
+          <div class="card-actions justify-between items-center">
+            <div class="text-2xl font-bold">1000 XP</div>
+            <button class="btn btn-primary btn-sm" disabled>Complété!</button>
+          </div>
+          <div class="divider my-2"></div>
+          <div class="flex gap-1">
+            <div class="w-4 h-4 rounded bg-current"></div>
+            <div class="w-4 h-4 rounded bg-current"></div>
+            <div class="w-4 h-4 rounded bg-current"></div>
+            <div class="w-4 h-4 rounded bg-current"></div>
+            <div class="w-4 h-4 rounded bg-current"></div>
+            <div class="w-4 h-4 rounded bg-current"></div>
+            <div class="w-4 h-4 rounded bg-current"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SYSTÈME DE POINTS -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <div class="badge badge-primary">4</div>
+      Système de Points
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">💰 Votre Portefeuille</h3>
+          <div class="stats shadow">
+            <div class="stat">
+              <div class="stat-figure text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     class="inline-block w-8 h-8 stroke-current">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                  </path>
+                </svg>
+              </div>
+              <div class="stat-title">Points Totaux</div>
+              <div class="stat-value text-primary">1,650</div>
+              <div class="stat-desc">↗︎ +125 cette semaine</div>
+            </div>
+          </div>
+
+          <div class="stats shadow mt-4">
+            <div class="stat">
+              <div class="stat-figure text-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     class="inline-block w-8 h-8 stroke-current">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4">
+                  </path>
+                </svg>
+              </div>
+              <div class="stat-title">Points Dispo</div>
+              <div class="stat-value text-secondary">450</div>
+              <div class="stat-desc">Prêts à échanger</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">🏪 Boutique Récompenses</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center p-3 bg-base-100 rounded-lg">
+              <div class="flex items-center gap-3">
+                <div class="text-2xl">🎁</div>
+                <div>
+                  <div class="font-semibold">Cadeau Mystère</div>
+                  <div class="text-sm opacity-60">Surprise garantie!</div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-primary">100 pts</div>
+                <button class="btn btn-primary btn-xs mt-1">Échanger</button>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center p-3 bg-base-100 rounded-lg">
+              <div class="flex items-center gap-3">
+                <div class="text-2xl">☕</div>
+                <div>
+                  <div class="font-semibold">Café Gratuit</div>
+                  <div class="text-sm opacity-60">Valable 30 jours</div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-primary">250 pts</div>
+                <button class="btn btn-primary btn-xs mt-1">Échanger</button>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center p-3 bg-base-100 rounded-lg opacity-50">
+              <div class="flex items-center gap-3">
+                <div class="text-2xl">🎧</div>
+                <div>
+                  <div class="font-semibold">Casque Premium</div>
+                  <div class="text-sm opacity-60">Plus que 50 pts!</div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold">500 pts</div>
+                <button class="btn btn-disabled btn-xs mt-1">Bientôt</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. BARRE DE PROGRESSION -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <div class="badge badge-primary">5</div>
+      Barres de Progression
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">📊 Progression Générale</h3>
+
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm font-medium">Niveau 10 → 11</span>
+                <span class="text-sm">1,650 / 2,000 XP</span>
+              </div>
+              <progress class="progress progress-primary w-full" value="82" max="100"></progress>
+              <div class="text-xs text-center mt-1">82% - Plus que 350 XP!</div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm font-medium">Mission Actuelle</span>
+                <span class="text-sm">7 / 10</span>
+              </div>
+              <progress class="progress progress-success w-full" value="70" max="100"></progress>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm font-medium">Objectif Hebdomadaire</span>
+                <span class="text-sm">3 / 7 jours</span>
+              </div>
+              <progress class="progress progress-warning w-full" value="43" max="100"></progress>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title">🎯 Compétences</h3>
+
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm font-medium">🔥 Vitesse</span>
+                <div class="badge badge-error">Expert</div>
+              </div>
+              <progress class="progress progress-error w-full mt-1" value="95" max="100"></progress>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm font-medium">🎯 Précision</span>
+                <div class="badge badge-warning">Avancé</div>
+              </div>
+              <progress class="progress progress-warning w-full mt-1" value="78" max="100"></progress>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm font-medium">🧠 Stratégie</span>
+                <div class="badge badge-info">Intermédiaire</div>
+              </div>
+              <progress class="progress progress-info w-full mt-1" value="45" max="100"></progress>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm font-medium">⚡ Endurance</span>
+                <div class="badge badge-success">Bon</div>
+              </div>
+              <progress class="progress progress-success w-full mt-1" value="60" max="100"></progress>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CONTRAINTES ET TEMPS -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <div class="badge badge-primary">6</div>
+      Contraintes et Temps
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card bg-gradient-to-br from-error to-red-600 text-error-content shadow-xl">
+        <div class="card-body text-center">
+          <h3 class="card-title justify-center">⏰ Défi Express</h3>
+          <div class="text-4xl font-mono font-bold">
+            <span class="countdown">
+              <span style="--value:2;"></span>:
+              <span style="--value:34;"></span>
+            </span>
+          </div>
+          <p>Temps restant</p>
+          <div class="card-actions justify-center">
+            <button class="btn btn-warning">Terminer Maintenant</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-gradient-to-br from-warning to-orange-400 text-warning-content shadow-xl">
+        <div class="card-body text-center">
+          <h3 class="card-title justify-center">📅 Deadline</h3>
+          <div class="text-2xl font-bold">Dans 2 jours</div>
+          <p>Projet à rendre</p>
+          <div class="radial-progress text-warning-content" style="--value:65;" role="progressbar">65%</div>
+          <div class="card-actions justify-center">
+            <button class="btn btn-error btn-sm">Continuer</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-gradient-to-br from-info to-blue-600 text-info-content shadow-xl">
+        <div class="card-body text-center">
+          <h3 class="card-title justify-center">🏁 Sprint</h3>
+          <div class="text-xl font-bold">5 défis</div>
+          <p>en 10 minutes</p>
+          <div class="flex gap-1 justify-center mt-2">
+            <div class="w-3 h-3 rounded-full bg-current"></div>
+            <div class="w-3 h-3 rounded-full bg-current"></div>
+            <div class="w-3 h-3 rounded-full bg-current opacity-50"></div>
+            <div class="w-3 h-3 rounded-full bg-current opacity-30"></div>
+            <div class="w-3 h-3 rounded-full bg-current opacity-30"></div>
+          </div>
+          <div class="card-actions justify-center">
+            <button class="btn btn-success btn-sm">Continuer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PARCOURS UTILISATEUR -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <div class="badge badge-primary">7</div>
+      Parcours Utilisateur
+    </h2>
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h3 class="card-title">🗺️ Votre Parcours d'Apprentissage</h3>
+
+        <div class="relative">
+          <!-- Ligne de progression -->
+          <div class="absolute left-6 top-8 bottom-8 w-1 bg-base-300 rounded-full"></div>
+          <div class="absolute left-6 top-8 w-1 bg-primary rounded-full" style="height: 60%;"></div>
+
+          <div class="space-y-6 relative">
+            <!-- Étape complétée -->
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-success text-success-content flex items-center justify-center font-bold text-lg z-10">
+                ✓
+              </div>
+              <div class="flex-1 card bg-success/10 border border-success/20">
+                <div class="card-body py-3">
+                  <h4 class="font-bold">Bases Maîtrisées</h4>
+                  <p class="text-sm opacity-70">HTML, CSS, JavaScript</p>
+                  <div class="badge badge-success badge-sm">Complété</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Étape en cours -->
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-primary text-primary-content flex items-center justify-center font-bold text-lg z-10 pulse-animation">
+                2
+              </div>
+              <div class="flex-1 card bg-primary/10 border border-primary/20">
+                <div class="card-body py-3">
+                  <h4 class="font-bold">Framework Frontend</h4>
+                  <p class="text-sm opacity-70">React, Vue, Angular</p>
+                  <div class="flex items-center gap-2">
+                    <progress class="progress progress-primary w-32" value="65" max="100"></progress>
+                    <span class="text-sm">65%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Étape suivante -->
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-base-300 text-base-content flex items-center justify-center font-bold text-lg z-10">
+                3
+              </div>
+              <div class="flex-1 card bg-base-100 border border-base-300">
+                <div class="card-body py-3">
+                  <h4 class="font-bold opacity-60">Backend & API</h4>
+                  <p class="text-sm opacity-50">Node.js, Express, MongoDB</p>
+                  <div class="badge badge-ghost badge-sm">À venir</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Étape verrouillée -->
+            <div class="flex items-center gap-4 opacity-40">
+              <div class="w-12 h-12 rounded-full bg-base-300 flex items-center justify-center font-bold text-lg z-10">
+                🔒
+              </div>
+              <div class="flex-1 card bg-base-100 border border-base-300">
+                <div class="card-body py-3">
+                  <h4 class="font-bold">DevOps & Déploiement</h4>
+                  <p class="text-sm opacity-50">Docker, AWS, CI/CD</p>
+                  <div class="badge badge-ghost badge-sm">Verrouillé</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="text-center py-8 border-t border-base-300">
+    <div class="text-lg font-bold mb-2">🎮 Gamification avec DaisyUI</div>
+    <p class="text-sm opacity-60">Tous les composants sont prêts à être intégrés dans votre projet!</p>
+    <div class="flex justify-center gap-4 mt-4">
+      <div class="badge badge-primary">CSS pur</div>
+      <div class="badge badge-secondary">Tailwind CSS</div>
+      <div class="badge badge-accent">DaisyUI</div>
+      <div class="badge badge-info">Responsive</div>
+    </div>
+  </footer>
+
+
+</div>
+
+<script>
+    // Animation pour les nouveaux badges
+    function showNewBadge() {
+        const badges = document.querySelectorAll('.bounce-in');
+        badges.forEach(badge => {
+            badge.style.animation = 'bounceIn 0.6s ease-out';
+        });
+    }
+
+    // Simulation de progression
+    function updateProgress() {
+        const progressBars = document.querySelectorAll('.progress');
+        progressBars.forEach(bar => {
+            const currentValue = parseInt(bar.value);
+            if (currentValue < 100) {
+                bar.value = Math.min(currentValue + Math.random() * 2, 100);
+            }
+        });
+    }
+
+    // Simulation de notification
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} fixed top-4 right-4 w-80 z-50`;
+        notification.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>${message}</span>
+            `;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation initiale
+        showNewBadge();
+
+        // Simulation d'événements
+        setTimeout(() => showNotification('🎉 Nouveau défi disponible!', 'success'), 3000);
+        setTimeout(() => showNotification('⚠️ Votre série expire dans 2h', 'warning'), 8000);
+
+        // Mise à jour des progress bars
+        setInterval(updateProgress, 5000);
+    });
+</script>

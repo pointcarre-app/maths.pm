@@ -8,7 +8,9 @@ local_path: "#"
 source_link: https://github.com/pointcarre-app/estafette
 color: info
 classes_formatted:
-  - "Infrastructure 🇫🇷"
+  - "Open Source"
+  - "Infra 🇫🇷"
+
 tags:
   - python
   - tools

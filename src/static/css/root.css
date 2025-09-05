@@ -72,10 +72,10 @@
   /* Only slightly different from base-100 but noticeable for layering */
   /* --color-base-200: oklch(97% 0.005 120);      Very light warm gray */
 
-  --color-base-200: oklch(98.5% 0.001 190);      /* Very light warm gray : SEL*/
+  --color-base-200: oklch(96.5% 0.001 190);      /* Very light warm gray : SEL*/
   
   /* More pronounced but still very light for borders, dividers */
-  --color-base-300: oklch(92% 0.003 120);      /* Light warm gray */
+  --color-base-300: oklch(90% 0.002 155);      /* Light warm gray */
   
   /* Strong, matte dark text - not pure black but very readable */
   /* High contrast against white backgrounds for excellent readability */

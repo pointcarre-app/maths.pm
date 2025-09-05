@@ -193,6 +193,7 @@ async def build_static_site():
                 "/ressources",
                 "/readme",
                 "/settings",
+                "/sitemap.xml",  # SEO sitemap
                 "/kill-service-workers",
                 "/pm",  # PM root
             ]
@@ -332,7 +333,158 @@ async def build_static_site():
             else:
                 logger.error(f"✗ MISSING CRITICAL FILE: {file.relative_to(output_dir)}")
 
+        # Generate optimized static sitemap after build
+        logger.info("Generating optimized sitemap.xml...")
+        generate_static_sitemap(output_dir, legacy_github_pages)
+
         return True
+
+
+def generate_static_sitemap(output_dir: Path, legacy_mode: bool = False):
+    """Generate a static sitemap.xml file optimized for SEO
+
+    Args:
+        output_dir: The dist directory where files are built
+        legacy_mode: Whether this is for legacy GitHub Pages deployment
+    """
+    from datetime import datetime  # Import datetime here for the function
+
+    # Determine base URL based on deployment type
+    if legacy_mode:
+        base_url = "https://pointcarre-app.github.io/maths.pm"
+    else:
+        # Modern deployment with custom domain
+        base_url = "https://maths.pm"
+
+    urls = []
+
+    def add_url(path: str, priority: float = 0.5, changefreq: str = "weekly", lastmod: str = None):
+        """Helper to add a URL to the sitemap"""
+        if not lastmod:
+            lastmod = datetime.now().strftime("%Y-%m-%d")
+
+        # Ensure path starts with /
+        if not path.startswith("/"):
+            path = "/" + path
+
+        urls.append(
+            {
+                "loc": f"{base_url}{path}",
+                "lastmod": lastmod,
+                "changefreq": changefreq,
+                "priority": str(priority),
+            }
+        )
+
+    # 1. Core pages (highest priority)
+    if (output_dir / "index.html").exists():
+        add_url("/", priority=1.0, changefreq="daily")
+    if (output_dir / "ressources.html").exists():
+        add_url("/ressources", priority=0.9, changefreq="weekly")
+
+    # 2. Product pages (high priority)
+    if (output_dir / "sujets0.html").exists():
+        add_url("/sujets0", priority=0.8, changefreq="weekly")
+    if (output_dir / "sujets0-form.html").exists():
+        add_url("/sujets0-form", priority=0.7, changefreq="weekly")
+    if (output_dir / "corsica" / "index.html").exists():
+        add_url("/corsica/", priority=0.8, changefreq="weekly")
+    if (output_dir / "nagini.html").exists():
+        add_url("/nagini", priority=0.8, changefreq="weekly")
+
+    # 3. PM Documentation (scan actual built files)
+    pm_dir = output_dir / "pm"
+    if pm_dir.exists():
+        # Add PM root
+        add_url("/pm", priority=0.7, changefreq="weekly")
+
+        # Scan for all HTML files in pm directory
+        for html_file in pm_dir.rglob("*.html"):
+            relative_path = html_file.relative_to(output_dir)
+
+            # Get file modification time
+            file_mtime = datetime.fromtimestamp(html_file.stat().st_mtime).strftime("%Y-%m-%d")
+
+            # Construct URL path
+            url_path = "/" + str(relative_path.with_suffix("")).replace("\\", "/")
+
+            # Skip index.html files (use directory path instead)
+            if html_file.name == "index.html":
+                url_path = url_path.replace("/index", "")
+
+            # Determine priority based on depth
+            depth = len(relative_path.parts) - 1  # Subtract 1 for 'pm' directory
+            priority = max(0.4, 0.7 - (depth * 0.1))
+
+            # Special priority boost for certain products
+            if "corsica" in str(relative_path):
+                priority = min(0.8, priority + 0.1)
+            elif "sujets0" in str(relative_path):
+                priority = min(0.8, priority + 0.1)
+
+            add_url(url_path, priority=priority, changefreq="monthly", lastmod=file_mtime)
+
+    # 4. Utility pages (lower priority)
+    if (output_dir / "readme.html").exists():
+        add_url("/readme", priority=0.3, changefreq="monthly")
+    if (output_dir / "settings.html").exists():
+        add_url("/settings", priority=0.2, changefreq="monthly")
+    if (output_dir / "kill-service-workers.html").exists():
+        add_url("/kill-service-workers", priority=0.1, changefreq="yearly")
+
+    # 5. Documentation pages
+    if (output_dir / "docs.html").exists():
+        add_url("/docs", priority=0.3, changefreq="monthly")
+    if (output_dir / "redoc.html").exists():
+        add_url("/redoc", priority=0.3, changefreq="monthly")
+
+    # Generate XML content
+    url_entries = []
+    for url_data in urls:
+        url_entries.append(f"""    <url>
+        <loc>{url_data["loc"]}</loc>
+        <lastmod>{url_data["lastmod"]}</lastmod>
+        <changefreq>{url_data["changefreq"]}</changefreq>
+        <priority>{url_data["priority"]}</priority>
+    </url>""")
+
+    sitemap_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+{chr(10).join(url_entries)}
+</urlset>"""
+
+    # Write sitemap file
+    sitemap_path = output_dir / "sitemap.xml"
+    sitemap_path.write_text(sitemap_content, encoding="utf-8")
+
+    logger.info(f"✓ Generated sitemap.xml with {len(urls)} URLs")
+    logger.info(f"  Base URL: {base_url}")
+    logger.info(f"  Output: {sitemap_path}")
+
+    # Also create robots.txt for better SEO
+    robots_content = f"""# Robots.txt for maths.pm
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: {base_url}/sitemap.xml
+
+# Crawl-delay (be nice to search engines)
+Crawl-delay: 1
+
+# Disallow certain paths
+Disallow: /api/
+Disallow: /kill-service-workers
+Disallow: /_output/
+Disallow: /env/
+"""
+
+    robots_path = output_dir / "robots.txt"
+    robots_path.write_text(robots_content, encoding="utf-8")
+    logger.info("✓ Generated robots.txt for SEO")
 
 
 if __name__ == "__main__":

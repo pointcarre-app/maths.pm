@@ -7,17 +7,17 @@ HTML pages and user-facing routes
 """
 
 import logging
-import markdown
-from fastapi import APIRouter, Request, Query, HTTPException, Response
-from pathlib import Path
-from fastapi.responses import HTMLResponse, FileResponse
-from fastapi.responses import JSONResponse
 import mimetypes
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+import markdown
+import orjson
+from fastapi import APIRouter, Request, Query, HTTPException, Response
+from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
 
 from ..settings import settings, get_product_settings
-
-# Get the logger
-logger = logging.getLogger("maths_pm")
 from .pm.services.pm_runner import build_pm_from_file
 from .pm.services.pm_fs_service import (
     build_pm_tree,
@@ -25,9 +25,8 @@ from .pm.services.pm_fs_service import (
     build_file_preview_data,
 )
 
-
-from typing import Any
-import orjson
+# Get the logger
+logger = logging.getLogger("maths_pm")
 
 
 # Create sujets0 router
@@ -51,6 +50,104 @@ async def ressources(request: Request):
     return settings.templates.TemplateResponse(
         "ressources.html",
         {"request": request, "page": {"title": "Homepage"}, "products": products_for_template},
+    )
+
+
+@core_router.get("/sitemap.xml", response_class=Response)
+async def sitemap(request: Request):
+    """Generate XML sitemap for SEO - includes all PM files, product pages, and static routes"""
+
+    # Get base URL from request
+    base_url = str(request.base_url).rstrip("/")
+
+    # Track all URLs
+    urls = []
+
+    # Helper to add URL with priority and changefreq
+    def add_url(path: str, priority: float = 0.5, changefreq: str = "weekly", lastmod: str = None):
+        if not lastmod:
+            lastmod = datetime.now().strftime("%Y-%m-%d")
+
+        # Ensure path starts with /
+        if not path.startswith("/"):
+            path = "/" + path
+
+        urls.append(
+            {
+                "loc": f"{base_url}{path}",
+                "lastmod": lastmod,
+                "changefreq": changefreq,
+                "priority": str(priority),
+            }
+        )
+
+    # 1. Core pages (highest priority)
+    add_url("/", priority=1.0, changefreq="daily")
+    add_url("/ressources", priority=0.9, changefreq="weekly")
+
+    # 2. Product pages (high priority)
+    for product in settings.products:
+        if not product.is_hidden:  # Include products that are not hidden
+            # Add main product page
+            add_url(f"/{product.name}", priority=0.8, changefreq="weekly")
+
+            # Add special product routes if they exist
+            if product.name == "sujets0":
+                add_url("/sujets0-form", priority=0.7, changefreq="weekly")
+
+    # 3. PM Documentation pages (medium-high priority)
+    add_url("/pm", priority=0.7, changefreq="weekly")
+
+    # Scan PM files from pms directory
+    pms_dir = settings.base_dir / "pms"
+    if pms_dir.exists():
+        for pm_file in pms_dir.rglob("*.md"):
+            relative_path = pm_file.relative_to(pms_dir)
+            # Get file modification time
+            file_mtime = datetime.fromtimestamp(pm_file.stat().st_mtime).strftime("%Y-%m-%d")
+
+            # Determine priority based on depth and product
+            depth = len(relative_path.parts)
+            priority = max(0.4, 0.7 - (depth * 0.1))
+
+            # Special priority for index files
+            if pm_file.name == "index.md":
+                priority = min(0.8, priority + 0.2)
+
+            pm_path = f"/pm/{relative_path.as_posix()}"
+            add_url(pm_path, priority=priority, changefreq="monthly", lastmod=file_mtime)
+
+    # 4. Utility pages (lower priority)
+    add_url("/readme", priority=0.3, changefreq="monthly")
+    add_url("/settings", priority=0.2, changefreq="monthly")
+    add_url("/kill-service-workers", priority=0.1, changefreq="yearly")
+
+    # 5. API documentation (low priority)
+    add_url("/docs", priority=0.3, changefreq="monthly")
+    add_url("/redoc", priority=0.3, changefreq="monthly")
+
+    # Generate XML content
+    url_entries = []
+    for url_data in urls:
+        url_entries.append(f"""    <url>
+        <loc>{url_data["loc"]}</loc>
+        <lastmod>{url_data["lastmod"]}</lastmod>
+        <changefreq>{url_data["changefreq"]}</changefreq>
+        <priority>{url_data["priority"]}</priority>
+    </url>""")
+
+    sitemap_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{chr(10).join(url_entries)}
+</urlset>"""
+
+    return Response(
+        content=sitemap_content,
+        media_type="application/xml",
+        headers={
+            "Content-Type": "application/xml; charset=utf-8",
+            "Cache-Control": "public, max-age=3600",  # Cache for 1 hour
+        },
     )
 
 
