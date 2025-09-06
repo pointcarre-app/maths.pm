@@ -73,57 +73,20 @@
   {# Backend settings loaded from data-brick in the content block #}
 {% endblock extra_head %}
 
-{% block modal_info_content %}
-  {% include "sujets0/modal-info-content.html" %}
-{% endblock modal_info_content %}
-
 {% block content %}
-
-
   <div class="padding-alt-security mx-auto mb-14 mt-8 max-w-4xl ">
     {% include "sujets0/header.html" %}
 
-
     {% include "sujets0/tabs.html" %}
 
-
     <div class="tab-alt-content" id="generate-content">
-      <div role="alert"
-           class="alert alert-warning alert-soft border-1 mb-6"
-           style="border-radius: var(--radius-card) !important;
-                  border-color: var(--color-warning) !important;
-                  background-color: var(--color-base-100) !important">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="h-6 w-6 shrink-0 stroke-current"
-             fill="none"
-             viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
-        <span><span class="font-handwritten text-lg">Maths.pm</span> ne collecte aucune donnée. Toute l'exécution a lieu dans le navigateur. Si votre ordinateur connaît des ralentisssements trop importants lors de la génération de questions, vous pouvez utiliser ces <a href="/sujets0/pre-genetated" class="link link-primary">fichiers PDFs</a> qui contiennent des exercices pré-générés.</span>
-      </div>
 
-      <div role="alert"
-           class="alert alert-info alert-soft border-1 mb-6"
-           style="border-radius: var(--radius-card) !important;
-                  border-color: var(--color-info) !important;
-                  background-color: var(--color-base-100) !important">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             fill="none"
-             viewBox="0 0 24 24"
-             class="h-6 w-6 shrink-0 stroke-current">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-          </path>
-        </svg>
-        <span>Lorsque vous arrivez sur la page et pour vous faire gagner du temps, le générateur s'exécute automatiquement. Quelques questions sont générées pour deux copies (i.e. deux élèves).</span>
-      </div>
       {% include "sujets0/generate-content-refactored.html" %}
     </div>
-
 
     <div class="tab-alt-content tab-alt-hidden" id="documentation-content">
       {% include "sujets0/documentation.html" %}
     </div>
-
 
   </div>
 

@@ -6,58 +6,69 @@
 
     <title>
       {% block title %}
-        {{ DOMAIN_CONFIG['index_view_specific_metatags']['title'] }}
-      {% endblock title %}
+        {{
+        DOMAIN_CONFIG['index_view_specific_metatags']['title'] }}
+      {% endblock
+      title %}
     </title>
     {% include "base/favicon.html" %}
-    {% include "base/imports.html" %}
 
-    {# Generic domain-wide metatags from domain config #}
-    {% if DOMAIN_CONFIG.domain_specific_metatags %}
+    {% include "base/imports.html" %}
+    {#
+Generic domain-wide metatags from domain config #}
+    {% if
+      DOMAIN_CONFIG.domain_specific_metatags %}
       {# Essential technical metatags #}
       {% if DOMAIN_CONFIG.domain_specific_metatags['theme-color'] %}
         <meta name="theme-color" content="{{ DOMAIN_CONFIG.domain_specific_metatags['theme-color'] }}" />
       {% endif %}
-
       {# Business/Site identity #}
-      {% if DOMAIN_CONFIG.domain_specific_metatags.subject %}
+      {% if
+        DOMAIN_CONFIG.domain_specific_metatags.subject %}
         <meta name="subject" content="{{ DOMAIN_CONFIG.domain_specific_metatags.subject }}" />
       {% endif %}
+
       {% if DOMAIN_CONFIG.domain_specific_metatags.copyright %}
         <meta name="copyright" content="{{ DOMAIN_CONFIG.domain_specific_metatags.copyright }}" />
       {% endif %}
+
       {% if DOMAIN_CONFIG.domain_specific_metatags.language %}
         <meta name="language" content="{{ DOMAIN_CONFIG.domain_specific_metatags.language }}" />
       {% endif %}
+
       {% if DOMAIN_CONFIG.domain_specific_metatags.Classification %}
         <meta name="Classification" content="{{ DOMAIN_CONFIG.domain_specific_metatags.Classification }}" />
       {% endif %}
+
       {% if DOMAIN_CONFIG.domain_specific_metatags.rating %}
         <meta name="rating" content="{{ DOMAIN_CONFIG.domain_specific_metatags.rating }}" />
       {% endif %}
-
       {# Mobile optimization #}
-      {% if DOMAIN_CONFIG.domain_specific_metatags.HandheldFriendly %}
+      {% if
+        DOMAIN_CONFIG.domain_specific_metatags.HandheldFriendly %}
         <meta name="HandheldFriendly" content="{{ DOMAIN_CONFIG.domain_specific_metatags.HandheldFriendly }}" />
       {% endif %}
+
       {% if DOMAIN_CONFIG.domain_specific_metatags.MobileOptimized %}
         <meta name="MobileOptimized" content="{{ DOMAIN_CONFIG.domain_specific_metatags.MobileOptimized }}" />
       {% endif %}
-
       {# Open Graph site-wide #}
-      {% if DOMAIN_CONFIG.domain_specific_metatags['og:site_name'] %}
+      {% if
+        DOMAIN_CONFIG.domain_specific_metatags['og:site_name'] %}
         <meta property="og:site_name" content="{{ DOMAIN_CONFIG.domain_specific_metatags['og:site_name'] }}" />
       {% endif %}
-
       {# Twitter site-wide #}
-      {% if DOMAIN_CONFIG.domain_specific_metatags['twitter:site'] %}
+      {% if
+        DOMAIN_CONFIG.domain_specific_metatags['twitter:site'] %}
         <meta name="twitter:site" content="{{ DOMAIN_CONFIG.domain_specific_metatags['twitter:site'] }}" />
       {% endif %}
-    {% endif %}
 
-    {# Page-specific defaults from index_view_specific_metatags - can be overridden #}
-    {# Only apply defaults if no product-specific metatags are provided #}
-    {% if not product_metatags %}
+    {% endif %}
+    {# Page-specific defaults from
+index_view_specific_metatags - can be overridden #} {# Only apply defaults
+if no product-specific metatags are provided #}
+    {% if not product_metatags
+      %}
       <meta name="description" content="{{ DOMAIN_CONFIG['index_view_specific_metatags']['description'] }}" />
       <meta name="keywords" content="{{ DOMAIN_CONFIG['index_view_specific_metatags']['keywords'] }}" />
     {% endif %}
@@ -65,68 +76,89 @@
 
     <!-- Custom head elements from domain config -->
     {% if DOMAIN_CONFIG.extra_head %}
-      {% for js_url in DOMAIN_CONFIG.extra_head.js %}<script src="{{ js_url }}"></script>{% endfor %}
+
+      {% for js_url in
+        DOMAIN_CONFIG.extra_head.js %}
+        <script src="{{ js_url }}"></script>
+      {% endfor %}
 
       {% for css_url in DOMAIN_CONFIG.extra_head.css %}
         <link rel="stylesheet" href="{{ css_url }}" />
       {% endfor %}
+
     {% endif %}
 
     <!-- 🎯 Smart Product Dependency Loader -->
     {# Only load if not already provided by product template #}
-    {% if not product_backend_settings %}
-      {% set path_segments = request.url.path.strip('/').split('/') %}
-      {% set current_route = path_segments[0] if path_segments and path_segments[0] else '' %}
+    {% if not
+      product_backend_settings %}
+      {% set path_segments = request.url.path.strip('/').split('/') %} {% set current_route = path_segments[0] if path_segments and path_segments[0] else '' %}
+      {% if
+        current_route %}
 
-      {% if current_route %}
         {% for product in products %}
-          {% if product.name == current_route and product.backend_settings %}
+
+          {% if product.name ==
+            current_route and product.backend_settings %}
             <!-- Auto-loading {{ product.name }} dependencies (route: /{{ current_route }}) -->
             {% for setting_key, setting_value in product.backend_settings.items() %}
-              {% if setting_value.js_url %}<script src="{{ setting_value.js_url }}"></script>{% endif %}
-              {% if setting_value.css_url %}
-                <link rel="stylesheet" href="{{ setting_value.css_url }}" />
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
+              {%
+              if setting_value.js_url %}
+              <script src="{{ setting_value.js_url }}"></script>
+            {% endif %}
+
+            {% if setting_value.css_url %}
+              <link rel="stylesheet" href="{{ setting_value.css_url }}" />
+            {% endif %}
+
+          {% endfor %}
+
+        {% endif %}
+
+      {% endfor %}
+
     {% endif %}
 
-    <script>
-        // Set backend settings as a global JS object
-        // ... existing code ...
-    </script>
+  {% endif %}
 
-    {% block extra_head %}
-    {% endblock extra_head %}
-  </head>
+  <script>
+      // Set backend settings as a global JS object
+      // ... existing code ...
+  </script>
 
-  {% include "base/bg.html" %}
-  <body class="text-base-content font-sans min-h-screen">
-    {% include "base/data-brick.html" %}
+  {% block extra_head %}
 
-    {% include "base/navbar-alt.html" %}
-    {# {% include "base/below-navbar.html" %} #}
+  {% endblock extra_head %}
+</head>
 
+{% include "base/bg.html" %}
 
-    {% include "sujets0/drawer.html" %}
+<body class="text-base-content font-sans min-h-screen">
+  {% include "base/data-brick.html" %}
 
-    <main class="mx-auto">
-      {% block content %}
-      {% endblock content %}
-    </main>
+  {% include "base/navbar-alt.html" %}
+  {#
+{% include "base/below-navbar.html" %} #}
+  {% include "sujets0/drawer.html"
+  %}
 
-    <!-- Navbar active state management -->
-    <script src="{{ request.url_for('static', path='js/navbar-active-state.js') }}"></script>
+  <main class="mx-auto">
+    {% block content %}
 
-    {% block footers %}
-      {% include  DOMAIN_CONFIG['templating']['footer_template'] %}
-    {% endblock footers %}
+    {% endblock content %}
+  </main>
 
-  </body>
+  <!-- Navbar active state management -->
+  <script src="{{ request.url_for('static', path='js/navbar-active-state.js') }}"></script>
+
+  {% block footers %}
+
+    {% include
+    DOMAIN_CONFIG['templating']['footer_template'] %}
+
+  {% endblock footers %}
+</body>
 </html>
-
 
 <!-- Subscription Call-to-Action
       <section class="my-12 p-6 bg-base-200 rounded-lg text-center">

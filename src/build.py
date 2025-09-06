@@ -250,6 +250,7 @@ class StaticSiteBuilder:
             "/settings",  # Settings view page
             "/kill-service-workers",  # Service worker management
             "/pm",  # PM root directory listing
+            "rgpd",
         ]
 
         # ====== API ROUTES ======

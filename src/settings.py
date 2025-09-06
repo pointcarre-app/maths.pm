@@ -94,6 +94,7 @@ domain_config_schema = Map(
                 "button_primary_href": Str(),
                 "button_ghost_text": Str(),
                 "button_ghost_href": Str(),
+                "rgpd_template": Str(),
             }
         ),
         StrictOptional("extra_head"): Map(

@@ -697,3 +697,9 @@ async def get_pm(
 async def identity(request: Request):
     """HTML interface for frontend execution with logs."""
     return settings.templates.TemplateResponse("identity/index.html", {"request": request})
+
+
+@core_router.get("/rgpd", response_class=HTMLResponse)
+async def rgpd(request: Request):
+    """HTML interface for frontend execution with logs."""
+    return settings.templates.TemplateResponse("rgpd.html", {"request": request})

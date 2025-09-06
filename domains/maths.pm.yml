@@ -154,6 +154,7 @@ templating:
   button_primary_href: "/ressources"
   button_ghost_text: "Contact"
   button_ghost_href: "/contact"
+  rgpd_template: "domains/maths-pm/rgpd.html"
 
 # Backend settings are now configured per product in /products/ directory
 # This keeps the domain configuration clean and allows for better organization 

@@ -146,6 +146,7 @@ class TemplatingModel(BaseModel):
     button_primary_href: str
     button_ghost_text: str
     button_ghost_href: str
+    rgpd_template: str
 
 
 class DomainModel(BaseModel):

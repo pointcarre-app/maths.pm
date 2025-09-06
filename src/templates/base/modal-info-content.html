@@ -7,9 +7,8 @@
     {% include "base/licenses.html" %}
   </div>
 
-
   <details class="p-0">
-    <summary class="cursor-pointer  hover:bg-base-100 rounded-lg text-sm">
+    <summary class="cursor-pointer hover:bg-base-100 rounded-lg text-sm">
       <span class="select-none">Codes sources : AGPLv3</span>
     </summary>
     <div class="px-4 pb-4 pt-4 text-sm leading-relaxed">
@@ -21,18 +20,20 @@
              height="96" />
       </div>
       <p>
-        Tous les codes sources des ressources référencées sur ce site et créées par la SAS Pointcarre.app sont distribués sous licence
+        Tous les codes sources des ressources référencées sur ce site et créées
+        par la SAS Pointcarre.app sont distribués sous licence
         <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="link link-primary">AGPLv3</a>.
       </p>
       <p class="mt-2">
-        Vous êtes libre de les utiliser, modifier et redistribuer, y compris pour un usage commercial,
-        à condition de partager vos modifications sous la même licence.
+        Vous êtes libre de les utiliser, modifier et redistribuer, y compris
+        pour un usage commercial, à condition de partager vos modifications sous
+        la même licence.
       </p>
     </div>
   </details>
 
   <details class="p-0">
-    <summary class="cursor-pointer  hover:bg-base-100 rounded-lg text-sm">
+    <summary class="cursor-pointer hover:bg-base-100 rounded-lg text-sm">
       <span class="select-none">Contenus : CC BY-NC-SA 4.0</span>
     </summary>
     <div class="px-4 pb-4 pt-4 text-sm leading-relaxed">
@@ -44,13 +45,14 @@
              height="96" />
       </div>
       <p>
-        Tous les contenus référencés sur ce site et créés par la SAS Pointcarre.app
-        (exercices, cours, articles, documentation, mentions légales, etc.) sont sous licence
+        Tous les contenus référencés sur ce site et créés par la SAS
+        Pointcarre.app (exercices, cours, articles, documentation, mentions
+        légales, etc.) sont sous licence
         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="link link-primary">CC BY-NC-SA 4.0</a>.
       </p>
       <p class="mt-2">
-        Vous pouvez les partager et les adapter librement pour un usage non commercial,
-        en citant la source et en conservant la même licence.
+        Vous pouvez les partager et les adapter librement pour un usage non
+        commercial, en citant la source et en conservant la même licence.
       </p>
     </div>
   </details>
@@ -61,6 +63,64 @@
       <button class="btn btn-soft">Fermer</button>
     </form>
   </div>
-
-
 </div>
+
+
+{# <div class="py-8 sm:px-6">
+  <div class="text-left mb-8">
+    <h2 class="text-2xl font-bold mb-2">Licences et droits d'usage</h2>
+  </div>
+
+  <div class="bg-base-100 rounded-lg border border-base-300 p-2 sm:p-6 mb-6">
+    {% include "base/licenses.html" %}
+  </div>
+
+  <details class="p-0">
+    <summary class="cursor-pointer hover:bg-base-100 rounded-lg text-sm">
+      <span class="select-none">Codes sources : AGPLv3</span>
+    </summary>
+    <div class="px-4 pb-4 pt-4 text-sm leading-relaxed">
+      <div class="flex justify-center mb-4">
+        <img class="w-24 h-auto" src="{{ request.url_for('static', path='icons/licenses/AGPLv3_Logo.svg') }}" alt="Logo licence AGPLv3" width="96" height="96" />
+      </div>
+      <p>
+        Tous les codes sources des ressources référencées sur ce site et créées
+        par la SAS Pointcarre.app sont distribués sous licence
+        <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="link link-primary">AGPLv3</a>.
+      </p>
+      <p class="mt-2">
+        Vous êtes libre de les utiliser, modifier et redistribuer, y compris
+        pour un usage commercial, à condition de partager vos modifications sous
+        la même licence.
+      </p>
+    </div>
+  </details>
+
+  <details class="p-0">
+    <summary class="cursor-pointer hover:bg-base-100 rounded-lg text-sm">
+      <span class="select-none">Contenus : CC BY-NC-SA 4.0</span>
+    </summary>
+    <div class="px-4 pb-4 pt-4 text-sm leading-relaxed">
+      <div class="flex justify-center mb-4">
+        <img class="w-24 h-auto" src="{{ request.url_for('static', path='icons/licenses/CC_BY-NC-SA.svg') }}" alt="Logo licence Creative Commons BY-NC-SA" width="96" height="96" />
+      </div>
+      <p>
+        Tous les contenus référencés sur ce site et créés par la SAS
+        Pointcarre.app (exercices, cours, articles, documentation, mentions
+        légales, etc.) sont sous licence
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="link link-primary">CC BY-NC-SA 4.0</a>.
+      </p>
+      <p class="mt-2">
+        Vous pouvez les partager et les adapter librement pour un usage non
+        commercial, en citant la source et en conservant la même licence.
+      </p>
+    </div>
+  </details>
+
+  <div class="modal-action"></div>
+  <div class="text-right">
+    <form method="dialog">
+      <button class="btn btn-soft">Fermer</button>
+    </form>
+  </div>
+</div> #}

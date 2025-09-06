@@ -21,6 +21,56 @@ for product in settings.products:
         break
 
 
+@sujets0_router.get("/", response_class=HTMLResponse)
+async def sujets0(request: Request):
+    """
+    Sujets0 application page - Mathematics exercise generator.
+
+    Uses product settings from the main settings module.
+    """
+    try:
+        # Build template context with product-specific settings
+        context = {
+            "request": request,
+            "page": {"title": "Sujets 0 - Générateur d'exercices"},
+        }
+
+        # Add product-specific context if available
+        if sujets0_product:
+            context.update(
+                {
+                    "product_name": sujets0_product.name,
+                    "product_title": sujets0_product.title_html,
+                    "product_description": getattr(
+                        sujets0_product, "description", "Générateur d'exercices mathématiques"
+                    ),
+                    # Pass product metatags for template to use
+                    "product_metatags": sujets0_product.metatags,
+                    # Pass backend settings if any
+                    "product_backend_settings": sujets0_product.backend_settings,
+                    # Add the full product object for template access
+                    "current_product": sujets0_product,
+                    # Specific settings for Sujets0
+                    "arpege_script_paths": sujets0_product.backend_settings.get(
+                        "arpege_generator_script_paths", []
+                    )
+                    if sujets0_product.backend_settings
+                    else [],
+                    "is_enabled": not sujets0_product.is_hidden,
+                    # Add generator levels information from product backend settings
+                    "generator_levels": sujets0_product.backend_settings.get("generator_levels", {})
+                    if sujets0_product.backend_settings
+                    else {},
+                    "get_generator_level": get_generator_level_info,
+                }
+            )
+
+        return settings.templates.TemplateResponse("sujets0/index/root.html", context)
+
+    except Exception as e:
+        return HTMLResponse(f"Error: {e}", status_code=500)
+
+
 @sujets0_router.get("/form", response_class=HTMLResponse)
 async def sujets0_form(request: Request):
     """
@@ -66,56 +116,6 @@ async def sujets0_form(request: Request):
             )
 
         return settings.templates.TemplateResponse("sujets0/form.html", context)
-
-    except Exception as e:
-        return HTMLResponse(f"Error: {e}", status_code=500)
-
-
-@sujets0_router.get("/sujets0", response_class=HTMLResponse)
-async def sujets0(request: Request):
-    """
-    Sujets0 application page - Mathematics exercise generator.
-
-    Uses product settings from the main settings module.
-    """
-    try:
-        # Build template context with product-specific settings
-        context = {
-            "request": request,
-            "page": {"title": "Sujets 0 - Générateur d'exercices"},
-        }
-
-        # Add product-specific context if available
-        if sujets0_product:
-            context.update(
-                {
-                    "product_name": sujets0_product.name,
-                    "product_title": sujets0_product.title_html,
-                    "product_description": getattr(
-                        sujets0_product, "description", "Générateur d'exercices mathématiques"
-                    ),
-                    # Pass product metatags for template to use
-                    "product_metatags": sujets0_product.metatags,
-                    # Pass backend settings if any
-                    "product_backend_settings": sujets0_product.backend_settings,
-                    # Add the full product object for template access
-                    "current_product": sujets0_product,
-                    # Specific settings for Sujets0
-                    "arpege_script_paths": sujets0_product.backend_settings.get(
-                        "arpege_generator_script_paths", []
-                    )
-                    if sujets0_product.backend_settings
-                    else [],
-                    "is_enabled": not sujets0_product.is_hidden,
-                    # Add generator levels information from product backend settings
-                    "generator_levels": sujets0_product.backend_settings.get("generator_levels", {})
-                    if sujets0_product.backend_settings
-                    else {},
-                    "get_generator_level": get_generator_level_info,
-                }
-            )
-
-        return settings.templates.TemplateResponse("sujets0/index.html", context)
 
     except Exception as e:
         return HTMLResponse(f"Error: {e}", status_code=500)

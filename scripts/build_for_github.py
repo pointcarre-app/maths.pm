@@ -196,6 +196,7 @@ async def build_static_site():
                 "/sitemap.xml",  # SEO sitemap
                 "/kill-service-workers",
                 "/pm",  # PM root
+                "/rgpd",
             ]
         )
 
