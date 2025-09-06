@@ -105,7 +105,7 @@ async def fetch_and_save(client, route, output_dir, base_path="/maths.pm", moder
                 content = content.replace("from '@js/", f"from '{base_path}/static/js/")
                 content = content.replace('from "@js/', f'from "{base_path}/static/js/')
             # Modern deployment (maths.pm): keep original paths
-            # No transformations needed - paths stay as /sujets0-form, /static/css/main.css, etc.
+            # No transformations needed - paths stay as /sujets0/form, /static/css/main.css, etc.
 
             # Convert PM links from .md to .html and remove ?format=html
             # This ensures links work in the static site
@@ -215,7 +215,7 @@ async def build_static_site():
         routes.extend(
             [
                 "/sujets0",
-                "/sujets0-form",
+                "/sujets0/form",
                 "/corsica/",
                 "/nagini",
             ]
@@ -384,9 +384,11 @@ def generate_static_sitemap(output_dir: Path, legacy_mode: bool = False):
 
     # 2. Product pages (high priority)
     if (output_dir / "sujets0.html").exists():
-        add_url("/sujets0", priority=0.8, changefreq="weekly")
-    if (output_dir / "sujets0-form.html").exists():
-        add_url("/sujets0-form", priority=0.7, changefreq="weekly")
+        add_url(
+            "/sujets0", priority=0.8, changefreq="weekly"
+        )  # TODO sel : ensure make sense for changefreq
+    if (output_dir / "sujets0/form.html").exists():
+        add_url("/sujets0/form", priority=0.7, changefreq="weekly")
     if (output_dir / "corsica" / "index.html").exists():
         add_url("/corsica/", priority=0.8, changefreq="weekly")
     if (output_dir / "nagini.html").exists():

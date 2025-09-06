@@ -93,7 +93,7 @@ async def sitemap(request: Request):
 
             # Add special product routes if they exist
             if product.name == "sujets0":
-                add_url("/sujets0-form", priority=0.7, changefreq="weekly")
+                add_url("/sujets0/form", priority=0.7, changefreq="weekly")
 
     # 3. PM Documentation pages (medium-high priority)
     add_url("/pm", priority=0.7, changefreq="weekly")

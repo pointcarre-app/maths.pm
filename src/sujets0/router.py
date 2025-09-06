@@ -11,7 +11,7 @@ from ..settings import settings
 from .dispatch_2de_1ere import get_generator_level_info
 
 # Create sujets0 router
-sujets0_router = APIRouter(tags=["sujets0"])
+sujets0_router = APIRouter(tags=["sujets0"], prefix="/sujets0")
 
 # Load sujets0 product settings once at module level
 sujets0_product = None
@@ -21,7 +21,7 @@ for product in settings.products:
         break
 
 
-@sujets0_router.get("/sujets0-form", response_class=HTMLResponse)
+@sujets0_router.get("/form", response_class=HTMLResponse)
 async def sujets0_form(request: Request):
     """
     Sujets0 application page - Mathematics exercise generator.
@@ -65,7 +65,7 @@ async def sujets0_form(request: Request):
                 }
             )
 
-        return settings.templates.TemplateResponse("sujets0/sujets0-form.html", context)
+        return settings.templates.TemplateResponse("sujets0/form.html", context)
 
     except Exception as e:
         return HTMLResponse(f"Error: {e}", status_code=500)
@@ -121,7 +121,7 @@ async def sujets0(request: Request):
         return HTMLResponse(f"Error: {e}", status_code=500)
 
 
-@sujets0_router.get("/sujets0/data-only", response_class=HTMLResponse)
+@sujets0_router.get("/data-only", response_class=HTMLResponse)
 async def sujets0_data_only(request: Request):
     """
     Sujets0 application page - Mathematics exercise generator.
@@ -174,7 +174,7 @@ async def sujets0_data_only(request: Request):
 # @sujets0_router.get("/sujets0/originals", response_class=HTMLResponse)
 
 
-@sujets0_router.get("/sujets0/ex-ante-generated", response_class=HTMLResponse)
+@sujets0_router.get("/ex-ante-generated", response_class=HTMLResponse)
 async def sujets0_ex_ante_generated(request: Request):
     """
     Pre-generated questions viewer - Displays questions from the build process.
@@ -274,7 +274,7 @@ async def sujets0_ex_ante_generated(request: Request):
         return HTMLResponse(f"Error: {e}", status_code=500)
 
 
-@sujets0_router.get("/sujets0/ex-ante-generated-error-analysis", response_class=HTMLResponse)
+@sujets0_router.get("/ex-ante-generated-error-analysis", response_class=HTMLResponse)
 async def sujets0_ex_ante_generated_error_analysis(request: Request):
     """
     Error analysis view for pre-generated questions.
@@ -380,7 +380,7 @@ async def sujets0_ex_ante_generated_error_analysis(request: Request):
         return HTMLResponse(f"Error: {e}", status_code=500)
 
 
-@sujets0_router.get("/sujets0/teacher-manifest", response_class=HTMLResponse)
+@sujets0_router.get("/teacher-manifest", response_class=HTMLResponse)
 async def sujets0_teacher_manifest(request: Request):
     """
     Teacher manifest - Display answer sheet from URL-encoded data.
@@ -412,7 +412,7 @@ async def sujets0_teacher_manifest(request: Request):
         return HTMLResponse(f"Error: {e}", status_code=500)
 
 
-@sujets0_router.get("/sujets0/originals/{filiere_number}", response_class=HTMLResponse)
+@sujets0_router.get("/originals/{filiere_number}", response_class=HTMLResponse)
 async def sujets0_originals(request: Request, filiere_number: str):
     """
     Original curriculum questions viewer by filiere.
@@ -661,7 +661,7 @@ async def scenery(request: Request):
 #############################
 
 
-@sujets0_router.get("/sujets0/v4pyjs", response_class=HTMLResponse)
+@sujets0_router.get("/v4pyjs", response_class=HTMLResponse)
 async def v4pyjs_test(request: Request):
     """
     V4PyJS test page - Testing environment for V4PyJS.

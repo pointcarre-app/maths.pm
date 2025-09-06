@@ -1,0 +1,363 @@
+<!-- Sujets0 Generate Content - REFACTORED with unified UI -->
+
+<!-- Configuration Section -->
+<div class="font-heading text-lg sm:text-xl md:text-2xl mt-12 mb-4">
+  Configurer la génération de copies
+</div>
+
+<div class="card bg-base-200 shadow-sm p-4 sm:p-6 md:p-8">
+  <form id="arpege-form" class="w-full max-w-[720px] mx-auto">
+    <!-- 2x2 Grid Layout -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+
+      <!-- Top Left: Number of copies -->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          <span class="font-light font-heading text-base md:text-lg">Nombre de copies</span>
+          <div class="tooltip tooltip-top"
+               data-tip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">
+            <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+          </div>
+        </legend>
+        <div class="join w-full">
+          <input type="number"
+                 id="nb-eleves"
+                 name="nb-eleves"
+                 min="1"
+                 max="50"
+                 value="2"
+                 required
+                 class="input input-bordered join-item flex-1 h-10" />
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('nb-eleves').stepDown()">−</button>
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('nb-eleves').stepUp()">+</button>
+        </div>
+        <p class="label-text-alt mt-1">Entre 1 et 50 copies</p>
+      </fieldset>
+
+      <!-- Top Right: Specialty selection -->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          <span class="font-light font-heading text-base md:text-lg">Filière / Spécialité</span>
+          <div class="tooltip tooltip-top"
+               data-tip="Spé pour spécialité maths, Non Spé pour enseignement spécifique et Techno pour filières technologiques">
+            <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help">?</span>
+          </div>
+        </legend>
+        <div class="join w-full">
+          <input type="radio" name="sujets0" value="spe" class="join-item btn h-10 flex-1" aria-label="Spé." checked />
+          <input type="radio"
+                 name="sujets0"
+                 value="non-spe"
+                 class="join-item btn h-10 flex-1"
+                 aria-label="Non Spé."
+                 disabled />
+          <input type="radio"
+                 name="sujets0"
+                 value="techno"
+                 class="join-item btn h-10 flex-1"
+                 aria-label="Techno"
+                 disabled />
+        </div>
+        <p class="label-text-alt mt-1">Choisir un programme officiel</p>
+      </fieldset>
+
+      <!-- Bottom Left: Questions per copy -->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          <span class="font-light font-heading text-base md:text-lg">Questions par copie</span>
+          <div class="tooltip tooltip-top" data-tip="Une partie A d'un sujet 0 officiel compte 12 questions">
+            <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+          </div>
+        </legend>
+        <div class="join w-full">
+          <input type="number"
+                 id="nb-questions"
+                 name="nb-questions"
+                 min="1"
+                 max="12"
+                 value="12"
+                 required
+                 class="input input-bordered join-item flex-1 h-10" />
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('nb-questions').stepDown()">−</button>
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('nb-questions').stepUp()">+</button>
+        </div>
+        <p class="label-text-alt mt-1">Entre 1 et 12 questions</p>
+      </fieldset>
+
+      <!-- Bottom Right: Seed number -->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          <span class="font-light font-heading text-base md:text-lg">Seed</span>
+          <div class="tooltip tooltip-top"
+               data-tip="Numéro de graine (=seed) pour la reproductibilité de la génération aléatoire des valeurs">
+            <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+          </div>
+        </legend>
+        <div class="join w-full">
+          <input type="number"
+                 id="seed"
+                 name="seed"
+                 min="1"
+                 max="100"
+                 value="9"
+                 required
+                 class="input input-bordered join-item flex-1 h-10" />
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('seed').stepDown()">−</button>
+          <button type="button"
+                  class="btn btn-square join-item h-10 w-10"
+                  onclick="document.getElementById('seed').stepUp()">+</button>
+        </div>
+        <p class="label-text-alt mt-1">Entre 1 et 100</p>
+      </fieldset>
+
+    </div>
+    <button id="big-generate-btn"
+            type="button"
+            class="btn btn-primary w-full font-bold bg-primary-focus hover:bg-primary-focus border-0 mt-4">
+      <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+      Générer les exercices
+    </button>
+
+
+  </form>
+</div>
+
+<!-- Big Generate Button -->
+
+
+<!-- JavaScript for form-based generation -->
+<script>
+    // Extract form configuration
+    function extractFormConfig() {
+        // Get form values
+        const nbStudents = document.getElementById('nb-eleves')?.value || 2;
+        const nbQuestions = document.getElementById('nb-questions')?.value || 12;
+        const seed = document.getElementById('seed')?.value || 9;
+
+        // Get selected curriculum from radio buttons
+        const curriculumRadio = document.querySelector('input[name="sujets0"]:checked');
+        let curriculum = 'Spé'; // default
+
+        if (curriculumRadio) {
+            switch (curriculumRadio.value) {
+                case 'spe':
+                    curriculum = 'Spé';
+                    break;
+                case 'non-spe':
+                    curriculum = 'Non-Spé';
+                    break;
+                case 'techno':
+                    curriculum = 'Techno';
+                    break;
+                default:
+                    curriculum = 'Spé';
+            }
+        }
+
+        return {
+            nbStudents,
+            nbQuestions,
+            seed,
+            curriculum
+        };
+    }
+
+    // Generate exercises based on form data
+    function generateFromForm() {
+        const config = extractFormConfig();
+
+        // Validate the configuration
+        const nbStudents = parseInt(config.nbStudents);
+        const nbQuestions = parseInt(config.nbQuestions);
+        const seed = parseInt(config.seed);
+
+        if (isNaN(nbStudents) || nbStudents < 1 || nbStudents > 50) {
+            alert('⚠️ Le nombre de copies doit être entre 1 et 50');
+            return;
+        }
+
+        if (isNaN(nbQuestions) || nbQuestions < 1 || nbQuestions > 12) {
+            alert('⚠️ Le nombre de questions doit être entre 1 et 12');
+            return;
+        }
+
+        if (isNaN(seed) || seed < 1 || seed > 100) {
+            alert('⚠️ La graine aléatoire doit être entre 1 et 100');
+            return;
+        }
+
+        console.log('🎯 Generating with config:', config);
+
+        // Build the target URL - adapt based on hosting environment
+        const baseUrl = `${window.location.protocol}//${window.location.host}`;
+
+        // Check deployment environment
+        const hostname = window.location.hostname;
+        const isLegacyGitHubPages = hostname.includes('.github.io');
+        const isProduction = hostname === 'maths.pm' || isLegacyGitHubPages;
+
+        // Construct the appropriate path based on hosting environment
+        let targetPath;
+        if (isLegacyGitHubPages) {
+            // Legacy GitHub Pages: include /maths.pm prefix and use .html extension
+            targetPath = `/maths.pm/pm/sujets0/a_generate.html`;
+        } else if (isProduction) {
+            // Production (maths.pm): direct path with .html extension
+            targetPath = `/pm/sujets0/a_generate.html`;
+        } else {
+            // Local development: direct path with .md extension
+            targetPath = `/pm/sujets0/a_generate.md`;
+        }
+
+        const targetUrl = `${baseUrl}${targetPath}?format=html&nbStudents=${config.nbStudents}&nbQuestions=${config.nbQuestions}&seed=${config.seed}&curriculum=${encodeURIComponent(config.curriculum)}#teacher-answer-table`;
+
+        console.log('🚀 Navigating to:', targetUrl);
+
+        // Navigate to the URL
+        window.location.href = targetUrl;
+    }
+
+    // Initialize the generate button when the page loads
+    function initializeGenerateButton() {
+        const generateBtn = document.getElementById('big-generate-btn');
+        if (generateBtn) {
+            generateBtn.addEventListener('click', generateFromForm);
+            console.log('✅ Generate button initialized');
+        } else {
+            console.warn('Generate button not found');
+        }
+    }
+
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeGenerateButton);
+    } else {
+        initializeGenerateButton();
+    }
+</script>
+
+<!-- Styles for document preview -->
+<style>
+    /* Papyrus document structure */
+    :root {
+        --papyrus-margin-top: 3mm;
+        --papyrus-margin-right: 8mm;
+        --papyrus-margin-bottom: 3mm;
+        --papyrus-margin-left: 8mm;
+        --papyrus-font-size-h1: 28px;
+        --papyrus-font-size-h2: 24px;
+        --papyrus-font-size-h3: 20px;
+        --papyrus-font-size-h4: 18px;
+        --papyrus-font-size-h5: 16px;
+        --papyrus-font-size-h6: 14px;
+        --papyrus-font-size-body: 15px;
+    }
+
+    .papyrus-document {
+        font-family: 'Spectral', serif;
+    }
+
+    .page-wrapper {
+        width: 210mm;
+        min-height: 297mm;
+        max-height: 297mm;
+        margin: 0 auto 10mm auto;
+        padding: 0;
+        background: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
+
+    .page-preview {
+        width: 100%;
+        height: 297mm;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    .page-content {
+        padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
+        height: 297mm;
+        width: 210mm;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Debug mode */
+    .debug-mode .page-wrapper {
+        border: 2px solid red;
+    }
+
+    .debug-mode .page-preview {
+        border: 2px solid blue;
+    }
+
+    .debug-mode .page-content {
+        border: 2px solid green;
+    }
+
+    /* Print styles */
+    @page {
+        margin: 0;
+        size: A4;
+    }
+
+    @media print {
+        .page-wrapper {
+            margin: 0;
+            box-shadow: none;
+            page-break-after: always;
+        }
+
+        .page-content {
+            padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            margin: 0;
+        }
+    }
+
+    /* Safari-specific styles */
+    @supports (-webkit-appearance: none) {
+        .text-2xs {
+            font-size: 0.625rem !important;
+            line-height: 1 !important;
+        }
+
+        .text-xs {
+            font-size: 0.75rem !important;
+            line-height: 1rem !important;
+        }
+
+        .text-sm {
+            font-size: 0.875rem !important;
+            line-height: 1.25rem !important;
+        }
+    }
+</style>

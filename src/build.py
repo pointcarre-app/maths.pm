@@ -276,7 +276,7 @@ class StaticSiteBuilder:
         # Product-specific routes
         product_routes = [
             "sujets0",  # Sujets0 product
-            "/sujets0-form",  # Sujets0 generate page
+            "/sujets0/form",  # Sujets0 generate page
             "/sujets0/teacher_manifest",  # Sujets0 teacher manifest
             "/sujets0/data-only",  # Sujets0 data-only page
             "/corsica/",  # Corsica product (trailing slash to avoid redirect)
