@@ -151,6 +151,12 @@ async def sitemap(request: Request):
     )
 
 
+@core_router.get("/sitemap-readable", response_class=HTMLResponse)
+async def sitemap_readable(request: Request):
+    """Readable sitemap for humans."""
+    return settings.templates.TemplateResponse("core/sitemap-readable.html", {"request": request})
+
+
 class ORJSONPrettyResponse(JSONResponse):
     def render(self, content: Any) -> bytes:
         return orjson.dumps(
@@ -702,4 +708,4 @@ async def identity(request: Request):
 @core_router.get("/rgpd", response_class=HTMLResponse)
 async def rgpd(request: Request):
     """HTML interface for frontend execution with logs."""
-    return settings.templates.TemplateResponse("rgpd.html", {"request": request})
+    return settings.templates.TemplateResponse("core/rgpd.html", {"request": request})

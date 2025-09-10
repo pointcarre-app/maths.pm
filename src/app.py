@@ -36,6 +36,9 @@ from .corsica.router import corsica_router
 from .jupyterlite.router import jupyterlite_router, jupyter_compat_router
 
 
+from .core.router_pm_examples import example_router
+
+
 def build_jupyterlite():
     """
     Build JupyterLite exactly like the working example.
@@ -433,6 +436,8 @@ app.include_router(nagini_router)
 app.include_router(api_router, prefix="/api")
 app.include_router(sujets0_router)
 app.include_router(corsica_router)
+app.include_router(example_router)
+
 
 # Conditionally include JupyterLite router
 if settings.jupyterlite_enabled:

@@ -1,0 +1,109 @@
+{% extends "base/main-alt.html" %}
+{# 
+  Example: Dynamic PM Loading Demo
+  This demonstrates loading PM content dynamically from templates
+#}
+
+{% block title %}Dynamic PM Loading Demo{% endblock %}
+
+{% block extra_head %}
+  {# Include PM head resources for styling #}
+  {% include "pm-include/head-resources.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">Dynamic PM Loading Examples</h1>
+
+    {# Example 1: Load a specific PM file with full rendering #}
+    <div class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">Example 1: Full PM Rendering</h2>
+      <div class="prose max-w-none">
+        <p class="mb-4">
+          Loading PM from: <code>corsica/a_troiz_geo.md</code>
+        </p>
+      </div>
+
+      {# Dynamically load and render the PM file #}
+      {% with pm_file="corsica/a_troiz_geo.md", product_name="corsica", show_toc=true %}
+        {% include "pm-include/render-dynamic.html" %}
+      {% endwith %}
+    </div>
+
+    <div class="divider"></div>
+
+    {# Example 2: Load multiple PM fragments in cards #}
+    <div class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">Example 2: Multiple PM Files in Cards</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        {# Card 1: Python Introduction #}
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">Python Basics</h3>
+            {# Load PM fragments only #}
+            {% with pm_file="pyly/01_premiers_pas.md", product_name="pyly" %}
+              {% include "pm-include/render-dynamic-fragments.html" %}
+            {% endwith %}
+          </div>
+        </div>
+
+        {# Card 2: Nagini Introduction #}
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">Nagini Introduction</h3>
+            {# Load PM fragments only #}
+            {% with pm_file="nagini/01_intro.md", product_name="nagini" %}
+              {% include "pm-include/render-dynamic-fragments.html" %}
+            {% endwith %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    {# Example 3: Conditional PM loading based on variables #}
+    <div class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">Example 3: Conditional PM Loading</h2>
+
+      {# Define which PM to load (in real app, this could come from route params) #}
+      {% set selected_topic = "examples" %}
+      {% set selected_file = "i_radio_example.md" %}
+
+      <div class="alert alert-info mb-4">
+        <span>Loading topic: <strong>{{ selected_topic }}</strong>, file: <strong>{{ selected_file }}</strong></span>
+      </div>
+
+      {# Construct the path and load the PM #}
+      {% set pm_path = selected_topic ~ "/" ~ selected_file %}
+      {% include "pm-include/render-dynamic.html" with pm_file=pm_path, show_debug=true %}
+    </div>
+
+    <div class="divider"></div>
+
+    {# Example 4: Inline PM fragments #}
+    <div class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">Example 4: Inline PM Content</h2>
+      <div class="prose max-w-none">
+        <p>You can embed PM content directly in your text:</p>
+
+        <div class="bg-base-200 p-4 rounded-lg my-4">
+          {# Load just the fragments inline #}
+          {% include "pm-include/render-dynamic-fragments.html" with pm_file="documentation/fragments_quick_reference.md" %}
+        </div>
+
+        <p>And continue with your regular content afterward.</p>
+      </div>
+    </div>
+
+    {# Example 5: Error handling #}
+    <div class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">Example 5: Error Handling</h2>
+      <p class="mb-4">This demonstrates what happens when a PM file doesn't exist:</p>
+
+      {# Try to load a non-existent file #}
+      {% include "pm-include/render-dynamic.html" with pm_file="non/existent/file.md" %}
+    </div>
+  </div>
+{% endblock %}

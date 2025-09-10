@@ -1,4 +1,4 @@
-<div class="card p-0 mx-auto border-base-300 border-1 shadow-lg" style="max-width: 450px;">
+<div class="card p-0 mx-auto border-base-200 border-2" style="max-width: 450px;">
   <!-- Safari-compatible fixed height container -->
   <div class="bg-base-100" style="height: 120px; position: relative;">
     {% if product.figure_png %}
@@ -25,7 +25,7 @@
     {% endif %}
   </div>
 
-  <hr class="border-base-300" />
+  <hr class="border-base-200" />
   <div class="card-body bg-base-100 py-8">
     <div class="flex flex-row items-center justify-between mb-3">
       <h2 class="card-title text-2xl gap-0 {{ product.font_class }}">{{ product.title_html|safe }}</h2>
@@ -62,7 +62,7 @@
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
         </svg>
         {% if product.product_type == "repo" %}
-          Tutorial
+          Tutoriel
         {% else %}
           Application
         {% endif %}

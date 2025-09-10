@@ -1,0 +1,14 @@
+{# Product Settings Warning Include #}
+{% if product_settings %}
+  {# {{ product_settings.name }} #}
+{% else %}
+  <div class="bg-warning text-warning-content text-center p-6 mb-12">
+    NO PRODUCT SETTINGS FOUND FOR:
+    <br />
+    <div class="font-mono badge">{{ product_name }}</div>
+    <br />
+    <div class="text-left text-xs">
+      Gentle remainder that the product name comes from the `origin` first subfolder (after `/pms` ).
+    </div>
+  </div>
+{% endif %}

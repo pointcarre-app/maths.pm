@@ -1,0 +1,41 @@
+name: pm
+product_type: "lib_from_mathspm"
+title_html: Pedagogical Message
+is_beta: true
+subtitle_html: Markdown enrichi pour l'enseignement
+description: "Servir du contenu pédagogique grâce à des fichiers Markdown enrichis, interactions via de QCM, évaluation d'expressions mathématiques, ou de code, etc..."
+local_path: /pm/teachers
+color: info
+figure_svg: pm-figure-svg.html
+classes_formatted:
+  - "Open Source"
+tags:
+  - education
+  - maths
+  - symbolic
+  - calculus
+  - engine
+domains:
+  - maths.pm
+
+owner_rdb: "SAS POINTCARRE.APP"
+owner_url: "https://pointcarre.app"
+
+
+# # Backend settings specific to Teachers
+# backend_settings:
+#   teachers:
+#     endpoint: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.20/"
+#     files_to_load:
+#       - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.20/src/teachers/__init__.py"
+#         path: "teachers/__init__.py"
+#       - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.20/src/teachers/generator.py"
+#         path: "teachers/generator.py"
+#       - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.20/src/teachers/maths.py"
+#         path: "teachers/maths.py"
+#       - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.20/src/teachers/formatting.py"
+#         path: "teachers/formatting.py"
+#       - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.20/src/teachers/corrector.py"
+#         path: "teachers/corrector.py"
+#       - url: "https://cdn.jsdelivr.net/gh/your-org/teachers@0.0.20/src/teachers/defaults.py"
+#         path: "teachers/defaults.py" 

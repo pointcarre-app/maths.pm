@@ -1,0 +1,48 @@
+{# 
+  PM Head Resources Template
+  
+  Usage in any template's extra_head block:
+    {% include "pm-include/head-resources.html" %}
+  
+  Required context variables:
+    - request: Request object for URL generation
+  
+  Optional context variables:
+    - include_mathlive: Include MathLive for LaTeX (default: true)
+    - include_codemirror: Include CodeMirror (default: true)
+    - pm_metatags: PM-specific metatags to include
+    - product_settings: Product settings for metatags fallback
+    - origin: Origin path for canonical URL
+#}
+
+{# PM Core Styles #}
+<link rel="stylesheet" href="{{ request.url_for('static', path='core/css/pm.css') }}" />
+<link rel="stylesheet" href="{{ request.url_for('static', path='core/css/toc.css') }}" />
+
+{# MathLive for LaTeX rendering #}
+{% if include_mathlive|default(true) %}
+  <script src="https://cdn.jsdelivr.net/npm/mathlive@0.105.2/mathlive.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/mathlive@0.105.2/mathlive-static.min.css" rel="stylesheet" />
+{% endif %}
+
+{# CodeMirror for code rendering #}
+{% if include_codemirror|default(true) %}
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+{% endif %}
+
+{# Import map for JS namespace aliases #}
+<script type="importmap">
+    {
+        "imports": {
+            "@js/": "{{ request.url_for('static', path='js/') }}"
+        }
+    }
+</script>
+
+{# Include PM metatags if provided #}
+{% if pm_metatags or product_settings %}
+  {% include 'pm/includes/metatags.html' %}
+{% endif %}

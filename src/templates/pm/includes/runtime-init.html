@@ -1,0 +1,16 @@
+{# PM Runtime Initialization Include #}
+<!-- PM runtime boot -->
+<script type="module">
+    import PMRuntime from '@js/pm/main.js';
+    const runtime = new PMRuntime({
+        mode: 'all'
+    });
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        runtime.init();
+    } else {
+        window.addEventListener('DOMContentLoaded', () => runtime.init(), {
+            once: true
+        });
+    }
+    window.pmRuntime = runtime;
+</script>

@@ -1,0 +1,88 @@
+{# 
+  Dynamic PM Rendering Template
+  
+  Usage in any template:
+    {% include "pm-include/render-dynamic.html" with pm_file="corsica/intro.md" %}
+    
+    or with product:
+    {% with pm_file="corsica/intro.md", product_name="corsica" %}
+      {% include "pm-include/render-dynamic.html" %}
+    {% endwith %}
+  
+  Required variables:
+    - pm_file: Path to the PM markdown file (relative to pms/ directory)
+  
+  Optional variables:
+    - product_name: Product name for loading product settings
+    - show_toc: Whether to show TOC (default: true)
+    - show_debug: Whether to show debug info (default: false)
+    - wrapper_class: Custom CSS class for wrapper
+#}
+
+{# Load the PM dynamically using the Jinja function #}
+{% set pm_context = load_pm(pm_file, product_name|default(none), show_debug|default(false)) %}
+
+{# Check if PM loaded successfully #}
+{% if pm_context.pm_loaded %}
+
+  {# Set PM variable for includes #}
+  {% set pm = pm_context.pm %}
+  {% set pm_json = pm_context.pm_json %}
+  {% set product_settings = pm_context.product_settings %}
+
+  {# Include TOC if requested and available #}
+  {% if show_toc|default(true) and pm and pm.toc %}
+    {% include 'pm/includes/toc-sidebar.html' %}
+  {% endif %}
+
+  {# Render PM content with optional wrapper #}
+  {% if wrapper_class %}
+    <div class="{{ wrapper_class }}">
+    {% else %}
+      <div class="pm-container lg:text-lg w-full md:max-w-3xl lg:max-w-4xl xl:max-w-4xl mx-auto">
+      {% endif %}
+
+      <div class="bg-base-100 shadow-2xl mt-12 px-4 py-4">
+        <div class="max-w-[640px] mx-auto md:py-12 bg-base-100">
+          {# Render fragments #}
+          {% if pm and pm.fragments %}
+            {% include 'pm/includes/fragments-renderer.html' %}
+          {% else %}
+            <div class="alert alert-info">
+              <span>No content available in this PM file.</span>
+            </div>
+          {% endif %}
+        </div>
+
+        {# Debug section if requested #}
+        {% if show_debug|default(false) %}
+          {% set debug = true %}
+          {% include 'pm/includes/debug-section.html' %}
+        {% endif %}
+      </div>
+    </div>
+
+    {# Initialize PM runtime #}
+    {% include 'pm/includes/runtime-init.html' %}
+
+  {% else %}
+    {# Show error if PM failed to load #}
+    <div class="alert alert-error">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           class="stroke-current shrink-0 h-6 w-6"
+           fill="none"
+           viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <div>
+        <h3 class="font-bold">Failed to load PM content</h3>
+        <div class="text-sm">
+          {% if pm_context.pm_error %}
+            Error: {{ pm_context.pm_error }}
+          {% else %}
+            Could not load PM file: {{ pm_file }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}

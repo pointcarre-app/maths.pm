@@ -1,0 +1,96 @@
+{# Debug Section Include - shows debug info when debug=true #}
+{% if debug %}
+  <!-- Debug Info (collapsible) -->
+  <div class="collapse collapse-arrow bg-base-100 mt-4">
+    <input type="checkbox" />
+    <div class="collapse-title text-sm font-medium">
+      Debug Info ({{ pm.fragments|length }} fragments)
+    </div>
+    <div class="collapse-content">
+      <pre class="text-xs bg-base-200 p-4 rounded overflow-auto max-h-96">{{ pm_json }}</pre>
+    </div>
+  </div>
+
+  <!-- Product Settings Debug (collapsible) -->
+  {% if product_name %}
+    <div class="collapse collapse-arrow bg-base-100 mt-4">
+      <input type="checkbox" />
+      <div class="collapse-title text-sm font-medium">
+        Product Settings: <span class="badge badge-primary badge-sm">{{ product_name }}</span>
+        {% if product_settings %}
+          <span class="badge badge-success badge-sm ml-2">Loaded</span>
+        {% else %}
+          <span class="badge badge-error badge-sm ml-2">Not Found</span>
+        {% endif %}
+        {# djlint:on #}
+      </div>
+      <div class="collapse-content">
+        {% if product_settings %}
+          <div class="grid gap-4">
+            <!-- Basic Product Info -->
+            <div class="card bg-base-200 p-4">
+              <h4 class="font-semibold mb-2">Basic Information</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                <div>
+                  <strong>Name:</strong> {{ product_settings.name }}
+                </div>
+                <div>
+                  <strong>Title:</strong> {{ product_title }}
+                </div>
+                <div>
+                  <strong>Enabled:</strong>
+                  {% if is_product_enabled %}
+                    <span class="badge badge-success badge-sm">Yes</span>
+                  {% else %}
+                    <span class="badge badge-error badge-sm">No</span>
+                  {% endif %}
+                </div>
+                {% if product_settings.product.local_path %}
+                  <div>
+                    <strong>Local Path:</strong> {{ product_settings.product.local_path }}
+                  </div>
+                {% endif %}
+              </div>
+              {% if product_description %}
+                <div class="mt-2">
+                  <strong>Description:</strong>
+                  <p class="text-sm mt-1">{{ product_description }}</p>
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Backend Settings -->
+            {% if product_backend_settings %}
+              <div class="card bg-base-200 p-4">
+                <h4 class="font-semibold mb-2">Backend Settings</h4>
+                <pre class="text-xs bg-base-300 p-3 rounded overflow-auto max-h-64">{{ product_backend_settings | tojson(indent=2) }}</pre>
+              </div>
+            {% endif %}
+
+            <!-- Full Product Data -->
+            <div class="card bg-base-200 p-4">
+              <h4 class="font-semibold mb-2">Complete Product Configuration</h4>
+              <pre class="text-xs bg-base-300 p-3 rounded overflow-auto max-h-64">{{ product_settings | tojson(indent=2) }}</pre>
+            </div>
+          </div>
+        {% else %}
+          <div class="alert alert-warning">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="stroke-current shrink-0 h-6 w-6"
+                 fill="none"
+                 viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+            <div>
+              <h3 class="font-bold">No Product Settings Found</h3>
+              <div class="text-sm">
+                Product "{{ product_name }}" was not found in the loaded products.
+                Check if the product configuration exists in the products/ directory and matches the current domain.
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+{% endif %}

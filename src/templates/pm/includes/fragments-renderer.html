@@ -1,0 +1,55 @@
+{# Fragments Renderer Include - renders all PM fragments #}
+{# djlint:off #}
+{% if pm.fragments %}
+  {# Piece-level layout wrapper controller (e.g., columns) #}
+  {% set ns = namespace(piece_open=false) %}
+  {% for fragment in pm.fragments %}
+    {# Handle layout directives carried by hr_ fragments #}
+    {% if fragment.f_type.value == 'hr_' %}
+      {% if fragment.layout and fragment.layout.type == 'columns' %}
+        {# Start or switch a piece_ wrapper with responsive columns #}
+        {% if ns.piece_open %}</div>{% endif %}
+        {% set bp = fragment.layout.breakpoint %}
+        {% set cols = fragment.layout.columns %}
+        {% set utils_list = fragment.layout.utilities %}
+        {% set utils = utils_list | join(' ') %}
+        {# Optional custom percentage widths via `.cols-30-70` token #}
+        {% set ns_cols = namespace(token=None) %}
+        {% for u in utils_list %}
+          {% if ns_cols.token is none and u[:5] == 'cols-' %}
+            {% set ns_cols.token = u %}
+          {% endif %}
+        {% endfor %}
+        {% set cols_token = ns_cols.token %}
+        {% if cols_token %}
+          {% set parts = cols_token.split('-')[1:] %}
+          {% set cols_style = (parts | join('% ')) ~ '%' %}
+          <div class="piece_ pm-cols use-var pm-cols-{{ bp }}-{{ cols }} {{ utils }}" style="--pm-cols: {{ cols_style }}">
+        {% else %}
+          <div class="piece_ pm-cols pm-cols-{{ bp }}-{{ cols }} {{ utils }}">
+        {% endif %}
+        {% set ns.piece_open = true %}
+        {# Do not render the hr fragment itself #}
+      {% else %}
+        {# Plain divider: close piece_ if open, otherwise render divider #}
+        {% if ns.piece_open %}
+        </div>
+        {% set ns.piece_open = false %}
+      {% else %}
+      {% set fragment_index = loop.index0 %}
+      <div class="fragment-wrapper {{ fragment.classes }}" data-f_type="{{ fragment.f_type.value }}">
+        {% include [ 'pm/fragments/' ~ fragment.f_type.value ~ '.html', 'pm/fragments/default.html' ] %}
+      </div>
+      {% endif %}
+    {% endif %}
+  {% else %}
+      {% set fragment_index = loop.index0 %}
+      <div class="fragment-wrapper {{ fragment.classes }}" data-f_type="{{ fragment.f_type.value }}">
+        {% include [ 'pm/fragments/' ~ fragment.f_type.value ~ '.html', 'pm/fragments/default.html' ] %}
+      </div>
+  {% endif %}
+{% endfor %}
+{# Ensure any open piece_ is closed #}
+{% if ns.piece_open %}</div>{% endif %}
+{% endif %}
+{# djlint:on #}

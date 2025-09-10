@@ -1,0 +1,16 @@
+{# 
+  PM Fragments Only Rendering Template
+  
+  Usage in any template:
+    {% include "pm-include/render-fragments-only.html" %}
+  
+  Required context variables:
+    - pm: The parsed PM object with fragments
+  
+  This template renders ONLY the fragments without any wrapper or styling.
+  Perfect for embedding PM content into existing layouts.
+#}
+
+{% if pm and pm.fragments %}
+  {% include 'pm/includes/fragments-renderer.html' %}
+{% endif %}

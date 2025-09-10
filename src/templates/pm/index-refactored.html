@@ -1,0 +1,24 @@
+{% extends "base/main-alt.html" %}
+
+{% block title %}
+  {# Priority: PM page metatags > Product metatags > PM title > Domain defaults #}
+  {% if pm_metatags and pm_metatags.title %}
+    {{ pm_metatags.title }}
+  {% elif product_settings and product_settings.product.metatags and product_settings.product.metatags.title %}
+    {{ product_settings.product.metatags.title }}
+  {% elif pm and pm.title %}
+    {{ pm.title }} - {{ DOMAIN_CONFIG['index_view_specific_metatags']['title'] }}
+  {% else %}
+    {{ DOMAIN_CONFIG['index_view_specific_metatags']['title'] }}
+  {% endif %}
+{% endblock title %}
+
+{% block extra_head %}
+  {# Include all PM head resources #}
+  {% include "pm-include/head-resources.html" %}
+{% endblock extra_head %}
+
+{% block content %}
+  {# Simply include the full PM renderer #}
+  {% include "pm-include/render-full.html" %}
+{% endblock content %}

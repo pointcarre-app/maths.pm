@@ -1,19 +1,21 @@
 <div class="max-w-3xl mx-auto">
-  <div class="flex flex-col sm:flex-row w-full py-2">
-    <div class="grid grow place-items-center sm:h-30">
+  <div class="flex flex-col sm:flex-row w-full sm:py-2s">
+    <div class="grid grow place-items-center  h-30">
       <div class="flex flex-col items-center">
         <div class="text-sm sm:text-base text-center font-heading mb-2">Codes sources</div>
-        <img class="h-[40px]" src="{{ request.url_for('static', path='icons/AGPLv3_Logo.svg') }}" alt="Logo licence AGPLv3">
+        <img class="h-[50px]"
+             src="{{ request.url_for('static', path='icons/AGPLv3_Logo.svg') }}"
+             alt="Logo licence AGPLv3" />
       </div>
     </div>
-    <div class="divider divider-horizontal text-xs px-12">
-      <span class="hidden sm:block"><span class="badge badge-sm badge-primary">LICENCES</span></span>
-    </div>
-    <div class="grid grow place-items-center sm:h-30">
+    <div class="divider divider-horizontal text-xs"></div>
+    <div class="grid grow place-items-center  h-30">
       <div class="flex flex-col">
         <div class="text-sm sm:text-base text-center font-heading mb-2">Contenus</div>
-        <img class="h-[40px]" src="{{ request.url_for('static', path='icons/CC_BY-NC-SA.svg') }}" alt="Logo licence Creative Commons">
+        <img class="h-[50px]"
+             src="{{ request.url_for('static', path='icons/CC_BY-NC-SA.svg') }}"
+             alt="Logo licence Creative Commons" />
       </div>
     </div>
   </div>
-</div> 
+</div>

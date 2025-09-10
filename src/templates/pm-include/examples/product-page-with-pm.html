@@ -1,0 +1,72 @@
+{% extends "base/main-alt.html" %}
+{# 
+  Example: Product page that embeds PM content
+  Shows how to mix regular content with PM rendering
+#}
+
+{% block title %}{{ product.title }} - Product Details{% endblock %}
+
+{% block extra_head %}
+  {# Include PM resources only if we have PM content #}
+  {% if pm %}
+    {% include "pm-include/head-resources.html" %}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto px-4 py-8">
+    {# Regular product header #}
+    <div class="hero bg-base-200 rounded-lg p-8 mb-8">
+      <div class="hero-content">
+        <div>
+          <h1 class="text-5xl font-bold">{{ product.title }}</h1>
+          <p class="py-6">{{ product.description }}</p>
+          <button class="btn btn-primary">Get Started</button>
+        </div>
+      </div>
+    </div>
+
+    {# Navigation tabs #}
+    <div class="tabs tabs-boxed mb-8">
+      <a class="tab tab-active">Overview</a>
+      <a class="tab">Documentation</a>
+      <a class="tab">Examples</a>
+    </div>
+
+    {# PM Content Section #}
+    {% if pm %}
+      <div class="card bg-base-100 shadow-xl mb-8">
+        <div class="card-body">
+          <h2 class="card-title">Documentation</h2>
+          {# Render only PM fragments without wrapper #}
+          {% include "pm-include/render-fragments-only.html" %}
+        </div>
+      </div>
+    {% endif %}
+
+    {# Other product sections #}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="card bg-base-100 shadow">
+        <div class="card-body">
+          <h3 class="card-title">Features</h3>
+          <ul class="list-disc list-inside">
+            <li>Feature 1</li>
+            <li>Feature 2</li>
+            <li>Feature 3</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow">
+        <div class="card-body">
+          <h3 class="card-title">Resources</h3>
+          <ul class="list-disc list-inside">
+            <li>Tutorial</li>
+            <li>API Reference</li>
+            <li>Examples</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

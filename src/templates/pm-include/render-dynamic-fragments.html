@@ -1,0 +1,34 @@
+{# 
+  Dynamic PM Fragments Rendering Template (No Wrapper)
+  
+  Usage in any template:
+    {% include "pm-include/render-dynamic-fragments.html" with pm_file="corsica/intro.md" %}
+    
+    or inline:
+    {% with pm_file="pyly/01_premiers_pas.md" %}
+      {% include "pm-include/render-dynamic-fragments.html" %}
+    {% endwith %}
+  
+  Required variables:
+    - pm_file: Path to the PM markdown file (relative to pms/ directory)
+  
+  Optional variables:
+    - product_name: Product name for loading product settings
+    - show_error: Whether to show error messages (default: true)
+#}
+
+{# Load the PM dynamically #}
+{% set pm_context = load_pm(pm_file, product_name|default(none)) %}
+
+{# Render fragments if PM loaded successfully #}
+{% if pm_context.pm_loaded and pm_context.pm %}
+  {% set pm = pm_context.pm %}
+  {% if pm.fragments %}
+    {% include 'pm/includes/fragments-renderer.html' %}
+  {% endif %}
+{% elif show_error|default(true) %}
+  <div class="text-error text-sm">
+    Failed to load: {{ pm_file }}
+    {% if pm_context.pm_error %}- {{ pm_context.pm_error }}{% endif %}
+  </div>
+{% endif %}

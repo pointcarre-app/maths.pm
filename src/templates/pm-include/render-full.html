@@ -1,0 +1,46 @@
+{# 
+  Full PM Rendering Template
+  
+  Usage in any template:
+    {% include "pm-include/render-full.html" %}
+  
+  Required context variables:
+    - pm: The parsed PM object
+    - request: Request object for URL generation
+    
+  Optional context variables:
+    - debug: Enable debug mode
+    - product_settings: Product configuration
+    - pm_metatags: Extracted metatags
+    - product_name: Product identifier
+#}
+
+{# Include TOC sidebar if pm has TOC #}
+{% if pm and pm.toc %}
+  {% include 'pm/includes/toc-sidebar.html' %}
+{% endif %}
+
+<div class="pm-container lg:text-lg w-full md:max-w-3xl lg:max-w-4xl xl:max-w-4xl mx-auto">
+  <div class="bg-base-100 shadow-2xl mt-12 px-4 py-4">
+    <!-- Main Content -->
+    <div class="max-w-[640px] mx-auto md:py-12 bg-base-100">
+      {# Include product warning if no product settings #}
+      {% if product_name and not product_settings %}
+        {% include 'pm/includes/product-warning.html' %}
+      {% endif %}
+
+      <!-- Fragments (rendered via partials) -->
+      {% if pm and pm.fragments %}
+        {% include 'pm/includes/fragments-renderer.html' %}
+      {% endif %}
+    </div>
+
+    {# Include debug section when debug mode is enabled #}
+    {% if debug %}
+      {% include 'pm/includes/debug-section.html' %}
+    {% endif %}
+
+    {# Include PM runtime initialization #}
+    {% include 'pm/includes/runtime-init.html' %}
+  </div>
+</div>

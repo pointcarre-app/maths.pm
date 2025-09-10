@@ -1,0 +1,46 @@
+{# 
+  PM Rendering with Custom Wrapper Template
+  
+  Usage in any template:
+    {% with wrapper_class="my-custom-class", show_toc=true %}
+      {% include "pm-include/render-with-wrapper.html" %}
+    {% endwith %}
+  
+  Required context variables:
+    - pm: The parsed PM object
+    - request: Request object (for runtime init)
+  
+  Optional context variables:
+    - wrapper_class: Custom CSS class for wrapper (default: "pm-container")
+    - show_toc: Whether to show TOC sidebar (default: true if pm.toc exists)
+    - show_debug: Whether to show debug info (default: follows debug flag)
+    - container_width: Container width class (default: "max-w-[640px]")
+#}
+
+{# Set defaults #}
+{% set wrapper_class = wrapper_class|default("pm-container lg:text-lg w-full md:max-w-3xl lg:max-w-4xl xl:max-w-4xl mx-auto") %}
+{% set show_toc = show_toc|default(true) %}
+{% set show_debug = show_debug|default(debug) %}
+{% set container_width = container_width|default("max-w-[640px]") %}
+
+{# Include TOC if requested and available #}
+{% if show_toc and pm and pm.toc %}
+  {% include 'pm/includes/toc-sidebar.html' %}
+{% endif %}
+
+<div class="{{ wrapper_class }}">
+  <div class="{{ container_width }} mx-auto md:py-12 bg-base-100">
+    {# Render fragments #}
+    {% if pm and pm.fragments %}
+      {% include 'pm/includes/fragments-renderer.html' %}
+    {% endif %}
+  </div>
+
+  {# Debug section if requested #}
+  {% if show_debug %}
+    {% include 'pm/includes/debug-section.html' %}
+  {% endif %}
+</div>
+
+{# Initialize PM runtime #}
+{% include 'pm/includes/runtime-init.html' %}

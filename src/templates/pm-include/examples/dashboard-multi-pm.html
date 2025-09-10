@@ -1,0 +1,115 @@
+{% extends "base/main-alt.html" %}
+{# 
+  Example: Dashboard with multiple PM contents
+  Shows how to render multiple PM contents on one page
+#}
+
+{% block title %}Dashboard - Multiple PM Contents{% endblock %}
+
+{% block extra_head %}
+  {# Include PM head resources once #}
+  {% include "pm-include/head-resources.html" %}
+
+  <style>
+      .pm-card {
+          max-height: 500px;
+          overflow-y: auto;
+      }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">Learning Dashboard</h1>
+
+    {# Grid layout for multiple PM contents #}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      {# First PM Card - Introduction #}
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">
+            {% if intro_pm %}
+              {{ intro_pm.title }}
+            {% else %}
+              Introduction
+            {% endif %}
+          </h2>
+          <div class="pm-card">
+            {% if intro_pm %}
+              {# Temporarily set pm variable for the include #}
+              {% set pm = intro_pm %}
+              {% include "pm-include/render-fragments-only.html" %}
+            {% else %}
+              <p class="text-base-content/60">No introduction content available.</p>
+            {% endif %}
+          </div>
+          <div class="card-actions justify-end mt-4">
+            <button class="btn btn-primary btn-sm">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      {# Second PM Card - Tutorial #}
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">
+            {% if tutorial_pm %}
+              {{ tutorial_pm.title }}
+            {% else %}
+              Tutorial
+            {% endif %}
+          </h2>
+          <div class="pm-card">
+            {% if tutorial_pm %}
+              {# Temporarily set pm variable for the include #}
+              {% set pm = tutorial_pm %}
+              {% include "pm-include/render-fragments-only.html" %}
+            {% else %}
+              <p class="text-base-content/60">No tutorial content available.</p>
+            {% endif %}
+          </div>
+          <div class="card-actions justify-end mt-4">
+            <button class="btn btn-secondary btn-sm">Start Tutorial</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Progress Section #}
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold mb-4">Your Progress</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="stat bg-base-200 rounded-lg">
+          <div class="stat-title">Completed</div>
+          <div class="stat-value text-primary">12</div>
+          <div class="stat-desc">Lessons finished</div>
+        </div>
+        <div class="stat bg-base-200 rounded-lg">
+          <div class="stat-title">In Progress</div>
+          <div class="stat-value text-secondary">3</div>
+          <div class="stat-desc">Currently learning</div>
+        </div>
+        <div class="stat bg-base-200 rounded-lg">
+          <div class="stat-title">Next Up</div>
+          <div class="stat-value text-accent">5</div>
+          <div class="stat-desc">Recommended lessons</div>
+        </div>
+      </div>
+    </div>
+
+    {# Quick Actions #}
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold mb-4">Quick Actions</h2>
+      <div class="flex flex-wrap gap-2">
+        <button class="btn btn-outline">Continue Learning</button>
+        <button class="btn btn-outline">Browse Topics</button>
+        <button class="btn btn-outline">View Achievements</button>
+        <button class="btn btn-outline">Settings</button>
+      </div>
+    </div>
+  </div>
+
+  {# Initialize PM runtime once for all PM contents #}
+  {% include 'pm/includes/runtime-init.html' %}
+{% endblock %}

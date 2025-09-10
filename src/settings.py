@@ -41,6 +41,7 @@ class ProductType(str, Enum):
 
     REPO = "repo"
     REPO_FROM_OTHER_ORG = "repo_from_other_org"
+    LIB_FROM_MATHSPM = "lib_from_mathspm"
     SECONDAIRE = "secondaire"
     DRAFT = "draft"
 
@@ -373,6 +374,15 @@ class Settings(BaseSettings):
         # Pass product-specific settings, not aggregated
         templates.env.globals["products_settings"] = self.serialized_products_settings
         templates.env.globals["domain_settings"] = json.dumps(self.domain_backend_settings)
+
+        # Register PM template helpers for dynamic PM loading
+        try:
+            from .core.pm.template_helpers import register_pm_helpers
+
+            register_pm_helpers(templates)
+        except ImportError:
+            logger.warning("PM template helpers not available")
+
         return templates
 
     @computed_field

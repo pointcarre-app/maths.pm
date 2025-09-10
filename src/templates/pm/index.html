@@ -1,4 +1,11 @@
 {% extends "base/main-alt.html" %}
+{# 
+  Standard PM Page Template
+  
+  This template can be simplified by using pm-include templates:
+  - See pm/index-refactored.html for the simplified version
+  - See pm-include/README.md for usage documentation
+#}
 
 {% block title %}
   {# Priority: PM page metatags > Product metatags > PM title > Domain defaults #}
@@ -14,6 +21,8 @@
 {% endblock title %}
 
 {% block extra_head %}
+  {# Include all PM head resources - simplified version available #}
+  {# You can also use: {% include "pm-include/head-resources.html" %} #}
   <link rel="stylesheet" href="{{ request.url_for('static', path='core/css/pm.css') }}" />
   <link rel="stylesheet" href="{{ request.url_for('static', path='core/css/toc.css') }}" />
   <!-- MathLive for LaTeX (if needed later) -->
@@ -33,263 +42,35 @@
       }
   </script>
 
-
   {# Todo: Ensure stability cross domains  / producs #}
 
-  {# PM page-specific metatags have highest priority #}
-  {% if pm_metatags %}
-    {% for key, value in pm_metatags.items() %}
-      {% if key not in ['title'] %}
-        {# Title is handled in title block #}
-        {% if key.startswith('og:') %}
-          <meta property="{{ key }}" content="{{ value }}" />
-        {% elif key.startswith('twitter:') %}
-          <meta name="{{ key }}" content="{{ value }}" />
-        {% elif key.startswith('DC.') %}
-          <meta name="{{ key }}" content="{{ value }}" />
-        {% elif key.startswith('itemprop') %}
-          <meta itemprop="{{ key.replace('itemprop-', '') }}" content="{{ value }}" />
-        {% elif key in ['description', 'keywords', 'author', 'robots', 'abstract', 'topic', 'summary', 'category', 'revised', 'pagename', 'subtitle'] %}
-          <meta name="{{ key }}" content="{{ value }}" />
-        {% else %}
-          <meta name="{{ key }}" content="{{ value }}" />
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  {% elif product_settings and product_settings.product.metatags %}
-    {# Product-specific metatags override domain defaults #}
-    {% for key, value in product_settings.product.metatags.items() %}
-      {% if key not in ['title'] %}
-        {# Title is handled in title block #}
-        {% if key.startswith('og:') %}
-          <meta property="{{ key }}" content="{{ value }}" />
-        {% elif key.startswith('twitter:') %}
-          <meta name="{{ key }}" content="{{ value }}" />
-        {% elif key.startswith('DC.') %}
-          <meta name="{{ key }}" content="{{ value }}" />
-        {% elif key.startswith('itemprop') %}
-          <meta itemprop="{{ key.replace('itemprop-', '') }}" content="{{ value }}" />
-        {% elif key == 'description' %}
-          {# Override the base template's description #}
-          <meta name="description" content="{{ value }}" />
-        {% elif key == 'keywords' %}
-          <meta name="keywords" content="{{ value }}" />
-        {% else %}
-          <meta name="{{ key }}" content="{{ value }}" />
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  {% elif pm %}
-    {# Fallback to PM-based metadata if no metatags #}
-    <meta name="description"
-          content="{{ pm.title }} - {{ pm.chapter if pm.chapter else 'Cours de mathématiques' }}" />
-  {% endif %}
-
-  {# Canonical URL for this PM page #}
-  {% if origin %}
-    <link rel="canonical" href="{{ request.url_for('get_pm', origin=origin) }}" />
-    <meta name="url" content="{{ request.url_for('get_pm', origin=origin) }}" />
-    <meta name="identifier-URL" content="{{ request.url_for('get_pm', origin=origin) }}" />
-  {% endif %}
+  {# Include PM metatags logic #}
+  {% include 'pm/includes/metatags.html' %}
 
 {% endblock extra_head %}
 
 {% block content %}
-  <!-- djlint:off -->
-                                              {# styles moved to @css/pm.css #}
+  {# This entire block can be replaced with: {% include "pm-include/render-full.html" %} #}
 
-                                              <div class="sidebar-fixed hidden xl:block">
-                                                <div class="w-72 flex flex-col card">
-      <div id="toc" class="p-4 flex-none text-left text-base-content/80">{{ pm.toc.html | safe }}</div>
-    </div>
-  </div>
+  {% include "pm/includes/toc-sidebar.html" %}
 
   <div class="pm-container lg:text-lg w-full md:max-w-3xl lg:max-w-4xl xl:max-w-4xl mx-auto">
     <div class="bg-base-100 shadow-2xl mt-12 px-4 py-4">
       <!-- Main Content -->
       <div class="max-w-[640px] mx-auto md:py-12 bg-base-100">
-        {% if product_settings %}
-          {# {{ product_settings.name }} #}
-        {% else %}
-          <div class="bg-warning text-warning-content text-center p-6 mb-12">
-            NO PRODUCT SETTINGS FOUND FOR:
-            <br />
-            <div class="font-mono badge">{{ product_name }}</div>
-            <br />
-            <div class="text-left text-xs">
-              Gentle remainder that the product name comes from the `origin` first subfolder (after `/pms` ).
-            </div>
-          </div>
-        {% endif %}
+        {# Include product warning message #}
+        {% include "pm/includes/product-warning.html" %}
 
         <!-- Fragments (rendered via partials) -->
-        {# djlint:off #}
-        {% if pm.fragments %}
-          {# Piece-level layout wrapper controller (e.g., columns) #}
-          {% set ns = namespace(piece_open=false) %}
-          {% for fragment in pm.fragments %}
-            {# Handle layout directives carried by hr_ fragments #}
-            {% if fragment.f_type.value == 'hr_' %}
-              {% if fragment.layout and fragment.layout.type == 'columns' %}
-                {# Start or switch a piece_ wrapper with responsive columns #}
-                {% if ns.piece_open %}</div>{% endif %}
-                {% set bp = fragment.layout.breakpoint %}
-                {% set cols = fragment.layout.columns %}
-                {% set utils_list = fragment.layout.utilities %}
-                {% set utils = utils_list | join(' ') %}
-                {# Optional custom percentage widths via `.cols-30-70` token #}
-                {% set ns_cols = namespace(token=None) %}
-                {% for u in utils_list %}
-                  {% if ns_cols.token is none and u[:5] == 'cols-' %}
-                    {% set ns_cols.token = u %}
-                  {% endif %}
-                {% endfor %}
-                {% set cols_token = ns_cols.token %}
-                {% if cols_token %}
-                  {% set parts = cols_token.split('-')[1:] %}
-                  {% set cols_style = (parts | join('% ')) ~ '%' %}
-                  <div class="piece_ pm-cols use-var pm-cols-{{ bp }}-{{ cols }} {{ utils }}" style="--pm-cols: {{ cols_style }}">
-                {% else %}
-                  <div class="piece_ pm-cols pm-cols-{{ bp }}-{{ cols }} {{ utils }}">
-                {% endif %}
-                {% set ns.piece_open = true %}
-                {# Do not render the hr fragment itself #}
-              {% else %}
-                {# Plain divider: close piece_ if open, otherwise render divider #}
-                {% if ns.piece_open %}
-                </div>
-                {% set ns.piece_open = false %}
-              {% else %}
-              {% set fragment_index = loop.index0 %}
-              <div class="fragment-wrapper {{ fragment.classes }}" data-f_type="{{ fragment.f_type.value }}">
-                {% include [ 'pm/fragments/' ~ fragment.f_type.value ~ '.html', 'pm/fragments/default.html' ] %}
-              </div>
-              {% endif %}
-            {% endif %}
-          {% else %}
-              {% set fragment_index = loop.index0 %}
-              <div class="fragment-wrapper {{ fragment.classes }}" data-f_type="{{ fragment.f_type.value }}">
-                {% include [ 'pm/fragments/' ~ fragment.f_type.value ~ '.html', 'pm/fragments/default.html' ] %}
-              </div>
-          {% endif %}
-        {% endfor %}
-        {# Ensure any open piece_ is closed #}
-        {% if ns.piece_open %}</div>{% endif %}
-    {% endif %}
-  </div>
-  {% if debug %}
-  <!-- Debug Info (collapsible) -->
-  <div class="collapse collapse-arrow bg-base-100 mt-4">
-    <input type="checkbox" />
-    <div class="collapse-title text-sm font-medium">
-      Debug Info ({{ pm.fragments|length }} fragments)
-    </div>
-    <div class="collapse-content">
-      <pre class="text-xs bg-base-200 p-4 rounded overflow-auto max-h-96">{{ pm_json }}</pre>
-    </div>
-  </div>
-
-      <!-- Product Settings Debug (collapsible) -->
-    {% if product_name %}
-      <div class="collapse collapse-arrow bg-base-100 mt-4">
-        <input type="checkbox" />
-        <div class="collapse-title text-sm font-medium">
-          Product Settings: <span class="badge badge-primary badge-sm">{{ product_name }}</span>
-          {% if product_settings %}
-            <span class="badge badge-success badge-sm ml-2">Loaded</span>
-          {% else %}
-            <span class="badge badge-error badge-sm ml-2">Not Found</span>
-          {% endif %}
-{# djlint:on #}
-        </div>
-        <div class="collapse-content">
-          {% if product_settings %}
-            <div class="grid gap-4">
-              <!-- Basic Product Info -->
-              <div class="card bg-base-200 p-4">
-                <h4 class="font-semibold mb-2">Basic Information</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                  <div>
-                    <strong>Name:</strong> {{ product_settings.name }}
-                  </div>
-                  <div>
-                    <strong>Title:</strong> {{ product_title }}
-                  </div>
-                  <div>
-                    <strong>Enabled:</strong>
-                    {% if is_product_enabled %}
-                      <span class="badge badge-success badge-sm">Yes</span>
-                    {% else %}
-                      <span class="badge badge-error badge-sm">No</span>
-                    {% endif %}
-                  </div>
-                  {% if product_settings.product.local_path %}
-                    <div>
-                      <strong>Local Path:</strong> {{ product_settings.product.local_path }}
-                    </div>
-                  {% endif %}
-                </div>
-                {% if product_description %}
-                  <div class="mt-2">
-                    <strong>Description:</strong>
-                    <p class="text-sm mt-1">{{ product_description }}</p>
-                  </div>
-                {% endif %}
-              </div>
-
-              <!-- Backend Settings -->
-              {% if product_backend_settings %}
-                <div class="card bg-base-200 p-4">
-                  <h4 class="font-semibold mb-2">Backend Settings</h4>
-                  <pre class="text-xs bg-base-300 p-3 rounded overflow-auto max-h-64">{{ product_backend_settings | tojson(indent=2) }}</pre>
-                </div>
-              {% endif %}
-
-              <!-- Full Product Data -->
-              <div class="card bg-base-200 p-4">
-                <h4 class="font-semibold mb-2">Complete Product Configuration</h4>
-                <pre class="text-xs bg-base-300 p-3 rounded overflow-auto max-h-64">{{ product_settings | tojson(indent=2) }}</pre>
-              </div>
-            </div>
-          {% else %}
-            <div class="alert alert-warning">
-              <svg xmlns="http://www.w3.org/2000/svg"
-                  class="stroke-current shrink-0 h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-              </svg>
-              <div>
-                <h3 class="font-bold">No Product Settings Found</h3>
-                <div class="text-sm">
-                  Product "{{ product_name }}" was not found in the loaded products.
-                  Check if the product configuration exists in the products/ directory and matches the current domain.
-                </div>
-              </div>
-            </div>
-          {% endif %}
-        </div>
+        {% include "pm/includes/fragments-renderer.html" %}
       </div>
-    {% endif %}
-  {% endif %}
 
+      {# Include debug section when debug mode is enabled #}
+      {% include "pm/includes/debug-section.html" %}
 
-  <!-- PM runtime boot -->
-  <script type="module">
-      import PMRuntime from '@js/pm/main.js';
-      const runtime = new PMRuntime({
-          mode: 'all'
-      });
-      if (document.readyState === 'complete' || document.readyState === 'interactive') {
-          runtime.init();
-      } else {
-          window.addEventListener('DOMContentLoaded', () => runtime.init(), {
-              once: true
-          });
-      }
-      window.pmRuntime = runtime;
-</script>
-</div>
-</div>
-<!-- djlint:on -->
+      {# Include PM runtime initialization #}
+      {% include "pm/includes/runtime-init.html" %}
+    </div>
+  </div>
+  <!-- djlint:on -->
 {% endblock content %}

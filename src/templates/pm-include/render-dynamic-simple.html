@@ -1,0 +1,41 @@
+{# 
+  Simplified Dynamic PM Rendering Template
+  
+  Usage:
+    {% with pm_file="corsica/intro.md" %}
+      {% include "pm-include/render-dynamic-simple.html" %}
+    {% endwith %}
+#}
+
+{# Load the PM dynamically #}
+{% if pm_file %}
+  {% set pm_context = load_pm(pm_file) %}
+
+  {% if pm_context.pm_loaded %}
+    {% set pm = pm_context.pm %}
+
+    {# Render fragments #}
+    <div class="pm-dynamic-content">
+      {% if pm.fragments %}
+        {% include 'pm/includes/fragments-renderer.html' %}
+      {% else %}
+        <p>No fragments in this PM file.</p>
+      {% endif %}
+    </div>
+
+    {# Include runtime #}
+    {% include 'pm/includes/runtime-init.html' %}
+  {% else %}
+    <div class="alert alert-error">
+      <span>Failed to load PM: {{ pm_file }}</span>
+      {% if pm_context.pm_error %}
+        <br />
+        Error: {{ pm_context.pm_error }}
+      {% endif %}
+    </div>
+  {% endif %}
+{% else %}
+  <div class="alert alert-warning">
+    <span>No pm_file specified</span>
+  </div>
+{% endif %}

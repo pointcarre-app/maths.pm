@@ -1,0 +1,70 @@
+{% extends "base/main-alt.html" %}
+
+{% block title %}Simple Dynamic PM Demo{% endblock %}
+
+{% block extra_head %}
+  {% include "pm-include/head-resources.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Simple Dynamic PM Loading</h1>
+
+    <div class="prose max-w-none mb-8">
+      <p>
+        This demonstrates loading PM files dynamically from Jinja templates without any Python preprocessing.
+      </p>
+    </div>
+
+    {# Example 1: Load a PM file directly #}
+    <div class="card bg-base-100 shadow-xl mb-6">
+      <div class="card-body">
+        <h2 class="card-title">Example 1: Corsica Geography</h2>
+        <p class="text-sm text-base-content/70 mb-4">Loading: corsica/a_troiz_geo.md</p>
+
+        {% with pm_file="corsica/a_troiz_geo.md" %}
+          {% include "pm-include/render-dynamic-simple.html" %}
+        {% endwith %}
+      </div>
+    </div>
+
+    {# Example 2: Load another PM file #}
+    <div class="card bg-base-100 shadow-xl mb-6">
+      <div class="card-body">
+        <h2 class="card-title">Example 2: Python Introduction</h2>
+        <p class="text-sm text-base-content/70 mb-4">Loading: pyly/01_premiers_pas.md</p>
+
+        {% set pm_file = "pyly/01_premiers_pas.md" %}
+        {% include "pm-include/render-dynamic-simple.html" %}
+      </div>
+    </div>
+
+    {# Example 3: Non-existent file (error handling) #}
+    <div class="card bg-base-100 shadow-xl mb-6">
+      <div class="card-body">
+        <h2 class="card-title">Example 3: Error Handling</h2>
+        <p class="text-sm text-base-content/70 mb-4">Trying to load: non/existent/file.md</p>
+
+        {% with pm_file="non/existent/file.md" %}
+          {% include "pm-include/render-dynamic-simple.html" %}
+        {% endwith %}
+      </div>
+    </div>
+
+    {# Example 4: Dynamic file selection #}
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Example 4: Dynamic Selection</h2>
+
+        {% set files = ["examples/intro.md", "examples/tutorial.md"] %}
+        {% set selected_index = 0 %}
+
+        <p class="text-sm text-base-content/70 mb-4">Selected: {{ files[selected_index] }}</p>
+
+        {% with pm_file=files[selected_index] %}
+          {% include "pm-include/render-dynamic-simple.html" %}
+        {% endwith %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

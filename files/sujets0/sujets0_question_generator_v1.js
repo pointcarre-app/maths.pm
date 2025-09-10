@@ -1421,7 +1421,7 @@ async function executeAllGenerators() {
 
 
 
-  // in french d
+  // in french
   const colors = [
     "rouge", "bleu", "vert", "jaune", "orange",
     "violet", "rose", "marron", "gris", "noir",

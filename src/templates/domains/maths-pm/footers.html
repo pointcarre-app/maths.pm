@@ -1,13 +1,13 @@
 <div class="mt-12 sm:mt-24">
-  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-5xl mx-auto md:card"
+  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 sm:p-8 max-w-4xl mx-auto md:card"
        style="background-color: var(--color-primary-ghost) !important;
               color: var(--color-primary) !important">
     <div class="max-w-3xl mx-auto py-12">
       <div class="mb-8">
-        <span class="font-handwritten text-2xl sm:text-3xl md:text-5xl">Maths.pm</span><span class="font-base text-base sm:text-xl md:text-3xl">&nbsp;ne collecte aucune donnée.</span>
+        <span class="font-handwritten text-3xl sm:text-3xl md:text-5xl">Maths.pm</span><span class="font-base text-lg sm:text-xl md:text-3xl">&nbsp;ne collecte aucune donnée.</span>
       </div>
 
-      <div class="text-sm sm:text-base md:text-lg text-left mb-6 font-light">
+      <div class="text-lg text-left mb-6 font-light">
         {# <span class="font-handwritten text-xl">Maths.pm</span> ne collecte
 pas aucune donnée - <span class="italic"></span>. #}Aucun cookie collecté, aucune ligne de log d'écrite, pas l'ombre d'une base de données distante - <span class="italic">nihil omnino</span>.
         <br />
@@ -29,8 +29,8 @@ pas aucune donnée - <span class="italic"></span>. #}Aucun cookie collecté, auc
   </div>
 </div>
 
-<div class="mt-12">
-  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-5xl mx-auto md:card bg-base-200 shadow">
+<div class="mt-12 mb-12">
+  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto md:card bg-base-200 shadow">
     <div class="max-w-3xl mx-auto py-12">
       <div class="mb-8">
         <span class="font-base text-lg sm:text-xl md:text-3xl">
@@ -40,41 +40,28 @@ pas aucune donnée - <span class="italic"></span>. #}Aucun cookie collecté, auc
           <a class="underline underline-offset-2 hover:underline-offset-4"
              href="{{ request.url_for('get_pm_root') }}">communs numériques</a>.</span>
       </div>
-      <hr class="my-8 bd-base-content" />
+      {# <hr class="my-8 bd-base-content" /> #}
       <div>
         <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-4" href="/about">Ressources pédagogiques</a>
       </div>
       <div>
         <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-4" href="/about">Logiciels Libres & Infrastructure 🇫🇷</a>
       </div>
-      <hr class="my-8 bd-base-content" />
+      <div>
+        <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-3" href="/about"> Licences AGPLv3 & CC BY-NC-SA 4.0</a>
+      </div>
+      <br />
+      <br />
       {% include "base/licenses.html" %}
     </div>
   </div>
 </div>
 
 
-<div class="bg-base-100 mt-24 px-6 sm:px-4 md:px-2">
-
-  <hr class="my-14 bd-base-content" />
+<div class="bg-base-200 px-4 sm:px-0">
 
 
-  <div class="flex items-center justify-center flex-col">
-    <div class="font-handwritten text-5xl mb-4">Maths.pm, par</div>
-    <div>
-      <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
-        <p class="w-14 h-14">{% include "base/logo-zelie-primary.html" %}</p>
-        <p class="font-heading pl-1">
-          <span class="text-4xl"><span class="">pointcarre</span>.app</span>
-        </p>
-      </a>
-    </div>
-  </div>
-
-
-  <hr class="my-14 bd-base-content" />
-
-  <footer class="text-base-content max-w-4xl mx-auto pt-4 pb-12 sticky top-[100vh] grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm md:text-base">
+  <footer class="text-base-content max-w-3xl mx-auto py-12 sticky top-[100vh] grid grid-cols-1 sm:grid-cols-3 gap-8">
     <!-- Logo Section -->
 
 
@@ -91,19 +78,19 @@ pas aucune donnée - <span class="italic"></span>. #}Aucun cookie collecté, auc
     <!-- Navigation Menu -->
     <nav class="flex flex-col">
       <h6 class="footer-title font-body">Navigation</h6>
-      <a href="" class="link link-hover">Page d'accueil</a>
+      <a href="" class="link link-hover">Accueil</a>
       <a href="" class="link link-hover">Plan du site</a>
-      <a href="" class="link link-hover">Bibliothèque des ressources</a>
-      <a href="/about" class="link link-hover">Site de Pointcarre.app</a>
+      <a href="/about" class="link link-hover">À propos</a>
+      <a href="/contact" class="link link-hover">Contact</a>
     </nav>
 
     <!-- Legal Links -->
     <nav class="flex flex-col">
-      <h6 class="footer-title font-body">Communs numériques</h6>
+      <h6 class="footer-title font-body">Ressources</h6>
       <a href="/privacy" class="link link-hover">Pour le secondaire</a>
       <a href="/privacy" class="link link-hover">Pour le supérieur</a>
-      <a href="/terms" class="link link-hover">Logiciels Libres</a>
-      <a href="/licenses" class="link link-hover">Infrastructure 🇫🇷</a>
+      <a href="/terms" class="link link-hover">CGU</a>
+      <a href="/licenses" class="link link-hover"><span class="italic">Open Source</span></a>
     </nav>
 
     <!-- Legal Links -->
@@ -111,6 +98,7 @@ pas aucune donnée - <span class="italic"></span>. #}Aucun cookie collecté, auc
       <h6 class="footer-title font-body">À Propos</h6>
       <a href="/privacy" class="link link-hover">Notre mission</a>
       <a href="/privacy" class="link link-hover">Nos engagements</a>
+      <a href="/licenses" class="link link-hover"><span class="italic">Open Source</span></a>
       <a href="/privacy" class="link link-hover">Mentions légales</a>
       <a href="/privacy" class="link link-hover">RGPD & Confidentialité</a>
 
