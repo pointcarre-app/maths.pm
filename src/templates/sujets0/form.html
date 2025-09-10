@@ -1,11 +1,14 @@
 {% extends "base/main-alt.html" %}
-
 {% block title %}
-  {% if product_metatags and product_metatags.title %}
+
+  {% if product_metatags and
+    product_metatags.title %}
     {{ product_metatags.title }}
   {% else %}
-    Sujets 0 - Exercices mathématiques pour l'épreuve anticipée de 1ère
+    Sujets 0 -
+    Exercices mathématiques pour l'épreuve anticipée de 1ère
   {% endif %}
+
 {% endblock title %}
 
 {% block extra_head %}
@@ -15,69 +18,76 @@
     {% if product_metatags.description %}
       <meta name="description" content="{{ product_metatags.description }}" />
     {% endif %}
+
     {% if product_metatags.keywords %}
       <meta name="keywords" content="{{ product_metatags.keywords }}" />
     {% endif %}
+
     {% if product_metatags.robots %}
       <meta name="robots" content="{{ product_metatags.robots }}" />
     {% endif %}
-
     {# Open Graph metatags #}
     {% if product_metatags['og:title'] %}
       <meta property="og:title" content="{{ product_metatags['og:title'] }}" />
     {% endif %}
+
     {% if product_metatags['og:description'] %}
       <meta property="og:description" content="{{ product_metatags['og:description'] }}" />
     {% endif %}
+
     {% if product_metatags['og:image'] %}
       <meta property="og:image" content="{{ product_metatags['og:image'] }}" />
     {% endif %}
+
     {% if product_metatags['og:url'] %}
       <meta property="og:url" content="{{ product_metatags['og:url'] }}" />
     {% endif %}
-
     {# Twitter Card metatags #}
     {% if product_metatags['twitter:card'] %}
       <meta name="twitter:card" content="{{ product_metatags['twitter:card'] }}" />
     {% endif %}
+
     {% if product_metatags['twitter:title'] %}
       <meta name="twitter:title" content="{{ product_metatags['twitter:title'] }}" />
     {% endif %}
+
     {% if product_metatags['twitter:description'] %}
       <meta name="twitter:description" content="{{ product_metatags['twitter:description'] }}" />
     {% endif %}
+
     {% if product_metatags['twitter:image'] %}
       <meta name="twitter:image" content="{{ product_metatags['twitter:image'] }}" />
     {% endif %}
-
     {# Dublin Core metatags #}
     {% for key, value in product_metatags.items() %}
       {% if key.startswith('DC.') %}<meta name="{{ key }}" content="{{ value }}" />{% endif %}
     {% endfor %}
-
     {# Any other custom metatags #}
     {% if product_metatags.revised %}
       <meta name="revised" content="{{ product_metatags.revised }}" />
     {% endif %}
+
     {% if product_metatags.topic %}
       <meta name="topic" content="{{ product_metatags.topic }}" />
     {% endif %}
+
     {% if product_metatags.summary %}
       <meta name="summary" content="{{ product_metatags.summary }}" />
     {% endif %}
+
     {% if product_metatags.category %}
       <meta name="category" content="{{ product_metatags.category }}" />
     {% endif %}
-  {% endif %}
 
+  {% endif %}
   {# Backend settings loaded from data-brick in the content block #}
 
   <script type="module">
       import {
           initializeTabs
-      } from '/static/js/sujets0/index-ui.js';
+      } from "/static/js/sujets0/index-ui.js";
 
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener("DOMContentLoaded", function() {
           initializeTabs();
       });
   </script>
@@ -88,200 +98,201 @@
 {% endblock modal_info_content %}
 
 {% block content %}
-  <div class="padding-alt-security mx-auto mb-14 mt-8 max-w-4xl ">
+  <div class="padding-alt-security mx-auto mb-14 mt-8 max-w-4xl">
     {% include "sujets0/header.html" %}
 
     {% include "sujets0/tabs.html" %}
 
     <div class="tab-alt-content" id="generate-content">
-      {# <div role="alert" class="alert alert-warning alert-soft border-1 mb-6" style="border-radius: var(--radius-card) !important; border-color: var(--color-warning) !important; background-color: var(--color-base-100) !important">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
-        <span><span class="font-handwritten text-lg">Maths.pm</span> ne collecte aucune donnée. Toute l'exécution a lieu dans le navigateur. Si votre ordinateur connaît des ralentisssements trop importants lors de la génération de questions, vous pouvez utiliser ces <a href="/sujets0/pre-genetated" class="link link-primary">fichiers PDFs</a> qui contiennent des exercices pré-générés.</span>
-      </div>
-      <div role="alert" class="alert alert-info alert-soft border-1 mb-6" style="border-radius: var(--radius-card) !important; border-color: var(--color-info) !important; background-color: var(--color-base-100) !important">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-          </path>
-        </svg>
-        <span>Lorsque vous arrivez sur la page et pour vous faire gagner du temps, le générateur s'exécute automatiquement. Quelques questions sont générées pour deux copies (i.e. deux élèves).</span>
-      </div> #}
-      {# {% include "sujets0/form.html" %} #}
 
-      <!-- Sujets0 Generate Content - REFACTORED with unified UI -->
 
-      <!-- Configuration Section -->
-      <div class="font-heading text-lg sm:text-xl md:text-2xl mt-12 mb-4">
-        Configurer la génération de copies
-      </div>
+      <div class="text-sm sm:text-base mb-6 text-base-content/70 md:px-6 md:py-10 md:bg-base-100 md:border-base-300 md:border-1"
+           style="border-radius: var(--radius-box)">
 
-      <div class="card bg-base-200 shadow-sm p-4 sm:p-6 md:p-8">
-        <form id="arpege-form" class="w-full max-w-[720px] mx-auto">
-          <!-- 2x2 Grid Layout -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+        <div class="w-full max-w-[720px] mx-auto">
 
-            <!-- Top Left: Number of copies -->
-            <fieldset class="fieldset">
-              <legend class="fieldset-legend">
-                <span class="font-light font-heading text-base md:text-lg">Nombre de copies</span>
-                <div class="tooltip tooltip-top"
-                     data-tip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">
-                  <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+          <!-- Configuration Section -->
+          <div class="font-heading text-lg sm:text-xl md:text-2xl mb-4">Première partie : Automatismes</div>
+
+          <ul class="list-disc list-inside text-sm text-base-content/60">
+            <li>
+              Les copies proposent dans le même ordre les mêmes questions, inspirées des sujets 0 du ministère.
+            </li>
+            <li>Des valeurs numériques différentes sont utilisées dans les copies.</li>
+            <li>Les corrigés pour l'enseignant sont inclus séparément.</li>
+          </ul>
+
+          <hr class="my-8 border-base-300" style="opacity: 0.8" />
+
+          <form id="arpege-form">
+            <!-- 2x2 Grid Layout -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Top Left: Number of copies -->
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">
+                  <span class="font-light font-heading text-base md:text-lg">Nombre de copies</span>
+                  <div class="tooltip tooltip-top"
+                       data-tip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">
+                    <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+                  </div>
+                </legend>
+                <div class="join w-full">
+                  <input type="number"
+                         id="nb-eleves"
+                         name="nb-eleves"
+                         min="1"
+                         max="50"
+                         value="2"
+                         required
+                         class="input input-bordered join-item flex-1 h-10" />
+                  <button type="button"
+                          class="btn btn-square join-item h-10 w-10"
+                          onclick="document.getElementById('nb-eleves').stepDown()">−</button>
+                  <button type="button"
+                          class="btn btn-square join-item h-10 w-10"
+                          onclick="document.getElementById('nb-eleves').stepUp()">+</button>
                 </div>
-              </legend>
-              <div class="join w-full">
-                <input type="number"
-                       id="nb-eleves"
-                       name="nb-eleves"
-                       min="1"
-                       max="50"
-                       value="2"
-                       required
-                       class="input input-bordered join-item flex-1 h-10" />
-                <button type="button"
-                        class="btn btn-square join-item h-10 w-10"
-                        onclick="document.getElementById('nb-eleves').stepDown()">−</button>
-                <button type="button"
-                        class="btn btn-square join-item h-10 w-10"
-                        onclick="document.getElementById('nb-eleves').stepUp()">+</button>
-              </div>
-              <p class="label-text-alt mt-1">Entre 1 et 50 copies</p>
-            </fieldset>
+                <p class="label-text-alt mt-1">Entre 1 et 50 copies</p>
+              </fieldset>
 
-            <!-- Top Right: Specialty selection -->
-            <fieldset class="fieldset">
-              <legend class="fieldset-legend">
-                <span class="font-light font-heading text-base md:text-lg">Filière / Spécialité</span>
-                <div class="tooltip tooltip-top"
-                     data-tip="Spé pour spécialité maths, Non Spé pour enseignement spécifique et Techno pour filières technologiques">
-                  <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help">?</span>
+              <!-- Top Right: Specialty selection -->
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">
+                  <span class="font-light font-heading text-base md:text-lg">Filière / Spécialité</span>
+                  <div class="tooltip tooltip-top"
+                       data-tip="Spé pour spécialité maths, Non Spé pour enseignement spécifique et Techno pour filières technologiques">
+                    <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help">?</span>
+                  </div>
+                </legend>
+                <div class="join w-full">
+                  <input type="radio" name="sujets0" value="spe" class="join-item btn h-10 flex-1" aria-label="Spé." />
+                  <input type="radio" name="sujets0" value="gen" class="join-item btn h-10 flex-1" aria-label="Non Spé." />
+                  <input type="radio"
+                         name="sujets0"
+                         value="techno"
+                         class="join-item btn h-10 flex-1"
+                         aria-label="Techno"
+                         disabled />
                 </div>
-              </legend>
-              <div class="join w-full">
-                <input type="radio" name="sujets0" value="spe" class="join-item btn h-10 flex-1" aria-label="Spé." checked />
-                <input type="radio"
-                       name="sujets0"
-                       value="non-spe"
-                       class="join-item btn h-10 flex-1"
-                       aria-label="Non Spé."
-                       disabled />
-                <input type="radio"
-                       name="sujets0"
-                       value="techno"
-                       class="join-item btn h-10 flex-1"
-                       aria-label="Techno"
-                       disabled />
-              </div>
-              <p class="label-text-alt mt-1">Choisir un programme officiel</p>
-            </fieldset>
+                <p class="label-text-alt mt-1">
+                  Choisir un programme officiel <strong>(obligatoire)</strong>
+                </p>
+              </fieldset>
 
-            <!-- Bottom Left: Questions per copy -->
-            <fieldset class="fieldset">
-              <legend class="fieldset-legend">
-                <span class="font-light font-heading text-base md:text-lg">Questions par copie</span>
-                <div class="tooltip tooltip-top" data-tip="Une partie A d'un sujet 0 officiel compte 12 questions">
-                  <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+              <!-- Bottom Left: Questions per copy -->
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">
+                  <span class="font-light font-heading text-base md:text-lg">Questions par copie</span>
+                  <div class="tooltip tooltip-top" data-tip="Une partie A d'un sujet 0 officiel compte 12 questions">
+                    <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+                  </div>
+                </legend>
+                <div class="join w-full">
+                  <input type="number"
+                         id="nb-questions"
+                         name="nb-questions"
+                         min="1"
+                         max="12"
+                         value="12"
+                         required
+                         class="input input-bordered join-item flex-1 h-10" />
+                  <button type="button"
+                          class="btn btn-square join-item h-10 w-10"
+                          onclick="document.getElementById('nb-questions').stepDown()">−</button>
+                  <button type="button"
+                          class="btn btn-square join-item h-10 w-10"
+                          onclick="document.getElementById('nb-questions').stepUp()">+</button>
                 </div>
-              </legend>
-              <div class="join w-full">
-                <input type="number"
-                       id="nb-questions"
-                       name="nb-questions"
-                       min="1"
-                       max="12"
-                       value="12"
-                       required
-                       class="input input-bordered join-item flex-1 h-10" />
-                <button type="button"
-                        class="btn btn-square join-item h-10 w-10"
-                        onclick="document.getElementById('nb-questions').stepDown()">−</button>
-                <button type="button"
-                        class="btn btn-square join-item h-10 w-10"
-                        onclick="document.getElementById('nb-questions').stepUp()">+</button>
-              </div>
-              <p class="label-text-alt mt-1">Entre 1 et 12 questions</p>
-            </fieldset>
+                <p class="label-text-alt mt-1">Entre 1 et 12 questions</p>
+              </fieldset>
 
-            <!-- Bottom Right: Seed number -->
-            <fieldset class="fieldset">
-              <legend class="fieldset-legend">
-                <span class="font-light font-heading text-base md:text-lg">Seed</span>
-                <div class="tooltip tooltip-top"
-                     data-tip="Numéro de graine (=seed) pour la reproductibilité de la génération aléatoire des valeurs">
-                  <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+              <!-- Bottom Right: Seed number -->
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">
+                  <span class="font-light font-heading text-base md:text-lg">Seed</span>
+                  <div class="tooltip tooltip-top"
+                       data-tip="Numéro de graine pour la reproductibilité de la génération aléatoire des copies">
+                    <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+                  </div>
+                </legend>
+                <div class="join w-full">
+                  <input type="number"
+                         id="seed"
+                         name="seed"
+                         min="1"
+                         max="100"
+                         value="9"
+                         required
+                         class="input input-bordered join-item flex-1 h-10" />
+                  <button type="button"
+                          class="btn btn-square join-item h-10 w-10"
+                          onclick="document.getElementById('seed').stepDown()">−</button>
+                  <button type="button"
+                          class="btn btn-square join-item h-10 w-10"
+                          onclick="document.getElementById('seed').stepUp()">+</button>
                 </div>
-              </legend>
-              <div class="join w-full">
-                <input type="number"
-                       id="seed"
-                       name="seed"
-                       min="1"
-                       max="100"
-                       value="9"
-                       required
-                       class="input input-bordered join-item flex-1 h-10" />
-                <button type="button"
-                        class="btn btn-square join-item h-10 w-10"
-                        onclick="document.getElementById('seed').stepDown()">−</button>
-                <button type="button"
-                        class="btn btn-square join-item h-10 w-10"
-                        onclick="document.getElementById('seed').stepUp()">+</button>
-              </div>
-              <p class="label-text-alt mt-1">Entre 1 et 100</p>
-            </fieldset>
-
-          </div>
-          <button id="big-generate-btn"
-                  type="button"
-                  class="btn btn-primary w-full font-bold bg-primary-focus hover:bg-primary-focus border-0 mt-4">
-            <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-            </svg>
-            Générer les exercices
-          </button>
-
-
-        </form>
+                <p class="label-text-alt mt-1">Entre 1 et 100</p>
+              </fieldset>
+            </div>
+            <button id="big-generate-btn"
+                    type="button"
+                    class="btn btn-primary w-full font-bold bg-primary-focus hover:bg-primary-focus border-0 mt-8">
+              <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+              Générer les copies
+            </button>
+          </form>
+        </div>
       </div>
 
       <!-- Big Generate Button -->
-
 
       <!-- JavaScript for form-based generation -->
       <script>
           // Extract form configuration
           function extractFormConfig() {
               // Get form values
-              const nbStudents = document.getElementById('nb-eleves')?.value || 2;
-              const nbQuestions = document.getElementById('nb-questions')?.value || 12;
-              const seed = document.getElementById('seed')?.value || 9;
+              const nbStudents = document.getElementById("nb-eleves")?.value || 2;
+              const nbQuestions =
+                  document.getElementById("nb-questions")?.value || 12;
+              const seed = document.getElementById("seed")?.value || 9;
 
               // Get selected curriculum from radio buttons
-              const curriculumRadio = document.querySelector('input[name="sujets0"]:checked');
-              let curriculum = 'Spé'; // default
+              const curriculumRadio = document.querySelector(
+                  'input[name="sujets0"]:checked'
+              );
+              let curriculum = null;
+              console.log("🔍 Curriculum radio:", curriculumRadio);
+              //let curriculum = 'Spé'; // default
 
-              if (curriculumRadio) {
+              if (curriculumRadio !== null) {
                   switch (curriculumRadio.value) {
-                      case 'spe':
-                          curriculum = 'Spé';
+                      case "spe":
+                          curriculum = "Spé";
                           break;
-                      case 'non-spe':
-                          curriculum = 'Non-Spé';
+                      case "gen":
+                          curriculum = "Non-Spé";
                           break;
-                      case 'techno':
-                          curriculum = 'Techno';
+                      case "techno":
+                          curriculum = "Techno";
                           break;
-                      default:
-                          curriculum = 'Spé';
+                          // default:
+                          // throw new Error('Invalid curriculum');
                   }
+              } else {
+                  throw new Error("Curriculum not selected");
+                  // Add a daisyUI Toast
               }
+
+              const curriculumSlug = curriculumRadio.value;
 
               return {
                   nbStudents,
                   nbQuestions,
                   seed,
-                  curriculum
+                  curriculum,
+                  curriculumSlug,
               };
           }
 
@@ -293,31 +304,32 @@
               const nbStudents = parseInt(config.nbStudents);
               const nbQuestions = parseInt(config.nbQuestions);
               const seed = parseInt(config.seed);
+              const curriculumSlug = config.curriculumSlug;
 
               if (isNaN(nbStudents) || nbStudents < 1 || nbStudents > 50) {
-                  alert('⚠️ Le nombre de copies doit être entre 1 et 50');
+                  alert("⚠️ Le nombre de copies doit être entre 1 et 50");
                   return;
               }
 
               if (isNaN(nbQuestions) || nbQuestions < 1 || nbQuestions > 12) {
-                  alert('⚠️ Le nombre de questions doit être entre 1 et 12');
+                  alert("⚠️ Le nombre de questions doit être entre 1 et 12");
                   return;
               }
 
               if (isNaN(seed) || seed < 1 || seed > 100) {
-                  alert('⚠️ La graine aléatoire doit être entre 1 et 100');
+                  alert("⚠️ La graine aléatoire doit être entre 1 et 100");
                   return;
               }
 
-              console.log('🎯 Generating with config:', config);
+              console.log("🎯 Generating with config:", config);
 
               // Build the target URL - adapt based on hosting environment
               const baseUrl = `${window.location.protocol}//${window.location.host}`;
 
               // Check deployment environment
               const hostname = window.location.hostname;
-              const isLegacyGitHubPages = hostname.includes('.github.io');
-              const isProduction = hostname === 'maths.pm' || isLegacyGitHubPages;
+              const isLegacyGitHubPages = hostname.includes(".github.io");
+              const isProduction = hostname === "maths.pm" || isLegacyGitHubPages;
 
               // Construct the appropriate path based on hosting environment
               let targetPath;
@@ -332,9 +344,15 @@
                   targetPath = `/pm/sujets0/a_generate.md`;
               }
 
-              const targetUrl = `${baseUrl}${targetPath}?format=html&nbStudents=${config.nbStudents}&nbQuestions=${config.nbQuestions}&seed=${config.seed}&curriculum=${encodeURIComponent(config.curriculum)}#teacher-answer-table`;
+              const targetUrl = `${baseUrl}${targetPath}?format=html&nbStudents=${
+          config.nbStudents
+        }&nbQuestions=${config.nbQuestions}&seed=${
+          config.seed
+        }&curriculum-slug=${encodeURIComponent(
+          config.curriculumSlug
+        )}&curriculum=${encodeURIComponent(config.curriculum)}`;
 
-              console.log('🚀 Navigating to:', targetUrl);
+              console.log("🚀 Navigating to:", targetUrl);
 
               // Navigate to the URL
               window.location.href = targetUrl;
@@ -342,136 +360,40 @@
 
           // Initialize the generate button when the page loads
           function initializeGenerateButton() {
-              const generateBtn = document.getElementById('big-generate-btn');
+              const generateBtn = document.getElementById("big-generate-btn");
               if (generateBtn) {
-                  generateBtn.addEventListener('click', generateFromForm);
-                  console.log('✅ Generate button initialized');
+                  generateBtn.addEventListener("click", generateFromForm);
+                  console.log("✅ Generate button initialized");
               } else {
-                  console.warn('Generate button not found');
+                  console.warn("Generate button not found");
               }
           }
 
           // Wait for DOM to be ready
-          if (document.readyState === 'loading') {
-              document.addEventListener('DOMContentLoaded', initializeGenerateButton);
+          if (document.readyState === "loading") {
+              document.addEventListener("DOMContentLoaded", initializeGenerateButton);
           } else {
               initializeGenerateButton();
           }
       </script>
 
-      <!-- Styles for document preview -->
-      <style>
-          /* Papyrus document structure */
-          :root {
-              --papyrus-margin-top: 3mm;
-              --papyrus-margin-right: 8mm;
-              --papyrus-margin-bottom: 3mm;
-              --papyrus-margin-left: 8mm;
-              --papyrus-font-size-h1: 28px;
-              --papyrus-font-size-h2: 24px;
-              --papyrus-font-size-h3: 20px;
-              --papyrus-font-size-h4: 18px;
-              --papyrus-font-size-h5: 16px;
-              --papyrus-font-size-h6: 14px;
-              --papyrus-font-size-body: 15px;
-          }
 
-          .papyrus-document {
-              font-family: 'Spectral', serif;
-          }
+      <div class="text-sm sm:text-base my-8 sm:my-12 text-base-content/70 md:px-6 md:py-10 md:bg-base-100 md:border-base-300 md:border-1"
+           style="border-radius: var(--radius-box)">
 
-          .page-wrapper {
-              width: 210mm;
-              min-height: 297mm;
-              max-height: 297mm;
-              margin: 0 auto 10mm auto;
-              padding: 0;
-              background: white;
-              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-              box-sizing: border-box;
-              position: relative;
-              overflow: hidden;
-              page-break-after: always;
-              page-break-inside: avoid;
-          }
+        <div class="w-full max-w-[720px] mx-auto">
 
-          .page-preview {
-              width: 100%;
-              height: 297mm;
-              padding: 0;
-              margin: 0;
-              position: relative;
-              box-sizing: border-box;
-          }
 
-          .page-content {
-              padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
-              height: 297mm;
-              width: 210mm;
-              box-sizing: border-box;
-              overflow: hidden;
-              position: relative;
-          }
+          <!-- Configuration Section -->
+          <div class="font-heading text-lg sm:text-xl md:text-2xl">Deuxième partie : Exercices</div>
 
-          /* Debug mode */
-          .debug-mode .page-wrapper {
-              border: 2px solid red;
-          }
+          <hr class="my-8 border-base-300" style="opacity: 0.8" />
 
-          .debug-mode .page-preview {
-              border: 2px solid blue;
-          }
+          <div class="text-sm sm:text-base mb-6 text-base-content/70 md:bg-base-100 md:border-base-300"
+               style="border-radius: var(--radius-box)">🚧 🏗️ En cours de développement.</div>
 
-          .debug-mode .page-content {
-              border: 2px solid green;
-          }
-
-          /* Print styles */
-          @page {
-              margin: 0;
-              size: A4;
-          }
-
-          @media print {
-              .page-wrapper {
-                  margin: 0;
-                  box-shadow: none;
-                  page-break-after: always;
-              }
-
-              .page-content {
-                  padding: var(--papyrus-margin-top) var(--papyrus-margin-right) var(--papyrus-margin-bottom) var(--papyrus-margin-left);
-              }
-
-              h1,
-              h2,
-              h3,
-              h4,
-              h5,
-              h6,
-              p {
-                  margin: 0;
-              }
-          }
-
-          /* Safari-specific styles */
-          @supports (-webkit-appearance: none) {
-              .text-2xs {
-                  font-size: 0.625rem !important;
-                  line-height: 1 !important;
-              }
-
-              .text-xs {
-                  font-size: 0.75rem !important;
-                  line-height: 1rem !important;
-              }
-
-              .text-sm {
-                  font-size: 0.875rem !important;
-                  line-height: 1.25rem !important;
-              }
-          }
-      </style>
+        </div>
+      </div>
 
 
     </div>
@@ -479,6 +401,30 @@
     <div class="tab-alt-content tab-alt-hidden" id="documentation-content">
       {% include "sujets0/documentation.html" %}
     </div>
-
   </div>
 {% endblock content %}
+
+
+{#
+    <div role="alert" class="alert alert-warning alert-soft border-1 mb-6" style=" border-radius: var(--radius-card) !important; border-color: var(--color-warning) !important; background-color: var(--color-base-100) !important; ">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+      <span><span class="font-handwritten text-lg">Maths.pm</span> ne collecte
+        aucune donnée. Toute l'exécution a lieu dans le navigateur. Si votre
+        ordinateur connaît des ralentisssements trop importants lors de la
+        génération de questions, vous pouvez utiliser ces
+        <a href="/sujets0/pre-genetated" class="link link-primary">fichiers PDFs</a>
+        qui contiennent des exercices pré-générés.</span>
+    </div>
+    <div role="alert" class="alert alert-info alert-soft border-1 mb-6" style=" border-radius: var(--radius-card) !important; border-color: var(--color-info) !important; background-color: var(--color-base-100) !important; ">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <span>Lorsque vous arrivez sur la page et pour vous faire gagner du temps, le
+        générateur s'exécute automatiquement. Quelques questions sont générées
+        pour deux copies (i.e. deux élèves).</span>
+    </div>
+#} {# {% include "sujets0/form.html" %} #}
+
+<!-- Sujets0 Generate Content - REFACTORED with unified UI -->

@@ -44,13 +44,13 @@ def render_question(*, x, factor):
     >>> components= generate_components(None, 0)
     >>> statement = render_question(**components)
     >>> statement["statement"]
-    'On considère un liquide pour lequel 1L pèse 700 g. Combien pèse 500 mL de ce liquide ?'
+    'On considère un liquide pour lequel $1$ L pèse $700$ g. Combien pèse $500$ mL de ce liquide ?'
     """
 
     mass = tm.Integer(n=1000) / factor
     mass = mass.simplified().as_decimal
 
-    statement = f"On considère un liquide pour lequel 1L pèse {mass.latex()} g. Combien pèse {x.latex()} mL de ce liquide ?"
+    statement = f"On considère un liquide pour lequel $1$ L pèse ${mass.latex()}$ g. Combien pèse ${x.latex()}$ mL de ce liquide ?"
     statement_html = f"<div>{statement}</div>"
 
     return {

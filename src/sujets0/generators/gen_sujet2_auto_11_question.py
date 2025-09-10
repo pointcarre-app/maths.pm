@@ -61,10 +61,10 @@ def render_question(*, a, b, c, x, x1, x2, f, expr):
     >>> components= generate_components(None, 0)
     >>> statement = render_question(**components)
     >>> statement["statement"]
-    "Soit $f$ une fonction définie sur $\\\\mathbb{R}$ par $f(x) = -8 \\\\times x^{2} + 80x -72$. Parmis la série A: -2; -1, 0, 1, 2, quel est l\'antécédent de 0 par la fonction $f$ ?"
+    "Soit $f$ une fonction définie sur $\\\\mathbb{R}$ par $f(x) = -8 \\\\times x^{2} + 80x -72$. Parmi les nombres suivants, : -2; -1, 0, 1, 2, quel est l\'antécédent de 0 par la fonction $f$ ?"
     """
 
-    statement = f"Soit ${f.latex()}$ une fonction définie sur $\\mathbb{{R}}$ par ${f.latex()}({x.latex()}) = {expr.latex()}$. Parmis la série A: -2; -1, 0, 1, 2, quel est l'antécédent de 0 par la fonction $f$ ?"
+    statement = f"{x1} Soit ${f.latex()}$ une fonction définie sur $\\mathbb{{R}}$ par ${f.latex()}({x.latex()}) = {expr.latex()}$. Parmis la série A: -2; -1, 0, 1, 2, quel est l'antécédent de 0 par la fonction $f$ ?"
     statement_html = f"<div>{statement}</div>"
 
     return {

@@ -177,7 +177,7 @@ pm-radio > div > button.btn-soft:hover {
   font-size: 1rem;
   font-weight: 300;
   text-align: left;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
 .fragment-wrapper.pm-subtitle p {

@@ -1,30 +1,8 @@
-<div class="tabs tabs-boxed pb-3 pt-2 mx-auto mb-8 bg-base-100 custom-tabs border-base-300 border-1 shadow"
+<div class="flex gap-2 sm:gap-4 mx-auto my-8 sm:my-12 w-full"
      style="border-radius: var(--radius-card) !important">
-  <style>
-      .custom-tabs .tab-active {
-          background-color: transparent !important;
-          color: var(--color-primary) !important;
-          font-weight: 500;
-          position: relative;
-      }
-
-      .custom-tabs .tab-active::after {
-          content: '';
-          position: absolute;
-          bottom: -2px;
-          left: 25%;
-          width: 50%;
-          height: 2px;
-          background-color: var(--color-primary);
-      }
-
-      .custom-tabs .tab {
-          transition: all 0.2s ease;
-      }
-  </style>
-  <a class="tab tab-lg flex-1 gap-1 tab-active" data-tab="generate">
+  <button class="btn btn-primary flex-1 px-2 sm:px-3" style="font-weight: 200 !important" data-tab="generate">
     <svg xmlns="http://www.w3.org/2000/svg"
-         class="h-4 w-4 hidden sm:block"
+         class="md-4 w-4 hidden sm:block flex-shrink-0"
          viewBox="0 0 24 24"
          fill="none"
          stroke="currentColor"
@@ -34,11 +12,14 @@
       <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
       <rect x="14" y="2" width="8" height="8" rx="1" />
     </svg>
-    <span>Générer<span class="hidden sm:inline">&nbsp;des exercices</span></span>
-  </a>
-  <a class="tab tab-lg flex-1 gap-1" data-tab="documentation">
+    <span class="text-xs md:text-base whitespace-nowrap">Générer<span class="hidden sm:inline">&nbsp;des exercices</span></span>
+  </button>
+  <button class="btn btn-outline flex-1 px-2 sm:px-3"
+          style="font-weight: 200 !important;
+                 opacity: 0.7"
+          data-tab="documentation">
     <svg xmlns="http://www.w3.org/2000/svg"
-         class="h-4 w-4 hidden sm:block"
+         class="h-4 w-4 hidden sm:block flex-shrink-0"
          viewBox="0 0 24 24"
          fill="none"
          stroke="currentColor"
@@ -51,14 +32,17 @@
       <path d="M16 13H8" />
       <path d="M16 17H8" />
     </svg>
-    <span>
+    <span class="text-xs md:text-base whitespace-nowrap">
       <span class="hidden sm:inline">Lire la documentation</span>
       <span class="sm:hidden">Documentation</span>
     </span>
-  </a>
-  <a class="tab tab-lg flex-1 gap-1" data-tab="subjects">
+  </button>
+  <button class="btn btn-outline flex-1 px-2 sm:px-3"
+          style="font-weight: 200 !important;
+                 opacity: 0.7"
+          data-tab="subjects">
     <svg xmlns="http://www.w3.org/2000/svg"
-         class="h-4 w-4 hidden sm:block"
+         class="h-4 w-4 hidden sm:block flex-shrink-0"
          viewBox="0 0 24 24"
          fill="none"
          stroke="currentColor"
@@ -72,9 +56,50 @@
       <path d="M3 22h18" />
       <path d="M6 18v-7" />
     </svg>
-    <span>
+    <span class="text-xs md:text-base whitespace-nowrap">
       <span class="hidden sm:inline">Consulter les sujets 0</span>
       <span class="sm:hidden">Sujets 0</span>
     </span>
-  </a>
+  </button>
 </div>
+
+<script>
+    // Tab switching functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabButtons = document.querySelectorAll('[data-tab]');
+        const tabContents = document.querySelectorAll('.tab-alt-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Update button states
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('btn-outline');
+                    // Add opacity for inactive buttons
+                    btn.style.opacity = '0.7';
+                    btn.style.fontWeight = '300';
+                });
+
+                // Set active button
+                this.classList.remove('btn-outline');
+                this.classList.add('btn-primary');
+                // Reset opacity for active button
+                this.style.opacity = '1';
+                //this.style.fontWeight = '300 !important';
+
+                // Show/hide content
+                const tabName = this.getAttribute('data-tab');
+                tabContents.forEach(content => {
+                    content.classList.add('tab-alt-hidden');
+                });
+
+                const selectedContent = document.getElementById(tabName + '-content');
+                if (selectedContent) {
+                    selectedContent.classList.remove('tab-alt-hidden');
+                }
+            });
+        });
+    });
+</script>

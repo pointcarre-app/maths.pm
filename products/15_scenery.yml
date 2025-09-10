@@ -4,8 +4,9 @@ title_html: Scenery
 subtitle_html: Visualizations and scenes
 # description: "Scenery makes integration tests easy & DRY via yamelization. Django focus for database access, all framework for JSON & HTML served assertion."
 description: "Scenery : tests d'intégrations DRY via yamelization. Permet de faire des assertions sur les JSON et HTML servis, ainsi que sur la base de données."
-local_path: "#"
+local_path: "/pm/scenery"
 source_link: https://github.com/pointcarre-app/scenery
+is_source_private: true
 color: success
 classes_formatted:
   - "Open Source"

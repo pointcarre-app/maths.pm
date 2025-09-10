@@ -12,9 +12,17 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """
     gen = tg.MathsGenerator(seed)
 
-    a = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
-    b = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
-    c = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
+    a = 0
+    while a == 0:
+        a = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
+
+    b = 0
+    while b == 0:
+        b = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
+
+    c = 0
+    while c == 0:
+        c = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
 
     a = a.simplified()
     b = b.simplified()

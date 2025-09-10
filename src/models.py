@@ -27,6 +27,7 @@ class ProductModel:
         self.description: str = data.get("description", "")
         self.local_path: Optional[str] = data.get("local_path")
         self.source_link: Optional[str] = data.get("source_link")
+        self.is_source_private: bool = str(data.get("is_source_private", "")).lower() == "true"
         self.figure_svg: Optional[str] = data.get("figure_svg")
         self.figure_png: Optional[str] = data.get("figure_png")
         self.color: str = data.get("color", "primary")

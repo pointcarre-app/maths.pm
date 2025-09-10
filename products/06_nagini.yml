@@ -4,7 +4,7 @@ title_html: Nagini
 subtitle_html: Python dans le navigateur
 # description: Execute Python scripts within the browser, install libraries, pass arguments from JS, use inputs, display graphs, and more.
 description: Exécuter des scripts Python dans le navigateur, installle des librairies, passer des arguments via JS, utiliser des inputs, et plus encore.
-local_path: /nagini
+local_path: /pm/nagini
 source_link: https://github.com/pointcarre-app/nagini
 color: accent
 figure_svg: nagini-figure-svg.html

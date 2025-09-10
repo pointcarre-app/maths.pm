@@ -6,8 +6,9 @@ is_beta: true
 subtitle_html: Animations & infographies
 # description: "Manim-based animation engine with high-level API for generating mathematical visualizations, educational videos, and presentations."
 description: "Moteur d'animation basé sur Manim, pour générer des visualisations mathématiques, des vidéos éducatives et des présentations."
-local_path: /cubrick
-source_link: https://framagit.org/your-org/pca-cubrick
+local_path: /pm/cubrick
+source_link: "https://github.com/pointcarre-app/cubrick/"
+is_source_private: true
 color: primary
 figure_svg: cubrick-figure-svg.html
 classes_formatted:

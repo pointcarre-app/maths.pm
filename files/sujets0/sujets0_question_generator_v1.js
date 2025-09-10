@@ -16,7 +16,8 @@ function extractConfigFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
   let nbStudents = parseInt(urlParams.get("nbStudents")) || 2;
   let nbQuestions = parseInt(urlParams.get("nbQuestions")) || 12;
-  const curriculum = urlParams.get("curriculum") || "Spé";
+  const curriculum = urlParams.get("curriculum");
+  const curriculumSlug = urlParams.get("curriculum-slug") ;
 
   // Cap values at their limits and show toasts
   if (nbStudents > 50) {
@@ -62,7 +63,7 @@ function extractConfigFromUrl() {
     );
   }
 
-  return { nbStudents, nbQuestions, curriculum };
+  return { nbStudents, nbQuestions, curriculum, curriculumSlug };
 }
 
 const configFromUrl = extractConfigFromUrl();
@@ -98,7 +99,7 @@ const CONFIG = {
   nbStudents: configFromUrl.nbStudents,
   nbQuestions: configFromUrl.nbQuestions,
   curriculum: configFromUrl.curriculum,
-
+  curriculumSlug: configFromUrl.curriculumSlug,
   // CDN URLs
   naginiJsUrl:
     "https://esm.sh/gh/pointcarre-app/nagini@v0.0.21/src/nagini.js?bundle",
@@ -149,6 +150,18 @@ const CONFIG = {
     "spe_sujet1_auto_10_question.py",
     "spe_sujet1_auto_11_question.py",
     "spe_sujet1_auto_12_question.py",
+    "gen_sujet2_auto_01_question.py",
+    "gen_sujet2_auto_02_question.py",
+    "gen_sujet2_auto_03_question.py",
+    "gen_sujet2_auto_04_question.py",
+    "gen_sujet2_auto_05_question.py",
+    "gen_sujet2_auto_06_question.py",
+    "gen_sujet2_auto_07_question.py",
+    "gen_sujet2_auto_08_question.py",
+    "gen_sujet2_auto_09_question.py",
+    "gen_sujet2_auto_10_question.py",
+    "gen_sujet2_auto_11_question.py",
+    "gen_sujet2_auto_12_question.py",
   ],
 
   // Graph mappings
@@ -606,40 +619,51 @@ function addPrintButton(container) {
     margin-left: 0.5rem;
   }
   </style>
-    <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800 mt-6">ℹ️ Au sujet de de la génération</h3>
-    <div class="p-0 mb-7 text-sm">
-        <ul class="list-none list-sujets0-questions-generator-report">
-            <li>📝 Corrigé enseignant inclus</li>
-            <li>🔬 Reproductibilité grâce à la <code>seed</code> <span class="italic">(graine)</span></li>
-        </ul>
-    </div>
-    <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800">📑 Au sujet de d'impression</h3>
-    <div class="p-0 mb-7 text-sm">
-        <ul class="list-none list-sujets0-questions-generator-report">
-            <li>✅ Optimisé pour Firefox & Chrome</li>   
-            <li>📝 Corrigé enseignant inclus</li>
-            <li>💡 Activer les "Graphiques d'arrière-plan" (ne peut être fait que manuellement)</li>
-            <li>📏 Possibilité d'ajuster les marges (mais normalement non nécessaire)</li>
-            <li>❌ Ne fonctionne pas sur Safari <a class="underline underline-offset-1 hover:underline-offset-4" href="">(malgré toute la bonne volonté du monde)</a></li>
-        </ul>
-    </div>
-    <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800 mt-6">📑 Sommaire</h3>
-    <div class="border border-gray-200 rounded-lg p-3">
-        <div id="toc-links" class="max-h-[300px] overflow-y-auto space-y-1">
-            <div class="text-xs text-gray-500 italic">Le sommaire sera généré après le chargement des questions...</div>
-        </div>
-    </div>
 
-    <div class="flex flex-col gap-2 mt-5 mb-8">
-    <button id="print-questions-btn" class="btn btn-info print-hide">
-        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
-            </path>
-        </svg>
-        Imprimer
-    </button>
-</div>`;
+    <div class="flex flex-col gap-2 mt-5 mb-4">
+      <button id="print-questions-btn" class="btn btn-info print-hide">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
+              </path>
+          </svg>
+          Imprimer
+      </button>
+    </div>
+    <details class="teacher-answer-details toc-details mb-4">
+        <summary class="teacher-summary">
+            Accès aux éléments imprimables
+        </summary>
+        <div class="border border-gray-200 rounded-lg p-3 mt-2">
+            <div id="toc-links" class="max-h-[300px] overflow-y-auto space-y-1">
+                <div class="text-xs text-gray-500 italic">Le sommaire sera généré après le chargement des questions...</div>
+            </div>
+        </div>
+    </details>
+    <details class="teacher-answer-details">
+        <summary class="teacher-summary">
+            Informations
+        </summary>
+        <div>
+            <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800 mt-6">📋 Au sujet de la génération</h3>
+            <div class="p-0 mb-7 text-sm">
+                <ul class="list-none list-sujets0-questions-generator-report">
+                    <li>📝 Corrigé enseignant inclus</li>
+                    <li>🔬 Reproductibilité grâce à la <code>seed</code> <span class="italic">(graine)</span></li>
+                </ul>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800">🖨️ Au sujet de l'impression</h3>
+            <div class="p-0 mb-7 text-sm">
+                <ul class="list-none list-sujets0-questions-generator-report">
+                    <li>✅ Optimisé pour Firefox & Chrome</li>   
+                    <li>📝 Corrigé enseignant inclus</li>
+                    <li>💡 Activer les "Graphiques d'arrière-plan" (ne peut être fait que manuellement)</li>
+                    <li>📏 Possibilité d'ajuster les marges (mais normalement non nécessaire)</li>
+                    <li>❌ Ne fonctionne pas sur Safari <a class="underline underline-offset-1 hover:underline-offset-4" href="">(malgré toute la bonne volonté du monde)</a></li>
+                </ul>
+            </div>
+        </div>
+    </details>`;
   container.appendChild(tocAndPrintButtonContainer);
   // Add click handler
   const printBtn = tocAndPrintButtonContainer.querySelector(
@@ -660,15 +684,6 @@ function handlePrint() {
     pmContainer.classList.add("print-target");
   }
 
-  // Force open teacher details for printing
-  const teacherDetails = document.querySelector(".teacher-answer-details");
-  const wasOpen = teacherDetails ? teacherDetails.open : false;
-
-  if (teacherDetails && !wasOpen) {
-    teacherDetails.open = true;
-    console.log("🖨️ Temporarily opened teacher details for printing");
-  }
-
   // Try to use the modern print API with no margins
   if (window.navigator && window.navigator.userAgent.includes("Chrome")) {
     // For Chrome, we can try to influence print settings via CSS
@@ -678,21 +693,18 @@ function handlePrint() {
     );
   }
 
-  // Trigger print dialog
-  window.print();
-
-  // Clean up after print dialog closes
+  // Small delay to ensure styles are applied
   setTimeout(() => {
-    if (pmContainer) {
-      pmContainer.classList.remove("print-target");
-    }
+    // Trigger print dialog
+    window.print();
 
-    // Restore original details state
-    if (teacherDetails && !wasOpen) {
-      teacherDetails.open = false;
-      console.log("🖨️ Restored teacher details to closed state");
-    }
-  }, 1000);
+    // Clean up after print dialog closes
+    setTimeout(() => {
+      if (pmContainer) {
+        pmContainer.classList.remove("print-target");
+      }
+    }, 1000);
+  }, 50);
 }
 
 function addPrintStyles() {
@@ -763,18 +775,35 @@ function addPrintStyles() {
                 page-break-inside: avoid !important;
             }
             
-            /* Force teacher answer details to be open when printing */
-            .teacher-answer-details {
-                display: block !important;
-            }
-            
-            .teacher-answer-details summary {
+            /* Hide the screen-only details version during print */
+            .screen-only {
                 display: none !important;
             }
             
-            .teacher-answer-details > div {
+            /* Show the print-only teacher table */
+            .print-only-teacher-table {
                 display: block !important;
-                margin-top: 0 !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            /* Ensure the print table is visible */
+            .print-only-teacher-table table {
+                display: table !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+            
+            /* Style the print-only heading */
+            .print-only-teacher-table h3 {
+                font-size: 14pt !important;
+                font-weight: 600 !important;
+                margin-bottom: 0.5rem !important;
+                color: black !important;
+            }
+            
+            /* Hide TOC details during print */
+            .toc-details {
+                display: none !important;
             }
             
             /* Specifically target the teacher answer table to stay with header */
@@ -941,9 +970,10 @@ function transformLoadingToSuccess(loadingDiv, results) {
   loadingDiv.className = loadingDiv.className
     .replace("bg-blue-50", "")
     .replace("border-blue-200", "border-success");
-  
+
   // Apply custom soft success background using CSS custom properties
-  loadingDiv.style.backgroundColor = "var(--color-success-ghost, color-mix(in oklab, var(--color-success) 8%, var(--color-base-100)))";
+  loadingDiv.style.backgroundColor =
+    "var(--color-success-ghost, color-mix(in oklab, var(--color-success) 8%, var(--color-base-100)))";
 
   // Get references to elements
   const spinner = loadingDiv.querySelector("#loading-spinner");
@@ -971,7 +1001,7 @@ function transformLoadingToSuccess(loadingDiv, results) {
   // Update progress with summary
   if (progress && results) {
     progress.className = "mt-2 text-sm text-success min-h-[20px]";
-    const successCount = results.filter(r => r.success).length;
+    const successCount = results.filter((r) => r.success).length;
     const totalCount = results.length;
     // • ${CONFIG.nbStudents} copies • ${CONFIG.nbQuestions} questions par copie
     progress.textContent = `${successCount}/${totalCount} questions générées`;
@@ -1022,6 +1052,13 @@ function addScreenStyles() {
   const screenStyles = document.createElement("style");
   screenStyles.id = "sujets0-screen-styles";
   screenStyles.textContent = `
+        /* Hide print-only elements on screen */
+        @media screen {
+            .print-only-teacher-table {
+                display: none !important;
+            }
+        }
+        
         /* Teacher answer details styling */
         .teacher-answer-details {
             border: 1px solid #e5e7eb;
@@ -1357,12 +1394,58 @@ async function executeAllGenerators() {
   console.log("🚀 Starting question generation...");
 
   // Select generators up to the requested amount (capped at 12)
-  const selectedGenerators = CONFIG.generators.slice(0, CONFIG.nbQuestions);
+  // Also select only the generator for the seleted curriculum
+  // select only the generators for the selected curriculum ie starting by CONFIG.curriculumSlug, 
+  const selectedGenerators = CONFIG.generators.filter(generator => generator.startsWith(CONFIG.curriculumSlug)).slice(0, CONFIG.nbQuestions);
   console.log(`📝 Selected ${selectedGenerators.length} generators`);
   const questionResults = [];
 
+
+  // For number of students:
+  // Generate a string : one mathematician - one color
+
+
+  const mathematicians = [
+    // Women
+    "Noether", "Mirzakhani", "Germain", "Lovelace", "Uhlenbeck",
+    "Daubechies", "Strickland", "Johnson", "Hodgkin", "Curie",
+    "Mouton", "Bath", "Goeppert-Mayer", "Apgar", "Solomon",
+    "Franklin", "Ball", "Merian", "Earle", "Jemison",
+    // Men
+    "Tao", "Gauss", "Newton", "Euler", "Riemann",
+    "Ramanujan", "Bernoulli", "Napier", "Archimedes", "Arad",
+    "Hackbusch", "Young", "Stilwell", "Huppert", "Calegari",
+    "Britton", "Kotelnikov", "Carré", "Marcolongo", "Galois",
+    "Poincaré"
+  ];
+
+
+
+  // in french d
+  const colors = [
+    "rouge", "bleu", "vert", "jaune", "orange",
+    "violet", "rose", "marron", "gris", "noir",
+    "blanc", "cyan", "magenta", "turquoise", "indigo",
+  ];
+
+
+  // create an an array of unique <mathematician>->color>
+  // With randomness 
+  // While ensuring uniqueness
+  // Shuffle the array
+  const shuffledMathematicians = [...mathematicians].sort(() => Math.random() - 0.5);
+  const shuffledColors = [...colors].sort(() => Math.random() - 0.5);
+  const mathematiciansAndColors = shuffledMathematicians.map((mathematician, index) => ({
+    mathematician,
+    color: shuffledColors[index % shuffledColors.length],
+  }));
+
   for (let studentNum = 1; studentNum <= CONFIG.nbStudents; studentNum++) {
     const seed = CONFIG.rootSeed + studentNum * Math.floor(Math.random() * 137);
+    
+    // Build nice identifier for this student using the pre-mapped array
+    const pairing = mathematiciansAndColors[(studentNum - 1) % mathematiciansAndColors.length];
+    const niceIdentifier = `${pairing.mathematician}-${pairing.color}`;
 
     let generatorNum = 1;
     for (const generator of selectedGenerators) {
@@ -1376,6 +1459,7 @@ async function executeAllGenerators() {
         result.seed = seed;
         result.generator = generator;
         result.generatorNum = generatorNum;
+        result.niceIdentifier = niceIdentifier;
         generatorNum++;
 
         // Attach graphs where needed
@@ -1397,6 +1481,7 @@ async function executeAllGenerators() {
           student: studentNum,
           generator: generator,
           generatorNum: generatorNum,
+          niceIdentifier: niceIdentifier,
         });
         generatorNum++;
       }
@@ -1431,29 +1516,122 @@ function generateFragmentsFromResults(results) {
   const fragments = [];
 
   // Header fragment
+
+
+  // ${JSON.stringify(CONFIG)}
+  // ${JSON.stringify(results)}
   fragments.push(
     PMFragmentGenerator.createParagraph(`
-
-  <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800 mt-6">⚙️ Paramètres</h3>
-    <div class="p-0 mb-7 text-sm">
-        <ul class="list-none list-sujets0-questions-generator-report">
-            <li class="font-mono"><span class="badge badge-outline badge-secondary">Programme : ${CONFIG.curriculum}</span></li>
-            <li class="font-mono"><span class="badge badge-outline badge-secondary">Copies : ${CONFIG.nbStudents}</span></li>
-            <li class="font-mono"><span class="badge badge-outline badge-secondary">Q° par copie : ${CONFIG.nbQuestions}</span></li>
-        </ul>
-    </div`)
+<div class="overflow-x-auto mt-4">
+  <table class="table table-zebra">
+    <tbody>
+      <tr>
+        <td class="sm:p-3">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">
+            <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Partie</td>
+        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">Première Partie</span></td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">
+            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Programme</td>
+        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">${CONFIG.curriculum}</span></td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Copies</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents}$</td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">
+            <path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Questions</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbQuestions}$</td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24" 
+              class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Total questions</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents} \\times ${CONFIG.nbQuestions} = ${CONFIG.nbQuestions * CONFIG.nbStudents}$</td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">
+            <path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Seed</td>
+        <td class="text-xs sm:text-sm md:text-base font-mono text-right">$${CONFIG.rootSeed}$</td>
+      </tr>
+    </tbody>
+  </table>
+</div>`)
   );
 
   // Create Teacher Copy section first
 
   // Generate teacher answer table with ID for TOC
-  let tableHtml = `
-        <div id="teacher-answer-table mb-6">
-            <details class="teacher-answer-details">
-                <summary class="teacher-summary">
-                    Corrigé Enseignant
-                </summary>
-                <div>
+  // Create the table HTML first (will be reused)
+  let tableContent = `
                     <table class="table table-zebra w-full border border-gray-300">
                 <thead>
                     <tr class="bg-gray-100">
@@ -1483,19 +1661,20 @@ function generateFragmentsFromResults(results) {
       "simplified_latex"
     );
 
-    // Create combined column content: [StudentNum]-([seed])-[QuestionNum]<br>generator
+    // Create combined column content: [StudentNum]-([seed])-[QuestionNum]<br>niceIdentifier<br>generator
     const studentNum = result.student || "N/A";
     const seed = result.seed || "N/A";
     const questionNum = result.generatorNum || "N/A";
     const generator = result.generator || "N/A";
+    const niceId = result.niceIdentifier || "";
 
     // Generate the correct URL for the generator file
     const basePath = getBasePath();
     const generatorUrl = `${basePath}/static/sujets0/generators/${generator}`;
 
-    const combinedInfo = `${studentNum}-(${seed})-${questionNum}<br><a href="${generatorUrl}" target="_blank" class="font-mono text-xs text-blue-600 hover:text-base-content underline">${generator}</a>`;
+    const combinedInfo = `${studentNum}-(${seed})-${questionNum}${niceId ? `<br><span class="text-xs font-semibold">${niceId}</span>` : ""}<br><a href="${generatorUrl}" target="_blank" class="font-mono text-xs text-blue-600 hover:text-base-content underline">${generator}</a>`;
 
-    tableHtml += `
+    tableContent += `
             <tr>
                 <td class="border border-gray-300 px-3 py-2" style="text-align:left !important; vertical-align:top !important; line-height:1.3;">${combinedInfo}</td>
                 <td class="border border-gray-300 px-3 py-2" style="text-align:right !important; vertical-align:middle !important;">${latexAnswers}</td>
@@ -1504,11 +1683,28 @@ function generateFragmentsFromResults(results) {
         `;
   });
 
-  tableHtml += `
+  tableContent += `
                 </tbody>
-                    </table>
+                    </table>`;
+
+  // Now wrap the table in both screen (details) and print versions
+  let tableHtml = `
+        <div id="teacher-answer-table" class="mb-6">
+            <!-- Screen version with collapsible details -->
+            <details class="teacher-answer-details screen-only">
+                <summary class="teacher-summary">
+                    Corrigé Enseignant
+                </summary>
+                <div>
+                    ${tableContent}
                 </div>
             </details>
+            
+            <!-- Print version that's always visible during print -->
+            <div class="print-only-teacher-table">
+                <h3 style="font-size: 1.1rem; font-weight: 500; margin-bottom: 0.75rem;">Corrigé Enseignant</h3>
+                ${tableContent}
+            </div>
         </div>
     `;
 
@@ -1530,9 +1726,13 @@ function generateFragmentsFromResults(results) {
     // Student header if multiple students
 
     if (Object.keys(byStudent).length > 1) {
+      // Get the niceIdentifier from the first result for this student
+      const niceId = byStudent[student][0]?.niceIdentifier || "";
+      const headerText = niceId ? `Copie n°${student} (${niceId})` : `Copie n°${student}`;
+      
       fragments.push(
         PMFragmentGenerator.createH2(
-          `Bac 1ère - Première Partie : Automatismes - n°${student}`,
+          headerText,
           ["font-mono"]
         )
       );
@@ -1707,7 +1907,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Show loading indicator with consistent height
   const loadingDiv = document.createElement("div");
   loadingDiv.className =
-    "sujets0-loading mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200 min-h-[80px] print-hide";
+    "sujets0-loading p-4 bg-blue-50 rounded-lg border border-blue-200 min-h-[80px] print-hide";
   loadingDiv.innerHTML = `
         <div class="flex items-center space-x-3">
             <div id="loading-spinner" class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
@@ -1767,25 +1967,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }, 100);
 
     // Add listener for native browser print (Ctrl+P)
+    // No longer need to manipulate details since we have a print-only table
     window.addEventListener("beforeprint", () => {
-      const teacherDetails = document.querySelector(".teacher-answer-details");
-      if (teacherDetails && !teacherDetails.open) {
-        teacherDetails.open = true;
-        teacherDetails.setAttribute("data-was-closed-for-print", "true");
-        console.log("🖨️ Auto-opened teacher details for native print");
-      }
+      console.log("🖨️ Native print triggered - print-only table will be shown");
     });
 
     window.addEventListener("afterprint", () => {
-      const teacherDetails = document.querySelector(".teacher-answer-details");
-      if (
-        teacherDetails &&
-        teacherDetails.getAttribute("data-was-closed-for-print")
-      ) {
-        teacherDetails.open = false;
-        teacherDetails.removeAttribute("data-was-closed-for-print");
-        console.log("🖨️ Restored teacher details after native print");
-      }
+      console.log("🖨️ Print completed");
     });
 
     // Expose for debugging

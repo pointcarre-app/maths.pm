@@ -38,7 +38,7 @@ def render_question(*, n):
     >>> components= generate_components(None, 0)
     >>> statement = render_question(**components)
     >>> statement["statement"]
-    "Le prix d'un article a quintuplé. De combien a-t-il augmenté en pourcentage ?"
+    "Le prix d'un article a quintuplé. Calculer la variation relative $V_r$."
     """
 
     literal_n = {
@@ -48,9 +48,7 @@ def render_question(*, n):
         5: "quintuplé",
     }
 
-    statement = (
-        f"Le prix d'un article a {literal_n[n.n]}. De combien a-t-il augmenté en pourcentage ?"
-    )
+    statement = f"Le prix d'un article a {literal_n[n.n]}. Calculer la variation relative $V_r$."
     statement_html = f"<div>{statement}</div>"
 
     return {

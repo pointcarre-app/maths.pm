@@ -23,6 +23,7 @@ from strictyaml import (
     Optional as StrictOptional,
     Seq,
     Str,
+    Bool,
     load,
 )
 
@@ -64,6 +65,7 @@ product_schema = Map(
         "description": Str(),
         StrictOptional("local_path"): Str(),
         StrictOptional("source_link"): Str(),
+        StrictOptional("is_source_private"): Bool(),
         StrictOptional("figure_svg"): Str(),
         StrictOptional("figure_png"): Str(),
         "color": Str(),

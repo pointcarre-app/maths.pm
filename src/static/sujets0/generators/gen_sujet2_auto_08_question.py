@@ -56,7 +56,7 @@ def render_question(*, x, a1, a2, b1, b2, expr):
     'Dévelloper $\\\\left(3x -8\\\\right) \\\\times \\\\left(4x -1\\\\right)$.'
     """
 
-    statement = f"Dévelloper ${expr.latex()}$."
+    statement = f"Développer ${expr.latex()}$."
     statement_html = f"<div>{statement}</div>"
 
     return {
