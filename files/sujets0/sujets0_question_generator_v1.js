@@ -619,7 +619,7 @@ function addPrintButton(container) {
     margin-left: 0.5rem;
   }
   </style>
-    <button id="print-questions-btn" class="btn btn-primary print-hide mb-4 w-full">
+    <button id="print-questions-btn" class="btn btn-primary print-hide mb-6 w-full">
           <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                       d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
@@ -627,7 +627,23 @@ function addPrintButton(container) {
           </svg>
           Imprimer
       </button>
-    
+    <details class="teacher-answer-details" open>
+        <summary class="teacher-summary">
+            Informations
+        </summary>
+        <div>
+            <div class="p-0 mt-4 mb-7 text-sm">
+                <ul class="list-none list-sujets0-questions-generator-report">
+                    <li>‼️ Lors de l'impression, il faut activer les "Graphiques d'arrière-plan" (ne peut être fait que manuellement dans la fenêtre d'impression). Vous pouvez lire <a class="underline underline-offset-1 hover:underline-offset-4" href="">notre documentation à ce sujet</a></li>
+                    <li>‼️ Ne fonctionne pas sur Safari <a class="underline underline-offset-1 hover:underline-offset-4" href="">(malgré beaucoup de bonne volonté)</a></li>
+                    <li>🟢 Optimisé pour Firefox & Chrome</li>   
+                    <li>🟢 Corrigé enseignant inclus</li>
+                    <li>🟢 Reproductibilité grâce à la <code>seed</code> <span class="italic">(graine)</span></li>
+                    <li>🟢 Possibilité d'ajuster les marges (mais normalement non nécessaire)</li>
+                </ul>
+            </div>
+        </div>
+    </details>
     <details class="teacher-answer-details toc-details mb-4">
         <summary class="teacher-summary">
             Accès aux éléments imprimables
@@ -635,29 +651,6 @@ function addPrintButton(container) {
         <div class="border border-gray-200 rounded-lg p-3 mt-2">
             <div id="toc-links" class="max-h-[300px] overflow-y-auto space-y-1">
                 <div class="text-xs text-gray-500 italic">Le sommaire sera généré après le chargement des questions...</div>
-            </div>
-        </div>
-    </details>
-    <details class="teacher-answer-details">
-        <summary class="teacher-summary">
-            Informations
-        </summary>
-        <div>
-            <div class="p-0 mt-4 mb-7 text-sm">
-                <ul class="list-none list-sujets0-questions-generator-report">
-                    <li>📝 Corrigé enseignant inclus</li>
-                    <li>🔬 Reproductibilité grâce à la <code>seed</code> <span class="italic">(graine)</span></li>
-                </ul>
-            </div>
-            
-            <div class="p-0 mb-7 text-sm">
-                <ul class="list-none list-sujets0-questions-generator-report">
-                    <li>✅ Optimisé pour Firefox & Chrome</li>   
-                    <li>📝 Corrigé enseignant inclus</li>
-                    <li>💡 Activer les "Graphiques d'arrière-plan" (ne peut être fait que manuellement)</li>
-                    <li>📏 Possibilité d'ajuster les marges (mais normalement non nécessaire)</li>
-                    <li>❌ Ne fonctionne pas sur Safari <a class="underline underline-offset-1 hover:underline-offset-4" href="">(malgré toute la bonne volonté du monde)</a></li>
-                </ul>
             </div>
         </div>
     </details>`;
@@ -1160,7 +1153,8 @@ function addScreenStyles() {
             padding: 0.25rem;
             font-size: 1rem;
             font-weight: 300;
-            color: #374151;
+            color: var(--color-base-content);
+            opacity: 0.7;
             cursor: pointer;
             transition: all 0.2s ease;
             border: 1px solid transparent;
@@ -2093,7 +2087,10 @@ function generateFragmentsFromResults(results) {
   for (const student of Object.keys(byStudent)) {
     // Student header if multiple students
 
-    if (Object.keys(byStudent).length > 1) {
+
+    // We prefer to display the "Copie N°" in all cases (scenery!)
+    // if (Object.keys(byStudent).length > 1) {
+
       // Get the niceIdentifier from the first result for this student
       const niceId = byStudent[student][0]?.niceIdentifier || "";
       const headerText = niceId
@@ -2102,7 +2099,7 @@ function generateFragmentsFromResults(results) {
 
       fragments.push(PMFragmentGenerator.createH2(headerText, ["font-mono"]));
       fragments.push(PMFragmentGenerator.createHr(["font-mono"]));
-    }
+    // }
 
     byStudent[student].forEach((result) => {
       // Preprocess statementHtml to inject question number properly

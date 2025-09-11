@@ -221,7 +221,6 @@
                          name="seed"
                          min="1"
                          max="100"
-                         value="9"
                          required
                          class="input input-bordered join-item flex-1 h-10" />
                   <button type="button"
@@ -358,6 +357,19 @@
               window.location.href = targetUrl;
           }
 
+          // Set random seed value
+          function setRandomSeed() {
+              const seedInput = document.getElementById("seed");
+              if (seedInput) {
+                  // Generate random number between 1 and 100 (inclusive)
+                  const randomSeed = Math.floor(Math.random() * 100) + 1;
+                  seedInput.value = randomSeed;
+                  console.log("🎲 Random seed set to:", randomSeed);
+              } else {
+                  console.warn("Seed input not found");
+              }
+          }
+
           // Initialize the generate button when the page loads
           function initializeGenerateButton() {
               const generateBtn = document.getElementById("big-generate-btn");
@@ -367,6 +379,9 @@
               } else {
                   console.warn("Generate button not found");
               }
+
+              // Set random seed on page load
+              setRandomSeed();
           }
 
           // Wait for DOM to be ready
