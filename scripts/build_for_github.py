@@ -197,6 +197,7 @@ async def build_static_site():
                 "/kill-service-workers",
                 "/pm",  # PM root
                 "/rgpd",
+                "/identity",
             ]
         )
 

@@ -1816,8 +1816,8 @@ function generateFragmentsFromResults(results) {
             <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Partie</td>
-        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">Première Partie</span></td>
+        <td class="text-xs sm:text-sm">Partie</td>
+        <td style="text-align: right !important;"><span class="text-xs sm:text-sm">Première Partie</span></td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1833,8 +1833,8 @@ function generateFragmentsFromResults(results) {
             <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Programme</td>
-        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">${CONFIG.curriculum}</span></td>
+        <td class="text-xs sm:text-sm">Programme</td>
+        <td style="text-align: right !important;"><span class="text-xs sm:text-sm">${CONFIG.curriculum}</span></td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1850,8 +1850,8 @@ function generateFragmentsFromResults(results) {
             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Copies</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents}$</td>
+        <td class="text-xs sm:text-sm">Copies</td>
+        <td class="text-xs sm:text-sm text-right">$${CONFIG.nbStudents}$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1867,8 +1867,8 @@ function generateFragmentsFromResults(results) {
             <path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Questions</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbQuestions}$</td>
+        <td class="text-xs sm:text-sm">Questions</td>
+        <td class="text-xs sm:text-sm text-right">$${CONFIG.nbQuestions}$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1879,8 +1879,8 @@ function generateFragmentsFromResults(results) {
               <path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Total questions</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents} \\times ${CONFIG.nbQuestions} = ${CONFIG.nbQuestions * CONFIG.nbStudents}$</td>
+        <td class="text-xs sm:text-sm">Total questions</td>
+        <td class="text-xs sm:text-sm text-right">$${CONFIG.nbStudents} \\times ${CONFIG.nbQuestions} = ${CONFIG.nbQuestions * CONFIG.nbStudents}$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1896,22 +1896,22 @@ function generateFragmentsFromResults(results) {
             <path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Seed</td>
-        <td class="text-xs sm:text-sm md:text-base font-mono text-right">$${CONFIG.rootSeed}$</td>
+        <td class="text-xs sm:text-sm">Seed</td>
+        <td class="text-xs sm:text-sm font-mono text-right">$${CONFIG.rootSeed}$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stamp-icon lucide-stamp"><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13"/><path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z"/><path d="M5 22h14"/></svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Reproductibilité</td>
+        <td class="text-xs sm:text-sm">Reproductibilité</td>
         <td class="text-xs md:text-sm font-mono text-right">$N°Copie-(Seed+N°Copie)-N°Question$ </td>
       </tr>
       <tr>
         <td class="sm:p-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fingerprint-icon lucide-fingerprint"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Empreinte par copie</td>
-        <td class="text-xs sm:text-sm md:text-base font-mono text-right">Mathématicien·ne - Couleur</td>
+        <td class="text-xs sm:text-sm">Empreinte par copie</td>
+        <td class="text-xs sm:text-sm font-mono text-right">Mathématicien·ne - Couleur</td>
       </tr>
     </tbody>
   </table>
@@ -1968,8 +1968,8 @@ function generateFragmentsFromResults(results) {
             <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Partie</td>
-        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">Première Partie</span></td>
+        <td class="text-xs sm:text-sm">Partie</td>
+        <td style="text-align: right !important;"><span class="text-xs sm:text-sm">Première Partie</span></td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1985,8 +1985,10 @@ function generateFragmentsFromResults(results) {
             <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Programme</td>
-        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">${CONFIG.curriculum}</span></td>
+        <td class="text-xs sm:text-sm">Programme</td>
+        <td style="text-align: right !important;"><span class="text-xs sm:text-sm">${
+          CONFIG.curriculum
+        }</span></td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -2002,8 +2004,8 @@ function generateFragmentsFromResults(results) {
             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Copies</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents}$</td>
+        <td class="text-xs sm:text-sm">Copies</td>
+        <td class="text-xs sm:text-sm text-right">$${CONFIG.nbStudents}$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -2019,8 +2021,8 @@ function generateFragmentsFromResults(results) {
             <path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Questions</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbQuestions}$</td>
+        <td class="text-xs sm:text-sm">Questions</td>
+        <td class="text-xs sm:text-sm text-right">$${CONFIG.nbQuestions}$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -2031,8 +2033,12 @@ function generateFragmentsFromResults(results) {
               <path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Total questions</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents} \\times ${CONFIG.nbQuestions} = ${CONFIG.nbQuestions * CONFIG.nbStudents}$</td>
+        <td class="text-xs sm:text-sm">Total questions</td>
+        <td class="text-xs sm:text-sm text-right">$${
+          CONFIG.nbStudents
+        } \\times ${CONFIG.nbQuestions} = ${
+        CONFIG.nbQuestions * CONFIG.nbStudents
+      }$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -2048,22 +2054,24 @@ function generateFragmentsFromResults(results) {
             <path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/>
           </svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Seed</td>
-        <td class="text-xs sm:text-sm md:text-base font-mono text-right">$${CONFIG.rootSeed}$</td>
+        <td class="text-xs sm:text-sm">Seed</td>
+        <td class="text-xs sm:text-sm font-mono text-right">$${
+          CONFIG.rootSeed
+        }$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stamp-icon lucide-stamp"><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13"/><path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z"/><path d="M5 22h14"/></svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Reproductibilité</td>
-        <td class="text-xs md:text-sm font-mono text-right">$N°Copie-(Seed+N°Copie)-N°Question$ </td>
+        <td class="text-xs sm:text-sm">Reproductibilité</td>
+        <td class="text-xs text-right">$N°Copie-(Seed+N°Copie)-N°Question$ </td>
       </tr>
       <tr>
         <td class="sm:p-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fingerprint-icon lucide-fingerprint"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg>
         </td>
-        <td class="text-xs sm:text-sm md:text-base">Empreinte par copie</td>
-        <td class="text-xs sm:text-sm md:text-base font-mono text-right">Mathématicien·ne - Couleur</td>
+        <td class="text-xs sm:text-sm">Empreinte par copie</td>
+        <td class="text-xs sm:text-sm font-mono text-right">Mathématicien·ne - Couleur</td>
       </tr>
     </tbody>
   </table>
