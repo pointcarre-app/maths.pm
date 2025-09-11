@@ -121,9 +121,9 @@ def render_question(*, x, c1, a2, b2, c2, a3, b3, c3, expr1, expr2, expr3):
             <tbody>
                 <tr>
                     <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333;">$f(x)$</td>
-                    <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${expr1.latex()}$</td>
-                    <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${expr2.latex()}$</td>
-                    <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${expr3.latex()}$</td>
+                    <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${expr1.latex().replace(".", ",")}$</td>
+                    <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${expr2.latex().replace(".", ",")}$</td>
+                    <td style="padding: 2px; font-size:0.8rem!important; text-align: center; border: 1px solid #333333; white-space: nowrap;">${expr3.latex().replace(".", ",")}$</td>
                 </tr>
             </tbody>
         </table>
@@ -150,8 +150,8 @@ missive(
         "statement": question["statement"],
         "statement_html": question["statement_html"],
         "answer": {
-            "latex": [latex_0],  # List to support multiple correct answers
-            "simplified_latex": answer["maths_object"].simplified().latex(),
+            "latex": [latex_0.replace(".", ",")],  # List to support multiple correct answers
+            "simplified_latex": answer["maths_object"].simplified().latex().replace(".", ","),
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),
         },

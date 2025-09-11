@@ -619,10 +619,9 @@ function addPrintButton(container) {
     margin-left: 0.5rem;
   }
   </style>
-
     <div class="flex flex-col gap-2 mt-5 mb-4">
-      <button id="print-questions-btn" class="btn btn-info print-hide">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button id="print-questions-btn" class="btn btn-primary print-hide">
+          <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                       d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
               </path>
@@ -645,14 +644,13 @@ function addPrintButton(container) {
             Informations
         </summary>
         <div>
-            <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800 mt-6">📋 Au sujet de la génération</h3>
-            <div class="p-0 mb-7 text-sm">
+            <div class="p-0 mt-4 mb-7 text-sm">
                 <ul class="list-none list-sujets0-questions-generator-report">
                     <li>📝 Corrigé enseignant inclus</li>
                     <li>🔬 Reproductibilité grâce à la <code>seed</code> <span class="italic">(graine)</span></li>
                 </ul>
             </div>
-            <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800">🖨️ Au sujet de l'impression</h3>
+            
             <div class="p-0 mb-7 text-sm">
                 <ul class="list-none list-sujets0-questions-generator-report">
                     <li>✅ Optimisé pour Firefox & Chrome</li>   
@@ -671,6 +669,9 @@ function addPrintButton(container) {
   );
   printBtn.addEventListener("click", handlePrint);
 }
+
+// <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800 mt-6">📋 Au sujet de la génération</h3>
+// <h3 class="text-xl sm:text-2xl font-semibold mb-2 text-gray-800">🖨️ Au sujet de l'impression</h3>
 
 function handlePrint() {
   // Create print-specific styles if they don't exist
@@ -1151,24 +1152,31 @@ function populateTableOfContents() {
   tocLinksContainer.appendChild(linkElement);
   linkCount++;
 
-  // Add smooth scroll behavior to the link
   const link = linkElement.querySelector("a");
   link.addEventListener("click", (e) => {
     e.preventDefault();
-    // If the table exists, scroll to it, otherwise scroll to top
+    
+    // Find the details element
+    const detailsElement = document.querySelector(".teacher-answer-details");
+    
+    // Open the details if it exists and isn't already open
+    if (detailsElement && !detailsElement.hasAttribute("open")) {
+      detailsElement.setAttribute("open", "");
+    }
+    
+    // Continue with existing scroll behavior
     if (teacherTable) {
       teacherTable.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
     } else {
-      // Fallback: scroll to top of page if table not found
       window.scrollTo({
         top: 0,
         behavior: "smooth",
       });
     }
-
+  
     // Update URL hash without jumping
     history.pushState(null, null, "#teacher-answer-table");
   });
@@ -1528,7 +1536,7 @@ async function executeAllGenerators() {
   console.log(`Total number of mathematicians and colors: ${mathematiciansAndColors.length}`);
 
   for (let studentNum = 1; studentNum <= CONFIG.nbStudents; studentNum++) {
-    const seed = CONFIG.rootSeed + studentNum * Math.floor(Math.random() * 137);
+    const seed = CONFIG.rootSeed + studentNum ;
 
     // Build nice identifier for this student using the pre-mapped array
     const pairing =
@@ -1611,6 +1619,10 @@ function generateFragmentsFromResults(results) {
   // ${JSON.stringify(results)}
   fragments.push(
     PMFragmentGenerator.createParagraph(`
+
+<div class="print-only-teacher-table">
+    <div style="font-weight: 0.5 !important; font-size: 1rem; margin-top: 1.25rem; margin-bottom: 0.75rem; font-family: var(--font-mono);">Paramètres de la génération</div>
+</div>
 <div class="overflow-x-auto mt-4">
   <table class="table table-zebra">
     <tbody>
@@ -1622,7 +1634,7 @@ function generateFragmentsFromResults(results) {
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
-            stroke-width="2" 
+            stroke-width="1" 
             stroke-linecap="round" 
             stroke-linejoin="round">
             <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"/>
@@ -1639,7 +1651,7 @@ function generateFragmentsFromResults(results) {
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
-            stroke-width="2" 
+            stroke-width="1" 
             stroke-linecap="round" 
             stroke-linejoin="round">
             <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
@@ -1658,7 +1670,7 @@ function generateFragmentsFromResults(results) {
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
-            stroke-width="2" 
+            stroke-width="1" 
             stroke-linecap="round" 
             stroke-linejoin="round">
             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/>
@@ -1677,7 +1689,7 @@ function generateFragmentsFromResults(results) {
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
-            stroke-width="2" 
+            stroke-width="1" 
             stroke-linecap="round" 
             stroke-linejoin="round">
             <path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/>
@@ -1693,7 +1705,7 @@ function generateFragmentsFromResults(results) {
           <svg xmlns="http://www.w3.org/2000/svg" 
               viewBox="0 0 24 24" 
               class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/>
           </svg>
         </td>
@@ -1712,7 +1724,7 @@ function generateFragmentsFromResults(results) {
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
-            stroke-width="2" 
+            stroke-width="1" 
             stroke-linecap="round" 
             stroke-linejoin="round">
             <path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/>
@@ -1722,6 +1734,20 @@ function generateFragmentsFromResults(results) {
         <td class="text-xs sm:text-sm md:text-base font-mono text-right">$${
           CONFIG.rootSeed
         }$</td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stamp-icon lucide-stamp"><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13"/><path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z"/><path d="M5 22h14"/></svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Reproductibilité</td>
+        <td class="text-xs md:text-sm font-mono text-right">$N°Copie-(Seed+N°Copie)-N°Question$ </td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fingerprint-icon lucide-fingerprint"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Empreinte par copie</td>
+        <td class="text-xs sm:text-sm md:text-base font-mono text-right">Mathématicien·ne - Couleur</td>
       </tr>
     </tbody>
   </table>
@@ -1733,18 +1759,18 @@ function generateFragmentsFromResults(results) {
   // Generate teacher answer table with ID for TOC
   // Create the table HTML first (will be reused)
   let tableContent = `
-                    <table class="table table-zebra w-full border border-gray-300">
-                <thead>
-                    <tr class="bg-gray-100">
-                        <th class="border border-gray-300 px-3 py-2" style="text-align:left !important; width: 25%; min-width: 200px;">
-                            ID
-                        </th>
-                        <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Réponse</th>
-                        <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Simplifiée</th>
-                    </tr>
-                </thead>
-                <tbody>
-                `;
+
+<table class="table table-zebra w-full border border-gray-300">
+  <thead>
+      <tr class="bg-gray-200">
+          <th class="border border-gray-300 px-3 py-2" style="text-align:left !important; width: 25%; min-width: 200px;">
+              Infos
+          </th>
+          <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Réponse</th>
+          <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Simplifiée</th>
+      </tr>
+  </thead>
+  <tbody>`;
 
   // Sort results by student, then by question number
   const sortedResults = results.slice().sort((a, b) => {
@@ -1805,7 +1831,7 @@ function generateFragmentsFromResults(results) {
             
             <!-- Print version that's always visible during print -->
             <div class="print-only-teacher-table">
-                <h3 style="font-size: 1.1rem; font-weight: 500; margin-bottom: 0.75rem;">Corrigé Enseignant</h3>
+                <div style="font-weight: 0.5 !important; font-size: 1rem; margin-top: 1.25rem; margin-bottom: 0.75rem; font-family: var(--font-mono);">Corrigé Enseignant</div>
                 ${tableContent}
             </div>
         </div>

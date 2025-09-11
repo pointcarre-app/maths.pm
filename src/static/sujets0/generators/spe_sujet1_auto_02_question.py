@@ -88,7 +88,11 @@ Lorsque : $a={components["a"].simplified().latex()}$ ; $b = {components["b"].lat
 # <br><span class="italic">La réponse doit être exprimée sous forme d'une fraction irréductible ou d'entier.</span>
 
 # Define latex_0 for multiple possible answers
-latex_0 = answer["maths_object"].latex()
+latex_0 = (
+    components["a"].simplified().latex()
+    + " "
+    + f"\\dfrac{{{components['b'].latex()}}}{{{components['c'].latex()} \\times ({components['d'].latex()})}}"
+)
 
 missive(
     {

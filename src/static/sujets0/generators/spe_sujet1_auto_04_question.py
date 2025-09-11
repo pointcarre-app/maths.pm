@@ -92,8 +92,14 @@ missive(
         "statement_html": statement_html,
         "mask": "V_r=",
         "answer": {
-            "latex": [latex_0, latex_1],  # List to support multiple correct answers
-            "simplified_latex": [simplified_0, simplified_1],  # List of simplified versions
+            "latex": [
+                latex_0.replace(".", ","),
+                latex_1.replace(".", ","),
+            ],  # List to support multiple correct answers
+            "simplified_latex": [
+                simplified_0.replace(".", ","),
+                simplified_1.replace(".", ","),
+            ],  # List of simplified versions
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),
         },
