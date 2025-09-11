@@ -51,7 +51,7 @@ def render_question(*, p, direction, coef):
     """
     # was : coef.simplified().latex
     coef = coef.simplified().as_decimal
-    statement = f"Le prix d'un article est multiplié par ${coef.latex().replace('.', ',')}$. Calculer la variation relative $V_r$ de ce prix."
+    statement = f"Le prix d'un article est multiplié par ${coef.latex().replace('.', ',')}$. Quelle est la variation du prix en pourcentage ?"
     return {
         "statement": statement,
         "statement_html": f"<div>{statement}</div>",
@@ -85,13 +85,13 @@ question = render_question(**components)
 # )
 
 # Create HTML version with percentage highlight
-coef_display = components["coef"].simplified().as_decimal.latex()
+coef_display = components["coef"].simplified().as_decimal.latex().replace(".", ",")
 literal_dir = "augmenté" if components["direction"].n == 1 else "diminué"
 
 
 # Create HTML version with formula highlighted
 statement_html = f"""<div>Le prix d'un article est multiplié par ${coef_display}$. 
-Calculer la variation relative $V_r$ de ce prix.<br></div>"""
+Calculer la variation du prix en pourcentage.<br></div>"""
 
 
 # <span class="italic">La réponse doit être exprimée sous forme d'une fraction irréductible ou d'entier.</span>

@@ -10,7 +10,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """
     gen = tg.MathsGenerator(seed)
 
-    p = gen.random_integer(1, 20)
+    p = gen.random_integer(1, 19)  # Avoid 100%
     p = tm.Integer(n=5 * p.n)
 
     direction = tm.Integer(n=gen.random_element_from((-1, 1)))
@@ -35,16 +35,16 @@ def render_question(*, p, direction):
     >>> direction = tm.Integer(n=1)
     >>> statement = render_question(p=p, direction=direction)
     >>> statement["statement"]
-    "Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. A l'issue de ces deux variations, quelle est la variation relative du prix ?"
+    "Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. A l'issue de ces deux variations, quelle est la variation du prix en pourcentage ?"
     """
     if direction == -1:
         dir1, dir2 = "diminue", "augmente"
     else:
         dir1, dir2 = "augmente", "diminue"
 
-    statement = f"""Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. A l'issue de ces deux variations, quelle est la variation relative du prix ?"""
+    statement = f"""Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. A l'issue de ces deux variations, quelle est la variation du prix en pourcentage ?"""
 
-    statement_html = f"""<div>Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. À l'issue de ces deux variations, quelle est la variation relative $V_r$ du prix ?</div>"""
+    statement_html = f"""<div>Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. À l'issue de ces deux variations, quelle est la variation du prix en pourcentage ?</div>"""
     return {
         "statement": statement,
         "statement_html": statement_html,

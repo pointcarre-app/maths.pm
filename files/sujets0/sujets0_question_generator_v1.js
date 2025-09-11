@@ -17,7 +17,7 @@ function extractConfigFromUrl() {
   let nbStudents = parseInt(urlParams.get("nbStudents")) || 2;
   let nbQuestions = parseInt(urlParams.get("nbQuestions")) || 12;
   const curriculum = urlParams.get("curriculum");
-  const curriculumSlug = urlParams.get("curriculum-slug") ;
+  const curriculumSlug = urlParams.get("curriculum-slug");
 
   // Cap values at their limits and show toasts
   if (nbStudents > 50) {
@@ -1285,6 +1285,19 @@ class PMFragmentGenerator {
     };
   }
 
+
+
+  static createHr(content, classes = []) {
+    const allClasses = [...classes, "mb-4", "border-base-200"];
+    return {
+      f_type: { value: "hr_" },
+      html: content,
+      data: {},
+      class_list:   allClasses,
+      classes: allClasses.join(" "),
+    };
+  }
+
   static createH2(content, classes = []) {
     const slug = content
       .toLowerCase()
@@ -1292,11 +1305,12 @@ class PMFragmentGenerator {
       .replace(/^-|-$/g, "");
     const allClasses = [
       ...classes,
-      "text-xl",
+      "text-lg",
       "mb-4",
       "pt-2",
-      "border-top-1",
-      "border-base-300",
+      "text-base-content/70",
+      // "border-top-1",
+      // "border-base-300",
     ];
     return {
       f_type: { value: "h2_" },
@@ -1395,56 +1409,137 @@ async function executeAllGenerators() {
 
   // Select generators up to the requested amount (capped at 12)
   // Also select only the generator for the seleted curriculum
-  // select only the generators for the selected curriculum ie starting by CONFIG.curriculumSlug, 
-  const selectedGenerators = CONFIG.generators.filter(generator => generator.startsWith(CONFIG.curriculumSlug)).slice(0, CONFIG.nbQuestions);
+  // select only the generators for the selected curriculum ie starting by CONFIG.curriculumSlug,
+  const selectedGenerators = CONFIG.generators
+    .filter((generator) => generator.startsWith(CONFIG.curriculumSlug))
+    .slice(0, CONFIG.nbQuestions);
   console.log(`📝 Selected ${selectedGenerators.length} generators`);
   const questionResults = [];
-
 
   // For number of students:
   // Generate a string : one mathematician - one color
 
-
   const mathematicians = [
     // Women
-    "Noether", "Mirzakhani", "Germain", "Lovelace", "Uhlenbeck",
-    "Daubechies", "Strickland", "Johnson", "Hodgkin", "Curie",
-    "Mouton", "Bath", "Goeppert-Mayer", "Apgar", "Solomon",
-    "Franklin", "Ball", "Merian", "Earle", "Jemison",
+    "Noether",
+    "Mirzakhani",
+    "Germain",
+    "Lovelace",
+    "Uhlenbeck",
+    "Daubechies",
+    "Strickland",
+    "Johnson",
+    "Hodgkin",
+    "Curie",
+    "Mouton",
+    "Bath",
+    "Goeppert-Mayer",
+    "Apgar",
+    "Solomon",
+    "Franklin",
+    "Ball",
+    "Merian",
+    "Earle",
+    "Jemison",
+    "Kovalevskaya",
+    "Cartwright",
+    "Robinson",
+    "Oleinik",
+    "Morawetz",
+    "Granville",
+    "Taussky-Todd",
+    "Karp",
+    "Blum",
+    "Blackwell",
     // Men
-    "Tao", "Gauss", "Newton", "Euler", "Riemann",
-    "Ramanujan", "Bernoulli", "Napier", "Archimedes", "Arad",
-    "Hackbusch", "Young", "Stilwell", "Huppert", "Calegari",
-    "Britton", "Kotelnikov", "Carré", "Marcolongo", "Galois",
-    "Poincaré"
+    "Tao",
+    "Gauss",
+    "Newton",
+    "Euler",
+    "Riemann",
+    "Ramanujan",
+    "Bernoulli",
+    "Napier",
+    "Archimedes",
+    "Arad",
+    "Hackbusch",
+    "Young",
+    "Stilwell",
+    "Huppert",
+    "Calegari",
+    "Britton",
+    "Kotelnikov",
+    "Carré",
+    "Marcolongo",
+    "Galois",
+    "Poincaré",
+    "Fermat",
+    "Cauchy",
+    "Laplace",
+    "Fourier",
+    "Lagrange",
+    "Leibniz",
+    "Descartes",
+    "Pascal",
+    "Fibonacci",
+    "Pythagoras"
   ];
-
-
 
   // in french
+  // const colors = [
+  //   "rouge", "bleu", "vert", "jaune", "orange",
+  //   "violet", "rose", "marron", "gris", "noir",
+  //   "blanc", "cyan", "magenta", "turquoise", "indigo",
+  // ];
+
   const colors = [
-    "rouge", "bleu", "vert", "jaune", "orange",
-    "violet", "rose", "marron", "gris", "noir",
-    "blanc", "cyan", "magenta", "turquoise", "indigo",
+    "red",
+    "blue",
+    "green",
+    "yellow",
+    "orange",
+    "violet",
+    "rose",
+    "marron",
+    "gris",
+    "noir",
+    "blanc",
+    "cyan",
+    "magenta",
+    "turquoise",
+    "indigo",
   ];
 
-
   // create an an array of unique <mathematician>->color>
-  // With randomness 
+  // With randomness
   // While ensuring uniqueness
   // Shuffle the array
-  const shuffledMathematicians = [...mathematicians].sort(() => Math.random() - 0.5);
+
+
+
+  const shuffledMathematicians = [...mathematicians].sort(
+    () => Math.random() - 0.5
+  );
   const shuffledColors = [...colors].sort(() => Math.random() - 0.5);
-  const mathematiciansAndColors = shuffledMathematicians.map((mathematician, index) => ({
-    mathematician,
-    color: shuffledColors[index % shuffledColors.length],
-  }));
+  const mathematiciansAndColors = shuffledMathematicians.map(
+    (mathematician, index) => ({
+      mathematician,
+      color: shuffledColors[index % shuffledColors.length],
+    })
+  );
+
+
+  // Log total number in variable `mathematiciansAndColors`
+  console.log(`Total number of mathematicians and colors: ${mathematiciansAndColors.length}`);
 
   for (let studentNum = 1; studentNum <= CONFIG.nbStudents; studentNum++) {
     const seed = CONFIG.rootSeed + studentNum * Math.floor(Math.random() * 137);
-    
+
     // Build nice identifier for this student using the pre-mapped array
-    const pairing = mathematiciansAndColors[(studentNum - 1) % mathematiciansAndColors.length];
+    const pairing =
+      mathematiciansAndColors[
+        (studentNum - 1) % mathematiciansAndColors.length
+      ];
     const niceIdentifier = `${pairing.mathematician}-${pairing.color}`;
 
     let generatorNum = 1;
@@ -1517,7 +1612,6 @@ function generateFragmentsFromResults(results) {
 
   // Header fragment
 
-
   // ${JSON.stringify(CONFIG)}
   // ${JSON.stringify(results)}
   fragments.push(
@@ -1557,7 +1651,9 @@ function generateFragmentsFromResults(results) {
           </svg>
         </td>
         <td class="text-xs sm:text-sm md:text-base">Programme</td>
-        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">${CONFIG.curriculum}</span></td>
+        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">${
+          CONFIG.curriculum
+        }</span></td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1574,7 +1670,9 @@ function generateFragmentsFromResults(results) {
           </svg>
         </td>
         <td class="text-xs sm:text-sm md:text-base">Copies</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents}$</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${
+          CONFIG.nbStudents
+        }$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1591,7 +1689,9 @@ function generateFragmentsFromResults(results) {
           </svg>
         </td>
         <td class="text-xs sm:text-sm md:text-base">Questions</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbQuestions}$</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${
+          CONFIG.nbQuestions
+        }$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1603,7 +1703,11 @@ function generateFragmentsFromResults(results) {
           </svg>
         </td>
         <td class="text-xs sm:text-sm md:text-base">Total questions</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents} \\times ${CONFIG.nbQuestions} = ${CONFIG.nbQuestions * CONFIG.nbStudents}$</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${
+          CONFIG.nbStudents
+        } \\times ${CONFIG.nbQuestions} = ${
+      CONFIG.nbQuestions * CONFIG.nbStudents
+    }$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1620,7 +1724,9 @@ function generateFragmentsFromResults(results) {
           </svg>
         </td>
         <td class="text-xs sm:text-sm md:text-base">Seed</td>
-        <td class="text-xs sm:text-sm md:text-base font-mono text-right">$${CONFIG.rootSeed}$</td>
+        <td class="text-xs sm:text-sm md:text-base font-mono text-right">$${
+          CONFIG.rootSeed
+        }$</td>
       </tr>
     </tbody>
   </table>
@@ -1672,7 +1778,9 @@ function generateFragmentsFromResults(results) {
     const basePath = getBasePath();
     const generatorUrl = `${basePath}/static/sujets0/generators/${generator}`;
 
-    const combinedInfo = `${studentNum}-(${seed})-${questionNum}${niceId ? `<br><span class="text-xs font-semibold">${niceId}</span>` : ""}<br><a href="${generatorUrl}" target="_blank" class="font-mono text-xs text-blue-600 hover:text-base-content underline">${generator}</a>`;
+    const combinedInfo = `${studentNum}-(${seed})-${questionNum}${
+      niceId ? `<br><span class="text-xs font-semibold">${niceId}</span>` : ""
+    }<br><a href="${generatorUrl}" target="_blank" class="font-mono text-xs text-blue-600 hover:text-base-content underline">${generator}</a>`;
 
     tableContent += `
             <tr>
@@ -1728,14 +1836,12 @@ function generateFragmentsFromResults(results) {
     if (Object.keys(byStudent).length > 1) {
       // Get the niceIdentifier from the first result for this student
       const niceId = byStudent[student][0]?.niceIdentifier || "";
-      const headerText = niceId ? `Copie n°${student} (${niceId})` : `Copie n°${student}`;
-      
-      fragments.push(
-        PMFragmentGenerator.createH2(
-          headerText,
-          ["font-mono"]
-        )
-      );
+      const headerText = niceId
+        ? `Copie n°${student} (${niceId})`
+        : `Copie n°${student}`;
+
+      fragments.push(PMFragmentGenerator.createH2(headerText, ["font-mono"]));
+      fragments.push(PMFragmentGenerator.createHr(["font-mono"]));
     }
 
     byStudent[student].forEach((result) => {
