@@ -1061,6 +1061,7 @@ function addScreenStyles() {
         
         /* Teacher answer details styling */
         .teacher-answer-details {
+            padding:0.25rem;
             border: 1px solid #e5e7eb;
             border-radius: 8px;
             overflow: hidden;
@@ -1070,23 +1071,21 @@ function addScreenStyles() {
         .teacher-summary {
             display: flex;
             align-items: center;
-            padding: 0.75rem;
-            font-size: 1.1rem;
-            font-weight: 400;
+            padding: 0.25rem;
+            font-size: 1rem;
+            font-weight: 300;
             color: #374151;
-            background-color: #f9fafb;
             cursor: pointer;
             transition: all 0.2s ease;
-            border: none;
+            border: 1px solid transparent;
             outline: none;
             position: relative;
             list-style: none;
             user-select: none;
         }
         
-        .teacher-summary:hover {
-            background-color: #f3f4f6;
-            color: #1f2937;
+        .teacher-answer-details:hover {
+            border: 1px solid var(--color-primary) !important;
         }
         
         /* Hide default browser markers */
@@ -1111,7 +1110,7 @@ function addScreenStyles() {
         /* Rotate arrow when open */
         .teacher-answer-details[open] .teacher-summary::before {
             transform: rotate(90deg);
-            color: #4b5563;
+            color: var(--color-base-content);
         }
         
         /* Content styling */
@@ -1120,11 +1119,7 @@ function addScreenStyles() {
             background-color: #ffffff;
         }
         
-        /* Focus styles for accessibility */
-        .teacher-summary:focus {
-            outline: 2px solid #3b82f6;
-            outline-offset: -2px;
-        }
+        /* Focus styles for accessibility: TODO sel: needs more understanding of the RG2A */
     `;
 
   document.head.appendChild(screenStyles);
@@ -1780,7 +1775,7 @@ function generateFragmentsFromResults(results) {
 
     const combinedInfo = `${studentNum}-(${seed})-${questionNum}${
       niceId ? `<br><span class="text-xs font-semibold">${niceId}</span>` : ""
-    }<br><a href="${generatorUrl}" target="_blank" class="font-mono text-xs text-blue-600 hover:text-base-content underline">${generator}</a>`;
+    }<br><a href="${generatorUrl}" target="_blank" class="font-mono text-xs text-base-content hover:text-base-content underline">${generator}</a>`;
 
     tableContent += `
             <tr>
