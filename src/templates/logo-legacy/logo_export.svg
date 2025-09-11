@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="logo" class="logo" viewBox="0 0 200 200" height="1000" width="1000" fill="white">
+  <rect x="0" y="0" stroke="white" width="200" height="200" fill="white" stroke-width="50" rx="14" ry="14" stroke-linejoin="round"></rect>
+  <rect x="57" y="57" stroke="black" width="86" height="86" fill="transparent" stroke-width="14" rx="14" ry="14" stroke-linejoin="round"></rect>
+  <circle cx="100" cy="100" r="14" fill="black"></circle>
+</svg>

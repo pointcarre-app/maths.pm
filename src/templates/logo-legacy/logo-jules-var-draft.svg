@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 525 108">
+    <!-- Logo -->
+    <g transform="translate(4,4)">
+        <!-- Outer square -->
+        <rect x="5" 
+              y="5" 
+              width="90" 
+              height="90" 
+              stroke="currentColor" 
+              fill="transparent" 
+              stroke-width="10" 
+              rx="20" 
+              ry="20" 
+              stroke-linejoin="round" />
+        
+        <!-- Center dot -->
+        <circle cx="50" 
+                cy="50" 
+                fill="currentColor" 
+                r="15" />
+                
+        <!-- Corner accents that match the original aesthetic -->
+        <path d="M25,15 L15,15 L15,25" 
+              stroke="currentColor" 
+              stroke-width="2.5" 
+              fill="none" />
+        <path d="M85,15 L95,15 L95,25" 
+              stroke="currentColor" 
+              stroke-width="2.5" 
+              fill="none" />
+        <path d="M15,75 L15,85 L25,85" 
+              stroke="currentColor" 
+              stroke-width="2.5" 
+              fill="none" />
+        <path d="M95,75 L95,85 L85,85" 
+              stroke="currentColor" 
+              stroke-width="2.5" 
+              fill="none" />
+    </g>
+    
+    <!-- Text -->
+    <text x="120" 
+          y="68" 
+          font-family="Nunito, sans-serif"
+          font-size="56" 
+          font-weight="600"
+          fill="currentColor">pointcarre.app</text>
+</svg>

@@ -634,7 +634,7 @@ function addPrintButton(container) {
         <div>
             <div class="p-0 mt-4 mb-7 text-sm">
                 <ul class="list-none list-sujets0-questions-generator-report">
-                    <li>‼️ Lors de l'impression, il faut activer les "Graphiques d'arrière-plan" (ne peut être fait que manuellement dans la fenêtre d'impression). Vous pouvez lire <a class="underline underline-offset-1 hover:underline-offset-4" href="">notre documentation à ce sujet</a></li>
+                    <li>‼️ Lors de l'impression, il faut activer les "Graphiques d'arrière-plan" (ne peut être fait que manuellement dans la fenêtre d'impression). Vous pouvez lire <a class="underline underline-offset-1 hover:underline-offset-4" href="">notre documentation à ce sujet</a>.</li>
                     <li>‼️ Ne fonctionne pas sur Safari <a class="underline underline-offset-1 hover:underline-offset-4" href="">(malgré beaucoup de bonne volonté)</a></li>
                     <li>🟢 Optimisé pour Firefox & Chrome</li>   
                     <li>🟢 Corrigé enseignant inclus</li>
