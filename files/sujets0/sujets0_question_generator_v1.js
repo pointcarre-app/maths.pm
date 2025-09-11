@@ -970,36 +970,67 @@ function addPrintStyles() {
                 overflow: hidden !important;
             }
             
-            /* Firefox-specific print fixes */
-            .firefox-print #teacher-answer-table,
-            .firefox-print .teacher-table-section,
-            .firefox-print .fragment-wrapper.teacher-table-section,
-            .firefox-print .fragment-wrapper:has(#teacher-answer-table),
-            .firefox-print .print-only-teacher-table,
-            .firefox-print .firefox-teacher-table,
-            .firefox-print .firefox-combined-tables,
-            .firefox-print .firefox-combined-teacher-section {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                -moz-column-break-inside: avoid !important;
-                break-inside: avoid-page !important;
-                display: table !important;
-                width: 100% !important;
-            }
-            
-            /* Ensure the combined Firefox fragment stays together */
-            .firefox-print .fragment-wrapper.firefox-combined-teacher-section {
-                page-break-inside: avoid !important;
-                break-inside: avoid-page !important;
-                -moz-column-break-inside: avoid !important;
-            }
-            
-            /* Keep teacher title with table in Firefox */
-            .firefox-print .print-only-teacher-table > div:first-child {
+            /* Firefox-specific print fixes - back to combined approach but smarter */
+            .firefox-print .fragment-wrapper.firefox-parameters-section {
                 page-break-after: avoid !important;
                 break-after: avoid !important;
                 -moz-column-break-after: avoid !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            .firefox-print .fragment-wrapper.firefox-teacher-section {
+                page-break-before: avoid !important;
+                break-before: avoid !important;
+                -moz-column-break-before: avoid !important;
+                margin-top: 0 !important;
+                page-break-inside: auto !important;
+            }
+            
+            /* Firefox: Allow teacher table to break if absolutely necessary */
+            .firefox-print .firefox-teacher-table,
+            .firefox-print .print-only-teacher-table {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+            
+            /* Firefox: Remove any potential title spacing and force table to top */
+            .firefox-print .print-only-teacher-table {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            
+            /* Firefox: Ensure table starts immediately without gaps */
+            .firefox-print .print-only-teacher-table table {
+                margin-top: 0 !important;
+                border-collapse: collapse !important;
+            }
+            
+            /* Firefox: Make tables more compact to fit together */
+            .firefox-print .firefox-parameters-table,
+            .firefox-print .print-only-teacher-table table {
+                font-size: 11pt !important;
+                line-height: 1.3 !important;
+            }
+            
+            .firefox-print .firefox-parameters-table td,
+            .firefox-print .print-only-teacher-table td {
+                padding: 4px 8px !important;
+            }
+            
+            /* Firefox: Reduce spacing between the two table sections */
+            .firefox-print .firefox-parameters-section {
                 margin-bottom: 0.5rem !important;
+            }
+            
+            .firefox-print .firefox-teacher-section {
+                margin-top: 0 !important;
+            }
+            
+            /* Firefox: Force teacher table to stay together as one unit */
+            .firefox-print .print-only-teacher-table {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                -moz-column-break-inside: avoid !important;
             }
             
             /* Ensure parameters table stays with teacher section in Firefox */
@@ -1235,12 +1266,14 @@ function populateTableOfContents() {
   link.addEventListener("click", (e) => {
     e.preventDefault();
     
-    // Find the details element
-    const detailsElement = document.querySelector(".teacher-answer-details");
+    // Find the details element - try both screen-only and general selectors
+    const detailsElement = document.querySelector(".teacher-answer-details.screen-only") || 
+                          document.querySelector(".teacher-answer-details");
     
     // Open the details if it exists and isn't already open
     if (detailsElement && !detailsElement.hasAttribute("open")) {
       detailsElement.setAttribute("open", "");
+      console.log("📖 Opened teacher details for TOC navigation");
     }
     
     // Continue with existing scroll behavior
@@ -1758,13 +1791,16 @@ function generateFragmentsFromResults(results) {
   // For Chrome, keep them separate as before
   
   if (isFirefox) {
-    // Build combined content for Firefox - both tables in one fragment
-    let combinedTablesHTML = `<div class="firefox-combined-tables">`;
+    // Firefox: Use same structure as Chrome but with Firefox-specific CSS classes for print compatibility
     
-    // Parameters table (no title for Firefox)
-    combinedTablesHTML += `
-<div class="overflow-x-auto mt-4 parameters-table-wrapper">
-  <table class="table table-zebra parameters-table">
+    // First fragment: Parameters table only (like Chrome)
+    fragments.push(
+      PMFragmentGenerator.createParagraph(`
+<div class="print-only-teacher-table parameters-table-section firefox-parameters-section">
+    <div style="font-weight: 0.5 !important; font-size: 1rem; margin-top: 1.25rem; margin-bottom: 0.75rem; font-family: var(--font-mono);">Paramètres de la génération</div>
+</div>
+<div class="overflow-x-auto mt-4 parameters-table-wrapper firefox-parameters-wrapper">
+  <table class="table table-zebra parameters-table firefox-parameters-table">
     <tbody>
       <tr>
         <td class="sm:p-3">
@@ -1798,9 +1834,7 @@ function generateFragmentsFromResults(results) {
           </svg>
         </td>
         <td class="text-xs sm:text-sm md:text-base">Programme</td>
-        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">${
-          CONFIG.curriculum
-        }</span></td>
+        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">${CONFIG.curriculum}</span></td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1817,9 +1851,7 @@ function generateFragmentsFromResults(results) {
           </svg>
         </td>
         <td class="text-xs sm:text-sm md:text-base">Copies</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${
-          CONFIG.nbStudents
-        }$</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents}$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1836,9 +1868,7 @@ function generateFragmentsFromResults(results) {
           </svg>
         </td>
         <td class="text-xs sm:text-sm md:text-base">Questions</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${
-          CONFIG.nbQuestions
-        }$</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbQuestions}$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1850,11 +1880,7 @@ function generateFragmentsFromResults(results) {
           </svg>
         </td>
         <td class="text-xs sm:text-sm md:text-base">Total questions</td>
-        <td class="text-xs sm:text-sm md:text-base text-right">$${
-          CONFIG.nbStudents
-        } \\times ${CONFIG.nbQuestions} = ${
-      CONFIG.nbQuestions * CONFIG.nbStudents
-    }$</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents} \\times ${CONFIG.nbQuestions} = ${CONFIG.nbQuestions * CONFIG.nbStudents}$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1871,9 +1897,7 @@ function generateFragmentsFromResults(results) {
           </svg>
         </td>
         <td class="text-xs sm:text-sm md:text-base">Seed</td>
-        <td class="text-xs sm:text-sm md:text-base font-mono text-right">$${
-          CONFIG.rootSeed
-        }$</td>
+        <td class="text-xs sm:text-sm md:text-base font-mono text-right">$${CONFIG.rootSeed}$</td>
       </tr>
       <tr>
         <td class="sm:p-3">
@@ -1891,13 +1915,12 @@ function generateFragmentsFromResults(results) {
       </tr>
     </tbody>
   </table>
-</div>`;
+</div>`)
+    );
     
-    // Now add the teacher correction table to the combined HTML
-    // Continue building combined HTML for Firefox
-    combinedTablesHTML += `
-        <!-- Teacher Answer Table -->
-        <div id="teacher-answer-table" class="mb-6 firefox-teacher-table" style="margin-top: 1rem;">
+    // Second fragment: Teacher correction table (like Chrome, but with Firefox classes)
+    let tableHtml = `
+        <div id="teacher-answer-table" class="mb-6 firefox-teacher-table">
             <!-- Screen version with collapsible details -->
             <details class="teacher-answer-details screen-only">
                 <summary class="teacher-summary">
@@ -1908,16 +1931,15 @@ function generateFragmentsFromResults(results) {
                 </div>
             </details>
             
-            <!-- Print version for Firefox - just the table, no title -->
+            <!-- Print version that's always visible during print - NO TITLE for Firefox to prevent page breaks -->
             <div class="print-only-teacher-table">
                 ${tableContent}
             </div>
         </div>
-    </div>`; // Close firefox-combined-tables div
+    `;
     
-    // Push the combined content as a single fragment for Firefox
     fragments.push(
-      PMFragmentGenerator.createParagraph(combinedTablesHTML, ["firefox-combined-teacher-section"])
+      PMFragmentGenerator.createParagraph(tableHtml, ["teacher-table-section", "firefox-teacher-section"])
     );
     
   } else {
@@ -2270,7 +2292,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Show loading indicator with consistent height
   const loadingDiv = document.createElement("div");
   loadingDiv.className =
-    "sujets0-loading p-4 bg-blue-50 rounded-lg border border-blue-200 min-h-[80px] print-hide";
+    "sujets0-loading p-4 bg-blue-50 rounded-lg border border-blue-200 min-h-[80px] print-hide mb-4";
   loadingDiv.innerHTML = `
         <div class="flex items-center space-x-3">
             <div id="loading-spinner" class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>

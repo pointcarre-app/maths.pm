@@ -126,11 +126,11 @@
 
           <form id="arpege-form">
             <!-- 2x2 Grid Layout -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <!-- Top Left: Number of copies -->
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base md:text-lg">Nombre de copies</span>
+                  <span class="font-light font-heading text-base text-base-content/80">Nombre de copies</span>
                   <div class="tooltip tooltip-top"
                        data-tip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">
                     <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
@@ -158,7 +158,7 @@
               <!-- Top Right: Specialty selection -->
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base md:text-lg">Filière / Spécialité</span>
+                  <span class="font-light font-heading text-base text-base-content/80">Filière / Spécialité</span>
                   <div class="tooltip tooltip-top"
                        data-tip="Spé pour spécialité maths, Non Spé pour enseignement spécifique et Techno pour filières technologiques">
                     <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help">?</span>
@@ -182,7 +182,7 @@
               <!-- Bottom Left: Questions per copy -->
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base md:text-lg">Questions par copie</span>
+                  <span class="font-light font-heading text-base text-base-content/80">Questions par copie</span>
                   <div class="tooltip tooltip-top" data-tip="Une partie A d'un sujet 0 officiel compte 12 questions">
                     <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
                   </div>
@@ -209,7 +209,7 @@
               <!-- Bottom Right: Seed number -->
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base md:text-lg">Seed</span>
+                  <span class="font-light font-heading text-base text-base-content/80">Seed</span>
                   <div class="tooltip tooltip-top"
                        data-tip="Numéro de graine pour la reproductibilité de la génération aléatoire des copies">
                     <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
@@ -354,7 +354,10 @@
               console.log("🚀 Navigating to:", targetUrl);
 
               // Navigate to the URL
-              window.location.href = targetUrl;
+              //window.location.href = targetUrl;
+              // Open in new tab + safe
+              window.open(targetUrl, '_blank', 'noopener,noreferrer');
+
           }
 
           // Set random seed value

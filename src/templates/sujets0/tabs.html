@@ -1,6 +1,6 @@
 <div class="flex gap-2 sm:gap-4 mx-auto my-8 sm:my-12 w-full"
      style="border-radius: var(--radius-card) !important">
-  <button class="btn btn-primary flex-1 px-2 sm:px-3" style="font-weight: 200 !important" data-tab="generate">
+  <button class="btn btn-neutral flex-1 px-2 sm:px-3" style="font-weight: 200 !important" data-tab="generate">
     <svg xmlns="http://www.w3.org/2000/svg"
          class="md-4 w-4 hidden sm:block flex-shrink-0"
          viewBox="0 0 24 24"
@@ -75,7 +75,7 @@
 
                 // Update button states
                 tabButtons.forEach(btn => {
-                    btn.classList.remove('btn-primary');
+                    btn.classList.remove('btn-neutral');
                     btn.classList.add('btn-outline');
                     // Add opacity for inactive buttons
                     btn.style.opacity = '0.7';
@@ -84,7 +84,7 @@
 
                 // Set active button
                 this.classList.remove('btn-outline');
-                this.classList.add('btn-primary');
+                this.classList.add('btn-neutral');
                 // Reset opacity for active button
                 this.style.opacity = '1';
                 //this.style.fontWeight = '300 !important';
