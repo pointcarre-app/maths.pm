@@ -619,8 +619,7 @@ function addPrintButton(container) {
     margin-left: 0.5rem;
   }
   </style>
-    <div class="flex flex-col gap-2 mt-5 mb-4">
-      <button id="print-questions-btn" class="btn btn-primary print-hide">
+    <button id="print-questions-btn" class="btn btn-primary print-hide mb-4 w-full">
           <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                       d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
@@ -628,7 +627,7 @@ function addPrintButton(container) {
           </svg>
           Imprimer
       </button>
-    </div>
+    
     <details class="teacher-answer-details toc-details mb-4">
         <summary class="teacher-summary">
             Accès aux éléments imprimables
@@ -711,6 +710,11 @@ function handlePrint() {
 function addPrintStyles() {
   const existingStyles = document.querySelector("#sujets0-print-styles");
   if (existingStyles) return;
+
+  // Add Firefox detection class for browser-specific styling
+  if (navigator.userAgent.includes('Firefox')) {
+    document.body.classList.add('firefox-print');
+  }
 
   const printStyles = document.createElement("style");
   printStyles.id = "sujets0-print-styles";
@@ -831,6 +835,20 @@ function addPrintStyles() {
                 page-break-before: avoid !important;
                 page-break-after: avoid !important;
                 break-after: avoid !important;
+            }
+            
+            /* Firefox: Try to keep first page content together */
+            .firefox-print .fragment-wrapper:first-child {
+                page-break-after: avoid !important;
+            }
+            
+            .firefox-print .fragment-wrapper:nth-child(2) {
+                page-break-before: avoid !important;
+                page-break-after: avoid !important;
+            }
+            
+            .firefox-print .fragment-wrapper:nth-child(3) {
+                page-break-before: avoid !important;
             }
             
             /* Alternative approach: explicitly target the sequence we want together */
@@ -957,6 +975,73 @@ function addPrintStyles() {
                 position: relative !important;
                 display: block !important;
                 overflow: hidden !important;
+            }
+            
+            /* Firefox-specific print fixes */
+            .firefox-print #teacher-answer-table,
+            .firefox-print .teacher-table-section,
+            .firefox-print .fragment-wrapper.teacher-table-section,
+            .firefox-print .fragment-wrapper:has(#teacher-answer-table),
+            .firefox-print .print-only-teacher-table,
+            .firefox-print .firefox-teacher-table,
+            .firefox-print .firefox-combined-tables,
+            .firefox-print .firefox-combined-teacher-section {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                -moz-column-break-inside: avoid !important;
+                break-inside: avoid-page !important;
+                display: table !important;
+                width: 100% !important;
+            }
+            
+            /* Ensure the combined Firefox fragment stays together */
+            .firefox-print .fragment-wrapper.firefox-combined-teacher-section {
+                page-break-inside: avoid !important;
+                break-inside: avoid-page !important;
+                -moz-column-break-inside: avoid !important;
+            }
+            
+            /* Keep teacher title with table in Firefox */
+            .firefox-print .print-only-teacher-table > div:first-child {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+                -moz-column-break-after: avoid !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            /* Ensure parameters table stays with teacher section in Firefox */
+            .firefox-print .fragment-wrapper:has(table):nth-child(-n+3),
+            .firefox-print .parameters-table-section,
+            .firefox-print .parameters-table-wrapper,
+            .firefox-print .parameters-table {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+                -moz-column-break-after: avoid !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Firefox table handling */
+            .firefox-print .fragment-wrapper[data-f_type="p_"]:has(table) {
+                break-inside: avoid-page !important;
+                page-break-inside: avoid !important;
+                -moz-column-break-inside: avoid !important;
+            }
+            
+            /* Orphans and widows control for Firefox */
+            .firefox-print .print-only-teacher-table {
+                orphans: 4;
+                widows: 4;
+            }
+            
+            /* Force teacher section elements to stay together in Firefox */
+            .firefox-print .fragment-wrapper:nth-child(-n+4) {
+                page-break-before: avoid !important;
+                page-break-after: avoid !important;
+                break-before: avoid !important;
+                break-after: avoid !important;
+                -moz-column-break-before: avoid !important;
+                -moz-column-break-after: avoid !important;
             }
         }
     `;
@@ -1613,18 +1698,79 @@ function formatAnswersForTeacherTable(result, answerType) {
 function generateFragmentsFromResults(results) {
   const fragments = [];
 
-  // Header fragment
+  // Detect Firefox for special handling
+  const isFirefox = navigator.userAgent.includes('Firefox');
 
-  // ${JSON.stringify(CONFIG)}
-  // ${JSON.stringify(results)}
-  fragments.push(
-    PMFragmentGenerator.createParagraph(`
+  // Generate teacher answer table content (shared by both Firefox and Chrome)
+  let tableContent = `
 
-<div class="print-only-teacher-table">
-    <div style="font-weight: 0.5 !important; font-size: 1rem; margin-top: 1.25rem; margin-bottom: 0.75rem; font-family: var(--font-mono);">Paramètres de la génération</div>
-</div>
-<div class="overflow-x-auto mt-4">
-  <table class="table table-zebra">
+<table class="table table-zebra w-full border border-gray-300">
+  <thead>
+      <tr class="bg-gray-200">
+          <th class="border border-gray-300 px-3 py-2" style="text-align:left !important; width: 25%; min-width: 200px;">
+              Infos
+          </th>
+          <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Réponse</th>
+          <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Simplifiée</th>
+      </tr>
+  </thead>
+  <tbody>`;
+
+  // Sort results by student, then by question number
+  const sortedResults = results.slice().sort((a, b) => {
+    if (a.student !== b.student) {
+      return a.student - b.student;
+    }
+    return a.generatorNum - b.generatorNum;
+  });
+
+  // Add table rows
+  sortedResults.forEach((result) => {
+    const latexAnswers = formatAnswersForTeacherTable(result, "latex");
+    const simplifiedAnswers = formatAnswersForTeacherTable(
+      result,
+      "simplified_latex"
+    );
+
+    // Create combined column content: [StudentNum]-([seed])-[QuestionNum]<br>niceIdentifier<br>generator
+    const studentNum = result.student || "N/A";
+    const seed = result.seed || "N/A";
+    const questionNum = result.generatorNum || "N/A";
+    const generator = result.generator || "N/A";
+    const niceId = result.niceIdentifier || "";
+
+    // Generate the correct URL for the generator file
+    const basePath = getBasePath();
+    const generatorUrl = `${basePath}/static/sujets0/generators/${generator}`;
+
+    const combinedInfo = `${studentNum}-(${seed})-${questionNum}${
+      niceId ? `<br><span class="text-xs font-semibold">${niceId}</span>` : ""
+    }<br><a href="${generatorUrl}" target="_blank" class="font-mono text-xs text-base-content hover:text-base-content underline">${generator}</a>`;
+
+    tableContent += `
+            <tr>
+                <td class="border border-gray-300 px-3 py-2" style="text-align:left !important; vertical-align:top !important; line-height:1.3;">${combinedInfo}</td>
+                <td class="border border-gray-300 px-3 py-2" style="text-align:right !important; vertical-align:middle !important;">${latexAnswers}</td>
+                <td class="border border-gray-300 px-3 py-2" style="text-align:right !important; vertical-align:middle !important;">${simplifiedAnswers}</td>
+            </tr>
+        `;
+  });
+
+  tableContent += `
+                </tbody>
+                    </table>`;
+
+  // For Firefox, we'll combine both tables into one fragment to keep them on the same page
+  // For Chrome, keep them separate as before
+  
+  if (isFirefox) {
+    // Build combined content for Firefox - both tables in one fragment
+    let combinedTablesHTML = `<div class="firefox-combined-tables">`;
+    
+    // Parameters table (no title for Firefox)
+    combinedTablesHTML += `
+<div class="overflow-x-auto mt-4 parameters-table-wrapper">
+  <table class="table table-zebra parameters-table">
     <tbody>
       <tr>
         <td class="sm:p-3">
@@ -1751,73 +1897,165 @@ function generateFragmentsFromResults(results) {
       </tr>
     </tbody>
   </table>
-</div>`)
-  );
-
-  // Create Teacher Copy section first
-
-  // Generate teacher answer table with ID for TOC
-  // Create the table HTML first (will be reused)
-  let tableContent = `
-
-<table class="table table-zebra w-full border border-gray-300">
-  <thead>
-      <tr class="bg-gray-200">
-          <th class="border border-gray-300 px-3 py-2" style="text-align:left !important; width: 25%; min-width: 200px;">
-              Infos
-          </th>
-          <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Réponse</th>
-          <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Simplifiée</th>
-      </tr>
-  </thead>
-  <tbody>`;
-
-  // Sort results by student, then by question number
-  const sortedResults = results.slice().sort((a, b) => {
-    if (a.student !== b.student) {
-      return a.student - b.student;
-    }
-    return a.generatorNum - b.generatorNum;
-  });
-
-  // Add table rows
-  sortedResults.forEach((result) => {
-    const latexAnswers = formatAnswersForTeacherTable(result, "latex");
-    const simplifiedAnswers = formatAnswersForTeacherTable(
-      result,
-      "simplified_latex"
+</div>`;
+    
+    // Now add the teacher correction table to the combined HTML
+    // Continue building combined HTML for Firefox
+    combinedTablesHTML += `
+        <!-- Teacher Answer Table -->
+        <div id="teacher-answer-table" class="mb-6 firefox-teacher-table" style="margin-top: 1rem;">
+            <!-- Screen version with collapsible details -->
+            <details class="teacher-answer-details screen-only">
+                <summary class="teacher-summary">
+                    Corrigé Enseignant
+                </summary>
+                <div>
+                    ${tableContent}
+                </div>
+            </details>
+            
+            <!-- Print version for Firefox - just the table, no title -->
+            <div class="print-only-teacher-table">
+                ${tableContent}
+            </div>
+        </div>
+    </div>`; // Close firefox-combined-tables div
+    
+    // Push the combined content as a single fragment for Firefox
+    fragments.push(
+      PMFragmentGenerator.createParagraph(combinedTablesHTML, ["firefox-combined-teacher-section"])
     );
-
-    // Create combined column content: [StudentNum]-([seed])-[QuestionNum]<br>niceIdentifier<br>generator
-    const studentNum = result.student || "N/A";
-    const seed = result.seed || "N/A";
-    const questionNum = result.generatorNum || "N/A";
-    const generator = result.generator || "N/A";
-    const niceId = result.niceIdentifier || "";
-
-    // Generate the correct URL for the generator file
-    const basePath = getBasePath();
-    const generatorUrl = `${basePath}/static/sujets0/generators/${generator}`;
-
-    const combinedInfo = `${studentNum}-(${seed})-${questionNum}${
-      niceId ? `<br><span class="text-xs font-semibold">${niceId}</span>` : ""
-    }<br><a href="${generatorUrl}" target="_blank" class="font-mono text-xs text-base-content hover:text-base-content underline">${generator}</a>`;
-
-    tableContent += `
-            <tr>
-                <td class="border border-gray-300 px-3 py-2" style="text-align:left !important; vertical-align:top !important; line-height:1.3;">${combinedInfo}</td>
-                <td class="border border-gray-300 px-3 py-2" style="text-align:right !important; vertical-align:middle !important;">${latexAnswers}</td>
-                <td class="border border-gray-300 px-3 py-2" style="text-align:right !important; vertical-align:middle !important;">${simplifiedAnswers}</td>
-            </tr>
-        `;
-  });
-
-  tableContent += `
-                </tbody>
-                    </table>`;
-
-  // Now wrap the table in both screen (details) and print versions
-  let tableHtml = `
+    
+  } else {
+    // Chrome and other browsers: Keep the original structure with separate fragments
+    
+    // First fragment: Parameters table
+    fragments.push(
+      PMFragmentGenerator.createParagraph(`
+<div class="print-only-teacher-table parameters-table-section">
+    <div style="font-weight: 0.5 !important; font-size: 1rem; margin-top: 1.25rem; margin-bottom: 0.75rem; font-family: var(--font-mono);">Paramètres de la génération</div>
+</div>
+<div class="overflow-x-auto mt-4 parameters-table-wrapper">
+  <table class="table table-zebra parameters-table">
+    <tbody>
+      <tr>
+        <td class="sm:p-3">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="1" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">
+            <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Partie</td>
+        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">Première Partie</span></td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="1" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">
+            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Programme</td>
+        <td style="text-align: right !important;"><span class="text-xs sm:text-sm md:text-base">${CONFIG.curriculum}</span></td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="1" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Copies</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents}$</td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="1" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">
+            <path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Questions</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbQuestions}$</td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24" 
+              class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+              fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Total questions</td>
+        <td class="text-xs sm:text-sm md:text-base text-right">$${CONFIG.nbStudents} \\times ${CONFIG.nbQuestions} = ${CONFIG.nbQuestions * CONFIG.nbStudents}$</td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="1" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">
+            <path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/>
+          </svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Seed</td>
+        <td class="text-xs sm:text-sm md:text-base font-mono text-right">$${CONFIG.rootSeed}$</td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stamp-icon lucide-stamp"><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13"/><path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z"/><path d="M5 22h14"/></svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Reproductibilité</td>
+        <td class="text-xs md:text-sm font-mono text-right">$N°Copie-(Seed+N°Copie)-N°Question$ </td>
+      </tr>
+      <tr>
+        <td class="sm:p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-base-content" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fingerprint-icon lucide-fingerprint"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg>
+        </td>
+        <td class="text-xs sm:text-sm md:text-base">Empreinte par copie</td>
+        <td class="text-xs sm:text-sm md:text-base font-mono text-right">Mathématicien·ne - Couleur</td>
+      </tr>
+    </tbody>
+  </table>
+</div>`)
+    );
+    
+    // Second fragment: Teacher correction table
+    let tableHtml = `
         <div id="teacher-answer-table" class="mb-6">
             <!-- Screen version with collapsible details -->
             <details class="teacher-answer-details screen-only">
@@ -1836,10 +2074,11 @@ function generateFragmentsFromResults(results) {
             </div>
         </div>
     `;
-
-  fragments.push(
-    PMFragmentGenerator.createParagraph(tableHtml, ["teacher-table-section"])
-  );
+    
+    fragments.push(
+      PMFragmentGenerator.createParagraph(tableHtml, ["teacher-table-section"])
+    );
+  }
 
   // Add separator between teacher section and student copies
   fragments.push(PMFragmentGenerator.createDivider());
