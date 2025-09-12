@@ -129,7 +129,7 @@ def render_question(*, n1, n2, p):
 
     p1 = (p * n1).simplified().as_decimal
 
-    statement = f"${n1.latex()}$ articles coûtent ${p1.latex()}$ euros. Combien coûtent ${n2.latex().replace('.', ',')}$ articles ?"
+    statement = f"${n1.latex()}$ articles coûtent ${p1.latex().replace('.', ',')}$ euros. Combien coûtent ${n2.latex()}$ articles ?"
     statement_html = f"<div>{statement}</div>"
 
     return {

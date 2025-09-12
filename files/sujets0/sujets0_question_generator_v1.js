@@ -90,7 +90,7 @@ function showToast(message, type = "error") {
 
 console.log("🟪🟪🟪 url config", extractConfigFromUrl());
 
-const teachersGitTag = "v0.0.24";
+const teachersGitTag = "v0.0.27";
 
 // Configuration constants
 const CONFIG = {
