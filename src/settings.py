@@ -43,6 +43,7 @@ class ProductType(str, Enum):
     REPO_FROM_OTHER_ORG = "repo_from_other_org"
     LIB_FROM_MATHSPM = "lib_from_mathspm"
     SECONDAIRE = "secondaire"
+    SUPERIEUR = "superieur"
     DRAFT = "draft"
 
 

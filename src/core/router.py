@@ -153,8 +153,264 @@ async def sitemap(request: Request):
 
 @core_router.get("/sitemap-readable", response_class=HTMLResponse)
 async def sitemap_readable(request: Request):
-    """Readable sitemap for humans."""
-    return settings.templates.TemplateResponse("core/sitemap-readable.html", {"request": request})
+    """Readable sitemap for humans - displays all site URLs organized by category."""
+
+    # Get base URL from request
+    base_url = str(request.base_url).rstrip("/")
+
+    # Organize URLs by category
+    sitemap_data = {
+        "core_pages": [],
+        "products": [],
+        "pm_documentation": [],
+        "utilities": [],
+        "api_docs": [],
+        "base_url": base_url,
+    }
+
+    # Helper to add URL with metadata
+    def add_url(
+        category: str,
+        path: str,
+        title: str = None,
+        description: str = None,
+        priority: float = 0.5,
+        changefreq: str = "weekly",
+        lastmod: str = None,
+    ):
+        if not lastmod:
+            lastmod = datetime.now().strftime("%Y-%m-%d")
+
+        # Ensure path starts with /
+        if not path.startswith("/"):
+            path = "/" + path
+
+        # Generate title from path if not provided
+        if not title:
+            if path == "/":
+                title = "Home"
+            else:
+                title = path.strip("/").replace("-", " ").replace("_", " ").title()
+
+        sitemap_data[category].append(
+            {
+                "path": path,
+                "url": f"{base_url}{path}",
+                "title": title,
+                "description": description,
+                "lastmod": lastmod,
+                "changefreq": changefreq,
+                "priority": priority,
+            }
+        )
+
+    # 1. Core pages (highest priority)
+    add_url(
+        "core_pages",
+        "/",
+        title="Home",
+        description="Main landing page",
+        priority=1.0,
+        changefreq="daily",
+    )
+    add_url(
+        "core_pages",
+        "/ressources",
+        title="Resources",
+        description="Educational resources and materials",
+        priority=0.9,
+    )
+
+    # 2. Product pages (high priority)
+    for product in settings.products:
+        if not product.is_hidden:
+            # Format product title and description
+            product_title = (
+                product.display_name if hasattr(product, "display_name") else product.name.title()
+            )
+            product_desc = (
+                product.description
+                if hasattr(product, "description")
+                else f"Explore {product_title}"
+            )
+
+            add_url(
+                "products",
+                f"/{product.name}",
+                title=product_title,
+                description=product_desc,
+                priority=0.8,
+            )
+
+            # Add special product routes
+            if product.name == "sujets0":
+                add_url(
+                    "products",
+                    "/sujets0/form",
+                    title="Sujets0 Form",
+                    description="Generate custom practice materials",
+                    priority=0.7,
+                )
+
+    # 3. PM Documentation pages
+    add_url(
+        "pm_documentation",
+        "/pm",
+        title="PM Documentation Hub",
+        description="Central documentation for PM system",
+        priority=0.7,
+    )
+
+    # Scan PM files from pms directory
+    pms_dir = settings.base_dir / "pms"
+    if pms_dir.exists():
+        # Collect and sort PM files
+        pm_files = []
+        for pm_file in pms_dir.rglob("*.md"):
+            relative_path = pm_file.relative_to(pms_dir)
+            pm_files.append((relative_path, pm_file))
+
+        # Sort by path for consistent ordering
+        pm_files.sort(key=lambda x: str(x[0]))
+
+        # Add first 50 PM files (to avoid overwhelming the page)
+        for relative_path, pm_file in pm_files[:50]:
+            file_mtime = datetime.fromtimestamp(pm_file.stat().st_mtime).strftime("%Y-%m-%d")
+
+            # Generate title from filename
+            file_title = pm_file.stem.replace("-", " ").replace("_", " ").title()
+
+            # Determine priority
+            depth = len(relative_path.parts)
+            priority = max(0.4, 0.7 - (depth * 0.1))
+
+            if pm_file.name == "index.md":
+                file_title = f"{relative_path.parent.name.title()} Index"
+                priority = min(0.8, priority + 0.2)
+
+            pm_path = f"/pm/{relative_path.as_posix()}"
+            add_url(
+                "pm_documentation",
+                pm_path,
+                title=file_title,
+                description=f"Documentation: {relative_path.parent}",
+                priority=priority,
+                changefreq="monthly",
+                lastmod=file_mtime,
+            )
+
+        # Add note if there are more files
+        total_pm_files = sum(1 for _ in pms_dir.rglob("*.md"))
+        sitemap_data["pm_files_total"] = total_pm_files
+        sitemap_data["pm_files_shown"] = len(pm_files[:50])
+
+    # 4. Utility pages
+    add_url(
+        "utilities",
+        "/readme",
+        title="README",
+        description="Project documentation and setup guide",
+        priority=0.3,
+        changefreq="monthly",
+    )
+    add_url(
+        "utilities",
+        "/settings",
+        title="Settings",
+        description="Application configuration viewer",
+        priority=0.2,
+        changefreq="monthly",
+    )
+    add_url(
+        "utilities",
+        "/kill-service-workers",
+        title="Kill Service Workers",
+        description="Utility to clear service worker cache",
+        priority=0.1,
+        changefreq="yearly",
+    )
+
+    # 5. API documentation
+    add_url(
+        "api_docs",
+        "/docs",
+        title="API Documentation (Swagger)",
+        description="Interactive API documentation with Swagger UI",
+        priority=0.3,
+        changefreq="monthly",
+    )
+    add_url(
+        "api_docs",
+        "/redoc",
+        title="API Documentation (ReDoc)",
+        description="Alternative API documentation with ReDoc",
+        priority=0.3,
+        changefreq="monthly",
+    )
+
+    # Calculate totals
+    sitemap_data["total_urls"] = sum(
+        len(urls) for category, urls in sitemap_data.items() if isinstance(urls, list)
+    )
+
+    return settings.templates.TemplateResponse(
+        "core/sitemap-readable.html",
+        {
+            "request": request,
+            "sitemap_data": sitemap_data,
+            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        },
+    )
+
+
+@core_router.get("/sitemap-display", response_class=HTMLResponse)
+async def plan_du_site(request: Request):
+    """Simple sitemap for footer link - clean and minimal presentation."""
+
+    # Organize URLs by category (simpler structure)
+    sitemap_simple = {
+        "main_sections": [],
+        "products": [],
+        "resources": [],
+    }
+
+    # Main sections
+    sitemap_simple["main_sections"] = [
+        {"path": "/", "title": "Accueil", "icon": "🏠"},
+        {"path": "/ressources", "title": "Ressources", "icon": "📚"},
+        {"path": "/pm", "title": "Accès aux documents PM", "icon": "📖"},
+    ]
+
+    # Products (only visible ones)
+    for product in settings.products:
+        if not product.is_hidden:
+            product_title = (
+                product.display_name if hasattr(product, "display_name") else product.name.title()
+            )
+            sitemap_simple["products"].append(
+                {
+                    "path": f"/{product.name}",
+                    "title": product_title,
+                    "icon": "🔧" if product.name in ["cubrick", "nagini", "estafette"] else "📝",
+                }
+            )
+
+    # Additional resources
+    sitemap_simple["resources"] = [
+        {"path": "/readme", "title": "README", "icon": "📄"},
+        {"path": "/settings", "title": "Configuration", "icon": "⚙️"},
+        {"path": "/docs", "title": "API Docs", "icon": "🔌"},
+        {"path": "/sitemap.xml", "title": "Sitemap XML", "icon": "🗺️"},
+        {"path": "/sitemap-readable", "title": "Sitemap détaillé", "icon": "📋"},
+    ]
+
+    return settings.templates.TemplateResponse(
+        "core/plan-du-site.html",
+        {
+            "request": request,
+            "sitemap": sitemap_simple,
+        },
+    )
 
 
 class ORJSONPrettyResponse(JSONResponse):

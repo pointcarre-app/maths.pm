@@ -1,0 +1,59 @@
+name: dataviz
+product_type: "superieur"
+title_html: Data Viz
+# is_hidden: true
+is_beta: true
+subtitle_html: Représentations de données (Python et KS)
+description: "Représenter des données en utilisant des librairies Python : Matplotlib et Bokeh, et une librairie JS : D3.js."
+local_path: /dataviz
+source_link: ""
+color: success
+figure_svg: dataviz-figure-svg.html
+classes_formatted:
+  - "Master"
+tags:
+  - education
+  - maths
+  - exam
+  - generator
+  - exercises
+domains:
+  - maths.pm
+
+owner_rdb: "SAS POINTCARRE.APP"
+owner_url: "https://pointcarre.app"
+
+# # Product-specific metatags
+# metatags:
+#   # SEO metatags
+#   title: "Sujets 0 - Générateur d'exercices pour l'épreuve anticipée de 1ère"
+#   description: "Générez automatiquement des exercices similaires aux sujets 0 de l'épreuve anticipée de mathématiques. Valeurs aléatoires, corrigés détaillés."
+#   keywords: "sujets 0, épreuve anticipée, première, mathématiques, exercices, générateur, QCM, automatismes"
+#   robots: "index, follow"
+  
+#   # Open Graph metatags
+#   og:title: "Sujets 0 - Exercices mathématiques 1ère"
+#   og:description: "Générateur automatique d'exercices pour l'épreuve anticipée de mathématiques en première. Entraînement avec corrigés."
+#   og:image: "https://maths.pm/static/images/sujets0-preview.jpg"
+#   og:type: "website"
+#   og:url: "https://maths.pm/sujets0"
+  
+#   # Twitter Card metatags
+#   twitter:card: "summary_large_image"
+#   twitter:title: "Sujets 0 - Générateur d'exercices"
+#   twitter:description: "Préparez l'épreuve anticipée avec des exercices générés automatiquement"
+#   twitter:image: "https://maths.pm/static/images/sujets0-twitter.jpg"
+  
+#   # Dublin Core metatags
+#   DC.title: "Générateur de sujets 0 pour l'épreuve anticipée"
+#   DC.creator: "Maths.pm Sujets0"
+#   DC.subject: "Mathématiques, Éducation, Évaluation"
+#   DC.description: "Outil de génération d'exercices mathématiques"
+  
+#   # Additional metatags
+#   topic: "Évaluation et exercices mathématiques"
+#   category: "Éducation, Mathématiques, Première"
+#   revised: "2025-01-15"
+#   pagename: "Sujets 0 - Générateur"
+
+

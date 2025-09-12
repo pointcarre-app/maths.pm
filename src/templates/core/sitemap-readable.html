@@ -1,1 +1,153 @@
-aaa
+{% extends "base/main-alt.html" %}
+
+{% block title %}
+  Site Map - {{ DOMAIN_CONFIG['index_view_specific_metatags']['title'] }}
+{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto px-4 py-8 max-w-7xl">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold mb-4">Site Map</h1>
+      <p class="text-lg text-base-content/70">Complete overview of all pages</p>
+      <div class="badge badge-outline badge-lg mt-2">Last updated: {{ generated_at }}</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats shadow w-full mb-8">
+      <div class="stat">
+        <div class="stat-title">Total Pages</div>
+        <div class="stat-value text-primary">{{ sitemap_data.total_urls }}</div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">Base URL</div>
+        <div class="stat-desc">{{ sitemap_data.base_url }}</div>
+      </div>
+    </div>
+
+    <!-- Core Pages -->
+    {% if sitemap_data.core_pages %}
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Core Pages</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {% for page in sitemap_data.core_pages %}
+            <div class="card bg-base-100 shadow-md">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <a href="{{ page.path }}" class="link link-primary">{{ page.title }}</a>
+                </h3>
+                <p class="text-sm">{{ page.description }}</p>
+                <div class="text-xs opacity-60">Updated: {{ page.lastmod }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Products -->
+    {% if sitemap_data.products %}
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Products & Features</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {% for page in sitemap_data.products %}
+            <div class="card bg-base-100 shadow-md">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <a href="{{ page.path }}" class="link link-secondary">{{ page.title }}</a>
+                </h3>
+                <p class="text-sm">{{ page.description }}</p>
+                <a href="{{ page.path }}" class="btn btn-secondary btn-sm mt-2">Explore →</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- PM Documentation -->
+    {% if sitemap_data.pm_documentation %}
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">
+          PM Documentation
+          {% if sitemap_data.pm_files_total %}
+            <span class="badge badge-info ml-2">{{ sitemap_data.pm_files_shown }}/{{ sitemap_data.pm_files_total }}</span>
+          {% endif %}
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="table table-zebra">
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Path</th>
+                <th>Modified</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for page in sitemap_data.pm_documentation %}
+                <tr>
+                  <td>
+                    <a href="{{ page.path }}" class="link link-hover">{{ page.title }}</a>
+                  </td>
+                  <td>
+                    <code class="text-xs">{{ page.path }}</code>
+                  </td>
+                  <td>{{ page.lastmod }}</td>
+                  <td>
+                    <progress class="progress progress-primary w-20" value="{{ (page.priority * 100)|int }}" max="100"></progress>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Utilities -->
+    {% if sitemap_data.utilities %}
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Utilities & Tools</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          {% for page in sitemap_data.utilities %}
+            <div class="alert shadow-lg">
+              <div>
+                <h3 class="font-bold">
+                  <a href="{{ page.path }}" class="link">{{ page.title }}</a>
+                </h3>
+                <div class="text-xs">{{ page.description }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- API Docs -->
+    {% if sitemap_data.api_docs %}
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">API Documentation</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          {% for page in sitemap_data.api_docs %}
+            <div class="card bg-info/10 border-2 border-info/30">
+              <div class="card-body">
+                <h3 class="card-title text-info">{{ page.title }}</h3>
+                <p class="text-sm">{{ page.description }}</p>
+                <a href="{{ page.path }}" class="btn btn-info btn-sm">Open Docs</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Footer -->
+    <div class="mt-12 text-center">
+      <div class="btn-group">
+        <a href="/sitemap.xml" class="btn btn-outline">View XML</a>
+        <a href="/" class="btn btn-primary">Home</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -10,7 +10,7 @@
   <div class="padding-alt-security">
     <div class="mt-12 md:mt-28  max-w-4xl mx-auto mb-14">
       <div class="max-w-[450px] md:max-w-full mx-auto">
-        <h2 class="text-xl sm:text-2xl md:text-4xl font-bold mb-2 md:mb-4">
+        <h2 id="secondaire" class="text-xl sm:text-2xl md:text-4xl font-bold mb-2 md:mb-4">
           Ressources pour le secondaire
         </h2>
         <div class="text-sm sm:text-base mb-6 text-base-content/70 md:p-6 md:bg-base-100 md:border-base-200 md:border-1"
@@ -22,6 +22,26 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 xl:gap-14">
         {% for product in products %}
           {% if product.product_type == "secondaire" %}
+            {% include "products/product-card.html" %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="mt-12 md:mt-28  max-w-4xl mx-auto mb-14">
+      <div class="max-w-[450px] md:max-w-full mx-auto">
+        <h2 id="secondaire" class="text-xl sm:text-2xl md:text-4xl font-bold mb-2 md:mb-4">
+          Ressources pour le supérieur
+        </h2>
+        <div class="text-sm sm:text-base mb-6 text-base-content/70 md:p-6 md:bg-base-100 md:border-base-200 md:border-1"
+             style="border-radius: var(--radius-box)">
+          Ces ressources ont été dévéloppées par Pointcarre.app et leurs codes sont sous licence AGPL-3.0 <a class="link link-primary" href="https://www.gnu.org/licenses/agpl-3.0.fr.html">AGPL-3.0</a>.
+          Les contenus (générés automatiquement ou créés manuellement) sont sous licence <a class="link link-primary" href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.fr">Creative Commons BY-NC-SA 4.0</a>.
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 xl:gap-14">
+        {% for product in products %}
+          {% if product.product_type == "superieur" %}
             {% include "products/product-card.html" %}
           {% endif %}
         {% endfor %}
