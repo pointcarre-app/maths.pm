@@ -65,8 +65,8 @@ missive(
         "statement": question["statement"],
         "statement_html": question["statement_html"],
         "answer": {
-            "latex": answer["maths_object"].latex(),
-            "simplified_latex": answer["maths_object"].simplified().latex(),
+            "latex": answer["maths_object"].latex().replace("\pi", "\\pi"),
+            "simplified_latex": answer["maths_object"].simplified().latex().replace("\pi", "\\pi"),
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),
         },

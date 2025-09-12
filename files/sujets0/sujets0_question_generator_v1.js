@@ -90,9 +90,11 @@ function showToast(message, type = "error") {
 
 console.log("🟪🟪🟪 url config", extractConfigFromUrl());
 
+const teachersGitTag = "v0.0.24";
+
 // Configuration constants
 const CONFIG = {
-  teachersGitTag: "v0.0.22",
+  teachersGitTag: teachersGitTag,
   naginiGitTag: "v0.0.21",
   v4PyJsGitTag: "v0.0.27",
   rootSeed: 14,
@@ -111,27 +113,27 @@ const CONFIG = {
   // Teacher module URLs
   teachersUrlsToPaths: [
     {
-      url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.22/src/teachers/__init__.py",
+      url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/__init__.py`,
       path: "teachers/__init__.py",
     },
     {
-      url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.22/src/teachers/generator.py",
+      url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/generator.py`,
       path: "teachers/generator.py",
     },
     {
-      url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.22/src/teachers/maths.py",
+      url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/maths.py`,
       path: "teachers/maths.py",
     },
-    {
-      url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.22/src/teachers/formatting.py",
+    { 
+      url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/formatting.py`,
       path: "teachers/formatting.py",
     },
     {
-      url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.22/src/teachers/corrector.py",
+      url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/corrector.py`,
       path: "teachers/corrector.py",
     },
     {
-      url: "https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@v0.0.22/src/teachers/defaults.py",
+      url: `https://cdn.jsdelivr.net/gh/pointcarre-app/teachers@${teachersGitTag}/src/teachers/defaults.py`,
       path: "teachers/defaults.py",
     },
   ],
@@ -284,6 +286,7 @@ async function executeGeneratorWithSeed(filename, seed) {
     // compare wiyh a new doppel
 
     // Inject seed
+    // Seed injection is done for random in sujets0_question_generator_v1.js
     const seedInjection = `\nimport random\nrandom.seed(${seed})\n\n# Override the default SEED\nimport teachers.defaults\nteachers.defaults.SEED = ${seed}\n\n`;
 
     pythonCode = pythonCode.replace(
@@ -620,8 +623,8 @@ function addPrintButton(container) {
   }
   </style>
     <button id="print-questions-btn" class="btn btn-primary print-hide mb-6 w-full">
-          <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" 
                       d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
               </path>
           </svg>
@@ -639,7 +642,7 @@ function addPrintButton(container) {
                     <li>🟢 Optimisé pour Firefox & Chrome</li>   
                     <li>🟢 Corrigé enseignant inclus</li>
                     <li>🟢 Reproductibilité grâce à la <code>seed</code> <span class="italic">(graine)</span></li>
-                    <li>🟢 Possibilité d'ajuster les marges (mais normalement non nécessaire)</li>
+                    <li>🟢 Possibilité d'ajuster les marges pour l'impression</li>
                 </ul>
             </div>
         </div>

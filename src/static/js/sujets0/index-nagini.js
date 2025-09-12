@@ -45,7 +45,7 @@ export async function loadNaginiAndInitialize(executeAllGenerators) {
 
 
 
-        const teachersGitTag = 'v0.0.22';
+        const teachersGitTag = 'v0.0.24';
         
         // Files for teachers module
         const teachersFiles = [

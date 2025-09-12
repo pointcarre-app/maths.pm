@@ -126,14 +126,14 @@
 
           <form id="arpege-form">
             <!-- 2x2 Grid Layout -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
               <!-- Top Left: Number of copies -->
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base text-base-content/80">Nombre de copies</span>
+                  <span class="font-light font-heading text-base sm:text-lg text-base-content/80">Nombre de copies</span>
                   <div class="tooltip tooltip-top"
                        data-tip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">
-                    <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+                    <span class="badge badge-outline badge-sm ml-2 cursor-help text-base-content/60">?</span>
                   </div>
                 </legend>
                 <div class="join w-full">
@@ -158,15 +158,19 @@
               <!-- Top Right: Specialty selection -->
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base text-base-content/80">Filière / Spécialité</span>
+                  <span class="font-light font-heading text-base sm:text-lg text-base-content/80">Programme</span>
                   <div class="tooltip tooltip-top"
                        data-tip="Spé pour spécialité maths, Non Spé pour enseignement spécifique et Techno pour filières technologiques">
-                    <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help">?</span>
+                    <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help text-base-content/60">?</span>
                   </div>
                 </legend>
                 <div class="join w-full">
-                  <input type="radio" name="sujets0" value="spe" class="join-item btn h-10 flex-1" aria-label="Spé." />
-                  <input type="radio" name="sujets0" value="gen" class="join-item btn h-10 flex-1" aria-label="Non Spé." />
+                  <input type="radio" name="sujets0" value="spe" class="join-item btn h-10 flex-1" aria-label="Spécialité" />
+                  <input type="radio"
+                         name="sujets0"
+                         value="gen"
+                         class="join-item btn h-10 flex-1"
+                         aria-label="Ens. Spécifique" />
                   <input type="radio"
                          name="sujets0"
                          value="techno"
@@ -182,9 +186,9 @@
               <!-- Bottom Left: Questions per copy -->
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base text-base-content/80">Questions par copie</span>
+                  <span class="font-light font-heading text-base sm:text-lg text-base-content/80">Questions par copie</span>
                   <div class="tooltip tooltip-top" data-tip="Une partie A d'un sujet 0 officiel compte 12 questions">
-                    <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+                    <span class="badge badge-outline badge-sm ml-2 cursor-help text-base-content/60">?</span>
                   </div>
                 </legend>
                 <div class="join w-full">
@@ -209,10 +213,10 @@
               <!-- Bottom Right: Seed number -->
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base text-base-content/80">Seed</span>
+                  <span class="font-light font-heading text-base sm:text-lg text-base-content/80">Seed</span>
                   <div class="tooltip tooltip-top"
                        data-tip="Numéro de graine pour la reproductibilité de la génération aléatoire des copies">
-                    <span class="badge badge-outline badge-sm ml-2 cursor-help">?</span>
+                    <span class="badge badge-outline badge-sm ml-2 cursor-help text-base-content/60">?</span>
                   </div>
                 </legend>
                 <div class="join w-full">

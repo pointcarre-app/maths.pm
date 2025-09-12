@@ -4,7 +4,10 @@
 ## High 
 
 
-- UX : add button go back top for after generation page
+- [] UX : add button go back top for after generation page
+
+- [] Seed injection is done for random in sujets0_question_generator_v1.js cf below
+     - No need in generators .py files
 
 - [] Migrate Doppel
      - Use case in `pca-mathspm/files/scripts/sujets0_question_generator.js` or `nagini.js` 

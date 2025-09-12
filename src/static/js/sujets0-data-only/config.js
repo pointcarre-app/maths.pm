@@ -1,4 +1,4 @@
-const teachersGitTag = 'v0.0.22';
+const teachersGitTag = 'v0.0.24';
 const v4PyJsGitTag = "v0.0.27";
 const naginiGitTag = "v0.0.21";
 
