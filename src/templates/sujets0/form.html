@@ -156,7 +156,7 @@
               </fieldset>
 
               <!-- Top Right: Specialty selection -->
-              <fieldset class="fieldset">
+              <fieldset class="fieldset" id="programme-fieldset">
                 <legend class="fieldset-legend">
                   <span class="font-light font-heading text-base sm:text-lg text-base-content/80">Programme</span>
                   <div class="tooltip tooltip-top"
@@ -164,7 +164,7 @@
                     <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help text-base-content/60">?</span>
                   </div>
                 </legend>
-                <div class="join w-full">
+                <div class="join w-full" id="programme-radio-group">
                   <input type="radio" name="sujets0" value="spe" class="join-item btn h-10 flex-1" aria-label="Spécialité" />
                   <input type="radio"
                          name="sujets0"
@@ -178,8 +178,11 @@
                          aria-label="Techno"
                          disabled />
                 </div>
-                <p class="label-text-alt mt-1">
+                <p class="label-text-alt mt-1" id="programme-help-text">
                   Choisir un programme officiel <strong>(obligatoire)</strong>
+                </p>
+                <p class="label-text-alt mt-1 text-error hidden" id="programme-error-text">
+                  ⚠️ Veuillez sélectionner un programme avant de générer les copies
                 </p>
               </fieldset>
 
@@ -253,6 +256,42 @@
 
       <!-- JavaScript for form-based generation -->
       <script>
+          // Function to add error styling to programme radio group
+          function addProgrammeError() {
+              const radioGroup = document.getElementById('programme-radio-group');
+              const errorText = document.getElementById('programme-error-text');
+              const helpText = document.getElementById('programme-help-text');
+
+              if (radioGroup) {
+                  radioGroup.classList.add('border-2', 'border-error', 'rounded-box');
+                  radioGroup.style.padding = '2px';
+              }
+              if (errorText) {
+                  errorText.classList.remove('hidden');
+              }
+              if (helpText) {
+                  helpText.classList.add('hidden');
+              }
+          }
+
+          // Function to remove error styling from programme radio group
+          function removeProgrammeError() {
+              const radioGroup = document.getElementById('programme-radio-group');
+              const errorText = document.getElementById('programme-error-text');
+              const helpText = document.getElementById('programme-help-text');
+
+              if (radioGroup) {
+                  radioGroup.classList.remove('border-2', 'border-error', 'rounded-box');
+                  radioGroup.style.padding = '';
+              }
+              if (errorText) {
+                  errorText.classList.add('hidden');
+              }
+              if (helpText) {
+                  helpText.classList.remove('hidden');
+              }
+          }
+
           // Extract form configuration
           function extractFormConfig() {
               // Get form values
@@ -284,8 +323,16 @@
                           // throw new Error('Invalid curriculum');
                   }
               } else {
+                  // Add error styling and scroll to the error
+                  addProgrammeError();
+                  const programmeFieldset = document.getElementById('programme-fieldset');
+                  if (programmeFieldset) {
+                      programmeFieldset.scrollIntoView({
+                          behavior: 'smooth',
+                          block: 'center'
+                      });
+                  }
                   throw new Error("Curriculum not selected");
-                  // Add a daisyUI Toast
               }
 
               const curriculumSlug = curriculumRadio.value;
@@ -301,7 +348,13 @@
 
           // Generate exercises based on form data
           function generateFromForm() {
-              const config = extractFormConfig();
+              let config;
+              try {
+                  config = extractFormConfig();
+              } catch (error) {
+                  console.error("Configuration error:", error);
+                  return; // Stop execution if configuration is invalid
+              }
 
               // Validate the configuration
               const nbStudents = parseInt(config.nbStudents);
@@ -386,6 +439,12 @@
               } else {
                   console.warn("Generate button not found");
               }
+
+              // Add event listeners to radio buttons to remove error styling when selected
+              const radioButtons = document.querySelectorAll('input[name="sujets0"]');
+              radioButtons.forEach(radio => {
+                  radio.addEventListener("change", removeProgrammeError);
+              });
 
               // Set random seed on page load
               setRandomSeed();
