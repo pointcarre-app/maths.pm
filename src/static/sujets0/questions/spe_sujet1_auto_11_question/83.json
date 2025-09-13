@@ -1,22 +1,26 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-11]",
-  "statement": "On a représenté ci-contre la courbe $\\\\mathcal\\{C\\}$ d'une fonction ${f}$.\nOn note $A$ le point d'abscisse $x_A=-6$ tel que le point appartienne à la courbe $\\\\mathcal\\{C\\}$.\nEcrire l'inégalité correcte de la forme $x\\\\times f(x) ? 0$",
+  "statement": "On a représenté ci-contre la courbe $\\mathcal{C}$ d'une fonction $f$.\nOn note $A$ le point d'abscisse $x_A=-3$ tel que le point appartienne à la courbe $\\mathcal{C}$.<br>Parmi les deux inégalités suivantes : <br>$x_a \\times f(x_a) > 0$ et $x_a \\times f(x_a) < 0$<br>Laquelle est correcte ?",
+  "statement_html": "<div>On a représenté ci-contre la courbe $\\mathcal{C}$ d'une fonction $f$.\nOn note $A$ le point d'abscisse $x_A=-3$ tel que le point appartienne à la courbe $\\mathcal{C}$.<br>Parmi les deux inégalités suivantes : <br>$x_a \\times f(x_a) > 0$ et $x_a \\times f(x_a) < 0$<br>Laquelle est correcte ?</div>",
   "answer": {
-    "latex": "0 > -6f(-6)",
-    "simplified_latex": "0 > -6f(-6)",
+    "latex": [
+      "0 > -3f(-3)"
+    ],
+    "simplified_latex": "0 > -3f(-3)",
     "sympy_exp_data": {
       "type": "StrictGreaterThan",
-      "sp.srepr": "StrictGreaterThan(Integer(0), Mul(Integer(-1), Integer(6), Function('f')(Integer(-6))))",
-      "str": "0 > -6*f(-6)"
+      "sp.srepr": "StrictGreaterThan(Integer(0), Mul(Integer(-1), Integer(3), Function('f')(Integer(-3))))",
+      "str": "0 > -3*f(-3)"
     },
-    "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Mul(l=Integer(n=-6), r=Function(name=f)(Integer(n=-6))))"
+    "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Mul(l=Integer(n=-3), r=Function(name=f)(Integer(n=-3))))"
   },
   "components": {
-    "root1": "-7",
-    "root2": "2",
+    "root1": "-4",
+    "root2": "3",
     "root3": "5",
-    "x": "-6",
-    "f": "f"
+    "x": "-3",
+    "f": "f",
+    "case": "case_b"
   },
   "seed": 83,
   "generator": "spe_sujet1_auto_11_question",

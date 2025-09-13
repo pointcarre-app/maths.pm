@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-11 + \\dfrac{33}{8}-16$.",
+  "statement": "Calculer $-11 + \\dfrac{33}{8} \\times \\left(-16\\right)$.",
+  "statement_html": "<div>Calculer $-11 + \\dfrac{33}{8} \\times \\left(-16\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-11 + \\dfrac{33}{8}-16",
+    "latex": "-11 + \\dfrac{33}{8} \\times \\left(-16\\right)",
     "simplified_latex": "-77",
     "sympy_exp_data": {
       "type": "Add",

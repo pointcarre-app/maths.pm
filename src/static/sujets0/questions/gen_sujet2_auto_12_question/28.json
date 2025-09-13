@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
-  "statement": "On considère les deux séries $A=-38 ; -36 ; -36 ; -34$  et $B=-80 ; -36 ; -36 ; 8$. Quelle est celle avec le plus grand écart type ?",
+  "statement": "On considère les deux séries :<br>$A=-38&nbsp ; &nbsp -36&nbsp ; &nbsp -36&nbsp ; &nbsp -34$  <br>$B=-80&nbsp ; &nbsp -36&nbsp ; &nbsp -36&nbsp ; &nbsp 8$<br>Quelle est celle avec le plus grand écart type ?",
+  "statement_html": "<div>On considère les deux séries :<br>$A=-38&nbsp ; &nbsp -36&nbsp ; &nbsp -36&nbsp ; &nbsp -34$  <br>$B=-80&nbsp ; &nbsp -36&nbsp ; &nbsp -36&nbsp ; &nbsp 8$<br>Quelle est celle avec le plus grand écart type ?</div>",
   "answer": {
     "latex": "B",
     "simplified_latex": "B",

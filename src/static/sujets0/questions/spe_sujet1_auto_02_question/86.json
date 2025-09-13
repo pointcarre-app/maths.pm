@@ -1,22 +1,25 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-2]",
-  "statement": "On considère la relation $F=a+\\\\dfrac\\{b\\}\\{cd\\}$. Lorsque $a=\\dfrac{1}{1}$, $b = 9$, $c = 6$, $d = -\\dfrac{1}{1}$, quelle est la valeur de $F$ ?",
+  "statement": "Soit $F=a+\\dfrac{b}{cd}$. Lorsque $a=1$, $b = 9$, $c = 6$, $d = -\\dfrac{1}{2}$, quelle est la valeur de $F$ ?",
+  "statement_html": "<div>Soit $F=a+\\dfrac{b}{cd}$. \nLorsque : $a=1$ ; $b = 9$ ; $c = 6$ ; $d = -\\dfrac{1}{2}$, quelle est la valeur de $F$ ?</div>",
   "mask": "F=",
   "answer": {
-    "latex": "\\dfrac{1}{1} + \\dfrac{9}{6-\\dfrac{1}{1}}",
-    "simplified_latex": "-\\dfrac{1}{2}",
+    "latex": [
+      "1 \\dfrac{9}{6 \\times (-\\dfrac{1}{2})}"
+    ],
+    "simplified_latex": "-2",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Rational(-3, 2), Integer(1))",
-      "str": "-3/2 + 1"
+      "sp.srepr": "Add(Integer(-3), Integer(1))",
+      "str": "-3 + 1"
     },
-    "formal_repr": "Add(l=Fraction(p=Integer(n=1), q=Integer(n=1)), r=Fraction(p=Integer(n=9), q=Mul(l=Integer(n=6), r=Fraction(p=Integer(n=-1), q=Integer(n=1)))))"
+    "formal_repr": "Add(l=Fraction(p=Integer(n=1), q=Integer(n=1)), r=Fraction(p=Integer(n=9), q=Mul(l=Integer(n=6), r=Fraction(p=Integer(n=-1), q=Integer(n=2)))))"
   },
   "components": {
     "a": "\\dfrac{1}{1}",
     "b": "9",
     "c": "6",
-    "d": "-\\dfrac{1}{1}"
+    "d": "-\\dfrac{1}{2}"
   },
   "seed": 86,
   "generator": "spe_sujet1_auto_02_question",

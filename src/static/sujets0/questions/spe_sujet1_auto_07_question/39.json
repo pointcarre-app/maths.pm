@@ -1,20 +1,25 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-7]",
-  "statement": "On a représenté ci-contre la parabole d'équation $y = x^2$. On note (\\\\mathcal\\{J\\}) l'inéquation, sur \\\\mathbb\\{R\\}, $x^{2} > 26$. Donner la ou les inéquation(s) du premier degré équivalente à \\\\mathcal\\{J\\}.",
+  "statement": "On a représenté ci-contre la parabole d'équation $y = x^2$ ainsi que la droite d'équation $y = 4$. Résoudre sur $\\mathbb{R}$ l'inéquation : $x^{2} > 4$.",
+  "statement_html": "<div>On a représenté ci-contre la parabole d'équation $y = x^2$ ainsi que la droite d'équation $y = 4$. Résoudre sur $\\mathbb{R}$ l'inéquation : $x^{2} > 4$.</div>",
   "answer": {
-    "latex": "\\left(x > 26^{\\dfrac{1}{2}}, -26^{\\dfrac{1}{2}} > x\\right)",
-    "simplified_latex": "\\left(x > 26^{\\dfrac{1}{2}}, -26^{\\dfrac{1}{2}} > x\\right)",
+    "latex": [
+      "x \\in \\left] -\\infty, -2 \\right[ \\cup \\left] 2, \\infty \\right["
+    ],
+    "simplified_latex": [
+      "x \\in \\left] -\\infty, -2 \\right[ \\cup \\left] 2, \\infty \\right["
+    ],
     "sympy_exp_data": {
       "type": "Tuple",
-      "sp.srepr": "Tuple(StrictGreaterThan(Symbol('x'), Pow(Integer(26), Rational(1, 2))), StrictGreaterThan(Mul(Integer(-1), Pow(Integer(26), Rational(1, 2))), Symbol('x')))",
-      "str": "(x > sqrt(26), -sqrt(26) > x)"
+      "sp.srepr": "Tuple(StrictGreaterThan(Mul(Integer(-1), Pow(Integer(4), Rational(1, 2))), Symbol('x')), StrictGreaterThan(Symbol('x'), Pow(Integer(4), Rational(1, 2))))",
+      "str": "(-sqrt(4) > x, x > sqrt(4))"
     },
-    "formal_repr": "(StrictGreaterThan(l=Symbol(s='x'), r=Pow(base=Integer(n=26), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))), StrictGreaterThan(l=Mul(l=Integer(n=-1), r=Pow(base=Integer(n=26), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))), r=Symbol(s='x')))"
+    "formal_repr": "(StrictGreaterThan(l=Mul(l=Integer(n=-1), r=Pow(base=Integer(n=4), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))), r=Symbol(s='x')), StrictGreaterThan(l=Symbol(s='x'), r=Pow(base=Integer(n=4), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))))"
   },
   "components": {
-    "n": "26",
+    "n": "4",
     "x": "x",
-    "relation": "x^{2} > 26"
+    "relation": "x^{2} > 4"
   },
   "seed": 39,
   "generator": "spe_sujet1_auto_07_question",

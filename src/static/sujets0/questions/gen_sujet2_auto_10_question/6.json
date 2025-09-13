@@ -1,8 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
-  "statement": "On définit la function $f$ par $f(x)=9 \\times x^{2} -7x + 6$. Calculer l'image de $-1$ par $f$.",
+  "statement": "On définit la function $f$ par $f(x)=9x^{2} -7x + 6$. Calculer l'image de $-1$ par $f$.",
+  "statement_html": "<div>On définit la function $f$ par $f(x)=9x^{2} -7x + 6$. Calculer l'image de $-1$ par $f$.</div>",
   "answer": {
-    "latex": "9 \\times -1^{2} -7 \\times -1 + 6",
+    "latex": "(9) \\times (-1)^2 + (-7) \\times (-1) + (6)",
     "simplified_latex": "22",
     "sympy_exp_data": {
       "type": "Add",

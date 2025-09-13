@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{1}{7} -\\dfrac{5}{2}-7$.",
+  "statement": "Calculer $\\dfrac{1}{7} -\\dfrac{5}{2} \\times \\left(-7\\right)$.",
+  "statement_html": "<div>Calculer $\\dfrac{1}{7} -\\dfrac{5}{2} \\times \\left(-7\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{1}{7} -\\dfrac{5}{2}-7",
+    "latex": "\\dfrac{1}{7} -\\dfrac{5}{2} \\times \\left(-7\\right)",
     "simplified_latex": "\\dfrac{247}{14}",
     "sympy_exp_data": {
       "type": "Add",

@@ -1,9 +1,17 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-3]",
-  "statement": "Le prix d'un article est multiplié par $1.64$. De combien de pourcent le prix de cet article a-t-il augmenté ?",
+  "statement": "Le prix d'un article est multiplié par $1,64$. Quelle est la variation du prix en pourcentage ?",
+  "statement_html": "<div>Le prix d'un article est multiplié par $1,64$. \nCalculer la variation du prix en pourcentage.<br></div>",
+  "mask": "V_r=",
   "answer": {
-    "latex": "\\dfrac{128}{200}",
-    "simplified_latex": "\\dfrac{16}{25}",
+    "latex": [
+      "\\dfrac{128}{200}",
+      "64\\%"
+    ],
+    "simplified_latex": [
+      "\\dfrac{16}{25}",
+      "64\\%"
+    ],
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(16, 25)",
@@ -14,7 +22,7 @@
   "components": {
     "p": "\\dfrac{128}{200}",
     "direction": "1",
-    "coef": "1 + 1\\dfrac{128}{200}"
+    "coef": "1 + 1 \\times \\dfrac{128}{200}"
   },
   "seed": 83,
   "generator": "spe_sujet1_auto_03_question",

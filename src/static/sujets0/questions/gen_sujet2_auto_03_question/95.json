@@ -1,9 +1,14 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-3]",
-  "statement": "Le prix d'un article a triplé. De combien a-t-il augmenté en pourcentage ?",
+  "statement": "Le prix d'un article a triplé. Quel est le pourcentage d'évolution ?.",
+  "statement_html": "<div>Le prix d'un article a triplé. Quel est le pourcentage d'évolution ?.</div>",
   "answer": {
-    "latex": "200",
-    "simplified_latex": "200",
+    "latex": [
+      "200"
+    ],
+    "simplified_latex": [
+      "200 \\%"
+    ],
     "sympy_exp_data": {
       "type": "Integer",
       "sp.srepr": "Integer(200)",

@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(-x -3\\right) \\times \\left(1x -2\\right)$.",
+  "statement": "Développer $\\left(-x -3\\right) \\times \\left(x -2\\right)$.",
+  "statement_html": "<div>Développer $\\left(-x -3\\right) \\times \\left(x -2\\right)$.</div>",
   "answer": {
-    "latex": "6 -x -x^{2}",
-    "simplified_latex": "6 -x -x^{2}",
+    "latex": "-x^{2} -x + 6",
+    "simplified_latex": "-x^{2} -x + 6",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(-1), Pow(Symbol('x'), Integer(2))), Mul(Integer(-1), Symbol('x'))), Integer(6))",
-      "str": "(-x**2 - x) + 6"
+      "sp.srepr": "Add(Mul(Integer(-1), Pow(Symbol('x'), Integer(2))), Add(Integer(6), Mul(Integer(-1), Symbol('x'))))",
+      "str": "-x**2 + (6 - x)"
     },
-    "formal_repr": "Add(l=Integer(n=6), r=Add(l=Mul(l=Integer(n=-1), r=Symbol(s='x')), r=Mul(l=Integer(n=-1), r=Pow(base=Symbol(s='x'), exp=Integer(n=2)))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=-1), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=-1), r=Symbol(s='x')), r=Integer(n=6)))"
   },
   "components": {
     "x": "x",
@@ -17,7 +18,7 @@
     "b1": "-3",
     "a2": "1",
     "b2": "-2",
-    "expr": "\\left(-x -3\\right) \\times \\left(1x -2\\right)"
+    "expr": "\\left(-x -3\\right) \\times \\left(x -2\\right)"
   },
   "seed": 77,
   "generator": "gen_sujet2_auto_08_question",

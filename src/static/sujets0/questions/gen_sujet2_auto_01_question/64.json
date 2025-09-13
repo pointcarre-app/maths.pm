@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $5 + 3\\dfrac{1}{9}$.",
+  "statement": "Calculer $5 + 3 \\times \\dfrac{1}{9}$.",
+  "statement_html": "<div>Calculer $5 + 3 \\times \\dfrac{1}{9}$.</div>",
   "mask": "",
   "answer": {
-    "latex": "5 + 3\\dfrac{1}{9}",
+    "latex": "5 + 3 \\times \\dfrac{1}{9}",
     "simplified_latex": "\\dfrac{16}{3}",
     "sympy_exp_data": {
       "type": "Add",

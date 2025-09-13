@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $-\\dfrac{15}{2} + \\dfrac{7}{4} \\times \\dfrac{22}{3}$.",
+  "statement_html": "<div>Calculer $-\\dfrac{15}{2} + \\dfrac{7}{4} \\times \\dfrac{22}{3}$.</div>",
   "mask": "",
   "answer": {
     "latex": "-\\dfrac{15}{2} + \\dfrac{7}{4} \\times \\dfrac{22}{3}",

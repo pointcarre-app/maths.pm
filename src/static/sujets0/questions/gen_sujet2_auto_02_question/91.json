@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "2 articles coûtent 30.4 euros. Combien coûtent 6 articles ?",
+  "statement": "$3$ articles coûtent $132$ euros. Combien coûtent $20$ articles ?",
+  "statement_html": "<div>$3$ articles coûtent $132$ euros. Combien coûtent $20$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{152}{10}6",
-    "simplified_latex": "\\dfrac{456}{5}",
+    "latex": [
+      "20 \\times 44",
+      "880"
+    ],
+    "simplified_latex": [
+      "880 €",
+      "880 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Integer(6), Rational(76, 5))",
-      "str": "(76/5)*6"
+      "sp.srepr": "Mul(Integer(20), Integer(44))",
+      "str": "44*20"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=152), q=Integer(n=10)), r=Integer(n=6))"
+    "formal_repr": "Mul(l=Integer(n=44), r=Integer(n=20))"
   },
   "components": {
-    "n1": "2",
-    "n2": "6",
-    "p": "\\dfrac{152}{10}"
+    "n1": "3",
+    "n2": "20",
+    "p": "44"
   },
   "seed": 91,
   "generator": "gen_sujet2_auto_02_question",

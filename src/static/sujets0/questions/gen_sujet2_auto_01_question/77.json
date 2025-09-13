@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-3 -\\dfrac{25}{4}-13$.",
+  "statement": "Calculer $-3 -\\dfrac{25}{4} \\times \\left(-13\\right)$.",
+  "statement_html": "<div>Calculer $-3 -\\dfrac{25}{4} \\times \\left(-13\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-3 -\\dfrac{25}{4}-13",
+    "latex": "-3 -\\dfrac{25}{4} \\times \\left(-13\\right)",
     "simplified_latex": "\\dfrac{313}{4}",
     "sympy_exp_data": {
       "type": "Add",

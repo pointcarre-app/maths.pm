@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(2x -7\\right) \\times \\left(-4x + 0\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; \\dfrac{0}{-4}\\rbracket$ ?",
+  "statement": "La fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = \\left(2x -7\\right)  \\left(-4x + 0\\right)$. <br>Établir le tableau de signes de $f$ sur $\\mathbb{R}$.",
+  "statement_html": "<div>La fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = \\left(2x -7\\right)  \\left(-4x + 0\\right)$. <br>Établir le tableau de signes de $f$ sur $\\mathbb{R}$.</div>",
   "answer": {
     "latex": "0 > f(x)",
     "simplified_latex": "0 > f(x)",

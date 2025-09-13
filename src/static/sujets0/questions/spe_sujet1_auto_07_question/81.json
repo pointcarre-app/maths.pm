@@ -1,20 +1,25 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-7]",
-  "statement": "On a représenté ci-contre la parabole d'équation $y = x^2$. On note (\\\\mathcal\\{J\\}) l'inéquation, sur \\\\mathbb\\{R\\}, $x^{2} > 64$. Donner la ou les inéquation(s) du premier degré équivalente à \\\\mathcal\\{J\\}.",
+  "statement": "On a représenté ci-contre la parabole d'équation $y = x^2$ ainsi que la droite d'équation $y = 9$. Résoudre sur $\\mathbb{R}$ l'inéquation : $x^{2} > 9$.",
+  "statement_html": "<div>On a représenté ci-contre la parabole d'équation $y = x^2$ ainsi que la droite d'équation $y = 9$. Résoudre sur $\\mathbb{R}$ l'inéquation : $x^{2} > 9$.</div>",
   "answer": {
-    "latex": "\\left(x > 64^{\\dfrac{1}{2}}, -64^{\\dfrac{1}{2}} > x\\right)",
-    "simplified_latex": "\\left(x > 8, -8 > x\\right)",
+    "latex": [
+      "x \\in \\left] -\\infty, -3 \\right[ \\cup \\left] 3, \\infty \\right["
+    ],
+    "simplified_latex": [
+      "x \\in \\left] -\\infty, -3 \\right[ \\cup \\left] 3, \\infty \\right["
+    ],
     "sympy_exp_data": {
       "type": "Tuple",
-      "sp.srepr": "Tuple(StrictGreaterThan(Symbol('x'), Pow(Integer(64), Rational(1, 2))), StrictGreaterThan(Mul(Integer(-1), Pow(Integer(64), Rational(1, 2))), Symbol('x')))",
-      "str": "(x > sqrt(64), -sqrt(64) > x)"
+      "sp.srepr": "Tuple(StrictGreaterThan(Mul(Integer(-1), Pow(Integer(9), Rational(1, 2))), Symbol('x')), StrictGreaterThan(Symbol('x'), Pow(Integer(9), Rational(1, 2))))",
+      "str": "(-sqrt(9) > x, x > sqrt(9))"
     },
-    "formal_repr": "(StrictGreaterThan(l=Symbol(s='x'), r=Pow(base=Integer(n=64), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))), StrictGreaterThan(l=Mul(l=Integer(n=-1), r=Pow(base=Integer(n=64), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))), r=Symbol(s='x')))"
+    "formal_repr": "(StrictGreaterThan(l=Mul(l=Integer(n=-1), r=Pow(base=Integer(n=9), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))), r=Symbol(s='x')), StrictGreaterThan(l=Symbol(s='x'), r=Pow(base=Integer(n=9), exp=Fraction(p=Integer(n=1), q=Integer(n=2)))))"
   },
   "components": {
-    "n": "64",
+    "n": "9",
     "x": "x",
-    "relation": "x^{2} > 64"
+    "relation": "x^{2} > 9"
   },
   "seed": 81,
   "generator": "spe_sujet1_auto_07_question",

@@ -1,8 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
-  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur -9 passant par le points $A(1;9)$. On note $B$ le point de la droite $d$ d'abscisse $8$. Calculer l'ordonnée de $d$.",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur $-9$ passant par le points $A(1;9)$. On note $B$ le point de la droite $d$ d'abscisse $8$. Calculer l'ordonnée de $B$.",
+  "statement_html": "<div>Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur $-9$ passant par le points $A(1;9)$. On note $B$ le point de la droite $d$ d'abscisse $8$. Calculer l'ordonnée de $B$.</div>",
   "answer": {
-    "latex": "9 + \\left(8 -1\\right) \\times -\\dfrac{90}{10}",
+    "latex": "9 + \\left(8 -1\\right) \\times \\left(-\\dfrac{90}{10}\\right)",
     "simplified_latex": "-54",
     "sympy_exp_data": {
       "type": "Add",

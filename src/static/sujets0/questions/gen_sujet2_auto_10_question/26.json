@@ -1,8 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
-  "statement": "On définit la function $f$ par $f(x)=-3 \\times x^{2} -3x + 4$. Calculer l'image de $8$ par $f$.",
+  "statement": "On définit la function $f$ par $f(x)=-3x^{2} -3x + 4$. Calculer l'image de $8$ par $f$.",
+  "statement_html": "<div>On définit la function $f$ par $f(x)=-3x^{2} -3x + 4$. Calculer l'image de $8$ par $f$.</div>",
   "answer": {
-    "latex": "-3 \\times 8^{2} -3 \\times 8 + 4",
+    "latex": "(-3) \\times (8)^2 + (-3) \\times (8) + (4)",
     "simplified_latex": "-212",
     "sympy_exp_data": {
       "type": "Add",

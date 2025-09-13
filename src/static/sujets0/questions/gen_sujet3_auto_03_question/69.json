@@ -14,7 +14,7 @@
   "components": {
     "p": "\\dfrac{701}{1000}",
     "direction": "-1",
-    "coef": "1 -\\dfrac{701}{1000}"
+    "coef": "1 - \\left(\\dfrac{701}{1000}\\right)"
   },
   "seed": 69,
   "generator": "gen_sujet3_auto_03_question",

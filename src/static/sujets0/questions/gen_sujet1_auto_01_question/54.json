@@ -3,7 +3,7 @@
   "statement": "Calculer $75 \\%$ de $90$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{15}{20}90",
+    "latex": "\\dfrac{15}{20} \\times 90",
     "simplified_latex": "\\dfrac{135}{2}",
     "sympy_exp_data": {
       "type": "Mul",

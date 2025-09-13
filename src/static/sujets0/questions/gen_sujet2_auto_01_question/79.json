@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-4 -\\dfrac{3}{5} \\times -\\dfrac{15}{2}$.",
+  "statement": "Calculer $-4 -\\dfrac{3}{5} \\times \\left(-\\dfrac{15}{2}\\right)$.",
+  "statement_html": "<div>Calculer $-4 -\\dfrac{3}{5} \\times \\left(-\\dfrac{15}{2}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-4 -\\dfrac{3}{5} \\times -\\dfrac{15}{2}",
+    "latex": "-4 -\\dfrac{3}{5} \\times \\left(-\\dfrac{15}{2}\\right)",
     "simplified_latex": "\\dfrac{1}{2}",
     "sympy_exp_data": {
       "type": "Add",

@@ -1,8 +1,11 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-1]",
   "statement": "Quel est l'inverse du quadruple de $9$ ?",
+  "statement_html": "<div>Quel est l'inverse du quadruple de $9$ ?<br></div>",
   "answer": {
-    "latex": "\\dfrac{1}{4 \\times 9}",
+    "latex": [
+      "\\dfrac{1}{4 \\times 9}"
+    ],
     "simplified_latex": "\\dfrac{1}{36}",
     "sympy_exp_data": {
       "type": "Rational",

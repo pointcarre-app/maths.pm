@@ -1,8 +1,12 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-6]",
-  "statement": "On considère $x$, $y$, et $u$ des réels non nuls tels que $\\\\dfrac\\{1\\}\\{x\\}+ \\\\dfrac\\{1\\}\\{y\\} = \\\\dfrac\\{1\\}\\{u\\}$. Exprimer $u$ en fonction $x$ et $y$.",
+  "statement": "On considère $x$, $y$, et $u$ des réels non nuls tels que $\\dfrac{1}{x}+ \\dfrac{1}{y} = \\dfrac{1}{u}$. Exprimer $u$ en fonction $x$ et $y$.",
+  "statement_html": "<div>On considère $x$, $y$, et $u$ des réels non nuls tels que : \n    <span>$\\dfrac{1}{x}+ \\dfrac{1}{y} = \\dfrac{1}{u}$</span>. Exprimer $u$ en fonction de $x$ et $y$.\n</div>\n",
+  "mask": "u=",
   "answer": {
-    "latex": "\\dfrac{xy}{x + y}",
+    "latex": [
+      "\\dfrac{xy}{x + y}"
+    ],
     "simplified_latex": "\\dfrac{xy}{x + y}",
     "sympy_exp_data": {
       "type": "Mul",

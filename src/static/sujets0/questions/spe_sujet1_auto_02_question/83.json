@@ -1,22 +1,25 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-2]",
-  "statement": "On considère la relation $F=a+\\\\dfrac\\{b\\}\\{cd\\}$. Lorsque $a=\\dfrac{1}{8}$, $b = 8$, $c = 2$, $d = -\\dfrac{1}{3}$, quelle est la valeur de $F$ ?",
+  "statement": "Soit $F=a+\\dfrac{b}{cd}$. Lorsque $a=\\dfrac{1}{8}$, $b = 8$, $c = 2$, $d = -\\dfrac{1}{4}$, quelle est la valeur de $F$ ?",
+  "statement_html": "<div>Soit $F=a+\\dfrac{b}{cd}$. \nLorsque : $a=\\dfrac{1}{8}$ ; $b = 8$ ; $c = 2$ ; $d = -\\dfrac{1}{4}$, quelle est la valeur de $F$ ?</div>",
   "mask": "F=",
   "answer": {
-    "latex": "\\dfrac{1}{8} + \\dfrac{8}{2-\\dfrac{1}{3}}",
-    "simplified_latex": "-\\dfrac{95}{8}",
+    "latex": [
+      "\\dfrac{1}{8} \\dfrac{8}{2 \\times (-\\dfrac{1}{4})}"
+    ],
+    "simplified_latex": "-\\dfrac{127}{8}",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Integer(-12), Rational(1, 8))",
-      "str": "-12 + 1/8"
+      "sp.srepr": "Add(Integer(-16), Rational(1, 8))",
+      "str": "-16 + 1/8"
     },
-    "formal_repr": "Add(l=Fraction(p=Integer(n=1), q=Integer(n=8)), r=Fraction(p=Integer(n=8), q=Mul(l=Integer(n=2), r=Fraction(p=Integer(n=-1), q=Integer(n=3)))))"
+    "formal_repr": "Add(l=Fraction(p=Integer(n=1), q=Integer(n=8)), r=Fraction(p=Integer(n=8), q=Mul(l=Integer(n=2), r=Fraction(p=Integer(n=-1), q=Integer(n=4)))))"
   },
   "components": {
     "a": "\\dfrac{1}{8}",
     "b": "8",
     "c": "2",
-    "d": "-\\dfrac{1}{3}"
+    "d": "-\\dfrac{1}{4}"
   },
   "seed": 83,
   "generator": "spe_sujet1_auto_02_question",

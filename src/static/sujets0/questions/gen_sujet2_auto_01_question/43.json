@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-\\dfrac{46}{5} + 13\\dfrac{3}{2}$.",
+  "statement": "Calculer $-\\dfrac{46}{5} + 13 \\times \\dfrac{3}{2}$.",
+  "statement_html": "<div>Calculer $-\\dfrac{46}{5} + 13 \\times \\dfrac{3}{2}$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-\\dfrac{46}{5} + 13\\dfrac{3}{2}",
+    "latex": "-\\dfrac{46}{5} + 13 \\times \\dfrac{3}{2}",
     "simplified_latex": "\\dfrac{103}{10}",
     "sympy_exp_data": {
       "type": "Add",

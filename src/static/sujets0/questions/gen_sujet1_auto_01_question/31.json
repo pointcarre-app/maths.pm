@@ -3,7 +3,7 @@
   "statement": "Calculer $80 \\%$ de $10$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{16}{20}10",
+    "latex": "\\dfrac{16}{20} \\times 10",
     "simplified_latex": "8",
     "sympy_exp_data": {
       "type": "Mul",

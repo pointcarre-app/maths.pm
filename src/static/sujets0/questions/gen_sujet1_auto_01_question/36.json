@@ -3,7 +3,7 @@
   "statement": "Calculer $10 \\%$ de $220$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{2}{20}220",
+    "latex": "\\dfrac{2}{20} \\times 220",
     "simplified_latex": "22",
     "sympy_exp_data": {
       "type": "Mul",

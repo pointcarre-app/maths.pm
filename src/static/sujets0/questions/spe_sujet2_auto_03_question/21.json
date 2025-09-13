@@ -1,23 +1,26 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-3]",
-  "statement": "Le prix d'un article est noté $P$. Ce prix augmente de $30\\%$ puis diminue de $30\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?",
+  "statement": "Le prix d'un article est noté $P$. Ce prix augmente de $10\\%$ puis diminue de $10\\%$. À l'issue de ces deux variations, quel est le pourcentage d'évolution ?",
+  "statement_html": "<div>Le prix d'un article est noté $P$. Ce prix augmente de $10\\%$ puis diminue de $10\\%$. À l'issue de ces deux variations, quel est le pourcentage d'évolution ?</div>",
   "answer": {
-    "latex": "-\\left(\\dfrac{30}{100}\\right)^{2}",
-    "simplified_latex": "-\\dfrac{9}{100}",
+    "latex": [
+      "-100\\left(\\dfrac{10}{100}\\right)^{2}"
+    ],
+    "simplified_latex": "-1 \\% ",
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Integer(-1), Pow(Rational(3, 10), Integer(2)))",
-      "str": "-(3/10)**2"
+      "sp.srepr": "Mul(Integer(-1), Integer(100), Pow(Rational(1, 10), Integer(2)))",
+      "str": "-100*(1/10)**2"
     },
-    "formal_repr": "Mul(l=Integer(n=-1), r=Pow(base=Fraction(p=Integer(n=30), q=Integer(n=100)), exp=Integer(n=2)))"
+    "formal_repr": "Mul(l=Integer(n=-100), r=Pow(base=Fraction(p=Integer(n=10), q=Integer(n=100)), exp=Integer(n=2)))"
   },
   "components": {
-    "p": "30",
+    "p": "10",
     "direction": "1"
   },
   "seed": 21,
   "generator": "spe_sujet2_auto_03_question",
   "success": true,
-  "stdout": "components ok\nanswer ok\nquestion ok\n",
+  "stdout": "",
   "stderr": ""
 }

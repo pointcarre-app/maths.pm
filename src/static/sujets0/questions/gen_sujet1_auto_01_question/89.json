@@ -3,7 +3,7 @@
   "statement": "Calculer $45 \\%$ de $60$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{9}{20}60",
+    "latex": "\\dfrac{9}{20} \\times 60",
     "simplified_latex": "27",
     "sympy_exp_data": {
       "type": "Mul",

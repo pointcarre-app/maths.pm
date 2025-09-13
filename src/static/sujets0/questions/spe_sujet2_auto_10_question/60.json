@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-x + 8\\right) \\times \\left(-x -6\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\dfrac{6}{-1}; -\\dfrac{8}{-1}\\rbracket$ ?",
+  "statement": "La fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = \\left(-x + 8\\right)  \\left(-x -6\\right)$. <br>Établir le tableau de signes de $f$ sur $\\mathbb{R}$.",
+  "statement_html": "<div>La fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = \\left(-x + 8\\right)  \\left(-x -6\\right)$. <br>Établir le tableau de signes de $f$ sur $\\mathbb{R}$.</div>",
   "answer": {
     "latex": "0 > f(x)",
     "simplified_latex": "0 > f(x)",

@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
-  "statement": "On considère les deux séries $A=22 ; 45 ; 45 ; 68$  et $B=42 ; 45 ; 45 ; 48$. Quelle est celle avec le plus grand écart type ?",
+  "statement": "On considère les deux séries :<br>$A=22&nbsp ; &nbsp 45&nbsp ; &nbsp 45&nbsp ; &nbsp 68$  <br>$B=42&nbsp ; &nbsp 45&nbsp ; &nbsp 45&nbsp ; &nbsp 48$<br>Quelle est celle avec le plus grand écart type ?",
+  "statement_html": "<div>On considère les deux séries :<br>$A=22&nbsp ; &nbsp 45&nbsp ; &nbsp 45&nbsp ; &nbsp 68$  <br>$B=42&nbsp ; &nbsp 45&nbsp ; &nbsp 45&nbsp ; &nbsp 48$<br>Quelle est celle avec le plus grand écart type ?</div>",
   "answer": {
     "latex": "A",
     "simplified_latex": "A",

@@ -3,7 +3,7 @@
   "statement": "Calculer $80 \\%$ de $240$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{16}{20}240",
+    "latex": "\\dfrac{16}{20} \\times 240",
     "simplified_latex": "192",
     "sympy_exp_data": {
       "type": "Mul",

@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
-  "statement": "On considère les deux séries $A=-40 ; 10 ; 10 ; 60$  et $B=9 ; 10 ; 10 ; 11$. Quelle est celle avec le plus grand écart type ?",
+  "statement": "On considère les deux séries :<br>$A=-40&nbsp ; &nbsp 10&nbsp ; &nbsp 10&nbsp ; &nbsp 60$  <br>$B=9&nbsp ; &nbsp 10&nbsp ; &nbsp 10&nbsp ; &nbsp 11$<br>Quelle est celle avec le plus grand écart type ?",
+  "statement_html": "<div>On considère les deux séries :<br>$A=-40&nbsp ; &nbsp 10&nbsp ; &nbsp 10&nbsp ; &nbsp 60$  <br>$B=9&nbsp ; &nbsp 10&nbsp ; &nbsp 10&nbsp ; &nbsp 11$<br>Quelle est celle avec le plus grand écart type ?</div>",
   "answer": {
     "latex": "A",
     "simplified_latex": "A",

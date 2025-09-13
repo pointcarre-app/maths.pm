@@ -1,22 +1,23 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
-  "statement": "On considère le nombre $N=\\dfrac{15^{13}}{5^{10}}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.",
+  "statement": "On considère le nombre $N=\\dfrac{10^{4}}{5^{2}}$. Exprimer $N$ sous la forme d'un entier.",
+  "statement_html": "<div>On considère le nombre $N=\\dfrac{10^{4}}{5^{2}}$. Exprimer $N$ sous la forme d'un entier.</div>",
   "answer": {
-    "latex": "5^{-7} \\times 3^{3}",
-    "simplified_latex": "\\dfrac{27}{78125}",
+    "latex": "5^{0}2^{2}",
+    "simplified_latex": "4",
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Pow(Integer(3), Integer(3)), Pow(Integer(5), Integer(-7)))",
-      "str": "3**3/5**7"
+      "sp.srepr": "Mul(Pow(Integer(2), Integer(2)), Pow(Integer(5), Integer(0)))",
+      "str": "5**0*2**2"
     },
-    "formal_repr": "Mul(l=Pow(base=Integer(n=5), exp=Integer(n=-7)), r=Pow(base=Integer(n=3), exp=Integer(n=3)))"
+    "formal_repr": "Mul(l=Pow(base=Integer(n=5), exp=Integer(n=0)), r=Pow(base=Integer(n=2), exp=Integer(n=2)))"
   },
   "components": {
     "x": "5",
-    "y": "3",
-    "n1": "10",
-    "n2": "3",
-    "expr": "\\dfrac{15^{13}}{5^{10}}"
+    "y": "2",
+    "n1": "2",
+    "n2": "2",
+    "expr": "\\dfrac{10^{4}}{5^{2}}"
   },
   "seed": 24,
   "generator": "spe_sujet2_auto_05_question",

@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{17}{6} + 24 \\times -21$.",
+  "statement": "Calculer $\\dfrac{17}{6} + 24 \\times \\left(-21\\right)$.",
+  "statement_html": "<div>Calculer $\\dfrac{17}{6} + 24 \\times \\left(-21\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{17}{6} + 24 \\times -21",
+    "latex": "\\dfrac{17}{6} + 24 \\times \\left(-21\\right)",
     "simplified_latex": "-\\dfrac{3007}{6}",
     "sympy_exp_data": {
       "type": "Add",

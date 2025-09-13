@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $49 + \\dfrac{7}{2}45$.",
+  "statement": "Calculer $49 + \\dfrac{7}{2} \\times 45$.",
+  "statement_html": "<div>Calculer $49 + \\dfrac{7}{2} \\times 45$.</div>",
   "mask": "",
   "answer": {
-    "latex": "49 + \\dfrac{7}{2}45",
+    "latex": "49 + \\dfrac{7}{2} \\times 45",
     "simplified_latex": "\\dfrac{413}{2}",
     "sympy_exp_data": {
       "type": "Add",

@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(-8x + 9\\right) \\times \\left(2x -9\\right)$.",
+  "statement": "Développer $\\left(-8x + 9\\right) \\times \\left(2x -9\\right)$.",
+  "statement_html": "<div>Développer $\\left(-8x + 9\\right) \\times \\left(2x -9\\right)$.</div>",
   "answer": {
-    "latex": "-81 -16 \\times x^{2} + 90x",
-    "simplified_latex": "-81 -16 \\times x^{2} + 90x",
+    "latex": "-16x^{2} + 90x -81",
+    "simplified_latex": "-16x^{2} + 90x -81",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(-1), Integer(16), Pow(Symbol('x'), Integer(2))), Mul(Integer(90), Symbol('x'))), Integer(-81))",
-      "str": "(-16*x**2 + 90*x) - 81"
+      "sp.srepr": "Add(Mul(Integer(-1), Integer(16), Pow(Symbol('x'), Integer(2))), Add(Mul(Integer(90), Symbol('x')), Integer(-81)))",
+      "str": "-16*x**2 + (90*x - 81)"
     },
-    "formal_repr": "Add(l=Integer(n=-81), r=Add(l=Mul(l=Integer(n=-16), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Mul(l=Integer(n=90), r=Symbol(s='x'))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=-16), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=90), r=Symbol(s='x')), r=Integer(n=-81)))"
   },
   "components": {
     "x": "x",

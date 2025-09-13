@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(9x -3\\right) \\times \\left(-3x -3\\right)$.",
+  "statement": "Développer $\\left(9x -3\\right) \\times \\left(-3x -3\\right)$.",
+  "statement_html": "<div>Développer $\\left(9x -3\\right) \\times \\left(-3x -3\\right)$.</div>",
   "answer": {
-    "latex": "9 -27 \\times x^{2} -18x",
-    "simplified_latex": "9 -27 \\times x^{2} -18x",
+    "latex": "-27x^{2} -18x + 9",
+    "simplified_latex": "-27x^{2} -18x + 9",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(-1), Integer(27), Pow(Symbol('x'), Integer(2))), Mul(Integer(-1), Integer(18), Symbol('x'))), Integer(9))",
-      "str": "(-27*x**2 - 18*x) + 9"
+      "sp.srepr": "Add(Mul(Integer(-1), Integer(27), Pow(Symbol('x'), Integer(2))), Add(Integer(9), Mul(Integer(-1), Integer(18), Symbol('x'))))",
+      "str": "-27*x**2 + (9 - 18*x)"
     },
-    "formal_repr": "Add(l=Integer(n=9), r=Add(l=Mul(l=Integer(n=-27), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Mul(l=Integer(n=-18), r=Symbol(s='x'))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=-27), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=-18), r=Symbol(s='x')), r=Integer(n=9)))"
   },
   "components": {
     "x": "x",

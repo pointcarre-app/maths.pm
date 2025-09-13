@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-7]",
   "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(-7;10)$ et $B(9;6)$. Calculer le coefficient directeur de la droite $d$.",
+  "statement_html": "<div>Le plan est muni d'un repère orthogonal. On note $d$ la droite passant par les points $A(-7;10)$ et $B(9;6)$. Calculer le coefficient directeur de la droite $d$.</div>",
   "answer": {
     "latex": "\\dfrac{6 -10}{9 + 7}",
     "simplified_latex": "-\\dfrac{4}{16}",

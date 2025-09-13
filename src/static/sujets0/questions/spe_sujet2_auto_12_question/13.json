@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-12]",
-  "statement": "Si un point mobile suit une trajectoire circulaire de rayon $R$, en mètre ($m$), son accélération centripète $u$ (en $m/s^2$) s'exprime en fonction de la vitesse $v$ (en $m/s$) de la manière suivante: $$a = \\dfrac{v^{2}}{R}$$ Exprimer $v$ en fonction de a et R.",
+  "statement": "Si un point mobile suit une trajectoire circulaire de rayon $R$, en mètre ($m$), son accélération centripète $u$ (en $m/s^2$) s'exprime en fonction de la vitesse $v$ (en $m/s$) de la manière suivante: $$a = \\dfrac{v^{2}}{R}$$ Exprimer $v$ en fonction de $a$ et $R$.",
+  "statement_html": "<div>Si un point mobile suit une trajectoire circulaire de rayon $R$, en mètre ($m$), son accélération centripète $u$ (en $m/s^2$) s'exprime en fonction de la vitesse $v$ (en $m/s$) de la manière suivante: $$a = \\dfrac{v^{2}}{R}$$ Exprimer $v$ en fonction de $a$ et $R$.</div>",
   "answer": {
-    "latex": "\\left(aR\\right)^{\\dfrac{1}{2}}",
-    "simplified_latex": "\\left(aR\\right)^{\\dfrac{1}{2}}",
+    "latex": "\\sqrt{aR}",
+    "simplified_latex": "\\sqrt{aR}",
     "sympy_exp_data": {
       "type": "Pow",
       "sp.srepr": "Pow(Mul(Symbol('R'), Symbol('a')), Rational(1, 2))",

@@ -1,8 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
-  "statement": "On définit la function $f$ par $f(x)=6 \\times x^{2} -6x + 3$. Calculer l'image de $8$ par $f$.",
+  "statement": "On définit la function $f$ par $f(x)=6x^{2} -6x + 3$. Calculer l'image de $8$ par $f$.",
+  "statement_html": "<div>On définit la function $f$ par $f(x)=6x^{2} -6x + 3$. Calculer l'image de $8$ par $f$.</div>",
   "answer": {
-    "latex": "6 \\times 8^{2} -6 \\times 8 + 3",
+    "latex": "(6) \\times (8)^2 + (-6) \\times (8) + (3)",
     "simplified_latex": "339",
     "sympy_exp_data": {
       "type": "Add",

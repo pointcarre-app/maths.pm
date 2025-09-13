@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-11]",
-  "statement": "Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = -2 \\times x^{2} + 8x -6$. Parmis la série A: -2; -1, 0, 1, 2, quel est l'antécédent de 0 par la fonction $f$ ?",
+  "statement": "Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = -2x^{2} + 8x -6$. Parmi ces nombres : $-2$ ; $-1$ ; $0$ ; $1$ ; $2$, quel est l'antécédent de $0$ par la fonction $f$ ?",
+  "statement_html": "<div>Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = -2x^{2} + 8x -6$. Parmi ces nombres : $-2$ ; $-1$ ; $0$ ; $1$ ; $2$, quel est l'antécédent de $0$ par la fonction $f$ ?</div>",
   "answer": {
     "latex": "1",
     "simplified_latex": "1",
@@ -18,7 +19,7 @@
     "c": "-6",
     "x1": "1",
     "x2": "3",
-    "expr": "-2 \\times x^{2} + 8x -6",
+    "expr": "-2x^{2} + 8x -6",
     "f": "f"
   },
   "seed": 40,

@@ -3,7 +3,7 @@
   "statement": "Calculer $65 \\%$ de $260$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{13}{20}260",
+    "latex": "\\dfrac{13}{20} \\times 260",
     "simplified_latex": "169",
     "sympy_exp_data": {
       "type": "Mul",

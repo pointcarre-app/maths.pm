@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-8 + \\dfrac{19}{2} \\times -\\dfrac{5}{2}$.",
+  "statement": "Calculer $-8 + \\dfrac{19}{2} \\times \\left(-\\dfrac{5}{2}\\right)$.",
+  "statement_html": "<div>Calculer $-8 + \\dfrac{19}{2} \\times \\left(-\\dfrac{5}{2}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-8 + \\dfrac{19}{2} \\times -\\dfrac{5}{2}",
+    "latex": "-8 + \\dfrac{19}{2} \\times \\left(-\\dfrac{5}{2}\\right)",
     "simplified_latex": "-\\dfrac{127}{4}",
     "sympy_exp_data": {
       "type": "Add",

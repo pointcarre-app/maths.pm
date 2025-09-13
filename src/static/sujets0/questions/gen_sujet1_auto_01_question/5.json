@@ -3,7 +3,7 @@
   "statement": "Calculer $45 \\%$ de $400$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{9}{20}400",
+    "latex": "\\dfrac{9}{20} \\times 400",
     "simplified_latex": "180",
     "sympy_exp_data": {
       "type": "Mul",

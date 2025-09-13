@@ -1,22 +1,23 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
-  "statement": "On considère le nombre $N=\\dfrac{10^{7}}{5^{2}}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.",
+  "statement": "On considère le nombre $N=\\dfrac{12^{6}}{6^{2}}$. Exprimer $N$ sous la forme d'un entier.",
+  "statement_html": "<div>On considère le nombre $N=\\dfrac{12^{6}}{6^{2}}$. Exprimer $N$ sous la forme d'un entier.</div>",
   "answer": {
-    "latex": "5^{3} \\times 2^{5}",
-    "simplified_latex": "4000",
+    "latex": "6^{1}2^{3}",
+    "simplified_latex": "48",
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Pow(Integer(2), Integer(5)), Pow(Integer(5), Integer(3)))",
-      "str": "5**3*2**5"
+      "sp.srepr": "Mul(Pow(Integer(2), Integer(3)), Pow(Integer(6), Integer(1)))",
+      "str": "6**1*2**3"
     },
-    "formal_repr": "Mul(l=Pow(base=Integer(n=5), exp=Integer(n=3)), r=Pow(base=Integer(n=2), exp=Integer(n=5)))"
+    "formal_repr": "Mul(l=Pow(base=Integer(n=6), exp=Integer(n=1)), r=Pow(base=Integer(n=2), exp=Integer(n=3)))"
   },
   "components": {
-    "x": "5",
+    "x": "6",
     "y": "2",
     "n1": "2",
-    "n2": "5",
-    "expr": "\\dfrac{10^{7}}{5^{2}}"
+    "n2": "3",
+    "expr": "\\dfrac{12^{6}}{6^{2}}"
   },
   "seed": 94,
   "generator": "spe_sujet2_auto_05_question",

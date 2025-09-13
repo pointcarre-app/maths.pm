@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-\\dfrac{1}{2} -\\dfrac{15}{2}3$.",
+  "statement": "Calculer $-\\dfrac{1}{2} -\\dfrac{15}{2} \\times 3$.",
+  "statement_html": "<div>Calculer $-\\dfrac{1}{2} -\\dfrac{15}{2} \\times 3$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-\\dfrac{1}{2} -\\dfrac{15}{2}3",
+    "latex": "-\\dfrac{1}{2} -\\dfrac{15}{2} \\times 3",
     "simplified_latex": "-23",
     "sympy_exp_data": {
       "type": "Add",

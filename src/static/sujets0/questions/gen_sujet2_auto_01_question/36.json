@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-8 -\\dfrac{48}{5}-40$.",
+  "statement": "Calculer $-8 -\\dfrac{48}{5} \\times \\left(-40\\right)$.",
+  "statement_html": "<div>Calculer $-8 -\\dfrac{48}{5} \\times \\left(-40\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-8 -\\dfrac{48}{5}-40",
+    "latex": "-8 -\\dfrac{48}{5} \\times \\left(-40\\right)",
     "simplified_latex": "376",
     "sympy_exp_data": {
       "type": "Add",

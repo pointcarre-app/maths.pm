@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $10 -\\dfrac{3}{5} \\times \\dfrac{27}{5}$.",
+  "statement_html": "<div>Calculer $10 -\\dfrac{3}{5} \\times \\dfrac{27}{5}$.</div>",
   "mask": "",
   "answer": {
     "latex": "10 -\\dfrac{3}{5} \\times \\dfrac{27}{5}",

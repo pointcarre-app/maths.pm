@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-\\dfrac{16}{7} + \\dfrac{12}{5}-8$.",
+  "statement": "Calculer $-\\dfrac{16}{7} + \\dfrac{12}{5} \\times \\left(-8\\right)$.",
+  "statement_html": "<div>Calculer $-\\dfrac{16}{7} + \\dfrac{12}{5} \\times \\left(-8\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-\\dfrac{16}{7} + \\dfrac{12}{5}-8",
+    "latex": "-\\dfrac{16}{7} + \\dfrac{12}{5} \\times \\left(-8\\right)",
     "simplified_latex": "-\\dfrac{752}{35}",
     "sympy_exp_data": {
       "type": "Add",

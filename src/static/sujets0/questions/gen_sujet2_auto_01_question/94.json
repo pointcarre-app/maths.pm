@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{19}{3} -7-\\dfrac{12}{7}$.",
+  "statement": "Calculer $\\dfrac{19}{3} -7 \\times \\left(-\\dfrac{12}{7}\\right)$.",
+  "statement_html": "<div>Calculer $\\dfrac{19}{3} -7 \\times \\left(-\\dfrac{12}{7}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{19}{3} -7-\\dfrac{12}{7}",
+    "latex": "\\dfrac{19}{3} -7 \\times \\left(-\\dfrac{12}{7}\\right)",
     "simplified_latex": "\\dfrac{55}{3}",
     "sympy_exp_data": {
       "type": "Add",

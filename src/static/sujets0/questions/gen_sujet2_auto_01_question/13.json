@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $-\\dfrac{17}{5} + \\dfrac{37}{3} \\times \\dfrac{33}{4}$.",
+  "statement_html": "<div>Calculer $-\\dfrac{17}{5} + \\dfrac{37}{3} \\times \\dfrac{33}{4}$.</div>",
   "mask": "",
   "answer": {
     "latex": "-\\dfrac{17}{5} + \\dfrac{37}{3} \\times \\dfrac{33}{4}",

@@ -2,7 +2,7 @@
   "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
   "statement": "7 articles coûtent 34.3 euros. Combien coûtent 11 articles ?",
   "answer": {
-    "latex": "\\dfrac{49}{10}11",
+    "latex": "\\dfrac{49}{10} \\times 11",
     "simplified_latex": "\\dfrac{539}{10}",
     "sympy_exp_data": {
       "type": "Mul",

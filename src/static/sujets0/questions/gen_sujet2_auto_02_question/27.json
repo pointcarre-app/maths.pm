@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "8 articles coûtent 144 euros. Combien coûtent 9 articles ?",
+  "statement": "$9$ articles coûtent $90,9$ euros. Combien coûtent $10$ articles ?",
+  "statement_html": "<div>$9$ articles coûtent $90,9$ euros. Combien coûtent $10$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{180}{10}9",
-    "simplified_latex": "162",
+    "latex": [
+      "10 \\times \\dfrac{101}{10}",
+      "101"
+    ],
+    "simplified_latex": [
+      "101 €",
+      "101 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Integer(9), Integer(18))",
-      "str": "18*9"
+      "sp.srepr": "Mul(Integer(10), Rational(101, 10))",
+      "str": "(101/10)*10"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=180), q=Integer(n=10)), r=Integer(n=9))"
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=101), q=Integer(n=10)), r=Integer(n=10))"
   },
   "components": {
-    "n1": "8",
-    "n2": "9",
-    "p": "\\dfrac{180}{10}"
+    "n1": "9",
+    "n2": "10",
+    "p": "\\dfrac{101}{10}"
   },
   "seed": 27,
   "generator": "gen_sujet2_auto_02_question",

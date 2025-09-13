@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-\\dfrac{19}{9} + \\dfrac{20}{3} \\times -\\dfrac{19}{4}$.",
+  "statement": "Calculer $-\\dfrac{19}{9} + \\dfrac{20}{3} \\times \\left(-\\dfrac{19}{4}\\right)$.",
+  "statement_html": "<div>Calculer $-\\dfrac{19}{9} + \\dfrac{20}{3} \\times \\left(-\\dfrac{19}{4}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-\\dfrac{19}{9} + \\dfrac{20}{3} \\times -\\dfrac{19}{4}",
+    "latex": "-\\dfrac{19}{9} + \\dfrac{20}{3} \\times \\left(-\\dfrac{19}{4}\\right)",
     "simplified_latex": "-\\dfrac{304}{9}",
     "sympy_exp_data": {
       "type": "Add",

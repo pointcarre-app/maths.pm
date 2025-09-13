@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-\\dfrac{33}{10} + \\dfrac{47}{2}-9$.",
+  "statement": "Calculer $-\\dfrac{33}{10} + \\dfrac{47}{2} \\times \\left(-9\\right)$.",
+  "statement_html": "<div>Calculer $-\\dfrac{33}{10} + \\dfrac{47}{2} \\times \\left(-9\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-\\dfrac{33}{10} + \\dfrac{47}{2}-9",
+    "latex": "-\\dfrac{33}{10} + \\dfrac{47}{2} \\times \\left(-9\\right)",
     "simplified_latex": "-\\dfrac{1074}{5}",
     "sympy_exp_data": {
       "type": "Add",

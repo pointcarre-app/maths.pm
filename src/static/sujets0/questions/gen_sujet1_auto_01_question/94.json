@@ -3,7 +3,7 @@
   "statement": "Calculer $30 \\%$ de $350$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{6}{20}350",
+    "latex": "\\dfrac{6}{20} \\times 350",
     "simplified_latex": "105",
     "sympy_exp_data": {
       "type": "Mul",

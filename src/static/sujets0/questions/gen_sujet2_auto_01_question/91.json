@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $-4 -\\dfrac{28}{3} \\times \\dfrac{1}{8}$.",
+  "statement_html": "<div>Calculer $-4 -\\dfrac{28}{3} \\times \\dfrac{1}{8}$.</div>",
   "mask": "",
   "answer": {
     "latex": "-4 -\\dfrac{28}{3} \\times \\dfrac{1}{8}",

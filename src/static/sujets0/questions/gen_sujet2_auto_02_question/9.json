@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "8 articles coûtent 125.6 euros. Combien coûtent 12 articles ?",
+  "statement": "$9$ articles coûtent $63,9$ euros. Combien coûtent $13$ articles ?",
+  "statement_html": "<div>$9$ articles coûtent $63,9$ euros. Combien coûtent $13$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{157}{10}12",
-    "simplified_latex": "\\dfrac{942}{5}",
+    "latex": [
+      "13 \\times \\dfrac{71}{10}",
+      "\\dfrac{923}{10}"
+    ],
+    "simplified_latex": [
+      "\\dfrac{923}{10} €",
+      "92,3 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Integer(12), Rational(157, 10))",
-      "str": "(157/10)*12"
+      "sp.srepr": "Mul(Rational(71, 10), Integer(13))",
+      "str": "(71/10)*13"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=157), q=Integer(n=10)), r=Integer(n=12))"
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=71), q=Integer(n=10)), r=Integer(n=13))"
   },
   "components": {
-    "n1": "8",
-    "n2": "12",
-    "p": "\\dfrac{157}{10}"
+    "n1": "9",
+    "n2": "13",
+    "p": "\\dfrac{71}{10}"
   },
   "seed": 9,
   "generator": "gen_sujet2_auto_02_question",

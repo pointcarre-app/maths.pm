@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{23}{2} + \\dfrac{12}{5}-46$.",
+  "statement": "Calculer $\\dfrac{23}{2} + \\dfrac{12}{5} \\times \\left(-46\\right)$.",
+  "statement_html": "<div>Calculer $\\dfrac{23}{2} + \\dfrac{12}{5} \\times \\left(-46\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{23}{2} + \\dfrac{12}{5}-46",
+    "latex": "\\dfrac{23}{2} + \\dfrac{12}{5} \\times \\left(-46\\right)",
     "simplified_latex": "-\\dfrac{989}{10}",
     "sympy_exp_data": {
       "type": "Add",

@@ -3,7 +3,7 @@
   "statement": "Calculer $25 \\%$ de $470$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{5}{20}470",
+    "latex": "\\dfrac{5}{20} \\times 470",
     "simplified_latex": "\\dfrac{235}{2}",
     "sympy_exp_data": {
       "type": "Mul",

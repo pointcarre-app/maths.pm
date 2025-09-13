@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $-7 + \\dfrac{39}{8} \\times \\dfrac{7}{3}$.",
+  "statement_html": "<div>Calculer $-7 + \\dfrac{39}{8} \\times \\dfrac{7}{3}$.</div>",
   "mask": "",
   "answer": {
     "latex": "-7 + \\dfrac{39}{8} \\times \\dfrac{7}{3}",

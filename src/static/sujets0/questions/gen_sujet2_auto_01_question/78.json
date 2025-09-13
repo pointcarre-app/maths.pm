@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $-13 -\\dfrac{12}{5} \\times \\dfrac{45}{7}$.",
+  "statement_html": "<div>Calculer $-13 -\\dfrac{12}{5} \\times \\dfrac{45}{7}$.</div>",
   "mask": "",
   "answer": {
     "latex": "-13 -\\dfrac{12}{5} \\times \\dfrac{45}{7}",

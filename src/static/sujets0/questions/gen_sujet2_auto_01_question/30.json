@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{19}{5} + 28\\dfrac{29}{4}$.",
+  "statement": "Calculer $\\dfrac{19}{5} + 28 \\times \\dfrac{29}{4}$.",
+  "statement_html": "<div>Calculer $\\dfrac{19}{5} + 28 \\times \\dfrac{29}{4}$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{19}{5} + 28\\dfrac{29}{4}",
+    "latex": "\\dfrac{19}{5} + 28 \\times \\dfrac{29}{4}",
     "simplified_latex": "\\dfrac{1034}{5}",
     "sympy_exp_data": {
       "type": "Add",

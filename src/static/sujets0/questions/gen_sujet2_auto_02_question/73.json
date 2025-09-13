@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "5 articles coûtent 16 euros. Combien coûtent 17 articles ?",
+  "statement": "$6$ articles coûtent $236,04$ euros. Combien coûtent $5$ articles ?",
+  "statement_html": "<div>$6$ articles coûtent $236,04$ euros. Combien coûtent $5$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{32}{10}17",
-    "simplified_latex": "\\dfrac{272}{5}",
+    "latex": [
+      "5 \\times \\dfrac{3934}{100}",
+      "\\dfrac{1967}{10}"
+    ],
+    "simplified_latex": [
+      "\\dfrac{1967}{10} €",
+      "196,7 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Rational(16, 5), Integer(17))",
-      "str": "(16/5)*17"
+      "sp.srepr": "Mul(Integer(5), Rational(1967, 50))",
+      "str": "(1967/50)*5"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=32), q=Integer(n=10)), r=Integer(n=17))"
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=3934), q=Integer(n=100)), r=Integer(n=5))"
   },
   "components": {
-    "n1": "5",
-    "n2": "17",
-    "p": "\\dfrac{32}{10}"
+    "n1": "6",
+    "n2": "5",
+    "p": "\\dfrac{3934}{100}"
   },
   "seed": 73,
   "generator": "gen_sujet2_auto_02_question",

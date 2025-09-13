@@ -2,7 +2,7 @@
   "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
   "statement": "3 articles coûtent 18.9 euros. Combien coûtent 1 articles ?",
   "answer": {
-    "latex": "\\dfrac{63}{10}1",
+    "latex": "\\dfrac{63}{10} \\times 1",
     "simplified_latex": "\\dfrac{63}{10}",
     "sympy_exp_data": {
       "type": "Mul",

@@ -1,9 +1,12 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-2]",
-  "statement": "On considère la relation $F=a+\\\\dfrac\\{b\\}\\{cd\\}$. Lorsque $a=\\dfrac{1}{4}$, $b = 4$, $c = 7$, $d = -\\dfrac{1}{10}$, quelle est la valeur de $F$ ?",
+  "statement": "Soit $F=a+\\dfrac{b}{cd}$. Lorsque $a=\\dfrac{1}{4}$, $b = 4$, $c = 7$, $d = -\\dfrac{1}{10}$, quelle est la valeur de $F$ ?",
+  "statement_html": "<div>Soit $F=a+\\dfrac{b}{cd}$. \nLorsque : $a=\\dfrac{1}{4}$ ; $b = 4$ ; $c = 7$ ; $d = -\\dfrac{1}{10}$, quelle est la valeur de $F$ ?</div>",
   "mask": "F=",
   "answer": {
-    "latex": "\\dfrac{1}{4} + \\dfrac{4}{7-\\dfrac{1}{10}}",
+    "latex": [
+      "\\dfrac{1}{4} \\dfrac{4}{7 \\times (-\\dfrac{1}{10})}"
+    ],
     "simplified_latex": "-\\dfrac{153}{28}",
     "sympy_exp_data": {
       "type": "Add",

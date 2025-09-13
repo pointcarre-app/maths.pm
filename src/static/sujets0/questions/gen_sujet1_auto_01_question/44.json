@@ -3,7 +3,7 @@
   "statement": "Calculer $85 \\%$ de $270$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{17}{20}270",
+    "latex": "\\dfrac{17}{20} \\times 270",
     "simplified_latex": "\\dfrac{459}{2}",
     "sympy_exp_data": {
       "type": "Mul",

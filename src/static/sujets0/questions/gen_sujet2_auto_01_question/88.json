@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $0 -\\dfrac{8}{3}30$.",
+  "statement": "Calculer $0 -\\dfrac{8}{3} \\times 30$.",
+  "statement_html": "<div>Calculer $0 -\\dfrac{8}{3} \\times 30$.</div>",
   "mask": "",
   "answer": {
-    "latex": "0 -\\dfrac{8}{3}30",
+    "latex": "0 -\\dfrac{8}{3} \\times 30",
     "simplified_latex": "-80",
     "sympy_exp_data": {
       "type": "Add",

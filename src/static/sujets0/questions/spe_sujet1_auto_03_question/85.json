@@ -1,9 +1,17 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-3]",
-  "statement": "Le prix d'un article est multiplié par $0.74$. De combien de pourcent le prix de cet article a-t-il diminué ?",
+  "statement": "Le prix d'un article est multiplié par $0,74$. Quelle est la variation du prix en pourcentage ?",
+  "statement_html": "<div>Le prix d'un article est multiplié par $0,74$. \nCalculer la variation du prix en pourcentage.<br></div>",
+  "mask": "V_r=",
   "answer": {
-    "latex": "\\dfrac{52}{200}",
-    "simplified_latex": "\\dfrac{13}{50}",
+    "latex": [
+      "\\dfrac{52}{200}",
+      "26\\%"
+    ],
+    "simplified_latex": [
+      "\\dfrac{13}{50}",
+      "26\\%"
+    ],
     "sympy_exp_data": {
       "type": "Rational",
       "sp.srepr": "Rational(13, 50)",
@@ -14,7 +22,7 @@
   "components": {
     "p": "\\dfrac{52}{200}",
     "direction": "-1",
-    "coef": "1 -\\dfrac{52}{200}"
+    "coef": "1 - \\left(\\dfrac{52}{200}\\right)"
   },
   "seed": 85,
   "generator": "spe_sujet1_auto_03_question",

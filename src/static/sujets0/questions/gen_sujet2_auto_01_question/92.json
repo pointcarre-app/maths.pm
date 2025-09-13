@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $\\dfrac{1}{3} + \\dfrac{22}{9} \\times \\dfrac{21}{10}$.",
+  "statement_html": "<div>Calculer $\\dfrac{1}{3} + \\dfrac{22}{9} \\times \\dfrac{21}{10}$.</div>",
   "mask": "",
   "answer": {
     "latex": "\\dfrac{1}{3} + \\dfrac{22}{9} \\times \\dfrac{21}{10}",

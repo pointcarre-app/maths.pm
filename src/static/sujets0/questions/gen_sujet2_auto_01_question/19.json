@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $36 + \\dfrac{50}{9} \\times -\\dfrac{35}{9}$.",
+  "statement": "Calculer $36 + \\dfrac{50}{9} \\times \\left(-\\dfrac{35}{9}\\right)$.",
+  "statement_html": "<div>Calculer $36 + \\dfrac{50}{9} \\times \\left(-\\dfrac{35}{9}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "36 + \\dfrac{50}{9} \\times -\\dfrac{35}{9}",
+    "latex": "36 + \\dfrac{50}{9} \\times \\left(-\\dfrac{35}{9}\\right)",
     "simplified_latex": "\\dfrac{1166}{81}",
     "sympy_exp_data": {
       "type": "Add",

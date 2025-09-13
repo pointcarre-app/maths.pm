@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
-  "statement": "On considère les deux séries $A=28 ; 37 ; 37 ; 46$  et $B=22 ; 37 ; 37 ; 52$. Quelle est celle avec le plus grand écart type ?",
+  "statement": "On considère les deux séries :<br>$A=28&nbsp ; &nbsp 37&nbsp ; &nbsp 37&nbsp ; &nbsp 46$  <br>$B=22&nbsp ; &nbsp 37&nbsp ; &nbsp 37&nbsp ; &nbsp 52$<br>Quelle est celle avec le plus grand écart type ?",
+  "statement_html": "<div>On considère les deux séries :<br>$A=28&nbsp ; &nbsp 37&nbsp ; &nbsp 37&nbsp ; &nbsp 46$  <br>$B=22&nbsp ; &nbsp 37&nbsp ; &nbsp 37&nbsp ; &nbsp 52$<br>Quelle est celle avec le plus grand écart type ?</div>",
   "answer": {
     "latex": "B",
     "simplified_latex": "B",

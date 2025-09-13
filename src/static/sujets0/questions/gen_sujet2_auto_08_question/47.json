@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(2x + 4\\right) \\times \\left(-7x + 8\\right)$.",
+  "statement": "Développer $\\left(2x + 4\\right) \\times \\left(-7x + 8\\right)$.",
+  "statement_html": "<div>Développer $\\left(2x + 4\\right) \\times \\left(-7x + 8\\right)$.</div>",
   "answer": {
-    "latex": "32 -14 \\times x^{2} -12x",
-    "simplified_latex": "32 -14 \\times x^{2} -12x",
+    "latex": "-14x^{2} -12x + 32",
+    "simplified_latex": "-14x^{2} -12x + 32",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(-1), Integer(14), Pow(Symbol('x'), Integer(2))), Mul(Integer(-1), Integer(12), Symbol('x'))), Integer(32))",
-      "str": "(-14*x**2 - 12*x) + 32"
+      "sp.srepr": "Add(Mul(Integer(-1), Integer(14), Pow(Symbol('x'), Integer(2))), Add(Integer(32), Mul(Integer(-1), Integer(12), Symbol('x'))))",
+      "str": "-14*x**2 + (32 - 12*x)"
     },
-    "formal_repr": "Add(l=Integer(n=32), r=Add(l=Mul(l=Integer(n=-14), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Mul(l=Integer(n=-12), r=Symbol(s='x'))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=-14), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=-12), r=Symbol(s='x')), r=Integer(n=32)))"
   },
   "components": {
     "x": "x",

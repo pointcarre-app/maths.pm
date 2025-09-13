@@ -1,9 +1,13 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-4]",
-  "statement": "Dans un lycée, le la moitié des élèves sont internes, parmi eux, la moitié sont des gauchers. Calculer le pourcentage de gauchers internes par rapport à l'ensemble des élèves du lycée.",
+  "statement": "Dans un lycée, la moitié des élèves sont internes, parmi eux, la moitié sont des gauchers. Calculer le pourcentage d'élèves qui sont gauchers et internes par rapport à l'ensemble des élèves du lycée.",
+  "statement_html": "<div>Dans un lycée, la moitié des élèves sont internes, parmi eux, la moitié sont des gauchers. Calculer le pourcentage d'élèves qui sont gauchers et internes par rapport à l'ensemble des élèves du lycée.</div>",
   "answer": {
     "latex": "\\dfrac{1}{2} \\times \\dfrac{1}{2}",
-    "simplified_latex": "\\dfrac{1}{4}",
+    "simplified_latex": [
+      "25\\%",
+      "25\\%"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
       "sp.srepr": "Mul(Rational(1, 2), Rational(1, 2))",
@@ -12,8 +16,8 @@
     "formal_repr": "Mul(l=Fraction(p=Integer(n=1), q=Integer(n=2)), r=Fraction(p=Integer(n=1), q=Integer(n=2)))"
   },
   "components": {
-    "p1": "\\dfrac{1}{2}",
-    "p2": "\\dfrac{1}{2}"
+    "f1_tm": "\\dfrac{1}{2}",
+    "f2_tm": "\\dfrac{1}{2}"
   },
   "seed": 32,
   "generator": "spe_sujet2_auto_04_question",

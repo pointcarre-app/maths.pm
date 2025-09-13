@@ -1,8 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
-  "statement": "On définit la function $f$ par $f(x)=3 \\times x^{2} + 6x -5$. Calculer l'image de $-7$ par $f$.",
+  "statement": "On définit la function $f$ par $f(x)=3x^{2} + 6x -5$. Calculer l'image de $-7$ par $f$.",
+  "statement_html": "<div>On définit la function $f$ par $f(x)=3x^{2} + 6x -5$. Calculer l'image de $-7$ par $f$.</div>",
   "answer": {
-    "latex": "3 \\times -7^{2} + 6 \\times -7 -5",
+    "latex": "(3) \\times (-7)^2 + (6) \\times (-7) + (-5)",
     "simplified_latex": "100",
     "sympy_exp_data": {
       "type": "Add",

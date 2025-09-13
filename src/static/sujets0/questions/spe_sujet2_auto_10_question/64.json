@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(5x + 10\\right) \\times \\left(-7x + 9\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\dfrac{10}{5}; \\dfrac{9}{-7}\\rbracket$ ?",
+  "statement": "La fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = \\left(5x + 10\\right)  \\left(-7x + 9\\right)$. <br>Établir le tableau de signes de $f$ sur $\\mathbb{R}$.",
+  "statement_html": "<div>La fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = \\left(5x + 10\\right)  \\left(-7x + 9\\right)$. <br>Établir le tableau de signes de $f$ sur $\\mathbb{R}$.</div>",
   "answer": {
     "latex": "f(x) > 0",
     "simplified_latex": "f(x) > 0",

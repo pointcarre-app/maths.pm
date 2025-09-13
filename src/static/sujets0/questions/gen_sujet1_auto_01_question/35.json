@@ -3,7 +3,7 @@
   "statement": "Calculer $55.00000000000001 \\%$ de $360$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{11}{20}360",
+    "latex": "\\dfrac{11}{20} \\times 360",
     "simplified_latex": "198",
     "sympy_exp_data": {
       "type": "Mul",

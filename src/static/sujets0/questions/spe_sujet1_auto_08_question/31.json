@@ -1,8 +1,11 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-8]",
-  "statement": "On a représenté ci-contre une droite (\\\\mathcal\\{D\\} dans un repère orthonormé. Donner l'équation de la droite \\\\mathcal\\{D\\} sous la forme $y=ax+b$",
+  "statement": "On a représenté ci-contre une droite $\\mathcal{D}$ dans un repère orthonormé. Donner l'équation de la droite $\\mathcal{D}$ sous la forme $y=ax+b$.",
+  "statement_html": "<div>On a représenté ci-contre une droite $\\mathcal{D}$ dans un repère orthonormé. Donner l'équation de la droite $\\mathcal{D}$ sous la forme $y=ax+b$.</div>",
   "answer": {
-    "latex": "\\dfrac{1}{4}x + 1",
+    "latex": [
+      "\\dfrac{1}{4}x + 1"
+    ],
     "simplified_latex": "\\dfrac{1}{4}x + 1",
     "sympy_exp_data": {
       "type": "Add",
@@ -16,9 +19,13 @@
     "a": "\\dfrac{1}{4}",
     "b": "1"
   },
+  "components_evaluated": {
+    "a": 0.25,
+    "b": 1.0
+  },
   "seed": 31,
   "generator": "spe_sujet1_auto_08_question",
   "success": true,
-  "stdout": "{'x': Symbol(s='x'), 'a': Fraction(p=Integer(n=1), q=Integer(n=4)), 'b': Integer(n=1), 'maths_object': Add(l=Mul(l=Fraction(p=Integer(n=1), q=Integer(n=4)), r=Symbol(s='x')), r=Integer(n=1)), 'statement': \"On a représenté ci-contre une droite (\\\\\\\\mathcal\\\\{D\\\\} dans un repère orthonormé. Donner l'équation de la droite \\\\\\\\mathcal\\\\{D\\\\} sous la forme $y=ax+b$\"}\n",
+  "stdout": "{'x': Symbol(s='x'), 'a': Fraction(p=Integer(n=1), q=Integer(n=4)), 'b': Integer(n=1), 'maths_object': Add(l=Mul(l=Fraction(p=Integer(n=1), q=Integer(n=4)), r=Symbol(s='x')), r=Integer(n=1)), 'statement': \"On a représenté ci-contre une droite $\\\\mathcal{D}$ dans un repère orthonormé. Donner l'équation de la droite $\\\\mathcal{D}$ sous la forme $y=ax+b$.\"}\n",
   "stderr": ""
 }

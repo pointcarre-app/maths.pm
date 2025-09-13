@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{13}{8} -13 \\times -2$.",
+  "statement": "Calculer $\\dfrac{13}{8} -13 \\times \\left(-2\\right)$.",
+  "statement_html": "<div>Calculer $\\dfrac{13}{8} -13 \\times \\left(-2\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{13}{8} -13 \\times -2",
+    "latex": "\\dfrac{13}{8} -13 \\times \\left(-2\\right)",
     "simplified_latex": "\\dfrac{221}{8}",
     "sympy_exp_data": {
       "type": "Add",

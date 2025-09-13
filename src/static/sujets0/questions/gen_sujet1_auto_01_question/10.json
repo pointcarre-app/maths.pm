@@ -3,7 +3,7 @@
   "statement": "Calculer $10 \\%$ de $370$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{2}{20}370",
+    "latex": "\\dfrac{2}{20} \\times 370",
     "simplified_latex": "37",
     "sympy_exp_data": {
       "type": "Mul",

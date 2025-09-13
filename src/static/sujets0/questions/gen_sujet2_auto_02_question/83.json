@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "8 articles coûtent 94.4 euros. Combien coûtent 3 articles ?",
+  "statement": "$9$ articles coûtent $81$ euros. Combien coûtent $16$ articles ?",
+  "statement_html": "<div>$9$ articles coûtent $81$ euros. Combien coûtent $16$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{118}{10}3",
-    "simplified_latex": "\\dfrac{177}{5}",
+    "latex": [
+      "16 \\times 9",
+      "144"
+    ],
+    "simplified_latex": [
+      "144 €",
+      "144 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Integer(3), Rational(59, 5))",
-      "str": "(59/5)*3"
+      "sp.srepr": "Mul(Integer(9), Integer(16))",
+      "str": "9*16"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=118), q=Integer(n=10)), r=Integer(n=3))"
+    "formal_repr": "Mul(l=Integer(n=9), r=Integer(n=16))"
   },
   "components": {
-    "n1": "8",
-    "n2": "3",
-    "p": "\\dfrac{118}{10}"
+    "n1": "9",
+    "n2": "16",
+    "p": "9"
   },
   "seed": 83,
   "generator": "gen_sujet2_auto_02_question",

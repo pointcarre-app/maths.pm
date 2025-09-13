@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(-7x -4\\right) \\times \\left(9x -4\\right)$.",
+  "statement": "Développer $\\left(-7x -4\\right) \\times \\left(9x -4\\right)$.",
+  "statement_html": "<div>Développer $\\left(-7x -4\\right) \\times \\left(9x -4\\right)$.</div>",
   "answer": {
-    "latex": "16 -63 \\times x^{2} -8x",
-    "simplified_latex": "16 -63 \\times x^{2} -8x",
+    "latex": "-63x^{2} -8x + 16",
+    "simplified_latex": "-63x^{2} -8x + 16",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(-1), Integer(63), Pow(Symbol('x'), Integer(2))), Mul(Integer(-1), Integer(8), Symbol('x'))), Integer(16))",
-      "str": "(-63*x**2 - 8*x) + 16"
+      "sp.srepr": "Add(Mul(Integer(-1), Integer(63), Pow(Symbol('x'), Integer(2))), Add(Integer(16), Mul(Integer(-1), Integer(8), Symbol('x'))))",
+      "str": "-63*x**2 + (16 - 8*x)"
     },
-    "formal_repr": "Add(l=Integer(n=16), r=Add(l=Mul(l=Integer(n=-63), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Mul(l=Integer(n=-8), r=Symbol(s='x'))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=-63), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=-8), r=Symbol(s='x')), r=Integer(n=16)))"
   },
   "components": {
     "x": "x",

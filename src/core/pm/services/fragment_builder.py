@@ -796,10 +796,16 @@ class FragmentBuilder:
                 # Decode HTML entities
                 decoded_html_content = html_module.unescape(html_content).strip()
 
-                # TODO: old vg deleted
-                if True:
+                # Check if HTML should be displayed as code (has 'code' class) or rendered
+                # Default behavior: render HTML unless explicitly marked as code
+                if "code" in classes or "display-code" in classes:
+                    # Display as syntax-highlighted code
                     f_type = "code_"
                     data = {"content": code_content, "language": language}
+                else:
+                    # Render as actual HTML
+                    f_type = "html_"
+                    data = {"content": decoded_html_content}
             else:
                 # Default code handling
                 f_type = "code_"

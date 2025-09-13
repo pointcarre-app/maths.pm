@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{23}{3} + \\dfrac{15}{2} \\times -\\dfrac{15}{8}$.",
+  "statement": "Calculer $\\dfrac{23}{3} + \\dfrac{15}{2} \\times \\left(-\\dfrac{15}{8}\\right)$.",
+  "statement_html": "<div>Calculer $\\dfrac{23}{3} + \\dfrac{15}{2} \\times \\left(-\\dfrac{15}{8}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{23}{3} + \\dfrac{15}{2} \\times -\\dfrac{15}{8}",
+    "latex": "\\dfrac{23}{3} + \\dfrac{15}{2} \\times \\left(-\\dfrac{15}{8}\\right)",
     "simplified_latex": "-\\dfrac{307}{48}",
     "sympy_exp_data": {
       "type": "Add",

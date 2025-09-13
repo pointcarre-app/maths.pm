@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{4}{5} + 17-\\dfrac{19}{5}$.",
+  "statement": "Calculer $\\dfrac{4}{5} + 17 \\times \\left(-\\dfrac{19}{5}\\right)$.",
+  "statement_html": "<div>Calculer $\\dfrac{4}{5} + 17 \\times \\left(-\\dfrac{19}{5}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{4}{5} + 17-\\dfrac{19}{5}",
+    "latex": "\\dfrac{4}{5} + 17 \\times \\left(-\\dfrac{19}{5}\\right)",
     "simplified_latex": "-\\dfrac{319}{5}",
     "sympy_exp_data": {
       "type": "Add",

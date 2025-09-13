@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "10 articles coûtent 24 euros. Combien coûtent 20 articles ?",
+  "statement": "$3$ articles coûtent $123$ euros. Combien coûtent $18$ articles ?",
+  "statement_html": "<div>$3$ articles coûtent $123$ euros. Combien coûtent $18$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{24}{10}20",
-    "simplified_latex": "48",
+    "latex": [
+      "18 \\times 41",
+      "738"
+    ],
+    "simplified_latex": [
+      "738 €",
+      "738 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Rational(12, 5), Integer(20))",
-      "str": "(12/5)*20"
+      "sp.srepr": "Mul(Integer(18), Integer(41))",
+      "str": "41*18"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=24), q=Integer(n=10)), r=Integer(n=20))"
+    "formal_repr": "Mul(l=Integer(n=41), r=Integer(n=18))"
   },
   "components": {
-    "n1": "10",
-    "n2": "20",
-    "p": "\\dfrac{24}{10}"
+    "n1": "3",
+    "n2": "18",
+    "p": "41"
   },
   "seed": 37,
   "generator": "gen_sujet2_auto_02_question",

@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $\\dfrac{37}{10} -\\dfrac{39}{10} \\times \\dfrac{35}{9}$.",
+  "statement_html": "<div>Calculer $\\dfrac{37}{10} -\\dfrac{39}{10} \\times \\dfrac{35}{9}$.</div>",
   "mask": "",
   "answer": {
     "latex": "\\dfrac{37}{10} -\\dfrac{39}{10} \\times \\dfrac{35}{9}",

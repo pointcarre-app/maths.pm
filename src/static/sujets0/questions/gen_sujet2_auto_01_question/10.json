@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $23 + \\dfrac{1}{2}23$.",
+  "statement": "Calculer $23 + \\dfrac{1}{2} \\times 23$.",
+  "statement_html": "<div>Calculer $23 + \\dfrac{1}{2} \\times 23$.</div>",
   "mask": "",
   "answer": {
-    "latex": "23 + \\dfrac{1}{2}23",
+    "latex": "23 + \\dfrac{1}{2} \\times 23",
     "simplified_latex": "\\dfrac{69}{2}",
     "sympy_exp_data": {
       "type": "Add",

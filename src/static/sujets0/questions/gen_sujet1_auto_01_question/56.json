@@ -3,7 +3,7 @@
   "statement": "Calculer $5 \\%$ de $360$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{1}{20}360",
+    "latex": "\\dfrac{1}{20} \\times 360",
     "simplified_latex": "18",
     "sympy_exp_data": {
       "type": "Mul",

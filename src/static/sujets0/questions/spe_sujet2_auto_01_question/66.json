@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-1]",
-  "statement": "On considère l'arbre de probabilité ci-dessous. Calculer la proabilité de B.",
+  "statement": "On considère l'arbre de probabilité ci-contre. <br>Calculer la probabilité de $B$.",
+  "statement_html": "<div>On considère l'arbre de probabilité ci-contre. <br>Calculer la probabilité de $B$.</div>",
   "answer": {
     "latex": "\\dfrac{2}{10} \\times \\left(\\dfrac{5}{10} + \\dfrac{7}{10}\\right)",
     "simplified_latex": "\\dfrac{6}{25}",

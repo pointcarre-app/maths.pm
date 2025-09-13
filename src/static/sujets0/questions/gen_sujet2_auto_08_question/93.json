@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(6x + 2\\right) \\times \\left(9x -6\\right)$.",
+  "statement": "Développer $\\left(6x + 2\\right) \\times \\left(9x -6\\right)$.",
+  "statement_html": "<div>Développer $\\left(6x + 2\\right) \\times \\left(9x -6\\right)$.</div>",
   "answer": {
-    "latex": "-12 -18x + 54 \\times x^{2}",
-    "simplified_latex": "-12 -18x + 54 \\times x^{2}",
+    "latex": "54x^{2} -18x -12",
+    "simplified_latex": "54x^{2} -18x -12",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(54), Pow(Symbol('x'), Integer(2))), Mul(Integer(-1), Integer(18), Symbol('x'))), Integer(-12))",
-      "str": "(54*x**2 - 18*x) - 12"
+      "sp.srepr": "Add(Mul(Integer(54), Pow(Symbol('x'), Integer(2))), Add(Mul(Integer(-1), Integer(18), Symbol('x')), Integer(-12)))",
+      "str": "54*x**2 + (-18*x - 12)"
     },
-    "formal_repr": "Add(l=Integer(n=-12), r=Add(l=Mul(l=Integer(n=-18), r=Symbol(s='x')), r=Mul(l=Integer(n=54), r=Pow(base=Symbol(s='x'), exp=Integer(n=2)))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=54), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=-18), r=Symbol(s='x')), r=Integer(n=-12)))"
   },
   "components": {
     "x": "x",

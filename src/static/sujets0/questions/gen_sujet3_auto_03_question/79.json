@@ -14,7 +14,7 @@
   "components": {
     "p": "\\dfrac{149}{1000}",
     "direction": "1",
-    "coef": "1 + 1\\dfrac{149}{1000}"
+    "coef": "1 + 1 \\times \\dfrac{149}{1000}"
   },
   "seed": 79,
   "generator": "gen_sujet3_auto_03_question",

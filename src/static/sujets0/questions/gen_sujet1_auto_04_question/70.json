@@ -2,7 +2,7 @@
   "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-4]",
   "statement": "Un article augmente de $\\dfrac{20}{100}\\%$ puis de nouveau de $\\dfrac{20}{100}\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?",
   "answer": {
-    "latex": "2\\dfrac{20}{100} + \\left(\\dfrac{20}{100}\\right)^{2}",
+    "latex": "2 \\times \\dfrac{20}{100} + \\left(\\dfrac{20}{100}\\right)^{2}",
     "simplified_latex": "\\dfrac{11}{25}",
     "sympy_exp_data": {
       "type": "Add",

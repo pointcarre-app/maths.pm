@@ -3,7 +3,7 @@
   "statement": "Calculer $95 \\%$ de $300$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{19}{20}300",
+    "latex": "\\dfrac{19}{20} \\times 300",
     "simplified_latex": "285",
     "sympy_exp_data": {
       "type": "Mul",

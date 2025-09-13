@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
-  "statement": "On considère les deux séries $A=35 ; 41 ; 41 ; 47$  et $B=-6 ; 41 ; 41 ; 88$. Quelle est celle avec le plus grand écart type ?",
+  "statement": "On considère les deux séries :<br>$A=35&nbsp ; &nbsp 41&nbsp ; &nbsp 41&nbsp ; &nbsp 47$  <br>$B=-6&nbsp ; &nbsp 41&nbsp ; &nbsp 41&nbsp ; &nbsp 88$<br>Quelle est celle avec le plus grand écart type ?",
+  "statement_html": "<div>On considère les deux séries :<br>$A=35&nbsp ; &nbsp 41&nbsp ; &nbsp 41&nbsp ; &nbsp 47$  <br>$B=-6&nbsp ; &nbsp 41&nbsp ; &nbsp 41&nbsp ; &nbsp 88$<br>Quelle est celle avec le plus grand écart type ?</div>",
   "answer": {
     "latex": "B",
     "simplified_latex": "B",

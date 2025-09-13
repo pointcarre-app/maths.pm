@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(-4x + 5\\right) \\times \\left(-6x + 1\\right)$.",
+  "statement": "Développer $\\left(-4x + 5\\right) \\times \\left(-6x + 1\\right)$.",
+  "statement_html": "<div>Développer $\\left(-4x + 5\\right) \\times \\left(-6x + 1\\right)$.</div>",
   "answer": {
-    "latex": "5 -34x + 24 \\times x^{2}",
-    "simplified_latex": "5 -34x + 24 \\times x^{2}",
+    "latex": "24x^{2} -34x + 5",
+    "simplified_latex": "24x^{2} -34x + 5",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(24), Pow(Symbol('x'), Integer(2))), Mul(Integer(-1), Integer(34), Symbol('x'))), Integer(5))",
-      "str": "(24*x**2 - 34*x) + 5"
+      "sp.srepr": "Add(Mul(Integer(24), Pow(Symbol('x'), Integer(2))), Add(Integer(5), Mul(Integer(-1), Integer(34), Symbol('x'))))",
+      "str": "24*x**2 + (5 - 34*x)"
     },
-    "formal_repr": "Add(l=Integer(n=5), r=Add(l=Mul(l=Integer(n=-34), r=Symbol(s='x')), r=Mul(l=Integer(n=24), r=Pow(base=Symbol(s='x'), exp=Integer(n=2)))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=24), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=-34), r=Symbol(s='x')), r=Integer(n=5)))"
   },
   "components": {
     "x": "x",

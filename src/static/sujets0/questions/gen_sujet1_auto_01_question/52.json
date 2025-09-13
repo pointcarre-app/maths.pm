@@ -3,7 +3,7 @@
   "statement": "Calculer $10 \\%$ de $180$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{2}{20}180",
+    "latex": "\\dfrac{2}{20} \\times 180",
     "simplified_latex": "18",
     "sympy_exp_data": {
       "type": "Mul",

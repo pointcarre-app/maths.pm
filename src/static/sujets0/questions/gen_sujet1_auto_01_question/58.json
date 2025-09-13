@@ -3,7 +3,7 @@
   "statement": "Calculer $35 \\%$ de $380$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{7}{20}380",
+    "latex": "\\dfrac{7}{20} \\times 380",
     "simplified_latex": "133",
     "sympy_exp_data": {
       "type": "Mul",

@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "9 articles coûtent 105.3 euros. Combien coûtent 11 articles ?",
+  "statement": "$10$ articles coûtent $286$ euros. Combien coûtent $16$ articles ?",
+  "statement_html": "<div>$10$ articles coûtent $286$ euros. Combien coûtent $16$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{117}{10}11",
-    "simplified_latex": "\\dfrac{1287}{10}",
+    "latex": [
+      "16 \\times \\dfrac{286}{10}",
+      "\\dfrac{2288}{5}"
+    ],
+    "simplified_latex": [
+      "\\dfrac{2288}{5} €",
+      "457,6 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Integer(11), Rational(117, 10))",
-      "str": "(117/10)*11"
+      "sp.srepr": "Mul(Integer(16), Rational(143, 5))",
+      "str": "(143/5)*16"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=117), q=Integer(n=10)), r=Integer(n=11))"
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=286), q=Integer(n=10)), r=Integer(n=16))"
   },
   "components": {
-    "n1": "9",
-    "n2": "11",
-    "p": "\\dfrac{117}{10}"
+    "n1": "10",
+    "n2": "16",
+    "p": "\\dfrac{286}{10}"
   },
   "seed": 81,
   "generator": "gen_sujet2_auto_02_question",

@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-9]",
-  "statement": "On note $\\\\mathcal\\{S\\}$ l'ensemble des solutions de l'équation $x^2=86$ sur $\\\\mathbb\\{R\\}$. Calculer $\\\\mathcal\\{S\\}$",
+  "statement": "On note $\\mathcal{S}$ l'ensemble des solutions de l'équation $x^2=86$ sur $\\mathbb{R}$.<br>Résoudre cette équation et en déduire $\\mathcal{S}$.",
+  "statement_html": "<div>On note $\\mathcal{S}$ l'ensemble des solutions de l'équation $x^2=86$ sur $\\mathbb{R}$.<br>Résoudre cette équation et en déduire $\\mathcal{S}$.</div>",
   "answer": {
-    "latex": "\\left(86^{\\dfrac{1}{2}}, -86^{\\dfrac{1}{2}}\\right)",
-    "simplified_latex": "\\left(86^{\\dfrac{1}{2}}, -86^{\\dfrac{1}{2}}\\right)",
+    "latex": "\\left(\\sqrt{86}, -\\sqrt{86}\\right)",
+    "simplified_latex": "\\left\\{\\sqrt{86}; -\\sqrt{86}\\right\\}",
     "sympy_exp_data": {
       "type": "Tuple",
       "sp.srepr": "Tuple(Pow(Integer(86), Rational(1, 2)), Mul(Integer(-1), Pow(Integer(86), Rational(1, 2))))",

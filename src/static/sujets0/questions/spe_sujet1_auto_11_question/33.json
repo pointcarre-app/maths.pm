@@ -1,8 +1,11 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-11]",
-  "statement": "On a représenté ci-contre la courbe $\\\\mathcal\\{C\\}$ d'une fonction ${f}$.\nOn note $A$ le point d'abscisse $x_A=-2$ tel que le point appartienne à la courbe $\\\\mathcal\\{C\\}$.\nEcrire l'inégalité correcte de la forme $x\\\\times f(x) ? 0$",
+  "statement": "On a représenté ci-contre la courbe $\\mathcal{C}$ d'une fonction $f$.\nOn note $A$ le point d'abscisse $x_A=-2$ tel que le point appartienne à la courbe $\\mathcal{C}$.<br>Parmi les deux inégalités suivantes : <br>$x_a \\times f(x_a) > 0$ et $x_a \\times f(x_a) < 0$<br>Laquelle est correcte ?",
+  "statement_html": "<div>On a représenté ci-contre la courbe $\\mathcal{C}$ d'une fonction $f$.\nOn note $A$ le point d'abscisse $x_A=-2$ tel que le point appartienne à la courbe $\\mathcal{C}$.<br>Parmi les deux inégalités suivantes : <br>$x_a \\times f(x_a) > 0$ et $x_a \\times f(x_a) < 0$<br>Laquelle est correcte ?</div>",
   "answer": {
-    "latex": "0 > -2f(-2)",
+    "latex": [
+      "0 > -2f(-2)"
+    ],
     "simplified_latex": "0 > -2f(-2)",
     "sympy_exp_data": {
       "type": "StrictGreaterThan",
@@ -12,11 +15,12 @@
     "formal_repr": "StrictGreaterThan(l=Integer(n=0), r=Mul(l=Integer(n=-2), r=Function(name=f)(Integer(n=-2))))"
   },
   "components": {
-    "root1": "-6",
-    "root2": "0",
-    "root3": "6",
+    "root1": "-4",
+    "root2": "2",
+    "root3": "4",
     "x": "-2",
-    "f": "f"
+    "f": "f",
+    "case": "case_c"
   },
   "seed": 33,
   "generator": "spe_sujet1_auto_11_question",

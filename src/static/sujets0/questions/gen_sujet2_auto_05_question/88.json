@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-8]",
-  "statement": "On considère un liquide pour lequel 1L pèse 400 g. Combien pèse 510 mL de ce liquide ?",
+  "statement": "On considère un liquide pour lequel $1$ L pèse $400$ g. Combien pèse $510$ mL de ce liquide ?",
+  "statement_html": "<div>On considère un liquide pour lequel $1$ L pèse $400$ g. Combien pèse $510$ mL de ce liquide ?</div>",
   "answer": {
     "latex": "\\dfrac{510}{\\dfrac{1000}{400}}",
-    "simplified_latex": "204",
+    "simplified_latex": "204 g",
     "sympy_exp_data": {
       "type": "Integer",
       "sp.srepr": "Integer(204)",

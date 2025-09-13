@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $2 + \\dfrac{34}{9} \\times \\dfrac{35}{6}$.",
+  "statement_html": "<div>Calculer $2 + \\dfrac{34}{9} \\times \\dfrac{35}{6}$.</div>",
   "mask": "",
   "answer": {
     "latex": "2 + \\dfrac{34}{9} \\times \\dfrac{35}{6}",

@@ -1,8 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
-  "statement": "On définit la function $f$ par $f(x)=7 \\times x^{2} -6x + 1$. Calculer l'image de $-6$ par $f$.",
+  "statement": "On définit la function $f$ par $f(x)=7x^{2} -6x + 1$. Calculer l'image de $-6$ par $f$.",
+  "statement_html": "<div>On définit la function $f$ par $f(x)=7x^{2} -6x + 1$. Calculer l'image de $-6$ par $f$.</div>",
   "answer": {
-    "latex": "7 \\times -6^{2} -6 \\times -6 + 1",
+    "latex": "(7) \\times (-6)^2 + (-6) \\times (-6) + (1)",
     "simplified_latex": "289",
     "sympy_exp_data": {
       "type": "Add",

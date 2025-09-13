@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
-  "statement": "On considère les deux séries $A=-1 ; 8 ; 8 ; 17$  et $B=-35 ; 8 ; 8 ; 51$. Quelle est celle avec le plus grand écart type ?",
+  "statement": "On considère les deux séries :<br>$A=-1&nbsp ; &nbsp 8&nbsp ; &nbsp 8&nbsp ; &nbsp 17$  <br>$B=-35&nbsp ; &nbsp 8&nbsp ; &nbsp 8&nbsp ; &nbsp 51$<br>Quelle est celle avec le plus grand écart type ?",
+  "statement_html": "<div>On considère les deux séries :<br>$A=-1&nbsp ; &nbsp 8&nbsp ; &nbsp 8&nbsp ; &nbsp 17$  <br>$B=-35&nbsp ; &nbsp 8&nbsp ; &nbsp 8&nbsp ; &nbsp 51$<br>Quelle est celle avec le plus grand écart type ?</div>",
   "answer": {
     "latex": "B",
     "simplified_latex": "B",

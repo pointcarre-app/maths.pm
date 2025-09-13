@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $-16 + \\dfrac{14}{3} \\times \\dfrac{11}{6}$.",
+  "statement_html": "<div>Calculer $-16 + \\dfrac{14}{3} \\times \\dfrac{11}{6}$.</div>",
   "mask": "",
   "answer": {
     "latex": "-16 + \\dfrac{14}{3} \\times \\dfrac{11}{6}",

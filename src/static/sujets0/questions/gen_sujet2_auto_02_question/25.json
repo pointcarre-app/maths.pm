@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "7 articles coûtent 137.9 euros. Combien coûtent 1 articles ?",
+  "statement": "$8$ articles coûtent $381,6$ euros. Combien coûtent $2$ articles ?",
+  "statement_html": "<div>$8$ articles coûtent $381,6$ euros. Combien coûtent $2$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{197}{10}1",
-    "simplified_latex": "\\dfrac{197}{10}",
+    "latex": [
+      "2 \\times \\dfrac{477}{10}",
+      "\\dfrac{477}{5}"
+    ],
+    "simplified_latex": [
+      "\\dfrac{477}{5} €",
+      "95,4 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Integer(1), Rational(197, 10))",
-      "str": "(197/10)*1"
+      "sp.srepr": "Mul(Integer(2), Rational(477, 10))",
+      "str": "(477/10)*2"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=197), q=Integer(n=10)), r=Integer(n=1))"
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=477), q=Integer(n=10)), r=Integer(n=2))"
   },
   "components": {
-    "n1": "7",
-    "n2": "1",
-    "p": "\\dfrac{197}{10}"
+    "n1": "8",
+    "n2": "2",
+    "p": "\\dfrac{477}{10}"
   },
   "seed": 25,
   "generator": "gen_sujet2_auto_02_question",

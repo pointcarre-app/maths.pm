@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-8]",
-  "statement": "On considère un liquide pour lequel 1L pèse 200 g. Combien pèse 250 mL de ce liquide ?",
+  "statement": "On considère un liquide pour lequel $1$ L pèse $200$ g. Combien pèse $250$ mL de ce liquide ?",
+  "statement_html": "<div>On considère un liquide pour lequel $1$ L pèse $200$ g. Combien pèse $250$ mL de ce liquide ?</div>",
   "answer": {
     "latex": "\\dfrac{250}{\\dfrac{1000}{200}}",
-    "simplified_latex": "50",
+    "simplified_latex": "50 g",
     "sympy_exp_data": {
       "type": "Integer",
       "sp.srepr": "Integer(50)",

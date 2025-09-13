@@ -3,7 +3,7 @@
   "statement": "Calculer $5 \\%$ de $500$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{1}{20}500",
+    "latex": "\\dfrac{1}{20} \\times 500",
     "simplified_latex": "25",
     "sympy_exp_data": {
       "type": "Mul",

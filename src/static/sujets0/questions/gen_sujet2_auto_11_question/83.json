@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-11]",
-  "statement": "Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = -7 \\times x^{2} + 77x -70$. Parmis la série A: -2; -1, 0, 1, 2, quel est l'antécédent de 0 par la fonction $f$ ?",
+  "statement": "Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = -7x^{2} + 77x -70$. Parmi ces nombres : $-2$ ; $-1$ ; $0$ ; $1$ ; $2$, quel est l'antécédent de $0$ par la fonction $f$ ?",
+  "statement_html": "<div>Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = -7x^{2} + 77x -70$. Parmi ces nombres : $-2$ ; $-1$ ; $0$ ; $1$ ; $2$, quel est l'antécédent de $0$ par la fonction $f$ ?</div>",
   "answer": {
     "latex": "1",
     "simplified_latex": "1",
@@ -18,7 +19,7 @@
     "c": "-70",
     "x1": "1",
     "x2": "10",
-    "expr": "-7 \\times x^{2} + 77x -70",
+    "expr": "-7x^{2} + 77x -70",
     "f": "f"
   },
   "seed": 83,

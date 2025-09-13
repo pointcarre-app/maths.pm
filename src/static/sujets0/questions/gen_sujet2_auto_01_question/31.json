@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-\\dfrac{49}{8} -\\dfrac{36}{7}-32$.",
+  "statement": "Calculer $-\\dfrac{49}{8} -\\dfrac{36}{7} \\times \\left(-32\\right)$.",
+  "statement_html": "<div>Calculer $-\\dfrac{49}{8} -\\dfrac{36}{7} \\times \\left(-32\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-\\dfrac{49}{8} -\\dfrac{36}{7}-32",
+    "latex": "-\\dfrac{49}{8} -\\dfrac{36}{7} \\times \\left(-32\\right)",
     "simplified_latex": "\\dfrac{8873}{56}",
     "sympy_exp_data": {
       "type": "Add",

@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-7]",
-  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur 8.9 passant par le points $A(4;-7)$. On note $B$ le point de la droite $d$ d'abscisse $6$. Calculer l'ordonnée de $d$.",
+  "statement": "Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur $8,9$ passant par le points $A(4;-7)$. On note $B$ le point de la droite $d$ d'abscisse $6$. Calculer l'ordonnée de $B$.",
+  "statement_html": "<div>Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur $8,9$ passant par le points $A(4;-7)$. On note $B$ le point de la droite $d$ d'abscisse $6$. Calculer l'ordonnée de $B$.</div>",
   "answer": {
     "latex": "-7 + \\left(6 -4\\right) \\times \\dfrac{89}{10}",
     "simplified_latex": "\\dfrac{54}{5}",

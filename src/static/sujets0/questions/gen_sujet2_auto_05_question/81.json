@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-8]",
-  "statement": "On considère un liquide pour lequel 1L pèse 800 g. Combien pèse 650 mL de ce liquide ?",
+  "statement": "On considère un liquide pour lequel $1$ L pèse $800$ g. Combien pèse $650$ mL de ce liquide ?",
+  "statement_html": "<div>On considère un liquide pour lequel $1$ L pèse $800$ g. Combien pèse $650$ mL de ce liquide ?</div>",
   "answer": {
     "latex": "\\dfrac{650}{\\dfrac{1000}{800}}",
-    "simplified_latex": "520",
+    "simplified_latex": "520 g",
     "sympy_exp_data": {
       "type": "Integer",
       "sp.srepr": "Integer(520)",

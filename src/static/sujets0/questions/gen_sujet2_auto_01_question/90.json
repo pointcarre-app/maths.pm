@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-12 + \\dfrac{11}{10}5$.",
+  "statement": "Calculer $-12 + \\dfrac{11}{10} \\times 5$.",
+  "statement_html": "<div>Calculer $-12 + \\dfrac{11}{10} \\times 5$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-12 + \\dfrac{11}{10}5",
+    "latex": "-12 + \\dfrac{11}{10} \\times 5",
     "simplified_latex": "-\\dfrac{13}{2}",
     "sympy_exp_data": {
       "type": "Add",

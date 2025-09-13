@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
-  "statement": "On considère les deux séries $A=15 ; 19 ; 19 ; 23$  et $B=-30 ; 19 ; 19 ; 68$. Quelle est celle avec le plus grand écart type ?",
+  "statement": "On considère les deux séries :<br>$A=15&nbsp ; &nbsp 19&nbsp ; &nbsp 19&nbsp ; &nbsp 23$  <br>$B=-30&nbsp ; &nbsp 19&nbsp ; &nbsp 19&nbsp ; &nbsp 68$<br>Quelle est celle avec le plus grand écart type ?",
+  "statement_html": "<div>On considère les deux séries :<br>$A=15&nbsp ; &nbsp 19&nbsp ; &nbsp 19&nbsp ; &nbsp 23$  <br>$B=-30&nbsp ; &nbsp 19&nbsp ; &nbsp 19&nbsp ; &nbsp 68$<br>Quelle est celle avec le plus grand écart type ?</div>",
   "answer": {
     "latex": "B",
     "simplified_latex": "B",

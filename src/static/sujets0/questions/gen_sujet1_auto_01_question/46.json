@@ -3,7 +3,7 @@
   "statement": "Calculer $65 \\%$ de $50$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{13}{20}50",
+    "latex": "\\dfrac{13}{20} \\times 50",
     "simplified_latex": "\\dfrac{65}{2}",
     "sympy_exp_data": {
       "type": "Mul",

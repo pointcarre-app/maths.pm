@@ -3,7 +3,7 @@
   "statement": "Calculer $45 \\%$ de $140$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{9}{20}140",
+    "latex": "\\dfrac{9}{20} \\times 140",
     "simplified_latex": "63",
     "sympy_exp_data": {
       "type": "Mul",

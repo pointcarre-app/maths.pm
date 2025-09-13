@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "7 articles coûtent 93.1 euros. Combien coûtent 19 articles ?",
+  "statement": "$8$ articles coûtent $360,56$ euros. Combien coûtent $18$ articles ?",
+  "statement_html": "<div>$8$ articles coûtent $360,56$ euros. Combien coûtent $18$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{133}{10}19",
-    "simplified_latex": "\\dfrac{2527}{10}",
+    "latex": [
+      "18 \\times \\dfrac{4507}{100}",
+      "\\dfrac{40563}{50}"
+    ],
+    "simplified_latex": [
+      "\\dfrac{40563}{50} €",
+      "811,26 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Rational(133, 10), Integer(19))",
-      "str": "(133/10)*19"
+      "sp.srepr": "Mul(Integer(18), Rational(4507, 100))",
+      "str": "(4507/100)*18"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=133), q=Integer(n=10)), r=Integer(n=19))"
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=4507), q=Integer(n=100)), r=Integer(n=18))"
   },
   "components": {
-    "n1": "7",
-    "n2": "19",
-    "p": "\\dfrac{133}{10}"
+    "n1": "8",
+    "n2": "18",
+    "p": "\\dfrac{4507}{100}"
   },
   "seed": 92,
   "generator": "gen_sujet2_auto_02_question",

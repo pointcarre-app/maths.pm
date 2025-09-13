@@ -1,9 +1,17 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-4]",
-  "statement": "Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?",
+  "statement": "Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. A l'issue de ces deux variations, quelle est la variation du prix en pourcentage ?",
+  "statement_html": "<div>Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. À l'issue de ces deux variations, quelle est la variation du prix en pourcentage ?</div>",
+  "mask": "V_r=",
   "answer": {
-    "latex": "-\\left(\\dfrac{65}{100}\\right)^{2}",
-    "simplified_latex": "-\\dfrac{169}{400}",
+    "latex": [
+      "-\\left(\\dfrac{65}{100}\\right)^{2}",
+      "-42,25\\%"
+    ],
+    "simplified_latex": [
+      "-\\dfrac{169}{400}",
+      "-42,25\\%"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
       "sp.srepr": "Mul(Integer(-1), Pow(Rational(13, 20), Integer(2)))",

@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $-12 + \\dfrac{19}{10} \\times \\dfrac{41}{3}$.",
+  "statement_html": "<div>Calculer $-12 + \\dfrac{19}{10} \\times \\dfrac{41}{3}$.</div>",
   "mask": "",
   "answer": {
     "latex": "-12 + \\dfrac{19}{10} \\times \\dfrac{41}{3}",

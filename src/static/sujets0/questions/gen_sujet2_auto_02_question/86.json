@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "1 articles coûtent 14.3 euros. Combien coûtent 11 articles ?",
+  "statement": "$2$ articles coûtent $76,2$ euros. Combien coûtent $19$ articles ?",
+  "statement_html": "<div>$2$ articles coûtent $76,2$ euros. Combien coûtent $19$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{143}{10}11",
-    "simplified_latex": "\\dfrac{1573}{10}",
+    "latex": [
+      "19 \\times \\dfrac{381}{10}",
+      "\\dfrac{7239}{10}"
+    ],
+    "simplified_latex": [
+      "\\dfrac{7239}{10} €",
+      "723,9 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Integer(11), Rational(143, 10))",
-      "str": "(143/10)*11"
+      "sp.srepr": "Mul(Integer(19), Rational(381, 10))",
+      "str": "(381/10)*19"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=143), q=Integer(n=10)), r=Integer(n=11))"
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=381), q=Integer(n=10)), r=Integer(n=19))"
   },
   "components": {
-    "n1": "1",
-    "n2": "11",
-    "p": "\\dfrac{143}{10}"
+    "n1": "2",
+    "n2": "19",
+    "p": "\\dfrac{381}{10}"
   },
   "seed": 86,
   "generator": "gen_sujet2_auto_02_question",

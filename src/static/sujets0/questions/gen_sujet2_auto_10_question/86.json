@@ -1,8 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
-  "statement": "On définit la function $f$ par $f(x)=-9 \\times x^{2} + 8x + 1$. Calculer l'image de $-9$ par $f$.",
+  "statement": "On définit la function $f$ par $f(x)=-9x^{2} + 8x + 1$. Calculer l'image de $-9$ par $f$.",
+  "statement_html": "<div>On définit la function $f$ par $f(x)=-9x^{2} + 8x + 1$. Calculer l'image de $-9$ par $f$.</div>",
   "answer": {
-    "latex": "-9 \\times -9^{2} + 8 \\times -9 + 1",
+    "latex": "(-9) \\times (-9)^2 + (8) \\times (-9) + (1)",
     "simplified_latex": "-800",
     "sympy_exp_data": {
       "type": "Add",

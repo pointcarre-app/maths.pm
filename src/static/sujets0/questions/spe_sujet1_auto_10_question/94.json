@@ -1,8 +1,11 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-10]",
-  "statement": "La courbe ci-contre représente la courbe d'équation $ax^2 + bx + c$. On suppose $\\\\lvert a \\\\rvert = 1$. Donner l'équation de la parabole.",
+  "statement": "$a$ et $c$ sont des nombres réels. Ci-contre, on a représenté la parabole d'équation $y=ax^2 + c$. On suppose que $|a| = 1$. Le point $M(0; 2)$ appartient à la parabole. Donner l'équation de la parabole.",
+  "statement_html": "<div>$a$ et $c$ sont des nombres réels. Ci-contre, on a représenté la parabole d'équation $y=ax^2 + c$. On suppose que $|a| = 1$. Le point $M(0; 2)$ appartient à la parabole. Donner l'équation de la parabole.</div>",
   "answer": {
-    "latex": "-x^{2} + 2",
+    "latex": [
+      "-x^{2} + 2"
+    ],
     "simplified_latex": "-x^{2} + 2",
     "sympy_exp_data": {
       "type": "Add",
@@ -19,6 +22,6 @@
   "seed": 94,
   "generator": "spe_sujet1_auto_10_question",
   "success": true,
-  "stdout": "{'a': Integer(n=-1), 'c': Integer(n=2), 'x': Symbol(s='x'), 'maths_object': Add(l=Mul(l=Integer(n=-1), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Integer(n=2)), 'statement': \"La courbe ci-contre représente la courbe d'équation $ax^2 + bx + c$. On suppose $\\\\\\\\lvert a \\\\\\\\rvert = 1$. Donner l'équation de la parabole.\", 'graph_description': \"Une parabole d'équation $-x^2+2$, avec simplement la valeur l'ordonée à l'origine\"}\n",
+  "stdout": "{'a': Integer(n=-1), 'c': Integer(n=2), 'x': Symbol(s='x'), 'maths_object': Add(l=Mul(l=Integer(n=-1), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Integer(n=2)), 'statement': \"$a$ et $c$ sont des nombres réels. Ci-contre, on a représenté la parabole d'équation $y=ax^2 + c$. On suppose que $|a| = 1$. Le point $M(0; 2)$ appartient à la parabole. Donner l'équation de la parabole.\", 'graph_description': \"Une parabole d'équation $-x^2+2$, avec simplement la valeur l'ordonée à l'origine\"}\n",
   "stderr": ""
 }

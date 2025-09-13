@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(6x -7\\right) \\times \\left(5x -5\\right)$.",
+  "statement": "Développer $\\left(6x -7\\right) \\times \\left(5x -5\\right)$.",
+  "statement_html": "<div>Développer $\\left(6x -7\\right) \\times \\left(5x -5\\right)$.</div>",
   "answer": {
-    "latex": "35 -65x + 30 \\times x^{2}",
-    "simplified_latex": "35 -65x + 30 \\times x^{2}",
+    "latex": "30x^{2} -65x + 35",
+    "simplified_latex": "30x^{2} -65x + 35",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(30), Pow(Symbol('x'), Integer(2))), Mul(Integer(-1), Integer(65), Symbol('x'))), Integer(35))",
-      "str": "(30*x**2 - 65*x) + 35"
+      "sp.srepr": "Add(Mul(Integer(30), Pow(Symbol('x'), Integer(2))), Add(Integer(35), Mul(Integer(-1), Integer(65), Symbol('x'))))",
+      "str": "30*x**2 + (35 - 65*x)"
     },
-    "formal_repr": "Add(l=Integer(n=35), r=Add(l=Mul(l=Integer(n=-65), r=Symbol(s='x')), r=Mul(l=Integer(n=30), r=Pow(base=Symbol(s='x'), exp=Integer(n=2)))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=30), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=-65), r=Symbol(s='x')), r=Integer(n=35)))"
   },
   "components": {
     "x": "x",

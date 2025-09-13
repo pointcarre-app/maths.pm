@@ -3,7 +3,7 @@
   "statement": "Calculer $60 \\%$ de $300$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{12}{20}300",
+    "latex": "\\dfrac{12}{20} \\times 300",
     "simplified_latex": "180",
     "sympy_exp_data": {
       "type": "Mul",

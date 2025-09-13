@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{9}{10} -\\dfrac{3}{5}-11$.",
+  "statement": "Calculer $\\dfrac{9}{10} -\\dfrac{3}{5} \\times \\left(-11\\right)$.",
+  "statement_html": "<div>Calculer $\\dfrac{9}{10} -\\dfrac{3}{5} \\times \\left(-11\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{9}{10} -\\dfrac{3}{5}-11",
+    "latex": "\\dfrac{9}{10} -\\dfrac{3}{5} \\times \\left(-11\\right)",
     "simplified_latex": "\\dfrac{15}{2}",
     "sympy_exp_data": {
       "type": "Add",

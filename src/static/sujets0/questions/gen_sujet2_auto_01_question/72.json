@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-\\dfrac{41}{10} + \\dfrac{44}{3} \\times -\\dfrac{2}{3}$.",
+  "statement": "Calculer $-\\dfrac{41}{10} + \\dfrac{44}{3} \\times \\left(-\\dfrac{2}{3}\\right)$.",
+  "statement_html": "<div>Calculer $-\\dfrac{41}{10} + \\dfrac{44}{3} \\times \\left(-\\dfrac{2}{3}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-\\dfrac{41}{10} + \\dfrac{44}{3} \\times -\\dfrac{2}{3}",
+    "latex": "-\\dfrac{41}{10} + \\dfrac{44}{3} \\times \\left(-\\dfrac{2}{3}\\right)",
     "simplified_latex": "-\\dfrac{1249}{90}",
     "sympy_exp_data": {
       "type": "Add",

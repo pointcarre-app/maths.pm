@@ -1,19 +1,24 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-6]",
-  "statement": "Un appareil a besoin d'une énergie de $11 \\times 10^{3}$ Joules (J) pour se mettre en route. A combien de kiloWatt-heure (kWh) cela correspond-il. On donne $1kWh=3.6 \\times 10^{6}J$.",
+  "statement": "Un appareil a besoin d'une énergie de $18 \\times 10^{6}$ Joules ($\\text{J}$) pour se mettre en route. À combien de kiloWatt-heure ($\\text{kWh}$) cela correspond-il?\n    <br><span class=\"italic underline\" style=\"font-weight: bold;\">Données :</span> $1\\text{kWh} = 3,6 \\times 10^{6}\\text{J}$.",
+  "statement_html": "<div>Un appareil a besoin d'une énergie de $18 \\times 10^{6}$ Joules ($\\text{J}$) pour se mettre en route. À combien de kiloWatt-heure ($\\text{kWh}$) cela correspond-il?\n    <br><span class=\"italic underline\" style=\"font-weight: bold;\">Données :</span> $1\\text{kWh} = 3,6 \\times 10^{6}\\text{J}$.</div>",
   "answer": {
-    "latex": "0",
-    "simplified_latex": "0",
+    "latex": "18 * 10^{6} / (3600000)",
+    "simplified_latex": [
+      "5 kWh"
+    ],
     "sympy_exp_data": {
-      "type": "Zero",
-      "sp.srepr": "Integer(0)",
-      "str": "0"
+      "type": "Integer",
+      "sp.srepr": "Integer(5)",
+      "str": "5"
     },
-    "formal_repr": "Decimal(p=None, q=None)"
+    "formal_repr": "Fraction(p=Mul(l=Integer(n=18), r=Pow(base=Integer(n=10), exp=Integer(n=6))), q=Mul(l=Fraction(p=Integer(n=36), q=Integer(n=10)), r=Pow(base=Integer(n=10), exp=Integer(n=6))))"
   },
   "components": {
-    "k": "11 \\times 10^{3}",
-    "factor": "3.6 \\times 10^{6}"
+    "prefix_joules_to_multiply_by_power": "18",
+    "power": "6",
+    "energy_joules": "1810^{6}",
+    "factor": "\\dfrac{36}{10}10^{6}"
   },
   "seed": 91,
   "generator": "spe_sujet2_auto_06_question",

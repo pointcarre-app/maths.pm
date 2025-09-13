@@ -3,7 +3,7 @@
   "statement": "Calculer $75 \\%$ de $240$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{15}{20}240",
+    "latex": "\\dfrac{15}{20} \\times 240",
     "simplified_latex": "180",
     "sympy_exp_data": {
       "type": "Mul",

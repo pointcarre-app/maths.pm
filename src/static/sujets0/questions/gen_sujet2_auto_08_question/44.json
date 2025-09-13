@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(4x + 8\\right) \\times \\left(7x -6\\right)$.",
+  "statement": "Développer $\\left(4x + 8\\right) \\times \\left(7x -6\\right)$.",
+  "statement_html": "<div>Développer $\\left(4x + 8\\right) \\times \\left(7x -6\\right)$.</div>",
   "answer": {
-    "latex": "-48 + 28 \\times x^{2} + 32x",
-    "simplified_latex": "-48 + 28 \\times x^{2} + 32x",
+    "latex": "28x^{2} + 32x -48",
+    "simplified_latex": "28x^{2} + 32x -48",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(28), Pow(Symbol('x'), Integer(2))), Mul(Integer(32), Symbol('x'))), Integer(-48))",
-      "str": "(28*x**2 + 32*x) - 48"
+      "sp.srepr": "Add(Mul(Integer(28), Pow(Symbol('x'), Integer(2))), Add(Mul(Integer(32), Symbol('x')), Integer(-48)))",
+      "str": "28*x**2 + (32*x - 48)"
     },
-    "formal_repr": "Add(l=Integer(n=-48), r=Add(l=Mul(l=Integer(n=28), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Mul(l=Integer(n=32), r=Symbol(s='x'))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=28), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=32), r=Symbol(s='x')), r=Integer(n=-48)))"
   },
   "components": {
     "x": "x",

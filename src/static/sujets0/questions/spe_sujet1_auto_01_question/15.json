@@ -1,8 +1,11 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-1]",
   "statement": "Quel est l'inverse du triple de $1$ ?",
+  "statement_html": "<div>Quel est l'inverse du triple de $1$ ?<br></div>",
   "answer": {
-    "latex": "\\dfrac{1}{3 \\times 1}",
+    "latex": [
+      "\\dfrac{1}{3 \\times 1}"
+    ],
     "simplified_latex": "\\dfrac{1}{3}",
     "sympy_exp_data": {
       "type": "Rational",

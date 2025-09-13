@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $37 -\\dfrac{38}{3} \\times -\\dfrac{21}{5}$.",
+  "statement": "Calculer $37 -\\dfrac{38}{3} \\times \\left(-\\dfrac{21}{5}\\right)$.",
+  "statement_html": "<div>Calculer $37 -\\dfrac{38}{3} \\times \\left(-\\dfrac{21}{5}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "37 -\\dfrac{38}{3} \\times -\\dfrac{21}{5}",
+    "latex": "37 -\\dfrac{38}{3} \\times \\left(-\\dfrac{21}{5}\\right)",
     "simplified_latex": "\\dfrac{451}{5}",
     "sympy_exp_data": {
       "type": "Add",

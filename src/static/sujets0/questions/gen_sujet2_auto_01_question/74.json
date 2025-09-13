@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{28}{9} -6 \\times -7$.",
+  "statement": "Calculer $\\dfrac{28}{9} -6 \\times \\left(-7\\right)$.",
+  "statement_html": "<div>Calculer $\\dfrac{28}{9} -6 \\times \\left(-7\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{28}{9} -6 \\times -7",
+    "latex": "\\dfrac{28}{9} -6 \\times \\left(-7\\right)",
     "simplified_latex": "\\dfrac{406}{9}",
     "sympy_exp_data": {
       "type": "Add",

@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(5x + 5\\right) \\times \\left(8x + 5\\right)$.",
+  "statement": "Développer $\\left(5x + 5\\right) \\times \\left(8x + 5\\right)$.",
+  "statement_html": "<div>Développer $\\left(5x + 5\\right) \\times \\left(8x + 5\\right)$.</div>",
   "answer": {
-    "latex": "25 + 40 \\times x^{2} + 65x",
-    "simplified_latex": "25 + 40 \\times x^{2} + 65x",
+    "latex": "40x^{2} + 65x + 25",
+    "simplified_latex": "40x^{2} + 65x + 25",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(40), Pow(Symbol('x'), Integer(2))), Mul(Integer(65), Symbol('x'))), Integer(25))",
-      "str": "(40*x**2 + 65*x) + 25"
+      "sp.srepr": "Add(Mul(Integer(40), Pow(Symbol('x'), Integer(2))), Add(Mul(Integer(65), Symbol('x')), Integer(25)))",
+      "str": "40*x**2 + (65*x + 25)"
     },
-    "formal_repr": "Add(l=Integer(n=25), r=Add(l=Mul(l=Integer(n=40), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Mul(l=Integer(n=65), r=Symbol(s='x'))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=40), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=65), r=Symbol(s='x')), r=Integer(n=25)))"
   },
   "components": {
     "x": "x",

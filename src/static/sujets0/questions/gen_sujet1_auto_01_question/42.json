@@ -3,7 +3,7 @@
   "statement": "Calculer $20 \\%$ de $410$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{4}{20}410",
+    "latex": "\\dfrac{4}{20} \\times 410",
     "simplified_latex": "82",
     "sympy_exp_data": {
       "type": "Mul",

@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-11]",
-  "statement": "Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = 6 \\times x^{2} -54x + 0$. Parmis la série A: -2; -1, 0, 1, 2, quel est l'antécédent de 0 par la fonction $f$ ?",
+  "statement": "Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = 6x^{2} -54x + 0$. Parmi ces nombres : $-2$ ; $-1$ ; $0$ ; $1$ ; $2$, quel est l'antécédent de $0$ par la fonction $f$ ?",
+  "statement_html": "<div>Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = 6x^{2} -54x + 0$. Parmi ces nombres : $-2$ ; $-1$ ; $0$ ; $1$ ; $2$, quel est l'antécédent de $0$ par la fonction $f$ ?</div>",
   "answer": {
     "latex": "0",
     "simplified_latex": "0",
@@ -18,7 +19,7 @@
     "c": "0",
     "x1": "0",
     "x2": "9",
-    "expr": "6 \\times x^{2} -54x + 0",
+    "expr": "6x^{2} -54x + 0",
     "f": "f"
   },
   "seed": 45,

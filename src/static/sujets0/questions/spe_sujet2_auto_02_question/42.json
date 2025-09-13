@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-2]",
-  "statement": "Le prix d'un article est de $40$ euros. Son prix augmente de $10$\\%. Quel est le nouveau prix de l'article ?",
+  "statement": "Le prix d'un article est de $40$ euros. Son prix augmente de $10 \\%$. Quel est le nouveau prix de l'article ?",
+  "statement_html": "<div>Le prix d'un article est de $40$ euros. Son prix augmente de $10 \\%$. Quel est le nouveau prix de l'article ?</div>",
   "answer": {
-    "latex": "4 \\times 10 \\times \\left(1 + 1\\dfrac{1}{10}\\right)",
-    "simplified_latex": "44",
+    "latex": "4 \\times 10 \\times \\left(1 + 1 \\times \\dfrac{1}{10}\\right)",
+    "simplified_latex": "44€",
     "sympy_exp_data": {
       "type": "Mul",
       "sp.srepr": "Mul(Mul(Integer(4), Integer(10)), Add(Mul(Rational(1, 10), Integer(1)), Integer(1)))",

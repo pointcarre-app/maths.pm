@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
-  "statement": "On considère les deux séries $A=-6 ; 2 ; 2 ; 10$  et $B=-42 ; 2 ; 2 ; 46$. Quelle est celle avec le plus grand écart type ?",
+  "statement": "On considère les deux séries :<br>$A=-6&nbsp ; &nbsp 2&nbsp ; &nbsp 2&nbsp ; &nbsp 10$  <br>$B=-42&nbsp ; &nbsp 2&nbsp ; &nbsp 2&nbsp ; &nbsp 46$<br>Quelle est celle avec le plus grand écart type ?",
+  "statement_html": "<div>On considère les deux séries :<br>$A=-6&nbsp ; &nbsp 2&nbsp ; &nbsp 2&nbsp ; &nbsp 10$  <br>$B=-42&nbsp ; &nbsp 2&nbsp ; &nbsp 2&nbsp ; &nbsp 46$<br>Quelle est celle avec le plus grand écart type ?</div>",
   "answer": {
     "latex": "B",
     "simplified_latex": "B",

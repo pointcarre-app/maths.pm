@@ -1,8 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
-  "statement": "On définit la function $f$ par $f(x)=-5 \\times x^{2} -x -2$. Calculer l'image de $6$ par $f$.",
+  "statement": "On définit la function $f$ par $f(x)=-5x^{2} -x -2$. Calculer l'image de $6$ par $f$.",
+  "statement_html": "<div>On définit la function $f$ par $f(x)=-5x^{2} -x -2$. Calculer l'image de $6$ par $f$.</div>",
   "answer": {
-    "latex": "-5 \\times 6^{2} -6 -2",
+    "latex": "(-5) \\times (6)^2 + (-1) \\times (6) + (-2)",
     "simplified_latex": "-188",
     "sympy_exp_data": {
       "type": "Add",

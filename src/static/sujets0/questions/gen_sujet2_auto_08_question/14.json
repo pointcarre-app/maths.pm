@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(-6x -2\\right) \\times \\left(7x -1\\right)$.",
+  "statement": "Développer $\\left(-6x -2\\right) \\times \\left(7x -1\\right)$.",
+  "statement_html": "<div>Développer $\\left(-6x -2\\right) \\times \\left(7x -1\\right)$.</div>",
   "answer": {
-    "latex": "2 -42 \\times x^{2} -8x",
-    "simplified_latex": "2 -42 \\times x^{2} -8x",
+    "latex": "-42x^{2} -8x + 2",
+    "simplified_latex": "-42x^{2} -8x + 2",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(-1), Integer(42), Pow(Symbol('x'), Integer(2))), Mul(Integer(-1), Integer(8), Symbol('x'))), Integer(2))",
-      "str": "(-42*x**2 - 8*x) + 2"
+      "sp.srepr": "Add(Mul(Integer(-1), Integer(42), Pow(Symbol('x'), Integer(2))), Add(Integer(2), Mul(Integer(-1), Integer(8), Symbol('x'))))",
+      "str": "-42*x**2 + (2 - 8*x)"
     },
-    "formal_repr": "Add(l=Integer(n=2), r=Add(l=Mul(l=Integer(n=-42), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Mul(l=Integer(n=-8), r=Symbol(s='x'))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=-42), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=-8), r=Symbol(s='x')), r=Integer(n=2)))"
   },
   "components": {
     "x": "x",

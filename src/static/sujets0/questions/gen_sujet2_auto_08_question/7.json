@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(1x + 3\\right) \\times \\left(-5x -8\\right)$.",
+  "statement": "Développer $\\left(x + 3\\right) \\times \\left(-5x -8\\right)$.",
+  "statement_html": "<div>Développer $\\left(x + 3\\right) \\times \\left(-5x -8\\right)$.</div>",
   "answer": {
-    "latex": "-24 -23x -5 \\times x^{2}",
-    "simplified_latex": "-24 -23x -5 \\times x^{2}",
+    "latex": "-5x^{2} -23x -24",
+    "simplified_latex": "-5x^{2} -23x -24",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(-1), Integer(5), Pow(Symbol('x'), Integer(2))), Mul(Integer(-1), Integer(23), Symbol('x'))), Integer(-24))",
-      "str": "(-5*x**2 - 23*x) - 24"
+      "sp.srepr": "Add(Mul(Integer(-1), Integer(5), Pow(Symbol('x'), Integer(2))), Add(Mul(Integer(-1), Integer(23), Symbol('x')), Integer(-24)))",
+      "str": "-5*x**2 + (-23*x - 24)"
     },
-    "formal_repr": "Add(l=Integer(n=-24), r=Add(l=Mul(l=Integer(n=-23), r=Symbol(s='x')), r=Mul(l=Integer(n=-5), r=Pow(base=Symbol(s='x'), exp=Integer(n=2)))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=-5), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=-23), r=Symbol(s='x')), r=Integer(n=-24)))"
   },
   "components": {
     "x": "x",
@@ -17,7 +18,7 @@
     "b1": "3",
     "a2": "-5",
     "b2": "-8",
-    "expr": "\\left(1x + 3\\right) \\times \\left(-5x -8\\right)"
+    "expr": "\\left(x + 3\\right) \\times \\left(-5x -8\\right)"
   },
   "seed": 7,
   "generator": "gen_sujet2_auto_08_question",

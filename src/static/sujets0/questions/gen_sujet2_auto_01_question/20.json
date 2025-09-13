@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $14 -\\dfrac{17}{2} \\times -\\dfrac{9}{10}$.",
+  "statement": "Calculer $14 -\\dfrac{17}{2} \\times \\left(-\\dfrac{9}{10}\\right)$.",
+  "statement_html": "<div>Calculer $14 -\\dfrac{17}{2} \\times \\left(-\\dfrac{9}{10}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "14 -\\dfrac{17}{2} \\times -\\dfrac{9}{10}",
+    "latex": "14 -\\dfrac{17}{2} \\times \\left(-\\dfrac{9}{10}\\right)",
     "simplified_latex": "\\dfrac{433}{20}",
     "sympy_exp_data": {
       "type": "Add",

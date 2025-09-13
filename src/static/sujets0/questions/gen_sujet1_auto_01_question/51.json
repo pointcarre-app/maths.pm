@@ -3,7 +3,7 @@
   "statement": "Calculer $85 \\%$ de $160$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{17}{20}160",
+    "latex": "\\dfrac{17}{20} \\times 160",
     "simplified_latex": "136",
     "sympy_exp_data": {
       "type": "Mul",

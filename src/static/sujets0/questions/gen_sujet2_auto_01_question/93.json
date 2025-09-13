@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $\\dfrac{13}{10} + 7 \\times -18$.",
+  "statement": "Calculer $\\dfrac{13}{10} + 7 \\times \\left(-18\\right)$.",
+  "statement_html": "<div>Calculer $\\dfrac{13}{10} + 7 \\times \\left(-18\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{13}{10} + 7 \\times -18",
+    "latex": "\\dfrac{13}{10} + 7 \\times \\left(-18\\right)",
     "simplified_latex": "-\\dfrac{1247}{10}",
     "sympy_exp_data": {
       "type": "Add",

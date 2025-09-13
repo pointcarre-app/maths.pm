@@ -3,7 +3,7 @@
   "statement": "Calculer $65 \\%$ de $460$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{13}{20}460",
+    "latex": "\\dfrac{13}{20} \\times 460",
     "simplified_latex": "299",
     "sympy_exp_data": {
       "type": "Mul",

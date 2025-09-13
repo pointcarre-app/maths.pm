@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-4]",
   "statement": "Suite à une diminution de $10 \\%$, un article coûte $54$ euros. Quel était son prix initial ?",
+  "statement_html": "<div>Suite à une diminution de $10 \\%$, un article coûte $54$ euros. Quel était son prix initial ?</div>",
   "answer": {
     "latex": "60",
-    "simplified_latex": "60",
+    "simplified_latex": "60 €",
     "sympy_exp_data": {
       "type": "Integer",
       "sp.srepr": "Integer(60)",

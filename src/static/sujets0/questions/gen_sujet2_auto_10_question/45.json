@@ -1,8 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
   "statement": "On définit la function $f$ par $f(x)=-x^{2} + 4x + 6$. Calculer l'image de $-1$ par $f$.",
+  "statement_html": "<div>On définit la function $f$ par $f(x)=-x^{2} + 4x + 6$. Calculer l'image de $-1$ par $f$.</div>",
   "answer": {
-    "latex": "--1^{2} + 4 \\times -1 + 6",
+    "latex": "(-1) \\times (-1)^2 + (4) \\times (-1) + (6)",
     "simplified_latex": "1",
     "sympy_exp_data": {
       "type": "Add",

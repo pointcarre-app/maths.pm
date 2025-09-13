@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "8 articles coûtent 25.6 euros. Combien coûtent 20 articles ?",
+  "statement": "$9$ articles coûtent $297,9$ euros. Combien coûtent $5$ articles ?",
+  "statement_html": "<div>$9$ articles coûtent $297,9$ euros. Combien coûtent $5$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{32}{10}20",
-    "simplified_latex": "64",
+    "latex": [
+      "5 \\times \\dfrac{3310}{100}",
+      "\\dfrac{331}{2}"
+    ],
+    "simplified_latex": [
+      "\\dfrac{331}{2} €",
+      "165,5 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Rational(16, 5), Integer(20))",
-      "str": "(16/5)*20"
+      "sp.srepr": "Mul(Integer(5), Rational(331, 10))",
+      "str": "(331/10)*5"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=32), q=Integer(n=10)), r=Integer(n=20))"
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=3310), q=Integer(n=100)), r=Integer(n=5))"
   },
   "components": {
-    "n1": "8",
-    "n2": "20",
-    "p": "\\dfrac{32}{10}"
+    "n1": "9",
+    "n2": "5",
+    "p": "\\dfrac{3310}{100}"
   },
   "seed": 64,
   "generator": "gen_sujet2_auto_02_question",

@@ -3,7 +3,7 @@
   "statement": "Calculer $95 \\%$ de $320$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{19}{20}320",
+    "latex": "\\dfrac{19}{20} \\times 320",
     "simplified_latex": "304",
     "sympy_exp_data": {
       "type": "Mul",

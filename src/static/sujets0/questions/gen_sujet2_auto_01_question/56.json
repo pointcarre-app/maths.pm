@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $21 + \\dfrac{10}{9} \\times -\\dfrac{4}{3}$.",
+  "statement": "Calculer $21 + \\dfrac{10}{9} \\times \\left(-\\dfrac{4}{3}\\right)$.",
+  "statement_html": "<div>Calculer $21 + \\dfrac{10}{9} \\times \\left(-\\dfrac{4}{3}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "21 + \\dfrac{10}{9} \\times -\\dfrac{4}{3}",
+    "latex": "21 + \\dfrac{10}{9} \\times \\left(-\\dfrac{4}{3}\\right)",
     "simplified_latex": "\\dfrac{527}{27}",
     "sympy_exp_data": {
       "type": "Add",

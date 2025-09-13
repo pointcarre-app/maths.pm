@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $6 -6-\\dfrac{45}{4}$.",
+  "statement": "Calculer $6 -6 \\times \\left(-\\dfrac{45}{4}\\right)$.",
+  "statement_html": "<div>Calculer $6 -6 \\times \\left(-\\dfrac{45}{4}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "6 -6-\\dfrac{45}{4}",
+    "latex": "6 -6 \\times \\left(-\\dfrac{45}{4}\\right)",
     "simplified_latex": "\\dfrac{147}{2}",
     "sympy_exp_data": {
       "type": "Add",

@@ -1,22 +1,23 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
-  "statement": "On considère le nombre $N=\\dfrac{15^{11}}{3^{9}}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.",
+  "statement": "On considère le nombre $N=\\dfrac{10^{6}}{5^{2}}$. Exprimer $N$ sous la forme d'un entier.",
+  "statement_html": "<div>On considère le nombre $N=\\dfrac{10^{6}}{5^{2}}$. Exprimer $N$ sous la forme d'un entier.</div>",
   "answer": {
-    "latex": "3^{-7} \\times 5^{2}",
-    "simplified_latex": "\\dfrac{25}{2187}",
+    "latex": "5^{1}2^{3}",
+    "simplified_latex": "40",
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Pow(Integer(3), Integer(-7)), Pow(Integer(5), Integer(2)))",
-      "str": "5**2/3**7"
+      "sp.srepr": "Mul(Pow(Integer(2), Integer(3)), Pow(Integer(5), Integer(1)))",
+      "str": "5**1*2**3"
     },
-    "formal_repr": "Mul(l=Pow(base=Integer(n=3), exp=Integer(n=-7)), r=Pow(base=Integer(n=5), exp=Integer(n=2)))"
+    "formal_repr": "Mul(l=Pow(base=Integer(n=5), exp=Integer(n=1)), r=Pow(base=Integer(n=2), exp=Integer(n=3)))"
   },
   "components": {
-    "x": "3",
-    "y": "5",
-    "n1": "9",
-    "n2": "2",
-    "expr": "\\dfrac{15^{11}}{3^{9}}"
+    "x": "5",
+    "y": "2",
+    "n1": "2",
+    "n2": "3",
+    "expr": "\\dfrac{10^{6}}{5^{2}}"
   },
   "seed": 44,
   "generator": "spe_sujet2_auto_05_question",

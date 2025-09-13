@@ -3,7 +3,7 @@
   "statement": "Calculer $10 \\%$ de $440$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{2}{20}440",
+    "latex": "\\dfrac{2}{20} \\times 440",
     "simplified_latex": "44",
     "sympy_exp_data": {
       "type": "Mul",

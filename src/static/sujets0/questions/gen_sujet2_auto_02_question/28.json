@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "2 articles coûtent 38.2 euros. Combien coûtent 5 articles ?",
+  "statement": "$3$ articles coûtent $146,79$ euros. Combien coûtent $6$ articles ?",
+  "statement_html": "<div>$3$ articles coûtent $146,79$ euros. Combien coûtent $6$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{191}{10}5",
-    "simplified_latex": "\\dfrac{191}{2}",
+    "latex": [
+      "6 \\times \\dfrac{4893}{100}",
+      "\\dfrac{14679}{50}"
+    ],
+    "simplified_latex": [
+      "\\dfrac{14679}{50} €",
+      "293,58 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Integer(5), Rational(191, 10))",
-      "str": "(191/10)*5"
+      "sp.srepr": "Mul(Integer(6), Rational(4893, 100))",
+      "str": "(4893/100)*6"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=191), q=Integer(n=10)), r=Integer(n=5))"
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=4893), q=Integer(n=100)), r=Integer(n=6))"
   },
   "components": {
-    "n1": "2",
-    "n2": "5",
-    "p": "\\dfrac{191}{10}"
+    "n1": "3",
+    "n2": "6",
+    "p": "\\dfrac{4893}{100}"
   },
   "seed": 28,
   "generator": "gen_sujet2_auto_02_question",

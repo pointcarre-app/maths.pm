@@ -1,8 +1,8 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-11]",
-  "statement": "Développer $\\left(1x -8\\right)^{2}$",
+  "statement": "Développer $\\left(x -8\\right)^{2}$",
   "answer": {
-    "latex": "\\left(1x -8\\right)^{2}",
+    "latex": "\\left(x -8\\right)^{2}",
     "simplified_latex": "x^{2} -16x -8^{2}",
     "sympy_exp_data": {
       "type": "Pow",

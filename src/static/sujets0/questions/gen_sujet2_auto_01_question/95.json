@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $\\dfrac{47}{9} + \\dfrac{5}{3} \\times \\dfrac{50}{3}$.",
+  "statement_html": "<div>Calculer $\\dfrac{47}{9} + \\dfrac{5}{3} \\times \\dfrac{50}{3}$.</div>",
   "mask": "",
   "answer": {
     "latex": "\\dfrac{47}{9} + \\dfrac{5}{3} \\times \\dfrac{50}{3}",

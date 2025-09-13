@@ -2,7 +2,7 @@
   "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
   "statement": "2 articles coûtent 15.2 euros. Combien coûtent 15 articles ?",
   "answer": {
-    "latex": "\\dfrac{76}{10}15",
+    "latex": "\\dfrac{76}{10} \\times 15",
     "simplified_latex": "114",
     "sympy_exp_data": {
       "type": "Mul",

@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-4 + 8-\\dfrac{11}{2}$.",
+  "statement": "Calculer $-4 + 8 \\times \\left(-\\dfrac{11}{2}\\right)$.",
+  "statement_html": "<div>Calculer $-4 + 8 \\times \\left(-\\dfrac{11}{2}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-4 + 8-\\dfrac{11}{2}",
+    "latex": "-4 + 8 \\times \\left(-\\dfrac{11}{2}\\right)",
     "simplified_latex": "-48",
     "sympy_exp_data": {
       "type": "Add",

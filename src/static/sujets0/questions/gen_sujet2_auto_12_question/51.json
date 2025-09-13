@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-12]",
-  "statement": "On considère les deux séries $A=-27 ; -19 ; -19 ; -11$  et $B=-64 ; -19 ; -19 ; 26$. Quelle est celle avec le plus grand écart type ?",
+  "statement": "On considère les deux séries :<br>$A=-27&nbsp ; &nbsp -19&nbsp ; &nbsp -19&nbsp ; &nbsp -11$  <br>$B=-64&nbsp ; &nbsp -19&nbsp ; &nbsp -19&nbsp ; &nbsp 26$<br>Quelle est celle avec le plus grand écart type ?",
+  "statement_html": "<div>On considère les deux séries :<br>$A=-27&nbsp ; &nbsp -19&nbsp ; &nbsp -19&nbsp ; &nbsp -11$  <br>$B=-64&nbsp ; &nbsp -19&nbsp ; &nbsp -19&nbsp ; &nbsp 26$<br>Quelle est celle avec le plus grand écart type ?</div>",
   "answer": {
     "latex": "B",
     "simplified_latex": "B",

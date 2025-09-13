@@ -1,8 +1,9 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-10]",
-  "statement": "On définit la function $f$ par $f(x)=-7 \\times x^{2} + 7x -8$. Calculer l'image de $2$ par $f$.",
+  "statement": "On définit la function $f$ par $f(x)=-7x^{2} + 7x -8$. Calculer l'image de $2$ par $f$.",
+  "statement_html": "<div>On définit la function $f$ par $f(x)=-7x^{2} + 7x -8$. Calculer l'image de $2$ par $f$.</div>",
   "answer": {
-    "latex": "-7 \\times 2^{2} + 7 \\times 2 -8",
+    "latex": "(-7) \\times (2)^2 + (7) \\times (2) + (-8)",
     "simplified_latex": "-22",
     "sympy_exp_data": {
       "type": "Add",

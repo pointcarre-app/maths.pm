@@ -1,19 +1,23 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-4]",
-  "statement": "Dans un lycée, le le tiers des élèves sont internes, parmi eux, la moitié sont des gauchers. Calculer le pourcentage de gauchers internes par rapport à l'ensemble des élèves du lycée.",
+  "statement": "Dans un lycée, le quart des élèves sont internes, parmi eux, la moitié sont des gauchers. Calculer le pourcentage d'élèves qui sont gauchers et internes par rapport à l'ensemble des élèves du lycée.",
+  "statement_html": "<div>Dans un lycée, le quart des élèves sont internes, parmi eux, la moitié sont des gauchers. Calculer le pourcentage d'élèves qui sont gauchers et internes par rapport à l'ensemble des élèves du lycée.</div>",
   "answer": {
-    "latex": "\\dfrac{1}{3} \\times \\dfrac{1}{2}",
-    "simplified_latex": "\\dfrac{1}{6}",
+    "latex": "\\dfrac{1}{4} \\times \\dfrac{1}{2}",
+    "simplified_latex": [
+      "\\dfrac{25}{2}\\%",
+      "12,5\\%"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Rational(1, 3), Rational(1, 2))",
-      "str": "(1/3)*(1/2)"
+      "sp.srepr": "Mul(Rational(1, 4), Rational(1, 2))",
+      "str": "(1/4)*(1/2)"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=1), q=Integer(n=3)), r=Fraction(p=Integer(n=1), q=Integer(n=2)))"
+    "formal_repr": "Mul(l=Fraction(p=Integer(n=1), q=Integer(n=4)), r=Fraction(p=Integer(n=1), q=Integer(n=2)))"
   },
   "components": {
-    "p1": "\\dfrac{1}{3}",
-    "p2": "\\dfrac{1}{2}"
+    "f1_tm": "\\dfrac{1}{4}",
+    "f2_tm": "\\dfrac{1}{2}"
   },
   "seed": 73,
   "generator": "spe_sujet2_auto_04_question",

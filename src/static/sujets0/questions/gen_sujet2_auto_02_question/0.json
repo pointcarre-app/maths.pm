@@ -1,20 +1,27 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-2]",
-  "statement": "7 articles coûtent 136.5 euros. Combien coûtent 14 articles ?",
+  "statement": "$8$ articles coûtent $136$ euros. Combien coûtent $15$ articles ?",
+  "statement_html": "<div>$8$ articles coûtent $136$ euros. Combien coûtent $15$ articles ?</div>",
   "answer": {
-    "latex": "\\dfrac{195}{10}14",
-    "simplified_latex": "273",
+    "latex": [
+      "15 \\times 17",
+      "255"
+    ],
+    "simplified_latex": [
+      "255 €",
+      "255 €"
+    ],
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Integer(14), Rational(39, 2))",
-      "str": "(39/2)*14"
+      "sp.srepr": "Mul(Integer(15), Integer(17))",
+      "str": "17*15"
     },
-    "formal_repr": "Mul(l=Fraction(p=Integer(n=195), q=Integer(n=10)), r=Integer(n=14))"
+    "formal_repr": "Mul(l=Integer(n=17), r=Integer(n=15))"
   },
   "components": {
-    "n1": "7",
-    "n2": "14",
-    "p": "\\dfrac{195}{10}"
+    "n1": "8",
+    "n2": "15",
+    "p": "17"
   },
   "seed": 0,
   "generator": "gen_sujet2_auto_02_question",

@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $\\dfrac{45}{4} + \\dfrac{17}{2} \\times \\dfrac{1}{2}$.",
+  "statement_html": "<div>Calculer $\\dfrac{45}{4} + \\dfrac{17}{2} \\times \\dfrac{1}{2}$.</div>",
   "mask": "",
   "answer": {
     "latex": "\\dfrac{45}{4} + \\dfrac{17}{2} \\times \\dfrac{1}{2}",

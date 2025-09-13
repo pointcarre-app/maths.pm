@@ -1,20 +1,24 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-11]",
-  "statement": "Quelle est l'expression développée de $\\left(x + 0.43\\right)^{2}$ ?",
+  "statement": "Quelle est l'expression développée de $(x+0,6)^2$ ?",
+  "statement_html": "<div>Quelle est l'expression développée de $(x+0,6)^2$ ?</div>",
   "answer": {
-    "latex": "\\left(x + 0.43\\right)^{2}",
-    "simplified_latex": "x^{2} + 0.86x + 0.43^{2}",
+    "latex": "x^{2} + \\dfrac{6}{5}x + \\dfrac{9}{25}",
+    "simplified_latex": [
+      "x^{2} + \\dfrac{6}{5}x + \\dfrac{9}{25}",
+      "x^{2} + 1,2x + 0,36"
+    ],
     "sympy_exp_data": {
-      "type": "Pow",
-      "sp.srepr": "Pow(Add(Symbol('x'), Rational(43, 100)), Integer(2))",
-      "str": "(x + 43/100)**2"
+      "type": "Add",
+      "sp.srepr": "Add(Pow(Symbol('x'), Integer(2)), Add(Mul(Rational(6, 5), Symbol('x')), Rational(9, 25)))",
+      "str": "x**2 + (6*x/5 + 9/25)"
     },
-    "formal_repr": "Pow(base=Add(l=Symbol(s='x'), r=Decimal(p=43, q=100)), exp=Integer(n=2))"
+    "formal_repr": "Add(l=Pow(base=Symbol(s='x'), exp=Integer(n=2)), r=Add(l=Mul(l=Fraction(p=Integer(n=6), q=Integer(n=5)), r=Symbol(s='x')), r=Fraction(p=Integer(n=9), q=Integer(n=25))))"
   },
   "components": {
     "x": "x",
-    "a": "0.43",
-    "expr": "\\left(x + 0.43\\right)^{2}"
+    "a": "\\dfrac{6}{10}",
+    "expr": "\\left(x + \\dfrac{6}{10}\\right)^{2}"
   },
   "seed": 36,
   "generator": "spe_sujet2_auto_11_question",

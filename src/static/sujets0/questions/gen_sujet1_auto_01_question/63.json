@@ -3,7 +3,7 @@
   "statement": "Calculer $75 \\%$ de $290$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{15}{20}290",
+    "latex": "\\dfrac{15}{20} \\times 290",
     "simplified_latex": "\\dfrac{435}{2}",
     "sympy_exp_data": {
       "type": "Mul",

@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(-5x -6\\right) \\times \\left(1x -5\\right)$.",
+  "statement": "Développer $\\left(-5x -6\\right) \\times \\left(x -5\\right)$.",
+  "statement_html": "<div>Développer $\\left(-5x -6\\right) \\times \\left(x -5\\right)$.</div>",
   "answer": {
-    "latex": "30 -5 \\times x^{2} + 19x",
-    "simplified_latex": "30 -5 \\times x^{2} + 19x",
+    "latex": "-5x^{2} + 19x + 30",
+    "simplified_latex": "-5x^{2} + 19x + 30",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(-1), Integer(5), Pow(Symbol('x'), Integer(2))), Mul(Integer(19), Symbol('x'))), Integer(30))",
-      "str": "(-5*x**2 + 19*x) + 30"
+      "sp.srepr": "Add(Mul(Integer(-1), Integer(5), Pow(Symbol('x'), Integer(2))), Add(Mul(Integer(19), Symbol('x')), Integer(30)))",
+      "str": "-5*x**2 + (19*x + 30)"
     },
-    "formal_repr": "Add(l=Integer(n=30), r=Add(l=Mul(l=Integer(n=-5), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Mul(l=Integer(n=19), r=Symbol(s='x'))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=-5), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=19), r=Symbol(s='x')), r=Integer(n=30)))"
   },
   "components": {
     "x": "x",
@@ -17,7 +18,7 @@
     "b1": "-6",
     "a2": "1",
     "b2": "-5",
-    "expr": "\\left(-5x -6\\right) \\times \\left(1x -5\\right)"
+    "expr": "\\left(-5x -6\\right) \\times \\left(x -5\\right)"
   },
   "seed": 70,
   "generator": "gen_sujet2_auto_08_question",

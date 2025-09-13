@@ -1,22 +1,23 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-5]",
-  "statement": "On considère le nombre $N=\\dfrac{6^{20}}{2^{10}}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.",
+  "statement": "On considère le nombre $N=\\dfrac{6^{4}}{2^{2}}$. Exprimer $N$ sous la forme d'un entier.",
+  "statement_html": "<div>On considère le nombre $N=\\dfrac{6^{4}}{2^{2}}$. Exprimer $N$ sous la forme d'un entier.</div>",
   "answer": {
-    "latex": "2^{0} \\times 3^{10}",
-    "simplified_latex": "59049",
+    "latex": "2^{0}3^{2}",
+    "simplified_latex": "9",
     "sympy_exp_data": {
       "type": "Mul",
-      "sp.srepr": "Mul(Pow(Integer(2), Integer(0)), Pow(Integer(3), Integer(10)))",
-      "str": "2**0*3**10"
+      "sp.srepr": "Mul(Pow(Integer(2), Integer(0)), Pow(Integer(3), Integer(2)))",
+      "str": "2**0*3**2"
     },
-    "formal_repr": "Mul(l=Pow(base=Integer(n=2), exp=Integer(n=0)), r=Pow(base=Integer(n=3), exp=Integer(n=10)))"
+    "formal_repr": "Mul(l=Pow(base=Integer(n=2), exp=Integer(n=0)), r=Pow(base=Integer(n=3), exp=Integer(n=2)))"
   },
   "components": {
     "x": "2",
     "y": "3",
-    "n1": "10",
-    "n2": "10",
-    "expr": "\\dfrac{6^{20}}{2^{10}}"
+    "n1": "2",
+    "n2": "2",
+    "expr": "\\dfrac{6^{4}}{2^{2}}"
   },
   "seed": 57,
   "generator": "spe_sujet2_auto_05_question",

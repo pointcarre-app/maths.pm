@@ -3,7 +3,7 @@
   "statement": "Dans un établissement scolaire, $50$ élèves étudient le Grec, ce qui représente de $2\\%$. Combien d'élèves au total sont inscrits dans l'établissement ?",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{50}{\\dfrac{2^{1} \\times 5^{0}}{100}}",
+    "latex": "\\dfrac{50}{\\dfrac{2^{1}5^{0}}{100}}",
     "simplified_latex": "2500",
     "sympy_exp_data": {
       "type": "Integer",
@@ -14,7 +14,7 @@
   },
   "components": {
     "n": "50",
-    "x": "\\dfrac{2^{1} \\times 5^{0}}{100}"
+    "x": "\\dfrac{2^{1}5^{0}}{100}"
   },
   "seed": 77,
   "generator": "gen_sujet3_auto_04_question",

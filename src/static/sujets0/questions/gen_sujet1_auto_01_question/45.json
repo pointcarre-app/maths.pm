@@ -3,7 +3,7 @@
   "statement": "Calculer $70 \\%$ de $180$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{14}{20}180",
+    "latex": "\\dfrac{14}{20} \\times 180",
     "simplified_latex": "126",
     "sympy_exp_data": {
       "type": "Mul",

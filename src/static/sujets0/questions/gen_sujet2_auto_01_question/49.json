@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-7 + 1 \\times -1$.",
+  "statement": "Calculer $-7 + 1 \\times \\left(-1\\right)$.",
+  "statement_html": "<div>Calculer $-7 + 1 \\times \\left(-1\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-7 + 1 \\times -1",
+    "latex": "-7 + 1 \\times \\left(-1\\right)",
     "simplified_latex": "-8",
     "sympy_exp_data": {
       "type": "Add",

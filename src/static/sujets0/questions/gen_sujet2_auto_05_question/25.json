@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-8]",
-  "statement": "On considère un liquide pour lequel 1L pèse 100 g. Combien pèse 490 mL de ce liquide ?",
+  "statement": "On considère un liquide pour lequel $1$ L pèse $100$ g. Combien pèse $490$ mL de ce liquide ?",
+  "statement_html": "<div>On considère un liquide pour lequel $1$ L pèse $100$ g. Combien pèse $490$ mL de ce liquide ?</div>",
   "answer": {
     "latex": "\\dfrac{490}{\\dfrac{1000}{100}}",
-    "simplified_latex": "49",
+    "simplified_latex": "49 g",
     "sympy_exp_data": {
       "type": "Integer",
       "sp.srepr": "Integer(49)",

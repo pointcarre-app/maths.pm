@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
   "statement": "Calculer $7 + \\dfrac{8}{9} \\times \\dfrac{41}{8}$.",
+  "statement_html": "<div>Calculer $7 + \\dfrac{8}{9} \\times \\dfrac{41}{8}$.</div>",
   "mask": "",
   "answer": {
     "latex": "7 + \\dfrac{8}{9} \\times \\dfrac{41}{8}",

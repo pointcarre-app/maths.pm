@@ -1,9 +1,10 @@
 {
   "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
-  "statement": "Calculer $-1 + 29-\\dfrac{17}{3}$.",
+  "statement": "Calculer $-1 + 29 \\times \\left(-\\dfrac{17}{3}\\right)$.",
+  "statement_html": "<div>Calculer $-1 + 29 \\times \\left(-\\dfrac{17}{3}\\right)$.</div>",
   "mask": "",
   "answer": {
-    "latex": "-1 + 29-\\dfrac{17}{3}",
+    "latex": "-1 + 29 \\times \\left(-\\dfrac{17}{3}\\right)",
     "simplified_latex": "-\\dfrac{496}{3}",
     "sympy_exp_data": {
       "type": "Add",

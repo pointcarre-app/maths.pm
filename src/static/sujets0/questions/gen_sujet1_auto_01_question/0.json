@@ -3,7 +3,7 @@
   "statement": "Calculer $70 \\%$ de $250$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{14}{20}250",
+    "latex": "\\dfrac{14}{20} \\times 250",
     "simplified_latex": "175",
     "sympy_exp_data": {
       "type": "Mul",

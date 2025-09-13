@@ -3,7 +3,7 @@
   "statement": "Calculer $20 \\%$ de $120$.",
   "mask": "",
   "answer": {
-    "latex": "\\dfrac{4}{20}120",
+    "latex": "\\dfrac{4}{20} \\times 120",
     "simplified_latex": "24",
     "sympy_exp_data": {
       "type": "Mul",

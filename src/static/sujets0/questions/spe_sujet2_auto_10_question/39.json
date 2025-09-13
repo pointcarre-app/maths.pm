@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-  "statement": "La fonction ${f}$ définie sur $\\\\mathbb\\{R\\}$ par $f(x) = \\left(-4x + 2\\right) \\times \\left(-2x -10\\right)$. Quel est le signe de f sur l'intervalle $\\lbracket -\\infty; -\\dfrac{2}{-4}\\rbracket$ ?",
+  "statement": "La fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = \\left(-4x + 2\\right)  \\left(-2x -10\\right)$. <br>Établir le tableau de signes de $f$ sur $\\mathbb{R}$.",
+  "statement_html": "<div>La fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = \\left(-4x + 2\\right)  \\left(-2x -10\\right)$. <br>Établir le tableau de signes de $f$ sur $\\mathbb{R}$.</div>",
   "answer": {
     "latex": "f(x) > 0",
     "simplified_latex": "f(x) > 0",

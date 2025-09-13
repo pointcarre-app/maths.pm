@@ -2,7 +2,7 @@
   "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
   "statement": "5 articles coûtent 50.5 euros. Combien coûtent 18 articles ?",
   "answer": {
-    "latex": "\\dfrac{101}{10}18",
+    "latex": "\\dfrac{101}{10} \\times 18",
     "simplified_latex": "\\dfrac{909}{5}",
     "sympy_exp_data": {
       "type": "Mul",

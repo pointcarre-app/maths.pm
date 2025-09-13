@@ -1,6 +1,7 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-11]",
-  "statement": "Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = -4 \\times x^{2} + 12x + 40$. Parmis la série A: -2; -1, 0, 1, 2, quel est l'antécédent de 0 par la fonction $f$ ?",
+  "statement": "Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = -4x^{2} + 12x + 40$. Parmi ces nombres : $-2$ ; $-1$ ; $0$ ; $1$ ; $2$, quel est l'antécédent de $0$ par la fonction $f$ ?",
+  "statement_html": "<div>Soit $f$ une fonction définie sur $\\mathbb{R}$ par $f(x) = -4x^{2} + 12x + 40$. Parmi ces nombres : $-2$ ; $-1$ ; $0$ ; $1$ ; $2$, quel est l'antécédent de $0$ par la fonction $f$ ?</div>",
   "answer": {
     "latex": "-2",
     "simplified_latex": "-2",
@@ -18,7 +19,7 @@
     "c": "40",
     "x1": "-2",
     "x2": "5",
-    "expr": "-4 \\times x^{2} + 12x + 40",
+    "expr": "-4x^{2} + 12x + 40",
     "f": "f"
   },
   "seed": 91,

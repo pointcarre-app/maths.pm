@@ -1,22 +1,25 @@
 {
   "beacon": "[1ere][sujets0][spé][sujet-1][automatismes][question-2]",
-  "statement": "On considère la relation $F=a+\\\\dfrac\\{b\\}\\{cd\\}$. Lorsque $a=\\dfrac{1}{7}$, $b = 5$, $c = 5$, $d = -\\dfrac{1}{9}$, quelle est la valeur de $F$ ?",
+  "statement": "Soit $F=a+\\dfrac{b}{cd}$. Lorsque $a=\\dfrac{1}{7}$, $b = 5$, $c = 5$, $d = -\\dfrac{1}{10}$, quelle est la valeur de $F$ ?",
+  "statement_html": "<div>Soit $F=a+\\dfrac{b}{cd}$. \nLorsque : $a=\\dfrac{1}{7}$ ; $b = 5$ ; $c = 5$ ; $d = -\\dfrac{1}{10}$, quelle est la valeur de $F$ ?</div>",
   "mask": "F=",
   "answer": {
-    "latex": "\\dfrac{1}{7} + \\dfrac{5}{5-\\dfrac{1}{9}}",
-    "simplified_latex": "-\\dfrac{62}{7}",
+    "latex": [
+      "\\dfrac{1}{7} \\dfrac{5}{5 \\times (-\\dfrac{1}{10})}"
+    ],
+    "simplified_latex": "-\\dfrac{69}{7}",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Integer(-9), Rational(1, 7))",
-      "str": "-9 + 1/7"
+      "sp.srepr": "Add(Integer(-10), Rational(1, 7))",
+      "str": "-10 + 1/7"
     },
-    "formal_repr": "Add(l=Fraction(p=Integer(n=1), q=Integer(n=7)), r=Fraction(p=Integer(n=5), q=Mul(l=Integer(n=5), r=Fraction(p=Integer(n=-1), q=Integer(n=9)))))"
+    "formal_repr": "Add(l=Fraction(p=Integer(n=1), q=Integer(n=7)), r=Fraction(p=Integer(n=5), q=Mul(l=Integer(n=5), r=Fraction(p=Integer(n=-1), q=Integer(n=10)))))"
   },
   "components": {
     "a": "\\dfrac{1}{7}",
     "b": "5",
     "c": "5",
-    "d": "-\\dfrac{1}{9}"
+    "d": "-\\dfrac{1}{10}"
   },
   "seed": 65,
   "generator": "spe_sujet1_auto_02_question",

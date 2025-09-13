@@ -2,7 +2,7 @@
   "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
   "statement": "2 articles coûtent 17.8 euros. Combien coûtent 14 articles ?",
   "answer": {
-    "latex": "\\dfrac{89}{10}14",
+    "latex": "\\dfrac{89}{10} \\times 14",
     "simplified_latex": "\\dfrac{623}{5}",
     "sympy_exp_data": {
       "type": "Mul",

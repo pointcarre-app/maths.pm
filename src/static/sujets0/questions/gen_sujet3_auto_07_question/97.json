@@ -2,7 +2,7 @@
   "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
   "statement": "4 articles coûtent 44 euros. Combien coûtent 12 articles ?",
   "answer": {
-    "latex": "\\dfrac{110}{10}12",
+    "latex": "\\dfrac{110}{10} \\times 12",
     "simplified_latex": "132",
     "sympy_exp_data": {
       "type": "Mul",

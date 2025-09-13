@@ -1,15 +1,16 @@
 {
   "beacon": "[1ere][sujets0][gén][sujet-2][automatismes][question-08]",
-  "statement": "Dévelloper $\\left(-x + 6\\right) \\times \\left(4x -1\\right)$.",
+  "statement": "Développer $\\left(-x + 6\\right) \\times \\left(4x -1\\right)$.",
+  "statement_html": "<div>Développer $\\left(-x + 6\\right) \\times \\left(4x -1\\right)$.</div>",
   "answer": {
-    "latex": "-6 -4 \\times x^{2} + 25x",
-    "simplified_latex": "-6 -4 \\times x^{2} + 25x",
+    "latex": "-4x^{2} + 25x -6",
+    "simplified_latex": "-4x^{2} + 25x -6",
     "sympy_exp_data": {
       "type": "Add",
-      "sp.srepr": "Add(Add(Mul(Integer(-1), Integer(4), Pow(Symbol('x'), Integer(2))), Mul(Integer(25), Symbol('x'))), Integer(-6))",
-      "str": "(-4*x**2 + 25*x) - 6"
+      "sp.srepr": "Add(Mul(Integer(-1), Integer(4), Pow(Symbol('x'), Integer(2))), Add(Mul(Integer(25), Symbol('x')), Integer(-6)))",
+      "str": "-4*x**2 + (25*x - 6)"
     },
-    "formal_repr": "Add(l=Integer(n=-6), r=Add(l=Mul(l=Integer(n=-4), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Mul(l=Integer(n=25), r=Symbol(s='x'))))"
+    "formal_repr": "Add(l=Mul(l=Integer(n=-4), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Add(l=Mul(l=Integer(n=25), r=Symbol(s='x')), r=Integer(n=-6)))"
   },
   "components": {
     "x": "x",
