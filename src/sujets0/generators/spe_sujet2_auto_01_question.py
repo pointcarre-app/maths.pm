@@ -43,10 +43,98 @@ def render_question(*, p_A, p_B_if_A, p_B_if_notA):
     """
 
     # NOTE mad: long string still need to be one line, otherwise doctest execution with backend executor are broken because of the try indentation it makes
-    statement = "On considère l'arbre de probabilité ci-contre. <br>Calculer la probabilité de $B$."
+    # statement = "On considère l'arbre de probabilité ci-contre. <br>Calculer la probabilité de l'évènement $B$."
     graph_description = "A proability tree with event A followed by continonal proabillity of B"
+
+    statement_html = f"""<div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
+    <div style='flex: 1; min-width: 250px;'>On considère l'arbre de probabilité ci-contre. <br>Calculer la probabilité de l'évènement $B$</div>
+    <div style='flex: 0 1 auto;'>  
+        <svg width="300" height="150" style="display: block; max-width: 100%; height: auto; border: 1px solid var(--color-base-300);">
+            <!-- Define arrowhead marker -->
+            <defs>
+                <marker id="arrowhead" markerWidth="6" markerHeight="4" 
+                refX="5" refY="2" orient="auto">
+                <polygon points="0 0, 6 2, 0 4" fill="#333" />
+                </marker>
+            </defs>
+            
+            <!-- First level branches with arrows -->
+            <line x1="30" y1="75" x2="110" y2="45" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="30" y1="75" x2="110" y2="105" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <!-- Second level branches from A with arrows -->
+            <line x1="140" y1="45" x2="220" y2="25" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="140" y1="45" x2="220" y2="55" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <!-- Second level branches from Ā with arrows -->
+            <line x1="140" y1="105" x2="220" y2="95" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="140" y1="105" x2="220" y2="125" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <!-- First level probability labels -->
+            <foreignObject x="55" y="40" width="30" height="15" style="overflow: visible;">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span style="line-height: 1; text-align: center; font-size: 12px;" id="p1">${p_A.as_decimal.latex().replace(".", ",")}$</span>
+                </div>
+            </foreignObject>
+            
+            <!-- First level event labels -->
+            <foreignObject x="115" y="35" width="20" height="15" style="overflow: visible;">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span style="line-height: 1; text-align: center; font-size: 14px;" id="eventA">$A$</span>
+                </div>
+            </foreignObject>
+            
+            <foreignObject x="115" y="100" width="20" height="15" style="overflow: visible;">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span style="line-height: 1; text-align: center; font-size: 14px;" id="eventNotA">$\\bar{{A}}$</span>
+                </div>
+            </foreignObject>
+            
+            <!-- Second level probability labels -->
+            <foreignObject x="170" y="16" width="30" height="15" style="overflow: visible;">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span style="line-height: 1; text-align: center; font-size: 12px;" id="p2">${p_B_if_A.as_decimal.latex().replace(".", ",")}$</span>
+                </div>
+            </foreignObject>
+            
+            <foreignObject x="170" y="120" width="30" height="15" style="overflow: visible;">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span style="line-height: 1; text-align: center; font-size: 12px;" id="p3">${p_B_if_notA.as_decimal.latex().replace(".", ",")}$</span>
+                </div>
+            </foreignObject>
+            
+            <!-- Second level event labels -->
+            <foreignObject x="225" y="20" width="20" height="15" style="overflow: visible;">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span style="line-height: 1; text-align: center; font-size: 14px;" id="eventB1">$B$</span>
+                </div>
+            </foreignObject>
+            
+            <foreignObject x="225" y="50" width="20" height="15" style="overflow: visible;">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span style="line-height: 1; text-align: center; font-size: 14px;" id="eventNotB1">$\\bar{{B}}$</span>
+                </div>
+            </foreignObject>
+            
+            <foreignObject x="225" y="90" width="20" height="15" style="overflow: visible;">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span style="line-height: 1; text-align: center; font-size: 14px;" id="eventB2">$B$</span>
+                </div>
+            </foreignObject>
+            
+            <foreignObject x="225" y="120" width="20" height="15" style="overflow: visible;">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span style="line-height: 1; text-align: center; font-size: 14px;" id="eventNotB2">$\\bar{{B}}$</span>
+                </div>
+            </foreignObject>
+         </svg>
+    </div>
+</div>
+"""
+
     return {
-        "statement": statement,
+        "statement": statement_html,
+        "statement_html": statement_html,
         "graph_description": graph_description,
     }
 
@@ -60,7 +148,7 @@ question = render_question(**components)
 
 
 # Create HTML version with probability tree description
-statement_html = f"<div>{question['statement']}</div>"
+statement_html = question["statement_html"]
 
 missive(
     {
@@ -69,7 +157,10 @@ missive(
         "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
-            "simplified_latex": answer["maths_object"].simplified().latex(),
+            "simplified_latex": [
+                answer["maths_object"].simplified().latex(),
+                answer["maths_object"].simplified().as_decimal.latex().replace(".", ","),
+            ],
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),
         },

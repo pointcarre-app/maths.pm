@@ -2140,10 +2140,10 @@ function generateFragmentsFromResults(results) {
       // Get the niceIdentifier from the first result for this student
       const niceId = byStudent[student][0]?.niceIdentifier || "";
       const headerText = niceId
-        ? `Copie n°${student} (${niceId})`
-        : `Copie n°${student}`;
+        ? `<span class="font-handwritten" style="font-size: 1.5rem;">Copie n°${student}</span> &nbsp;&nbsp;&nbsp;<span class="font-mono">[${niceId}]</span>`
+        : `<span class="font-handwritten">Copie n°${student}</span>`;
 
-      fragments.push(PMFragmentGenerator.createH2(headerText, ["font-mono"]));
+      fragments.push(PMFragmentGenerator.createH2(headerText, []));
       fragments.push(PMFragmentGenerator.createHr(["font-mono"]));
     // }
 
