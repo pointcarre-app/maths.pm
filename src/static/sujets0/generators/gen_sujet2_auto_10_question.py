@@ -80,7 +80,7 @@ missive(
         "statement": question["statement"],
         "statement_html": question["statement_html"],
         "answer": {
-            "latex": answer["maths_object"].latex(),
+            "latex": f"({components['a'].latex()}) \\times ({components['x0'].latex()})^{2} + ({components['b'].latex()}) \\times ({components['x0'].latex()}) + ({components['c'].latex()})",
             "simplified_latex": answer["maths_object"].simplified().latex(),
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),

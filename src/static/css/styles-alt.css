@@ -3,7 +3,9 @@
 
 
 
-
+* {
+  scroll-margin-top: 50px;
+}
 
 
 /**************** Padding-responsiveness ****************/

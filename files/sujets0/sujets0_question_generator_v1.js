@@ -904,10 +904,11 @@ function addPrintStyles() {
             h2, .print-target h2 { foformat: Copy-Seed-Q#nt-size: 16pt !important; }
             h3, .print-target h3 { font-size: 14pt !important; }
             
-            /* Math expressions */
-            .katex, .print-target .katex {
+            /* Math expressions - force base-content/black color for all KaTeX elements */
+            .katex, .print-target .katex,
+            .katex *, .print-target .katex * {
                 font-size: 12pt !important;
-                color: black;
+                color: var(--color-base-content, black) !important;
             }
             
             /* Ensure SVGs scale properly */
