@@ -39,11 +39,11 @@ def render_question(*, p_A, p_B_if_A, p_B_if_notA):
     >>> components = generate_components(None, 0)
     >>> statement = render_question(**components)
     >>> statement["statement"]
-    "On considère l'arbre de probabilité ci-dessous. Calculer la proabilité de B."
+    "On considère l'arbre de probabilité ci-contre. Calculer la proabilité de B."
     """
 
     # NOTE mad: long string still need to be one line, otherwise doctest execution with backend executor are broken because of the try indentation it makes
-    statement = "On considère l'arbre de probabilité ci-dessous. Calculer la proabilité de B."
+    statement = "On considère l'arbre de probabilité ci-contre. <br>Calculer la probabilité de $B$."
     graph_description = "A proability tree with event A followed by continonal proabillity of B"
     return {
         "statement": statement,
@@ -60,22 +60,7 @@ question = render_question(**components)
 
 
 # Create HTML version with probability tree description
-statement_html = f'''
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            On considère l'arbre de probabilité ci-dessous.
-        </div>
-        <div class="alert alert-info">
-            <span class="text-xs">Note: {question.get('graph_description', 'Un arbre de probabilité avec l\''événement A suivi de la probabilité conditionnelle de B')}</span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Calculer la probabilité de B.
-        </div>
-    </div>
-</div>
-'''
+statement_html = f"<div>{question['statement']}</div>"
 
 missive(
     {

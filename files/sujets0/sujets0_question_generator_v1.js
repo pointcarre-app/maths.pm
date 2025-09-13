@@ -140,18 +140,30 @@ const CONFIG = {
 
   // Generator files
   generators: [
-    "spe_sujet1_auto_01_question.py",
-    "spe_sujet1_auto_02_question.py",
-    "spe_sujet1_auto_03_question.py",
-    "spe_sujet1_auto_04_question.py",
-    "spe_sujet1_auto_05_question.py",
-    "spe_sujet1_auto_06_question.py",
-    "spe_sujet1_auto_07_question.py",
-    "spe_sujet1_auto_08_question.py",
-    "spe_sujet1_auto_09_question.py",
-    "spe_sujet1_auto_10_question.py",
-    "spe_sujet1_auto_11_question.py",
-    "spe_sujet1_auto_12_question.py",
+    // "spe_sujet1_auto_01_question.py",
+    // "spe_sujet1_auto_02_question.py",
+    // "spe_sujet1_auto_03_question.py",
+    // "spe_sujet1_auto_04_question.py",
+    // "spe_sujet1_auto_05_question.py",
+    // "spe_sujet1_auto_06_question.py",
+    // "spe_sujet1_auto_07_question.py",
+    // "spe_sujet1_auto_08_question.py",
+    // "spe_sujet1_auto_09_question.py",
+    // "spe_sujet1_auto_10_question.py",
+    // "spe_sujet1_auto_11_question.py",
+    // "spe_sujet1_auto_12_question.py",
+    "spe_sujet2_auto_01_question.py",
+    "spe_sujet2_auto_02_question.py",
+    "spe_sujet2_auto_03_question.py",
+    "spe_sujet2_auto_04_question.py",
+    "spe_sujet2_auto_05_question.py",
+    "spe_sujet2_auto_06_question.py",
+    "spe_sujet2_auto_07_question.py",
+    "spe_sujet2_auto_08_question.py",
+    "spe_sujet2_auto_09_question.py",
+    "spe_sujet2_auto_10_question.py",
+    "spe_sujet2_auto_11_question.py",
+    "spe_sujet2_auto_12_question.py",
     "gen_sujet2_auto_01_question.py",
     "gen_sujet2_auto_02_question.py",
     "gen_sujet2_auto_03_question.py",
@@ -1741,8 +1753,8 @@ function generateFragmentsFromResults(results) {
           <th class="border border-gray-300 px-3 py-2" style="text-align:left !important; width: 25%; min-width: 200px;">
               Infos
           </th>
-          <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Réponse</th>
-          <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Simplifiée</th>
+          <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Calcul</th>
+          <th class="border border-gray-300 px-3 py-2" style="text-align:right !important; width: 37.5%;">Simplification</th>
       </tr>
   </thead>
   <tbody>`;

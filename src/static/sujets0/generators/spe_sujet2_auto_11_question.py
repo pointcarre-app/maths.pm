@@ -11,11 +11,11 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     gen = tg.MathsGenerator(seed)
     x = tm.Symbol(s="x")
-    p = gen.random_integer(1, 100)
+    p = gen.random_integer(1, 10)
 
     # TODO: we could randomize on decimal vs fraction
 
-    a = tm.Decimal(p=p.n, q=100)  # tm.Integer(n=100)
+    a = tm.Fraction(p=p.n, q=10)  # tm.Integer(n=100)
     expr = (x + a) ** tm.Integer(n=2)
 
     return {
@@ -34,7 +34,7 @@ def solve(*, x, a, expr):
     >>> answer["maths_object"].simplified()
     Add(l=Add(l=Pow(base=Symbol(s='x'), exp=Integer(n=2)), r=Mul(l=Decimal(p=100, q=100), r=Symbol(s='x'))), r=Pow(base=Decimal(p=50, q=100), exp=Integer(n=2)))
     """
-    answer = expr
+    answer = tm.group_terms(expr)
     return {
         "maths_object": answer,
     }
@@ -48,8 +48,11 @@ def render_question(*, x, a, expr):
     "Quelle est l\'expression développée de $\\\\left(x + 0,5\\\\right)^\\\\{2\\\\}$ ?"
     """
 
-    statement = f"Quelle est l'expression développée de ${expr.latex()}$ ?"
+    exp_latex_decimal = f"(x+{a.as_decimal.latex().replace('.', ',')})^{2}"
 
+    statement = f"Quelle est l'expression développée de ${exp_latex_decimal}$ ?"
+
+    # statement = ""
     return {
         "statement": statement,
     }
@@ -61,42 +64,41 @@ question = render_question(**components)
 
 
 # Create HTML version with expression to expand
-statement_html = """
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            Quelle est l'expression développée de :
-        </div>
-        <div class="alert alert-info">
-            <span class="text-lg">${expr.latex()}$</span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Développer et simplifier l'expression.
-        </div>
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
-missive(
-    {
-        "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-11]",
-        "statement": question["statement"],
-        "statement_html": statement_html,
-        "answer": {
-            "latex": answer["maths_object"].latex(),
-            "simplified_latex": answer["maths_object"].simplified().latex(),
-            "sympy_exp_data": answer["maths_object"].sympy_expr_data,
-            "formal_repr": repr(answer["maths_object"]),
-        },
-        "components": {
-            "x": components["x"].latex(),
-            "a": components["a"].latex(),
-            "expr": components["expr"].latex(),
-        },
-    }
+
+first_order_term_latex = (
+    (tm.Integer(n=2) * components["a"]).simplified().as_decimal.latex().replace(".", ",")
 )
-# print("Statement:", question["statement"])
-# print("Answer:", answer["maths_object"])
-# print("Simplified answer:", answer["maths_object"].simplified())
-# print("LaTeX representation:", answer["maths_object"].latex())
+zero_order_term_latex = (
+    (components["a"] ** tm.Integer(n=2)).simplified().as_decimal.latex().replace(".", ",")
+)
+
+
+missive_dict = {
+    "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-11]",
+    "statement": question["statement"],
+    "statement_html": statement_html,
+    "answer": {
+        "latex": answer["maths_object"].latex(),
+        "simplified_latex": [
+            answer["maths_object"].latex(),
+            "x^{2} + " + f"{first_order_term_latex}x + {zero_order_term_latex}",
+        ],
+        "sympy_exp_data": answer["maths_object"].sympy_expr_data,
+        "formal_repr": repr(answer["maths_object"]),
+    },
+    "components": {
+        "x": components["x"].latex(),
+        "a": components["a"].latex(),
+        "expr": components["expr"].latex(),
+    },
+}
+
+
+try:
+    missive(missive_dict)
+except NameError:
+    from pprint import pprint
+
+    pprint(missive_dict)

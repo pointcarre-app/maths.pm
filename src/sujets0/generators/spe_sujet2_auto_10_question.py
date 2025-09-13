@@ -82,14 +82,8 @@ def render_question(*, root1, root2, a1, b1, a2, b2, f, interval, x):
 
     func_def = tm.Equality(l=f(x), r=(a1 * x + b1) * (a2 * x + b2))
 
-    statement = (
-        r"""La fonction ${"""
-        + f.name
-        + r"""}$ définie sur $\\mathbb\{R\}$ par $"""
-        + func_def.latex()
-        + "$. "
-    )
-    statement += f"Quel est le signe de {f.name} sur l'intervalle ${interval.latex()}$ ?"
+    statement = f"""La fonction ${f.name}$ définie sur $\\mathbb{{R}}$ par ${func_def.latex().replace("\\times", "")}$. """
+    statement += "<br>Établir le tableau de signes de $f$ sur $\\mathbb{R}$."
     return {
         "statement": statement,
     }
@@ -110,47 +104,35 @@ func_def = tm.Equality(
     * (components["a2"] * components["x"] + components["b2"]),
 )
 
-statement_html = """
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            La fonction ${components["f"].name}$ est définie sur $\\mathbb{R}$ par :
-        </div>
-        <div class="alert alert-info mb-3">
-            <span class="text-lg">${func_def.latex()}$</span>
-        </div>
-        <div class="text-sm mb-3">
-            Sur l'intervalle : <span class="badge badge-primary">${components["interval"].latex()}$</span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Quel est le signe de ${components["f"].name}$ sur cet intervalle ?
-        </div>
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
-missive(
-    {
-        "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
-        "statement": question["statement"],
-        "statement_html": statement_html,
-        "answer": {
-            "latex": answer["maths_object"].latex(),
-            "simplified_latex": answer["maths_object"].simplified().latex(),
-            "sympy_exp_data": answer["maths_object"].sympy_expr_data,
-            "formal_repr": repr(answer["maths_object"]),
-        },
-        "components": {
-            "root1": components["root1"].latex(),
-            "root2": components["root2"].latex(),
-            "a1": components["a1"].latex(),
-            "a2": components["a2"].latex(),
-            "b1": components["b1"].latex(),
-            "b2": components["b2"].latex(),
-            "interval": components["interval"].latex(),
-            "x": components["x"].latex(),
-            "f": components["f"].name,
-        },
-    }
-)
+missive_dict = {
+    "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-10]",
+    "statement": question["statement"],
+    "statement_html": statement_html,
+    "answer": {
+        "latex": answer["maths_object"].latex(),
+        "simplified_latex": answer["maths_object"].simplified().latex(),
+        "sympy_exp_data": answer["maths_object"].sympy_expr_data,
+        "formal_repr": repr(answer["maths_object"]),
+    },
+    "components": {
+        "root1": components["root1"].latex(),
+        "root2": components["root2"].latex(),
+        "a1": components["a1"].latex(),
+        "a2": components["a2"].latex(),
+        "b1": components["b1"].latex(),
+        "b2": components["b2"].latex(),
+        "interval": components["interval"].latex(),
+        "x": components["x"].latex(),
+        "f": components["f"].name,
+    },
+}
+
+
+try:
+    missive(missive_dict)
+except NameError:
+    from pprint import pprint
+
+    pprint(missive_dict)

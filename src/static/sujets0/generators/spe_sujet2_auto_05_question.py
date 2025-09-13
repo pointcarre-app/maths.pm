@@ -3,6 +3,18 @@ import teachers.maths as tm
 from teachers.defaults import SEED
 
 
+# TODO selfb : too complex
+
+# Current code produces:
+# p = (x*y)^(n1+n2)
+# q = x^n1
+# Result: ((xy)^(n1+n2))/x^n1
+# To get ((xy)^n)/x^n, you need:
+
+
+# HYPERCUBE
+
+
 def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """[sujets0][spé][sujet-2][automatismes][question-?]
     >>> generate_components(None, 0)
@@ -11,16 +23,14 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     gen = tg.MathsGenerator(seed)
 
-    x = gen.random_element_from([2, 3, 5])
-    y = x
-    while y == x:
-        y = gen.random_element_from([2, 3, 5])
-    n1 = gen.random_integer(1, 10)
-    n2 = gen.random_integer(1, 10)
+    x = gen.random_element_from([2, 3, 4, 5, 6])
+    y = gen.random_element_from([2, 3])
+    n1 = gen.random_integer(2, 3)  # no 1
+    n2 = gen.random_integer(2, 4)  # no 1
     x, y = tm.Integer(n=x), tm.Integer(n=y)
 
     # TODO: difficulty could swith p and q
-    p = tm.Pow(base=(x * y).simplified(), exp=(n1 + n2).simplified())
+    p = tm.Pow(base=(x * y).simplified(), exp=(n1 * n2).simplified())
     q = tm.Pow(base=x, exp=n1)
     expr = tm.Fraction(p=p, q=q)
 
@@ -47,10 +57,12 @@ def render_question(*, x, y, n1, n2, expr):
     >>> components= generate_components(None, 0)
     >>> statement = render_question(**components)
     >>> statement["statement"]
-    'On considère le nombre $N=\\\\\\\\dfrac\\\\{6^\\\\{14\\\\}\\\\}\\\\{3^\\\\{5\\\\}\\\\}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers.'
+    'On considère le nombre $N=\\\\\\\\dfrac\\\\{6^\\\\{14\\\\}\\\\}\\\\{3^\\\\{5\\\\}\\\\}$. Exprimer $N$ sous la forme d'un entier.'
     """
 
-    statement = f"On considère le nombre $N={expr.latex()}$. Simplifier $N$ tout en conservant la décomposition en facteurs premiers."
+    statement = (
+        f"On considère le nombre $N={expr.latex()}$. Exprimer $N$ sous la forme d'un entier."
+    )
 
     return {
         "statement": statement,
@@ -63,22 +75,7 @@ question = render_question(**components)
 
 
 # Create HTML version with prime factorization
-statement_html = """
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            On considère le nombre :
-        </div>
-        <div class="alert alert-info">
-            <span class="text-lg">$N = {expr.latex()}$</span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Simplifier $N$ tout en conservant la décomposition en facteurs premiers.
-        </div>
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
 missive(
     {

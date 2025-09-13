@@ -4,7 +4,7 @@ title_html: Data Viz
 # is_hidden: true
 is_beta: true
 subtitle_html: Représentations de données (Python et KS)
-description: "Représenter des données en utilisant des librairies Python : Matplotlib et Bokeh, et une librairie JS : D3.js."
+description: "Dans le contexte d'une formation à forte composante mathématiques, apprendre à représenter des données en utilisant les librairies Python : Matplotlib et Bokeh, et une librairie JS : D3.js."
 local_path: /dataviz
 source_link: ""
 color: success

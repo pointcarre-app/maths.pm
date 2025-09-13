@@ -1,3 +1,5 @@
+import random
+
 import teachers.generator as tg
 import teachers.maths as tm
 from teachers.defaults import SEED
@@ -11,18 +13,28 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     gen = tg.MathsGenerator(seed)
 
-    q1 = gen.random_integer(2, 4)
-    p1 = tm.Fraction(p=1, q=q1)
-    q2 = gen.random_integer(2, 4)
-    p2 = tm.Fraction(p=1, q=q2)
+    # Mixing of p and q in names careful : p cant  be name for both numerator and fraction
+
+    # q1 = gen.random_integer(2, 4)
+    # p1 = tm.Fraction(p=1, q=q1)
+    # q2 = gen.random_integer(2, 4)
+    # p2 = tm.Fraction(p=1, q=q2)
+
+    q1 = random.choice([2, 4, 5])
+
+    f1_tm = tm.Fraction(p=1, q=q1)
+
+    q2 = random.choice([2, 4, 5])
+
+    f2_tm = tm.Fraction(p=1, q=q2)
 
     return {
-        "p1": p1,
-        "p2": p2,
+        "f1_tm": f1_tm,
+        "f2_tm": f2_tm,
     }
 
 
-def solve(*, p1, p2):
+def solve(*, f1_tm, f2_tm):
     """[sujets0][spé][sujet-1][automatismes][question-?]
     >>> components= generate_components(None, 0)
     >>> answer = solve(**components)
@@ -31,13 +43,13 @@ def solve(*, p1, p2):
     >>> answer["maths_object"].simplified()
     Fraction(p=Integer(n=1), q=Integer(n=9))
     """
-    answer = p1 * p2
+    answer = f1_tm * f2_tm
     return {
         "maths_object": answer,
     }
 
 
-def render_question(*, p1, p2):
+def render_question(*, f1_tm, f2_tm):
     r"""[sujets0][spé][sujet-1][automatismes][question-?]
     >>> components= generate_components(None, 0)
     >>> statement = render_question(**components)
@@ -45,13 +57,15 @@ def render_question(*, p1, p2):
     "Dans un lycée, le le tiers des élèves sont internes, parmi eux, le tiers sont des gauchers. Calculer le pourcentage de gauchers internes par rapport à l'ensemble des élèves du lycée."
     """
 
+    # selfb : removed 1/3 to ensure proper exact decimals
+
     literal_proportions = {
         2: "la moitié",
-        3: "le tiers",
         4: "le quart",
+        5: "le cinquième",
     }
 
-    statement = f"Dans un lycée, le {literal_proportions[p1.q.n]} des élèves sont internes, parmi eux, {literal_proportions[p2.q.n]} sont des gauchers. Calculer le pourcentage de gauchers internes par rapport à l'ensemble des élèves du lycée."
+    statement = f"Dans un lycée, {literal_proportions[f1_tm.q.n]} des élèves sont internes, parmi eux, {literal_proportions[f2_tm.q.n]} sont des gauchers. Calculer le pourcentage d'élèves qui sont gauchers et internes par rapport à l'ensemble des élèves du lycée."
 
     return {
         "statement": statement,
@@ -63,54 +77,39 @@ answer = solve(**components)
 question = render_question(**components)
 
 
-# Create HTML version with nested proportions
-literal_proportions = {
-    2: "la moitié",
-    3: "le tiers",
-    4: "le quart",
+statement_html = f"<div>{question['statement']}</div>"
+
+missive_dict = {
+    "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-4]",
+    "statement": question["statement"],
+    "statement_html": statement_html,
+    "answer": {
+        "latex": answer["maths_object"].latex(),
+        "simplified_latex": [
+            (answer["maths_object"] * tm.Integer(n=100)).simplified().latex().replace(".", ",")
+            + "\%",
+            (answer["maths_object"] * tm.Integer(n=100))
+            .simplified()
+            .as_decimal.latex()
+            .replace(".", ",")
+            + "\%",
+        ],
+        "sympy_exp_data": answer["maths_object"].sympy_expr_data,
+        "formal_repr": repr(answer["maths_object"]),
+    },
+    "components": {
+        "f1_tm": components["f1_tm"].latex(),
+        "f2_tm": components["f2_tm"].latex(),
+    },
 }
 
-statement_html = f"""
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">Dans un lycée :</div>
-        <div class="stats stats-vertical shadow">
-            <div class="stat">
-                <div class="stat-title">Elèves internes</div>
-                <div class="stat-value text-primary">{literal_proportions[components["p1"].q.n]}</div>
-                <div class="stat-desc">des élèves</div>
-            </div>
-            <div class="stat">
-                <div class="stat-title">Gauchers parmi les internes</div>
-                <div class="stat-value text-secondary">{literal_proportions[components["p2"].q.n]}</div>
-                <div class="stat-desc">sont des gauchers</div>
-            </div>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Calculer le pourcentage de gauchers internes par rapport à l'ensemble des élèves du lycée.
-        </div>
-    </div>
-</div>
-"""
 
-missive(
-    {
-        "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-4]",
-        "statement": question["statement"],
-        "statement_html": statement_html,
-        "answer": {
-            "latex": answer["maths_object"].latex(),
-            "simplified_latex": answer["maths_object"].simplified().latex(),
-            "sympy_exp_data": answer["maths_object"].sympy_expr_data,
-            "formal_repr": repr(answer["maths_object"]),
-        },
-        "components": {
-            "p1": components["p1"].latex(),
-            "p2": components["p2"].latex(),
-        },
-    }
-)
+try:
+    missive(missive_dict)
+except NameError:
+    from pprint import pprint
+
+    pprint(missive_dict)
 # print("Statement:", question["statement"])
 # print("Answer:", question["maths_object"])
 # print("Simplified answer:", question["maths_object"].simplified())

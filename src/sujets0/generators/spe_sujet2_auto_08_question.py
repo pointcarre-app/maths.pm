@@ -42,6 +42,9 @@ def solve(*, x, y, a, c):
     return {"maths_object": maths_object}
 
 
+## TODO selfb : visibility (prévise ordonnée à l'origine entier?? bof)
+
+
 def render_question(*, x, y, a, c):
     """[sujets0][spé][sujet-2][automatismes][question-9]
     >>> components= generate_components(None, 0)
@@ -51,11 +54,11 @@ def render_question(*, x, y, a, c):
     >>> statement["graph_description"]
     "La droite d\'équation y = 1x + 1"
     """
-    statement = f"La courbe ci-contre représente un droite dont le coefficient directeur vaut 1, en valeur absolue. Donner l'équation de la droite sous la forme $a{x.latex()} + b{y.latex()} + c = 0$."
+    statement = f"La courbe ci-contre représente une droite dont le coefficient directeur vaut $1$, en valeur absolue (c'est à dire qu'il vaut $1$ ou $-1$). Donner l'équation de la droite sous la forme $a{x.latex()} + b{y.latex()} + c = 0$."
 
-    graph_description = f"La droite d'équation y = {a.n}x + {c.n}"
+    # graph_description = f"La droite d'équation y = {a.n}x + {c.n}"
 
-    return {"statement": statement, "graph_description": graph_description}
+    return {"statement": statement}
 
 
 components = generate_components(None)
@@ -67,20 +70,7 @@ print(components | answer | question)
 
 
 # Create HTML version with graph description
-statement_html = f"""
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            La courbe ci-contre représente une droite dont le coefficient directeur vaut 1, en valeur absolue.
-        </div>
-        {f'<div class="text-xs text-base-content/60 italic mb-2">Note: {question.get("graph_description", "")}</div>' if "graph_description" in question else ""}
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Donner l'équation de la droite sous la forme <span class="badge badge-primary">$a{x.latex()} + b{y.latex()} + c = 0$</span>
-        </div>
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
 missive(
     {

@@ -51,13 +51,11 @@ def render_question(*, n1: tm.Integer, n2: tm.Integer):
         4: "d'un quart",
     }
 
-
     statement = f"Calculer {literal_inverse_n1[n1.n]} {literal_inverse_n2[n2.n]} ?"
 
     return {
         "statement": statement,
     }
-
 
 
 components = generate_components(None)

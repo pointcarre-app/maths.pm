@@ -49,9 +49,9 @@ def render_question(*, n, x, relation):
     """
 
     statement = (
-        r"On note $\\mathcal\{S\}$ l'ensemble des solutions de l'équation $"
+        "On note $\\mathcal{S}$ l'ensemble des solutions de l'équation $"
         + f"{x.latex()}^2={n.latex()}"
-        + r"$ sur $\\mathbb\{R\}$. Calculer $\\mathcal\{S\}$"
+        + "$ sur $\\mathbb{R}$.<br>Résoudre cette équation et en déduire $\\mathcal{S}$."
     )
 
     return {
@@ -68,19 +68,7 @@ question = render_question(**components)
 
 
 # Create HTML version with equation
-statement_html = """
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="alert alert-info mb-3">
-            <span>On note $\\mathcal{S}$ l'ensemble des solutions de l'équation <span class="badge badge-primary">${x.latex()}^2={n.latex()}$</span> sur $\\mathbb{R}$</span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Calculer $\\mathcal{S}$
-        </div>
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
 missive(
     {
@@ -89,7 +77,12 @@ missive(
         "statement_html": statement_html,
         "answer": {
             "latex": answer["maths_object"].latex(),
-            "simplified_latex": answer["maths_object"].simplified().latex(),
+            "simplified_latex": answer["maths_object"]
+            .simplified()
+            .latex()
+            .replace(",", ";")
+            .replace("(", "\\{")
+            .replace(")", "\\}"),
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),
         },

@@ -45,9 +45,9 @@ def render_question(*, v, a, r, expr):
         "Si un point mobile suit une trajectoire circulaire de rayon $R$, en mètre ($m$), son accélération centripète $u$ (en $m/s^2$) s'exprime en fonction de la vitesse $v$ (en $m/s$) de la manière suivante: $$"
         + expr.latex()
         + "$$ Exprimer $v$ en fonction de "
-        + a.latex()
+        + f"${a.latex()}$"
         + " et "
-        + r.latex()
+        + f"${r.latex()}$"
         + "."
     )
 
@@ -62,22 +62,7 @@ question = render_question(**components)
 
 
 # Create HTML version with physics formula
-statement_html = f"""
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            Si un point mobile suit une trajectoire circulaire de rayon $R$ (en mètre), son accélération centripète $a$ (en $m/s^2$) s'exprime en fonction de la vitesse $v$ (en $m/s$) de la manière suivante :
-        </div>
-        <div class="alert alert-info mb-3">
-            <span class="text-lg">${{expr.latex()}}$</span>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            Exprimer $v$ en fonction de ${a.latex()}$ et ${r.latex()}$.
-        </div>
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
 missive(
     {

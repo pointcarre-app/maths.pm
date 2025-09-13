@@ -3,9 +3,27 @@
 ###############################################################################
 
 
+import random
 import teachers.generator as tg
 import teachers.maths as tm
 from teachers.defaults import SEED
+
+
+# TODO selfb: discuss
+# For p = 10:
+
+# Formula: -100 × (10/100)² = -100 × 0.01 = -1%
+# Verification: 1.10 × 0.90 = 0.99 → -1%
+
+# For p = 20:
+
+# Formula: -100 × (20/100)² = -100 × 0.04 = -4%
+# Verification: 1.20 × 0.80 = 0.96 → -4%
+
+# For p = 50:
+
+# Formula: -100 × (50/100)² = -100 × 0.25 = -25%
+# Verification: 1.50 × 0.50 = 0.75 → -25%
 
 
 def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
@@ -14,24 +32,37 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     {'p': Integer(n=65), 'direction': Integer(n=1)}
     """
     gen = tg.MathsGenerator(seed)
-
-    p = gen.random_integer(1, 20)
-    p = tm.Integer(n=5 * p.n)
+    p = random.choice([tm.Integer(n=10), tm.Integer(n=20), tm.Integer(n=50)])
 
     direction = tm.Integer(n=gen.random_element_from((-1, 1)))
     return {"p": p, "direction": direction}
+
+
+# TODO selfb: compare to exercices grom spe_sujet_1 avec retours
 
 
 def solve(*, p, direction):
     """[sujets0][spé][sujet-2][automatismes][question-3]
     >>> answer = solve(p=tm.Integer(n=65), direction=tm.Integer(n=1))
     >>> answer["maths_object"]
-    Mul(l=Integer(n=-1), r=Pow(base=Fraction(p=Integer(n=65), q=Integer(n=100)), exp=Integer(n=2)))
+    Mul(l=Integer(n=-100), r=Pow(base=Fraction(p=Integer(n=65), q=Integer(n=100)), exp=Integer(n=2)))
     >>> answer["maths_object"].simplified()
-    Fraction(p=Integer(n=-169), q=Integer(n=400))
+    Fraction(p=Integer(n=-4225), q=Integer(n=100))
     """
-    maths_object = -((p / tm.Integer(n=100)) ** tm.Integer(n=2))
+    maths_object = -tm.Integer(n=100) * ((p / tm.Integer(n=100)) ** tm.Integer(n=2))
     return {"maths_object": maths_object}
+
+
+# def solve(*, p, direction):
+#     """[sujets0][spé][sujet-2][automatismes][question-3]
+#     >>> answer = solve(p=tm.Integer(n=65), direction=tm.Integer(n=1))
+#     >>> answer["maths_object"]
+#     Mul(l=Integer(n=-1), r=Pow(base=Fraction(p=Integer(n=65), q=Integer(n=100)), exp=Integer(n=2)))
+#     >>> answer["maths_object"].simplified()
+#     Fraction(p=Integer(n=-169), q=Integer(n=400))
+#     """
+#     maths_object = -((p / tm.Integer(n=100)) ** tm.Integer(n=2))
+#     return {"maths_object": maths_object}
 
 
 def render_question(*, p, direction):
@@ -40,14 +71,14 @@ def render_question(*, p, direction):
     >>> direction = tm.Integer(n=1)
     >>> statement = render_question(p=p, direction=direction)
     >>> statement["statement"]
-    "Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?"
+    "Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. A l'issue de ces deux variations, quel est le pourcentage d'évolution ?"
     """
     if direction == -1:
         dir1, dir2 = "diminue", "augmente"
     else:
         dir1, dir2 = "augmente", "diminue"
 
-    statement = f"""Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?"""
+    statement = f"""Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. À l'issue de ces deux variations, quel est le pourcentage d'évolution ?"""
 
     return {
         "statement": statement,
@@ -55,58 +86,42 @@ def render_question(*, p, direction):
 
 
 components = generate_components(None)
-print("components ok")
 answer = solve(**components)
-print("answer ok")
 question = render_question(**components)
-print("question ok")
 
 
 # print(components | answer | question)
 
 
-# Create HTML version - same as sujet1 question 4
-if components["direction"].n == -1:
-    dir1, dir2 = "diminue", "augmente"
-else:
-    dir1, dir2 = "augmente", "diminue"
+# # Create HTML version - same as sujet1 question 4
+# if components["direction"].n == -1:
+#     dir1, dir2 = "diminue", "augmente"
+# else:
+#     dir1, dir2 = "augmente", "diminue"
 
-statement_html = f"""
-<div class="card bg-base-100 shadow-sm">
-    <div class="card-body">
-        <div class="text-sm mb-3">
-            Le prix d'un article est noté $P$.
-        </div>
-        <div class="steps steps-vertical">
-            <div class="step step-primary">
-                <div class="text-sm">Ce prix {dir1} de <span class="badge badge-warning">${{p.latex()}}\\%$</span></div>
-            </div>
-            <div class="step step-primary">
-                <div class="text-sm">Puis {dir2} de <span class="badge badge-warning">${{p.latex()}}\\%$</span></div>
-            </div>
-        </div>
-        <div class="divider"></div>
-        <div class="text-sm font-semibold">
-            A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?
-        </div>
-    </div>
-</div>
-"""
+statement_html = f"<div>{question['statement']}</div>"
 
-missive(
-    {
-        "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-3]",
-        "statement": question["statement"],
-        "statement_html": statement_html,
-        "answer": {
-            "latex": answer["maths_object"].latex(),
-            "simplified_latex": answer["maths_object"].simplified().latex(),
-            "sympy_exp_data": answer["maths_object"].sympy_expr_data,
-            "formal_repr": repr(answer["maths_object"]),
-        },
-        "components": {
-            "p": components["p"].latex(),
-            "direction": components["direction"].latex(),
-        },
-    }
-)
+
+missive_dict = {
+    "beacon": "[1ere][sujets0][spé][sujet-2][automatismes][question-3]",
+    "statement": question["statement"],
+    "statement_html": statement_html,
+    "answer": {
+        "latex": [answer["maths_object"].latex()],
+        "simplified_latex": answer["maths_object"].simplified().latex() + " \\% ",
+        "sympy_exp_data": answer["maths_object"].sympy_expr_data,
+        "formal_repr": repr(answer["maths_object"]),
+    },
+    "components": {
+        "p": components["p"].latex(),
+        "direction": components["direction"].latex(),
+    },
+}
+
+
+try:
+    missive(missive_dict)
+except NameError:
+    from pprint import pprint
+
+    pprint(missive_dict)
