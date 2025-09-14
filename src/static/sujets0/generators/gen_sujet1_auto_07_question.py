@@ -12,7 +12,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     gen = tg.MathsGenerator(seed)
 
     n1 = gen.random_integer(0, 10)
-    n2 = gen.random_integer(-10, -1)
+    n2 = gen.random_integer(-3, -1)
 
     return {
         "n1": n1,
@@ -41,10 +41,12 @@ def render_question(*, n1, n2):
     "Donner l\'arrondi de $10^{6} + 10^{-4}$ à l\'unité près, en utilisant l\'écriture scientifique."
     """
     expr = tm.Integer(n=10) ** n1 + tm.Integer(n=10) ** n2
-    statement = f"Donner l'arrondi de ${expr.latex()}$ à l'unité près, en utilisant l'écriture scientifique."
+    statement = f"Donner l'arrondi de ${expr.latex()}$ à l'unité près. Donner le résultat sous la forme d'un entier."
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -57,6 +59,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-7]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

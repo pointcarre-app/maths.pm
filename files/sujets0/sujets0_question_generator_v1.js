@@ -152,6 +152,7 @@ const CONFIG = {
     "spe_sujet1_auto_10_question.py",
     "spe_sujet1_auto_11_question.py",
     "spe_sujet1_auto_12_question.py",
+    //
     "spe_sujet2_auto_01_question.py",
     "spe_sujet2_auto_02_question.py",
     "spe_sujet2_auto_03_question.py",
@@ -164,6 +165,20 @@ const CONFIG = {
     "spe_sujet2_auto_10_question.py",
     "spe_sujet2_auto_11_question.py",
     "spe_sujet2_auto_12_question.py",
+    //
+    "gen_sujet1_auto_01_question.py",
+    "gen_sujet1_auto_02_question.py",
+    "gen_sujet1_auto_03_question.py",
+    "gen_sujet1_auto_04_question.py",
+    "gen_sujet1_auto_05_question.py",
+    "gen_sujet1_auto_06_question.py",
+    "gen_sujet1_auto_07_question.py",
+    "gen_sujet1_auto_08_question.py",
+    "gen_sujet1_auto_09_question.py",
+    "gen_sujet1_auto_10_question.py",
+    "gen_sujet1_auto_11_question.py",
+    "gen_sujet1_auto_12_question.py",
+    //
     "gen_sujet2_auto_01_question.py",
     "gen_sujet2_auto_02_question.py",
     "gen_sujet2_auto_03_question.py",
@@ -176,6 +191,19 @@ const CONFIG = {
     "gen_sujet2_auto_10_question.py",
     "gen_sujet2_auto_11_question.py",
     "gen_sujet2_auto_12_question.py",
+    //
+    "gen_sujet3_auto_01_question.py",
+    "gen_sujet3_auto_02_question.py",
+    "gen_sujet3_auto_03_question.py",
+    "gen_sujet3_auto_04_question.py",
+    "gen_sujet3_auto_05_question.py",
+    "gen_sujet3_auto_06_question.py",
+    "gen_sujet3_auto_07_question.py",
+    "gen_sujet3_auto_08_question.py",
+    "gen_sujet3_auto_09_question.py",
+    "gen_sujet3_auto_10_question.py",
+    "gen_sujet3_auto_11_question.py",
+    "gen_sujet3_auto_12_question.py",
   ],
 
   // Graph mappings
@@ -282,7 +310,7 @@ async function executeGeneratorWithSeed(filename, seed) {
   }
 
   const basePath = getBasePath();
-  const url = `${basePath}/static/sujets0/generators/${filename}`;
+  const url = `${basePath}/static/sujets0/generators/${filename}?v=${Date.now()}`;
 
   try {
     const response = await fetch(url);

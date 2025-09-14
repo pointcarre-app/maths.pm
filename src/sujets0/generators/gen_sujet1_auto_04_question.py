@@ -1,3 +1,4 @@
+import random
 import teachers.generator as tg
 import teachers.maths as tm
 from teachers.defaults import SEED
@@ -10,8 +11,11 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """
     gen = tg.MathsGenerator(seed)
 
-    p = gen.random_integer(1, 20)
-    p = tm.Integer(n=5 * p.n) / tm.Integer(n=100)
+    multiplier_int = random.choice([1, 2, 4, 6])
+    p = tm.Integer(n=5 * multiplier_int) / tm.Integer(n=100)
+
+    # Mène donc à p = 5% ou 10% ou 20% ou 30%
+    # Donc
 
     return {"p": p}
 
@@ -25,7 +29,7 @@ def solve(*, p):
     >>> answer["maths_object"].simplified()
     Fraction(p=Integer(n=689), q=Integer(n=400))
     """
-    maths_object = tm.Integer(n=2)*p + p ** tm.Integer(n=2)
+    maths_object = (tm.Integer(n=1) + p) * (tm.Integer(n=1) + p) - tm.Integer(n=1)
     return {"maths_object": maths_object}
 
 
@@ -37,10 +41,12 @@ def render_question(*, p):
     "Un article augmente de $\\\\dfrac{65}{100}\\\\%$ puis de nouveau de $\\\\dfrac{65}{100}\\\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?"
     """
 
-    statement = f"""Un article augmente de ${p.latex()}\\%$ puis de nouveau de ${p.latex()}\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?"""
+    statement = f"""Un article augmente de ${(tm.Integer(n=100) * p).simplified().as_decimal.latex().replace(".", ",")}\\%$ puis de nouveau de ${(tm.Integer(n=100) * p).simplified().as_decimal.latex().replace(".", ",")}\\%$. A l'issue de ces deux variations, quel est le pourcentage d'évolution ?"""
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -56,9 +62,14 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-4]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
-            "simplified_latex": answer["maths_object"].simplified().latex(),
+            "simplified_latex": [
+                answer["maths_object"].simplified().latex() + "\\%",
+                (answer["maths_object"] * tm.Integer(n=100)).simplified().as_decimal.latex()
+                + "\\%",
+            ],
             "sympy_exp_data": answer["maths_object"].sympy_expr_data,
             "formal_repr": repr(answer["maths_object"]),
         },

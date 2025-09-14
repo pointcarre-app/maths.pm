@@ -51,10 +51,12 @@ def render_question(*, n1: tm.Integer, n2: tm.Integer):
         4: "d'un quart",
     }
 
-    statement = f"Calculer {literal_inverse_n1[n1.n]} {literal_inverse_n2[n2.n]} ?"
+    statement = f"Quelle fraction représente {literal_inverse_n1[n1.n]} {literal_inverse_n2[n2.n]} ?<br><span class='italic'>Note : le cinquième de la moitié est représenté par la fraction $\\dfrac{{1}}{{10}}$.</span>"
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -66,6 +68,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-5]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

@@ -47,7 +47,7 @@ def solve(*, f, a, b, c):
     if f.name == "moyenne":
         maths_object = (a + b + c) / tm.Integer(n=3)
     elif f.name == "médiane":
-        l = sorted([a,b,c], key=lambda x: x.eval())
+        l = sorted([a, b, c], key=lambda x: x.eval())
         maths_object = l[1]
     else:
         raise ValueError(f"Unknown function {f.name}")
@@ -61,11 +61,13 @@ def render_question(*, f, a, b, c):
     >>> statement["statement"]
     'Calcluer la $moyenne$ de la série A : -2 ; 7 ; 94'
     """
-    l = sorted([a,b,c], key=lambda x: x.eval())
-    statement = f"Calcluer la ${f.latex()}$ de la série A : {l[0].latex()} ; {l[1].latex()} ; {l[2].latex()}"
+    l = sorted([a, b, c], key=lambda x: x.eval())
+    statement = f"Calculer la {f.latex()} de la série $A = {{ {l[0].latex()} ; {l[1].latex()} ; {l[2].latex()} }}$"
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -81,6 +83,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-12]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

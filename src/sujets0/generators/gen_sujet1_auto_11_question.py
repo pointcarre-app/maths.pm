@@ -34,7 +34,7 @@ def solve(*, x, a, b):
     >>> answer["maths_object"].simplified()
     Add(l=Add(l=Mul(l=Integer(n=9), r=Pow(base=Symbol(s='x'), exp=Integer(n=2))), r=Mul(l=Integer(n=24), r=Symbol(s='x'))), r=Integer(n=16))
     """
-    maths_object = (a*x + b) ** tm.Integer(n=2)
+    maths_object = (a * x + b) ** tm.Integer(n=2)
     return {"maths_object": maths_object}
 
 
@@ -45,13 +45,14 @@ def render_question(*, x, a, b):
     >>> statement["statement"]
     'Développer $\\\\left(3x + 4\\\\right)^{2}$'
     """
-    expr = (a*x + b) ** tm.Integer(n=2)
-
+    expr = (a * x + b) ** tm.Integer(n=2)
 
     statement = f"Développer ${expr.latex()}$"
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -67,6 +68,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-11]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

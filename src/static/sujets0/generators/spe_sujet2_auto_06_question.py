@@ -17,7 +17,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     prefix_joules_to_multiply_by_power = (tm.Integer(n=18) * multiple).simplified()
 
     # Choose power of 10 (either 10^6 or 10^12)
-    power = tm.Integer(n=random.choice([6, 12]))
+    power = tm.Integer(n=random.choice([6, 8]))
 
     # Total energy in Joules
     energy_joules = prefix_joules_to_multiply_by_power * (tm.Integer(n=10) ** power)

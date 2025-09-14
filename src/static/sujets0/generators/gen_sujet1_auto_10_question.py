@@ -16,7 +16,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     while a.n == 0 or p.n == 0:
         a = gen.random_integer(-9, 9)
         p = gen.random_integer(-9, 9)
-    
+
     c = gen.random_integer(1, 9)
     q = gen.random_integer(1, 9)
 
@@ -45,7 +45,7 @@ def solve(*, x, f, x0, a, b, c):
     >>> answer["maths_object"].simplified()
     Fraction(p=Integer(n=159), q=Integer(n=5))
     """
-    maths_object = a + b*(x0-c) ** tm.Integer(n=2)
+    maths_object = a + b * (x0 - c) ** tm.Integer(n=2)
     return {"maths_object": maths_object}
 
 
@@ -56,13 +56,14 @@ def render_question(*, x, x0, f, a, b, c):
     >>> statement["statement"]
     "On définit la function $f$ par $f(x)=3 + \\\\dfrac{4}{5}\\\\left(x -1\\\\right)^{2}$. Calculer l'image de $7$ par $f$."
     """
-    expr = a + b*(x-c) ** tm.Integer(n=2)
+    expr = a + b * (x - c) ** tm.Integer(n=2)
 
-
-    statement = f"On définit la function ${f.latex()}$ par ${f(x).latex()}={expr.latex()}$. Calculer l'image de ${x0.latex()}$ par ${f.latex()}$."
+    statement = f"On considère la fonction ${f.latex()}$ définiepar ${f(x).latex()}={expr.latex()}$. Calculer l'image de ${x0.latex()}$ par ${f.latex()}$."
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -78,6 +79,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-10]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

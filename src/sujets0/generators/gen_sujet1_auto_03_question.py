@@ -10,24 +10,22 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """
 
     gen = tg.MathsGenerator(seed)
-    a = tm.Fraction(p=1, q = 2) ** gen.random_integer(2, 5)
-    b = tm.Fraction(p=1, q = 3) ** gen.random_integer(2, 5)
-    c = tm.Fraction(p=1, q = 5) ** gen.random_integer(2, 5)
+    a = tm.Fraction(p=1, q=2) ** gen.random_integer(2, 5)
+    b = tm.Fraction(p=1, q=3) ** gen.random_integer(2, 5)
+    c = tm.Fraction(p=1, q=5) ** gen.random_integer(2, 5)
 
-    # NOTE: being smart to have a nice decimal 
+    # NOTE: being smart to have a nice decimal
     q = tm.Integer(n=2) ** gen.random_integer(1, 3) * tm.Integer(n=5) ** gen.random_integer(1, 2)
 
-    d = tm.Fraction(p=tm.Integer(n=1), q = q)
-
+    d = tm.Fraction(p=tm.Integer(n=1), q=q)
 
     d = d.as_decimal
-    
 
     return {
-        "a" : a,
-        "b" : b,
-        "c" : c,
-        "d" : d,
+        "a": a,
+        "b": b,
+        "c": c,
+        "d": d,
     }
 
 
@@ -41,7 +39,7 @@ def solve(*, a, b, c, d):
     Fraction(p=Integer(n=1), q=Integer(n=25))
     """
 
-    maths_object = max(a, b, c, d, key= lambda x: x.eval())
+    maths_object = max(a, b, c, d, key=lambda x: x.eval())
     return {"maths_object": maths_object}
 
 
@@ -50,13 +48,15 @@ def render_question(*, a, b, c, d):
     >>> components = generate_components(None, 0)
     >>> statement = render_question(**components)
     >>> statement["statement"]
-    'Quel est le maximum parmis les nombres suivants: $A=\\\\left(\\\\dfrac{1}{2}\\\\right)^{5}$, $B=\\\\left(\\\\dfrac{1}{3}\\\\right)^{5}$, $C=\\\\left(\\\\dfrac{1}{5}\\\\right)^{2}$, $D=0,01$'
+    'Quel est le maximum parmi les nombres suivants: $A=\\\\left(\\\\dfrac{1}{2}\\\\right)^{5}$, $B=\\\\left(\\\\dfrac{1}{3}\\\\right)^{5}$, $C=\\\\left(\\\\dfrac{1}{5}\\\\right)^{2}$, $D=0,01$'
     """
 
-    statement = f"""Quel est le maximum parmis les nombres suivants: $A={a.latex()}$, $B={b.latex()}$, $C={c.latex()}$, $D={d.latex()}$"""
+    statement = f"""Quel est le maximum parmi les nombres suivants : <br>$A={a.latex()}$, $B={b.latex()}$, $C={c.latex()}$, $D={d.latex().replace(".", ",")}$"""
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -72,6 +72,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-3]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

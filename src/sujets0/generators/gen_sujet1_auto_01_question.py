@@ -49,8 +49,10 @@ def render_question(*, n, x):
     x = x.simplified()
 
     statement = f"Calculer ${x.as_percent.latex()} \\%$ de ${n.latex()}$."
+    statement_html = f"<div>{statement}</div>"
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -74,6 +76,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gen][sujet-2][automatismes][question-2]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "mask": "",
         "answer": {
             "latex": answer["maths_object"].latex(),

@@ -10,18 +10,17 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """
 
     gen = tg.MathsGenerator(seed)
-    a = tm.Fraction(p=tm.Integer(n=5) * gen.random_integer(1, 20), q = tm.Integer(n=100))
-    b = tm.Fraction(p=gen.random_integer(1, 100), q = tm.Integer(n=100))
-    c = tm.Fraction(p=gen.random_integer(1, 100), q = tm.Integer(n=100))
+    a = tm.Fraction(p=tm.Integer(n=5) * gen.random_integer(1, 20), q=tm.Integer(n=100))
+    b = tm.Fraction(p=gen.random_integer(1, 100), q=tm.Integer(n=100))
+    c = tm.Fraction(p=gen.random_integer(1, 100), q=tm.Integer(n=100))
 
     a = a.simplified()
     c = c.as_decimal
-    
 
     return {
-        "a" : a,
-        "b" : b,
-        "c" : c,
+        "a": a,
+        "b": b,
+        "c": c,
     }
 
 
@@ -35,7 +34,7 @@ def solve(*, a, b, c):
     Fraction(p=Integer(n=49), q=Integer(n=50))
     """
 
-    maths_object = max(a, b, c, key= lambda x: x.eval())
+    maths_object = max(a, b, c, key=lambda x: x.eval())
     return {"maths_object": maths_object}
 
 
@@ -47,10 +46,12 @@ def render_question(*, a, b, c):
     'Quel est le maximum parmis les nombres suivants: $A=\\\\dfrac{13}{20}$, $B=\\\\dfrac{98}{100}$, $C=0,54$'
     """
 
-    statement = f"""Quel est le maximum parmis les nombres suivants: $A={a.latex()}$, $B={b.latex()}$, $C={c.latex()}$"""
+    statement = f"""Quel est le maximum parmi les nombres suivants :<br>$A={a.latex()}$ ; $B={b.latex()}$ ; $C={c.latex().replace(".", ",")}$"""
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -66,6 +67,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-2]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

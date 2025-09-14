@@ -53,10 +53,12 @@ def render_question(*, a, b, c):
 
     expr = a + b + c
 
-    statement = f"Calculer ${expr.latex()}$."
+    statement = f"Exprimer sous forme d'un entier ou d'une fraction irréductible ou d'un nombre décimal : ${expr.latex().replace('.', ',')}$."
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -68,6 +70,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-6]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

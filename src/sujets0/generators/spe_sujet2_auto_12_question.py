@@ -38,11 +38,11 @@ def render_question(*, v, a, r, expr):
     >>> components= generate_components(None, 0)
     >>> statement = render_question(**components)
     >>> statement["statement"]
-    "Si un point mobile suit une trajectoire circulaire de rayon $R$, en mètre ($m$), son accélération centripète $u$ (en $m/s^2$) s'exprime en fonction de la vitesse $v$ (en $m/s$) de la manière suivante: $$a = \\\\\\\\dfrac\\\\{v^\\\\{2\\\\}\\\\}\\\\{R\\\\}$$ Exprimer $v$ en fonction de a et R."
+    "Si un point mobile suit une trajectoire circulaire de rayon $R$, en mètre ($m$), son accélération centripète $a$ (en $m/s^2$) s'exprime en fonction de la vitesse $v$ (en $m/s$) de la manière suivante: $$a = \\\\\\\\dfrac\\\\{v^\\\\{2\\\\}\\\\}\\\\{R\\\\}$$ Exprimer $v$ en fonction de a et R."
     """
 
     statement = (
-        "Si un point mobile suit une trajectoire circulaire de rayon $R$, en mètre ($m$), son accélération centripète $u$ (en $m/s^2$) s'exprime en fonction de la vitesse $v$ (en $m/s$) de la manière suivante: $$"
+        "Si un point mobile suit une trajectoire circulaire de rayon $R$, en mètre ($m$), son accélération centripète $a$ (en $m/s^2$) s'exprime en fonction de la vitesse $v$ (en $m/s$) de la manière suivante: $$"
         + expr.latex()
         + "$$ Exprimer $v$ en fonction de "
         + f"${a.latex()}$"
