@@ -605,9 +605,11 @@ async function processKatexInSvg(svgString) {
 
           // Restore colors (like index-graphs.js line 99-105)
           if (bgColor) div.style.backgroundColor = bgColor;
+          // TODO :clean and understand this color management 
+          // cause it's primary if = color
           if (color) {
             div.querySelectorAll(".katex, .katex *").forEach((el) => {
-              el.style.color = color;
+              el.style.color = 'var(--color-base-content)';
             });
           }
         } catch (e) {
@@ -1466,7 +1468,6 @@ class PMFragmentGenerator {
       ...classes,
       "text-lg",
       "mb-4",
-      "pt-2",
       "text-base-content/70",
       // "border-top-1",
       // "border-base-300",
@@ -1495,7 +1496,7 @@ class PMFragmentGenerator {
   }
 
   static createDivider(classes = []) {
-    const allClasses = [...classes, "my-4", "border-base-300"];
+    const allClasses = [...classes, "my-4 sm:my-8", "border-base-300"];
     return {
       f_type: { value: "hr_" },
       html: "",
@@ -2168,7 +2169,7 @@ function generateFragmentsFromResults(results) {
       // Get the niceIdentifier from the first result for this student
       const niceId = byStudent[student][0]?.niceIdentifier || "";
       const headerText = niceId
-        ? `<span class="font-handwritten" style="font-size: 1.5rem;">Copie n°${student}</span> &nbsp;&nbsp;&nbsp;<span class="font-mono">[${niceId}]</span>`
+        ? `<div class="pt-4 print-hide"></div><span class="font-handwritten" style="font-size: 1.5rem;">Copie n°${student}</span> &nbsp;&nbsp;&nbsp;<span class="font-mono">[${niceId}]</span>`
         : `<span class="font-handwritten">Copie n°${student}</span>`;
 
       fragments.push(PMFragmentGenerator.createH2(headerText, []));

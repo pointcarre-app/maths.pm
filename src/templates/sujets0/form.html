@@ -94,7 +94,7 @@
 {% endblock extra_head %}
 
 {% block modal_info_content %}
-  {% include "sujets0/modal-info-content.html" %}
+  {% include "sujets0/modal-primary-content.html" %}
 {% endblock modal_info_content %}
 
 {% block content %}
@@ -106,74 +106,55 @@
     <div class="tab-alt-content" id="generate-content">
 
 
-      <div class="font-heading text-lg sm:text-2xl md:text-3xl mb-4">Première partie : Automatismes</div>
-
-
-      <div class="text-sm sm:text-base mb-6 text-base-content/70 md:px-6 md:py-10 md:bg-base-100 md:border-base-300 md:border-1"
+      <div class="text-sm sm:text-base mb-6 md:px-6 md:py-10 md:bg-base-100 md:shadow-sm"
            style="border-radius: var(--radius-box)">
 
         <div class="max-w-[640px] mx-auto">
+
+          <div class="font-heading text-2xl md:text-3xl mb-4">Première partie : Automatismes</div>
+
+
           <!-- Configuration Section -->
 
           <form id="arpege-form">
             <!-- 2x2 Grid Layout -->
             <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
-              <!-- Top Left: Number of copies -->
-              <fieldset class="fieldset">
-                <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-xl text-base-content/80">Nombre de copies</span>
-                  <div class="tooltip  tooltip-top"
-                       data-tip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">
-                    <span class="badge badge-outline badge-sm ml-2 cursor-help text-base-content/60">?</span>
-                  </div>
-                </legend>
-                <div class="join w-full mt-2">
-                  <input type="number"
-                         id="nb-eleves"
-                         name="nb-eleves"
-                         min="1"
-                         max="50"
-                         value="2"
-                         required
-                         class="input sm:input-lg input-bordered join-item flex-1 h-10" />
-                  <button type="button"
-                          class="btn sm:btn-lg btn-square join-item"
-                          onclick="document.getElementById('nb-eleves').stepDown()">−</button>
-                  <button type="button"
-                          class="btn sm:btn-lg btn-square join-item"
-                          onclick="document.getElementById('nb-eleves').stepUp()">+</button>
-                </div>
-                <p class="label-text-alt mt-1">Entre 1 et 50 copies</p>
-              </fieldset>
 
-              <hr class="my-4 border-base-300" />
 
               <!-- Top Right: Specialty selection -->
-              <fieldset class="fieldset" id="programme-fieldset">
+              <fieldset class="fieldset mt-4" id="programme-fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-xl text-base-content/80">Sujet 0 pour la génératon</span>
+                  <span class="font-light text-xl text-base-content/80">Sélection du sujet 0</span>
                   <div class="tooltip tooltip-top"
                        data-tip="Choisissez un sujet 0 correspondant à votre classe : Spé 1-2 pour spécialité maths, Ens. Spécifique 1-3 pour enseignement spécifique et Techno 1-2 pour filières technologiques">
-                    <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help text-base-content/60">?</span>
+                    <span class="badge badge-outline badge-rounded ml-2 cursor-help text-base-content/60">?</span>
                   </div>
                 </legend>
-                <div class="space-y-3 mt-2" id="programme-radio-group">
+
+                <p id="programme-help-text"  class="text-sm sm:text-base italic mb-2 text-base-content/60">
+                  Choisir un des <a class="link link-primary" target="_blank">sujets 0</a> publiés par le ministère
+                </p>
+                <p class="text-error hidden text-sm sm:text-base italic mb-2" id="programme-error-text">
+                  ⛔️ Veuillez sélectionner un sujet 0 pour une filière spécifique avant de générer les copies
+                </p>
+
+                <div class="sm:p-6 sm:bg-base-200 sm:border-base-300 sm:border-1 card" id="programme-radio-group">
                   <!-- Spécialité Group -->
                   <div>
-                    <div class="text-base font-light text-base-content/60 mb-2">
-                      <span class="badge badge-info badge-soft">Spécialité</span>
+                    <div class="text-base font-light text-base-content/60 mb-3">
+                      <span class="badge badge-primary  badge-lg badge-soft">Spécialité</span>
                     </div>
                     <div class="join w-full">
                       <input type="radio"
                              name="sujets0"
                              value="spe_sujet1"
-                             class="join-item btn btn-info btn-outline  flex-1"
+                             class="join-item btn btn-primary btn-soft border-primary border-1  flex-1"
                              aria-label="Sujet 0 n°1"
                              style="font-weight: 300" />
                       <input type="radio"
                              name="sujets0"
                              value="spe_sujet2"
-                             class="join-item btn btn-info btn-outline  flex-1"
+                             class="join-item btn btn-primary btn-soft border-primary border-1  flex-1"
                              aria-label="Sujet 0 n°2"
                              style="font-weight: 300" />
                     </div>
@@ -181,26 +162,26 @@
 
                   <!-- Enseignement Spécifique Group -->
                   <div>
-                    <div class="text-base font-light text-base-content/60 mt-4 mb-2">
-                      <span class="badge badge-info badge-soft">Enseignement Spécifique</span>
+                    <div class="text-base font-light text-base-content/60 mt-6 mb-3">
+                      <span class="badge badge-primary  badge-lg badge-soft">Enseignement Spécifique</span>
                     </div>
                     <div class="join w-full">
                       <input type="radio"
                              name="sujets0"
                              value="gen_sujet1"
-                             class="join-item btn btn-info btn-outline  flex-1"
+                             class="join-item btn btn-primary btn-soft border-primary border-1 flex-1"
                              aria-label="Sujet 0 n°1"
                              style="font-weight:300" />
                       <input type="radio"
                              name="sujets0"
                              value="gen_sujet2"
-                             class="join-item btn btn-info btn-outline  flex-1"
+                             class="join-item btn btn-primary btn-soft border-primary border-1  flex-1"
                              aria-label="Sujet 0 n°2"
                              style="font-weight:300" />
                       <input type="radio"
                              name="sujets0"
                              value="gen_sujet3"
-                             class="join-item btn btn-info btn-outline  flex-1"
+                             class="join-item btn btn-primary btn-soft border-primary border-1  flex-1"
                              aria-label="Sujet 0 n°3"
                              style="font-weight:300" />
                     </div>
@@ -208,37 +189,31 @@
 
                   <!-- Technologique Group -->
                   <div>
-                    <div class="text-base font-light text-base-content/60 mt-4 mb-2">
-                      <span class="badge badge-info badge-soft">Technologique</span>
+                    <div class="text-base font-light text-base-content/60 mt-6 mb-3">
+                      <span class="badge badge-primary  badge-lg badge-soft">Technologique</span>
                     </div>
 
                     <div class="join w-full">
                       <input type="radio"
                              name="sujets0"
                              value="techno_sujet1"
-                             class="join-item btn btn-info btn-outline  flex-1"
+                             class="join-item btn btn-primary btn-soft  border-base-300 border-1 flex-1"
                              aria-label="Sujet 0 n°1"
                              style="font-weight:300"
                              disabled />
                       <input type="radio"
                              name="sujets0"
                              value="techno_sujet2"
-                             class="join-item btn btn-info btn-outline  flex-1"
+                             class="join-item btn btn-primary btn-soft  border-base-300 border-1 flex-1"
                              aria-label="Sujet 0 n°2"
                              style="font-weight:300"
                              disabled />
                     </div>
                   </div>
                 </div>
-                <p class="label-text-alt mt-1" id="programme-help-text">
-                  Choisir un sujet 0 officiel <strong>(obligatoire)</strong>
-                </p>
-                <p class="label-text-alt mt-1 text-error hidden" id="programme-error-text">
-                  ⚠️ Veuillez sélectionner un sujet 0 pour une filière spécifique avant de générer les copies
-                </p>
               </fieldset>
 
-              <hr class="my-4 border-base-300" />
+              {# <hr class="mt-6  border-base-300" /> #}
 
               <!-- Bottom Left: Questions per copy -->
               <fieldset class="fieldset" hidden>
@@ -267,49 +242,84 @@
                 <p class="label-text-alt mt-1">Entre 1 et 12 questions</p>
               </fieldset>
 
-              <!-- Bottom Right: Seed number -->
-              <fieldset class="fieldset">
+              <!-- Top Left: Number of copies -->
+              <fieldset class="fieldset mt-4">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-xl text-base-content/80">Seed</span>
-                  <div class="tooltip tooltip-top"
-                       data-tip="Numéro de graine pour la reproductibilité de la génération aléatoire des copies">
-                    <span class="badge badge-outline badge-sm ml-2 cursor-help text-base-content/60">?</span>
+                  <span class="font-light text-xl text-base-content/80">Nombre de copies</span>
+                  <div class="tooltip  tooltip-top"
+                       data-tip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">
+                    <span class="badge badge-outline ml-2 cursor-help text-base-content/60">?</span>
                   </div>
                 </legend>
-                <div class="join w-full mt-2">
+
+                <p class="text-sm sm:text-base italic mb-2 text-base-content/60">Entre 1 et 50 copies</p>
+
+
+                <div class="join w-full mt-0 sm:p-6 sm:bg-base-200 sm:border-base-300 sm:border-1"
+                     style="border-radius: var(--radius-box)">
+                  <input type="number"
+                         id="nb-eleves"
+                         name="nb-eleves"
+                         min="1"
+                         max="50"
+                         value="2"
+                         required
+                         class="input sm:input-lg input-bordered border-primary border-1 join-item flex-1 h-10" />
+                  <button type="button"
+                          class="btn sm:btn-lg btn-square btn-primary btn-soft border-primary border-1 join-item"
+                          onclick="document.getElementById('nb-eleves').stepDown()">−</button>
+                  <button type="button"
+                          class="btn sm:btn-lg btn-square btn-primary btn-soft border-primary border-1 join-item"
+                          onclick="document.getElementById('nb-eleves').stepUp()">+</button>
+                </div>
+              </fieldset>
+
+              {# <hr class="my-4 border-base-300" /> #}
+
+
+              <!-- Bottom Right: Seed number -->
+              <fieldset class="fieldset mt-4">
+                <legend class="fieldset-legend">
+                  <span class="font-light text-xl text-base-content/80">Graîne (<span class="italic">seed</span>, pour la reproductibilité)</span>
+                  <div class="tooltip tooltip-top"
+                       data-tip="Numéro de graine pour la reproductibilité de la génération aléatoire des copies">
+                    <span class="badge badge-outline ml-2 cursor-help text-base-content/60">?</span>
+                  </div>
+                </legend>
+                <p class="text-sm sm:text-base italic mb-2 text-base-content/60">Entre 1 et 100</p>
+                <div class="join w-full mt-0 sm:p-6 sm:bg-base-200 sm:border-base-300 sm:border-1"
+                     style="border-radius: var(--radius-box)">
                   <input type="number"
                          id="seed"
                          name="seed"
                          min="1"
                          max="100"
                          required
-                         class="input sm:input-lg input-bordered join-item flex-1 h-10" />
+                         class="input sm:input-lg input-bordered border-primary border-1 join-item flex-1 h-10" />
                   <button type="button"
-                          class="btn btn-square sm:btn-lg join-item h-10 w-10"
+                          class="btn btn-square sm:btn-lg btn-primary btn-soft border-primary border-1 join-item h-10 w-10"
                           onclick="document.getElementById('seed').stepDown()">−</button>
                   <button type="button"
-                          class="btn btn-square sm:btn-lg join-item h-10 w-10"
+                          class="btn btn-square sm:btn-lg btn-primary btn-soft border-primary border-1 join-item h-10 w-10"
                           onclick="document.getElementById('seed').stepUp()">+</button>
                 </div>
-                <p class="label-text-alt mt-1">Entre 1 et 100</p>
               </fieldset>
             </div>
             <button id="big-generate-btn"
                     type="button"
-                    class="btn btn-primary w-full font-bold bg-primary-focus hover:bg-primary-focus border-0 mt-8">
+                    class="btn btn-primary btn-lg w-full font-bold bg-primary-focus hover:bg-primary-focus border-0 mt-8"
+                    style="font-weight: 400 !important">
               <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
               </svg>
               Générer les copies
             </button>
           </form>
 
-          <div class="p-4 sm:p-6 sm:bg-base-200 mt-6">
-            <ul class="list-disc list-inside text-sm text-base-content/60">
-              <li>
-                Les copies proposent dans le même ordre les 12 mêmes questions d'un des sujets 0 publiés par le ministère.
-              </li>
-              <li>Des valeurs numériques différentes sont utilisées dans les copies.</li>
+          <div class="mt-3 italic">
+            <ul class="list-disc-none text-sm text-base-content/60">
+              <li>Chaque copie propose les 12 questions issues d'une première partie d'un sujet 0.</li>
+              <li>Des valeurs numériques différentes sont utilisées pour chaque copie.</li>
               <li>Les corrigés pour l'enseignant sont inclus séparément.</li>
             </ul>
           </div>
@@ -327,8 +337,7 @@
               const helpText = document.getElementById('programme-help-text');
 
               if (radioGroup) {
-                  radioGroup.classList.add('border-2', 'border-error', 'rounded-box');
-                  radioGroup.style.padding = '2px';
+                  radioGroup.classList.add('border-error')
               }
               if (errorText) {
                   errorText.classList.remove('hidden');
@@ -535,7 +544,7 @@
       </script>
 
 
-      <div class="font-heading text-lg sm:text-2xl md:text-3xl mb-4 mt-8">
+      <div class="font-heading text-lg sm:text-2xl md:text-3xl mb-4 mt-18">
         Deuxième partie : Exercices
       </div>
 
@@ -546,7 +555,7 @@
         <div class="w-full max-w-[720px] mx-auto">
 
 
-          <div class="text-sm sm:text-base mb-6 text-base-content/70 md:bg-base-100 md:border-base-300"
+          <div class="text-sm sm:text-base text-base-content/70 md:bg-base-100 md:border-base-300"
                style="border-radius: var(--radius-box)">🚧 🏗️ En cours de développement.</div>
 
         </div>
@@ -574,7 +583,7 @@
         <a href="/sujets0/pre-genetated" class="link link-primary">fichiers PDFs</a>
         qui contiennent des exercices pré-générés.</span>
     </div>
-    <div role="alert" class="alert alert-info alert-soft border-1 mb-6" style=" border-radius: var(--radius-card) !important; border-color: var(--color-info) !important; background-color: var(--color-base-100) !important; ">
+    <div role="alert" class="alert alert-primary alert-soft border-1 mb-6" style=" border-radius: var(--radius-card) !important; border-color: var(--color-primary) !important; background-color: var(--color-base-100) !important; ">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
       </svg>
