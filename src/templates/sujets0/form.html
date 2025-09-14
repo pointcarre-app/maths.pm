@@ -213,6 +213,44 @@
                 </div>
               </fieldset>
 
+
+              <fieldset class="fieldset mt-4" id="mode-question-fieldset">
+                <legend class="fieldset-legend">
+                  <span class="font-light text-xl text-base-content/80">Type de question</span>
+                  <div class="tooltip tooltip-top"
+                       data-tip="Choisissez un sujet 0 correspondant à votre classe : Spé 1-2 pour spécialité maths, Ens. Spécifique 1-3 pour enseignement spécifique et Techno 1-2 pour filières technologiques">
+                    <span class="badge badge-outline badge-rounded ml-2 cursor-help text-base-content/60">?</span>
+                  </div>
+                </legend>
+
+                <p class="text-sm sm:text-base italic mb-2 text-base-content/60">
+                  La première partie de l'épreuve est un QCM, mais nous proposons également un mode "question ouverte"
+                </p>
+
+
+                <div class="sm:p-6 sm:bg-base-200 sm:border-base-300 sm:border-1 card" id="mode-question-radio-group">
+                  <!-- Spécialité Group -->
+                  <div>
+                    <div class="join w-full">
+                      <input type="radio"
+                             name="mode-question"
+                             value="open"
+                             class="join-item btn btn-primary flex-1"
+                             aria-label="Question ouverte"
+                             style="font-weight: 300"
+                             checked />
+                      <input type="radio"
+                             name="mode-question"
+                             value="mcq"
+                             class="join-item btn btn-primary btn-soft  border-1  flex-1"
+                             aria-label="QCM"
+                             style="font-weight: 300"
+                             disabled />
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
               {# <hr class="mt-6  border-base-300" /> #}
 
               <!-- Bottom Left: Questions per copy -->
