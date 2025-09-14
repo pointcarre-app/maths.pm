@@ -106,23 +106,14 @@
     <div class="tab-alt-content" id="generate-content">
 
 
+      <div class="font-heading text-lg sm:text-2xl md:text-3xl mb-4">Première partie : Automatismes</div>
+
+
       <div class="text-sm sm:text-base mb-6 text-base-content/70 md:px-6 md:py-10 md:bg-base-100 md:border-base-300 md:border-1"
            style="border-radius: var(--radius-box)">
 
         <div class="w-full max-w-[720px] mx-auto">
-
           <!-- Configuration Section -->
-          <div class="font-heading text-lg sm:text-xl md:text-2xl mb-4">Première partie : Automatismes</div>
-
-          <ul class="list-disc list-inside text-sm text-base-content/60">
-            <li>
-              Les copies proposent dans le même ordre les mêmes questions, inspirées des sujets 0 du ministère.
-            </li>
-            <li>Des valeurs numériques différentes sont utilisées dans les copies.</li>
-            <li>Les corrigés pour l'enseignant sont inclus séparément.</li>
-          </ul>
-
-          <hr class="my-8 border-base-300" style="opacity: 0.8" />
 
           <form id="arpege-form">
             <!-- 2x2 Grid Layout -->
@@ -130,8 +121,8 @@
               <!-- Top Left: Number of copies -->
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base sm:text-lg text-base-content/80">Nombre de copies</span>
-                  <div class="tooltip tooltip-top"
+                  <span class="font-light font-heading text-lg sm:text-xl text-base-content/80">Nombre de copies</span>
+                  <div class="tooltip  tooltip-top"
                        data-tip="Toutes les copies utiliseront les mêmes questions avec des valeurs différentes">
                     <span class="badge badge-outline badge-sm ml-2 cursor-help text-base-content/60">?</span>
                   </div>
@@ -155,28 +146,65 @@
                 <p class="label-text-alt mt-1">Entre 1 et 50 copies</p>
               </fieldset>
 
+              <hr class="my-4 border-base-300" />
+
               <!-- Top Right: Specialty selection -->
               <fieldset class="fieldset" id="programme-fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base sm:text-lg text-base-content/80">Programme</span>
+                  <span class="font-light font-heading text-lg sm:text-xl text-base-content/80">Sujet 0 pour la génératon</span>
                   <div class="tooltip tooltip-top"
-                       data-tip="Spé pour spécialité maths, Non Spé pour enseignement spécifique et Techno pour filières technologiques">
+                       data-tip="Choisissez un sujet 0 correspondant à votre classe : Spé 1-2 pour spécialité maths, Ens. Spécifique 1-3 pour enseignement spécifique et Techno 1-2 pour filières technologiques">
                     <span class="badge badge-outline badge-sm badge-rounded ml-2 cursor-help text-base-content/60">?</span>
                   </div>
                 </legend>
-                <div class="join w-full" id="programme-radio-group">
-                  <input type="radio" name="sujets0" value="spe" class="join-item btn h-10 flex-1" aria-label="Spécialité" />
-                  <input type="radio"
-                         name="sujets0"
-                         value="gen"
-                         class="join-item btn h-10 flex-1"
-                         aria-label="Ens. Spécifique" />
-                  <input type="radio"
-                         name="sujets0"
-                         value="techno"
-                         class="join-item btn h-10 flex-1"
-                         aria-label="Techno"
-                         disabled />
+                <div class="space-y-3" id="programme-radio-group">
+                  <!-- Spécialité Group -->
+                  <div>
+                    <div class="text-xs font-medium text-base-content/60 mb-1 pl-1">Spécialité</div>
+                    <div class="join w-full">
+                      <input type="radio" name="sujets0" value="spe_sujet1" class="join-item btn h-10 flex-1" aria-label="Spé 1" />
+                      <input type="radio" name="sujets0" value="spe_sujet2" class="join-item btn h-10 flex-1" aria-label="Spé 2" />
+                    </div>
+                  </div>
+
+                  <!-- Enseignement Spécifique Group -->
+                  <div>
+                    <div class="text-xs font-medium text-base-content/60 mb-1 pl-1">Enseignement Spécifique</div>
+                    <div class="join w-full">
+                      <input type="radio"
+                             name="sujets0"
+                             value="gen_sujet1"
+                             class="join-item btn h-10 flex-1"
+                             aria-label="Ens. Spé 1" />
+                      <input type="radio"
+                             name="sujets0"
+                             value="gen_sujet2"
+                             class="join-item btn h-10 flex-1"
+                             aria-label="Ens. Spé 2" />
+                      <input type="radio"
+                             name="sujets0"
+                             value="gen_sujet3"
+                             class="join-item btn h-10 flex-1"
+                             aria-label="Ens. Spé 3" />
+                    </div>
+                  </div>
+
+                  <!-- Technologique Group -->
+                  <div>
+                    <div class="text-xs font-medium text-base-content/60 mb-1 pl-1">Technologique</div>
+                    <div class="join w-full">
+                      <input type="radio"
+                             name="sujets0"
+                             value="techno_sujet1"
+                             class="join-item btn h-10 flex-1"
+                             aria-label="Techno 1" />
+                      <input type="radio"
+                             name="sujets0"
+                             value="techno_sujet2"
+                             class="join-item btn h-10 flex-1"
+                             aria-label="Techno 2" />
+                    </div>
+                  </div>
                 </div>
                 <p class="label-text-alt mt-1" id="programme-help-text">
                   Choisir un programme officiel <strong>(obligatoire)</strong>
@@ -186,8 +214,10 @@
                 </p>
               </fieldset>
 
+              <hr class="my-4 border-base-300" />
+
               <!-- Bottom Left: Questions per copy -->
-              <fieldset class="fieldset">
+              <fieldset class="fieldset" hidden>
                 <legend class="fieldset-legend">
                   <span class="font-light font-heading text-base sm:text-lg text-base-content/80">Questions par copie</span>
                   <div class="tooltip tooltip-top" data-tip="Une partie A d'un sujet 0 officiel compte 12 questions">
@@ -216,7 +246,7 @@
               <!-- Bottom Right: Seed number -->
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">
-                  <span class="font-light font-heading text-base sm:text-lg text-base-content/80">Seed</span>
+                  <span class="font-light font-heading text-lg sm:text-xl text-base-content/80">Seed</span>
                   <div class="tooltip tooltip-top"
                        data-tip="Numéro de graine pour la reproductibilité de la génération aléatoire des copies">
                     <span class="badge badge-outline badge-sm ml-2 cursor-help text-base-content/60">?</span>
@@ -249,6 +279,16 @@
               Générer les copies
             </button>
           </form>
+
+          <div class="p-4 sm:p-6 sm:bg-base-200 mt-6">
+            <ul class="list-disc list-inside text-sm text-base-content/60">
+              <li>
+                Les copies proposent dans le même ordre les 12 mêmes questions d'un des sujets 0 publiés par le ministère.
+              </li>
+              <li>Des valeurs numériques différentes sont utilisées dans les copies.</li>
+              <li>Les corrigés pour l'enseignant sont inclus séparément.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -310,14 +350,26 @@
 
               if (curriculumRadio !== null) {
                   switch (curriculumRadio.value) {
-                      case "spe":
-                          curriculum = "Spé";
+                      case "spe_sujet1":
+                          curriculum = "Spé 1";
                           break;
-                      case "gen":
-                          curriculum = "Non-Spé";
+                      case "spe_sujet2":
+                          curriculum = "Spé 2";
                           break;
-                      case "techno":
-                          curriculum = "Techno";
+                      case "gen_sujet1":
+                          curriculum = "Ens. Spé 1";
+                          break;
+                      case "gen_sujet2":
+                          curriculum = "Ens. Spé 2";
+                          break;
+                      case "gen_sujet3":
+                          curriculum = "Ens. Spé 3";
+                          break;
+                      case "techno_sujet1":
+                          curriculum = "Techno 1";
+                          break;
+                      case "techno_sujet2":
+                          curriculum = "Techno 2";
                           break;
                           // default:
                           // throw new Error('Invalid curriculum');
@@ -459,16 +511,16 @@
       </script>
 
 
-      <div class="text-sm sm:text-base my-8 sm:my-12 text-base-content/70 md:px-6 md:py-10 md:bg-base-100 md:border-base-300 md:border-1"
+      <div class="font-heading text-lg sm:text-2xl md:text-3xl mb-4 mt-8">
+        Deuxième partie : Exercices
+      </div>
+
+
+      <div class="text-sm sm:text-base text-base-content/70 md:px-6 md:py-10 md:bg-base-100 md:border-base-300 md:border-1"
            style="border-radius: var(--radius-box)">
 
         <div class="w-full max-w-[720px] mx-auto">
 
-
-          <!-- Configuration Section -->
-          <div class="font-heading text-lg sm:text-xl md:text-2xl">Deuxième partie : Exercices</div>
-
-          <hr class="my-8 border-base-300" style="opacity: 0.8" />
 
           <div class="text-sm sm:text-base mb-6 text-base-content/70 md:bg-base-100 md:border-base-300"
                style="border-radius: var(--radius-box)">🚧 🏗️ En cours de développement.</div>

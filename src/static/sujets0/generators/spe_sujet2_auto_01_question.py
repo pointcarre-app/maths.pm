@@ -47,7 +47,7 @@ def render_question(*, p_A, p_B_if_A, p_B_if_notA):
     graph_description = "A proability tree with event A followed by continonal proabillity of B"
 
     statement_html = f"""<div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
-    <div style='flex: 1; min-width: 250px;'>On considère l'arbre de probabilité ci-contre. <br>Calculer la probabilité de l'évènement $B$</div>
+    <div style='flex: 1; min-width: 250px;'>On considère l'arbre de probabilité ci-contre. <br>Calculer la probabilité de l'évènement $B$.</div>
     <div style='flex: 0 1 auto;'>  
         <svg width="300" height="150" style="display: block; max-width: 100%; height: auto; border: 1px solid var(--color-base-300);">
             <!-- Define arrowhead marker -->
