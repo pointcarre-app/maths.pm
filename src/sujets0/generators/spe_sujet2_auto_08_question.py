@@ -248,53 +248,53 @@ def render_question(*, x, y, a, c):
   <!-- Y-axis tick labels -->
   <foreignObject x="{origin_x - 12}" y="{origin_y - (1) * scale - 4}" width="10" height="8" style="overflow: visible;">
     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end;">
-      <span style="line-height: 1; text-align: right; font-size: 7px;">$1$</span>
+      <span style="line-height: 1; text-align: right; font-size: 8px;">$1$</span>
     </div>
   </foreignObject>
   <foreignObject x="{origin_x - 12}" y="{origin_y - (2) * scale - 4}" width="10" height="8" style="overflow: visible;">
     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end;">
-      <span style="line-height: 1; text-align: right; font-size: 7px;">$2$</span>
+      <span style="line-height: 1; text-align: right; font-size: 8px;">$2$</span>
     </div>
   </foreignObject>
   <foreignObject x="{origin_x - 12}" y="{origin_y - (3) * scale - 4}" width="10" height="8" style="overflow: visible;">
     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end;">
-      <span style="line-height: 1; text-align: right; font-size: 7px;">$3$</span>
+      <span style="line-height: 1; text-align: right; font-size: 8px;">$3$</span>
     </div>
   </foreignObject>
   <foreignObject x="{origin_x - 12}" y="{origin_y - (4) * scale - 4}" width="10" height="8" style="overflow: visible;">
     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end;">
-      <span style="line-height: 1; text-align: right; font-size: 7px;">$4$</span>
+      <span style="line-height: 1; text-align: right; font-size: 8px;">$4$</span>
     </div>
   </foreignObject>
   <foreignObject x="{origin_x - 15}" y="{origin_y + (1) * scale - 4}" width="13" height="8" style="overflow: visible;">
     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end;">
-      <span style="line-height: 1; text-align: right; font-size: 7px;">$-1$</span>
+      <span style="line-height: 1; text-align: right; font-size: 8px;">$-1$</span>
     </div>
   </foreignObject>
   <foreignObject x="{origin_x - 15}" y="{origin_y + (2) * scale - 4}" width="13" height="8" style="overflow: visible;">
     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end;">
-      <span style="line-height: 1; text-align: right; font-size: 7px;">$-2$</span>
+      <span style="line-height: 1; text-align: right; font-size: 8px;">$-2$</span>
     </div>
   </foreignObject>
   <foreignObject x="{origin_x - 15}" y="{origin_y + (3) * scale - 4}" width="13" height="8" style="overflow: visible;">
     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end;">
-      <span style="line-height: 1; text-align: right; font-size: 7px;">$-3$</span>
+      <span style="line-height: 1; text-align: right; font-size: 8px;">$-3$</span>
     </div>
   </foreignObject>
   <foreignObject x="{origin_x - 15}" y="{origin_y + (4) * scale - 4}" width="13" height="8" style="overflow: visible;">
     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end;">
-      <span style="line-height: 1; text-align: right; font-size: 7px;">$-4$</span>
+      <span style="line-height: 1; text-align: right; font-size: 8px;">$-4$</span>
     </div>
   </foreignObject>
   
   <!-- Axis labels -->
-  <foreignObject x="{origin_x + (4) * scale + 10}" y="{origin_y + 4}" width="12" height="10" style="overflow: visible;">
+  <foreignObject x="{origin_x + (4) * scale + 8}" y="{origin_y + 2}" width="12" height="10" style="overflow: visible;">
     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
       <span style="line-height: 1; text-align: center; font-size: 10px;">$x$</span>
     </div>
   </foreignObject>
   
-  <foreignObject x="{origin_x}" y="{origin_y - (5) * scale - 2}" width="12" height="10" style="overflow: visible;">
+  <foreignObject x="{origin_x}" y="{origin_y - (5) * scale}" width="12" height="10" style="overflow: visible;">
     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
       <span style="line-height: 1; text-align: center; font-size: 10px;">$y$</span>
     </div>
@@ -367,17 +367,60 @@ setTimeout(() => observer.disconnect(), 5000);"""
     # Build the complete SVG with script
     svg_with_script = f"{svg_chart}\n{complete_script}"
 
+    # Calculate two integer coordinate points on the line for pedagogical clarity
+    #
+    # For line equation y = slope*x + y_intercept, we want to find two points with integer coordinates
+    # to help students identify the line more easily and verify their answer.
+    #
+    # Point 1: (0, c) - Always integer since c is always an integer (y-intercept)
+    # Point 2: We need to find an x value that makes y = slope*x + c an integer
+    #
+    # Strategy:
+    # - If slope is integer: any integer x works, use x=1
+    # - If slope is fraction p/q: x must be multiple of q to make slope*x integer
+    #   Example: slope = 2/3, then x=3 gives y = (2/3)*3 + c = 2 + c (integer)
+    #
+    point1_x, point1_y = 0, int(y_intercept)  # Always (0, c)
+
+    # Determine second integer point based on slope type
+    if hasattr(a, "q"):  # a is a fraction tm.Fraction(p=..., q=...)
+        # For fraction slope p/q, use x = q (denominator) to ensure integer result
+        point2_x = a.q.n  # Extract the numeric value of denominator
+        point2_y = int(slope * point2_x + y_intercept)
+
+        # Verify it's actually an integer (safety check)
+        calculated_y = slope * point2_x + y_intercept
+        if abs(calculated_y - round(calculated_y)) > 1e-10:  # Not close to integer
+            # Fallback: try x = 2*q if q doesn't work
+            point2_x = 2 * a.q.n
+            point2_y = int(slope * point2_x + y_intercept)
+    else:  # a is an integer
+        # For integer slope, any integer x works, use x=1 for simplicity
+        point2_x = 1
+        point2_y = int(slope * point2_x + y_intercept)
+
+    # Store the two integer points as components for pedagogical use
+    integer_point1 = f"({point1_x}; {point1_y})"
+    integer_point2 = f"({point2_x}; {point2_y})"
+
     # Create the statement HTML with better structure
     statement_html = f"""<div style='display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;'>
     <div style='flex: 1; min-width: 250px;'>
-        Donner l'équation de la droite sous la forme $a{x.latex()} + b{y.latex()} + c = 0$.
+        Les points de coordonnées ${integer_point1}$ et ${integer_point2}$ appartiennent à la droite représentée sur le graphique ci-contre.
+        Donner l'équation de cette droite sous la forme $a{x.latex()} + b{y.latex()} + c = 0$.
     </div>
     <div style='flex: 0 1 auto;'>  
         {svg_with_script}
     </div>
 </div>"""
 
-    return {"statement": statement_html, "statement_html": statement_html}
+    return {
+        "statement": statement_html,
+        "statement_html": statement_html,
+        "integer_point1": integer_point1,
+        "integer_point2": integer_point2,
+        "integer_points": [integer_point1, integer_point2],
+    }
 
 
 components = generate_components(None)
