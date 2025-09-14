@@ -3,6 +3,13 @@ import teachers.maths as tm
 from teachers.defaults import SEED
 
 
+# Speed calculation: (d/t) * 60 km/h
+# Since d ∈ {1,2,...,10} and t ∈ {1,2,4,8,16} (all powers of 2),
+# the result 60d/t always gives exact decimals (finite decimal expansion)
+# because denominators only contain factors of 2 and 5 after simplification.
+# Examples: 60/8 = 7.5, 60/16 = 3.75, 180/8 = 22.5
+
+
 def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """[sujets0][gén][sujet-1][automatismes][question-8]
     >>> generate_components(None, 0)
@@ -10,16 +17,15 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """
 
     gen = tg.MathsGenerator(seed)
-    
+
     n1, n2, n3 = gen.random_integer(0, 2), gen.random_integer(0, 1), gen.random_integer(0, 1)
 
-    t = (tm.Integer(n=2) ** n1) * (tm.Integer(n=2) ** n2) * (tm.Integer(n=2) ** n3) 
+    t = (tm.Integer(n=2) ** n1) * (tm.Integer(n=2) ** n2) * (tm.Integer(n=2) ** n3)
     t = t.simplified()
 
     d = gen.random_integer(1, 10)
 
     factor = tm.Integer(n=1) / tm.Integer(n=60)
-
 
     return {
         "t": t,
@@ -37,7 +43,7 @@ def solve(*, d, t, factor):
     >>> answer["maths_object"].simplified()
     Integer(n=75)
     """
-    maths_object = (d/t) / factor
+    maths_object = (d / t) / factor
     return {
         "maths_object": maths_object,
     }
@@ -51,10 +57,12 @@ def render_question(*, d, t, factor):
     'Un object parcours $5$ km en 4 minutes. Quelle est sa vitesse moyenne en km/h ?'
     """
 
-    statement = f"Un object parcours ${d.latex()}$ km en {t.latex()} minutes. Quelle est sa vitesse moyenne en km/h ?"
+    statement = f"Un object parcours ${d.latex()}$ km en ${t.latex()}$ minutes. Quelle est sa vitesse moyenne en $km/h$ ?"
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -67,6 +75,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-1][automatismes][question-8]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

@@ -1,3 +1,4 @@
+import random
 import teachers.generator as tg
 import teachers.maths as tm
 from teachers.defaults import SEED
@@ -12,15 +13,17 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     n = gen.random_integer(1, 10) * tm.Integer(n=10)
     n = n.simplified()
-
-    n1, n2 = tm.Integer(n=0), tm.Integer(n=0)
-    while n1.n == 0 and n2.n == 0:
-        n1 = gen.random_integer(0, 2)
-        n2 = gen.random_integer(0, 2)
-
-    x = ((tm.Integer(n=2) ** n1) * (tm.Integer(n=5) ** n2))  / tm.Integer(n=100)
+    x = random.choice(
+        [
+            tm.Fraction(p=5, q=100),
+            tm.Fraction(p=10, q=100),
+            tm.Fraction(p=20, q=100),
+            tm.Fraction(p=25, q=100),
+            tm.Fraction(p=50, q=100),
+        ]
+    )
     # x = x.simplified()
-    
+
     return {
         "n": n,
         "x": x,
@@ -36,7 +39,7 @@ def solve(*, n, x):
     >>> answer["maths_object"].simplified()
     Integer(n=3500)
     """
-    maths_object = (n / x)
+    maths_object = n / x
     return {"maths_object": maths_object}
 
 
@@ -51,12 +54,11 @@ def render_question(*, n, x):
     x = x.simplified()
 
     statement = f"Dans un établissement scolaire, ${n.latex()}$ élèves étudient le Grec, ce qui représente de ${x.as_percent.latex()}\\%$. Combien d'élèves au total sont inscrits dans l'établissement ?"
+    statement_html = f"<div>{statement}</div>"
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
-
-
-
 
 
 components = generate_components(None)
@@ -68,6 +70,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gen][sujet-3][automatismes][question-4]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "mask": "",
         "answer": {
             "latex": answer["maths_object"].latex(),
@@ -81,5 +84,3 @@ missive(
         },
     }
 )
-
-

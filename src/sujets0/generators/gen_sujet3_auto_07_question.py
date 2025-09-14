@@ -1,3 +1,4 @@
+import random
 import teachers.generator as tg
 import teachers.maths as tm
 from teachers.defaults import SEED
@@ -11,7 +12,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     gen = tg.MathsGenerator(seed)
 
-    n1 = gen.random_integer(1, 10)
+    n1 = random.choice([tm.Integer(n=5), tm.Integer(n=10), tm.Integer(n=20), tm.Integer(n=50)])
     p = gen.random_integer(1, 200) / tm.Integer(n=10)
     n2 = tm.Integer(n=n1.n)
     while n2.n == n1.n:
@@ -33,7 +34,7 @@ def solve(*, n1, n2, p):
     >>> answer["maths_object"].simplified()
     Fraction(p=Integer(n=507), q=Integer(n=5))
     """
-    maths_object = (p * n2)
+    maths_object = p * n2
     return {
         "maths_object": maths_object,
     }
@@ -49,10 +50,12 @@ def render_question(*, n1, n2, p):
 
     p1 = (p * n1).simplified().as_decimal
 
-    statement = f"{n1.latex()} articles coûtent {p1.latex()} euros. Combien coûtent {n2.latex()} articles ?"
+    statement = f"${n1.latex()}$ articles coûtent ${p1.latex()}$ euros. Combien coûtent ${n2.latex().replace('.', ',')}$ articles ?"
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -68,6 +71,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-7]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

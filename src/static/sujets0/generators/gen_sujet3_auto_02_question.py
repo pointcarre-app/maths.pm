@@ -35,17 +35,19 @@ def render_question(*, p, direction):
     >>> direction = tm.Integer(n=1)
     >>> statement = render_question(p=p, direction=direction)
     >>> statement["statement"]
-    "Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?"
+    "Le prix d'un article est noté $P$. Ce prix augmente de $65\\%$ puis diminue de $65\\%$. A l'issue de ces deux variations, quel est le pourcentage d'évolution ?"
     """
     if direction == -1:
         dir1, dir2 = "diminue", "augmente"
     else:
         dir1, dir2 = "augmente", "diminue"
 
-    statement = f"""Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%$. A l'issue de ces deux variations, de combien le prix a-t-il varié en pourcentage ?"""
+    statement = f"""Le prix d'un article est noté $P$. Ce prix {dir1} de ${p.latex()}\\%$ puis {dir2} de ${p.latex()}\\%. A l'issue de ces deux variations, quel est le pourcentage d'évolution ?"""
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -61,6 +63,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-2]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

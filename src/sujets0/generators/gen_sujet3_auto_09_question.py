@@ -14,7 +14,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     # Génère un pourcentage de réduction (5%, 10%, 15%, 20%, 25%, 30%, 40%, 50%)
     reduction_options = [5, 10, 15, 20, 25, 30, 40, 50]
-    reduction_value = gen.random_choice(reduction_options)
+    reduction_value = gen.random_element_from(reduction_options)
     reduction = tm.Integer(n=reduction_value)
 
     return {
@@ -42,10 +42,12 @@ def render_question(*, price, reduction):
     """[sujets0][gén][sujet-3][automatismes][question-9]
     Génère l'énoncé de la question.
     """
-    statement = f"Un article coûte {price.latex()} €. Il bénéficie d'une réduction de {reduction.latex()}%. Quel est son nouveau prix ?"
+    statement = f"Un article coûte ${price.simplified().latex()}$ €. Il bénéficie d'une réduction de ${reduction.latex()}\\%$. Quel est son nouveau prix ?"
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
 
 
@@ -59,6 +61,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-9]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["final_price"].latex(),
             "simplified_latex": answer["simplified_price"].latex(),

@@ -6,7 +6,6 @@ import teachers.maths as tm
 from teachers.defaults import SEED
 
 
-
 def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """[sujets0][spé][sujet-3][automatismes][question-3]
     >>> generate_components(None, 0)
@@ -51,11 +50,12 @@ def render_question(*, p, direction, coef):
         1: "augmente",
     }
 
-    statement = f"Par combien faut-il multiplier une quantité positive pour que celle-ci {literal_direction[direction.n]} de ${p.as_percent.latex()}\\%$ ?"
+    statement = f"Par combien faut-il multiplier une quantité positive pour que celle-ci {literal_direction[direction.n]} de ${p.as_percent.latex().replace('.', ',')}\\%$ ?"
+    statement_html = f"<div>{statement}</div>"
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
-
 
 
 components = generate_components(None)
@@ -67,6 +67,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][spé][sujet-3][automatismes][question-3]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),

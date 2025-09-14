@@ -10,10 +10,10 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     """
     gen = tg.MathsGenerator(seed)
 
-    x = gen.random_integer(1, 100)   / tm.Integer(n=100)
+    x = gen.random_integer(1, 100) / tm.Integer(n=100)
     n = tm.Symbol(s="n")
     v = tm.Function(name="V")
-    
+
     return {
         "n": n,
         "v": v,
@@ -30,7 +30,7 @@ def solve(*, n, v, x):
     >>> answer["maths_object"].simplified()
     Mul(l=Decimal(p=1, q=2), r=Function(name=V)(Symbol(s='n')))
     """
-    coef = (tm.Integer(n=1)-x).simplified().as_decimal
+    coef = (tm.Integer(n=1) - x).simplified().as_decimal
     maths_object = coef * v(n)
     return {"maths_object": maths_object}
 
@@ -45,13 +45,12 @@ def render_question(*, n, v, x):
 
     x = x.simplified()
 
-    statement = f"Le volume ${v(n).latex()}$ d'un glacier diminue de ${x.as_percent.latex()}\\%$ chaque année.  Exprimer ${v(n+tm.Integer(n=1)).latex()}$ en fonction de ${v(n).latex()}$"
+    statement = f"Le volume ${v(n).latex()}$ d'un glacier diminue de ${x.as_percent.latex()}\\%$ chaque année.  Exprimer ${v(n + tm.Integer(n=1)).latex()}$ en fonction de ${v(n).latex()}$"
+    statement_html = f"<div>{statement}</div>"
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
-
-
-
 
 
 components = generate_components(None)
@@ -63,6 +62,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gen][sujet-3][automatismes][question-5]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "mask": "",
         "answer": {
             "latex": answer["maths_object"].latex(),
@@ -77,5 +77,3 @@ missive(
         },
     }
 )
-
-

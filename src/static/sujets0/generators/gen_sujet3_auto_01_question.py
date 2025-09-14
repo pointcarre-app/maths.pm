@@ -22,16 +22,7 @@ def generate_components(difficulty, seed=SEED) -> dict:
 
     expr = a * b
 
-
-    return {
-        "a": a,
-        "b": b,
-        "n1": n1,
-        "n2": n2,
-        "n3": n3,
-        "n4": n4,
-        "expr" : expr
-    }
+    return {"a": a, "b": b, "n1": n1, "n2": n2, "n3": n3, "n4": n4, "expr": expr}
 
 
 def solve(*, a, b, n1, n2, n3, n4, expr):
@@ -50,7 +41,7 @@ def solve(*, a, b, n1, n2, n3, n4, expr):
     return {"maths_object": maths_object}
 
 
-def render_question(*,  a, b, n1, n2, n3, n4, expr):
+def render_question(*, a, b, n1, n2, n3, n4, expr):
     """[1ere][sujets0][gén][sujet-3][automatismes][question-1]
     >>> components = generate_components(None, 0)
     >>> question = render_question(**components)
@@ -58,12 +49,13 @@ def render_question(*,  a, b, n1, n2, n3, n4, expr):
     "Donner l\'ordre de grandeur de $99990 \\\\times 99000$."
     """
 
-    statement = f"Donner l'ordre de grandeur de ${expr.latex()}$."
+    statement = f"Quel est l'ordre de grandeur de ${expr.latex()}$ ?<br><span class='italic underline' style='font-weight: bold;'>Rappel :</span> l'ordre de grandeur d'un nombre est la puissance de 10 de son écriture scientifique. Par exemple, l'ordre de grandeur de $1234$ est $10^3$ car $1234 = 1,234 \\times 10^{{3}}$. De même, l'ordre de grandeur de $0,004$ est $10^{{-3}}$ car $0,004 = 4 \\times 10^{{-3}}$."
+    statement_html = f"<div>{statement}</div>"
 
     return {
         "statement": statement,
+        "statement_html": statement_html,
     }
-
 
 
 components = generate_components(None)
@@ -74,6 +66,7 @@ missive(
     {
         "beacon": "[1ere][sujets0][gén][sujet-3][automatismes][question-1]",
         "statement": question["statement"],
+        "statement_html": question["statement_html"],
         "answer": {
             "latex": answer["maths_object"].latex(),
             "simplified_latex": answer["maths_object"].simplified().latex(),
@@ -87,7 +80,7 @@ missive(
             "n2": components["n2"].latex(),
             "n3": components["n3"].latex(),
             "n4": components["n4"].latex(),
-            "expr" : components["expr"].latex(),
+            "expr": components["expr"].latex(),
         },
     }
 )
