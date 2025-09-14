@@ -71,7 +71,7 @@ def render_question(*, p_A, p_B_if_A, p_B_if_notA):
             <line x1="140" y1="105" x2="220" y2="125" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
             
             <!-- First level probability labels -->
-            <foreignObject x="55" y="40" width="30" height="15" style="overflow: visible;">
+            <foreignObject x="55" y="38" width="30" height="15" style="overflow: visible;">
                 <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
                 <span style="line-height: 1; text-align: center; font-size: 12px;" id="p1">${p_A.as_decimal.latex().replace(".", ",")}$</span>
                 </div>
@@ -91,13 +91,13 @@ def render_question(*, p_A, p_B_if_A, p_B_if_notA):
             </foreignObject>
             
             <!-- Second level probability labels -->
-            <foreignObject x="170" y="16" width="30" height="15" style="overflow: visible;">
+            <foreignObject x="170" y="14" width="30" height="15" style="overflow: visible;">
                 <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
                 <span style="line-height: 1; text-align: center; font-size: 12px;" id="p2">${p_B_if_A.as_decimal.latex().replace(".", ",")}$</span>
                 </div>
             </foreignObject>
             
-            <foreignObject x="170" y="120" width="30" height="15" style="overflow: visible;">
+            <foreignObject x="170" y="122" width="30" height="15" style="overflow: visible;">
                 <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
                 <span style="line-height: 1; text-align: center; font-size: 12px;" id="p3">${p_B_if_notA.as_decimal.latex().replace(".", ",")}$</span>
                 </div>

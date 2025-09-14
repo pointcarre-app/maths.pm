@@ -11,8 +11,6 @@
 
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
 
 <svg width="350" height="350" style="display: block; max-width: 100%; height: auto; border: 1px solid #333;">
   <!-- Define arrowhead marker -->
@@ -174,28 +172,50 @@
 </svg>
 
 <script>
-// Render axis labels
-katex.render("x", document.getElementById('xAxisLabel_spe_sujet2_auto_08_question_chart'));
-katex.render("y", document.getElementById('yAxisLabel_spe_sujet2_auto_08_question_chart'));
-
-// Render tick labels
-katex.render("1", document.getElementById('x1_spe_sujet2_auto_08_question_chart'));
-katex.render("2", document.getElementById('x2_spe_sujet2_auto_08_question_chart'));
-katex.render("3", document.getElementById('x3_spe_sujet2_auto_08_question_chart'));
-katex.render("4", document.getElementById('x4_spe_sujet2_auto_08_question_chart'));
-katex.render("-1", document.getElementById('xm1_spe_sujet2_auto_08_question_chart'));
-katex.render("-2", document.getElementById('xm2_spe_sujet2_auto_08_question_chart'));
-katex.render("-3", document.getElementById('xm3_spe_sujet2_auto_08_question_chart'));
-katex.render("-4", document.getElementById('xm4_spe_sujet2_auto_08_question_chart'));
-
-katex.render("1", document.getElementById('y1_spe_sujet2_auto_08_question_chart'));
-katex.render("2", document.getElementById('y2_spe_sujet2_auto_08_question_chart'));
-katex.render("3", document.getElementById('y3_spe_sujet2_auto_08_question_chart'));
-katex.render("4", document.getElementById('y4_spe_sujet2_auto_08_question_chart'));
-katex.render("-1", document.getElementById('ym1_spe_sujet2_auto_08_question_chart'));
-katex.render("-2", document.getElementById('ym2_spe_sujet2_auto_08_question_chart'));
-katex.render("-3", document.getElementById('ym3_spe_sujet2_auto_08_question_chart'));
-katex.render("-4", document.getElementById('ym4_spe_sujet2_auto_08_question_chart'));
+// Wait for DOM and your KaTeX system to be ready
+document.addEventListener("DOMContentLoaded", function() {
+  // Set labels with LaTeX delimiters
+  document.getElementById('xAxisLabel_spe_sujet2_auto_08_question_chart').innerHTML = '$x$';
+  document.getElementById('yAxisLabel_spe_sujet2_auto_08_question_chart').innerHTML = '$y$';
+  
+  // Set X-axis tick labels
+  document.getElementById('x1_spe_sujet2_auto_08_question_chart').innerHTML = '$1$';
+  document.getElementById('x2_spe_sujet2_auto_08_question_chart').innerHTML = '$2$';
+  document.getElementById('x3_spe_sujet2_auto_08_question_chart').innerHTML = '$3$';
+  document.getElementById('x4_spe_sujet2_auto_08_question_chart').innerHTML = '$4$';
+  document.getElementById('xm1_spe_sujet2_auto_08_question_chart').innerHTML = '$-1$';
+  document.getElementById('xm2_spe_sujet2_auto_08_question_chart').innerHTML = '$-2$';
+  document.getElementById('xm3_spe_sujet2_auto_08_question_chart').innerHTML = '$-3$';
+  document.getElementById('xm4_spe_sujet2_auto_08_question_chart').innerHTML = '$-4$';
+  
+  // Set Y-axis tick labels
+  document.getElementById('y1_spe_sujet2_auto_08_question_chart').innerHTML = '$1$';
+  document.getElementById('y2_spe_sujet2_auto_08_question_chart').innerHTML = '$2$';
+  document.getElementById('y3_spe_sujet2_auto_08_question_chart').innerHTML = '$3$';
+  document.getElementById('y4_spe_sujet2_auto_08_question_chart').innerHTML = '$4$';
+  document.getElementById('ym1_spe_sujet2_auto_08_question_chart').innerHTML = '$-1$';
+  document.getElementById('ym2_spe_sujet2_auto_08_question_chart').innerHTML = '$-2$';
+  document.getElementById('ym3_spe_sujet2_auto_08_question_chart').innerHTML = '$-3$';
+  document.getElementById('ym4_spe_sujet2_auto_08_question_chart').innerHTML = '$-4$';
+  
+  // Force math rendering after a small delay to ensure content is set
+  setTimeout(function() {
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(document.body, {
+        delimiters: [{
+          left: '$$',
+          right: '$$',
+          display: true
+        }, {
+          left: '$',
+          right: '$',
+          display: false
+        }],
+        throwOnError: false
+      });
+    }
+  }, 100);
+});
 
 // Function to draw line y = ax + b
 function drawLineSpeSubject2Auto08Question(a, b) {
@@ -226,7 +246,7 @@ function drawLineSpeSubject2Auto08Question(a, b) {
 
 // Example: draw line y = 0.5x + 1
 drawLineSpeSubject2Auto08Question(0.5, 1);
-</script>right
+</script>
 ```
 
 
