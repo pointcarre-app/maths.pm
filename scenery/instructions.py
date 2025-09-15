@@ -26,7 +26,7 @@ def get_pm_sujets0_a_generate_html(django_testcase, url, data, query_parameters)
 
     fragment_wrappers = django_testcase.driver.find_elements(By.CLASS_NAME, "fragment-wrapper")
 
-    print("HERE", len(fragment_wrappers))
+    # print("HERE", len(fragment_wrappers))
 
     for wrapper in fragment_wrappers[:k]: 
         django_testcase.driver.execute_script("arguments[0].remove();", wrapper)
