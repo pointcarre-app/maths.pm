@@ -201,6 +201,15 @@ async def build_static_site():
             ]
         )
 
+        # PM example/demo routes
+        routes.extend(
+            [
+                "/dynamic-pm-demo",  # Dynamic PM loading demo
+                "/simple-dynamic-demo",  # Simple dynamic PM demo
+                # Add any other PM example routes here as needed
+            ]
+        )
+
         # API routes
         routes.extend(
             [

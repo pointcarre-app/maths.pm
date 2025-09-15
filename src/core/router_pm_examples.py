@@ -188,16 +188,16 @@ async def dynamic_pm_demo(request: Request):
     return settings.templates.TemplateResponse("pm-include/examples/dynamic-pm-demo.html", context)
 
 
-# Example 8: Test dynamic PM loading
-@example_router.get("/test-dynamic-pm", response_class=HTMLResponse)
-async def test_dynamic_pm(request: Request):
-    """Test if dynamic PM loading works"""
+# # Example 8: Test dynamic PM loading
+# @example_router.get("/test-dynamic-pm", response_class=HTMLResponse)
+# async def test_dynamic_pm(request: Request):
+#     """Test if dynamic PM loading works"""
 
-    context = {
-        "request": request,
-    }
+#     context = {
+#         "request": request,
+#     }
 
-    return settings.templates.TemplateResponse("test-dynamic-pm.html", context)
+#     return settings.templates.TemplateResponse("test-dynamic-pm.html", context)
 
 
 # Example 9: Simple dynamic PM demo

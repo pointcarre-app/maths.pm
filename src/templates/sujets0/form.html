@@ -110,7 +110,7 @@
     <div class="tab-alt-content max-w-4xl mx-auto padding-alt-security " id="generate-content">
 
 
-      <div class="text-sm sm:text-base mb-6  md:py-10 " style="border-radius: var(--radius-box)">
+      <div class="text-sm sm:text-base mb-6  md:py-4" style="border-radius: var(--radius-box)">
 
         <div class="mx-auto">
 
@@ -125,7 +125,8 @@
 
 
               <!-- Top Right: Specialty selection -->
-              <div class="mt-4 sm:p-6 sm:bg-base-200/90 sm:border-base-300 sm:border-1"
+              <div id="wrapper-programme-radio-group"
+                   class="mt-4 sm:p-6 sm:bg-base-200/90 sm:border-base-300 sm:border-1"
                    style="border-radius: var(--radius-box)">
                 <fieldset class="fieldset " id="programme-fieldset">
                   <legend class="fieldset-legend flex items-center justify-between w-full">
@@ -135,11 +136,23 @@
                       <span class="badge badge-outline badge-rounded cursor-help text-base-content/60">?</span>
                     </div>
                   </legend>
-                  <div class="mt-2" id="programme-radio-group">
+
+                  <p id="programme-help-text"  class="text-sm sm:text-base italic text-base-content/60">
+                    Choisir un des <a class="link link-primary" target="_blank">sujets 0</a> publiés par le ministère
+                  </p>
+                  <p class="text-error hidden text-sm sm:text-base italic" id="programme-error-text">
+                    ⛔️ Veuillez sélectionner un sujet 0 pour une filière spécifique avant de générer les copies
+                  </p>
+
+
+                  {# <hr class="my-8 border-base-300" /> #}
+
+
+                  <div id="programme-radio-group">
                     <!-- Spécialité Group -->
-                    <div>
+                    <div class="mt-6">
                       <div class="text-base font-light text-base-content/60 mb-3">
-                        <span class="badge badge-primary  badge-lg badge-soft">Spécialité</span>
+                        <span class="badge badge-outline badge-lg opacity-70">Spécialité</span>
                       </div>
                       <div class="join w-full">
                         <input type="radio"
@@ -157,10 +170,12 @@
                       </div>
                     </div>
 
+                    {# <hr class="my-8 border-base-300" /> #}
+
                     <!-- Enseignement Spécifique Group -->
-                    <div>
-                      <div class="text-base font-light text-base-content/60 mt-6 mb-3">
-                        <span class="badge badge-primary  badge-lg badge-soft">Enseignement Spécifique</span>
+                    <div class="mt-10">
+                      <div class="text-base font-light text-base-content/60bg-base-200/90 mb-3">
+                        <span class="badge badge-outline badge-lg opacity-70">Enseignement Spécifique</span>
                       </div>
                       <div class="join w-full">
                         <input type="radio"
@@ -184,10 +199,12 @@
                       </div>
                     </div>
 
+                    {# <hr class="my-8 border-base-300" /> #}
+
                     <!-- Technologique Group -->
-                    <div>
-                      <div class="text-base font-light text-base-content/60 mt-6 mb-3">
-                        <span class="badge badge-primary  badge-lg badge-soft">Technologique</span>
+                    <div class="mt-10">
+                      <div class="text-base font-light text-base-content/60bg-base-200/90 mb-3">
+                        <span class="badge badge-outline badge-lg opacity-70">Technologique</span>
                       </div>
 
                       <div class="join w-full">
@@ -208,12 +225,7 @@
                       </div>
                     </div>
                   </div>
-                  <p id="programme-help-text"  class="text-sm sm:text-base italic mt-1 text-base-content/60">
-                    Choisir un des <a class="link link-primary" target="_blank">sujets 0</a> publiés par le ministère
-                  </p>
-                  <p class="text-error hidden text-sm sm:text-base italic mt-1" id="programme-error-text">
-                    ⛔️ Veuillez sélectionner un sujet 0 pour une filière spécifique avant de générer les copies
-                  </p>
+
                 </fieldset>
 
               </div>
@@ -373,9 +385,12 @@
         <script>
             // Function to add error styling to programme radio group
             function addProgrammeError() {
-                const radioGroup = document.getElementById('programme-radio-group');
+
                 const errorText = document.getElementById('programme-error-text');
                 const helpText = document.getElementById('programme-help-text');
+
+                const radioGroup = document.getElementById('wrapper-programme-radio-group');
+                //const radioGroup = document.getElementById('programme-radio-group');
 
                 if (radioGroup) {
                     radioGroup.classList.add('border-error')
@@ -556,6 +571,20 @@
                 }
             }
 
+            // Function to update radio button styling
+            function updateRadioButtonStyling() {
+                const radioButtons = document.querySelectorAll('input[name="sujets0"]');
+                radioButtons.forEach(btn => {
+                    if (btn.checked) {
+                        btn.classList.remove('btn-soft');
+                        btn.classList.add('btn-active');
+                    } else {
+                        btn.classList.remove('btn-active');
+                        btn.classList.add('btn-soft');
+                    }
+                });
+            }
+
             // Initialize the generate button when the page loads
             function initializeGenerateButton() {
                 const generateBtn = document.getElementById("big-generate-btn");
@@ -569,8 +598,14 @@
                 // Add event listeners to radio buttons to remove error styling when selected
                 const radioButtons = document.querySelectorAll('input[name="sujets0"]');
                 radioButtons.forEach(radio => {
-                    radio.addEventListener("change", removeProgrammeError);
+                    radio.addEventListener("change", function() {
+                        removeProgrammeError();
+                        updateRadioButtonStyling();
+                    });
                 });
+
+                // Initialize radio button styling on page load
+                updateRadioButtonStyling();
 
                 // Set random seed on page load
                 setRandomSeed();

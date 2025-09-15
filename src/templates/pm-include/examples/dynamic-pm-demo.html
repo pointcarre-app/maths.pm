@@ -25,9 +25,10 @@
       </div>
 
       {# Dynamically load and render the PM file #}
-      {% with pm_file="corsica/a_troiz_geo.md", product_name="corsica", show_toc=true %}
-        {% include "pm-include/render-dynamic.html" %}
-      {% endwith %}
+      {% set pm_file = "corsica/a_troiz_geo.md" %}
+      {% set product_name = "corsica" %}
+      {% set show_toc = false %}  {# Set to false to avoid duplicate TOC #}
+      {% include "pm-include/render-dynamic.html" %}
     </div>
 
     <div class="divider"></div>
@@ -42,9 +43,9 @@
           <div class="card-body">
             <h3 class="card-title">Python Basics</h3>
             {# Load PM fragments only #}
-            {% with pm_file="pyly/01_premiers_pas.md", product_name="pyly" %}
-              {% include "pm-include/render-dynamic-fragments.html" %}
-            {% endwith %}
+            {% set pm_file = "pyly/01_premiers_pas.md" %}
+            {% set product_name = "pyly" %}
+            {% include "pm-include/render-dynamic-fragments.html" %}
           </div>
         </div>
 
@@ -53,9 +54,9 @@
           <div class="card-body">
             <h3 class="card-title">Nagini Introduction</h3>
             {# Load PM fragments only #}
-            {% with pm_file="nagini/01_intro.md", product_name="nagini" %}
-              {% include "pm-include/render-dynamic-fragments.html" %}
-            {% endwith %}
+            {% set pm_file = "nagini/01_intro.md" %}
+            {% set product_name = "nagini" %}
+            {% include "pm-include/render-dynamic-fragments.html" %}
           </div>
         </div>
       </div>
@@ -77,7 +78,9 @@
 
       {# Construct the path and load the PM #}
       {% set pm_path = selected_topic ~ "/" ~ selected_file %}
-      {% include "pm-include/render-dynamic.html" with pm_file=pm_path, show_debug=true %}
+      {% set pm_file = pm_path %}
+      {% set show_debug = true %}
+      {% include "pm-include/render-dynamic.html" %}
     </div>
 
     <div class="divider"></div>
@@ -90,7 +93,8 @@
 
         <div class="bg-base-200 p-4 rounded-lg my-4">
           {# Load just the fragments inline #}
-          {% include "pm-include/render-dynamic-fragments.html" with pm_file="documentation/fragments_quick_reference.md" %}
+          {% set pm_file = "documentation/fragments_quick_reference.md" %}
+          {% include "pm-include/render-dynamic-fragments.html" %}
         </div>
 
         <p>And continue with your regular content afterward.</p>
@@ -103,7 +107,8 @@
       <p class="mb-4">This demonstrates what happens when a PM file doesn't exist:</p>
 
       {# Try to load a non-existent file #}
-      {% include "pm-include/render-dynamic.html" with pm_file="non/existent/file.md" %}
+      {% set pm_file = "non/existent/file.md" %}
+      {% include "pm-include/render-dynamic.html" %}
     </div>
   </div>
 {% endblock %}
