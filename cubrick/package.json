@@ -9,6 +9,10 @@
     "serve": "node server.js &",
     "capture": "npm run serve && sleep 2 && npm run record",
     "convert-transparent": "ffmpeg -framerate 30 -i frames/frame_%04d.png -c:v prores_ks -pix_fmt yuva444p10le -alpha_bits 8 output/transparent.mov",
+    "convert:once": "ffmpeg -y -framerate 30 -i frames/roll-once/frame_%04d.png -c:v prores_ks -profile:v 4 -pix_fmt yuva444p10le -alpha_bits 8 output/roll-once.mov",
+    "convert:twice": "ffmpeg -y -framerate 30 -i frames/roll-twice/frame_%04d.png -c:v prores_ks -profile:v 4 -pix_fmt yuva444p10le -alpha_bits 8 output/roll-twice.mov",
+    "convert:thrice": "ffmpeg -y -framerate 30 -i frames/roll-thrice/frame_%04d.png -c:v prores_ks -profile:v 4 -pix_fmt yuva444p10le -alpha_bits 8 output/roll-thrice.mov",
+    "convert-all": "npm run convert:once && npm run convert:twice && npm run convert:thrice",
     "convert-green": "ffmpeg -f lavfi -i 'color=c=lime:s=400x400' -framerate 30 -i frames/frame_%04d.png -filter_complex '[1:v][0:v]overlay' output/green_screen.mov",
     "cleanup": "rm -rf frames/*"
   },

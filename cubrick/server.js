@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 const server = http.createServer((req, res) => {
-    const filePath = path.join(__dirname, req.url === '/' ? 'animation.html' : req.url);
+    const defaultFile = 'capture-identity.html';
+    const filePath = path.join(__dirname, req.url === '/' ? defaultFile : req.url);
     
     if (fs.existsSync(filePath)) {
         const ext = path.extname(filePath);
