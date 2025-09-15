@@ -1,0 +1,18 @@
+{
+  "name": "cubrick-svg-recorder",
+  "version": "1.0.0",
+  "description": "Record SVG animations with transparency for video editing",
+  "main": "record.js",
+  "scripts": {
+    "start": "node server.js",
+    "record": "node record.js",
+    "serve": "node server.js &",
+    "capture": "npm run serve && sleep 2 && npm run record",
+    "convert-transparent": "ffmpeg -framerate 30 -i frames/frame_%04d.png -c:v prores_ks -pix_fmt yuva444p10le -alpha_bits 8 output/transparent.mov",
+    "convert-green": "ffmpeg -f lavfi -i 'color=c=lime:s=400x400' -framerate 30 -i frames/frame_%04d.png -filter_complex '[1:v][0:v]overlay' output/green_screen.mov",
+    "cleanup": "rm -rf frames/*"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}
