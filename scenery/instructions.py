@@ -20,19 +20,28 @@ def get_pm_sujets0_a_generate_html(django_testcase, url, data, query_parameters)
 
     time.sleep(1)
 
-    k = 6
+
+
+    k = 8
 
     fragment_wrappers = django_testcase.driver.find_elements(By.CLASS_NAME, "fragment-wrapper")
+
+    print("HERE", len(fragment_wrappers))
+
     for wrapper in fragment_wrappers[:k]: 
         django_testcase.driver.execute_script("arguments[0].remove();", wrapper)
-
-
-
-    if int(query_parameters["nbStudents"]) > 1:
-        fragment_wrappers = django_testcase.driver.find_elements(By.CSS_SELECTOR, '.fragment-wrapper[data-f_type="h2_"]')
-        for wrapper in fragment_wrappers:
-            django_testcase.driver.execute_script("arguments[0].remove();", wrapper)
     
+
+
+    # if int(query_parameters["nbStudents"]) > 1:
+    fragment_wrappers = django_testcase.driver.find_elements(By.CSS_SELECTOR, '.fragment-wrapper[data-f_type="h2_"]')
+    for wrapper in fragment_wrappers:
+        django_testcase.driver.execute_script("arguments[0].remove();", wrapper)
+
+    fragment_wrappers = django_testcase.driver.find_elements(By.CSS_SELECTOR, '.fragment-wrapper[data-f_type="hr_"]')
+    for wrapper in fragment_wrappers:
+        django_testcase.driver.execute_script("arguments[0].remove();", wrapper)
+
     time.sleep(1)
 
 
