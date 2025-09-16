@@ -1,4 +1,4 @@
-{# <section class="fixed inset-0 w-screen h-screen z-[-10] overflow-hidden">
+<section class="fixed inset-0 w-screen h-screen z-[-10] overflow-hidden">
 
 
   <!-- <a href="{{ url_for('index') }}" class="flex items-center gap-1 sm:gap-2 bg-transparent pl-4 pt-3" style="position:absolute; top:0; left:0">
@@ -6,8 +6,8 @@
     <p class="font-heading">
       <span class="text-lg"><span class="">pointcarre</span>.app</span>
       {# <span class="text-sm sm:text-lg text-primary">&nbsp;/&nbsp;</span> #}
-{# <span class="text-sm sm:text-lg">1<sup>ère</sup></span> #}
-{# <span class="text-sm sm:text-lg text-primary">/</span>
+      {# <span class="text-sm sm:text-lg">1<sup>ère</sup></span> #}
+      {# <span class="text-sm sm:text-lg text-primary">/</span>
             <span class="text-sm sm:text-lg">Spé Maths</span>
             <span class="text-sm sm:text-lg text-primary"> /</span>
 <span class="text-sm sm:text-lg">Automatismes</span> #} {#
@@ -15,54 +15,57 @@
             <span class="text-sm text-base-content/50">/</span>
             <span class="badge badge-soft badge-sm sm:badge-lg">Spé. Maths</span>
             #}
-</p>
+    </p>
 </a> -->
 
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
-<defs>
-<radialGradient id="gradient" cx="18%" cy="35%" r="15%" fx="18%" fy="35%">
-<stop offset="0%" stop-color="#a46dff" stop-opacity="0.5" />
-<stop offset="70%" stop-color="#a46dff" stop-opacity="0.3" />
-<stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
-</radialGradient>
+  <svg xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 800 600"
+       preserveAspectRatio="xMidYMid slice"
+       width="100%"
+       height="100%">
+    <defs>
+    <radialGradient id="gradient" cx="18%" cy="35%" r="15%" fx="18%" fy="35%">
+    <stop offset="0%" stop-color="#a46dff" stop-opacity="0.5" />
+    <stop offset="70%" stop-color="#a46dff" stop-opacity="0.3" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
 
-<filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
-<feGaussianBlur in="SourceGraphic" stdDeviation="30" />
-</filter>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="30" />
+    </filter>
 
-{# Grid pattern definition #}
-<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-<path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f0f0f0" stroke-width="0.5" />
-</pattern>
+    {# Grid pattern definition #}
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f0f0f0" stroke-width="0.5" />
+    </pattern>
 
-{# Notebook paper lines pattern #}
-<pattern id="notebook-lines" width="30" height="30" patternUnits="userSpaceOnUse">
-<!-- Main line (thicker) -->
-<line x1="0" y1="29" x2="30" y2="29" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
+    {# Notebook paper lines pattern #}
+    <pattern id="notebook-lines" width="30" height="30" patternUnits="userSpaceOnUse">
+    <!-- Main line (thicker) -->
+    <line x1="0" y1="29" x2="30" y2="29" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
 
-{# Thinner interlines #}
-<line x1="0" y1="7" x2="30" y2="7" stroke="var(--color-primary)" stroke-width="0.45" opacity="0.10" />
-<line x1="0" y1="14" x2="30" y2="14" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
-<line x1="0" y1="21" x2="30" y2="21" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
+    {# Thinner interlines #}
+    <line x1="0" y1="7" x2="30" y2="7" stroke="var(--color-primary)" stroke-width="0.45" opacity="0.10" />
+    <line x1="0" y1="14" x2="30" y2="14" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
+    <line x1="0" y1="21" x2="30" y2="21" stroke="var(--color-primary)" stroke-width="0.35" opacity="0.10" />
 
-{# Main vertical line - will be hidden on wide screens via CSS  #}
-<line x1="29" y1="0" x2="29" y2="64" stroke="var(--color-primary)" stroke-width="0.45" opacity="0.10" />
-</pattern>
-</defs>
+    {# Main vertical line - will be hidden on wide screens via CSS  #}
+    <line x1="29" y1="0" x2="29" y2="64" stroke="var(--color-primary)" stroke-width="0.45" opacity="0.10" />
+    </pattern>
+    </defs>
 
-{# Main background #}
-<rect width="100%" height="100%" opacity="0.3" fill="var(--color-base-100)" />
+    {# Main background #}
+    <rect width="100%" height="100%" opacity="0.3" fill="var(--color-base-100)" />
 
-{# Notebook paper lines overlay #}
-<rect width="100%" height="100%" fill="url(#notebook-lines)" opacity="0.5" />
+    {# Notebook paper lines overlay #}
+    <rect width="100%" height="100%" fill="url(#notebook-lines)" opacity="0.5" />
 
-{# Special vertical line that only appears on wide screens #}
-<line class="special-vertical-line" x1="89.5" y1="0" x2="89.5" y2="600" stroke="var(--color-secondary)" stroke-width="0.6" opacity="0.2" />
+    {# Special vertical line that only appears on wide screens #}
+    <line class="special-vertical-line" x1="89.5" y1="0" x2="89.5" y2="600" stroke="var(--color-secondary)" stroke-width="0.6" opacity="0.2" />
 
-{# Radial gradient background #}
-{# <rect width="100%" height="100%" fill="url(#gradient)" opacity="0.6" /> #}
-</svg>
+    {# Radial gradient background #}
+    {# <rect width="100%" height="100%" fill="url(#gradient)" opacity="0.6" /> #}
+  </svg>
 
 </section>
-#}
