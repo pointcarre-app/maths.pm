@@ -435,13 +435,15 @@ xl	80rem (1280px)	@media (width >= 80rem) { ... }
 
 
 
-
-/* ///resources */
-
 .badge:has(sup) {
   padding-top: 0.25rem;
 }
 
+
+/* ///resources */
+
+/* 
+
 .badge {
   padding-top: 0.15rem;
-}
+} */

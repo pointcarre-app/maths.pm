@@ -1,20 +1,399 @@
 {% extends "base/main-alt.html" %}
 {% block content %}
-  <div class="max-w-2xl px-4 mx-auto mt-24 mb-24">
+  <style>
+      /* Container for animation demos */
+      .animation-container {
+          border-radius: 4px;
+          position: relative;
+          text-align: left;
+          display: inline-block;
+          width: 200px;
+          min-height: 280px;
+          margin: 2rem;
+          padding-top: 1rem;
+      }
+
+      /* Wide container for rolling animations */
+      .animation-container-wide {
+          border-radius: 4px;
+          position: relative;
+          text-align: left;
+          display: inline-block;
+          width: 200px;
+          min-height: 180px;
+          margin: 2rem;
+          padding-top: 1rem;
+      }
+
+      /* Container for JS rolling animation */
+      .animation-container-js {
+          border-radius: 4px;
+          position: relative;
+          text-align: left;
+          display: inline-block;
+          width: 300px;
+          min-height: 180px;
+          margin: 2rem;
+          padding-top: 1rem;
+          background-color: #f5f5f5;
+      }
+
+      #js-rolling-container {
+          position: relative;
+          height: 120px;
+      }
+
+      #js-rolling-logo {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 60px;
+          height: 60px;
+      }
+
+      /*
+       * JS Rolling Demos
+       * - Each demo keeps an element anchored on the same baseline and simulates
+       *   a square rolling over its edges by switching the pivot between
+       *   painted (outer) corners of the stroked square.
+       * - IMPORTANT: We compute transformOrigin in CSS px from the SVG
+       *   viewBox and include half the stroke width; otherwise tiny visual jumps occur.
+       */
+      .js-rolling-container-1 {
+          position: relative;
+          height: 120px;
+      }
+
+      #js-rolling-one {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 60px;
+          height: 60px;
+      }
+
+      /* JS rolling animation (two rolls) */
+      .js-rolling-container-2 {
+          position: relative;
+          height: 120px;
+      }
+
+      #js-rolling-two {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 60px;
+          height: 60px;
+      }
+
+      /* Third demo: three rolls */
+      .js-rolling-container-3 {
+          position: relative;
+          height: 120px;
+      }
+
+      #js-rolling-three {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 60px;
+          height: 60px;
+      }
+
+      .animation-container svg,
+      .animation-container-wide svg {
+          margin-top: 1rem;
+      }
+
+      /* Spinning logo animation */
+      .spinning-logo-animation {
+          animation: spin 4s linear infinite;
+      }
+
+      .spinning-logo-animation rect {
+          stroke: #3d139c;
+      }
+
+      .spinning-logo-animation circle {
+          fill: #3d139c;
+      }
+
+      /* Pulsating logo animation */
+      .pulsating-logo-animation {
+          animation: pulse-scale 1.5s ease-in-out infinite;
+          transform-origin: center;
+      }
+
+      .pulsating-logo-animation rect {
+          stroke: #3d139c;
+      }
+
+      .pulsating-logo-animation circle {
+          fill: #3d139c;
+      }
+
+      /* Keyframe animations */
+      @keyframes spin {
+          0% {
+              transform: rotate(0deg);
+          }
+
+          100% {
+              transform: rotate(360deg);
+          }
+      }
+
+      @keyframes pulse-scale {
+          0% {
+              transform: scale(1);
+              opacity: 1;
+          }
+
+          50% {
+              transform: scale(1.3);
+              opacity: 0.7;
+          }
+
+          100% {
+              transform: scale(1);
+              opacity: 1;
+          }
+      }
+
+      /* Simple rotation animation - one 90° roll */
+      .rolling-logo-animation {
+          animation: roll-simple 4s ease-in-out infinite;
+          transform-origin: 100% 100%;
+          /* bottom-right corner */
+          width: 60px;
+          height: 60px;
+          display: inline-block;
+      }
+
+      .rolling-logo-animation svg {
+          width: 60px;
+          height: 60px;
+      }
+
+      @keyframes roll-simple {
+
+          /* Starting position - square sits normally */
+          0%,
+          25% {
+              transform: rotate(0deg);
+          }
+
+          /* Rotate 90° clockwise around bottom-right corner */
+          /* Right edge becomes bottom edge */
+          50%,
+          75% {
+              transform: rotate(90deg);
+          }
+
+          /* Return to start */
+          100% {
+              transform: rotate(0deg);
+          }
+      }
+
+      /* One-way rotation animation - rotates and stays */
+      .rolling-logo-oneway {
+          animation: roll-oneway 3s ease-in-out forwards;
+          transform-origin: 100% 100%;
+          /* bottom-right corner */
+          width: 60px;
+          height: 60px;
+          display: inline-block;
+      }
+
+      .rolling-logo-oneway svg {
+          width: 60px;
+          height: 60px;
+      }
+
+      @keyframes roll-oneway {
+
+          /* Starting position - square sits normally */
+          0%,
+          33% {
+              transform: rotate(0deg);
+          }
+
+          /* Rotate 90° clockwise and stay there */
+          /* Right edge becomes bottom edge */
+          66%,
+          100% {
+              transform: rotate(90deg);
+          }
+      }
+
+      /* Two-roll animation - rotates twice and stays */
+      /* NOTE: True rolling with changing pivot points is complex in CSS */
+      /* This is a simplified version that shows the concept */
+      .rolling-logo-tworoll {
+          animation: roll-tworoll 5s ease-in-out forwards;
+          transform-origin: 100% 100%;
+          /* bottom-right corner */
+          width: 60px;
+          height: 60px;
+          display: inline-block;
+      }
+
+      .rolling-logo-tworoll svg {
+          width: 60px;
+          height: 60px;
+      }
+
+      @keyframes roll-tworoll {
+
+          /* Starting position - square sits normally */
+          0%,
+          15% {
+              transform: translateX(0) rotate(0deg);
+              transform-origin: 100% 100%;
+              /* bottom-right */
+          }
+
+          /* First roll - rotate 90° clockwise around bottom-right */
+          /* Right edge becomes bottom edge */
+          30% {
+              transform: translateX(0) rotate(90deg);
+              transform-origin: 100% 100%;
+          }
+
+          /* After first roll, the square needs to translate and continue */
+          /* The old top-right is now the new bottom-right */
+          35% {
+              transform: translateX(60px) rotate(90deg);
+              transform-origin: 100% 0%;
+              /* new pivot: was top-right, now bottom-right */
+          }
+
+          /* Second roll - rotate another 90° from new position */
+          /* This would make the square continue rolling right */
+          50% {
+              transform: translateX(60px) rotate(180deg);
+              transform-origin: 100% 0%;
+          }
+
+          /* Final position after two rolls */
+          55%,
+          100% {
+              transform: translateX(120px) rotate(180deg);
+              transform-origin: center;
+          }
+      }
+
+
+      /* Collapsing animation (keeping for potential future use) */
+      @keyframes collapse {
+          from {
+              height: auto;
+              overflow: hidden;
+          }
+
+          to {
+              height: 0;
+              overflow: hidden;
+          }
+      }
+
+      .animate-collapse {
+          animation: collapse 0.5s ease forwards;
+      }
+  </style>
+
+  <div class="max-w-4xl px-4 mx-auto mt-24 mb-24">
     <h1 class="text-6xl font-bold mb-4">Identity</h1>
 
     <div class="mt-24">
+      <h1 class="text-3xl font-bold mb-8">
+        Headings with <span class="underline">Spectral</span> (no css class out of text-3xl cause h1)
+      </h1>
+
+      <h3 class="text-xl font-bold mb-8">
+        Headings with <span class="underline">Spectral</span> (no css class out of text-xl cause h3)
+      </h3>
+
       <hr class="my-4" />
-      <h1 class="text-4xl font-bold mb-8">Headings with Spectral</h1>
-      <div class="max-w-sm text-xl mb-4">Body with Inter</div>
-      <div class="max-w-sm  text-xl font-mono mb-4">Mono with JetBrains Mono</div>
-      <div class="max-w-sm  text-xl font-handwritten mb-4">Handwritten with Dancing Script</div>
-      <div class="max-w-sm  text-base-content/30 text-xl font-accent mb-4">
-        Accent with EB Garamond (to see)
+
+
+      <div class="text-xl mb-4">
+        Body with <span class="underline">Lexend</span> (with no css class cause body font-family=Lexend)
       </div>
-      <div class="max-w-sm  text-base-content/30 text-xl font-strong mb-4">
-        Strong with Lora (to see)
+      <div class="text-xl mb-4" style="font-family: var(--font-lexend);">
+        Body with <span class="underline">Lexend</span> (check with css variable)
       </div>
+
+      <hr class="my-4" />
+
+
+      <div class=" text-xl font-mono mb-4">
+        Mono with <span class="underline">JetBrains Mono</span> (css class)
+      </div>
+      <div class=" text-xl mb-4" style="font-family: var(--font-jetbrains);">
+        Mono with <span class="underline">JetBrains Mono</span> (css variable)
+      </div>
+
+      <hr class="my-4" />
+
+
+      <div class=" text-xl font-handwritten mb-4">
+        Handwritten with <span class="underline">Dancing Script</span> (css class)
+      </div>
+      <div class=" text-xl mb-4" style="font-family: var(--font-dancing-script);">
+        Handwritten with <span class="underline">Dancing Script</span> (css variable)
+      </div>
+
+      <hr class="my-4" />
+
+
+      <div class="text-xl mb-4" style="font-family: var(--font-inter);">
+        (alt) Body with <span class="underline">Inter</span> (css variable)
+      </div>
+
+      <hr class="my-4" />
+
+
+      <div class=" text-xl font-accent mb-4">
+        (alt) Accent with <span class="underline">EB Garamond</span> (css class)
+      </div>
+      <div class=" text-xl mb-4" style="font-family: var(--font-eb-garamond);">
+        (alt) Accent with <span class="underline">EB Garamond</span> (css variable)
+      </div>
+
+      <hr class="my-4" />
+
+
+      <div class=" text-xl font-strong mb-4">
+        (alt) Strong with <span class="underline">Lora</span> (css class stro,g)
+      </div>
+      <div class=" text-xl mb-4" style="font-family: var(--font-lora);">
+        (alt) Strong with <span class="underline">Lora</span> (css variable)
+      </div>
+
+      <hr class="my-4" />
+
+
+      <div class="text-xl mb-4" style="font-family: var(--font-playfair);">
+        (alt) Text with <span class="underline">Playfair Display</span> (css variable)
+      </div>
+
+      <hr class="my-4" />
+
+
+      <div class="text-xl mb-4" style="font-family: var(--font-architects);">
+        (alt) Text with <span class="underline">Architects Daughter</span> (css variable)
+      </div>
+
+      <hr class="my-4" />
+
+
+      <div class="text-xl mb-4" style="font-family: var(--font-source-serif);">
+        (alt) Text with <span class="underline">Source Serif 4</span> (css variable)
+      </div>
+
+
     </div>
     <div class="mt-24">
       <hr class="my-4" />
@@ -92,6 +471,420 @@
         </div>
       </div>
     </div>
+
+    <div class="mt-24">
+      <hr class="my-4" />
+      <h1 class="text-4xl font-bold mb-8">Loading Animations</h1>
+
+
+      <h2 class="text-2xl font-bold mb-4">Loading Animations - Logo Gabriel</h2>
+      <div class="flex justify-start items-start mb-8 -mx-8">
+        <!-- Spinning Gabriel Logo Animation -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-4">Spinning Gabriel</h2>
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="spinning-logo-animation"
+               viewBox="0 0 100 100"
+               height="100"
+               width="100">
+            <rect x="7" y="7" width="86" height="86" fill="transparent" stroke-width="14" rx="14" ry="14" stroke-linejoin="round" />
+            <circle cx="50" cy="50" r="14"></circle>
+          </svg>
+        </div>
+
+        <!-- Pulsating Gabriel Logo Animation -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-4">Pulsating Gabriel</h2>
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="pulsating-logo-animation"
+               viewBox="0 0 100 100"
+               height="100"
+               width="100">
+            <rect x="7" y="7" width="86" height="86" fill="transparent" stroke-width="14" rx="14" ry="14" stroke-linejoin="round" />
+            <circle cx="50" cy="50" r="14"></circle>
+          </svg>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mb-4">Loading Animations - Logo Zélie</h2>
+      <div class="flex justify-start items-start mb-8 -mx-8">
+        <!-- Spinning Zélie Logo Animation -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-4">Spinning Zélie</h2>
+          <div class="spinning-logo-animation">{% include "base/logo-zelie-primary.html" %}</div>
+        </div>
+
+        <!-- Pulsating Zélie Logo Animation -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-4">Pulsating Zélie</h2>
+          <div class="pulsating-logo-animation">{% include "base/logo-zelie-primary.html" %}</div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mb-4">Loading Animations - Logo Jules</h2>
+      <div class="flex justify-start items-start mb-8 -mx-8">
+        <!-- Spinning Jules Logo Animation -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-4">Spinning Jules</h2>
+          <div class="spinning-logo-animation">{% include "base/logo-jules-primary.html" %}</div>
+        </div>
+
+        <!-- Pulsating Jules Logo Animation -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-4">Pulsating Jules</h2>
+          <div class="pulsating-logo-animation">{% include "base/logo-jules-primary.html" %}</div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mb-4">Loading Animations - Logo Abel</h2>
+      <div class="flex justify-start items-start mb-8 -mx-8">
+        <!-- Spinning Abel Logo Animation -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-4">Spinning Abel</h2>
+          <div class="spinning-logo-animation">{% include "base/logo-abel-primary.html" %}</div>
+        </div>
+
+        <!-- Pulsating Abel Logo Animation -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-4">Pulsating Abel</h2>
+          <div class="pulsating-logo-animation">{% include "base/logo-abel-primary.html" %}</div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mb-4">Rolling Animation - Simple Square (JavaScript)</h2>
+      <div class="flex justify-start items-start mb-8 -mx-8">
+        <!-- JavaScript Rolling Animation - One Roll THAT ACTUALLY WORKS -->
+        <div class="animation-container-js">
+          <h2 class="text-lg font-semibold mb-4">Roll Once (90°)</h2>
+          <div id="anchor-roll-once" class="js-rolling-container-1">
+            <div id="js-rolling-one">
+              <!-- Match exact proportions from logo-zelie-primary.html -->
+              <svg width="60" height="60" viewBox="0 0 82 82">
+                <rect x="5" y="5" width="72" height="72" fill="transparent" stroke="#3d139c" stroke-width="10" rx="4" ry="4" />
+                <rect x="36" y="36" width="10" height="10" fill="#3d139c" stroke="#3d139c" stroke-width="8" rx="1" ry="1" />
+              </svg>
+            </div>
+          </div>
+          <button onclick="rollOnce()" class="btn btn-sm btn-primary mt-4">Roll Once</button>
+        </div>
+        <!-- JavaScript Rolling Animation - Two Rolls -->
+        <div class="animation-container-js">
+          <h2 class="text-lg font-semibold mb-4">Roll Twice (2 × 90°)</h2>
+          <div id="anchor-roll-twice" class="js-rolling-container-2">
+            <div id="js-rolling-two">
+              <!-- Match exact proportions from logo-zelie-primary.html -->
+              <svg width="60" height="60" viewBox="0 0 82 82">
+                <rect x="5" y="5" width="72" height="72" fill="transparent" stroke="#3d139c" stroke-width="10" rx="4" ry="4" />
+                <rect x="36" y="36" width="10" height="10" fill="#3d139c" stroke="#3d139c" stroke-width="8" rx="1" ry="1" />
+              </svg>
+            </div>
+          </div>
+          <div class="flex gap-2 mt-4">
+            <button onclick="rollTwice()" class="btn btn-sm btn-primary">Roll Twice</button>
+            <button onclick="resetRollTwice()" class="btn btn-sm">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- New row for the third demo -->
+      <div class="flex justify-start items-start mb-8 -mx-8">
+        <!-- JavaScript Rolling Animation - Three Rolls -->
+        <div class="animation-container-js">
+          <h2 class="text-lg font-semibold mb-4">Roll Thrice (3 × 90°)</h2>
+          <div id="anchor-roll-thrice" class="js-rolling-container-3">
+            <div id="js-rolling-three">
+              <!-- Same geometry as above for consistency -->
+              <svg width="60" height="60" viewBox="0 0 82 82">
+                <rect x="5" y="5" width="72" height="72" fill="transparent" stroke="#3d139c" stroke-width="10" rx="4" ry="4" />
+                <rect x="36" y="36" width="10" height="10" fill="#3d139c" stroke="#3d139c" stroke-width="8" rx="1" ry="1" />
+              </svg>
+            </div>
+          </div>
+          <div class="flex gap-2 mt-4">
+            <button onclick="rollThrice()" class="btn btn-sm btn-primary">Roll Thrice</button>
+            <button onclick="resetRollThrice()" class="btn btn-sm">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        // SIMPLE JS - JUST ROTATE AROUND CORNER, NO TRANSLATION
+
+        function rollOnce() {
+            const logo = document.getElementById('js-rolling-one');
+
+            // Reset
+            logo.style.transition = 'none';
+            logo.style.transform = 'rotate(0deg)';
+            // SVG viewBox is 82x82, displayed at 60x60, so scale factor is 60/82
+            // Bottom-right of square in viewBox is (77,77), in display: 77*(60/82) ≈ 56.3px
+            logo.style.transformOrigin = '56.3px 56.3px'; // bottom-right corner scaled to display size
+
+            setTimeout(() => {
+                // Just rotate 90° around bottom-right corner - THIS ACTUALLY WORKS
+                logo.style.transition = 'transform 1s ease-in-out';
+                logo.style.transform = 'rotate(90deg)';
+            }, 50);
+        }
+
+        // Auto-start on load
+        //window.addEventListener('load', () => {
+        //setTimeout(() => {
+        //rollOnce();
+        //}, 500);
+        //});
+
+        // DYNAMIC JS - TWO ROLLS WITH CORNER PIVOT SWITCH
+
+        function computeLogoMetrics(targetId) {
+            const wrapper = document.getElementById(targetId);
+            const svg = wrapper.querySelector('svg');
+            if (!svg) {
+                throw new Error('SVG not found inside #' + targetId);
+            }
+            // ViewBox metrics
+            const vb = svg.viewBox.baseVal;
+            const scaleX = svg.clientWidth / vb.width;
+            const scaleY = svg.clientHeight / vb.height;
+
+            // Pick the border square rect (the largest rect)
+            const rects = Array.from(svg.querySelectorAll('rect'));
+            const borderRect = rects.reduce((acc, r) => {
+                const w = parseFloat(r.getAttribute('width') || '0');
+                return (!acc || w > acc.w) ? {
+                    el: r,
+                    w
+                } : acc;
+            }, null).el;
+
+            const rx = parseFloat(borderRect.getAttribute('x'));
+            const ry = parseFloat(borderRect.getAttribute('y'));
+            const rw = parseFloat(borderRect.getAttribute('width'));
+            const rh = parseFloat(borderRect.getAttribute('height'));
+
+            // WARNING (harsh): if you ignore stroke width you WILL get tiny jumps.
+            // The <rect> geometry is the inner box; the visible outline extends by
+            // strokeWidth/2 on each side. We must use OUTER corners as pivots.
+            const strokeAttr = borderRect.getAttribute('stroke-width');
+            const strokeWidth = strokeAttr ? parseFloat(strokeAttr) : 0;
+            const halfStroke = strokeWidth / 2;
+
+            // Use outer (painted) corners for correct rolling pivots
+            const brVb = {
+                x: rx + rw + halfStroke,
+                y: ry + rh + halfStroke
+            };
+            const trVb = {
+                x: rx + rw + halfStroke,
+                y: ry - halfStroke
+            };
+            const tlVb = {
+                x: rx - halfStroke,
+                y: ry - halfStroke
+            };
+            const blVb = {
+                x: rx - halfStroke,
+                y: ry + rh + halfStroke
+            };
+
+            // Convert to CSS px within the element box
+            const brPx = {
+                x: (brVb.x - vb.x) * scaleX,
+                y: (brVb.y - vb.y) * scaleY,
+            };
+            const trPx = {
+                x: (trVb.x - vb.x) * scaleX,
+                y: (trVb.y - vb.y) * scaleY,
+            };
+            const tlPx = {
+                x: (tlVb.x - vb.x) * scaleX,
+                y: (tlVb.y - vb.y) * scaleY,
+            };
+            const blPx = {
+                x: (blVb.x - vb.x) * scaleX,
+                y: (blVb.y - vb.y) * scaleY,
+            };
+
+            // One edge advance equals the displayed SVG width
+            const translateStep = svg.clientWidth;
+            // Vertical compensation when switching pivot from bottom-right to top-right
+            const verticalCompensation = brPx.y - trPx.y;
+
+            return {
+                brPx,
+                trPx,
+                tlPx,
+                blPx,
+                translateStep,
+                verticalCompensation
+            };
+        }
+
+        // Helper: switch transform-origin while preserving on-screen position (left/baseline)
+        function pivotSwitchPreservePosition(logo, originPx, baseTranslateX, baseTranslateY, rotationDeg) {
+            const before = logo.getBoundingClientRect();
+            logo.style.transition = 'none';
+            logo.style.transformOrigin = `${originPx.x}px ${originPx.y}px`;
+            logo.style.transform = `translateX(${baseTranslateX}px) translateY(${baseTranslateY}px) rotate(${rotationDeg}deg)`;
+            const after = logo.getBoundingClientRect();
+            const dx = before.left - after.left;
+            const dy = before.bottom - after.bottom;
+            logo.style.transform = `translateX(${baseTranslateX + dx}px) translateY(${baseTranslateY + dy}px) rotate(${rotationDeg}deg)`;
+            return {
+                dx,
+                dy
+            };
+        }
+
+        function resetRollTwice() {
+            const logo = document.getElementById('js-rolling-two');
+            if (!logo) return;
+            const {
+                brPx
+            } = computeLogoMetrics('js-rolling-two');
+            logo.style.transition = 'none';
+            logo.style.transformOrigin = `${brPx.x}px ${brPx.y}px`;
+            logo.style.transform = 'translateX(0px) rotate(0deg)';
+        }
+
+        function rollTwice() {
+            const logo = document.getElementById('js-rolling-two');
+            if (!logo) return;
+
+            const {
+                brPx,
+                trPx,
+                translateStep,
+                verticalCompensation
+            } = computeLogoMetrics('js-rolling-two');
+
+            // Reset to start
+            logo.style.transition = 'none';
+            logo.style.transform = 'translateX(0px) rotate(0deg)';
+            logo.style.transformOrigin = `${brPx.x}px ${brPx.y}px`;
+
+            // First roll: 0 -> 90° around bottom-right corner
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    logo.style.transition = 'transform 800ms ease-in-out';
+                    logo.style.transform = 'translateX(0px) rotate(90deg)';
+                });
+            });
+
+            function onFirstEnd(ev) {
+                if (ev.propertyName !== 'transform') return;
+                logo.removeEventListener('transitionend', onFirstEnd);
+
+                // Prepare for second roll: set new pivot to original top-right,
+                // and advance one edge to the right. Then dynamically compensate Y
+                // so the bottom baseline stays constant.
+                const baselineBefore = logo.getBoundingClientRect().bottom;
+
+                logo.style.transition = 'none';
+                logo.style.transformOrigin = `${trPx.x}px ${trPx.y}px`;
+                logo.style.transform = `translateX(${translateStep}px) rotate(90deg)`;
+
+                // Force layout to measure the new baseline
+                const baselineAfter = logo.getBoundingClientRect().bottom;
+                const deltaY = baselineBefore - baselineAfter; // positive => move down
+                logo.style.transform = `translateX(${translateStep}px) translateY(${deltaY}px) rotate(90deg)`;
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        logo.style.transition = 'transform 800ms ease-in-out';
+                        logo.style.transform = `translateX(${translateStep}px) translateY(${deltaY}px) rotate(180deg)`;
+                    });
+                });
+            }
+
+            logo.addEventListener('transitionend', onFirstEnd);
+        }
+
+        // Auto-start the two-roll demo slightly after the single roll
+        //window.addEventListener('load', () => {
+        //setTimeout(() => {
+        //rollTwice();
+        //}, 1400);
+        //});
+
+        // --- Third demo: three sequential 90° rolls with dynamic pivot switching ---
+
+        function resetRollThrice() {
+            const logo = document.getElementById('js-rolling-three');
+            if (!logo) return;
+            const {
+                brPx
+            } = computeLogoMetrics('js-rolling-three');
+            logo.style.transition = 'none';
+            logo.style.transformOrigin = `${brPx.x}px ${brPx.y}px`;
+            logo.style.transform = 'translateX(0px) rotate(0deg)';
+        }
+
+        function rollThrice() {
+            const logo = document.getElementById('js-rolling-three');
+            if (!logo) return;
+
+            const {
+                brPx,
+                trPx,
+                tlPx,
+                translateStep
+            } = computeLogoMetrics('js-rolling-three');
+
+            // Start: pivot bottom-right
+            logo.style.transition = 'none';
+            logo.style.transformOrigin = `${brPx.x}px ${brPx.y}px`;
+            logo.style.transform = 'translateX(0px) rotate(0deg)';
+
+            // First: 0 -> 90 (pivot BR)
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    logo.style.transition = 'transform 700ms ease-in-out';
+                    logo.style.transform = 'translateX(0px) rotate(90deg)';
+                });
+            });
+
+            function onFirstEnd(ev) {
+                if (ev.propertyName !== 'transform') return;
+                logo.removeEventListener('transitionend', onFirstEnd);
+
+                // Second: switch pivot to TR, translate one edge, keep baseline
+                // Use continuity-preserving pivot change for step 2
+                const cont2 = pivotSwitchPreservePosition(logo, trPx, translateStep, 0, 90);
+                const deltaY = cont2.dy;
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        logo.style.transition = 'transform 700ms ease-in-out';
+                        logo.style.transform = `translateX(${translateStep}px) translateY(${deltaY}px) rotate(180deg)`;
+                    });
+                });
+
+                function onSecondEnd(e2) {
+                    if (e2.propertyName !== 'transform') return;
+                    logo.removeEventListener('transitionend', onSecondEnd);
+
+                    // Third: switch pivot to OUTER TOP-LEFT and advance one more edge,
+                    // preserving X and Y continuity across the origin change
+                    const tx = translateStep * 2;
+                    const cont3 = pivotSwitchPreservePosition(logo, tlPx, tx, deltaY, 180);
+
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            logo.style.transition = 'transform 700ms ease-in-out';
+                            logo.style.transform = `translateX(${tx + cont3.dx}px) translateY(${deltaY + cont3.dy}px) rotate(270deg)`;
+                        });
+                    });
+                }
+
+                logo.addEventListener('transitionend', onSecondEnd);
+            }
+
+            logo.addEventListener('transitionend', onFirstEnd);
+        }
+    </script>
+
     <div class="mt-24">
       <hr class="my-4" />
       <h1 class="text-4xl font-bold mb-8">Buttons</h1>
@@ -159,7 +952,10 @@
           <div class="stat-figure text-secondary">
             <div class="avatar avatar-online">
               <div class="w-16 rounded-full">
-                <img src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp" />
+                <img src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
+                     alt="Avatar"
+                     width="64"
+                     height="64" />
               </div>
             </div>
           </div>
@@ -168,7 +964,6 @@
           <div class="stat-desc text-secondary">31 tasks remaining</div>
         </div>
       </div>
-
 
       <h2 class="text-2xl font-bold mb-4">Progress</h2>
       <div class="mb-12">
@@ -179,7 +974,6 @@
         <progress class="progress progress-neutral  w-56" value="70" max="100"></progress>
         <progress class="progress w-56" value="100" max="100"></progress>
       </div>
-
 
       {# {% include "identity/zbeul.html" %} #}
 

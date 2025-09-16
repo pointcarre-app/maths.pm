@@ -669,12 +669,16 @@ class FragmentBuilder:
                             sections, _ = pp.parse(html_module.escape(codex_script))
 
                             pcomp = PythonComposer()
-                            data["composed_script"] = pcomp.compose(
-                                foreground_script=sections["foreground_script"],
-                                background_script=sections["background_script"],
-                                publics_checks=sections["public_checks"],
-                                privates_checks=sections["private_checks"],
-                            )
+
+                            # for later for auto-correction
+                            # TODO : unitary tests too
+                            # data["composed_script"] = pcomp.compose(
+                            #     foreground_script=sections["foreground_script"],
+                            #     background_script=sections["background_script"],
+                            #     publics_checks=sections["public_checks"],
+                            #     privates_checks=sections["private_checks"],
+                            # )
+
                             # data["foreground_script"] = sections["foreground_script"]
                             # data["background_script"] = sections["background_script"]
                             # data["public_checks"] = sections["public_checks"]
