@@ -310,7 +310,7 @@ def mirror_files_for_lite_into_output() -> int:
     Returns number of files copied/updated.
     """
     source_dir = settings.jupyterlite_content_dir
-    
+
     if not source_dir.exists():
         logger.warning(f"⚠️ files-for-lite/ not found: {source_dir}")
         return 0
@@ -318,18 +318,18 @@ def mirror_files_for_lite_into_output() -> int:
     # List of destination directories to mirror files to
     dest_roots = [
         settings.jupyterlite_dir / "_output" / "files",  # Runtime location
-        settings.base_dir / "_output" / "files",         # Legacy/static build location
+        settings.base_dir / "_output" / "files",  # Legacy/static build location
     ]
-    
+
     total_copied = 0
-    
+
     for dest_root in dest_roots:
         # Check if the parent _output directory exists
         output_parent = dest_root.parent
         if not output_parent.exists():
             logger.debug(f"JupyterLite output missing, skipping: {output_parent}")
             continue
-            
+
         copied = 0
         for root, dirs, files in os.walk(source_dir):
             rel_root = os.path.relpath(root, source_dir)
@@ -341,12 +341,15 @@ def mirror_files_for_lite_into_output() -> int:
                 dest_file = dest_dir / filename
                 try:
                     # Copy if missing or source is newer
-                    if not dest_file.exists() or src_file.stat().st_mtime > dest_file.stat().st_mtime:
+                    if (
+                        not dest_file.exists()
+                        or src_file.stat().st_mtime > dest_file.stat().st_mtime
+                    ):
                         copy2(src_file, dest_file)
                         copied += 1
                 except Exception as e:
                     logger.warning(f"⚠️ Failed to copy {src_file} -> {dest_file}: {e}")
-        
+
         if copied > 0:
             logger.info(f"📦 files-for-lite mirrored to {dest_root} ({copied} files)")
         total_copied += copied
@@ -369,57 +372,65 @@ def debug_jupyterlite_files() -> dict:
         "source_dir": str(source_dir),
         "source_exists": source_dir.exists(),
         "locations": {},
-        "summary": {}
+        "summary": {},
     }
-    
+
     if source_dir.exists():
         source_files = list(source_dir.rglob("*"))
         source_file_count = len([f for f in source_files if f.is_file()])
         report["source_file_count"] = source_file_count
     else:
         report["source_file_count"] = 0
-    
+
     # Check all potential output locations
     locations_to_check = [
         ("runtime", settings.jupyterlite_dir / "_output" / "files"),
         ("legacy", settings.base_dir / "_output" / "files"),
         ("dist", settings.base_dir / "dist" / "static" / "jupyterlite" / "_output" / "files"),
     ]
-    
+
     for location_name, location_path in locations_to_check:
         location_info = {
             "path": str(location_path),
             "exists": location_path.exists(),
             "file_count": 0,
-            "sample_files": []
+            "sample_files": [],
         }
-        
+
         if location_path.exists():
             files = list(location_path.rglob("*"))
             file_list = [f for f in files if f.is_file()]
             location_info["file_count"] = len(file_list)
             location_info["sample_files"] = [str(f.name) for f in file_list[:5]]  # First 5 files
-            
+
         report["locations"][location_name] = location_info
-    
+
     # Generate summary
     total_locations = len(locations_to_check)
-    available_locations = sum(1 for loc in report["locations"].values() if loc["exists"] and loc["file_count"] > 0)
-    
+    available_locations = sum(
+        1 for loc in report["locations"].values() if loc["exists"] and loc["file_count"] > 0
+    )
+
     report["summary"] = {
         "total_locations_checked": total_locations,
         "available_locations": available_locations,
         "status": "healthy" if available_locations > 0 else "missing_files",
-        "recommendations": []
+        "recommendations": [],
     }
-    
+
     # Add recommendations
     if available_locations == 0:
-        report["summary"]["recommendations"].append("Run mirror_files_for_lite_into_output() to copy files")
-        report["summary"]["recommendations"].append("Check if JupyterLite has been built with build_jupyterlite()")
+        report["summary"]["recommendations"].append(
+            "Run mirror_files_for_lite_into_output() to copy files"
+        )
+        report["summary"]["recommendations"].append(
+            "Check if JupyterLite has been built with build_jupyterlite()"
+        )
     elif available_locations < total_locations:
-        report["summary"]["recommendations"].append("Some locations missing files - consider rebuilding")
-    
+        report["summary"]["recommendations"].append(
+            "Some locations missing files - consider rebuilding"
+        )
+
     return report
 
 

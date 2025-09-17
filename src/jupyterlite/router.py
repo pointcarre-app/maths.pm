@@ -237,12 +237,12 @@ async def debug_files(request: Request):
     """Debug JupyterLite file availability"""
     from ..lifespan.manager import debug_jupyterlite_files
     import json
-    
+
     report = debug_jupyterlite_files()
-    
+
     # Create HTML response with the debug information
     status_color = "#4caf50" if report["summary"]["status"] == "healthy" else "#f44336"
-    
+
     html_content = f"""
     <!DOCTYPE html>
     <html>
@@ -274,24 +274,28 @@ async def debug_files(request: Request):
             </div>
 
             <h2>📂 Source Directory</h2>
-            <div class="location {'available' if report['source_exists'] else 'missing'}">
+            <div class="location {"available" if report["source_exists"] else "missing"}">
                 <strong>Path:</strong> {report["source_dir"]}<br>
-                <strong>Exists:</strong> {'✅ Yes' if report['source_exists'] else '❌ No'}<br>
+                <strong>Exists:</strong> {"✅ Yes" if report["source_exists"] else "❌ No"}<br>
                 <strong>File Count:</strong> {report["source_file_count"]}
             </div>
 
             <h2>🎯 Output Locations</h2>
     """
-    
+
     for location_name, location_info in report["locations"].items():
-        status_class = "available" if location_info["exists"] and location_info["file_count"] > 0 else "missing"
+        status_class = (
+            "available"
+            if location_info["exists"] and location_info["file_count"] > 0
+            else "missing"
+        )
         status_icon = "✅" if location_info["exists"] and location_info["file_count"] > 0 else "❌"
-        
+
         html_content += f"""
             <div class="location {status_class}">
                 <h3>{status_icon} {location_name.title()} Location</h3>
                 <strong>Path:</strong> {location_info["path"]}<br>
-                <strong>Exists:</strong> {'✅ Yes' if location_info['exists'] else '❌ No'}<br>
+                <strong>Exists:</strong> {"✅ Yes" if location_info["exists"] else "❌ No"}<br>
                 <strong>File Count:</strong> {location_info["file_count"]}<br>
                 <strong>Sample Files:</strong><br>
                 <div class="file-list">
@@ -299,15 +303,15 @@ async def debug_files(request: Request):
                 </div>
             </div>
         """
-    
+
     if report["summary"]["recommendations"]:
         html_content += f"""
             <h2>💡 Recommendations</h2>
             <ul>
-                {''.join(f"<li>{rec}</li>" for rec in report["summary"]["recommendations"])}
+                {"".join(f"<li>{rec}</li>" for rec in report["summary"]["recommendations"])}
             </ul>
         """
-    
+
     html_content += f"""
             <h2>🔗 Actions</h2>
             <a href="/jupyterlite/lab" class="btn">🔬 Open JupyterLite Lab</a>
@@ -320,7 +324,7 @@ async def debug_files(request: Request):
     </body>
     </html>
     """
-    
+
     return HTMLResponse(html_content)
 
 
