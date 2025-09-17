@@ -1,0 +1,137 @@
+{# First version #}
+{# <script>
+     function renderMathOnBody() {
+         if (typeof renderMathInElement !== 'undefined') {
+             console.log('🎯 Rendering all LaTeX content');
+             renderMathInElement(document.body, {
+                 delimiters: [{
+                     left: '$$',
+                     right: '$$',
+                     display: true
+                 }, {
+                     left: '$',
+                     right: '$',
+                     display: false
+                 }],
+                 throwOnError: false
+             });
+         } else {
+             // Retry after a short delay if KaTeX isn't loaded yet
+             setTimeout(function() {
+                 if (typeof renderMathInElement !== 'undefined') {
+                     console.log('🎯 Rendering all LaTeX content (delayed)');
+                     renderMathInElement(document.body, {
+                         delimiters: [{
+                             left: '$$',
+                             right: '$$',
+                             display: true
+                         }, {
+                             left: '$',
+                             right: '$',
+                             display: false
+                         }],
+                         throwOnError: false
+                     });
+                 }
+             }, 500);
+         }
+     }
+
+     document.addEventListener("DOMContentLoaded", function() {
+         // Check if page has script modules that delay math rendering
+         if (window.delayMathRendering) {
+             console.log('⏳ Math rendering delayed, waiting for signal...');
+             document.addEventListener('render-math-now', function() {
+                 renderMathOnBody();
+             });
+         } else {
+             // Normal immediate rendering for static pages
+             renderMathOnBody();
+         }
+     });
+ </script> #}
+
+{# Look for script module #}
+{# <script>
+     function renderMathOnBody() {
+         if (typeof renderMathInElement !== 'undefined') {
+             console.log('🎯 Rendering all LaTeX content');
+             renderMathInElement(document.body, {
+                 delimiters: [{
+                     left: '$$',
+                     right: '$$',
+                     display: true
+                 }, {
+                     left: '$',
+                     right: '$',
+                     display: false
+                 }],
+                 throwOnError: false
+             });
+         } else {
+             // Retry after a short delay if KaTeX isn't loaded yet
+             setTimeout(function() {
+                 if (typeof renderMathInElement !== 'undefined') {
+                     console.log('🎯 Rendering all LaTeX content (delayed)');
+                     renderMathInElement(document.body, {
+                         delimiters: [{
+                             left: '$$',
+                             right: '$$',
+                             display: true
+                         }, {
+                             left: '$',
+                             right: '$',
+                             display: false
+                         }],
+                         throwOnError: false
+                     });
+                 }
+             }, 500);
+         }
+     }
+
+     document.addEventListener("DOMContentLoaded", function() {
+         // Check if page has script modules that delay math rendering
+         if (window.delayMathRendering) {
+             console.log('⏳ Math rendering delayed, waiting for signal...');
+             document.addEventListener('render-math-now', function() {
+                 renderMathOnBody();
+             });
+         } else {
+             // Normal immediate rendering for static pages
+             renderMathOnBody();
+         }
+     });
+ </script> #}
+
+{# Original approach - commented out
+<script>
+    // In imports.html, replace the entire DOMContentLoaded:
+    document.addEventListener("DOMContentLoaded", function() {
+        // Check for script modules that need to generate content
+        const scriptModules = document.querySelectorAll('[data-f_type="script_module_"]');
+        const hasGenerators = Array.from(scriptModules).some(script =>
+            script.textContent.includes('Question Generator') ||
+            script.textContent.includes('generateFragments')
+        );
+
+        if (hasGenerators) {
+            // Wait for all generators to finish
+            let generatorsCompleted = 0;
+            const totalGenerators = scriptModules.length;
+
+            document.addEventListener('generator-completed', function() {
+                generatorsCompleted++;
+                if (generatorsCompleted >= totalGenerators) {
+                    renderMathOnBody(); // Render everything at once
+                }
+            });
+        } else {
+            // Normal immediate rendering
+            renderMathOnBody();
+        }
+    });
+
+    // In your script (after fragment injection):
+    document.dispatchEvent(new CustomEvent('generator-completed'));
+</script> #}

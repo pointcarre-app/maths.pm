@@ -4,7 +4,9 @@ title_html: Data Viz
 # is_hidden: true
 is_beta: true
 subtitle_html: Représentations de données (Python et KS)
-description: "Dans le contexte d'une formation à forte composante mathématiques, apprendre à représenter des données en utilisant les librairies Python : Matplotlib et Bokeh, et une librairie JS : D3.js."
+# description: "Dans le contexte d'une formation à forte composante mathématiques, apprendre à représenter des données en utilisant les librairies Python : Matplotlib et Bokeh, et une librairie JS : D3.js."
+# description: "This course, taught within a program with a strong mathematical component, introduces students to data visualization using Python libraries such as Matplotlib and Bokeh, combining theoretical principles with practical, interactive applications."
+description: In a program with a strong mathematical component, this course introduces data visualization with Python libraries such as Matplotlib and Bokeh, blending theory and interactive practice.
 local_path: /dataviz
 source_link: ""
 color: success
