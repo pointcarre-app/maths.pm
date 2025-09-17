@@ -232,6 +232,98 @@ async def jupyter_repl_redirect(request: Request):
     return RedirectResponse(url="/jupyterlite/repl", status_code=301)
 
 
+@jupyterlite_router.get("/debug/files")
+async def debug_files(request: Request):
+    """Debug JupyterLite file availability"""
+    from ..lifespan.manager import debug_jupyterlite_files
+    import json
+    
+    report = debug_jupyterlite_files()
+    
+    # Create HTML response with the debug information
+    status_color = "#4caf50" if report["summary"]["status"] == "healthy" else "#f44336"
+    
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>JupyterLite Files Debug</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {{ font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }}
+            .container {{ max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }}
+            .status {{ background: {status_color}; color: white; padding: 15px; border-radius: 4px; margin: 20px 0; }}
+            .location {{ background: #f8f9fa; border: 1px solid #dee2e6; padding: 15px; border-radius: 4px; margin: 10px 0; }}
+            .location.available {{ border-color: #4caf50; }}
+            .location.missing {{ border-color: #f44336; }}
+            pre {{ background: #f5f5f5; padding: 10px; border-radius: 4px; font-size: 12px; overflow-x: auto; }}
+            .btn {{ display: inline-block; background: #1976d2; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; margin: 5px; }}
+            .btn:hover {{ background: #1565c0; }}
+            .file-list {{ font-family: monospace; font-size: 12px; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>📁 JupyterLite Files Debug</h1>
+            
+            <div class="status">
+                <strong>Status:</strong> {report["summary"]["status"].upper()}<br>
+                <strong>Available Locations:</strong> {report["summary"]["available_locations"]}/{report["summary"]["total_locations_checked"]}<br>
+                <strong>Source Files:</strong> {report["source_file_count"]}
+            </div>
+
+            <h2>📂 Source Directory</h2>
+            <div class="location {'available' if report['source_exists'] else 'missing'}">
+                <strong>Path:</strong> {report["source_dir"]}<br>
+                <strong>Exists:</strong> {'✅ Yes' if report['source_exists'] else '❌ No'}<br>
+                <strong>File Count:</strong> {report["source_file_count"]}
+            </div>
+
+            <h2>🎯 Output Locations</h2>
+    """
+    
+    for location_name, location_info in report["locations"].items():
+        status_class = "available" if location_info["exists"] and location_info["file_count"] > 0 else "missing"
+        status_icon = "✅" if location_info["exists"] and location_info["file_count"] > 0 else "❌"
+        
+        html_content += f"""
+            <div class="location {status_class}">
+                <h3>{status_icon} {location_name.title()} Location</h3>
+                <strong>Path:</strong> {location_info["path"]}<br>
+                <strong>Exists:</strong> {'✅ Yes' if location_info['exists'] else '❌ No'}<br>
+                <strong>File Count:</strong> {location_info["file_count"]}<br>
+                <strong>Sample Files:</strong><br>
+                <div class="file-list">
+                    {chr(10).join(f"  • {file}" for file in location_info["sample_files"])}
+                </div>
+            </div>
+        """
+    
+    if report["summary"]["recommendations"]:
+        html_content += f"""
+            <h2>💡 Recommendations</h2>
+            <ul>
+                {''.join(f"<li>{rec}</li>" for rec in report["summary"]["recommendations"])}
+            </ul>
+        """
+    
+    html_content += f"""
+            <h2>🔗 Actions</h2>
+            <a href="/jupyterlite/lab" class="btn">🔬 Open JupyterLite Lab</a>
+            <a href="/jupyterlite/debug/service-worker" class="btn">🔧 Service Worker Debug</a>
+            <a href="/" class="btn">🏠 Home</a>
+
+            <h2>📋 Raw Report</h2>
+            <pre>{json.dumps(report, indent=2)}</pre>
+        </div>
+    </body>
+    </html>
+    """
+    
+    return HTMLResponse(html_content)
+
+
 @jupyterlite_router.get("/debug/service-worker")
 async def debug_service_worker(request: Request):
     """Debug service worker issues"""
