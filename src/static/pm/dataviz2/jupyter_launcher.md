@@ -37,18 +37,18 @@ Interactive Python environment with pre-loaded datasets and visualization exampl
 
 ## 🚀 **DIRECT ACCESS LINKS** (No JavaScript Required)
 
-**[📋 Simple Direct Access Page](http://localhost:8000/static/jupyter_direct.html)** - Guaranteed to work!
+**[📋 Simple Direct Access Page](http://127.0.0.1:5001/static/jupyter_direct.html)** - Guaranteed to work!
 
 ### Individual Notebooks:
-- **[🔬 Corsica Data Analysis](http://localhost:8000/static/jupyterlite/_output/lab/index.html?path=corsica_a_0_transform_data.ipynb&cache=false&nocache=1&direct=true)** - Geographic data transformation
-- **[📈 P5.js Graphics](http://localhost:8000/static/jupyterlite/_output/lab/index.html?path=p5js_example.ipynb&cache=false&nocache=1&direct=true)** - Interactive visualizations  
-- **[🐍 Python Examples](http://localhost:8000/static/jupyterlite/_output/lab/index.html?path=python_example.ipynb&cache=false&nocache=1&direct=true)** - Basic data visualization
-- **[🧪 Test Environment](http://localhost:8000/static/jupyterlite/_output/lab/index.html?path=notebook_test.ipynb&cache=false&nocache=1&direct=true)** - Sandbox for experiments
+- **[🔬 Corsica Data Analysis](http://127.0.0.1:5001/static/jupyterlite/_output/lab/index.html?path=corsica_a_0_transform_data.ipynb&cache=false&nocache=1&direct=true)** - Geographic data transformation
+- **[📈 P5.js Graphics](http://127.0.0.1:5001/static/jupyterlite/_output/lab/index.html?path=p5js_example.ipynb&cache=false&nocache=1&direct=true)** - Interactive visualizations  
+- **[🐍 Python Examples](http://127.0.0.1:5001/static/jupyterlite/_output/lab/index.html?path=python_example.ipynb&cache=false&nocache=1&direct=true)** - Basic data visualization
+- **[🧪 Test Environment](http://127.0.0.1:5001/static/jupyterlite/_output/lab/index.html?path=notebook_test.ipynb&cache=false&nocache=1&direct=true)** - Sandbox for experiments
 
 ### Alternative Interfaces:
-- **[🔬 Full JupyterLite Lab](http://localhost:8000/static/jupyterlite/_output/lab/index.html?cache=false&nocache=1)** - Complete interface
-- **[📂 File Browser](http://localhost:8000/static/jupyterlite/_output/tree/index.html?cache=false&nocache=1)** - Browse all files
-- **[💻 Python REPL](http://localhost:8000/static/jupyterlite/_output/repl/index.html?cache=false&nocache=1)** - Quick Python console
+- **[🔬 Full JupyterLite Lab](http://127.0.0.1:5001/static/jupyterlite/_output/lab/index.html?cache=false&nocache=1)** - Complete interface
+- **[📂 File Browser](http://127.0.0.1:5001/static/jupyterlite/_output/tree/index.html?cache=false&nocache=1)** - Browse all files
+- **[💻 Python REPL](http://127.0.0.1:5001/static/jupyterlite/_output/repl/index.html?cache=false&nocache=1)** - Quick Python console
 
 ## 🔧 **Alternative Access Methods**
 
