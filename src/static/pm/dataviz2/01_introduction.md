@@ -30,6 +30,31 @@ pagename: "Code Media Fragments Guide"
 
 This guide covers fragments for displaying code, images, and other visual content in pedagogical messages.
 
+## 🚀 Interactive Jupyter Notebooks
+
+Access interactive Python environments with pre-loaded data and examples:
+
+### 📊 **Data Visualization Notebooks**
+
+**🚀 [Complete JupyterLite Launcher](jupyter_launcher.md)** - Dedicated launcher page with cache-busting
+
+**Direct Notebook Access:**
+- **[🔬 Corsica Data Analysis](http://localhost:8000/static/jupyterlite/_output/lab/index.html?path=corsica_a_0_transform_data.ipynb&cache=false)** - Geographic data transformation
+- **[📈 P5.js Visualization](http://localhost:8000/static/jupyterlite/_output/lab/index.html?path=p5js_example.ipynb&cache=false)** - Interactive graphics with P5.js
+- **[🐍 Python Examples](http://localhost:8000/static/jupyterlite/_output/lab/index.html?path=python_example.ipynb&cache=false)** - Basic data visualization
+- **[🧪 Notebook Sandbox](http://localhost:8000/static/jupyterlite/_output/lab/index.html?path=notebook_test.ipynb&cache=false)** - Test environment
+
+### 📁 **Data Files Available**
+- **Corsica Geographic Data**: `data/processed/corsica/` (PNG, SVG maps)
+- **GeoJSON Data**: `data/raw/geojson/france/region.json`
+- **Vector Graphics**: `corsica_grid_svg.svg`
+
+### 🔧 **Direct File Access**
+- **[📂 Browse All Files](http://localhost:8000/static/jupyterlite/_output/tree/index.html)** - File browser interface
+- **[🛠️ REPL Environment](http://localhost:8000/static/jupyterlite/_output/repl/index.html)** - Quick Python console
+
+---
+
 ## Code Fragments
 
 ### 1. Static Code Blocks (code_)

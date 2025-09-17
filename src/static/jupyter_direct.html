@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JupyterLite Direct Access</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .notebook-links {
+            margin: 20px 0;
+        }
+
+        .notebook-links a {
+            display: block;
+            margin: 10px 0;
+            padding: 15px 25px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .notebook-links a:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f8ff;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚀 JupyterLite Direct Access</h1>
+      <p>Click any link below to open notebooks directly with cache-busting:</p>
+
+      <div class="notebook-links" id="notebook-links">
+        <!-- Links will be populated by JavaScript -->
+      </div>
+
+      <div class="status">
+        <strong>Status:</strong> <span id="status">Loading...</span>
+        <br />
+        <strong>Timestamp:</strong> <span id="timestamp"></span>
+      </div>
+    </div>
+
+    <script>
+        // Generate timestamp for cache busting
+        const timestamp = new Date().getTime();
+        const randomId = Math.random().toString(36).substr(2, 9);
+
+        // Update status
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        document.getElementById('status').textContent = 'Ready';
+
+        // Base URL - force port 5001
+        const baseUrl = window.location.protocol + '//' + window.location.hostname + ':5001';
+
+        // Notebook files
+        const notebooks = [{
+            name: '🔬 Corsica Data Analysis',
+            file: 'corsica_a_0_transform_data.ipynb',
+            description: 'Geographic data transformation'
+        }, {
+            name: '📈 P5.js Graphics',
+            file: 'p5js_example.ipynb',
+            description: 'Interactive visualizations'
+        }, {
+            name: '🐍 Python Examples',
+            file: 'python_example.ipynb',
+            description: 'Basic data visualization'
+        }, {
+            name: '🧪 Test Environment',
+            file: 'notebook_test.ipynb',
+            description: 'Sandbox for experiments'
+        }];
+
+        // Generate links
+        const linksContainer = document.getElementById('notebook-links');
+
+        notebooks.forEach(notebook => {
+            const url = `${baseUrl}/static/jupyterlite/_output/lab/index.html?path=${notebook.file}&cache=false&t=${timestamp}&nocache=1&r=${randomId}&direct=true`;
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank';
+            link.textContent = `${notebook.name} - ${notebook.description}`;
+
+            linksContainer.appendChild(link);
+        });
+
+        // Add general access links
+        const generalLinks = [{
+            name: '🔬 Full JupyterLite Lab',
+            url: `${baseUrl}/static/jupyterlite/_output/lab/index.html?cache=false&t=${timestamp}&nocache=1&r=${randomId}`
+        }, {
+            name: '📂 File Browser',
+            url: `${baseUrl}/static/jupyterlite/_output/tree/index.html?cache=false&t=${timestamp}&nocache=1&r=${randomId}`
+        }, {
+            name: '💻 Python REPL',
+            url: `${baseUrl}/static/jupyterlite/_output/repl/index.html?cache=false&t=${timestamp}&nocache=1&r=${randomId}`
+        }];
+
+        generalLinks.forEach(item => {
+            const link = document.createElement('a');
+            link.href = item.url;
+            link.target = '_blank';
+            link.textContent = item.name;
+            link.style.background = '#4CAF50';
+
+            linksContainer.appendChild(link);
+        });
+
+        console.log('JupyterLite Direct Access loaded');
+        console.log('Base URL:', baseUrl);
+        console.log('Timestamp:', timestamp);
+        console.log('Random ID:', randomId);
+    </script>
+  </body>
+</html>
