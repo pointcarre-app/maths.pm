@@ -301,12 +301,59 @@ def preload_notebooks_into_jupyterlite_output() -> int:
     return copied
 
 
+def mirror_files_for_lite_into_output() -> int:
+    """
+    Mirror the entire files-for-lite/ directory tree into JupyterLite _output/files/.
+    Preserves subdirectories like data/, and copies all file types (.ipynb, .svg, etc.).
+
+    Returns number of files copied/updated.
+    """
+    source_dir = settings.jupyterlite_content_dir
+    dest_root = settings.jupyterlite_dir / "_output" / "files"
+
+    if not (settings.jupyterlite_dir / "_output").exists():
+        logger.debug("JupyterLite output missing; skipping files-for-lite mirroring")
+        return 0
+
+    if not source_dir.exists():
+        logger.warning(f"⚠️ files-for-lite/ not found: {source_dir}")
+        return 0
+
+    copied = 0
+    for root, dirs, files in os.walk(source_dir):
+        rel_root = os.path.relpath(root, source_dir)
+        dest_dir = dest_root / rel_root if rel_root != "." else dest_root
+        dest_dir.mkdir(parents=True, exist_ok=True)
+
+        for filename in files:
+            src_file = Path(root) / filename
+            dest_file = dest_dir / filename
+            try:
+                # Copy if missing or source is newer
+                if not dest_file.exists() or src_file.stat().st_mtime > dest_file.stat().st_mtime:
+                    copy2(src_file, dest_file)
+                    copied += 1
+            except Exception as e:
+                logger.warning(f"⚠️ Failed to copy {src_file} -> {dest_file}: {e}")
+
+    if copied > 0:
+        logger.info(f"📦 files-for-lite mirrored into JupyterLite files/ ({copied} files)")
+    else:
+        logger.info("📦 files-for-lite already up-to-date in JupyterLite files/")
+
+    return copied
+
+
 @asynccontextmanager
 async def lifespan_manager(app: FastAPI):
     logger.info(f"🚀 Starting Maths.pm ({settings.domain_config.domain_url or 'localhost'})")
     if settings.jupyterlite_enabled:
         await async_build_jupyterlite()
-        # After JupyterLite is built, ensure notebooks are present in output
+        # After JupyterLite is built, mirror files-for-lite fully and then ensure notebooks
+        try:
+            mirror_files_for_lite_into_output()
+        except Exception as e:
+            logger.warning(f"⚠️ Failed to mirror files-for-lite into JupyterLite: {e}")
         try:
             preload_notebooks_into_jupyterlite_output()
         except Exception as e:
