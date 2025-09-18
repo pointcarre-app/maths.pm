@@ -11,15 +11,15 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     gen = tg.MathsGenerator(seed)
 
-    x1 = gen.random_integer(-100, 100)
-    x2 = gen.random_integer(-100, 100)
+    x1 = gen.random_integer(-10, 10)
+    x2 = gen.random_integer(-10, 10)
 
     # Ensure x2 ≠ x1 to avoid division by zero
     while x2.n == x1.n:
-        x2 = gen.random_integer(-100, 100)
+        x2 = gen.random_integer(-10, 10)
 
-    y1 = gen.random_integer(-100, 100)
-    y2 = gen.random_integer(-100, 100)
+    y1 = gen.random_integer(-20, 20)
+    y2 = gen.random_integer(-20, 20)
 
     return {
         "x1": x1,

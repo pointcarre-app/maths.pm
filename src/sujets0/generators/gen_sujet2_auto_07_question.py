@@ -11,7 +11,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
 
     gen = tg.MathsGenerator(seed)
 
-    a = gen.random_integer(-100, 100) / tm.Integer(n=10)
+    a = gen.random_integer(-20, 20) / tm.Integer(n=10)
     x1 = gen.random_integer(-10, 10)
     x2 = gen.random_integer(-10, 10)
 
@@ -53,7 +53,7 @@ def render_question(*, a, x1, y1, x2):
     "Le plan est muni d\'un repère orthogonal. On note $d$ la droite de coeffcient directeur -0,2 passant par le points $A(3;-2)$. On note $B$ le point de la droite $d$ d'abscisse $-9$. Calculer l\'ordonnée de $B$."
     """
 
-    statement = f"Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur ${a.as_decimal.latex().replace('.', ',')}$ passant par le points $A({x1.latex()};{y1.latex()})$. On note $B$ le point de la droite $d$ d'abscisse ${x2.latex()}$. Calculer l'ordonnée de $B$."
+    statement = f"Le plan est muni d'un repère orthogonal. On note $d$ la droite de coeffcient directeur ${a.as_decimal.latex().replace('.', ',')}$ (= ${a.latex()}$) passant par le points $A({x1.latex()};{y1.latex()})$. On note $B$ le point de la droite $d$ d'abscisse ${x2.latex()}$. Calculer l'ordonnée de $B$."
     statement_html = f"<div>{statement}</div>"
     return {
         "statement": statement,

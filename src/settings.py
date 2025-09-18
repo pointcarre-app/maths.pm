@@ -139,6 +139,15 @@ class Settings(BaseSettings):
         default=True, description="Automatically install JupyterLite if missing"
     )
 
+    # GitHub integration for PM-from-URL functionality
+    github_token: Optional[str] = Field(
+        default=None, description="GitHub personal access token for private repositories"
+    )
+    environment: str = Field(
+        default="production",
+        description="Application environment (development, staging, test, production)",
+    )
+
     # Private cached attributes
     _domain_config_cache: Optional[DomainModel] = None
     _products_cache: Optional[List[ProductModel]] = None

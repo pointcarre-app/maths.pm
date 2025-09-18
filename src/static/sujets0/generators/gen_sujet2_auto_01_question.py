@@ -1,3 +1,4 @@
+import random
 import teachers.generator as tg
 import teachers.maths as tm
 from teachers.defaults import SEED
@@ -13,16 +14,79 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     gen = tg.MathsGenerator(seed)
 
     a = 0
-    while a == 0:
-        a = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
+    while a == 0:  # consistent with pm objects ?
+        num_a = random.choice(
+            [
+                tm.Integer(n=1),
+                tm.Integer(n=2),
+                tm.Integer(n=3),
+                tm.Integer(n=4),
+                tm.Integer(n=5),
+                tm.Integer(n=10),
+            ]
+        )
+        denom_a = random.choice(
+            [
+                tm.Integer(n=1),
+                tm.Integer(n=2),
+                tm.Integer(n=3),
+                tm.Integer(n=4),
+                tm.Integer(n=5),
+                tm.Integer(n=10),
+            ]
+        )
+
+        a = num_a / denom_a
 
     b = 0
     while b == 0:
-        b = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
+        num_b = random.choice(
+            [
+                tm.Integer(n=1),
+                tm.Integer(n=2),
+                tm.Integer(n=3),
+                tm.Integer(n=4),
+                tm.Integer(n=5),
+                tm.Integer(n=10),
+            ]
+        )
+
+        denom_b = random.choice(
+            [
+                tm.Integer(n=1),
+                tm.Integer(n=2),
+                tm.Integer(n=3),
+                tm.Integer(n=4),
+                tm.Integer(n=5),
+                tm.Integer(n=10),
+            ]
+        )
+        b = num_b / denom_b
 
     c = 0
     while c == 0:
-        c = gen.random_integer(-50, 50) / gen.random_integer(1, 10)
+        num_c = random.choice(
+            [
+                tm.Integer(n=1),
+                tm.Integer(n=2),
+                tm.Integer(n=3),
+                tm.Integer(n=4),
+                tm.Integer(n=5),
+                tm.Integer(n=10),
+            ]
+        )
+
+        denom_c = random.choice(
+            [
+                tm.Integer(n=1),
+                tm.Integer(n=2),
+                tm.Integer(n=3),
+                tm.Integer(n=4),
+                tm.Integer(n=5),
+                tm.Integer(n=10),
+            ]
+        )
+        c = num_c / denom_c
 
     a = a.simplified()
     b = b.simplified()

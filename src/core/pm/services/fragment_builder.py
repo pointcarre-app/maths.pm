@@ -217,6 +217,17 @@ class FragmentBuilder:
                 data = {"content": fallback, "language": "text"}
 
         ##############################
+        # HTML FRAGMENTS (script, style, etc.)
+        ##############################
+        elif tag_name in ["script", "style"]:
+            # Handle script and style tags as HTML fragments
+            f_type = "html_"
+            html = ""
+            data = {
+                "content": str(tag)  # Include the entire tag with attributes
+            }
+
+        ##############################
         # ERRORS for other
         ##############################
         elif tag_name == "div" and ("toc" in class_list):

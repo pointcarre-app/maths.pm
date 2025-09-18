@@ -64,14 +64,21 @@ python -m src.app
 
 ## Step 4: Test the PM-from-URL Route
 
+### Using the Test Interface (Recommended)
+
+```bash
+# Open the convenient test interface
+open http://127.0.0.1:5001/pm-from-url-test
+```
+
 ### Basic HTML Test
 
 ```bash
-# Test with the sample lesson
-curl "http://localhost:5001/pm-from-url?url=http://localhost:8080/test-pms/sample-lesson.md"
+# Test with the sample lesson (updated URLs)
+curl "http://127.0.0.1:5001/pm-from-url?url=http://127.0.0.1:8021/test-pms/sample-lesson.md"
 
 # Test with the simple example
-curl "http://localhost:5001/pm-from-url?url=http://localhost:8080/test-pms/simple-example.md"
+curl "http://127.0.0.1:5001/pm-from-url?url=http://127.0.0.1:8021/test-pms/simple-example.md"
 ```
 
 ### JSON API Test

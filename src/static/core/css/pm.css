@@ -967,4 +967,5 @@ pm-number-input button.btn-soft:hover {
 .svg-latex .katex {
     font-size: inherit;
     font-family: 'KaTeX_Main', sans-serif;
+    color: var(--color-base-content);
 }

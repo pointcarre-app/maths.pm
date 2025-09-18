@@ -3,12 +3,35 @@
   {# {{ product_settings.name }} #}
 {% else %}
   <div class="bg-warning text-warning-content text-center p-6 mb-12">
-    NO PRODUCT SETTINGS FOUND FOR:
-    <br />
-    <div class="font-mono badge">{{ product_name }}</div>
-    <br />
-    <div class="text-left text-xs">
-      Gentle remainder that the product name comes from the `origin` first subfolder (after `/pms` ).
-    </div>
+    {% if is_external_url %}
+      {# External URL source #}
+      <div class="text-sm">📡 EXTERNAL CONTENT LOADED FROM:</div>
+      <br />
+      <div class="font-mono text-xs break-all px-4 bg-base-100 bg-opacity-20 rounded p-2">
+        {% set clean_url = origin.split('github_token=')[0] if 'github_token=' in origin else origin %}
+        {{ clean_url }}
+        {% if 'github_token=' in origin %}github_token=&lt;token&gt;{% endif %}
+        {% if using_env_token %}
+          <span class="text-xs opacity-75 block mt-1">(authenticated via environment token)</span>
+        {% endif %}
+      </div>
+      <br />
+      <div class="text-xs opacity-75">
+        External content uses default styling.
+        {% if not product_name %}
+          <br />
+          Use <code>?product_name=corsica</code> for product-specific settings.
+        {% endif %}
+      </div>
+    {% else %}
+      {# Local file source #}
+      NO PRODUCT SETTINGS FOUND FOR:
+      <br />
+      <div class="font-mono badge">{{ product_name or 'None' }}</div>
+      <br />
+      <div class="text-left text-xs">
+        Gentle remainder that the product name comes from the `origin` first subfolder (after `/pms` ).
+      </div>
+    {% endif %}
   </div>
 {% endif %}

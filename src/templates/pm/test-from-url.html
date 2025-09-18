@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PM from URL - Test Interface</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css"
+          rel="stylesheet"
+          type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-base-200">
+    <div class="container mx-auto p-6">
+      <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold mb-2">🧪 PM from URL - Test Interface</h1>
+          <div class="badge badge-{{ 'success' if environment == 'development' else 'warning' }}">
+            {{ environment.upper() }} Environment
+          </div>
+          {% if has_github_token %}
+            <div class="badge badge-success ml-2">🔑 GitHub Token Available</div>
+          {% else %}
+            <div class="badge badge-error ml-2">❌ No GitHub Token</div>
+          {% endif %}
+        </div>
+
+        <!-- Quick Test Forms -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <!-- Public Repository Test -->
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">🌐 Public Repository Test</h2>
+              <p class="text-sm opacity-70">Test with a public GitHub repository (no token needed)</p>
+
+              <form class="space-y-4" onsubmit="testPublicRepo(event)">
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">GitHub Raw URL</span>
+                  </label>
+                  <input type="url"
+                         class="input input-bordered"
+                         id="publicUrl"
+                         value="https://raw.githubusercontent.com/microsoft/vscode/main/README.md"
+                         placeholder="https://raw.githubusercontent.com/user/repo/main/file.md" />
+                </div>
+
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Product Name (optional)</span>
+                  </label>
+                  <select class="select select-bordered" id="publicProduct">
+                    <option value="">Default styling</option>
+                    <option value="corsica">corsica</option>
+                    <option value="dataviz2">dataviz2</option>
+                    <option value="pm">pm</option>
+                  </select>
+                </div>
+
+                <div class="card-actions">
+                  <button type="submit" class="btn btn-primary">🚀 Test Public URL</button>
+                  <button type="button" onclick="copyPublicUrl()" class="btn btn-ghost">📋 Copy URL</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Private Repository Test -->
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">🔒 Private Repository Test</h2>
+              <p class="text-sm opacity-70">Test with your private repository using environment token</p>
+
+              <form class="space-y-4" onsubmit="testPrivateRepo(event)">
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Private GitHub Raw URL</span>
+                  </label>
+                  <input type="url"
+                         class="input input-bordered"
+                         id="privateUrl"
+                         value="https://raw.githubusercontent.com/pointcarre-app/mathspm-pp/main/test-pms/sample-lesson.md"
+                         placeholder="https://raw.githubusercontent.com/user/private-repo/main/file.md" />
+                </div>
+
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Product Name (optional)</span>
+                  </label>
+                  <select class="select select-bordered" id="privateProduct">
+                    <option value="">Default styling</option>
+                    <option value="corsica" selected>corsica</option>
+                    <option value="dataviz2">dataviz2</option>
+                    <option value="pm">pm</option>
+                  </select>
+                </div>
+
+                <div class="card-actions">
+                  <button type="submit" class="btn btn-primary" {% if not has_github_token %}disabled{% endif %}>
+                    🔑 Test Private URL
+                  </button>
+                  <button type="button" onclick="copyPrivateUrl()" class="btn btn-ghost">📋 Copy URL</button>
+                </div>
+
+                {% if not has_github_token %}
+                  <div class="alert alert-warning">
+                    <span>⚠️ GitHub token not found in environment. Add GITHUB_TOKEN to .env file.</span>
+                  </div>
+                {% endif %}
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manual URL Builder -->
+        <div class="card bg-base-100 shadow-xl mb-8">
+          <div class="card-body">
+            <h2 class="card-title">🛠️ Manual URL Builder</h2>
+            <p class="text-sm opacity-70">Build custom PM-from-URL requests</p>
+
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Source URL</span>
+                </label>
+                <input type="url"
+                       class="input input-bordered input-sm"
+                       id="manualUrl"
+                       placeholder="https://example.com/file.md"
+                       oninput="updateManualUrl()" />
+              </div>
+
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Product</span>
+                </label>
+                <select class="select select-bordered select-sm" id="manualProduct" onchange="updateManualUrl()">
+                  <option value="">None</option>
+                  <option value="corsica">corsica</option>
+                  <option value="dataviz2">dataviz2</option>
+                  <option value="pm">pm</option>
+                </select>
+              </div>
+
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Format</span>
+                </label>
+                <select class="select select-bordered select-sm" id="manualFormat" onchange="updateManualUrl()">
+                  <option value="html">HTML</option>
+                  <option value="json">JSON</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-control mt-4">
+              <label class="label">
+                <span class="label-text">Generated URL</span>
+              </label>
+              <div class="join">
+                <input type="text"
+                       class="input input-bordered join-item flex-1 font-mono text-xs"
+                       id="generatedUrl"
+                       readonly />
+                <button class="btn join-item" onclick="copyGeneratedUrl()">📋</button>
+                <button class="btn btn-primary join-item" onclick="openGeneratedUrl()">🚀 Open</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Environment Info -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">ℹ️ Environment Information</h2>
+            <div class="stats stats-vertical lg:stats-horizontal shadow">
+              <div class="stat">
+                <div class="stat-title">Environment</div>
+                <div class="stat-value text-sm">{{ environment.upper() }}</div>
+                <div class="stat-desc">Current environment mode</div>
+              </div>
+
+              <div class="stat">
+                <div class="stat-title">GitHub Token</div>
+                <div class="stat-value text-sm">{{ '✅ Available' if has_github_token else '❌ Missing' }}</div>
+                <div class="stat-desc">For private repositories</div>
+              </div>
+
+              <div class="stat">
+                <div class="stat-title">Base URL</div>
+                <div class="stat-value text-sm">{{ base_url }}</div>
+                <div class="stat-desc">Application base URL</div>
+              </div>
+            </div>
+
+            <div class="alert alert-info mt-4">
+              <span>
+                <strong>Security Note:</strong> This test interface is only available in {{ environment }} environment.
+                GitHub tokens from environment variables are automatically loaded for private repository access.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        const baseUrl = "{{ base_url }}";
+
+        function testPublicRepo(event) {
+            event.preventDefault();
+            const url = document.getElementById('publicUrl').value;
+            const product = document.getElementById('publicProduct').value;
+
+            let testUrl = `${baseUrl}/pm-from-url?url=${encodeURIComponent(url)}`;
+            if (product) testUrl += `&product_name=${product}`;
+
+            window.open(testUrl, '_blank');
+        }
+
+        function testPrivateRepo(event) {
+            event.preventDefault();
+            const url = document.getElementById('privateUrl').value;
+            const product = document.getElementById('privateProduct').value;
+
+            let testUrl = `${baseUrl}/pm-from-url?url=${encodeURIComponent(url)}`;
+            if (product) testUrl += `&product_name=${product}`;
+
+            window.open(testUrl, '_blank');
+        }
+
+        function copyPublicUrl() {
+            const url = document.getElementById('publicUrl').value;
+            const product = document.getElementById('publicProduct').value;
+
+            let testUrl = `${baseUrl}/pm-from-url?url=${encodeURIComponent(url)}`;
+            if (product) testUrl += `&product_name=${product}`;
+
+            navigator.clipboard.writeText(testUrl);
+            showToast('Public URL copied to clipboard!');
+        }
+
+        function copyPrivateUrl() {
+            const url = document.getElementById('privateUrl').value;
+            const product = document.getElementById('privateProduct').value;
+
+            let testUrl = `${baseUrl}/pm-from-url?url=${encodeURIComponent(url)}`;
+            if (product) testUrl += `&product_name=${product}`;
+
+            navigator.clipboard.writeText(testUrl);
+            showToast('Private URL copied to clipboard!');
+        }
+
+        function updateManualUrl() {
+            const url = document.getElementById('manualUrl').value;
+            const product = document.getElementById('manualProduct').value;
+            const format = document.getElementById('manualFormat').value;
+
+            if (!url) {
+                document.getElementById('generatedUrl').value = '';
+                return;
+            }
+
+            let generatedUrl = `${baseUrl}/pm-from-url?url=${encodeURIComponent(url)}`;
+            if (product) generatedUrl += `&product_name=${product}`;
+            if (format !== 'html') generatedUrl += `&format=${format}`;
+
+            document.getElementById('generatedUrl').value = generatedUrl;
+        }
+
+        function copyGeneratedUrl() {
+            const url = document.getElementById('generatedUrl').value;
+            if (url) {
+                navigator.clipboard.writeText(url);
+                showToast('Generated URL copied to clipboard!');
+            }
+        }
+
+        function openGeneratedUrl() {
+            const url = document.getElementById('generatedUrl').value;
+            if (url) {
+                window.open(url, '_blank');
+            }
+        }
+
+        function showToast(message) {
+            // Simple toast notification
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-top toast-center';
+            toast.innerHTML = `<div class="alert alert-success"><span>${message}</span></div>`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                document.body.removeChild(toast);
+            }, 3000);
+        }
+
+        // Initialize manual URL builder
+        updateManualUrl();
+    </script>
+  </body>
+</html>

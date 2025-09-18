@@ -21,7 +21,7 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
     # n1: number of articles in the given information (2 to 10)
     # n2: number of articles we're asking about (2 to 20)
     n1 = gen.random_integer(2, 10)
-    n2 = gen.random_integer(2, 20)
+    n2 = gen.random_integer(2, 10)
     while n2.n == n1.n:
         n2 = gen.random_integer(2, 20)
 
@@ -55,7 +55,8 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
         # n * 25 = 25n (always an integer, 0 decimals)
         unit_price = gen.random_integer(1, 50)
 
-    elif choice.n <= 7:
+    else:
+        # choice.n <= 7:
         # ====================================================================
         # 40% chance: Price with exactly 1 decimal place (e.g., 12.5€)
         # ====================================================================
@@ -68,18 +69,18 @@ def generate_components(difficulty, seed=SEED) -> dict[str, tm.MathsObject]:
         # Examples: 3 * 23.5 = 70.5 (1 decimal), 4 * 12.5 = 50 (0 decimals)
         unit_price = gen.random_integer(1, 500) / tm.Integer(n=10)
 
-    else:
-        # ====================================================================
-        # 30% chance: Price with exactly 2 decimal places (e.g., 12.99€)
-        # ====================================================================
-        # We generate integer/100, which gives values like:
-        # 1/100 = 0.01, 1234/100 = 12.34, 5000/100 = 50.00
-        #
-        # When multiplied by any integer n:
-        # n * (1234/100) = 1234n/100
-        # The denominator is 100, so the decimal representation has AT MOST 2 decimals
-        # Examples: 3 * 12.34 = 37.02 (2 decimals), 4 * 12.25 = 49 (0 decimals)
-        unit_price = gen.random_integer(1, 5000) / tm.Integer(n=100)
+    # else:
+    #     # ====================================================================
+    #     # 30% chance: Price with exactly 2 decimal places (e.g., 12.99€)
+    #     # ====================================================================
+    #     # We generate integer/100, which gives values like:
+    #     # 1/100 = 0.01, 1234/100 = 12.34, 5000/100 = 50.00
+    #     #
+    #     # When multiplied by any integer n:
+    #     # n * (1234/100) = 1234n/100
+    #     # The denominator is 100, so the decimal representation has AT MOST 2 decimals
+    #     # Examples: 3 * 12.34 = 37.02 (2 decimals), 4 * 12.25 = 49 (0 decimals)
+    #     unit_price = gen.random_integer(1, 5000) / tm.Integer(n=100)
 
     # ========================================================================
     # WHY THIS WORKS WITHOUT ANY LOOPS OR CHECKING:

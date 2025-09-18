@@ -63,7 +63,7 @@ def render_question(*, a, b, c, x, x1, x2, f, expr):
     >>> statement["statement"]
     """
 
-    statement = f"Soit ${f.latex()}$ une fonction définie sur $\\mathbb{{R}}$ par ${f.latex()}({x.latex()}) = {expr.latex()}$. Parmi ces nombres : $-2$ ; $-1$ ; $0$ ; $1$ ; $2$, quel est l'antécédent de $0$ par la fonction $f$ ?"
+    statement = f"Soit ${f.latex()}$ une fonction définie sur $\\mathbb{{R}}$ par ${f.latex()}({x.latex()}) = {expr.latex()}$. Parmi ces nombres : $\\{{-2$ ; $-1$ ; $0$ ; $1$ ; $2\\}}$, quel est l'antécédent de $0$ par la fonction $f$ ?"
     statement_html = f"<div>{statement}</div>"
 
     return {

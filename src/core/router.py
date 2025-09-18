@@ -16,8 +16,12 @@ from urllib.parse import urlparse
 import httpx
 import markdown
 import orjson
+from dotenv import load_dotenv
 from fastapi import APIRouter, Request, Query, HTTPException, Response
 from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
+
+# Load environment variables from .env file
+load_dotenv()
 
 from ..settings import settings, get_product_settings
 from .pm.services.pm_runner import build_pm_from_file
@@ -963,6 +967,9 @@ async def get_pm_from_url(
     request: Request,
     url: str = Query(..., description="URL to fetch the markdown file from"),
     product_name: str = Query(None, description="Product name for settings"),
+    github_token: str = Query(
+        None, description="GitHub personal access token for private repositories"
+    ),
     format: str = Query(
         "html", description="Response format (json or html)", regex="^(json|html)$"
     ),
@@ -974,6 +981,8 @@ async def get_pm_from_url(
         request: The request object
         url: URL to fetch the markdown file from
         product_name: Optional product name for loading product settings
+        github_token: Optional GitHub personal access token for private repositories
+                     (falls back to GITHUB_TOKEN environment variable if not provided)
         format: Response format ('json' or 'html')
         debug: Enable debug mode
 
@@ -984,6 +993,8 @@ async def get_pm_from_url(
         - `/pm-from-url?url=https://raw.githubusercontent.com/user/repo/main/file.md` - HTML view
         - `/pm-from-url?url=https://example.com/file.md&format=json` - JSON data
         - `/pm-from-url?url=https://example.com/file.md&product_name=corsica` - With product settings
+        - `/pm-from-url?url=https://raw.githubusercontent.com/user/private-repo/main/file.md&github_token=TOKEN` - Private repo with token parameter
+        - `/pm-from-url?url=https://raw.githubusercontent.com/user/private-repo/main/file.md` - Private repo using GITHUB_TOKEN env var
 
     """
     # Validate URL format
@@ -999,8 +1010,32 @@ async def get_pm_from_url(
 
     # Fetch content from URL
     try:
+        # Prepare headers for authentication
+        headers = {}
+
+        # Use provided github_token parameter or fall back to settings (with security check)
+        env_token = None
+        environment = settings.environment.lower()
+
+        # Only load environment token in non-production environments
+        if environment in ["development", "staging", "test"]:
+            env_token = settings.github_token
+        elif settings.github_token and not github_token:
+            raise HTTPException(
+                status_code=403,
+                detail="GitHub token from environment is not allowed in production. Use github_token parameter instead.",
+            )
+
+        effective_token = github_token or env_token
+
+        if effective_token and "githubusercontent.com" in url:
+            headers["Authorization"] = f"token {effective_token}"
+            if debug:
+                token_source = "parameter" if github_token else f"environment ({environment})"
+                logger.info(f"Using GitHub token for authentication (source: {token_source})")
+
         async with httpx.AsyncClient(timeout=30.0) as client:
-            response = await client.get(url)
+            response = await client.get(url, headers=headers)
             response.raise_for_status()
 
             # Check if content is likely markdown
@@ -1011,7 +1046,21 @@ async def get_pm_from_url(
             markdown_content = response.text
 
     except httpx.HTTPError as e:
-        raise HTTPException(status_code=400, detail=f"Failed to fetch content from URL: {str(e)}")
+        # Handle specific HTTP errors
+        if hasattr(e, "response") and e.response.status_code == 401:
+            raise HTTPException(
+                status_code=401,
+                detail="Authentication failed. Check your GitHub token for private repositories.",
+            )
+        elif hasattr(e, "response") and e.response.status_code == 404:
+            raise HTTPException(
+                status_code=404,
+                detail="File not found. Check URL path and authentication for private repositories.",
+            )
+        else:
+            raise HTTPException(
+                status_code=400, detail=f"Failed to fetch content from URL: {str(e)}"
+            )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Unexpected error fetching URL: {str(e)}")
 
@@ -1053,6 +1102,10 @@ async def get_pm_from_url(
             "product_name": product_name,
             "page": {"title": f"PM from URL - {pm.title}"},
             "source_url": url,  # Add source URL to context
+            "is_external_url": True,  # Flag to indicate external source
+            "using_env_token": bool(
+                not github_token and settings.github_token and "githubusercontent.com" in url
+            ),
         }
 
         # Extract page-specific metatags from PM metadata
@@ -1114,6 +1167,34 @@ async def get_pm_from_url(
             )
 
         return settings.templates.TemplateResponse("pm/index.html", context)
+
+
+@core_router.get("/pm-from-url-test", response_class=HTMLResponse)
+async def pm_from_url_test(request: Request):
+    """Testing interface for PM-from-URL functionality.
+
+    Only available in development, staging, and test environments.
+    """
+    environment = settings.environment.lower()
+
+    if environment not in ["development", "staging", "test"]:
+        raise HTTPException(
+            status_code=403,
+            detail="PM-from-URL test interface is only available in development, staging, and test environments.",
+        )
+
+    # Check if GitHub token is available
+    has_github_token = bool(settings.github_token)
+
+    context = {
+        "request": request,
+        "page": {"title": "PM from URL - Test Interface"},
+        "environment": environment,
+        "has_github_token": has_github_token,
+        "base_url": str(request.base_url).rstrip("/"),
+    }
+
+    return settings.templates.TemplateResponse("pm/test-from-url.html", context)
 
 
 @core_router.get("/identity", response_class=HTMLResponse)

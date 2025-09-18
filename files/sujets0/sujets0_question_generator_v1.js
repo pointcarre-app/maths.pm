@@ -16,6 +16,7 @@ function extractConfigFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
   let nbStudents = parseInt(urlParams.get("nbStudents")) || 2;
   let nbQuestions = parseInt(urlParams.get("nbQuestions")) || 12;
+  let seed = parseInt(urlParams.get("seed")) || 14; // Default to 14 if no seed provided
   const curriculum = urlParams.get("curriculum");
   const curriculumSlug = urlParams.get("curriculum-slug");
 
@@ -63,7 +64,7 @@ function extractConfigFromUrl() {
     );
   }
 
-  return { nbStudents, nbQuestions, curriculum, curriculumSlug };
+  return { nbStudents, nbQuestions, seed, curriculum, curriculumSlug };
 }
 
 const configFromUrl = extractConfigFromUrl();
@@ -97,7 +98,7 @@ const CONFIG = {
   teachersGitTag: teachersGitTag,
   naginiGitTag: "v0.0.21",
   v4PyJsGitTag: "v0.0.27",
-  rootSeed: 14,
+  rootSeed: configFromUrl.seed,
   nbStudents: configFromUrl.nbStudents,
   nbQuestions: configFromUrl.nbQuestions,
   curriculum: configFromUrl.curriculum,
