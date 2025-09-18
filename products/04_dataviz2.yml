@@ -8,7 +8,7 @@ subtitle_html: Représentations de données (Python et KS)
 # description: "This course, taught within a program with a strong mathematical component, introduces students to data visualization using Python libraries such as Matplotlib and Bokeh, combining theoretical principles with practical, interactive applications."
 description: In a program with a strong mathematical component, this course introduces data visualization with Python libraries such as Matplotlib and Bokeh, blending theory and interactive practice.
 local_path: /dataviz
-source_link: ""
+# source_link: "/pm/dataviz2"
 color: success
 figure_svg: dataviz-figure-svg.html
 classes_formatted:

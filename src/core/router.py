@@ -11,7 +11,9 @@ import mimetypes
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
+import httpx
 import markdown
 import orjson
 from fastapi import APIRouter, Request, Query, HTTPException, Response
@@ -19,6 +21,7 @@ from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
 
 from ..settings import settings, get_product_settings
 from .pm.services.pm_runner import build_pm_from_file
+from .pm.services.pm_builder import PMBuilder
 from .pm.services.pm_fs_service import (
     build_pm_tree,
     resolve_pm_path,
@@ -892,6 +895,164 @@ async def get_pm(
             "origin": origin,
             "product_name": product_name,
             "page": {"title": f"PM - {pm.title}"},
+        }
+
+        # Extract page-specific metatags from PM metadata
+        pm_metatags = {}
+        if pm.metadata:
+            # Common metatags that might be in PM files
+            metatag_fields = [
+                "title",
+                "description",
+                "keywords",
+                "author",
+                "robots",
+                "og:title",
+                "og:description",
+                "og:image",
+                "og:url",
+                "og:type",
+                "twitter:card",
+                "twitter:title",
+                "twitter:description",
+                "twitter:image",
+                "DC.title",
+                "DC.creator",
+                "DC.subject",
+                "DC.description",
+                "abstract",
+                "topic",
+                "summary",
+                "category",
+                "revised",
+                "pagename",
+                "subtitle",
+                "canonical",
+            ]
+
+            # Extract any metatag fields from metadata
+            for field in metatag_fields:
+                if field in pm.metadata:
+                    pm_metatags[field] = pm.metadata[field]
+
+            # Also extract any fields that start with common metatag prefixes
+            for key, value in pm.metadata.items():
+                if any(key.startswith(prefix) for prefix in ["og:", "twitter:", "DC.", "itemprop"]):
+                    pm_metatags[key] = value
+
+        # Add PM metatags to context
+        context["pm_metatags"] = pm_metatags
+
+        # Add product-specific context if settings are available
+        if product_settings:
+            context.update(
+                {
+                    "product_settings": product_settings.to_dict(),
+                    "product_title": product_settings.title,
+                    "product_description": product_settings.description,
+                    "product_backend_settings": product_settings.backend_settings,
+                    "is_product_enabled": product_settings.is_enabled,
+                }
+            )
+
+        return settings.templates.TemplateResponse("pm/index.html", context)
+
+
+@core_router.get("/pm-from-url")
+async def get_pm_from_url(
+    request: Request,
+    url: str = Query(..., description="URL to fetch the markdown file from"),
+    product_name: str = Query(None, description="Product name for settings"),
+    format: str = Query(
+        "html", description="Response format (json or html)", regex="^(json|html)$"
+    ),
+    debug: bool = Query(False, description="Debug mode"),
+) -> Response:
+    """Get a PM from a distant URL containing a markdown file.
+
+    Args:
+        request: The request object
+        url: URL to fetch the markdown file from
+        product_name: Optional product name for loading product settings
+        format: Response format ('json' or 'html')
+        debug: Enable debug mode
+
+    Returns:
+        JSON representation of the PM or template response
+
+    Examples:
+        - `/pm-from-url?url=https://raw.githubusercontent.com/user/repo/main/file.md` - HTML view
+        - `/pm-from-url?url=https://example.com/file.md&format=json` - JSON data
+        - `/pm-from-url?url=https://example.com/file.md&product_name=corsica` - With product settings
+
+    """
+    # Validate URL format
+    try:
+        parsed_url = urlparse(url)
+        if not parsed_url.scheme or not parsed_url.netloc:
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid URL format. URL must include scheme (http/https) and domain.",
+            )
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid URL format.")
+
+    # Fetch content from URL
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.get(url)
+            response.raise_for_status()
+
+            # Check if content is likely markdown
+            content_type = response.headers.get("content-type", "").lower()
+            if not (content_type.startswith("text/") or "markdown" in content_type):
+                logger.warning(f"URL content-type is {content_type}, proceeding anyway")
+
+            markdown_content = response.text
+
+    except httpx.HTTPError as e:
+        raise HTTPException(status_code=400, detail=f"Failed to fetch content from URL: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Unexpected error fetching URL: {str(e)}")
+
+    # Build PM from markdown content
+    try:
+        pm = PMBuilder.from_markdown(
+            md_content=markdown_content,
+            origin=url,  # Use URL as origin
+            verbosity=1 if debug else 0,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=422, detail=f"Failed to parse markdown content: {str(e)}")
+
+    # Get product-specific settings if product name provided
+    product_settings = None
+    if product_name:
+        product_settings = get_product_settings(product_name)
+
+    # Handle response format
+    if format == "json":
+        # Include product settings in JSON response if available
+        response_data = pm.model_dump()
+        if product_settings:
+            response_data["product_settings"] = product_settings.to_dict()
+        response_data["source_url"] = url
+        return ORJSONPrettyResponse(content=response_data)
+
+    elif format == "html":
+        # Convert PM to JSON-compatible dict using Pydantic's json method
+        pm_json = pm.model_dump_json()
+
+        # Build template context with product settings
+        context = {
+            "request": request,
+            "debug": debug,
+            "pm": pm,
+            "pm_json": pm_json,
+            "origin": url,  # Use URL as origin for template
+            "product_name": product_name,
+            "page": {"title": f"PM from URL - {pm.title}"},
+            "source_url": url,  # Add source URL to context
         }
 
         # Extract page-specific metatags from PM metadata
