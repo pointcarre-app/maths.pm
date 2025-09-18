@@ -1,13 +1,15 @@
 
 cases:
 
-  D:
+  LOAD:
     query_parameters:
       nbStudents: "5"
       nbQuestions: "5"
       seed: "9"
       format: html
-      curriculum: Spé   
+      # curriculum: Spé   
+      curriculum-slug: spe_sujet1
+      curriculum: Spé 1
     count_fragments: 25
 
 scene:

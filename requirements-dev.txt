@@ -4,4 +4,4 @@ matplotlib
 djlint==1.36.4 
 black==24.4.2
 ruff==0.11.2
-pca-scenery==0.1.14
+pca-scenery==0.1.15
