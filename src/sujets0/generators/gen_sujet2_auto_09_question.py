@@ -43,10 +43,10 @@ def render_question(*, v, h, r, expr):
     >>> components= generate_components(None, 0)
     >>> statement = render_question(**components)
     >>> statement["statement"]
-    "Le volume $V$ d\'un cône de hauteur $h$ et de rayon $r$ est $V = \\\\dfrac{1}{3}\\\\pi r^{2}h$. Isoler $h$."
+    "Le volume $V$ d\'un cône de hauteur $h$ et de rayon $r$ est $V = \\\\dfrac{1}{3}\\\\pi r^{2}h$. Isoler $h$, c'est à dire exprimer $h$ en fonction de $V$ et $r$."
     """
 
-    statement = f"Le volume ${v.latex()}$ d'un cône de hauteur ${h.latex()}$ et de rayon ${r.latex()}$ est $V=\\dfrac{1}{3} \\pi  r^{2}h$. Isoler $h$."
+    statement = f"Le volume ${v.latex()}$ d'un cône de hauteur ${h.latex()}$ et de rayon ${r.latex()}$ est $V=\\dfrac{1}{3} \\pi  r^{2}h$. Isoler $h$, c'est à dire exprimer $h$ en fonction de $V$ et $r$."
     statement_html = f"<div>{statement}</div>"
     return {
         "statement": statement,

@@ -141,7 +141,7 @@ def render_question(*, center, disp_low, disp_high, a, b):
     a_latex = "&nbsp ; &nbsp ".join(e.latex() for e in a.elements)
     b_latex = "&nbsp ; &nbsp ".join(e.latex() for e in b.elements)
 
-    statement = f"On considère les deux séries :<br>$A=\\{{ {a_latex}\\}}$  <br>$B=\\{{ {b_latex}\\}}$<br>Quelle est celle avec le plus grand écart type ?"
+    statement = f"On considère les deux séries :<br>$A=({a_latex})$  <br>$B=({b_latex})$<br>Quelle est la série avec le plus grand écart type ?"
     statement_html = f"<div>{statement}</div>"
 
     return {

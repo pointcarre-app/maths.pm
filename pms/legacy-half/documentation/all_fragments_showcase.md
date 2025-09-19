@@ -233,13 +233,15 @@ console.log(greet("World"));
 
 ### Interactive Code (codex_)
 
+Legacy syntax:
 ```yaml
 codexPCAVersion: 1
 script_path: "pyly/premiers-pas-affichages-strings.py"
 ```
 
+New syntax (preferred):
 ```yaml
-codexPCAVersion: 1
+f_type: "codex_"
 script_path: "intro/variables_intro.py"
 ```
 

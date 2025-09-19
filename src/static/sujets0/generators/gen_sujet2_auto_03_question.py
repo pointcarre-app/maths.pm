@@ -48,7 +48,7 @@ def render_question(*, n):
         5: "quintuplé",
     }
 
-    statement = f"Le prix d'un article a {literal_n[n.n]}. Quel est le pourcentage d'évolution ?."
+    statement = f"Le prix d'un article a {literal_n[n.n]}. Quel est le pourcentage d'évolution ?"
     statement_html = f"<div>{statement}</div>"
 
     return {

@@ -8,6 +8,32 @@
   font-size: 1rem;
 }
 
+/* Link styles using DaisyUI semantic colors */
+.pm-container a {
+  color: var(--color-info);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--color-info) 40%, transparent);
+  text-underline-offset: 0.2em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease, text-underline-offset 0.2s ease;
+}
+
+.pm-container a:hover {
+  color: var(--color-info);
+  text-decoration-color: color-mix(in oklab, var(--color-info) 70%, transparent);
+  text-underline-offset: 0.35em;
+}
+
+.pm-container a:visited {
+  color: var(--color-secondary);
+  text-decoration-color: color-mix(in oklab, var(--color-secondary) 40%, transparent);
+}
+
+.pm-container a:visited:hover {
+  color: var(--color-secondary);
+  text-decoration-color: color-mix(in oklab, var(--color-secondary) 70%, transparent);
+  text-underline-offset: 0.35em;
+}
+
 
 
 

@@ -8,6 +8,10 @@
 ## Course Description
 Data visualization is a fundamental ingredient of data science as it "forces us to notice what we never expected to see" in a given dataset. Dataviz is also a tool for communication and, as such, is a visual language. All along the courses, we will focus on methods and strategies to represent datasets, using dynamic and interactive tools.
 
+**📖 Course Materials:**
+- **[Introduction & Interactive Notebooks](01_introduction.md)** - Getting started with Jupyter environments and code fragments
+- **[Jupyter Launcher](jupyter_launcher.md)** - Direct access to interactive Python environments
+
 ---
 
 ## Learning Outcomes
@@ -125,6 +129,7 @@ By the end of this course, students will be able to:
   - Data-ink ratio optimization
   - Chart junk elimination
   - Small multiples principle
+- **📚 [See Interactive Examples & Code Fragments](01_introduction.md)** for hands-on practice
 
 #### **Practice (3 hours)**
 *Following the complexity progression*
@@ -152,6 +157,7 @@ By the end of this course, students will be able to:
   - Overview first, zoom and filter, details on demand
   - Direct manipulation principles
   - Real-time data streaming concepts
+- **🚀 [Access Interactive Jupyter Environments](01_introduction.md#interactive-jupyter-notebooks)** for live coding practice
 
 #### **Practice (5 hours)**
 - **Interactive Distribution Analysis**

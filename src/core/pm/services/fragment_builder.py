@@ -683,22 +683,24 @@ class FragmentBuilder:
 
                             # for later for auto-correction
                             # TODO : unitary tests too
-                            # data["composed_script"] = pcomp.compose(
-                            #     foreground_script=sections["foreground_script"],
-                            #     background_script=sections["background_script"],
-                            #     publics_checks=sections["public_checks"],
-                            #     privates_checks=sections["private_checks"],
-                            # )
+                            data["composed_script"] = pcomp.compose(
+                                foreground_script=sections["foreground_script"],
+                                background_script=sections["background_script"],
+                                publics_checks=sections["public_checks"],
+                                privates_checks=sections["private_checks"],
+                            )
 
-                            # data["foreground_script"] = sections["foreground_script"]
-                            # data["background_script"] = sections["background_script"]
-                            # data["public_checks"] = sections["public_checks"]
-                            # data["private_checks"] = sections["private_checks"]
-                            # data[""]
-                            # from pprint import pprint
+                            data["composed_script"] = sections["foreground_script"]
 
-                            # pprint(sections)
-                            # data["codex_script"] = html_module.escape(codex_script)
+                            data["foreground_script"] = sections["foreground_script"]
+                            data["background_script"] = sections["background_script"]
+                            data["public_checks"] = sections["public_checks"]
+                            data["private_checks"] = sections["private_checks"]
+                            data[""]
+                            from pprint import pprint
+
+                            pprint(sections)
+                            data["codex_script"] = html_module.escape(codex_script)
 
                             data |= sections
 
@@ -747,6 +749,54 @@ class FragmentBuilder:
                                     data[k] = float(data[k])
                                 except Exception:
                                     pass
+
+                    # New: f_type: codex_ YAML block → codex_ fragment
+                    elif data.get("f_type") == "codex_":
+                        f_type = "codex_"
+                        html = ""
+
+                        # Ensure script_path is provided
+                        if "script_path" not in data:
+                            raise ValueError("CODEX requires 'script_path' field")
+
+                        script_path = data["script_path"]
+                        path = settings.build_codex_path_from_script_path(script_path)
+                        with open(path) as file:
+                            codex_script = file.read()
+
+                            pp = PythonParser()
+                            # sections, asts
+                            sections, _ = pp.parse(html_module.escape(codex_script))
+
+                            pcomp = PythonComposer()
+
+                            # For later auto-correction - compose full script with all sections
+                            # TODO : unitary tests too
+                            data["composed_script"] = pcomp.compose(
+                                foreground_script=sections["foreground_script"],
+                                background_script=sections["background_script"],
+                                publics_checks=sections["public_checks"],
+                                privates_checks=sections["private_checks"],
+                            )
+
+                            # IMPORTANT: For display purposes, we need the foreground_script to be shown in the editor
+                            # The template expects 'content' field for the CodeMirror editor to display the code
+                            # Set content to foreground_script so users can see the editable code
+                            data["content"] = sections["foreground_script"]
+
+                            # Store all individual sections for potential future use
+                            data["foreground_script"] = sections["foreground_script"]
+                            data["background_script"] = sections["background_script"]
+                            data["public_checks"] = sections["public_checks"]
+                            data["private_checks"] = sections["private_checks"]
+
+                            from pprint import pprint
+
+                            pprint(sections)
+                            data["codex_script"] = html_module.escape(codex_script)
+
+                            # Merge all sections into data for backward compatibility
+                            data |= sections
 
                     # New: fType: script_module_ YAML block → script_module_ fragment
                     elif data.get("fType") == "script_module_":

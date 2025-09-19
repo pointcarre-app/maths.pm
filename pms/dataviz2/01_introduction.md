@@ -30,6 +30,8 @@ pagename: "Code Media Fragments Guide"
 
 This guide covers fragments for displaying code, images, and other visual content in pedagogical messages.
 
+**📋 [← Back to Course Syllabus](00_plan.md)** | **🚀 [Direct Jupyter Access](jupyter_launcher.md)**
+
 ## 🚀 Interactive Jupyter Notebooks
 
 Access interactive Python environments with pre-loaded data and examples:
