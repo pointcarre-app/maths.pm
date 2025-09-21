@@ -41,7 +41,7 @@ In a terminal, run the following commands: `brew update && brew install pyenv`
 
 ### Create a specific virtual environment with the specified version (in the repo-folder)
 
-```
+```bash
 # Path to installed Python binary
  ~/.pyenv/versions/3.10.1/bin/python -m venv env
 ```
@@ -49,13 +49,13 @@ In a terminal, run the following commands: `brew update && brew install pyenv`
 
 ## Activate / deactivate the virtual environment
 
-```
+```bash
 source env/bin/activate
 deactivate
 ```
 
 ## Check correct pip3 used
-```
+```bash
 which pip3 
 # path should be from the just installed and activated environment
 # example: /Users/selim/repos/pca/env/bin/pip3
@@ -63,6 +63,6 @@ which pip3
 
 ## Install requirements
 
-```
+```bash
 pip3 install -r requirements.txt
 ```

@@ -3,9 +3,9 @@ js_dependencies:
   - "https://cdn.bokeh.org/bokeh/release/bokeh-3.6.2.min.js"
 ---
 
-# DataViz2 Sandbox - Interactive Python Execution
+# Sandbox - Interactive Python Execution
 
-Test the interactive Python execution with matplotlib, pandas, and Bokeh support.
+Test the interactive Python execution with matplotlib, pandas, and Bokeh.
 
 ## Basic Python Example
 
@@ -221,4 +221,17 @@ inline: |
   
   print("⚠️  This example uses deprecated circle() method")
   print("📏 Check the compact warning display below!")
+```
+
+
+
+
+## Test codex with height_in_px
+
+```yaml 
+f_type: "codex_"
+height_in_px: 900
+inline: |
+    # Your Python code here
+    print("Hello World")
 ```

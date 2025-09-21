@@ -8,6 +8,23 @@
 }
 
 
+
+/* OVERRIDE DAISYUI */
+/**************** Mockup code ****************/
+
+
+/* 
+
+.mockup-code {
+  & pre {
+      &:before {
+          content: "";
+          margin-right: 0 !important;
+      }
+  }
+} */
+
+
 /**************** Padding-responsiveness ****************/
 
 

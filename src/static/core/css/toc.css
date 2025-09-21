@@ -22,6 +22,8 @@
 /* TOC Styling */
 #toc {
   padding: 1rem !important;
+  font-size: 0.9rem !important;
+  font-weight: 400 !important;
 }
 
 #toc ul {
@@ -38,14 +40,14 @@
 #toc > ul > li > a {
   /* color: hsl(var(--bc) / 0.85) !important; */
   font-weight: 500 !important;
-  font-size: 1.1rem !important;
+  /* font-size: 0.9rem !important; */
 }
 
 
 
 #toc > ul > ul {
   padding-left: 0rem !important;
-  margin-top: 0.75rem !important;
+  /* margin-top: 0.75rem !important; */
 }
 
 #toc > ul > ul > ul {
@@ -72,7 +74,7 @@
 /* Second level links */
 #toc > ul > li > ul > li  {
   padding-left: 0rem !important;
-  margin-bottom: 0.25rem !important;
+  /* margin-bottom: 0.25rem !important; */
 }
 
 
@@ -97,21 +99,20 @@
 #toc > ul > li > ul > li > ul > li > {
   padding-left: 0.5rem !important;
   margin-bottom: 0rem !important;
-  /* font-size: 0.275rem !important; */
 }
 
 /* Third level links - smaller and lighter */
 #toc > ul > li > ul > li > ul > li > a {
-  font-size: 0.8125rem !important;
   padding-left: 0.5rem !important;
 
 }
 
 
 #toc > ul > li > ul > li > ul > li > a:last-child {
-  font-size: 0.8125rem !important;
+  font-size: 0.75rem !important;
   padding-left: 0.5rem !important;
   margin-bottom: 1.5rem !important;
+  font-weight: 300 !important;
 
 }
 

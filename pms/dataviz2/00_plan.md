@@ -1,9 +1,9 @@
-# Data Visualization 
+# Data Visualization: Course overview
 
 
 [TOC]
 
-Organizational aspects and syllabus
+Organizational aspects, syllabus and evaluation criteria
 {: .pm-subtitle}
 
 
@@ -95,8 +95,9 @@ The evaluation consists on a data vizualisation project. The students will have 
 
 #### Hour 1: Course Introduction & Visual Variables
 
-- [**Course overview and evaluation criteria**](00_plan.md) *(i.e. the file you're currently reading)*
+- [**Course overview**](00_plan.md) *(i.e. the file you're currently reading)*
 - [**Graphic Semiology Fundamentals**](session_1_a.md)
+- <span class="text-base-content/60"> [Optional] [**Installing Python, the clean way**](01_installing_python.md) </span>
 
 
 #### Hours 2 & 3: Data types & first graphs

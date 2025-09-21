@@ -134,25 +134,36 @@ export class PMCodex extends LitElement {
           });
           console.debug('[pm-codex] CodeMirror started', { isExecutable, isEditable });
           
-          // STEP 4.1: APPLY CUSTOM HEIGHT
+          // STEP 4.1: APPLY HEIGHT CONFIGURATION
           // Check for height configuration in data attributes
           const heightInPx = this.getAttribute('data-height-in-px') || 
                            container.getAttribute('data-height-in-px') ||
                            wrapper?.getAttribute('data-height-in-px');
           
+          const cmWrapper = cm.getWrapperElement();
+          
           if (heightInPx) {
             const height = parseInt(heightInPx, 10);
             if (!isNaN(height) && height > 0) {
-              // Set the height on the CodeMirror wrapper
-              const cmWrapper = cm.getWrapperElement();
+              // Set the custom height on the CodeMirror wrapper
               cmWrapper.style.height = `${height}px`;
               cmWrapper.style.maxHeight = `${height}px`;
               console.debug('[pm-codex] Applied custom height:', height + 'px');
-              
-              // Refresh CodeMirror to ensure proper rendering with new height
-              setTimeout(() => cm.refresh(), 10);
+            } else {
+              // Invalid height, use default
+              cmWrapper.style.height = '600px';
+              cmWrapper.style.maxHeight = '600px';
+              console.debug('[pm-codex] Invalid height, using default: 600px');
             }
+          } else {
+            // No height specified, use default 600px
+            cmWrapper.style.height = '600px';
+            cmWrapper.style.maxHeight = '600px';
+            console.debug('[pm-codex] No height specified, using default: 600px');
           }
+          
+          // Refresh CodeMirror to ensure proper rendering with new height
+          setTimeout(() => cm.refresh(), 10);
           
           // Store CodeMirror instance for external access
           this._codeMirror = cm;

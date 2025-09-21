@@ -646,7 +646,7 @@ class FragmentBuilder:
         data = {}
 
         # Default to Python if no language is specified
-        language = "python"
+        language = "?"
 
         # Extract language class from code tag
         code_tag = tag.find("code")

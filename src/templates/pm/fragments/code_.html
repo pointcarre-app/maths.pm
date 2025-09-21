@@ -1,3 +1,26 @@
-<div class="fragment mockup-code" data-f_type="{{ fragment.f_type.value }}">
-  <pre class="fragment-code"><code class="language-{{ fragment.data.language if fragment.data and fragment.data.language is defined }}">{{ fragment.data.content | e }}</code></pre>
+<div class="fragment" data-f_type="{{ fragment.f_type.value }}">
+
+  <div class="badge bg-base-200"
+       style="margin-left: auto;
+              margin-right: 0.75rem;
+              display: block;
+              width: fit-content;
+              border-top-left-radius: var(--radius-box);
+              border-top-right-radius: var(--radius-box);
+              border-bottom-left-radius: 0;
+              border-bottom-right-radius: 0;
+              font-size: 0.875rem">
+
+    {# <div class="badge bg-base-200"
+      style="border-top-left-radius: var(--radius-box);
+             border-top-right-radius: var(--radius-box);
+             border-bottom-left-radius: 0;
+             border-bottom-right-radius: 0;
+             text-align: right;
+             margin-left: auto;
+             margin-right: 0;
+             font-size: 0.875rem"> #}
+    {{ fragment.data.language if fragment.data and fragment.data.language is defined }}
+  </div>
+  <pre class="fragment-code bg-base-200"><code class="language-{{ fragment.data.language if fragment.data and fragment.data.language is defined }}">{{ fragment.data.content | e }}</code></pre>
 </div>
