@@ -9,7 +9,14 @@ We'll focus on `pyenv` for python version management. The following instructions
 
 [TOC]
 
-## Why installing `Pyenv` ?
+
+
+
+
+## Installing `pyenv` 
+
+
+### Why installing `pyenv` ?
 
 > `pyenv` is a tool to manage multiple Python versions, while maintaining a consistent and clean installation process. The source code is available [here](https://github.com/pyenv/pyenv).
 
@@ -19,7 +26,6 @@ We'll focus on `pyenv` for python version management. The following instructions
 **Kind remainder**: it's always a bad idea to interact with the system Python version. Python is used by most of the OS, updating some libraries (or any other operation)might break the system.
 {: .alert .alert-warning .alert-soft}
 
-## Installing `pyenv` 
 
 ### MacOS
 
@@ -68,10 +74,10 @@ Nevertheless, independently of your ease with Python installation, you should us
 {: .alert .alert-warning .alert-soft}
 
 
-## Virtual environment setup (MacOS & Linux)
+## Virtual env setup (UNIX based OS)
 
 
-We'll rely on the built-in `venv` module to create a virtual environment. The following instructions are valid for MacOS and Linux. If you use Windows, please refer to the [specific instructions](https://docs.python.org/3/library/venv.html) from the official Python documentation.
+We'll rely on the built-in `venv` module to create a virtual environment. The following instructions are valid for UNIX based OS (such as MacOS and Linux). If you use Windows, please refer to the [specific instructions](https://docs.python.org/3/library/venv.html) from the official Python documentation.
 
 ### Folder creation
 
@@ -101,13 +107,13 @@ We'll rely on the built-in `venv` module to create a virtual environment. The fo
 ```
 
 
-## Interacting with the virtual environment
+## Interacting with the virtual env
 
 
 The two following commands should be run from the folder containing the virtual environment, i.e. containing the `env` folder.
 {: .alert .alert-success .alert-soft}
 
-### Activating the virtual environment
+### Activating the virtual env
 
 
 ```bash
@@ -115,16 +121,19 @@ source env/bin/activate
 ```
 
 
-### Deactivating the virtual environment
+### Deactivating the virtual env
 
 ```bash
 deactivate
 ```
 
 
-## Check correct `pip3` / `pip` / `python3` / `python` are used
+## Aliases & defensive programming
 
-You should run those command from the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment.
+You should run those command from the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment. The goal is to ensure that the correct `pip3` / `pip` / `python3` / `python` are used (i.e. that the aliases are correct).
+
+
+### Is `pip3` alias correct ?
 
 ```bash
 which pip3 
@@ -132,6 +141,7 @@ which pip3
 # example: /Users/elliot/repos/dataviz-course/env/bin/pip3
 ```
 
+### Is `pip` alias correct ?
 
 Also for an extra security: 
 
@@ -140,6 +150,8 @@ which pip
 # path should be from the just installed and activated environment
 # example: /Users/elliot/repos/dataviz-course/env/bin/pip
 ```
+
+### Is `python3` alias correct ?
 
 Still a bit more of extra security:
 
@@ -150,6 +162,8 @@ which python3
 ```
 
 
+### Is `python` alias correct ?
+
 Finally, because *Defensive programming* is our best friend:
 
 
@@ -158,14 +172,6 @@ which python3
 # path should be from the just installed and activated environment: this was the last one!
 # example: /Users/elliot/repos/dataviz-course/env/bin/python3
 ```
-
-
-
-
-
-
-
-
 
 
 
