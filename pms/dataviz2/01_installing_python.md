@@ -161,12 +161,104 @@ which python3
 
 
 
-## Install requirements 
 
 
-We need to install the dependencies of the project.
+
+
+
+
+
+
+## Installing JupyterLab globally
+
+
+We'll install JupyterLab globally so it's available across all projects (also because it's easier to manage).
+
+### MacOS
 
 ```bash
-cd dataviz-course
-pip3 install 
+brew install jupyterlab
 ```
+
+### Linux
+
+Below, different instructions for different Linux distributions are listed. Using Ubuntu, we recommand to use the 2️⃣ method.
+{: .alert .alert-warning .alert-soft}
+
+1️⃣ Using pip with the pyenv-managed Python:
+
+```bash
+~/.pyenv/versions/3.13.5/bin/pip install jupyterlab
+```
+
+2️⃣ Alternatively, on Ubuntu/Debian:
+
+```bash
+sudo apt update
+sudo apt install python3-pip
+pip3 install --user jupyterlab
+```
+
+3️⃣ On Fedora/RHEL/CentOS:
+
+```bash
+sudo dnf install python3-pip
+pip3 install --user jupyterlab
+```
+
+### Windows
+
+We recommand following the instruction from the [official repository](https://github.com/jupyterlab/jupyterlab-desktop). Also the official JupyterLab installation documentation for version `4.4.x` is available [here](https://jupyterlab.readthedocs.io/en/stable/install/installation.html) (last stable version as of 2025/09/15).
+
+## Register the virtual environment with JupyterLab
+
+### Ensuring we are in the correct folder
+
+**You need to access the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment.**
+
+```bash
+# Make sure to be in the folder containing the virtual environment
+# by running the following command:
+cd dataviz-course
+```
+
+### Ensuring we are in the correct folder
+
+```bash
+# Make sure your virtual environment is activated 
+# by running the following command:
+source env/bin/activate
+```
+
+### Installing `ipykernel`
+
+
+```bash
+# Install `ipykernel`
+pip3 install ipykernel
+```
+
+
+### Registering the virtual environment with JupyterLab
+
+```bash
+# Register the environment as a kernel
+python -m ipykernel install --user --name=env --display-name="datavize-env"
+```
+
+
+
+After installing `ipykernel` in your virtual environment, register it as a kernel for JupyterLab:
+Now you can start JupyterLab from anywhere and select the `dataviz-env` kernel to use your project's virtual environment.
+
+```bash
+# Start JupyterLab 
+jupyter lab 
+```
+
+This command should also work:
+
+```bash
+jupyter-lab
+```
+

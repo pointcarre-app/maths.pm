@@ -3,32 +3,63 @@ js_dependencies:
   - "https://cdn.bokeh.org/bokeh/release/bokeh-3.6.2.min.js"
 ---
 
+
 # Sandbox - Interactive Python Execution
 
 Test the interactive Python execution with matplotlib, pandas, and Bokeh.
+{: .pm-subtitle}
 
-## Basic Python Example
+
+[TOC]
+
+## Python built-in libraries
+
+
+### Basic example
 
 ```yaml
 f_type: "codex_"
+height_in_px: 350
 inline: |
-  # Basic Python execution test
-  print("Hello from DataViz2!")
-  
-  # Some calculations
-  x = 10
-  y = 20
-  result = x + y
-  print(f"The sum of {x} and {y} is {result}")
-  
-  # List operations
-  numbers = [1, 2, 3, 4, 5]
-  squared = [n**2 for n in numbers]
-  print(f"Original: {numbers}")
-  print(f"Squared: {squared}")
+  # Testing built-in library import
+  import math
+  import datetime
+
+  # Testing printing
+  print("Hello from DataViz!")
+  print("Current date and time:", datetime.datetime.now())
+
+  # Testing basic logic
+  primes_below_100 = [
+    x 
+    for x in range(2, 100) 
+    if all(x % y != 0 for y in range(2, int(math.sqrt(x)) + 1))
+  ]
+  print("All the prime numbers below 100 are:")
+  print(primes_below_100)
 ```
 
-## Matplotlib Example
+
+### 🔴 Inputs Not working
+
+*Nagini timeout should stop execution after 30 seconds*
+
+```yaml
+f_type: "codex_"
+height_in_px: 120
+inline: |
+  try:
+    x = input()
+    print(f"You entered: {x}")
+  except Exception as e:
+    print(f"Error: {e}")
+```
+
+
+## `matplotlib` (+ `pandas`) examples
+
+
+### Simple `matplotlib` example
 
 ```yaml
 f_type: "codex_"
@@ -61,7 +92,8 @@ inline: |
   print("Plot generated successfully!")
 ```
 
-## Pandas Example
+
+### `pandas`-only example
 
 ```yaml
 f_type: "codex_"
@@ -94,7 +126,7 @@ inline: |
   print(dept_avg)
 ```
 
-## Data Visualization with Pandas
+### `pandas` + `matplotlib` time series example
 
 ```yaml
 f_type: "codex_"
@@ -142,57 +174,147 @@ inline: |
   print(f"Value range: {df['value'].min():.2f} to {df['value'].max():.2f}")
 ```
 
-## Original Codex (from file)
+
+
+
+## `bokeh` interactive plots
+
+
+### 🟢 Working example (for `pm-codex`)
+
+
+This code creates a fully interactive sine wave plot using Bokeh with hover tooltips, zoom/pan functionality, and clickable legends.
+
 
 ```yaml
 f_type: "codex_"
-script_path: "intro/variables_intro.py"
-```
-
-## Bokeh Interactive Plot Example
-
-```yaml
-f_type: "codex_"
+height_in_px: 1150
 inline: |
-  from bokeh.plotting import figure, curdoc
-  from bokeh.models import HoverTool
-  import numpy as np
-  
-  # Create data
-  x = np.linspace(0, 4*np.pi, 100)
-  y = np.sin(x)
-  
-  # Create interactive plot
+  # 🚀 ORIGINAL VERSION - Works with your Pyodide wrapper
+  # 📦 Import Bokeh plotting + document
+  from bokeh.plotting import figure, curdoc  
+  # 🎯 Import hover functionality
+  from bokeh.models import HoverTool     
+  # 🔢 Import numerical operations     
+  import numpy as np                          
+
+  # 🔢 100 points from 0 to 4π (2 sine cycles)
+  x = np.linspace(0, 4*np.pi, 100)           
+  # 📈 Calculate sine values for each x
+  y = np.sin(x)                              
+
+  # 📝 Plot title: `title` argument
+  # 📏 Plot width in pixels: `width` argument
+  # 📏 Plot height in pixels: `height` argument
+  # 🛠️ Interactive tools available: `tools` argument
   p = figure(
-      title="Interactive Sine Wave - Try zooming and panning!",
-      width=600, 
-      height=400,
-      tools="pan,wheel_zoom,box_zoom,reset"
+      title="Interactive Sine Wave - Try zooming and panning!",  
+      width=600,                             
+      height=400,                           
+      tools="pan,wheel_zoom,box_zoom,reset"  
   )
-  
-  # Add line and points
-  p.line(x, y, legend_label="sin(x)", line_width=2, color='navy')
-  p.scatter(x[::5], y[::5], size=8, color='red', alpha=0.5)
-  
-  # Add hover tool
-  hover = HoverTool(tooltips=[("(x,y)", "($x, $y)")])
-  p.add_tools(hover)
-  
-  # Customize
-  p.xaxis.axis_label = "x"
-  p.yaxis.axis_label = "sin(x)"
-  p.legend.click_policy = "hide"
-  
-  # Add to document for capture
-  curdoc().add_root(p)
-  
+
+  # 📊 Blue sine curve
+  p.line(x, y, legend_label="sin(x)", line_width=2, color='navy')  
+  # 🔴 Red dots every 5th point
+  p.scatter(x[::5], y[::5], size=8, color='red', alpha=0.5)      
+
+  # 💬 Add hover functionality: show coordinates on hover
+  hover = HoverTool(tooltips=[("(x,y)", "($x, $y)")])  
+  # ➕ Add hover tool to plot
+  p.add_tools(hover)                         
+
+  # 🎨 Customize plot appearance
+  # 📊 X-axis label
+  p.xaxis.axis_label = "x"                   
+  # 📊 Y-axis label
+  p.yaxis.axis_label = "sin(x)"             
+  # 👁️ Click legend to hide/show lines
+  p.legend.click_policy = "hide"             
+
+  # 📺 Display plot in document (`pm-codex`): `curdoc().add_root(p)`
+  curdoc().add_root(p)                       
+
+  # 📢 Success messages
   print("✅ Interactive Bokeh plot created!")
   print("🎯 Use mouse to pan, scroll to zoom, hover for values!")
 ```
 
-## Bokeh Deprecation Warning Test
 
-This example intentionally uses the deprecated `circle()` method to demonstrate the compact warning display:
+### 🔴 Working example (for `jupyter`)
+
+
+**This code is designed to work in standard and local JupyterLab**. It creates a fully interactive sine wave plot using Bokeh with hover tooltips, zoom/pan functionality, and clickable legends.
+
+
+```yaml
+f_type: "codex_"
+inline: |
+  # 📚 JUPYTER VERSION - Works in standard JupyterLab
+  # 📦 Import plotting + show function
+  from bokeh.plotting import figure, show   
+  # ❌ OLD: curdoc not needed for Jupyter
+  # from bokeh.plotting import figure, curdoc 
+  # ✨ NEW: Enable notebook output mode
+  from bokeh.io import output_notebook    
+  # 🎯 Import hover functionality
+  from bokeh.models import HoverTool   
+
+  # 🔢 Import numerical operations
+  import numpy as np                          
+
+  # 🔧 CRITICAL: Specific NOTEBOOK: Enable Jupyter notebook display mode
+  # ✨ Specific NOTEBOOK: Tell Bokeh to render in notebook cells
+  output_notebook()                           
+
+  # 🔢 100 points from 0 to 4π (2 sine cycles)
+  x = np.linspace(0, 4*np.pi, 100)           
+  # 📈 Calculate sine values for each x
+  y = np.sin(x)                              
+
+  # 📝 Plot title
+  # 📏 Plot width in pixels
+  # 📏 Plot height in pixels
+  # 🛠️ Interactive tools available
+  p = figure(
+      title="Interactive Sine Wave - Try zooming and panning!",  
+      width=600,                             
+      height=400,                            
+      tools="pan,wheel_zoom,box_zoom,reset"  
+  )
+
+  # 📊 Blue sine curve
+  p.line(x, y, legend_label="sin(x)", line_width=2, color='navy')  
+  # 🔴 Red dots every 5th point
+  p.scatter(x[::5], y[::5], size=8, color='red', alpha=0.5)       
+
+  # 💬 Add hover functionality: show coordinates on hover
+  hover = HoverTool(tooltips=[("(x,y)", "($x, $y)")])  
+  # ➕ Add hover tool to plot
+  p.add_tools(hover)                         
+
+  # 🎨 Customize plot appearance
+  # 📊 X-axis label
+  p.xaxis.axis_label = "x"        
+  # 📊 Y-axis label
+  p.yaxis.axis_label = "sin(x)"       
+  # 👁️ Click legend to hide/show lines
+  p.legend.click_policy = "hide"             
+
+  # 📺 Display plot (Jupyter method)
+  # ✨ NEW: Specific NOTEBOOK: Display plot directly in cell output
+  show(p)        
+  # ❌ OLD: Not needed for Jupyter
+  # curdoc().add_root(p)                     
+
+  # 📢 Success messages
+  print("✅ Interactive Bokeh plot created!")
+  print("🎯 Use mouse to pan, scroll to zoom, hover for values!")
+```
+
+### 🟡 Deprecation warning (for `pm-codex`)
+
+This example intentionally uses the deprecated `circle()` method to demonstrate the compact warning display.
 
 ```yaml
 f_type: "codex_"
@@ -226,12 +348,41 @@ inline: |
 
 
 
-## Test codex with height_in_px
+
+
+
+
+
+
+
+
+## `pm-codex` integration tests 
+
+#### With `height_in_px`
 
 ```yaml 
 f_type: "codex_"
-height_in_px: 900
+height_in_px: 100
 inline: |
+    # CodeMirror will set the height to 250px for the Codex container
     # Your Python code here
     print("Hello World")
+```
+
+#### With `script_path`
+
+```yaml
+f_type: "codex_"
+script_path: "intro/variables_intro.py"
+```
+
+
+
+## Legacy 
+
+### Codex_ original work
+
+```yaml
+f_type: "codex_"
+script_path: "intro/variables_intro.py"
 ```
