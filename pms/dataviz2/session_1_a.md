@@ -86,7 +86,6 @@ This graph comes from the article: *Why are some languages spoken faster than ot
 
 ### 2.1. Structure of Information
 
-
 ### 2.1.1. Invariant and Components
 
 - **Invariant (Theme/Essence):** The unifying core of the data (e.g., a common subject or theme linking all data points).
@@ -152,8 +151,64 @@ inline: |
 
 ### 2.2. Relationships
 
-- Key in analysis: how components relate, not necessarily their individual meanings, but their differences and connections.[5]
-- For every dataset, determining its dimensionality (number/nature of components) directs the choice of graphic strategy.[10][1]
+#### 2.2.1. Relations and dimensionality
+
+- Key in analysis: how components relate, not necessarily their individual meanings, but their differences and connections.
+- For every dataset, determining its dimensionality (number/nature of components) directs the choice of graphic strategy.
+
+
+
+#### 2.2.2. An example with a scatter plot (+ regression line)
+
+```yaml
+f_type: "codex_"
+inline: |
+
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    # Real data: Olympic 100m sprint records
+    # INVARIANT: Athletic performance (the theme)
+
+    # Raw data lists - men's 100m world records progression
+    years = [1912, 1921, 1930, 1936, 1956, 1968, 1977, 1983, 1988, 1994, 1999, 2005, 2007, 2008, 2009]
+    times = [10.6, 10.4, 10.3, 10.2, 10.1, 9.95, 9.95, 9.93, 9.92, 9.85, 9.79, 9.77, 9.74, 9.69, 9.58]  # seconds
+    record_holders = ['USA', 'USA', 'CAN', 'USA', 'USA', 'USA', 'USA', 'USA', 'CAN', 'USA', 'USA', 'JAM', 'JAM', 'JAM', 'JAM']
+
+    # Create scatter plot
+    plt.figure(figsize=(12, 8))
+
+    # Different colors for different countries
+    country_colors = {'USA': '#1f77b4', 'CAN': '#ff7f0e', 'JAM': '#2ca02c'}
+    colors = [country_colors[country] for country in record_holders]
+
+    # Scatter plot
+    plt.scatter(years, times, c=colors, s=80, alpha=0.8, edgecolor='black', linewidth=1.5)
+
+    # Add regression line
+    z = np.polyfit(years, times, 1)
+    p = np.poly1d(z)
+    plt.plot(years, p(years), "r--", alpha=0.8, linewidth=2, label=f'Trend: {z[0]:.4f}s per year')
+
+    # Labels and formatting
+    plt.xlabel('Year', fontsize=13)
+    plt.ylabel('Time (seconds)', fontsize=13)
+    plt.title('RELATIONSHIPS: How Components Connect\nInvariant: Athletic Performance | Relationship: Time vs Technology/Training Evolution', 
+            fontsize=16, pad=20, fontweight='bold')
+
+    # Invert y-axis (faster times are lower)
+    plt.gca().invert_yaxis()
+
+    # Add legend for countries
+    for country, color in country_colors.items():
+        plt.scatter([], [], c=color, s=80, label=country, edgecolor='black')
+    plt.legend(loc='upper right', fontsize=11)
+
+    # Grid for better readability
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+```
 
 ***
 
