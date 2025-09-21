@@ -1,8 +1,11 @@
-# Todo: check version
-bokeh==3.8.0
+# for dataviz2
+ipykernel==6.30.1
+numpy==2.3.2
 pandas==2.3.2
-ipykernel
-matplotlib
+matplotlib==3.10.5
+bokeh==3.8.0
+
+# Devtools
 djlint==1.36.4 
 black==24.4.2
 ruff==0.11.2

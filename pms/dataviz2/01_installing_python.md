@@ -216,7 +216,9 @@ pip3 install --user jupyterlab
 
 We recommand following the instruction from the [official repository](https://github.com/jupyterlab/jupyterlab-desktop). Also the official JupyterLab installation documentation for version `4.4.x` is available [here](https://jupyterlab.readthedocs.io/en/stable/install/installation.html) (last stable version as of 2025/09/15).
 
-## Register the virtual environment with JupyterLab
+## Register the virtual env
+
+**We need to register the virtual environment with JupyterLab to be able to use it in JupyterLab.**
 
 ### Ensuring we are in the correct folder
 
@@ -241,7 +243,7 @@ source env/bin/activate
 
 ```bash
 # Install `ipykernel`
-pip3 install ipykernel
+pip3 install ipykernel==6.30.1
 ```
 
 
@@ -267,4 +269,25 @@ This command should also work:
 ```bash
 jupyter-lab
 ```
+
+
+
+## Installing the libraries for the course
+
+**Make sure to be in the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment.**
+
+```bash
+# ensuring to be in the correct folder
+cd dataviz-course
+# activating the virtual environment
+source env/bin/activate
+# installing the libraries
+pip3 install matplotlib==3.10.5
+pip3 install ipykernel==6.30.1
+pip3 install numpy==2.3.2
+pip3 install pandas==2.3.2
+pip3 install matplotlib==3.10.5
+pip3 install bokeh==3.8.0
+```
+
 
