@@ -29,6 +29,7 @@ owner_url: "https://pointcarre.app"
 backend_settings:
   # JavaScript dependencies to load for this product
   js_dependencies:
+    - "/static/js/pm/bokeh-detector.js"
     - "/static/js/products/dataviz2/main.js"
   # Enable executable codex fragments (use quotes for proper bool handling)
   codex_executable: "true"

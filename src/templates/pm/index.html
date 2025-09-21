@@ -57,22 +57,7 @@
   {% if pm and pm.js_dependencies %}
     <!-- PM JS dependencies (Bokeh, etc.) -->
     {% for js_dep in pm.js_dependencies %}<script src="{{ js_dep }}"></script>{% endfor %}
-    <script>
-        // Verify Bokeh loaded if expected
-        if ({
-                {
-                    pm.js_dependencies | tojson | safe
-                }
-            }.some(dep => dep.includes('bokeh'))) {
-            window.addEventListener('DOMContentLoaded', () => {
-                if (window.Bokeh) {
-                    console.log('[PM] BokehJS loaded successfully:', Bokeh.version);
-                } else {
-                    console.error('[PM] BokehJS expected but not loaded!');
-                }
-            });
-        }
-    </script>
+    <!-- PM JS dependencies automatically include Bokeh detector when needed -->
   {% endif %}
 
 {% endblock extra_head %}

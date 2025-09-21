@@ -172,7 +172,7 @@ inline: |
   
   # Add line and points
   p.line(x, y, legend_label="sin(x)", line_width=2, color='navy')
-  p.circle(x[::5], y[::5], size=8, color='red', alpha=0.5)
+  p.scatter(x[::5], y[::5], size=8, color='red', alpha=0.5)
   
   # Add hover tool
   hover = HoverTool(tooltips=[("(x,y)", "($x, $y)")])
@@ -188,4 +188,37 @@ inline: |
   
   print("✅ Interactive Bokeh plot created!")
   print("🎯 Use mouse to pan, scroll to zoom, hover for values!")
+```
+
+## Bokeh Deprecation Warning Test
+
+This example intentionally uses the deprecated `circle()` method to demonstrate the compact warning display:
+
+```yaml
+f_type: "codex_"
+inline: |
+  from bokeh.plotting import figure, curdoc
+  from bokeh.models import HoverTool
+  import numpy as np
+  
+  # Create simple data
+  x = [1, 2, 3, 4, 5]
+  y = [2, 5, 3, 8, 7]
+  
+  # Create plot
+  p = figure(
+      title="Deprecation Warning Demo",
+      width=400, 
+      height=300,
+      tools="pan,wheel_zoom,reset"
+  )
+  
+  # This will trigger the deprecation warning
+  p.circle(x, y, size=15, color='red', alpha=0.6)
+  
+  # Add to document
+  curdoc().add_root(p)
+  
+  print("⚠️  This example uses deprecated circle() method")
+  print("📏 Check the compact warning display below!")
 ```

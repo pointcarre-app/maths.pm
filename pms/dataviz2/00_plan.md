@@ -95,13 +95,13 @@ The evaluation consists on a data vizualisation project. The students will have 
 
 #### Hour 1: Course Introduction & Visual Variables
 
-- [**Course overview and evaluation criteria (i.e. the file you're currently reading)**](00_plan.md)
-- [**Graphic Semiology Fundamentals**](01_session_1_a.md)
+- [**Course overview and evaluation criteria**](00_plan.md) *(i.e. the file you're currently reading)*
+- [**Graphic Semiology Fundamentals**](session_1_a.md)
 
 
 #### Hours 2 & 3: Data types & first graphs
 
-- [**Data Types Classification and introduction to `matplotlib`**](01_session_1_h_23.md)
+- [**Data Types Classification and introduction to `matplotlib`**](session_1_h_23.md)
 - [**Groups consitution and project data requirements**](01_session_1_b.md)
 - [**Practical work with `matplotlib`**](01_session_1_c.md)
 

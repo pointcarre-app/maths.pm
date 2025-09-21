@@ -1,4 +1,7 @@
+
 /* PM namespace styles (moved from pm/index.html) */
+
+
 
 
 /* Typography and rhythm */
@@ -6,6 +9,7 @@
   /* line-height: 1.65; */
   line-height: 1.5;
   font-size: 1rem;
+  font-size: 0.95rem !important;
 }
 
 /* Link styles using DaisyUI semantic colors */
@@ -49,9 +53,12 @@
 } */
 
 
+
+
+
 .fragment-wrapper[data-f_type="image_"] {
   padding: 1rem;
-  border: var(--color-base-300) 1px solid;
+  border: var(--color-base-200) 1px solid;
   border-radius: var(--radius-box);
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -64,7 +71,7 @@
 
 @media (max-width: 768px) {
   .fragment-wrapper[data-f_type="image_"] {
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
     border-radius: var(--radius-box);
     margin-bottom: 0.5rem;
   }
@@ -560,6 +567,13 @@ pre.fragment-code {
   height: auto;
   border-radius: 0.5rem;
   margin: 0.25rem 0 0.25rem;
+}
+
+/* Image description text styling */
+.fragment.image .mt-1 {
+  font-style: italic;
+  color: color-mix(in oklab, var(--color-base-content) 70%, var(--color-base-100));
+  line-height: 1.4;
 }
 
 /* SVGs */
@@ -1187,9 +1201,9 @@ pm-number-input button.btn-soft:hover {
 
 /* Main execution UI container */
 .dataviz2-execution-ui {
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     padding-top: 1rem;
-    border-top: 1px solid var(--color-base-300);
+    /* border-top: 1px solid var(--color-base-300); */
 }
 
 /* Button group styling */
@@ -1303,8 +1317,14 @@ pm-number-input button.btn-soft:hover {
 /* Empty output message */
 .dataviz2-output-content .text-base-content\/60 {
     text-align: center;
-    padding: 2rem;
+    /* padding: 2rem; */
     font-style: italic;
+}
+
+
+.fragment-wrapper[data-f_type="codex_"]  {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
 }
 
 /* Make CodeMirror in pm-codex slightly taller for DataViz2 */
@@ -1313,6 +1333,8 @@ pm-codex[data-executable="true"] .CodeMirror {
     max-height: 600px;
     resize: vertical;
     overflow: hidden;
+    /* margin-top: 1.5rem;
+    margin-bottom: 1.5rem; */
 }
 
 pm-codex[data-editable="true"] .CodeMirror {
@@ -1339,6 +1361,7 @@ pm-codex[data-editable="true"] .CodeMirror:focus-within {
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
+
 
 /* Responsive adjustments */
 @media (max-width: 640px) {

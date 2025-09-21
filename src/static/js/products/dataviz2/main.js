@@ -12,9 +12,9 @@
     
     // Configuration
     const CONFIG = {
-        naginiVersion: 'v0.0.22',
-        naginiUrl: 'https://esm.sh/gh/pointcarre-app/nagini@v0.0.22/src/nagini.js?bundle',
-        pyodideWorkerUrl: 'https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.22/src/pyodide/worker/worker-dist.js',
+        naginiVersion: 'v0.0.24',
+        naginiUrl: 'https://esm.sh/gh/pointcarre-app/nagini@v0.0.24/src/nagini.js?bundle',
+        pyodideWorkerUrl: 'https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.24/src/pyodide/worker/worker-dist.js',
         preloadPackages: ['matplotlib', 'pandas', 'numpy', 'bokeh'],
     };
     
@@ -86,21 +86,22 @@
             
             // Create execution UI - insert AFTER CodeMirror, not inside
             const uiContainer = document.createElement('div');
-            uiContainer.className = 'dataviz2-execution-ui mt-4';
+            uiContainer.className = 'dataviz2-execution-ui';
             uiContainer.innerHTML = `
                 <div class="btn-group mb-4">
-                    <button class="dataviz2-execute-btn btn btn-primary btn-sm">
+                    <button class="dataviz2-execute-btn btn btn-secondary btn-soft btn-sm">
                         ▶ Execute
                     </button>
-                    <button class="dataviz2-clear-btn btn btn-ghost btn-sm">
+                    <button class="dataviz2-clear-btn btn btn-soft btn-sm">
                         Clear Output
                     </button>
                 </div>
                 <div class="dataviz2-output" style="display: none;">
-                    <div class="divider">Output</div>
                     <div class="dataviz2-output-content"></div>
                 </div>
             `;
+
+            // <div class="divider">Output</div>
             
             // Insert UI AFTER the CodeMirror element (outside it!)
             cmElement.parentNode.insertBefore(uiContainer, cmElement.nextSibling);
@@ -119,7 +120,7 @@
                     
                     const success = await initializeNagini();
                     if (!success) {
-                        outputContent.innerHTML = '<div class="alert alert-error"><span>❌ Failed to load Python runtime</span></div>';
+                        outputContent.innerHTML = '<div class="alert alert-error alert-outline"><span>❌ Failed to load Python runtime</span></div>';
                         return;
                     }
                 }
@@ -134,6 +135,36 @@
                     
                     outputContent.innerHTML = '';
                     
+                    // Check for Python execution errors first (v0.0.24 format)
+                    if (result.error) {
+                        console.log('[DataViz2] Python error detected:', result.error);
+                        console.log('[DataViz2] Error stderr:', result.stderr);
+                        
+                        const errorDiv = document.createElement('div');
+                        errorDiv.className = 'alert alert-error alert-outline';
+                        errorDiv.innerHTML = `
+                            <div>
+                                <strong> ${result.error.name || 'Error'}:</strong>
+                                <pre class="mt-1 text-sm">${result.stderr || result.error.message || 'Unknown execution error'}</pre>
+                            </div>
+                        `;
+                        outputContent.appendChild(errorDiv);
+                        
+                        // Still show stdout if there was output before the error
+                        if (result.stdout) {
+                            const stdoutDiv = document.createElement('div');
+                            stdoutDiv.className = 'mt-2';
+                            stdoutDiv.innerHTML = '<div class="text-sm text-base-content/70 mb-1">Output before error:</div>';
+                            const pre = document.createElement('pre');
+                            pre.className = 'bg-base-200 p-2 rounded text-sm';
+                            pre.textContent = result.stdout;
+                            stdoutDiv.appendChild(pre);
+                            outputContent.appendChild(stdoutDiv);
+                        }
+                        
+                        return; // Don't process other outputs if there's an error
+                    }
+                    
                     // Stdout
                     if (result.stdout) {
                         const pre = document.createElement('pre');
@@ -142,83 +173,46 @@
                         outputContent.appendChild(pre);
                     }
                     
-                    // Stderr (errors and warnings)
+                    // Stderr (warnings only, since errors are handled above) - simple approach
                     if (result.stderr) {
                         const stderrText = result.stderr.trim();
                         
-                        // Check for matplotlib font warnings specifically
-                        const isFontWarnings = stderrText.includes('findfont: Generic family') && 
-                                             stderrText.includes('not found because none of the following families were found');
+                        // Just show a simple button for any stderr content
+                        const warningContainer = document.createElement('div');
+                        warningContainer.style.marginTop = '0.5rem';
                         
-                        // Check if it's just warnings (like BokehDeprecationWarning or font warnings)
-                        const isWarningsOnly = (stderrText.includes('Warning') || isFontWarnings) && 
-                                             !stderrText.includes('Error') && 
-                                             !stderrText.includes('Traceback');
+                        const warningButton = document.createElement('button');
+                        warningButton.className = 'btn btn-sm btn-outline btn-warning';
+                        warningButton.textContent = 'Show warnings';
                         
-                        if (isFontWarnings) {
-                            // Special handling for matplotlib font warnings - make them less prominent
-                            const fontWarningDiv = document.createElement('details');
-                            fontWarningDiv.className = 'collapse collapse-arrow bg-base-200 border border-warning/20 mt-2';
-                            const warningCount = stderrText.split('findfont:').length - 1;
-                            fontWarningDiv.innerHTML = `
-                                <summary class="collapse-title text-xs font-medium text-warning/70">
-                                    <span class="flex items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        Font warnings (${warningCount}) - plots will use fallback fonts
-                                    </span>
-                                </summary>
-                                <div class="collapse-content">
-                                    <div class="alert alert-info text-xs mt-2 mb-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        <div>
-                                            <strong>Info:</strong> Matplotlib can't find the Arial font and will use a fallback font instead. 
-                                            This doesn't affect plot functionality, just the appearance.
-                                        </div>
-                                    </div>
-                                    <pre class="text-2xs text-base-content/60 whitespace-pre-wrap max-h-32 overflow-y-auto">${stderrText}</pre>
-                                </div>
-                            `;
-                            outputContent.appendChild(fontWarningDiv);
-                        } else if (isWarningsOnly) {
-                            // Create collapsible warnings section for other warnings
-                            const warningDiv = document.createElement('details');
-                            warningDiv.className = 'collapse collapse-arrow bg-warning/10 mt-2';
-                            warningDiv.innerHTML = `
-                                <summary class="collapse-title text-sm font-medium text-warning">
-                                    <span class="flex items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                                        </svg>
-                                        Warnings (${stderrText.split('Warning').length - 1})
-                                    </span>
-                                </summary>
-                                <div class="collapse-content">
-                                    <pre class="text-xs text-warning/80 mt-2 whitespace-pre-wrap">${stderrText}</pre>
-                                </div>
-                            `;
-                            outputContent.appendChild(warningDiv);
-                        } else {
-                            // Regular error handling
-                            const errorDiv = document.createElement('div');
-                            errorDiv.className = 'alert alert-error mt-2';
-                            const errorPre = document.createElement('pre');
-                            errorPre.className = 'm-0 text-sm';
-                            errorPre.textContent = stderrText;
-                            errorDiv.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div><strong>Error:</strong></div>';
-                            errorDiv.appendChild(errorPre);
-                            outputContent.appendChild(errorDiv);
-                        }
+                        const warningDetails = document.createElement('pre');
+                        warningDetails.style.display = 'none';
+                        warningDetails.style.marginTop = '0.5rem';
+                        warningDetails.style.padding = '0.5rem';
+                        warningDetails.style.background = 'var(--color-base-200)';
+                        warningDetails.style.borderRadius = '0.25rem';
+                        warningDetails.style.fontSize = '0.75rem';
+                        warningDetails.style.maxHeight = '200px';
+                        warningDetails.style.overflowY = 'auto';
+                        warningDetails.style.whiteSpace = 'pre-wrap';
+                        warningDetails.textContent = stderrText;
+                        
+                        warningButton.onclick = function() {
+                            const isVisible = warningDetails.style.display === 'block';
+                            warningDetails.style.display = isVisible ? 'none' : 'block';
+                            warningButton.textContent = isVisible ? 'Show warnings' : 'Hide warnings';
+                        };
+                        
+                        warningContainer.appendChild(warningButton);
+                        warningContainer.appendChild(warningDetails);
+                        outputContent.appendChild(warningContainer);
                     }
                     
                     // Matplotlib figures
                     if (result.figures && result.figures.length > 0) {
                         result.figures.forEach((base64, index) => {
                             const figureCard = document.createElement('div');
-                            figureCard.className = 'card bg-base-100 shadow-xl mt-4';
+                            figureCard.className = 'card bg-base-100 mt-4';
                             figureCard.innerHTML = `
                                 <figure class="px-4 pt-4">
                                     <img src="data:image/png;base64,${base64}" 
@@ -312,16 +306,17 @@
                         outputContent.innerHTML = '<div class="text-base-content/60 italic">No output</div>';
                     }
                     
-                } catch (error) {
-                    console.error('[DataViz2] Execution error:', error);
+                } catch (jsError) {
+                    // This catches JavaScript-level errors (worker issues, timeouts, etc.)
+                    console.error('[DataViz2] JavaScript error:', jsError);
                     outputContent.innerHTML = `
-                        <div class="alert alert-error">
+                        <div class="alert alert-error alert-outline">
                             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             <div>
-                                <strong>Execution Error:</strong>
-                                <pre class="mt-1 text-sm">${error.message || error}</pre>
+                                <strong>JavaScript Error:</strong>
+                                <pre class="mt-1 text-sm">${jsError.message || jsError}</pre>
                             </div>
                         </div>
                     `;

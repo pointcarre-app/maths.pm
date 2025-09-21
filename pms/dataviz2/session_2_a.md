@@ -1,7 +1,6 @@
 
+# Matplotlib
 
-
-# Graphic Semiology Fundamentals
 
 ## Matplotlib Configuration Best Practices
 
