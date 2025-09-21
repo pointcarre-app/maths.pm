@@ -1,3 +1,18 @@
+### 2.2. Relationships
+
+#### 2.2.1. Relations and dimensionality
+
+- Key in analysis: how components relate, not necessarily their individual meanings, but their differences and connections.
+- For every dataset, determining its dimensionality (number/nature of components) directs the choice of graphic strategy.
+
+
+
+```yaml
+f_type: "codex_"
+
+
+# TODO excellent example for issues if y-axis doesnt start at 0 (good idea but not always)
+
 
 <!-- 3D TEMPTATION -->
 <!-- https://www.statsmapsnpix.com/2020/11/how-to-make-3d-population-density.html -->
@@ -17,6 +32,9 @@ Danger cause of angles : cf squares or other hidden behind because of the positi
 <!-- "Panel data???"  --> to see with Etienne, but states yes ?
 
 
+
+
+<!-- Exercice : Tours mais en les rerésetant plus comme des tours -->
 
 
 - [**Course overview and evaluation criteria (i.e. the file you're currently reading)**](00_plan.md)

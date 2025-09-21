@@ -1327,6 +1327,12 @@ pm-number-input button.btn-soft:hover {
     margin-bottom: 1.5rem !important;
 }
 
+/* Default CodeMirror height for all pm-codex instances */
+pm-codex .CodeMirror {
+    max-height: 600px; /* Default maximum height */
+    overflow: hidden;
+}
+
 /* Make CodeMirror in pm-codex slightly taller for DataViz2 */
 pm-codex[data-executable="true"] .CodeMirror {
     min-height: 200px;

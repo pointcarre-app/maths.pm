@@ -759,6 +759,16 @@ class FragmentBuilder:
                         f_type = "codex_"
                         html = ""
 
+                        # Capture height_in_px configuration if provided
+                        if "height_in_px" in data:
+                            try:
+                                height_value = int(data["height_in_px"])
+                                # Ensure reasonable bounds (min 100px, max 2000px)
+                                data["height_in_px"] = max(100, min(2000, height_value))
+                            except (ValueError, TypeError):
+                                # Invalid height value, remove it to use default
+                                data.pop("height_in_px", None)
+
                         # Support both script_path and inline code
                         if "inline" in data:
                             # Handle inline code

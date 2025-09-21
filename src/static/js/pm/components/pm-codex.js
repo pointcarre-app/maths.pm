@@ -134,6 +134,26 @@ export class PMCodex extends LitElement {
           });
           console.debug('[pm-codex] CodeMirror started', { isExecutable, isEditable });
           
+          // STEP 4.1: APPLY CUSTOM HEIGHT
+          // Check for height configuration in data attributes
+          const heightInPx = this.getAttribute('data-height-in-px') || 
+                           container.getAttribute('data-height-in-px') ||
+                           wrapper?.getAttribute('data-height-in-px');
+          
+          if (heightInPx) {
+            const height = parseInt(heightInPx, 10);
+            if (!isNaN(height) && height > 0) {
+              // Set the height on the CodeMirror wrapper
+              const cmWrapper = cm.getWrapperElement();
+              cmWrapper.style.height = `${height}px`;
+              cmWrapper.style.maxHeight = `${height}px`;
+              console.debug('[pm-codex] Applied custom height:', height + 'px');
+              
+              // Refresh CodeMirror to ensure proper rendering with new height
+              setTimeout(() => cm.refresh(), 10);
+            }
+          }
+          
           // Store CodeMirror instance for external access
           this._codeMirror = cm;
           container._codeMirror = cm;

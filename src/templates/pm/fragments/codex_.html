@@ -1,4 +1,9 @@
-<div class="fragment codex" data-f_type="{{ fragment.f_type.value }}" data-codex-container>
+<div class="fragment codex"
+     data-f_type="{{ fragment.f_type.value }}"
+     data-codex-container
+     {% if fragment.data and fragment.data.height_in_px is defined %}
+       data-height-in-px="{{ fragment.data.height_in_px }}"
+     {% endif %}>
   <div class="skeleton h-6 w-28 mb-2"></div>
   <div class="skeleton h-40 w-full rounded mb-2"></div>
   <textarea class="codex-editor hidden" data-language="python">{{ (fragment.data.composed_script if fragment.data and fragment.data.composed_script is defined else (fragment.html | striptags)) | e }}</textarea>

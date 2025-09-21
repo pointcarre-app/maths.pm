@@ -55,10 +55,10 @@ This graph comes from the research paper: *Different languages, similar encoding
 
 
 
-### 1.3. [An adapation]((https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others)) of this graph from The Economist
+### 1.3. [An adapation](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others) of this graph from The Economist
 
 
-This graph comes from the article: *Why are some languages spoken faster than others?* by The Economist - Sep 28th 2019.<br>[Source: The Economist](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others)
+This graph comes from the article: *Why are some languages spoken faster than others?* [by The Economist](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others) (Sep 28th 2019).
 
 ![Why are some languages spoken faster than others? by The Economist - Sep 28th 2019](files/language_bits_per_second.webp)
 {: .max-w-[550px] .mx-auto .my-6}
@@ -100,6 +100,7 @@ This graph comes from the article: *Why are some languages spoken faster than ot
 
 ```yaml
 f_type: "codex_"
+height_in_px: 800
 inline: |
     import matplotlib.pyplot as plt
 
@@ -139,8 +140,8 @@ inline: |
     plt.xticks(all_years, fontsize=10, rotation=45)
     plt.xlabel('Completion Year', fontsize=13)
     plt.ylabel('Height (meters)', fontsize=13)
-    plt.title('STRUCTURE: Invariant + Components\nInvariant: Buildings | Components: Name (nominal), Height (quantitative), City (nominal)', 
-            fontsize=16, pad=20, fontweight='bold')
+    plt.title('STRUCTURE: Invariant + Components\nInvariant: Buildings | Components: Name (nominal), Height (quantitative), City (nominal), Year (quantitative)', 
+         fontsize=18, pad=25, fontweight='bold')
 
     plt.ylim(0, max(heights_sorted) + 80)  # Extra space for labels
     plt.tight_layout()

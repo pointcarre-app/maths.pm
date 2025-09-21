@@ -55,10 +55,10 @@ This graph comes from the research paper: *Different languages, similar encoding
 
 
 
-### 1.3. [An adapation]((https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others)) of this graph from The Economist
+### 1.3. [An adapation](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others) of this graph from The Economist
 
 
-This graph comes from the article: *Why are some languages spoken faster than others?* by The Economist - Sep 28th 2019.<br>[Source: The Economist](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others)
+This graph comes from the article: *Why are some languages spoken faster than others?* [by The Economist](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others) (Sep 28th 2019).
 
 ![Why are some languages spoken faster than others? by The Economist - Sep 28th 2019](files/language_bits_per_second.webp)
 {: .max-w-[550px] .mx-auto .my-6}
@@ -86,7 +86,6 @@ This graph comes from the article: *Why are some languages spoken faster than ot
 
 ### 2.1. Structure of Information
 
-
 ### 2.1.1. Invariant and Components
 
 - **Invariant (Theme/Essence):** The unifying core of the data (e.g., a common subject or theme linking all data points).
@@ -101,25 +100,34 @@ This graph comes from the article: *Why are some languages spoken faster than ot
 
 ```yaml
 f_type: "codex_"
+height_in_px: 800
 inline: |
     import matplotlib.pyplot as plt
 
-    # Real data: World's tallest buildings
+    # Real data: World's tallest buildings over 500m
     # INVARIANT: Buildings (the theme)
 
-    # Raw data lists (removed Lotte Tower to avoid duplicate 2017)
-    buildings = ['Burj Khalifa', 'Shanghai Tower', 'Abraj Al-Bait', 'Ping An']
-    heights = [828, 632, 601, 599]  # meters
-    cities = ['Dubai', 'Shanghai', 'Mecca', 'Shenzhen']
-    completion_years = [2010, 2015, 2012, 2017]
+    # Raw data lists - all buildings over 500m
+    buildings = ['Burj Khalifa', 'Merdeka 118', 'Shanghai Tower', 'Abraj Al-Bait', 'Ping An']
+    heights = [828, 679, 632, 601, 599]  # meters
+    cities = ['Dubai', 'Kuala Lumpur', 'Shanghai', 'Mecca', 'Shenzhen']
+    completion_years = [2010, 2023, 2015, 2012, 2017]
 
-    # Simple bar chart with better colors
-    plt.figure(figsize=(12, 8))
-    colors = ['#E74C3C', '#3498DB', '#2ECC71', '#F39C12']  # Red, Blue, Green, Orange
-    bars = plt.bar(buildings, heights, color=colors, alpha=0.8, edgecolor='black', linewidth=1.5)
+    # Sort by year for proper x-axis
+    sorted_data = sorted(zip(completion_years, buildings, heights, cities))
+    years_sorted = [item[0] for item in sorted_data]
+    buildings_sorted = [item[1] for item in sorted_data]
+    heights_sorted = [item[2] for item in sorted_data]
+    cities_sorted = [item[3] for item in sorted_data]
+
+    # Simple bar chart with greys and narrower bars
+    plt.figure(figsize=(14, 8))
+    colors = ['#2C3E50', '#34495E', '#5D6D7E', '#85929E', '#AEB6BF']  # Different shades of grey
+    bars = plt.bar(years_sorted, heights_sorted, width=1, color=colors, alpha=0.9, 
+                edgecolor='black', linewidth=2)
 
     # Add building names and cities above bars
-    for i, (bar, building, city) in enumerate(zip(bars, buildings, cities)):
+    for i, (bar, building, city) in enumerate(zip(bars, buildings_sorted, cities_sorted)):
         # Building name
         plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 25, 
                 building, ha='center', va='bottom', fontsize=12, fontweight='bold')
@@ -127,14 +135,15 @@ inline: |
         plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 45, 
                 city, ha='center', va='bottom', fontsize=11, style='italic')
 
-    # X-axis with years
-    plt.xticks(range(len(buildings)), completion_years, fontsize=12)
+    # X-axis with actual years as x values
+    all_years = list(range(2010, 2024))
+    plt.xticks(all_years, fontsize=10, rotation=45)
     plt.xlabel('Completion Year', fontsize=13)
     plt.ylabel('Height (meters)', fontsize=13)
-    plt.title('STRUCTURE: Invariant + Components\nInvariant: Buildings | Components: Name (nominal), Height (quantitative), City (nominal)', 
-            fontsize=14, pad=20)
+    plt.title('STRUCTURE: Invariant + Components\nInvariant: Buildings | Components: Name (nominal), Height (quantitative), City (nominal), Year (quantitative)', 
+         fontsize=18, pad=25, fontweight='bold')
 
-    plt.ylim(0, max(heights) + 80)  # Extra space for labels
+    plt.ylim(0, max(heights_sorted) + 80)  # Extra space for labels
     plt.tight_layout()
     plt.show()
 ```
@@ -143,8 +152,64 @@ inline: |
 
 ### 2.2. Relationships
 
-- Key in analysis: how components relate, not necessarily their individual meanings, but their differences and connections.[5]
-- For every dataset, determining its dimensionality (number/nature of components) directs the choice of graphic strategy.[10][1]
+#### 2.2.1. Relations and dimensionality
+
+- Key in analysis: how components relate, not necessarily their individual meanings, but their differences and connections.
+- For every dataset, determining its dimensionality (number/nature of components) directs the choice of graphic strategy.
+
+
+
+#### 2.2.2. An example with a scatter plot (+ regression line)
+
+```yaml
+f_type: "codex_"
+inline: |
+
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    # Real data: Olympic 100m sprint records
+    # INVARIANT: Athletic performance (the theme)
+
+    # Raw data lists - men's 100m world records progression
+    years = [1912, 1921, 1930, 1936, 1956, 1968, 1977, 1983, 1988, 1994, 1999, 2005, 2007, 2008, 2009]
+    times = [10.6, 10.4, 10.3, 10.2, 10.1, 9.95, 9.95, 9.93, 9.92, 9.85, 9.79, 9.77, 9.74, 9.69, 9.58]  # seconds
+    record_holders = ['USA', 'USA', 'CAN', 'USA', 'USA', 'USA', 'USA', 'USA', 'CAN', 'USA', 'USA', 'JAM', 'JAM', 'JAM', 'JAM']
+
+    # Create scatter plot
+    plt.figure(figsize=(12, 8))
+
+    # Different colors for different countries
+    country_colors = {'USA': '#1f77b4', 'CAN': '#ff7f0e', 'JAM': '#2ca02c'}
+    colors = [country_colors[country] for country in record_holders]
+
+    # Scatter plot
+    plt.scatter(years, times, c=colors, s=80, alpha=0.8, edgecolor='black', linewidth=1.5)
+
+    # Add regression line
+    z = np.polyfit(years, times, 1)
+    p = np.poly1d(z)
+    plt.plot(years, p(years), "r--", alpha=0.8, linewidth=2, label=f'Trend: {z[0]:.4f}s per year')
+
+    # Labels and formatting
+    plt.xlabel('Year', fontsize=13)
+    plt.ylabel('Time (seconds)', fontsize=13)
+    plt.title('RELATIONSHIPS: How Components Connect\nInvariant: Athletic Performance | Relationship: Time vs Technology/Training Evolution', 
+            fontsize=16, pad=20, fontweight='bold')
+
+    # Invert y-axis (faster times are lower)
+    plt.gca().invert_yaxis()
+
+    # Add legend for countries
+    for country, color in country_colors.items():
+        plt.scatter([], [], c=color, s=80, label=country, edgecolor='black')
+    plt.legend(loc='upper right', fontsize=11)
+
+    # Grid for better readability
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+```
 
 ***
 

@@ -96,6 +96,7 @@
                         Clear Output
                     </button>
                 </div>
+                <div class="divider">Output</div>
                 <div class="dataviz2-output" style="display: none;">
                     <div class="dataviz2-output-content"></div>
                 </div>
@@ -116,7 +117,7 @@
                 // Initialize Nagini if needed
                 if (!naginiReady) {
                     outputDiv.style.display = 'block';
-                    outputContent.innerHTML = '<div class="loading loading-spinner loading-sm"></div> <span class="text-base-content/60">Loading Python runtime...</span>';
+                    outputContent.innerHTML = '<div class="flex items-center gap-2"><div class="loading loading-spinner loading-sm"></div> <span class="text-base-content/60">Loading Nagini...</span></div>';
                     
                     const success = await initializeNagini();
                     if (!success) {
