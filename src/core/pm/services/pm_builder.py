@@ -92,6 +92,9 @@ class PMBuilder:
             if "checked_by_sel" in metadata
             else None,
             "without_fragments": False,
+            # Extract dependencies from metadata
+            "js_dependencies": metadata.get("js_dependencies"),
+            "css_dependencies": metadata.get("css_dependencies"),
         }
 
         if verbosity > 0:

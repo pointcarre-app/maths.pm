@@ -858,6 +858,14 @@ async def get_pm(
     if pm_path.is_file() and pm_path.suffix.lower() != ".md":
         media_type, _ = mimetypes.guess_type(str(pm_path))
 
+        # For image files, always serve inline (for embedding in markdown and direct viewing)
+        image_extensions = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".ico"}
+        if pm_path.suffix.lower() in image_extensions:
+            # Don't set filename parameter to avoid download prompt
+            return FileResponse(
+                str(pm_path), media_type=media_type, headers={"Content-Disposition": "inline"}
+            )
+
         # Raw mode keeps previous behavior (direct file response)
         if format == "raw":
             return FileResponse(str(pm_path), media_type=media_type, filename=pm_path.name)

@@ -35,12 +35,6 @@ f_type: "codex_"
 inline: |
   import matplotlib.pyplot as plt
   import numpy as np
-  import warnings
-  import matplotlib
-  
-  # Suppress matplotlib font warnings for cleaner output
-  warnings.filterwarnings('ignore', message='findfont: Generic family')
-  matplotlib.rcParams['font.family'] = 'DejaVu Sans'  # Use available fallback font
   
   # Create data
   x = np.linspace(0, 2 * np.pi, 100)
@@ -102,12 +96,6 @@ inline: |
   import pandas as pd
   import matplotlib.pyplot as plt
   import numpy as np
-  import warnings
-  import matplotlib
-  
-  # Suppress matplotlib font warnings for cleaner output
-  warnings.filterwarnings('ignore', message='findfont: Generic family')
-  matplotlib.rcParams['font.family'] = 'DejaVu Sans'  # Use available fallback font
   
   # Create sample time series data
   dates = pd.date_range('20240101', periods=100)

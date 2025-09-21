@@ -33,15 +33,16 @@
       {% else %}
         {# Plain divider: close piece_ if open, otherwise render divider #}
         {% if ns.piece_open %}
-        </div>
-        {% set ns.piece_open = false %}
-      {% else %}
-      {% set fragment_index = loop.index0 %}
-      <div class="fragment-wrapper {{ fragment.classes }}" data-f_type="{{ fragment.f_type.value }}">
-        {% include [ 'pm/fragments/' ~ fragment.f_type.value ~ '.html', 'pm/fragments/default.html' ] %}
-      </div>
+          </div>
+          {% set ns.piece_open = false %}
+        {% else %}
+          {# Render the plain hr divider #}
+          {% set fragment_index = loop.index0 %}
+          <div class="fragment-wrapper {{ fragment.classes }}" data-f_type="{{ fragment.f_type.value }}">
+            {% include [ 'pm/fragments/' ~ fragment.f_type.value ~ '.html', 'pm/fragments/default.html' ] %}
+          </div>
+        {% endif %}
       {% endif %}
-    {% endif %}
   {% else %}
       {% set fragment_index = loop.index0 %}
       <div class="fragment-wrapper {{ fragment.classes }}" data-f_type="{{ fragment.f_type.value }}">

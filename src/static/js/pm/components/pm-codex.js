@@ -115,22 +115,41 @@ export class PMCodex extends LitElement {
         try {
           // STEP 4: CODEMIRROR CREATION
           // Create CodeMirror instance from the textarea
-          // Configuration optimized for read-only code display with educational features
+          // Check if this codex should be editable
+          // Also check the parent wrapper for attributes
+          const wrapper = this.closest('.fragment-wrapper[data-f_type="codex_"]');
+          const isExecutable = this.hasAttribute('data-executable') || 
+                             container.hasAttribute('data-executable') ||
+                             wrapper?.hasAttribute('data-executable');
+          const isEditable = this.hasAttribute('data-editable') || 
+                           container.hasAttribute('data-editable') ||
+                           wrapper?.hasAttribute('data-editable');
+          
           // eslint-disable-next-line no-undef
           const cm = CodeMirror.fromTextArea(textarea, {
             mode: textarea.dataset.language || 'python', // Language mode from data attribute, default Python
             lineNumbers: true,                           // Show line numbers for reference
-            readOnly: 'nocursor',                       // Read-only: users can see but not edit
+            readOnly: isEditable ? false : 'nocursor',  // Editable if marked, otherwise read-only
             viewportMargin: Infinity,                   // Render all content (good for printing/export)
           });
-          console.debug('[pm-codex] CodeMirror started');
+          console.debug('[pm-codex] CodeMirror started', { isExecutable, isEditable });
           
-          // STEP 5: UI CLEANUP
+          // Store CodeMirror instance for external access
+          this._codeMirror = cm;
+          container._codeMirror = cm;
+          
+          // STEP 5: ADD EXECUTION UI (if executable)
+          // Add execution controls that product-specific scripts can hook into
+          if (isExecutable) {
+            this._addExecutionUI(container, cm);
+          }
+          
+          // STEP 6: UI CLEANUP
           // Hide skeleton loading indicators now that the real editor is ready
           // This provides smooth transition from loading state to ready state
           container.querySelectorAll('.skeleton').forEach((sk) => sk.classList.add('hidden'));
         } catch (e) {
-          // STEP 6: FALLBACK HANDLING
+          // STEP 7: FALLBACK HANDLING
           // If CodeMirror fails to initialize, show the plain textarea as fallback
           // This ensures users can still see the code even if enhanced editor fails
           console.warn('[pm-codex] CodeMirror init failed, revealing textarea', e);
@@ -191,6 +210,114 @@ export class PMCodex extends LitElement {
       console.debug('[pm-codex] no IO, initializing immediately');
       initEditor();
     }
+  }
+
+  /**
+   * ADD EXECUTION UI
+   * ================
+   * Adds execution controls (buttons and output area) to the codex
+   * Product-specific scripts can listen for the 'codex-execute' event
+   * to handle the actual execution logic
+   */
+  _addExecutionUI(container, codeMirror) {
+    // Create execution UI container
+    const uiContainer = document.createElement('div');
+    uiContainer.className = 'codex-execution-ui mt-3';
+    
+    // Create button group
+    const buttonGroup = document.createElement('div');
+    buttonGroup.className = 'flex gap-2 mb-3';
+    
+    // Execute button with DaisyUI styling
+    const executeBtn = document.createElement('button');
+    executeBtn.className = 'btn btn-primary btn-sm';
+    executeBtn.innerHTML = `
+      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      Execute
+    `;
+    
+    // Clear button (initially hidden)
+    const clearBtn = document.createElement('button');
+    clearBtn.className = 'btn btn-ghost btn-sm hidden';
+    clearBtn.innerHTML = `
+      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+      </svg>
+      Clear Output
+    `;
+    
+    buttonGroup.appendChild(executeBtn);
+    buttonGroup.appendChild(clearBtn);
+    uiContainer.appendChild(buttonGroup);
+    
+    // Output area (initially hidden)
+    const outputArea = document.createElement('div');
+    outputArea.className = 'codex-output-area hidden';
+    
+    // Output header
+    const outputHeader = document.createElement('div');
+    outputHeader.className = 'text-sm font-semibold mb-2 text-base-content/70';
+    outputHeader.textContent = 'Output:';
+    
+    // Output content with DaisyUI mockup-code styling
+    const outputContent = document.createElement('div');
+    outputContent.className = 'codex-output-content mockup-code bg-base-200 relative';
+    outputContent.innerHTML = '<pre class="text-sm"><code></code></pre>';
+    
+    outputArea.appendChild(outputHeader);
+    outputArea.appendChild(outputContent);
+    uiContainer.appendChild(outputArea);
+    
+    // Insert UI after the CodeMirror wrapper
+    const cmWrapper = codeMirror.getWrapperElement();
+    cmWrapper.parentNode.insertBefore(uiContainer, cmWrapper.nextSibling);
+    
+    // Event handlers
+    executeBtn.addEventListener('click', () => {
+      const code = codeMirror.getValue();
+      
+      // Show output area and clear button
+      outputArea.classList.remove('hidden');
+      clearBtn.classList.remove('hidden');
+      
+      // Show loading state
+      outputContent.innerHTML = `
+        <pre class="text-sm"><code class="text-info">Executing code...</code></pre>
+      `;
+      
+      // Dispatch custom event for product-specific handlers
+      const event = new CustomEvent('codex-execute', {
+        detail: {
+          code: code,
+          codeMirror: codeMirror,
+          outputElement: outputContent,
+          codexElement: this,
+          container: container
+        },
+        bubbles: true
+      });
+      this.dispatchEvent(event);
+      console.debug('[pm-codex] Dispatched codex-execute event');
+    });
+    
+    clearBtn.addEventListener('click', () => {
+      // Clear output and hide areas
+      outputContent.innerHTML = '<pre class="text-sm"><code></code></pre>';
+      outputArea.classList.add('hidden');
+      clearBtn.classList.add('hidden');
+    });
+    
+    // Store references for external access
+    this._executionUI = {
+      container: uiContainer,
+      executeBtn: executeBtn,
+      clearBtn: clearBtn,
+      outputArea: outputArea,
+      outputContent: outputContent
+    };
   }
 
   /**

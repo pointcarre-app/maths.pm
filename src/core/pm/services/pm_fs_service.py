@@ -56,12 +56,30 @@ def resolve_pm_path(origin: str, base_dir: Path) -> Path:
     """Resolve a PM-origin into an absolute file system path.
 
     Tries `<base_dir>/pms/<origin>` first, then `<base_dir>/<origin>` for assets.
+    If the path doesn't exist and doesn't have an extension, tries adding .md
     """
     candidate = base_dir / "pms" / origin
     if candidate.exists():
         return candidate
+    
+    # If path doesn't exist and has no extension, try adding .md
+    if not candidate.suffix:
+        candidate_md = candidate.with_suffix('.md')
+        if candidate_md.exists():
+            return candidate_md
+    
     candidate2 = base_dir / origin
-    return candidate2
+    if candidate2.exists():
+        return candidate2
+    
+    # Try adding .md to second candidate too
+    if not candidate2.suffix:
+        candidate2_md = candidate2.with_suffix('.md')
+        if candidate2_md.exists():
+            return candidate2_md
+    
+    # Return the original candidate if nothing found
+    return candidate
 
 
 def guess_media_type(path: Path) -> str:

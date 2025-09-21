@@ -39,6 +39,10 @@ class PM(BaseModel):
     html_content: str | None = None
     without_fragments: bool = False
 
+    # Dynamic dependencies from metadata
+    js_dependencies: list[str] | None = None
+    css_dependencies: list[str] | None = None
+
     @field_validator("fragments", mode="before")
     def convert_fragments(cls, v):
         """Convert fragment dictionaries to Fragment instances."""

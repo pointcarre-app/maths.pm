@@ -1,4 +1,16 @@
 {# PM Runtime Initialization Include #}
+
+{# Load product-specific JS dependencies if available #}
+{% if product_settings and product_settings.product %}
+  {% set product_backend = product_settings.product.backend_settings %}
+  {% if product_backend and product_backend.js_dependencies %}
+    <!-- Product JS for {{ product_settings.product.name }} -->
+    {% for js_dep in product_backend.js_dependencies %}
+      <script type="module" src="{{ js_dep }}"></script>
+    {% endfor %}
+  {% endif %}
+{% endif %}
+
 <!-- PM runtime boot -->
 <script type="module">
     import PMRuntime from '@js/pm/main.js';

@@ -25,6 +25,15 @@ domains:
 owner_rdb: "SAS POINTCARRE.APP"
 owner_url: "https://pointcarre.app"
 
+# Backend settings for DataViz2 product
+backend_settings:
+  # JavaScript dependencies to load for this product
+  js_dependencies:
+    - "/static/js/products/dataviz2/main.js"
+  # Enable executable codex fragments (use quotes for proper bool handling)
+  codex_executable: "true"
+  codex_editable: "true"
+
 # # Product-specific metatags
 # metatags:
 #   # SEO metatags
