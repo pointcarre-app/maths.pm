@@ -104,39 +104,30 @@ f_type: "codex_"
 inline: |
     import matplotlib.pyplot as plt
 
-    # Real data: World's tallest buildings
+    # Real data: World's tallest buildings over 500m
     # INVARIANT: Buildings (the theme)
 
-    # Raw data lists (removed Lotte Tower to avoid duplicate 2017)
-    buildings = [
-        'Burj Khalifa', 
-        'Shanghai Tower', 
-        'Abraj Al-Bait', 
-        'Ping An'
-    ]
-    heights = [828, 632, 601, 599]  # meters
-    cities = ['Dubai', 'Shanghai', 'Mecca', 'Shenzhen']
-    completion_years = [2010, 2015, 2012, 2017]
+    # Raw data lists - all buildings over 500m
+    buildings = ['Burj Khalifa', 'Merdeka 118', 'Shanghai Tower', 'Abraj Al-Bait', 'Ping An']
+    heights = [828, 679, 632, 601, 599]  # meters
+    cities = ['Dubai', 'Kuala Lumpur', 'Shanghai', 'Mecca', 'Shenzhen']
+    completion_years = [2010, 2023, 2015, 2012, 2017]
 
-    # Simple bar chart with better colors
-    plt.figure(figsize=(12, 8))
-    colors = [
-        '#E74C3C',  # Red
-        '#3498DB',  # Blue
-        '#2ECC71',  # Green
-        '#F39C12'   # Orange
-    ]  
-    bars = plt.bar(
-        buildings, 
-        heights, 
-        color=colors, 
-        alpha=0.8, 
-        edgecolor='black', 
-        linewidth=1.5
-    )
+    # Sort by year for proper x-axis
+    sorted_data = sorted(zip(completion_years, buildings, heights, cities))
+    years_sorted = [item[0] for item in sorted_data]
+    buildings_sorted = [item[1] for item in sorted_data]
+    heights_sorted = [item[2] for item in sorted_data]
+    cities_sorted = [item[3] for item in sorted_data]
+
+    # Simple bar chart with greys and narrower bars
+    plt.figure(figsize=(14, 8))
+    colors = ['#2C3E50', '#34495E', '#5D6D7E', '#85929E', '#AEB6BF']  # Different shades of grey
+    bars = plt.bar(years_sorted, heights_sorted, width=1, color=colors, alpha=0.9, 
+                edgecolor='black', linewidth=2)
 
     # Add building names and cities above bars
-    for i, (bar, building, city) in enumerate(zip(bars, buildings, cities)):
+    for i, (bar, building, city) in enumerate(zip(bars, buildings_sorted, cities_sorted)):
         # Building name
         plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 25, 
                 building, ha='center', va='bottom', fontsize=12, fontweight='bold')
@@ -144,14 +135,15 @@ inline: |
         plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 45, 
                 city, ha='center', va='bottom', fontsize=11, style='italic')
 
-    # X-axis with years
-    plt.xticks(range(len(buildings)), completion_years, fontsize=12)
+    # X-axis with actual years as x values
+    all_years = list(range(2010, 2024))
+    plt.xticks(all_years, fontsize=10, rotation=45)
     plt.xlabel('Completion Year', fontsize=13)
     plt.ylabel('Height (meters)', fontsize=13)
     plt.title('STRUCTURE: Invariant + Components\nInvariant: Buildings | Components: Name (nominal), Height (quantitative), City (nominal)', 
-            fontsize=14, pad=20)
+            fontsize=16, pad=20, fontweight='bold')
 
-    plt.ylim(0, max(heights) + 80)  # Extra space for labels
+    plt.ylim(0, max(heights_sorted) + 80)  # Extra space for labels
     plt.tight_layout()
     plt.show()
 ```

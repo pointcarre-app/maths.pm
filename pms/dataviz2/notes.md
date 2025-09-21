@@ -19,6 +19,9 @@ Danger cause of angles : cf squares or other hidden behind because of the positi
 
 
 
+<!-- Exercice : Tours mais en les rerésetant plus comme des tours -->
+
+
 - [**Course overview and evaluation criteria (i.e. the file you're currently reading)**](00_plan.md)
 - **[Graphic Semiology Fundamentals](01_session_1_h_a.md)**
 
