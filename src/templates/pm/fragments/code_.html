@@ -1,26 +1,42 @@
+{# <div class="fragment" data-f_type="{{ fragment.f_type.value }}">
+
+  <div class="badge bg-base-200" style="margin-left: auto; margin-right: 0.75rem; display: block; width: fit-content; border-top-left-radius: var(--radius-box); border-top-right-radius: var(--radius-box); border-bottom-left-radius: 0; border-bottom-right-radius: 0; font-size: 0.875rem">
+
+    {{ fragment.data.language if fragment.data and fragment.data.language is defined }}
+  </div>
+  <pre class="fragment-code bg-base-200"><code class="language-{{ fragment.data.language if fragment.data and fragment.data.language is defined }}">{{ fragment.data.content | e }}</code></pre>
+</div> #}
+
+
 <div class="fragment" data-f_type="{{ fragment.f_type.value }}">
 
-  <div class="badge bg-base-200"
-       style="margin-left: auto;
-              margin-right: 0.75rem;
-              display: block;
-              width: fit-content;
-              border-top-left-radius: var(--radius-box);
-              border-top-right-radius: var(--radius-box);
-              border-bottom-left-radius: 0;
-              border-bottom-right-radius: 0;
-              font-size: 0.875rem">
-
-    {# <div class="badge bg-base-200"
-      style="border-top-left-radius: var(--radius-box);
-             border-top-right-radius: var(--radius-box);
-             border-bottom-left-radius: 0;
-             border-bottom-right-radius: 0;
-             text-align: right;
-             margin-left: auto;
-             margin-right: 0;
-             font-size: 0.875rem"> #}
-    {{ fragment.data.language if fragment.data and fragment.data.language is defined }}
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0;">
+    <div></div>
+    <!-- spacer -->
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      <div class="badge bg-base-200"
+           style="border-top-left-radius: var(--radius-box);
+                  border-top-right-radius: var(--radius-box);
+                  border-bottom-left-radius: 0;
+                  border-bottom-right-radius: 0;
+                  font-size: 0.875rem">
+        {{ fragment.data.language if fragment.data and fragment.data.language is defined }}
+      </div>
+      <button class="copy-btn"
+              style="background: var(--color-primary-ghost);
+                     color: var(--color-primary);
+                     border: none;
+                     padding: 0.25rem;
+                     border-radius: 0.25rem;
+                     cursor: pointer;
+                     display: flex;
+                     align-items: center">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+          <path d="m4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+        </svg>
+      </button>
+    </div>
   </div>
   <pre class="fragment-code bg-base-200"><code class="language-{{ fragment.data.language if fragment.data and fragment.data.language is defined }}">{{ fragment.data.content | e }}</code></pre>
 </div>

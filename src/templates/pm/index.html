@@ -121,5 +121,20 @@
       });
   </script>
 
+  <script>
+      document.addEventListener('click', function(e) {
+          if (e.target.matches('.copy-btn') || e.target.closest('.copy-btn')) {
+              const button = e.target.closest('.copy-btn');
+              const codeElement = button.closest('.fragment').querySelector('code');
+              navigator.clipboard.writeText(codeElement.textContent);
+
+              // Change button color briefly for feedback
+              const originalBg = button.style.background;
+              button.style.background = '#10b981';
+              setTimeout(() => button.style.background = originalBg, 1000);
+          }
+      });
+  </script>
+
   <!-- djlint:on -->
 {% endblock content %}
