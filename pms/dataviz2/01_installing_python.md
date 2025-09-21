@@ -64,7 +64,7 @@ pyenv install 3.13.5
 
 
 
-Nevertheless, independently of your easy with Python installation, you should use a version statisfying `>=3.12`, and preferably `>=3.13`. **Not following those rules could lead to unexpected errors and issues, with the risk of being very time consuming to solve.**
+Nevertheless, independently of your ease with Python installation, you should use a version statisfying `>=3.12`, and preferably `>=3.13`. **Not following those rules could lead to unexpected errors and issues, with the risk of being very time consuming to solve.**
 {: .alert .alert-warning .alert-soft}
 
 
@@ -160,8 +160,12 @@ which python3
 
 
 
-## Install requirements
+## Install requirements 
+
+
+We need to install the dependencies of the project.
 
 ```bash
-pip3 install -r requirements.txt
+cd dataviz-course
+pip3 install 
 ```
