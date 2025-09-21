@@ -26,6 +26,7 @@
   font-weight: 400 !important;
 }
 
+
 #toc ul {
   list-style: none !important;
   padding-left: 0 !important;
@@ -67,7 +68,13 @@
 
 #toc a:hover {
   /* color: hsl(var(--bc) / 1) !important; */
-  padding-left: 0.25rem !important;
+  /* padding-left: 0.25rem !important; */
+  color: var(--color-info) !important;
+  cursor: pointer !important;
+  text-decoration: underline !important;
+  text-decoration-color: color-mix(in oklab, var(--color-info) 40%, transparent) !important;
+  text-underline-offset: 0.2em !important;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease, text-underline-offset 0.2s ease !important;
 }
 
 

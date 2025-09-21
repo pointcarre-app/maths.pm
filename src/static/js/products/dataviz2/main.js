@@ -96,8 +96,8 @@
                         Clear Output
                     </button>
                 </div>
-                <div class="divider">Output</div>
                 <div class="dataviz2-output" style="display: none;">
+                <div class="divider">Output</div>
                     <div class="dataviz2-output-content"></div>
                 </div>
             `;

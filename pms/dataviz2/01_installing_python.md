@@ -2,7 +2,7 @@
 
 # Installing Python, the clean way
 
-The following instructions are valid for MacOS and Linux. For Windows, please refer to the specific `pyenv` installation instructions.
+We'll focus on `pyenv` for python version management. The following instructions are valid for MacOS and Linux. For Windows, please refer to the specific `pyenv` installation instructions. Also, we'll detail h
 {: .pm-subtitle}
 
 
@@ -68,13 +68,14 @@ Nevertheless, independently of your ease with Python installation, you should us
 {: .alert .alert-warning .alert-soft}
 
 
-## Virtual environment setup
+## Virtual environment setup (MacOS & Linux)
 
+
+We'll rely on the built-in `venv` module to create a virtual environment. The following instructions are valid for MacOS and Linux. If you use Windows, please refer to the [specific instructions](https://docs.python.org/3/library/venv.html) from the official Python documentation.
 
 ### Folder creation
 
 - Create a new folder for the virtual environment and `cd` into it. In this example, the folder is called `dataviz-course`.
-
 
 
 ```bash
@@ -123,7 +124,7 @@ deactivate
 
 ## Check correct `pip3` / `pip` / `python3` / `python` are used
 
-- You should run those command from the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment.
+You should run those command from the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment.
 
 ```bash
 which pip3 
@@ -132,7 +133,7 @@ which pip3
 ```
 
 
-- Also for an extra security: 
+Also for an extra security: 
 
 ```bash
 which pip
@@ -140,7 +141,7 @@ which pip
 # example: /Users/elliot/repos/dataviz-course/env/bin/pip
 ```
 
-- Still a bit more of extra security:
+Still a bit more of extra security:
 
 ```bash
 which python3
@@ -149,12 +150,12 @@ which python3
 ```
 
 
-- Finally, because *Defensive programming* is our best friend:
+Finally, because *Defensive programming* is our best friend:
 
 
 ```bash
 which python3
-# path should be from the just installed and activated environment
+# path should be from the just installed and activated environment: this was the last one!
 # example: /Users/elliot/repos/dataviz-course/env/bin/python3
 ```
 

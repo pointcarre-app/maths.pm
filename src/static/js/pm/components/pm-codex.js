@@ -136,6 +136,7 @@ export class PMCodex extends LitElement {
           
           // STEP 4.1: APPLY HEIGHT CONFIGURATION
           // Check for height configuration in data attributes
+          // Priority: pm-codex element > container > wrapper
           const heightInPx = this.getAttribute('data-height-in-px') || 
                            container.getAttribute('data-height-in-px') ||
                            wrapper?.getAttribute('data-height-in-px');

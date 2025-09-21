@@ -195,34 +195,42 @@ export class PMRuntime {
     const tag = FTYPE_TO_TAG[fType];
     if (!tag) return; // no enhancement
 
-    // Upgrade by wrapping existing content in the component tag
-    if (!wrapperEl.querySelector(tag)) {
-      const fragment = wrapperEl.querySelector('.fragment');
-      const host = document.createElement(tag);
-      // Pass minimal context via dataset for PE
-      host.setAttribute('data-f_type', fType);
-      // Preserve original fragment semantic classes (e.g., 'codex', 'image', etc.)
-      if (fragment && fragment.classList) {
-        fragment.classList.forEach((cls) => {
-          if (cls !== 'fragment') host.classList.add(cls);
-        });
+      // Upgrade by wrapping existing content in the component tag
+      if (!wrapperEl.querySelector(tag)) {
+        const fragment = wrapperEl.querySelector('.fragment');
+        const host = document.createElement(tag);
+        // Pass minimal context via dataset for PE
+        host.setAttribute('data-f_type', fType);
+        // Preserve original fragment semantic classes (e.g., 'codex', 'image', etc.)
+        if (fragment && fragment.classList) {
+          fragment.classList.forEach((cls) => {
+            if (cls !== 'fragment') host.classList.add(cls);
+          });
+        }
+        // Copy data attributes from fragment to host component
+        if (fragment && fragment.attributes) {
+          for (const attr of fragment.attributes) {
+            if (attr.name.startsWith('data-') && attr.name !== 'data-f_type') {
+              host.setAttribute(attr.name, attr.value);
+            }
+          }
+        }
+        // Move existing child content into the component slot (clone and sanitize)
+        // Keep classes on wrapper; component handles behavior only
+        if (fragment) {
+          const clone = fragment.cloneNode(true);
+          // Remove legacy inline handlers to avoid ReferenceError
+          clone.querySelectorAll('[onclick]').forEach((el) => el.removeAttribute('onclick'));
+          // Project original children rather than nested wrapper divs
+          while (clone.firstChild) host.appendChild(clone.firstChild);
+        }
+        // Replace fragment with component
+        if (fragment && fragment.parentElement) {
+          fragment.parentElement.replaceChild(host, fragment);
+        } else {
+          wrapperEl.appendChild(host);
+        }
       }
-      // Move existing child content into the component slot (clone and sanitize)
-      // Keep classes on wrapper; component handles behavior only
-      if (fragment) {
-        const clone = fragment.cloneNode(true);
-        // Remove legacy inline handlers to avoid ReferenceError
-        clone.querySelectorAll('[onclick]').forEach((el) => el.removeAttribute('onclick'));
-        // Project original children rather than nested wrapper divs
-        while (clone.firstChild) host.appendChild(clone.firstChild);
-      }
-      // Replace fragment with component
-      if (fragment && fragment.parentElement) {
-        fragment.parentElement.replaceChild(host, fragment);
-      } else {
-        wrapperEl.appendChild(host);
-      }
-    }
   }
 
   initAllInteractive() {

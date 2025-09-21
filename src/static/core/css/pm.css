@@ -540,7 +540,7 @@ pre.fragment-code {
   border-radius: var(--radius-box);
   overflow: auto;
   /* margin: 0.75rem 0 1rem; */
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Inline code styling */
@@ -1337,7 +1337,7 @@ pm-codex .CodeMirror {
 
 /* Make CodeMirror in pm-codex slightly taller for DataViz2 */
 pm-codex[data-executable="true"] .CodeMirror {
-    min-height: 200px;
+    min-height: 10px;
     resize: vertical;
     overflow: hidden;
     /* margin-top: 1.5rem;
