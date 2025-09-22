@@ -10,7 +10,7 @@ Organizational aspects, syllabus and evaluation criteria
 <!-- <hr class="my-5 border-base-200"> -->
 
 
-## An first example from Reuters
+## A first example from Reuters
 
 
 ![COVID-19 Mortality in the US](files/covid-2timeseries-us-presidency.jpg)
@@ -97,10 +97,16 @@ The evaluation consists on a data vizualisation project. The students will have 
 
 - [**Course overview**](00_plan.md) *(i.e. the file you're currently reading)*
 - [**Graphic Semiology Fundamentals**](session_1_a.md)
-- <span class="text-base-content/60"> [Optional] [**Installing Python, the clean way**](01_installing_python.md) </span>
 
 
-#### Hours 2 & 3: Data types & first graphs
+#### Hour 2: Python: installation and philosophy
+
+
+- <span class="text-base-content/60"> [Recommended] [**Installing Python, the clean way**](01_installing_python.md) </span>
+- [**The Zen of Python**](02_zen_of_python.md)
+
+
+#### Hours 3: Data types & first graphs
 
 - [**Data Types Classification and introduction to `matplotlib`**](session_1_h_23.md)
 - [**Groups consitution and project data requirements**](01_session_1_b.md)
@@ -109,6 +115,9 @@ The evaluation consists on a data vizualisation project. The students will have 
 
 ### 2️⃣ Session 2: Static data vizualisation panorama
 
+
+Any issue related to the proper execution of code on your machine must be solved during this session. **Feel free to ask for help.**
+{: .alert .alert-error .alert-soft}
 
 #### Hour 1 & 2: Static graphical representation panorama
 
@@ -129,8 +138,6 @@ The evaluation consists on a data vizualisation project. The students will have 
 ### 3️⃣ Session 3: Advanced data vizualisation
 
 
-Any issue related to the proper execution of code on machine must be solved during this session. **Feel free to ask for help.**
-{: .alert .alert-error .alert-soft}
 
 Each group must have selected a dataset and a project scope during hour 3.
 {: .alert .alert-warning .alert-soft}

@@ -97,10 +97,16 @@ The evaluation consists on a data vizualisation project. The students will have 
 
 - [**Course overview**](00_plan.md) *(i.e. the file you're currently reading)*
 - [**Graphic Semiology Fundamentals**](session_1_a.md)
-- <span class="text-base-content/60"> [Optional] [**Installing Python, the clean way**](01_installing_python.md) </span>
 
 
-#### Hours 2 & 3: Data types & first graphs
+#### Hour 2: Python: installation and philosophy
+
+
+- <span class="text-base-content/60"> [Recommended] [**Installing Python, the clean way**](01_installing_python.md) </span>
+- [**The Zen of Python**](02_zen_of_python.md)
+
+
+#### Hours 3: Data types & first graphs
 
 - [**Data Types Classification and introduction to `matplotlib`**](session_1_h_23.md)
 - [**Groups consitution and project data requirements**](01_session_1_b.md)

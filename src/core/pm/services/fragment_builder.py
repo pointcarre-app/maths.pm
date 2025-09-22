@@ -354,11 +354,16 @@ class FragmentBuilder:
         else:
             f_type = f"{tag.name}_"  # ul or ol SI FINE
 
-            # Remove all classes from li tags
-            for li in tag.find_all("li"):
-                li.attrs = {}
+            # Check if this list contains nested lists
+            has_nested_lists = bool(tag.find_all(["ul", "ol"]))
 
-            tag.attrs["class"] = ""
+            if not has_nested_lists:
+                # Only strip attributes for simple, non-nested lists
+                # Remove all classes from li tags
+                for li in tag.find_all("li"):
+                    li.attrs = {}
+
+                tag.attrs["class"] = ""
 
             # print(tag)
 
@@ -662,6 +667,7 @@ class FragmentBuilder:
                 try:
                     data = yaml.safe_load(code_content)
 
+                    # TODO sel: legacy to get rid of
                     # Special handling for different YAML content types
                     if "codexPCAVersion" in data:
                         # Simplified codex handling without file access
@@ -707,6 +713,19 @@ class FragmentBuilder:
                             data["codex_script"] = html_module.escape(codex_script)
 
                             data |= sections
+
+                            # # Convert values and handle HTML entities
+                            # for key, value in data.items():
+                            #     if isinstance(value, int):
+                            #         data[key] = str(value)
+                            #     elif isinstance(value, str):
+                            #         if "&gt;" in value:
+                            #             value = value.replace("&gt;", ">")
+                            #         if "&lt;" in value:
+                            #             value = value.replace("&lt;", "<")
+                            #         if "&amp;" in value:
+                            #             value = value.replace("&amp;", "&")
+                            #         data[key] = value
 
                     elif ("graphPCAVersion" in data) or ("graph" in classes):
                         f_type = "graph_"
@@ -763,8 +782,8 @@ class FragmentBuilder:
                         if "height_in_px" in data:
                             try:
                                 height_value = int(data["height_in_px"])
-                                # Ensure reasonable bounds (min 100px, max 2000px)
-                                data["height_in_px"] = max(100, min(2000, height_value))
+                                # Ensure reasonable bounds (min 50px, max 2000px)
+                                data["height_in_px"] = max(50, min(2000, height_value))
                             except (ValueError, TypeError):
                                 # Invalid height value, remove it to use default
                                 data.pop("height_in_px", None)
@@ -772,7 +791,8 @@ class FragmentBuilder:
                         # Support both script_path and inline code
                         if "inline" in data:
                             # Handle inline code
-                            codex_script = data["inline"]
+                            # TODO sel: generalize cause canonical/excellent solution to unescape the inline code
+                            codex_script = html_module.unescape(data["inline"])
 
                             # For inline code, we don't need to parse sections
                             # The entire inline code is the foreground script
@@ -821,6 +841,7 @@ class FragmentBuilder:
 
                                 # Merge all sections into data for backward compatibility
                                 data |= sections
+
                         else:
                             # Neither inline nor script_path provided
                             raise ValueError(

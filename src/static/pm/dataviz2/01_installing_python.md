@@ -9,7 +9,14 @@ We'll focus on `pyenv` for python version management. The following instructions
 
 [TOC]
 
-## Why installing `Pyenv` ?
+
+
+
+
+## Installing `pyenv` 
+
+
+### Why installing `pyenv` ?
 
 > `pyenv` is a tool to manage multiple Python versions, while maintaining a consistent and clean installation process. The source code is available [here](https://github.com/pyenv/pyenv).
 
@@ -19,7 +26,6 @@ We'll focus on `pyenv` for python version management. The following instructions
 **Kind remainder**: it's always a bad idea to interact with the system Python version. Python is used by most of the OS, updating some libraries (or any other operation)might break the system.
 {: .alert .alert-warning .alert-soft}
 
-## Installing `pyenv` 
 
 ### MacOS
 
@@ -68,10 +74,10 @@ Nevertheless, independently of your ease with Python installation, you should us
 {: .alert .alert-warning .alert-soft}
 
 
-## Virtual environment setup (MacOS & Linux)
+## Virtual env setup (UNIX based OS)
 
 
-We'll rely on the built-in `venv` module to create a virtual environment. The following instructions are valid for MacOS and Linux. If you use Windows, please refer to the [specific instructions](https://docs.python.org/3/library/venv.html) from the official Python documentation.
+We'll rely on the built-in `venv` module to create a virtual environment. The following instructions are valid for UNIX based OS (such as MacOS and Linux). If you use Windows, please refer to the [specific instructions](https://docs.python.org/3/library/venv.html) from the official Python documentation.
 
 ### Folder creation
 
@@ -101,13 +107,13 @@ We'll rely on the built-in `venv` module to create a virtual environment. The fo
 ```
 
 
-## Interacting with the virtual environment
+## Interacting with the virtual env
 
 
 The two following commands should be run from the folder containing the virtual environment, i.e. containing the `env` folder.
 {: .alert .alert-success .alert-soft}
 
-### Activating the virtual environment
+### Activating the virtual env
 
 
 ```bash
@@ -115,16 +121,19 @@ source env/bin/activate
 ```
 
 
-### Deactivating the virtual environment
+### Deactivating the virtual env
 
 ```bash
 deactivate
 ```
 
 
-## Check correct `pip3` / `pip` / `python3` / `python` are used
+## Aliases & defensive programming
 
-You should run those command from the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment.
+You should run those command from the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment. The goal is to ensure that the correct `pip3` / `pip` / `python3` / `python` are used (i.e. that the aliases are correct).
+
+
+### Is `pip3` alias correct ?
 
 ```bash
 which pip3 
@@ -132,6 +141,7 @@ which pip3
 # example: /Users/elliot/repos/dataviz-course/env/bin/pip3
 ```
 
+### Is `pip` alias correct ?
 
 Also for an extra security: 
 
@@ -141,6 +151,8 @@ which pip
 # example: /Users/elliot/repos/dataviz-course/env/bin/pip
 ```
 
+### Is `python3` alias correct ?
+
 Still a bit more of extra security:
 
 ```bash
@@ -149,6 +161,8 @@ which python3
 # example: /Users/elliot/repos/dataviz-course/env/bin/python3
 ```
 
+
+### Is `python` alias correct ?
 
 Finally, because *Defensive programming* is our best friend:
 
@@ -161,12 +175,119 @@ which python3
 
 
 
-## Install requirements 
+## Installing JupyterLab globally
 
 
-We need to install the dependencies of the project.
+We'll install JupyterLab globally so it's available across all projects (also because it's easier to manage).
+
+### MacOS
 
 ```bash
-cd dataviz-course
-pip3 install 
+brew install jupyterlab
 ```
+
+### Linux
+
+Below, different instructions for different Linux distributions are listed. Using Ubuntu, we recommand to use the 2️⃣ method.
+{: .alert .alert-warning .alert-soft}
+
+1️⃣ Using pip with the pyenv-managed Python:
+
+```bash
+~/.pyenv/versions/3.13.5/bin/pip install jupyterlab
+```
+
+2️⃣ Alternatively, on Ubuntu/Debian:
+
+```bash
+sudo apt update
+sudo apt install python3-pip
+pip3 install --user jupyterlab
+```
+
+3️⃣ On Fedora/RHEL/CentOS:
+
+```bash
+sudo dnf install python3-pip
+pip3 install --user jupyterlab
+```
+
+### Windows
+
+We recommand following the instruction from the [official repository](https://github.com/jupyterlab/jupyterlab-desktop). Also the official JupyterLab installation documentation for version `4.4.x` is available [here](https://jupyterlab.readthedocs.io/en/stable/install/installation.html) (last stable version as of 2025/09/15).
+
+## Register the virtual env
+
+**We need to register the virtual environment with JupyterLab to be able to use it in JupyterLab.**
+
+### Ensuring we are in the correct folder
+
+**You need to access the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment.**
+
+```bash
+# Make sure to be in the folder containing the virtual environment
+# by running the following command:
+cd dataviz-course
+```
+
+### Ensuring we are in the correct folder
+
+```bash
+# Make sure your virtual environment is activated 
+# by running the following command:
+source env/bin/activate
+```
+
+### Installing `ipykernel`
+
+
+```bash
+# Install `ipykernel`
+pip3 install ipykernel==6.30.1
+```
+
+
+### Registering the virtual environment with JupyterLab
+
+```bash
+# Register the environment as a kernel
+python -m ipykernel install --user --name=env --display-name="datavize-env"
+```
+
+
+
+After installing `ipykernel` in your virtual environment, register it as a kernel for JupyterLab:
+Now you can start JupyterLab from anywhere and select the `dataviz-env` kernel to use your project's virtual environment.
+
+```bash
+# Start JupyterLab 
+jupyter lab 
+```
+
+This command should also work:
+
+```bash
+jupyter-lab
+```
+
+
+
+## Installing the libraries for the course
+
+**Make sure to be in the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment.**
+
+```bash
+# ensuring to be in the correct folder
+cd dataviz-course
+# activating the virtual environment
+source env/bin/activate
+# installing the libraries
+pip3 install matplotlib==3.10.5
+pip3 install ipykernel==6.30.1
+pip3 install numpy==2.3.2
+pip3 install pandas==2.3.2
+pip3 install matplotlib==3.10.5
+pip3 install bokeh==3.8.0
+```
+
+
