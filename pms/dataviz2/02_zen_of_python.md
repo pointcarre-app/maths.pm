@@ -46,16 +46,19 @@ The Pythonic version is more readable, avoids silent errors, and uses a list com
 ### 1️⃣ Beautiful is better than ugly
 ```yaml
 f_type: "codex_"
-height_in_px: 180
+height_in_px: 230
 inline: |
     # Not Pythonic - unclear names, dense
     x = [1, 2, 3, 4, 5]
     y = []
-    for i in x: y.append(i**2) if i%2==0 else None
+    for i in x: 
+        y.append(i**2) if i%2==0 else None
+    print("y =", y)
 
     # Pythonic - clear names, readable
     numbers = [1, 2, 3, 4, 5]
     squared_evens = [num ** 2 for num in numbers if num % 2 == 0]
+    print("squared_evens =", squared_evens)
 ```
 
 ### 2️⃣ Explicit is better than implicit
@@ -237,6 +240,9 @@ The Zen of Python, outlined in PEP 20, consists of 19 aphorisms that guide Pytho
 19. **Namespaces are one honking great idea -- let's do more of those!**  
     Use namespaces (e.g., modules, classes) to organize code logically, avoiding naming conflicts and improving modularity.
 
-## The unwritten (and unexplained) 20th principle
+20. **The real Easter Egg**
+    The 20th principle is intentionally unwritten, reflecting "explicit is better than implicit." More info  [here, at math.python.org](https://mail.python.org/pipermail/python-list/1999-June/001951.html).
 
-The 20th principle is intentionally unwritten, reflecting "explicit is better than implicit." More info  [here, at math.python.org](https://mail.python.org/pipermail/python-list/1999-June/001951.html).
+
+
+

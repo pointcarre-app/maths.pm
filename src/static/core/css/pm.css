@@ -1170,6 +1170,27 @@ pm-number-input button.btn-soft:hover {
   padding-left: 1rem !important;
 }
 
+/* Ordered lists styling */
+.fragment-wrapper[data-f_type="ol_"] ol {
+  margin-top: 0.25rem !important;
+  margin-bottom: 1rem !important;
+  padding-left: 1rem !important;
+  list-style: decimal !important;
+}
+
+/* First level ordered lists - decimal numbers */
+.fragment-wrapper[data-f_type="ol_"] > ol {
+  list-style: decimal !important;
+}
+
+/* Second level nested ordered lists - lower alpha */
+.fragment-wrapper[data-f_type="ol_"] li ol {
+  list-style: lower-alpha !important;
+  font-size: 0.9em; /* Makes the numbers smaller */
+  margin-bottom: 0.25rem !important;
+  padding-left: 1rem !important;
+}
+
 
 
 

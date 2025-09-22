@@ -10,7 +10,7 @@ Organizational aspects, syllabus and evaluation criteria
 <!-- <hr class="my-5 border-base-200"> -->
 
 
-## An first example from Reuters
+## A first example from Reuters
 
 
 ![COVID-19 Mortality in the US](files/covid-2timeseries-us-presidency.jpg)
@@ -116,6 +116,9 @@ The evaluation consists on a data vizualisation project. The students will have 
 ### 2️⃣ Session 2: Static data vizualisation panorama
 
 
+Any issue related to the proper execution of code on your machine must be solved during this session. **Feel free to ask for help.**
+{: .alert .alert-error .alert-soft}
+
 #### Hour 1 & 2: Static graphical representation panorama
 
 - [**`matplotlib` as the Python reference**](01_session_2_a.md)
@@ -135,8 +138,6 @@ The evaluation consists on a data vizualisation project. The students will have 
 ### 3️⃣ Session 3: Advanced data vizualisation
 
 
-Any issue related to the proper execution of code on machine must be solved during this session. **Feel free to ask for help.**
-{: .alert .alert-error .alert-soft}
 
 Each group must have selected a dataset and a project scope during hour 3.
 {: .alert .alert-warning .alert-soft}

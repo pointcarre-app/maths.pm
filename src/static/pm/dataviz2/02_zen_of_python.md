@@ -6,7 +6,21 @@ Programming philosophy, design principles, and guiding values
 
 <!-- <hr class="my-5 border-base-200"> -->
 
-## A first example in practice
+
+## An Easter Egg, or more ?
+
+Run this to see the Zen of Python:
+```yaml
+f_type: "codex_"
+height_in_px: 20
+inline: |
+    import this
+```
+
+
+## Code Examples
+
+### 0️⃣A first example in practice
 ```yaml
 f_type: "codex_"
 height_in_px: 280
@@ -27,7 +41,8 @@ inline: |
 ```
 The Pythonic version is more readable, avoids silent errors, and uses a list comprehension for clarity and brevity.
 
-## More Code Examples
+
+
 ### 1️⃣ Beautiful is better than ugly
 ```yaml
 f_type: "codex_"
@@ -222,12 +237,6 @@ The Zen of Python, outlined in PEP 20, consists of 19 aphorisms that guide Pytho
 19. **Namespaces are one honking great idea -- let's do more of those!**  
     Use namespaces (e.g., modules, classes) to organize code logically, avoiding naming conflicts and improving modularity.
 
-## Easter Egg
-Run this to see the Zen of Python:
-```yaml
-f_type: "codex_"
-height_in_px: 300
-inline: |
-    import this
-```
-The 20th principle is intentionally unwritten, reflecting "explicit is better than implicit."
+## The unwritten (and unexplained) 20th principle
+
+The 20th principle is intentionally unwritten, reflecting "explicit is better than implicit." More info  [here, at math.python.org](https://mail.python.org/pipermail/python-list/1999-June/001951.html).
