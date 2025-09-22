@@ -7,7 +7,7 @@ Programming philosophy, design principles, and guiding values
 <!-- <hr class="my-5 border-base-200"> -->
 
 
-## An Easter Egg, or more ?
+## Is this only an Easter Egg ?
 
 Run this to see the Zen of Python:
 ```yaml
@@ -17,6 +17,8 @@ inline: |
     import this
 ```
 
+
+> It's not an Easter Egg, it's a list of principles that guide Python's design and coding practices. As we deal with very high level abstraction when building data visualisation tools, this list is a good guide to write Pythonic code.
 
 ## Code Examples
 
@@ -46,7 +48,7 @@ The Pythonic version is more readable, avoids silent errors, and uses a list com
 ### 1️⃣ Beautiful is better than ugly
 ```yaml
 f_type: "codex_"
-height_in_px: 230
+height_in_px: 240
 inline: |
     # Not Pythonic - unclear names, dense
     x = [1, 2, 3, 4, 5]
@@ -175,12 +177,12 @@ inline: |
 - Focus on simplicity, readability, and clarity
 - Key areas: aesthetics, explicitness, error handling, design clarity
 
-### 📊 Learning Outcomes
+### ⚛️ Secondary learning Outcomes
 - Write Pythonic code
 - Recognize and avoid anti-patterns
 - Create maintainable, clear code
 
-## 🎯 The 19 Principles Explained
+##  The 19 Principles Explained
 The Zen of Python, outlined in PEP 20, consists of 19 aphorisms that guide Python’s design and coding practices. Below is an explanation of each principle with its practical implications:
 
 1. **Beautiful is better than ugly**  

@@ -15,11 +15,11 @@ Organizational aspects, syllabus and evaluation criteria
 
 ![COVID-19 Mortality in the US](files/covid-2timeseries-us-presidency.jpg)
 
-> Can we make bold statements about the time-series of COVID-19 of numbers of deaths in the US ? Do we need more data ?
+> Can we make bold statements about the time-series of COVID-19 of numbers of deaths in the US ? Do we need more data ? The complete article from **Reuters** is available [here](https://www.reuters.com/world/us/biden-marks-1-million-americans-dead-covid-2022-05-12/).
+To better understand this chart and the conclusion we can draw, more details are provided [here](80_covid_us_stats_analysis.md).
 
 
-The complete article from **Reuters** is available [here](https://www.reuters.com/world/us/biden-marks-1-million-americans-dead-covid-2022-05-12/).
-To better understand this chart and the conclusion we can draw more, details are provided [here](80_covid_us_stats_analysis.md).
+
 
 
 ## About this course
@@ -28,17 +28,14 @@ To better understand this chart and the conclusion we can draw more, details are
 
 ### 📝 Organizational details
 
-**Teaching Language:** English  
-**ECTS Credits:** 1  
-**Duration:** 
-
-- 15 hours lectures and tutorials (i.e. $3\\times 5h= 15h$)
-- 10 hours personal work  
-
-**Teaching material: *(more details below)***
-
-- *"Slides"*
-- Exercises
+- Teaching Language: English  
+- ECTS Credits: 1  
+- Duration: 
+    - 15 hours lectures and tutorials (i.e. $3\\times 5h= 15h$)
+    - 10 hours personal work  
+- Teaching material: [*See below*](#detailed-plan-and-organization-of-the-course)
+    - *"Slides"*
+    - Exercises
 
 
 
