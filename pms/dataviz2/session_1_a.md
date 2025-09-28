@@ -698,7 +698,7 @@ inline: |
 ## 4. Visual  Variables
 
 
-This part of the lecture is available [here: Visual Variables](session_1_a1_visual_retinal.md).
+This part of the lecture is available [here: Visual Variables](session_1_a1_visual.md).
 {: .alert .alert-success .alert-soft}
 
 

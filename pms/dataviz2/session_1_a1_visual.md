@@ -3,7 +3,7 @@
 
 
 [TOC]
-<span class="font-heading">4. Visual (Retinal) Variables <br>For [Graphic Semiology Fundamentals](session_1_a.md) from Session 1</span>
+<span class="font-heading">4. Visual Variables <br>For [Graphic Semiology Fundamentals](session_1_a.md) from Session 1</span>
 {: .pm-subtitle}
 
 
@@ -11,7 +11,7 @@
 ## Notes
 
 - 1️⃣ Session 1: [Graphic Semiology Fundamentals](session_1_a.md) 
-  - <span class="font-heading sm:text-lg">4. Visual (Retinal) Variables</span>
+  - <span class="font-heading sm:text-lg">4. Visual Variables</span>
 
 
 ## 4.1. The Eight Visual Variables
