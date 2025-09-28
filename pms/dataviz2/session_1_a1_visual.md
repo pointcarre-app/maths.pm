@@ -240,7 +240,7 @@ inline: |
 ## 4.4. 💾 Datasets used in the following examples
 
 
-We'll use some panel data: gdp (nominal) per year and per country. The dataset and its documentation are available [here](https://github.com/datasets/gdp).
+We'll use some panel data: GDP (nominal) per year and per country. The dataset and its documentation are available [here](https://github.com/datasets/gdp).
 
 
 

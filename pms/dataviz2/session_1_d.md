@@ -355,13 +355,14 @@ inline: |
 
 ## 3. Real Data Examples with GDP Dataset
 
-### 3.1. Loading External Data
+### 3.1. Loading External Data (`pandas` with `pyodide` as backend)
 
 ```yaml
 f_type: "codex_"
-height_in_px: 180
+height_in_px: 250
 inline: |
-    import matplotlib.pyplot as plt
+    # We actually don't need to import matplotlib here
+    # import matplotlib.pyplot as plt
     import pandas as pd
     from pyodide.http import open_url
     
@@ -369,9 +370,22 @@ inline: |
     url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
     df = pd.read_csv(open_url(url))
     
-    print(f"Dataset shape: {df.shape}")
+    # Exclude non-country entities (regions, income groups, aggregates)
+    exclude_codes = {
+        'AFE', 'AFW', 'ARB', 'CSS', 'CEB', 'CHI', 'EAR', 'EAS', 'TEA', 'EAP', 
+        'EMU', 'ECS', 'TEC', 'ECA', 'EUU', 'FCS', 'HPC', 'HIC', 'IBD', 'IBT', 
+        'IDB', 'IDX', 'IDA', 'LTE', 'LCN', 'LAC', 'TLA', 'LDC', 'LMY', 'LIC', 
+        'LMC', 'MEA', 'TMN', 'MNA', 'MIC', 'NAC', 'OED', 'OSS', 'PSS', 'PST', 
+        'PRE', 'SAS', 'TSA', 'SSF', 'TSS', 'SSA', 'SST', 'UMC', 'WLD'
+    }
+    
+    # Filter to keep only individual countries
+    df_countries = df[~df['Country Code'].isin(exclude_codes)] if 'Country Code' in df.columns else df
+    
+    print(f"Full dataset shape: {df.shape}")
+    print(f"Countries only shape: {df_countries.shape}")
     print(f"Columns: {list(df.columns)}")
-    print(f"Years range: {df['Year'].min()} - {df['Year'].max()}")
+    print(f"Years range: {df_countries['Year'].min()} - {df_countries['Year'].max()}")
 ```
 
 ### 3.2. Line Plot with Real Time Series Data
@@ -389,6 +403,7 @@ inline: |
     df = pd.read_csv(open_url(url))
     
     # Get USA GDP over time (continuous variable)
+    # USA is a real country so no filtering needed here
     usa_gdp = df[df['Country Name'] == 'United States'].copy()
     usa_gdp = usa_gdp[usa_gdp['Year'] >= 2000]
     
@@ -419,8 +434,18 @@ inline: |
     url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
     df = pd.read_csv(open_url(url))
     
+    # Exclude non-country entities
+    exclude_codes = {
+        'AFE', 'AFW', 'ARB', 'CSS', 'CEB', 'CHI', 'EAR', 'EAS', 'TEA', 'EAP', 
+        'EMU', 'ECS', 'TEC', 'ECA', 'EUU', 'FCS', 'HPC', 'HIC', 'IBD', 'IBT', 
+        'IDB', 'IDX', 'IDA', 'LTE', 'LCN', 'LAC', 'TLA', 'LDC', 'LMY', 'LIC', 
+        'LMC', 'MEA', 'TMN', 'MNA', 'MIC', 'NAC', 'OED', 'OSS', 'PSS', 'PST', 
+        'PRE', 'SAS', 'TSA', 'SSF', 'TSS', 'SSA', 'SST', 'UMC', 'WLD'
+    }
+    df_countries = df[~df['Country Code'].isin(exclude_codes)] if 'Country Code' in df.columns else df
+    
     # Top 5 countries by GDP in 2020 (nominal categories)
-    df_2020 = df[df['Year'] == 2020].nlargest(5, 'Value')
+    df_2020 = df_countries[df_countries['Year'] == 2020].nlargest(5, 'Value')
     
     # Create bar chart
     plt.figure(figsize=(10, 5))
@@ -435,7 +460,7 @@ inline: |
     plt.show()
 ```
 
-### 3.4. Scatter Plot - GDP Growth Comparison
+### 3.4. Scatter Plot - Year-to-Year GDP Growth Variations
 
 ```yaml
 f_type: "codex_"
@@ -450,64 +475,272 @@ inline: |
     url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
     df = pd.read_csv(open_url(url))
     
-    # Compare GDP in 2000 vs 2020 for countries
-    df_2000 = df[df['Year'] == 2000][['Country Name', 'Value']].rename(columns={'Value': 'GDP_2000'})
-    df_2020 = df[df['Year'] == 2020][['Country Name', 'Value']].rename(columns={'Value': 'GDP_2020'})
-    df_compare = df_2000.merge(df_2020, on='Country Name')
+    # Pick Turkiye	 - a country with high economic volatility
+    country = 'Turkiye'
+    country_data = df[df['Country Name'] == country].copy()
+    country_data = country_data.sort_values('Year')
     
-    # Filter for visibility
-    df_compare = df_compare[(df_compare['GDP_2000'] > 1e11) & (df_compare['GDP_2020'] > 1e11)]
+    # Calculate year-to-year growth rate (percentage change)
+    country_data['Growth_Rate'] = country_data['Value'].pct_change() * 100
+    
+    # Remove the first row (no previous year to compare)
+    country_data = country_data.dropna(subset=['Growth_Rate'])
+    
+    # Filter to recent decades for clarity (1990 onwards)
+    country_data = country_data[country_data['Year'] >= 1990]
+    
+    # Normalize GDP values for marker sizes (50 to 500 range)
+    min_gdp = country_data['Value'].min()
+    max_gdp = country_data['Value'].max()
+    country_data['Marker_Size'] = 50 + 450 * (country_data['Value'] - min_gdp) / (max_gdp - min_gdp)
     
     # Create scatter plot
-    plt.figure(figsize=(10, 8))
-    plt.scatter(df_compare['GDP_2000'] / 1e12, df_compare['GDP_2020'] / 1e12, 
-                s=80, alpha=0.6, c='blue', edgecolor='black')
+    plt.figure(figsize=(12, 7))
     
-    # Add diagonal reference line
-    max_val = max(df_compare[['GDP_2000', 'GDP_2020']].max() / 1e12)
-    plt.plot([0, max_val], [0, max_val], 'r--', alpha=0.5, label='No growth line')
+    # Color points based on positive (green) or negative (red) growth
+    colors = ['green' if x > 0 else 'red' for x in country_data['Growth_Rate']]
     
-    plt.xlabel('GDP 2000 (Trillion USD)', fontsize=12)
-    plt.ylabel('GDP 2020 (Trillion USD)', fontsize=12)
-    plt.title('GDP Growth: 2000 vs 2020', fontsize=14)
-    plt.legend()
+    scatter = plt.scatter(country_data['Year'], country_data['Growth_Rate'], 
+                         s=country_data['Marker_Size'], alpha=0.6, 
+                         c=colors, edgecolor='black', linewidth=1)
+    
+    # Add horizontal line at y=0
+    plt.axhline(y=0, color='gray', linestyle='-', alpha=0.5, linewidth=1)
+    
+    # Add annotations for crisis years
+    crisis_years = {1994: 'Currency Crisis', 2001: 'Banking Crisis', 2009: 'Global Crisis', 2018: 'Currency Crisis'}
+    for year, label in crisis_years.items():
+        if year in country_data['Year'].values:
+            row = country_data[country_data['Year'] == year].iloc[0]
+            plt.annotate(label, xy=(year, row['Growth_Rate']), 
+                        xytext=(year, row['Growth_Rate'] - 2.5),
+                        fontsize=9, ha='center',
+                        arrowprops=dict(arrowstyle='->', alpha=0.5))
+    
+    # Create legend for marker sizes
+    # Calculate GDP values for legend (in billions)
+    gdp_low = min_gdp / 1e9
+    gdp_mid = (min_gdp + max_gdp) / 2 / 1e9
+    gdp_high = max_gdp / 1e9
+    
+    # Create dummy plots for legend
+    for size, gdp_val, label in [(50, gdp_low, f'${gdp_low:.0f}B'),
+                                   (275, gdp_mid, f'${gdp_mid:.0f}B'),
+                                   (500, gdp_high, f'${gdp_high:.0f}B')]:
+        plt.scatter([], [], s=size, c='gray', alpha=0.6, 
+                   edgecolor='black', linewidth=1, label=label)
+    
+    # Add legend in upper left with title
+    plt.legend(title='GDP Value', loc='upper left', fontsize=9, 
+              title_fontsize=10, framealpha=0.9)
+
+
+    # Adding a plot mostly to better assess the horizontal positions of the circles
+    plt.plot(country_data['Year'].tolist(), 
+    country_data['Growth_Rate'].tolist(),
+    color='black', linewidth=0.4)
+    
+    plt.xlabel('Year', fontsize=12)
+    plt.ylabel('GDP Growth Rate (%)', fontsize=12)
+    plt.title(f'{country}: GDP Year-to-Year Growth Rate\n(Marker size represents GDP value)', fontsize=14)
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.show()
 ```
 
-### 3.5. Complex Visualization with Subplots
+### 3.5. Complex Visualization with Subplots - Global GDP Analysis
 
 ```yaml
 f_type: "codex_"
-height_in_px: 600
+height_in_px: 700
 inline: |
     import matplotlib.pyplot as plt
     import pandas as pd
+    import numpy as np
     from pyodide.http import open_url
     
     # Load data
     url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
     df = pd.read_csv(open_url(url))
     
-    # Prepare data for different countries
-    countries = ['United States', 'China', 'Japan', 'Germany']
-    colors = ['blue', 'red', 'green', 'orange']
+    # Exclude non-country entities (regions, income groups, aggregates)
+    exclude_codes = {
+        'AFE', 'AFW', 'ARB', 'CSS', 'CEB', 'CHI', 'EAR', 'EAS', 'TEA', 'EAP',
+        'EMU', 'ECS', 'TEC', 'ECA', 'EUU', 'FCS', 'HPC', 'HIC', 'IBD', 'IBT',
+        'IDB', 'IDX', 'IDA', 'LTE', 'LCN', 'LAC', 'TLA', 'LDC', 'LMY', 'LIC',
+        'LMC', 'MEA', 'TMN', 'MNA', 'MIC', 'NAC', 'OED', 'OSS', 'PSS', 'PST',
+        'PRE', 'SAS', 'TSA', 'SSF', 'TSS', 'SSA', 'SST', 'UMC', 'WLD'
+    }
+    df_countries = df[~df['Country Code'].isin(exclude_codes)] if 'Country Code' in df.columns else df
     
-    # Create 2x2 subplots
-    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
-    fig.suptitle('GDP Trends for Major Economies', fontsize=16)
+    # Create 2x2 subplots with different insights
+    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+    fig.suptitle('Global GDP Patterns and Correlations (All Countries)', fontsize=16, y=1.02)
     
-    for idx, (country, color) in enumerate(zip(countries, colors)):
-        ax = axes[idx // 2, idx % 2]
-        country_data = df[(df['Country Name'] == country) & (df['Year'] >= 2010)]
+    # --- TOP LEFT: GDP Size vs Growth Volatility Correlation ---
+    ax1 = axes[0, 0]
+    # Calculate average GDP and growth volatility for each country (2000-2020)
+    recent_data = df_countries[df_countries['Year'] >= 2000].copy()
+    
+    country_stats = []
+    for country in recent_data['Country Name'].unique():
+        country_df = recent_data[recent_data['Country Name'] == country].sort_values('Year')
+        if len(country_df) >= 5:  # Need enough data points
+            growth_rates = country_df['Value'].pct_change() * 100
+            avg_gdp = country_df['Value'].mean() / 1e9  # In billions
+            volatility = growth_rates.std()
+            if not pd.isna(volatility) and avg_gdp > 0:
+                country_stats.append({
+                    'Country': country,
+                    'Avg_GDP_Billion': avg_gdp,
+                    'Growth_Volatility': volatility
+                })
+    
+    stats_df = pd.DataFrame(country_stats)
+    
+    # Create scatter plot with log scale for GDP
+    scatter = ax1.scatter(stats_df['Avg_GDP_Billion'], stats_df['Growth_Volatility'],
+                         s=30, alpha=0.6, c=np.log10(stats_df['Avg_GDP_Billion']),
+                         cmap='viridis', edgecolor='black', linewidth=0.5)
+    ax1.set_xscale('log')
+    ax1.set_xlabel('Average GDP (Billion USD, log scale)', fontsize=10)
+    ax1.set_ylabel('Growth Rate Volatility (%)', fontsize=10)
+    ax1.set_title('GDP Size vs Growth Volatility\n(Smaller economies tend to be more volatile)', fontsize=11)
+    ax1.grid(True, alpha=0.3)
+    
+    # --- TOP RIGHT: Distribution of Growth Rates by Decade ---
+    ax2 = axes[0, 1]
+    # Calculate growth rates for all countries
+    growth_data = []
+    for country in df_countries['Country Name'].unique():
+        country_df = df_countries[df_countries['Country Name'] == country].sort_values('Year')
+        country_df['Growth_Rate'] = country_df['Value'].pct_change() * 100
+        country_df['Decade'] = (country_df['Year'] // 10) * 10
+        growth_data.append(country_df[['Country Name', 'Year', 'Decade', 'Growth_Rate']])
+    
+    growth_df = pd.concat(growth_data, ignore_index=True).dropna()
+    
+    # Box plot by decade
+    decades = [1970, 1980, 1990, 2000, 2010, 2020]
+    box_data = [growth_df[growth_df['Decade'] == d]['Growth_Rate'].values for d in decades]
+    box_data = [data[~np.isnan(data)] for data in box_data]  # Remove NaN values
+    
+    bp = ax2.boxplot(box_data, positions=range(len(decades)), widths=0.7,
+                     patch_artist=True, showfliers=False)
+    
+    # Color boxes
+    colors_box = ['#ffcccc', '#ffddaa', '#ffffcc', '#ccffcc', '#ccddff', '#ffccff']
+    for patch, color in zip(bp['boxes'], colors_box):
+        patch.set_facecolor(color)
+        patch.set_alpha(0.7)
+    
+    ax2.set_xticks(range(len(decades)))
+    ax2.set_xticklabels([f"{d}s" for d in decades])
+    ax2.set_ylabel('GDP Growth Rate (%)', fontsize=10)
+    ax2.set_title('Global Growth Rate Distribution by Decade\n(Medians, quartiles, and ranges)', fontsize=11)
+    ax2.grid(True, axis='y', alpha=0.3)
+    ax2.axhline(y=0, color='red', linestyle='--', alpha=0.5, linewidth=0.8)
+    
+    # --- BOTTOM LEFT: Top 10 vs Bottom 10 GDP Countries Growth Comparison ---
+    ax3 = axes[1, 0]
+    # Get latest year data for ranking
+    latest_year = df_countries['Year'].max()
+    latest_data = df_countries[df_countries['Year'] == latest_year].sort_values('Value', ascending=False)
+    
+    top_10 = latest_data.head(10)['Country Name'].tolist()
+    bottom_10 = latest_data[latest_data['Value'] > 0].tail(10)['Country Name'].tolist()
+    
+    # Calculate average growth rates for each group (2000-2020)
+    years = range(2000, 2021)
+    top_growth = []
+    bottom_growth = []
+    
+    for year in years:
+        year_data = df_countries[df_countries['Year'] == year]
         
-        ax.plot(country_data['Year'], country_data['Value'] / 1e12, 
-                color=color, linewidth=2, marker='o', markersize=3)
-        ax.set_title(country)
-        ax.set_xlabel('Year')
-        ax.set_ylabel('GDP (Trillion USD)')
-        ax.grid(True, alpha=0.3)
+        # Top 10 average growth
+        top_data = year_data[year_data['Country Name'].isin(top_10)]
+        if len(top_data) > 0:
+            top_prev = df_countries[(df_countries['Year'] == year-1) & 
+                                   (df_countries['Country Name'].isin(top_10))]
+            if len(top_prev) > 0:
+                merged = top_data.merge(top_prev, on='Country Name', suffixes=('', '_prev'))
+                growth = ((merged['Value'] - merged['Value_prev']) / merged['Value_prev'] * 100).mean()
+                top_growth.append(growth)
+            else:
+                top_growth.append(np.nan)
+        else:
+            top_growth.append(np.nan)
+        
+        # Bottom 10 average growth  
+        bottom_data = year_data[year_data['Country Name'].isin(bottom_10)]
+        if len(bottom_data) > 0:
+            bottom_prev = df_countries[(df_countries['Year'] == year-1) & 
+                                      (df_countries['Country Name'].isin(bottom_10))]
+            if len(bottom_prev) > 0:
+                merged = bottom_data.merge(bottom_prev, on='Country Name', suffixes=('', '_prev'))
+                growth = ((merged['Value'] - merged['Value_prev']) / merged['Value_prev'] * 100).mean()
+                bottom_growth.append(growth)
+            else:
+                bottom_growth.append(np.nan)
+        else:
+            bottom_growth.append(np.nan)
+    
+    ax3.plot(years, top_growth, 'b-', linewidth=2, label='Top 10 Economies', alpha=0.8)
+    ax3.plot(years, bottom_growth, 'r-', linewidth=2, label='Smallest 10 Economies', alpha=0.8)
+    ax3.fill_between(years, top_growth, 0, alpha=0.3, color='blue')
+    ax3.fill_between(years, bottom_growth, 0, alpha=0.3, color='red')
+    
+    ax3.set_xlabel('Year', fontsize=10)
+    ax3.set_ylabel('Average GDP Growth Rate (%)', fontsize=10)
+    ax3.set_title('Growth Rates: Large vs Small Economies\n(Average growth of top 10 vs bottom 10)', fontsize=11)
+    ax3.legend(loc='upper left', fontsize=9)
+    ax3.grid(True, alpha=0.3)
+    ax3.axhline(y=0, color='gray', linestyle='-', alpha=0.5)
+    
+    # --- BOTTOM RIGHT: Number of Countries in Recession by Year ---
+    ax4 = axes[1, 1]
+    recession_count = []
+    boom_count = []
+    years_list = range(1970, 2021)
+    
+    for year in years_list:
+        year_data = df_countries[df_countries['Year'] == year]
+        prev_year_data = df_countries[df_countries['Year'] == year-1]
+        
+        if len(year_data) > 0 and len(prev_year_data) > 0:
+            merged = year_data.merge(prev_year_data, on='Country Name', suffixes=('', '_prev'))
+            merged['Growth'] = (merged['Value'] - merged['Value_prev']) / merged['Value_prev'] * 100
+            
+            recession = len(merged[merged['Growth'] < 0])
+            boom = len(merged[merged['Growth'] > 5])
+            
+            recession_count.append(recession)
+            boom_count.append(boom)
+        else:
+            recession_count.append(0)
+            boom_count.append(0)
+    
+    # Create stacked area chart
+    ax4.fill_between(years_list, 0, recession_count, color='red', alpha=0.6, label='Recession (<0% growth)')
+    ax4.fill_between(years_list, 0, boom_count, color='green', alpha=0.6, label='Boom (>5% growth)')
+    
+    # Mark major crisis years
+    crisis_years = {1973: 'Oil Crisis', 1982: 'Debt Crisis', 1991: 'USSR Collapse', 
+                   1997: 'Asian Crisis', 2008: 'Financial Crisis', 2020: 'COVID-19'}
+    
+    for year, label in crisis_years.items():
+        if year in years_list:
+            idx = list(years_list).index(year)
+            ax4.axvline(x=year, color='black', linestyle='--', alpha=0.3)
+            ax4.text(year, max(recession_count) * 0.9, label, rotation=90, 
+                    fontsize=8, ha='right', va='bottom')
+    
+    ax4.set_xlabel('Year', fontsize=10)
+    ax4.set_ylabel('Number of Countries', fontsize=10)
+    ax4.set_title('Global Economic Cycles: Countries in Recession vs Boom\n(Highlighting major crisis years)', fontsize=11)
+    ax4.legend(loc='upper right', fontsize=9)
+    ax4.grid(True, alpha=0.3)
     
     plt.tight_layout()
     plt.show()

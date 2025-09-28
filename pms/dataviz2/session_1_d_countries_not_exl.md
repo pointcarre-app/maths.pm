@@ -64,7 +64,7 @@ Understanding data types and basic visualization with matplotlib
 
 ```yaml
 f_type: "codex_"
-height_in_px: 180
+height_in_px: 250
 inline: |
     import matplotlib.pyplot as plt
     import pandas as pd
@@ -75,9 +75,22 @@ inline: |
     url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
     df = pd.read_csv(open_url(url))
     
-    print(f"Dataset shape: {df.shape}")
+    # Exclude non-country entities (regions, income groups, aggregates)
+    exclude_codes = {
+        'AFE', 'AFW', 'ARB', 'CSS', 'CEB', 'CHI', 'EAR', 'EAS', 'TEA', 'EAP', 
+        'EMU', 'ECS', 'TEC', 'ECA', 'EUU', 'FCS', 'HPC', 'HIC', 'IBD', 'IBT', 
+        'IDB', 'IDX', 'IDA', 'LTE', 'LCN', 'LAC', 'TLA', 'LDC', 'LMY', 'LIC', 
+        'LMC', 'MEA', 'TMN', 'MNA', 'MIC', 'NAC', 'OED', 'OSS', 'PSS', 'PST', 
+        'PRE', 'SAS', 'TSA', 'SSF', 'TSS', 'SSA', 'SST', 'UMC', 'WLD'
+    }
+    
+    # Filter to keep only individual countries
+    df_countries = df[~df['Country Code'].isin(exclude_codes)] if 'Country Code' in df.columns else df
+    
+    print(f"Full dataset shape: {df.shape}")
+    print(f"Countries only shape: {df_countries.shape}")
     print(f"Columns: {list(df.columns)}")
-    print(f"Years range: {df['Year'].min()} - {df['Year'].max()}")
+    print(f"Years range: {df_countries['Year'].min()} - {df_countries['Year'].max()}")
 ```
 
 ### 2.2. Core Matplotlib Components
@@ -123,6 +136,7 @@ inline: |
     df = pd.read_csv(open_url(url))
     
     # Get USA GDP over time (continuous variable)
+    # USA is a real country so no filtering needed here
     usa_gdp = df[df['Country Name'] == 'United States'].copy()
     usa_gdp = usa_gdp[usa_gdp['Year'] >= 2000]
     
@@ -153,8 +167,18 @@ inline: |
     url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
     df = pd.read_csv(open_url(url))
     
+    # Exclude non-country entities
+    exclude_codes = {
+        'AFE', 'AFW', 'ARB', 'CSS', 'CEB', 'CHI', 'EAR', 'EAS', 'TEA', 'EAP', 
+        'EMU', 'ECS', 'TEC', 'ECA', 'EUU', 'FCS', 'HPC', 'HIC', 'IBD', 'IBT', 
+        'IDB', 'IDX', 'IDA', 'LTE', 'LCN', 'LAC', 'TLA', 'LDC', 'LMY', 'LIC', 
+        'LMC', 'MEA', 'TMN', 'MNA', 'MIC', 'NAC', 'OED', 'OSS', 'PSS', 'PST', 
+        'PRE', 'SAS', 'TSA', 'SSF', 'TSS', 'SSA', 'SST', 'UMC', 'WLD'
+    }
+    df_countries = df[~df['Country Code'].isin(exclude_codes)] if 'Country Code' in df.columns else df
+    
     # Top 5 countries by GDP in 2020 (nominal categories)
-    df_2020 = df[df['Year'] == 2020].nlargest(5, 'Value')
+    df_2020 = df_countries[df_countries['Year'] == 2020].nlargest(5, 'Value')
     
     # Create bar chart
     plt.figure(figsize=(10, 5))
@@ -184,9 +208,19 @@ inline: |
     url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
     df = pd.read_csv(open_url(url))
     
+    # Exclude non-country entities
+    exclude_codes = {
+        'AFE', 'AFW', 'ARB', 'CSS', 'CEB', 'CHI', 'EAR', 'EAS', 'TEA', 'EAP', 
+        'EMU', 'ECS', 'TEC', 'ECA', 'EUU', 'FCS', 'HPC', 'HIC', 'IBD', 'IBT', 
+        'IDB', 'IDX', 'IDA', 'LTE', 'LCN', 'LAC', 'TLA', 'LDC', 'LMY', 'LIC', 
+        'LMC', 'MEA', 'TMN', 'MNA', 'MIC', 'NAC', 'OED', 'OSS', 'PSS', 'PST', 
+        'PRE', 'SAS', 'TSA', 'SSF', 'TSS', 'SSA', 'SST', 'UMC', 'WLD'
+    }
+    df_countries = df[~df['Country Code'].isin(exclude_codes)] if 'Country Code' in df.columns else df
+    
     # Compare GDP in 2000 vs 2020 for countries
-    df_2000 = df[df['Year'] == 2000][['Country Name', 'Value']].rename(columns={'Value': 'GDP_2000'})
-    df_2020 = df[df['Year'] == 2020][['Country Name', 'Value']].rename(columns={'Value': 'GDP_2020'})
+    df_2000 = df_countries[df_countries['Year'] == 2000][['Country Name', 'Value']].rename(columns={'Value': 'GDP_2000'})
+    df_2020 = df_countries[df_countries['Year'] == 2020][['Country Name', 'Value']].rename(columns={'Value': 'GDP_2020'})
     df_compare = df_2000.merge(df_2020, on='Country Name')
     
     # Filter for visibility
@@ -224,7 +258,8 @@ inline: |
     url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
     df = pd.read_csv(open_url(url))
     
-    # Prepare data for different countries
+    # Note: These are all real countries, so no filtering needed here
+    # But for completeness, showing how to filter if needed
     countries = ['United States', 'China', 'Japan', 'Germany']
     colors = ['blue', 'red', 'green', 'orange']
     
