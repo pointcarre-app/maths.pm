@@ -38,10 +38,11 @@
     <dialog id="my_modal_1" class="modal">
       <div class="modal-box">{% include "base/modal-info-content.html" %}</div>
     </dialog>
-    <a class="btn  btn-square btn-ghost"
-       style="box-shadow: none !important;
-              border: none !important;
-              font-weight:400">
+    <button id="interropability-button"
+            class="btn btn-square btn-ghost"
+            style="box-shadow: none !important;
+                   border: none !important;
+                   font-weight:400">
       <svg xmlns="http://www.w3.org/2000/svg"
            width="20"
            height="20"
@@ -56,7 +57,7 @@
         <path d="m17 8-5-5-5 5"></path>
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
       </svg>
-    </a>
+    </button>
     <a href="{{ DOMAIN_CONFIG['templating']['button_primary_href'] }}"
        class="btn btn-sm sm:btn-md  btn-primary"
        style="padding: 0.5rem 0.75rem;

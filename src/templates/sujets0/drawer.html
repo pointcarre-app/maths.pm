@@ -102,6 +102,42 @@
       </ul>
     </li> #}
     <li class="mt-6">
+      <div class="text-sm font-semibold mb-2">Largeur</div>
+      <ul class="">
+        <li>
+          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left width-btn"
+                  data-width="640px"
+                  style="margin-bottom: 0.25rem;
+                         padding-left: 0.75rem;
+                         justify-content: flex-start;
+                         font-weight: 300;
+                         font-size: 0.875rem">📱 Petit (640px)</button>
+        </li>
+        <li>
+          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left width-btn"
+                  data-width="768px"
+                  style="margin-bottom: 0.25rem;
+                         padding-left: 0.75rem;
+                         justify-content: flex-start;
+                         font-weight: 300;
+                         font-size: 0.875rem">📄 Moyen (768px)</button>
+        </li>
+        <li>
+          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left width-btn"
+                  data-width="1024px"
+                  style="margin-bottom: 0.25rem;
+                         padding-left: 0.75rem;
+                         justify-content: flex-start;
+                         font-weight: 300;
+                         font-size: 0.875rem">🖥️ Grand (1024px)</button>
+        </li>
+        {# <li>
+          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left" onclick="document.getElementById('pm-wrapper-max-width').style.maxWidth = 'none'" style="margin-bottom: 0.25rem; padding-left: 0.75rem; justify-content: flex-start; font-weight: 300; font-size: 0.875rem">📺 Plein écran</button>
+        </li> #}
+      </ul>
+    </li>
+
+    <li class="mt-6">
       <div class="text-sm font-semibold mb-2">Thèmes</div>
       <ul class="">
         <li>
@@ -473,6 +509,24 @@
         //console.error(e);
         //}
 
+        // Width management
+        function setWidth(width) {
+            const pmWrapper = document.getElementById('pm-wrapper-max-width');
+            if (pmWrapper) {
+                pmWrapper.style.maxWidth = width;
+                localStorage.setItem("pm-width", width);
+            }
+        }
+
+        function initializeWidth() {
+            const savedWidth = localStorage.getItem("pm-width");
+            if (savedWidth) {
+                setWidth(savedWidth);
+            } else {
+                setWidth('640px'); // Default width
+            }
+        }
+
         // Theme management
         function setTheme(theme) {
             document.documentElement.setAttribute("data-theme", theme);
@@ -492,6 +546,16 @@
         }
 
         initializeTheme();
+        initializeWidth();
+
+        // Add event listeners to width buttons
+        const widthButtons = document.querySelectorAll(".width-btn");
+        widthButtons.forEach((button) => {
+            const width = button.getAttribute("data-width");
+            button.addEventListener("click", function() {
+                setWidth(width);
+            });
+        });
 
         // Add event listeners to theme buttons - updated for new button structure
         const themeButtons = document.querySelectorAll(

@@ -226,15 +226,15 @@ pm-radio > div > button.btn-soft:hover {
 /* Also increase the bottom margin of the p itself before heavy content */
 /* .fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="svg_"]) p.fragment, */
 /* TODO:sel To see, cause make sense */
-.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="image_"]) p.fragment,
+/* .fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="image_"]) p.fragment, */
 /* .fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="table_"]) p.fragment, */
 /* .fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="codex_"]) p.fragment, */
 /* .fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="code_"]) p.fragment, */
-.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="graph_"]) p.fragment,
-.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="tabvar_"]) p.fragment {
-  margin-top: 0.5rem;
+/* .fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="graph_"]) p.fragment, */
+/* .fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="tabvar_"]) p.fragment { */
+  /* margin-top: 0.5rem;
   margin-bottom: 2.25rem;
-}
+} */
 
 .fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="codex_"]) p.fragment {
   margin-bottom: 1rem;
@@ -296,9 +296,9 @@ h4.fragment {
 
 
 
-.fragment-wrapper[data-f_type="h2_"] + .fragment-wrapper[data-f_type="h3_"] h3.fragment {
+/* .fragment-wrapper[data-f_type="h2_"] + .fragment-wrapper[data-f_type="h3_"] h3.fragment {
   margin-top: 0.7rem;
-}
+} */
 
 .fragment-wrapper[data-f_type="h2_"]  {
   margin-top: 1rem;
@@ -1165,7 +1165,9 @@ pm-number-input button.btn-soft:hover {
 /* Second level (nested) - small disc bullets */
 .fragment-wrapper[data-f_type="ul_"] li ul {
   list-style: disc !important;
-  font-size: 0.9em; /* Makes the disc smaller */
+  /* Makes the disc smaller */
+  /* And also change the size lol so dont use it as lists become ugly as fuck */
+  /* font-size: 0.9em;  */
   margin-bottom: 0.25rem !important;
   padding-left: 1rem !important;
 }

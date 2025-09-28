@@ -193,6 +193,6 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 - [**Practical work per group: final project**](01_session_5_a.md)
 
 
-#### Hour 2: Group work: final project
+#### Hour 3: Group work: final project presentation 
 
-- [**Practical work per group: final project**](01_session_5_b.md)
+- [**Practical work per group: final project**](01_session_5_c.md)

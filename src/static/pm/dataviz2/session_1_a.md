@@ -39,33 +39,56 @@
 
 
 
+### 1.2. Historical Evolution
+
+- Bertin's laboratory, the Laboratoire de Graphique, crystallized these principles through interdisciplinary collaboration, handling demands across social sciences, geography, and cartography.
+- The 1967 *“Sémiologie graphique”* was a paradigm shift, bringing a rational, systematic language for visual analytics.
 
 
 
-### 1.2. A first example from [this research paper](https://www.science.org/doi/10.1126/sciadv.aaw2594)
+
+
+### 1.3. An example from [a research paper](https://www.science.org/doi/10.1126/sciadv.aaw2594)
 
 
 
-This graph comes from the research paper: *Different languages, similar encoding efficiency: Comparable information rates across the human communicative niche* by Christophe Coupé, Yoon Mi Oh, Dan Dediu, and François Pellegrino.<br>[Source: Science.org](https://www.science.org/doi/10.1126/sciadv.aaw2594)
+> This graph comes from the research paper: *Different languages, similar encoding efficiency: Comparable information rates across the human communicative niche* by Christophe Coupé, Yoon Mi Oh, Dan Dediu, and François Pellegrino.<br>[Source: Science.org](https://www.science.org/doi/10.1126/sciadv.aaw2594)
+
+
+
+### 1.4. [Optional] Information Rate (IR) Definition
+
+- In the graph below, "SR" stands for *Speech Rate* and "IR" stands for *Information Rate*.
+- Based on Shannon's information theory in the study:
+    - Information Density ($ID$): Average bits of information per syllable (conditional entropy, accounting for syllable dependencies).
+    - Speech Rate ($SR$): Syllables spoken per second.
+- $IR = ID \\times SR$ (bits/second).
+- Across $17$ languages, $IR$ averages $\text{\textasciitilde} 39$ bits/s, showing languages encode info at similar rates despite differences in $ID$ or $SR$.
+
+
 
 
 ![Different languages, similar encoding efficiency: Comparable information rates across the human communicative niche - by Christophe Coupé, Yoon Mi Oh, Dan Dediu, and François Pellegrino. Source: Science.org](files/language_bits_per_second-original.jpeg)
 {: .max-w-[550px] .mx-auto .my-6}
 
 
+> More explanations detailed on [here](session_1_ashannon.md).
 
 
-### 1.3. [An adapation](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others) of this graph from The Economist
+
+### 1.4. [An adapation](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others) from The Economist
 
 
-This graph comes from the article: *Why are some languages spoken faster than others?* [by The Economist](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others) (Sep 28th 2019).
+> This graph comes from the article: *Why are some languages spoken faster than others?* by The Economist (Sep 28th 2019). [Link](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others)
 
 ![Why are some languages spoken faster than others? by The Economist - Sep 28th 2019](files/language_bits_per_second.webp)
 {: .max-w-[550px] .mx-auto .my-6}
 
 
 
-### 1.4. Discussion
+### 1.5.  💬 Discussion
+
+**Looking at the two above graphs:**
 
 - What are the signifiers ?
 - What are the signified ?
@@ -76,31 +99,116 @@ This graph comes from the article: *Why are some languages spoken faster than ot
 
 
 
-### 1.5. Historical Evolution
 
-- Bertin's laboratory, the Laboratoire de Graphique, crystallized these principles through interdisciplinary collaboration, handling demands across social sciences, geography, and cartography.
-- The 1967 *“Sémiologie graphique”* was a paradigm shift, bringing a rational, systematic language for visual analytics.
+## 2. Structure of Information
 
 
-## 2. Information Analysis
 
-### 2.1. Structure of Information
-
-### 2.1.1. Invariant and Components
+### 2.1. Theoretical Foundations
 
 - **Invariant (Theme/Essence):** The unifying core of the data (e.g., a common subject or theme linking all data points).
 - **Components (Variables/Items):** Distinct fields or characteristics in the dataset (nominal, ordinal, quantitative).
 - Components can relate differentially (qualitative categories), ordinally (rank/order), or quantitatively (measured scales).
+- Graphic System: Theoretical Framework
+    - The cartographic/graphic “plane” is the two-dimensional space in which elements are organized.
+    - It translates “plane geometry” into meaningful arrangements: quantities, categories, relationships, or spatial representations.
+- **Classes of Representation**
+    - **Diagrams:** Abstract data structures (e.g., time series, bar charts).
+    - **Networks:** Relationships among entities (e.g., graphs, flow diagrams).
+    - **Maps:** Spatial embedding of data (e.g., geographic maps).
 
 
 
+### 2.2 Datasets used in the following examples
 
-### 2.1.2. An example with a bar chart
+```yaml
+f_type: "codex_"
+height_in_px: 600
+inline: |
+    import matplotlib.pyplot as plt
+    import pandas as pd
+    
+    # Raw data lists - all buildings over 500m
+    buildings = ['Burj Khalifa', 'Merdeka 118', 'Shanghai Tower', 'Abraj Al-Bait', 'Ping An']
+    heights = [828, 679, 632, 601, 599]  # meters
+    cities = ['Dubai', 'Kuala Lumpur', 'Shanghai', 'Mecca', 'Shenzhen']
+    completion_years = [2010, 2023, 2015, 2012, 2017]
+    
+    # Create a DataFrame for better display
+    df = pd.DataFrame({
+        'Building': buildings,
+        'Height (m)': heights,
+        'City': cities,
+        'Completion Year': completion_years
+    })
+    
+    # Sort by height for better visualization
+    df_sorted = df.sort_values('Height (m)', ascending=False).reset_index(drop=True)
+    
+    # Create a clean table visualization
+    fig, ax = plt.subplots(figsize=(12, 8))
+    ax.axis('tight')
+    ax.axis('off')
+    
+    # Create table
+    table = ax.table(cellText=df_sorted.values,
+                    colLabels=df_sorted.columns,
+                    cellLoc='center',
+                    loc='center',
+                    bbox=[0, 0.3, 1, 0.6])
+    
+    # Style the table
+    table.auto_set_font_size(False)
+    table.set_fontsize(12)
+    table.scale(1, 2)
+    
+    # Style header row
+    for i in range(len(df_sorted.columns)):
+        table[(0, i)].set_facecolor('#4472C4')
+        table[(0, i)].set_text_props(weight='bold', color='white')
+    
+    # Style data rows with alternating colors
+    for i in range(1, len(df_sorted) + 1):
+        for j in range(len(df_sorted.columns)):
+            if i % 2 == 0:
+                table[(i, j)].set_facecolor('#F2F2F2')
+            else:
+                table[(i, j)].set_facecolor('white')
+    
+    # Add title and description
+    plt.title('DATASET: World\'s Tallest Buildings Over 500m\n' +
+              'INVARIANT: Buildings | COMPONENTS: Name, Height, City, Year',
+              fontsize=16, fontweight='bold', pad=20)
+    
+    # Add summary statistics
+    plt.figtext(0.05, 0.15, 
+               f"Dataset Summary:\n" +
+               f"• Total buildings: {len(buildings)}\n" +
+               f"• Height range: {min(heights)}m - {max(heights)}m\n" +
+               f"• Year range: {min(completion_years)} - {max(completion_years)}\n" +
+               f"• Average height: {sum(heights)/len(heights):.0f}m",
+               fontsize=11, 
+               bbox=dict(boxstyle="round,pad=0.5", facecolor="lightblue", alpha=0.3))
+    
+    plt.figtext(0.35, 0.15,
+               f"Data Types:\n" +
+               f"• Building names: Nominal (categorical)\n" +
+               f"• Heights: Quantitative (continuous)\n" +
+               f"• Cities: Nominal (categorical)\n" +
+               f"• Years: Quantitative (discrete)",
+               fontsize=11,
+               bbox=dict(boxstyle="round,pad=0.5", facecolor="lightgreen", alpha=0.3))
+    
+    plt.tight_layout()
+    plt.show()
+```
+
+### 2.3. An example with a bar chart
 
 
 ```yaml
 f_type: "codex_"
-height_in_px: 800
+height_in_px: 950
 inline: |
     import matplotlib.pyplot as plt
 
@@ -120,123 +228,476 @@ inline: |
     heights_sorted = [item[2] for item in sorted_data]
     cities_sorted = [item[3] for item in sorted_data]
 
-    # Simple bar chart with greys and narrower bars
-    plt.figure(figsize=(14, 8))
+    # Create larger figure with high DPI
+    plt.figure(figsize=(16, 10), dpi=150)
     colors = ['#2C3E50', '#34495E', '#5D6D7E', '#85929E', '#AEB6BF']  # Different shades of grey
     bars = plt.bar(years_sorted, heights_sorted, width=1, color=colors, alpha=0.9, 
                 edgecolor='black', linewidth=2)
 
-    # Add building names and cities above bars
+    # Add building names and cities above bars with bigger text and more space
     for i, (bar, building, city) in enumerate(zip(bars, buildings_sorted, cities_sorted)):
-        # Building name
-        plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 25, 
-                building, ha='center', va='bottom', fontsize=12, fontweight='bold')
-        # City name in italics
-        plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 45, 
-                city, ha='center', va='bottom', fontsize=11, style='italic')
+        # Building name - bigger font and more spacing
+        plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 35, 
+                building, ha='center', va='bottom', fontsize=16, fontweight='bold')
+        # City name in italics - bigger font and more spacing
+        plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 65, 
+                city, ha='center', va='bottom', fontsize=14, style='italic')
 
     # X-axis with actual years as x values
     all_years = list(range(2010, 2024))
-    plt.xticks(all_years, fontsize=10, rotation=45)
-    plt.xlabel('Completion Year', fontsize=13)
-    plt.ylabel('Height (meters)', fontsize=13)
+    plt.xticks(all_years, fontsize=16, rotation=45)
+    plt.xlabel('Completion Year', fontsize=16, fontweight='bold')
+    plt.ylabel('Height (meters)', fontsize=16, fontweight='bold')
     plt.title('STRUCTURE: Invariant + Components\nInvariant: Buildings | Components: Name (nominal), Height (quantitative), City (nominal), Year (quantitative)', 
-         fontsize=18, pad=25, fontweight='bold')
+            fontsize=20, pad=30, fontweight='bold')
 
-    plt.ylim(0, max(heights_sorted) + 80)  # Extra space for labels
+    plt.ylim(0, max(heights_sorted) + 120)  # Extra space for larger labels
+
+    # Improve overall appearance
+    plt.grid(axis='y', alpha=0.3, linestyle='--')
     plt.tight_layout()
+
     plt.show()
 ```
 
 
 
-### 2.2. Relationships
+<!-- plt.tight_layout() -->
 
-#### 2.2.1. Relations and dimensionality
+
+
+### 2.4.  💬 Discussion
+
+**Looking at the above graph:**
+
+- What are the signifiers ?
+- What are the signified ?
+- What can we conclude from those graphs ?
+- How to they compare in terms of readability and visual unity ?
+
+
+## 3. Relationships
+
+### 3.1. Relations and dimensionality
 
 - Key in analysis: how components relate, not necessarily their individual meanings, but their differences and connections.
 - For every dataset, determining its dimensionality (number/nature of components) directs the choice of graphic strategy.
 
 
 
-#### 2.2.2. An example with a scatter plot (+ regression line)
+### 3.2. 💾 Datasets used in the following examples
+
+
+```html
+<details class="mb-1">
+    <summary>100m men world record progression</summary>
+    <table class="table p-4 bg-base-100" style="border-radius: var(--radius-box);">
+        <thead>
+            <tr>
+                <th>Date</th><th>Time (s)</th><th>Athlete Country</th>
+            </tr>
+        </thead>
+      <tbody>
+          <tr>
+            <td>1912-07-06</td><td>10.6</td><td>🇺🇸</td>
+          </tr>   
+          <tr>
+            <td>1921-04-23</td><td>10.4</td><td>🇺🇸</td>
+          </tr>
+          <tr>
+            <td>1930-08-09</td><td>10.3</td><td>🇨🇦</td>
+          </tr>
+          <tr>
+            <td>1936-06-20</td><td>10.2</td><td>🇺🇸</td>
+          </tr>
+          <tr>
+            <td>1956-08-03</td><td>10.1</td><td>🇺🇸</td>
+          </tr>
+          <tr>
+            <td>1960-06-21</td><td>10.0</td><td>🇩🇪</td>
+          </tr>
+          <tr>
+            <td>1968-06-20</td><td>9.95</td><td>🇺🇸</td>
+          </tr>
+          <tr>
+            <td>1983-07-03</td><td>9.93</td><td>🇺🇸</td>
+          </tr>
+          <tr>
+            <td>1988-09-24</td><td>9.92</td><td>🇺🇸</td>
+          </tr>
+          <tr>
+            <td>1991-06-14</td><td>9.90</td><td>🇺🇸</td>
+          </tr>
+          <tr>
+            <td>1991-08-25</td><td>9.86</td><td>🇺🇸</td>
+          </tr>
+          <tr>
+            <td>1994-07-06</td><td>9.85</td><td>🇺🇸</td>
+          </tr>
+          <tr>
+            <td>1996-07-27</td><td>9.84</td><td>🇨🇦</td>
+          </tr>
+          <tr>
+            <td>1999-06-16</td><td>9.79</td><td>🇺🇸</td>
+          </tr>
+        
+          <tr>
+            <td>2005-06-14</td><td>9.77</td><td>🇯🇲</td>
+          </tr>
+          <tr>
+            <td>2008-05-31</td><td>9.72</td><td>🇯🇲</td>
+          </tr>
+          <tr>
+            <td>2008-08-16</td><td>9.69</td><td>🇯🇲</td>
+          </tr>
+          <tr>
+            <td>2009-08-16</td><td>9.58</td><td>🇯🇲</td>
+          </tr>
+      </tbody>
+    </table>
+    <p class="text-sm text-gray-500">Source: Wikipedia / World Athletics (as of September 2025)</p>
+</details>
+```
+
+
+```html
+<details class="mb-4">
+    <summary>North countries national development profiles</summary>
+    <table class="table p-4 bg-base-100" style="border-radius: var(--radius-box);">
+        <thead>
+            <tr>
+                <th>Country</th><th>GDP per Capita</th><th>Life Expectancy</th><th>Education Index</th><th>Happiness Score</th><th>Innovation Index</th><th>Environmental Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Norway 🇳🇴</td><td>75</td><td>82</td><td>95</td><td>76</td><td>68</td><td>78</td></tr>
+            <tr><td>Switzerland 🇨🇭</td><td>81</td><td>84</td><td>88</td><td>75</td><td>67</td><td>81</td></tr>
+            <tr><td>Denmark 🇩🇰</td><td>60</td><td>81</td><td>92</td><td>78</td><td>58</td><td>78</td></tr>
+            <tr><td>Iceland 🇮🇸</td><td>52</td><td>83</td><td>95</td><td>75</td><td>55</td><td>68</td></tr>
+            <tr><td>Netherlands 🇳🇱</td><td>53</td><td>82</td><td>93</td><td>74</td><td>58</td><td>76</td></tr>
+            <tr><td>Sweden 🇸🇪</td><td>51</td><td>83</td><td>94</td><td>73</td><td>63</td><td>78</td></tr>
+            <tr><td>Germany 🇩🇪</td><td>46</td><td>81</td><td>93</td><td>70</td><td>87</td><td>77</td></tr>
+            <tr><td>Canada 🇨🇦</td><td>46</td><td>82</td><td>92</td><td>72</td><td>61</td><td>72</td></tr>
+            <tr><td>Australia 🇦🇺</td><td>55</td><td>83</td><td>92</td><td>73</td><td>46</td><td>60</td></tr>
+            <tr><td>Japan 🇯🇵</td><td>39</td><td>85</td><td>85</td><td>59</td><td>54</td><td>65</td></tr>
+            <tr><td>South Korea 🇰🇷</td><td>31</td><td>83</td><td>85</td><td>58</td><td>64</td><td>63</td></tr>
+            <tr><td>United Kingdom 🇬🇧</td><td>42</td><td>81</td><td>90</td><td>70</td><td>59</td><td>58</td></tr>
+            <tr><td>France 🇫🇷</td><td>40</td><td>83</td><td>88</td><td>66</td><td>54</td><td>80</td></tr>
+            <tr><td>Belgium 🇧🇪</td><td>47</td><td>82</td><td>89</td><td>69</td><td>50</td><td>73</td></tr>
+            <tr><td>Austria 🇦🇹</td><td>48</td><td>81</td><td>91</td><td>71</td><td>45</td><td>79</td></tr>
+        </tbody>
+    </table>
+    <p class="text-sm text-gray-500">Source: Normalized national development data used for heatmap visualization.</p>
+</details>
+```
+
+
+### 3.3. An example with a scatter plot 
+
+
+> Here we add a regression line to the scatter plot to show the trend of the data. It show how to combine lines and points in the same plot.
+
+
+Look carefully at the axis: the $y$ axis is inverted, because the faster times are better. This is a common practice in data visualization, it's not mandatory, but it helps to make the plot more readable.
+{: .alert .alert-warning .alert-soft}
+
+
 
 ```yaml
 f_type: "codex_"
+height_in_px: 1560
 inline: |
-
     import matplotlib.pyplot as plt
+    import matplotlib.dates as mdates
+    from datetime import datetime
     import numpy as np
 
-    # Real data: Olympic 100m sprint records
-    # INVARIANT: Athletic performance (the theme)
+    # World record data (precise date, time, country)
+    records = [
+        ("1912-07-06", 10.6, "USA", "🇺🇸"),
+        ("1921-04-23", 10.4, "USA", "🇺🇸"),
+        ("1930-08-09", 10.3, "CAN", "🇨🇦"),
+        ("1936-06-20", 10.2, "USA", "🇺🇸"),
+        ("1956-08-03", 10.1, "USA", "🇺🇸"),
+        ("1960-06-21", 10.0, "GER", "🇩🇪"),
+        ("1968-06-20", 9.95, "USA", "🇺🇸"),
+        ("1983-07-03", 9.93, "USA", "🇺🇸"),
+        ("1988-09-24", 9.92, "USA", "🇺🇸"),
+        ("1991-06-14", 9.90, "USA", "🇺🇸"),
+        ("1991-08-25", 9.86, "USA", "🇺🇸"),
+        ("1994-07-06", 9.85, "USA", "🇺🇸"),
+        ("1996-07-27", 9.84, "CAN", "🇨🇦"),
+        ("1999-06-16", 9.79, "USA", "🇺🇸"),
+        ("2005-06-14", 9.77, "JAM", "🇯🇲"),
+        ("2008-05-31", 9.72, "JAM", "🇯🇲"),
+        ("2008-08-16", 9.69, "JAM", "🇯🇲"),
+        ("2009-08-16", 9.58, "JAM", "🇯🇲")
+    ]
 
-    # Raw data lists - men's 100m world records progression
-    years = [1912, 1921, 1930, 1936, 1956, 1968, 1977, 1983, 1988, 1994, 1999, 2005, 2007, 2008, 2009]
-    times = [10.6, 10.4, 10.3, 10.2, 10.1, 9.95, 9.95, 9.93, 9.92, 9.85, 9.79, 9.77, 9.74, 9.69, 9.58]  # seconds
-    record_holders = ['USA', 'USA', 'CAN', 'USA', 'USA', 'USA', 'USA', 'USA', 'CAN', 'USA', 'USA', 'JAM', 'JAM', 'JAM', 'JAM']
+    dates = [datetime.strptime(r[0], "%Y-%m-%d") for r in records]
+    times = [r[1] for r in records]
+    countries = [r[2] for r in records]
+    emojis = [r[3] for r in records]
 
-    # Create scatter plot
-    plt.figure(figsize=(12, 8))
+    colors = {"USA": "#1f77b4", "CAN": "#ff7f0e", "JAM": "#2ca02c", "GER":"#999999"}
+    point_colors = [colors[c] for c in countries]
 
-    # Different colors for different countries
-    country_colors = {'USA': '#1f77b4', 'CAN': '#ff7f0e', 'JAM': '#2ca02c'}
-    colors = [country_colors[country] for country in record_holders]
+    plt.figure(figsize=(12, 7))
+    plt.scatter(dates, times, c=point_colors, s=85, edgecolor='black', label="World Record")
 
-    # Scatter plot
-    plt.scatter(years, times, c=colors, s=80, alpha=0.8, edgecolor='black', linewidth=1.5)
+    # Prepare dates for proper regression with zero-based normalization
+    x = mdates.date2num(dates)
+    x0 = x - x[0]
 
-    # Add regression line
-    z = np.polyfit(years, times, 1)
+    # Regression line on normalized x axis
+    z = np.polyfit(x0, times, 1)
     p = np.poly1d(z)
-    plt.plot(years, p(years), "r--", alpha=0.8, linewidth=2, label=f'Trend: {z[0]:.4f}s per year')
+    plt.plot(dates, p(x0), "r--", alpha=0.8, linewidth=2, 
+            label=f"Trend: {z[0]:.5f} s/day")
 
-    # Labels and formatting
-    plt.xlabel('Year', fontsize=13)
+    plt.xlabel('Date', fontsize=13)
     plt.ylabel('Time (seconds)', fontsize=13)
-    plt.title('RELATIONSHIPS: How Components Connect\nInvariant: Athletic Performance | Relationship: Time vs Technology/Training Evolution', 
-            fontsize=16, pad=20, fontweight='bold')
-
-    # Invert y-axis (faster times are lower)
+    plt.title(
+        '100m Men World Record Progression\n'
+        'Relationship: Athletic Performance vs Time\n'
+        'Source: Wikipedia / World Athletics (as of September 2025)',
+        fontsize=15,
+        pad=18,
+        fontweight='bold'
+    )
     plt.gca().invert_yaxis()
-
-    # Add legend for countries
-    for country, color in country_colors.items():
-        plt.scatter([], [], c=color, s=80, label=country, edgecolor='black')
-    plt.legend(loc='upper right', fontsize=11)
-
-    # Grid for better readability
     plt.grid(True, alpha=0.3)
+
+    # Custom legend for countries (name + color + emoji)
+    from matplotlib.lines import Line2D
+    legend_elements = [
+        Line2D([0], [0], marker='o', color='w', markerfacecolor=colors["USA"], 
+            markeredgecolor='black', markersize=11, label='USA'),
+        Line2D([0], [0], marker='o', color='w', markerfacecolor=colors["CAN"], 
+            markeredgecolor='black', markersize=11, label='Canada'),
+        Line2D([0], [0], marker='o', color='w', markerfacecolor=colors["JAM"],
+            markeredgecolor='black', markersize=11, label='Jamaica'),
+        Line2D([0], [0], marker='o', color='w', markerfacecolor=colors["GER"],
+            markeredgecolor='black', markersize=11, label='Germany')
+    ]
+    plt.legend(
+        handles=legend_elements,
+        loc='lower right',
+        fontsize=13,
+        title="Country"
+    )
     plt.tight_layout()
     plt.show()
 ```
+    
+    
 
-***
 
-## 3. Graphic System: Theoretical Framework
+Since not only the 100m men world record, but also most of the world records (whatever the sport) have been improved continuously during the last century, what can we conclude about the evolution in the field of athletics?
+{: .alert .alert-info .alert-soft}
 
-### 3.1. Plane and Space
 
-- The cartographic/graphic “plane” is the two-dimensional space in which elements are organized.[8]
-- It translates “plane geometry” into meaningful arrangements: quantities, categories, relationships, or spatial representations.[8]
+### 3.4. An example with a heatmap
 
-### 3.2. Classes of Representation
+> This example demonstrates how multiple quantitative components relate across different entities. The heatmap reveals patterns, clusters, and trade-offs that emerge from multi-dimensional data without incorrectly connecting nominal categories.
 
-- **Diagrams:** Abstract data structures (e.g., time series, bar charts).[6]
-- **Networks:** Relationships among entities (e.g., graphs, flow diagrams).[6]
-- **Maps:** Spatial embedding of data (e.g., geographic maps).[6][5]
+```yaml
+f_type: "codex_"
+height_in_px: 800
+inline: |
+    import matplotlib.pyplot as plt
+    import numpy as np
 
-***
+    countries = ['Norway', 'Switzerland', 'Denmark', 'Iceland', 'Netherlands', 
+                'Sweden', 'Germany', 'Canada', 'Australia', 'Japan', 'South Korea',
+                'United Kingdom', 'France', 'Belgium', 'Austria']
+
+    data = {
+        'GDP per Capita': [75, 81, 60, 52, 53, 51, 46, 46, 55, 39, 31, 42, 40, 47, 48],
+        'Life Expectancy': [82, 84, 81, 83, 82, 83, 81, 82, 83, 85, 83, 81, 83, 82, 81],
+        'Education Index': [95, 88, 92, 95, 93, 94, 93, 92, 92, 85, 85, 90, 88, 89, 91],
+        'Happiness Score': [76, 75, 78, 75, 74, 73, 70, 72, 73, 59, 58, 70, 66, 69, 71],
+        'Innovation Index': [68, 67, 58, 55, 58, 63, 87, 61, 46, 54, 64, 59, 54, 50, 45],
+        'Environmental Score': [78, 81, 78, 68, 76, 78, 77, 72, 60, 65, 63, 58, 80, 73, 79]
+    }
+
+    data_matrix = np.array([data[key] for key in data.keys()]).T
+
+    # Sort countries by GDP per capita (descending)
+    sorted_indices = np.argsort(data['GDP per Capita'])[::-1]
+    countries_sorted = [countries[i] for i in sorted_indices]
+    data_matrix_sorted = data_matrix[sorted_indices]
+
+    fig, ax = plt.subplots(figsize=(12, 10))
+    im = ax.imshow(data_matrix_sorted, cmap='RdYlBu_r', aspect='auto', vmin=30, vmax=95)
+
+    for i in range(len(countries_sorted)):
+        for j in range(len(data.keys())):
+            val = int(data_matrix_sorted[i, j])
+            color = 'black' if 50 <= val <= 80 else 'white'
+            ax.text(j, i, val, ha='center', va='center', color=color, fontweight='bold')
+
+    ax.set_xticks(range(len(data.keys())))
+    ax.set_xticklabels(list(data.keys()), rotation=45, ha='right', fontsize=13)
+    ax.set_yticks(range(len(countries_sorted)))
+    ax.set_yticklabels(countries_sorted)
+
+    cbar = fig.colorbar(im, ax=ax)
+    cbar.set_label('Score', rotation=270, labelpad=15)
+
+    ax.set_title('DIMENSIONALITY: 6D Data Matrix\nInvariant: National Profiles | Each cell = one relationship', 
+                fontsize=16, fontweight='bold', pad=25)
+    ax.set_xlabel('Components (Dimensions)', fontsize=14)
+    ax.set_ylabel('Countries (Entities)', fontsize=12)
+
+    plt.tight_layout()
+    plt.show()
+
+```
+
+
+
+### 3.5. Another example with a heatmap
+
+
+```yaml
+f_type: "codex_"
+height_in_px: 780
+inline: |
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = {
+        'GDP per Capita': [75, 81, 60, 52, 53, 51, 46, 46, 55, 39, 31, 42, 40, 47, 48],
+        'Life Expectancy': [82, 84, 81, 83, 82, 83, 81, 82, 83, 85, 83, 81, 83, 82, 81],
+        'Education Index': [95, 88, 92, 95, 93, 94, 93, 92, 92, 85, 85, 90, 88, 89, 91],
+        'Happiness Score': [76, 75, 78, 75, 74, 73, 70, 72, 73, 59, 58, 70, 66, 69, 71],
+        'Innovation Index': [68, 67, 58, 55, 58, 63, 87, 61, 46, 54, 64, 59, 54, 50, 45],
+        'Environmental Score': [78, 81, 78, 68, 76, 78, 77, 72, 60, 65, 63, 58, 80, 73, 79]
+    }
+
+    data_matrix = np.array([data[key] for key in data.keys()]).T
+    corr_matrix = np.corrcoef(data_matrix.T)
+    mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
+
+    fig, ax = plt.subplots(figsize=(10, 10))
+    masked_corr = np.ma.masked_where(mask, corr_matrix)
+    im = ax.matshow(masked_corr, cmap='RdBu_r', vmin=-1, vmax=1)
+
+    for i in range(len(data.keys())):
+        for j in range(len(data.keys())):
+            if i >= j:
+                corr_val = corr_matrix[i, j]
+                ax.text(j, i, f"{corr_val:.2f}", ha='center', va='center', color='black', fontsize=10, fontweight='bold')
+
+    ax.set_xticks(range(len(data.keys())))
+    ax.set_xticklabels([key.replace(' ', '\n') for key in data.keys()], rotation=45, ha='left')
+    ax.set_yticks(range(len(data.keys())))
+    ax.set_yticklabels([key.replace(' ', '\n') for key in data.keys()])
+
+    cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+    cbar.set_label('Correlation', rotation=270, labelpad=15)
+
+    ax.set_title('COMPONENT RELATIONSHIPS\nHow dimensions correlate with each other', fontsize=14, fontweight='bold', pad=15)
+
+    plt.tight_layout()
+    plt.show()
+
+```
+
+### 3.6. Alternative: Clustered scatter matrix
+
+```yaml
+f_type: "codex_"
+height_in_px: 1200
+inline: |
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    # Same data as above
+    countries = ['Norway', 'Switzerland', 'Denmark', 'Iceland', 'Netherlands', 
+                'Sweden', 'Germany', 'Canada', 'Australia', 'Japan', 'South Korea',
+                'United Kingdom', 'France', 'Belgium', 'Austria']
+    
+    gdp = [75, 81, 60, 52, 53, 51, 46, 46, 55, 39, 31, 42, 40, 47, 48]
+    happiness = [76, 75, 78, 75, 74, 73, 70, 72, 73, 59, 58, 70, 66, 69, 71]
+    innovation = [68, 67, 58, 55, 58, 63, 87, 61, 46, 54, 64, 59, 54, 50, 45]
+    environment = [78, 81, 78, 68, 76, 78, 77, 72, 60, 65, 63, 58, 80, 73, 79]
+    
+    # Create regions for coloring
+    regions = ['Nordic']*6 + ['Western Europe']*5 + ['Asia']*2 + ['Anglo']*2
+    region_colors = {'Nordic': '#2E4057', 'Western Europe': '#048A81', 
+                    'Asia': '#F18F01', 'Anglo': '#C73E1D'}
+    colors = [region_colors[region] for region in regions]
+    
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(14, 12))
+    
+    # Four key 2D relationships
+    plots_config = [
+        (ax1, gdp, happiness, 'GDP per Capita', 'Happiness Score'),
+        (ax2, innovation, environment, 'Innovation Index', 'Environmental Score'),
+        (ax3, gdp, innovation, 'GDP per Capita', 'Innovation Index'),
+        (ax4, happiness, environment, 'Happiness Score', 'Environmental Score')
+    ]
+    
+    for ax, x_data, y_data, x_label, y_label in plots_config:
+        scatter = ax.scatter(x_data, y_data, c=colors, s=100, alpha=0.7, 
+                           edgecolor='black', linewidth=1)
+        
+        # Add trend line
+        z = np.polyfit(x_data, y_data, 1)
+        p = np.poly1d(z)
+        x_trend = np.linspace(min(x_data), max(x_data), 100)
+        ax.plot(x_trend, p(x_trend), "r--", alpha=0.6, linewidth=1.5)
+        
+        ax.set_xlabel(x_label, fontsize=11)
+        ax.set_ylabel(y_label, fontsize=11)
+        ax.grid(True, alpha=0.3)
+        
+        # Add correlation coefficient
+        corr = np.corrcoef(x_data, y_data)[0,1]
+        ax.text(0.05, 0.95, f'r = {corr:.2f}', transform=ax.transAxes, 
+               bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+    
+    # Overall title
+    fig.suptitle('MULTI-DIMENSIONAL RELATIONSHIPS: 2D Projections of 6D Data\n' +
+                'Pattern: Nordic countries cluster consistently across dimensions', 
+                fontsize=16, fontweight='bold', y=0.98)
+    
+    # Legend
+    handles = [plt.scatter([], [], c=color, s=100, label=region, edgecolor='black') 
+              for region, color in region_colors.items()]
+    fig.legend(handles=handles, loc='center', bbox_to_anchor=(0.5, 0.02), ncol=4)
+    
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.92, bottom=0.08)
+    plt.show()
+```
+
+
+### 3.7.  💬 Discussion
+
+**Looking at the above graph:**
+
+- What are the signifiers ?
+- What are the signified ?
+- What can we conclude from those graphs ?
+- How to they compare in terms of readability and visual unity ?
+- **Big findings?** Are we this sure ? (<span class="italic">For some heatmap values from 3.4, once the economical context of those countries is known, the analysis is pretty clear. But for some others, it's not so obvious.</span>)
+
+
+
+
 
 ## 4. Visual (Retinal) Variables
 
 ### 4.1. The Eight Visual Variables
 
-Bertin identifies eight key visual variables used to encode data in 2D graphics:[6][5]
+> Bertin identifies eight key visual variables used to encode data in 2D graphics.
 
 | Variable     | Description                          | Example Use                        |
 | ------------ | ------------------------------------ | ---------------------------------- |
-| Position     | X/Y coordinates                      | Maps, scatter plots                |
+| Position     | $X$/$Y$ coordinates                  | Maps, scatter plots                |
 | Size         | Magnitude (length, area, volume)     | Bubble charts                      |
 | Value        | Lightness/darkness                   | Heatmaps, shading                  |
 | Texture      | Pattern density                      | Map hatching                       |
@@ -245,31 +706,124 @@ Bertin identifies eight key visual variables used to encode data in 2D graphics:
 | Shape        | Icon/form                            | Markers, diagram symbols           |
 | Grain        | Fineness or coarseness of texture    | (Often non-standard, overlaps above)|
 
-> {{matplotlib_placeholder_visual_variables}}
-
-### 4.2. Properties of Visual Variables[7][5]
+### 4.2. Properties of Visual Variables
 
 - **Selectivity:** Can similar symbols be rapidly and preattentively recognized?
 - **Associativity:** Can variables be grouped and compared without interference from others?
 - **Order:** Can the variable sensibly convey progression or ranking?
 - **Quantification:** Can the variable indicate measurable differences?
 
-Associativity is crucial for design: some variables interfere with others (disassociativity), making layering complex data less clear.[7]
+Associativity is crucial for design: some variables interfere with others (disassociativity), making layering complex data less clear.
 
-***
+
+
+### 4.3. 💾 Datasets used in the following examples
+
+
+We'll use some panel data: gdp (nominal) per year and per country. The dataset and its documentation are available [here](https://github.com/datasets/gdp).
+
+
+
+### 4.4. Illustration of Bertin's Visual Variables
+
+
+
+
+```yaml
+f_type: "codex_"
+height_in_px: 1000
+inline: |
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from pyodide.http import open_url
+
+    # Load data
+    url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
+    df = pd.read_csv(open_url(url))
+
+    # World average GDP per year 1960+
+    world_gdp = df.groupby('Year')['Value'].mean().reset_index()
+    world_gdp = world_gdp[world_gdp['Year'] >= 1960].copy()
+    world_gdp['GDP (Trillions)'] = world_gdp['Value'] / 1e12
+    world_gdp['Trend'] = world_gdp['GDP (Trillions)'].diff().fillna(0)
+    world_gdp['Opacity'] = np.where(world_gdp['Trend'] >= 0, 1.0, 0.3)
+
+    # Latest year
+    latest_year = df['Year'].max()
+    df_latest = df[df['Year'] == latest_year]
+
+    # Select top 10 and bottom 10 countries by GDP in latest year
+    top10 = df_latest.nlargest(10, 'Value')['Country Name'].tolist()
+    bottom10 = df_latest.nsmallest(10, 'Value')['Country Name'].tolist()
+    selected_countries = top10 + bottom10
+
+    # Filter main dataframe for selected countries from 1960
+    df_filtered = df[(df['Country Name'].isin(selected_countries)) & (df['Year'] >= 1960)].copy()
+    df_filtered['GDP (Trillions)'] = df_filtered['Value'] / 1e12
+
+    fig, ax = plt.subplots(figsize=(16, 9))
+
+    # Plot world GDP bars with opacity per trend
+    for idx, row in world_gdp.iterrows():
+        ax.bar(row['Year'], row['GDP (Trillions)'], color='grey', alpha=row['Opacity'], width=0.7,
+            label='World Avg GDP' if idx == 0 else "")
+
+    # Assign distinct colors for countries
+    colors = plt.cm.tab20.colors  # A colormap with many distinct colors
+
+    # Plot country GDP lines with opacity limited
+    for i, country in enumerate(selected_countries):
+        country_data = df_filtered[df_filtered['Country Name'] == country]
+        gdp_vals = country_data['GDP (Trillions)'].values
+        trend = np.diff(gdp_vals, prepend=gdp_vals[0])
+        alphas = np.clip(0.5 + (trend / np.max(np.abs(trend))), 0.5, 1.0)  # opacity between 0.5-1.0
+
+        # Plot line segments
+        for j in range(len(country_data) - 1):
+            ax.plot(country_data['Year'].iloc[j:j + 2], gdp_vals[j:j + 2], color=colors[i % len(colors)],
+                    alpha=(alphas[j] + alphas[j + 1]) / 2, linewidth=2)
+        # Plot markers
+        for j, yr in enumerate(country_data['Year']):
+            ax.scatter(yr, gdp_vals[j], color=colors[i % len(colors)], alpha=alphas[j], edgecolor='black',
+                    s=40, zorder=5)
+
+    # Title with multiline describing selection
+    title_text = ("GDP Trends 1960 - Latest Year\n"
+                "Top 10 and Bottom 10 Countries by GDP in {}\n"
+                "With World Average GDP Bars (Opacity Indicates Growth/Decline)").format(latest_year)
+
+    ax.set_title(title_text, fontsize=18, weight='bold')
+    ax.set_xlabel('Year', fontsize=16)
+    ax.set_ylabel('GDP (Trillions USD)', fontsize=16)
+    ax.legend(selected_countries + ['World Avg GDP'], fontsize=10, bbox_to_anchor=(1.05, 1), loc='upper left')
+    ax.tick_params(axis='both', which='major', labelsize=14)
+    ax.set_xlim(1960, latest_year)
+    plt.xticks(rotation=45)
+    ax.grid(axis='y', linestyle='--', alpha=0.7)
+
+    plt.tight_layout(rect=[0, 0, 0.85, 1])  # Make room for legend on right
+    plt.show()
+
+
+```
+
+
+
+
 
 ## 5. Graphic Rules and Grammar
 
 ### 5.1. Problem Construction
 
-- Any graphic is a solution to multiple possible ways to encode the same dataset—the “graphic problem” is to choose the most efficient/legible.[1][6]
-- Design must account for perceptual tasks (lookup, comparison, grouping, pattern search).[3][5]
+- Any graphic is a solution to multiple possible ways to encode the same dataset—the “graphic problem” is to choose the most efficient/legible.
+- Design must account for perceptual tasks (lookup, comparison, grouping, pattern search).
 
 ### 5.2. Grammar of Construction
 
-- **Density:** Avoid excessive clutter, but enough detail for insight.[10][1]
-- **Retinal Legibility:** Variables should combine without creating confusion.[3][8]
-- **Layering/Separation:** Different elements must remain perceptually separable (via color, value, or shape).[5]
+- **Density:** Avoid excessive clutter, but enough detail for insight.
+- **Retinal Legibility:** Variables should combine without creating confusion.
+- **Layering/Separation:** Different elements must remain perceptually separable (via color, value, or shape).
 
 ***
 

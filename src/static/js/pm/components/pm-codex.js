@@ -175,11 +175,25 @@ export class PMCodex extends LitElement {
           if (isExecutable) {
             this._addExecutionUI(container, cm);
           }
-          
+
           // STEP 6: UI CLEANUP
           // Hide skeleton loading indicators now that the real editor is ready
           // This provides smooth transition from loading state to ready state
           container.querySelectorAll('.skeleton').forEach((sk) => sk.classList.add('hidden'));
+
+          // STEP 6.1: ALWAYS NOTIFY EXTERNAL SCRIPTS
+          // Dispatch event to notify DataViz2 and other product scripts that codex is ready
+          const readyEvent = new CustomEvent('pm-codex-ready', {
+            detail: {
+              codexElement: this,
+              codeMirror: cm,
+              container: container,
+              isExecutable: isExecutable
+            },
+            bubbles: true
+          });
+          this.dispatchEvent(readyEvent);
+          console.debug('[pm-codex] Dispatched pm-codex-ready event');
         } catch (e) {
           // STEP 7: FALLBACK HANDLING
           // If CodeMirror fails to initialize, show the plain textarea as fallback
