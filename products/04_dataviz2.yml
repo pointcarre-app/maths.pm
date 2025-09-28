@@ -9,7 +9,12 @@ subtitle_html: Représentations de données (Python et KS)
 description: In a program with a strong mathematical component, this course introduces data visualization with Python libraries such as Matplotlib and Bokeh, blending theory and interactive practice.
 # TODO sel: Document: this is OK even for static generation cause update at the right moment
 # of the .md (but when ?)
-local_path: /pm/dataviz2/00_plan.md#detailed-plan-and-organization-of-the-course
+# TODO sel: make anchor compatible 
+# #detailed-plan-and-organization-of-the-course
+# if this is added, .md remains and isnt transformed into .html
+# (when static deploy ofc)
+local_path: /pm/dataviz2/00_plan.md
+
 # source_link: "/pm/dataviz2"
 color: success
 figure_svg: dataviz-figure-svg.html

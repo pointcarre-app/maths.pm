@@ -3,7 +3,7 @@
 
 [TOC]
 
-Organizational aspects, syllabus and evaluation criteria
+[Organizational aspects, syllabus and evaluation criteria](#detailed-plan-and-organization-of-the-course)
 {: .pm-subtitle}
 
 
@@ -80,6 +80,8 @@ To better understand this chart and the conclusion we can draw, more details are
 **📖 Course Materials:**
 - **[Introduction & Interactive Notebooks](01_introduction.md)** - Getting started with Jupyter environments and code fragments
 - **[Jupyter Launcher](jupyter_launcher.md)** - Direct access to interactive Python environments -->
+
+&nbsp;
 
 ### 📝 Evaluation
 The evaluation consists on a data vizualisation project. The students will have *to build a web site* based on Bokeh library. As this course doesn't include any web development concepts and tools, the student will have will have the right to use a `Jupyter Notebook`. Hence, bokeh interactivity will be avalaible

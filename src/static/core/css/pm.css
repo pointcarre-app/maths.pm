@@ -236,9 +236,9 @@ pm-radio > div > button.btn-soft:hover {
   margin-bottom: 2.25rem;
 } */
 
-.fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="codex_"]) p.fragment {
+/* .fragment-wrapper[data-f_type="p_"]:has(+ .fragment-wrapper[data-f_type="codex_"]) p.fragment {
   margin-bottom: 1rem;
-}
+} */
 
 .fragment-wrapper.pm-subtitle {
   /* padding: 1.5rem; */
@@ -562,7 +562,7 @@ pre.fragment-code {
 .codex .CodeMirror {
   border-radius: 0.5rem;
   border: 1px solid var(--color-base-300) !important;
-  font-size: 0.9rem;
+  font-size: 0.85rem !important;
   line-height: 1.3;
 }
 
@@ -1255,7 +1255,10 @@ pm-number-input button.btn-soft:hover {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+    justify-content: flex-end;
 }
+
+
 
 /* Execute and Clear buttons */
 .dataviz2-execution-ui .dataviz2-execute-btn,
@@ -1366,7 +1369,7 @@ pm-number-input button.btn-soft:hover {
 
 
 .fragment-wrapper[data-f_type="codex_"]  {
-    /* margin-top: 1.5rem !important; */
+    margin-top: 1.5rem !important;
     margin-bottom: 1.5rem !important;
 }
 

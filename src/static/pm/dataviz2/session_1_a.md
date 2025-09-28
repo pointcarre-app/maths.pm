@@ -289,9 +289,9 @@ inline: |
 
 
 ```html
-<details class="mb-1">
+<details class="my-2 sm:p-4 sm:bg-base-200" style="border-radius: var(--radius-box);overflow-x: scroll;">
     <summary>100m men world record progression</summary>
-    <table class="table p-4 bg-base-100" style="border-radius: var(--radius-box);">
+    <table class="table p-4 mt-2" style="border-radius: var(--radius-box);">
         <thead>
             <tr>
                 <th>Date</th><th>Time (s)</th><th>Athlete Country</th>
@@ -361,33 +361,33 @@ inline: |
 
 
 ```html
-<details class="mb-4">
+<details class="my-2 sm:p-4 sm:bg-base-200" style="border-radius: var(--radius-box);overflow-x: scroll;">
     <summary>North countries national development profiles</summary>
-    <table class="table p-4 bg-base-100" style="border-radius: var(--radius-box);">
+    <table class="table p-4 mt-2" style="border-radius: var(--radius-box);">
         <thead>
             <tr>
                 <th>Country</th><th>GDP per Capita</th><th>Life Expectancy</th><th>Education Index</th><th>Happiness Score</th><th>Innovation Index</th><th>Environmental Score</th>
             </tr>
         </thead>
         <tbody>
-            <tr><td>Norway 🇳🇴</td><td>75</td><td>82</td><td>95</td><td>76</td><td>68</td><td>78</td></tr>
-            <tr><td>Switzerland 🇨🇭</td><td>81</td><td>84</td><td>88</td><td>75</td><td>67</td><td>81</td></tr>
-            <tr><td>Denmark 🇩🇰</td><td>60</td><td>81</td><td>92</td><td>78</td><td>58</td><td>78</td></tr>
-            <tr><td>Iceland 🇮🇸</td><td>52</td><td>83</td><td>95</td><td>75</td><td>55</td><td>68</td></tr>
-            <tr><td>Netherlands 🇳🇱</td><td>53</td><td>82</td><td>93</td><td>74</td><td>58</td><td>76</td></tr>
-            <tr><td>Sweden 🇸🇪</td><td>51</td><td>83</td><td>94</td><td>73</td><td>63</td><td>78</td></tr>
-            <tr><td>Germany 🇩🇪</td><td>46</td><td>81</td><td>93</td><td>70</td><td>87</td><td>77</td></tr>
-            <tr><td>Canada 🇨🇦</td><td>46</td><td>82</td><td>92</td><td>72</td><td>61</td><td>72</td></tr>
-            <tr><td>Australia 🇦🇺</td><td>55</td><td>83</td><td>92</td><td>73</td><td>46</td><td>60</td></tr>
-            <tr><td>Japan 🇯🇵</td><td>39</td><td>85</td><td>85</td><td>59</td><td>54</td><td>65</td></tr>
-            <tr><td>South Korea 🇰🇷</td><td>31</td><td>83</td><td>85</td><td>58</td><td>64</td><td>63</td></tr>
-            <tr><td>United Kingdom 🇬🇧</td><td>42</td><td>81</td><td>90</td><td>70</td><td>59</td><td>58</td></tr>
-            <tr><td>France 🇫🇷</td><td>40</td><td>83</td><td>88</td><td>66</td><td>54</td><td>80</td></tr>
-            <tr><td>Belgium 🇧🇪</td><td>47</td><td>82</td><td>89</td><td>69</td><td>50</td><td>73</td></tr>
-            <tr><td>Austria 🇦🇹</td><td>48</td><td>81</td><td>91</td><td>71</td><td>45</td><td>79</td></tr>
+            <tr><td style="min-width:180px !important;";>Norway 🇳🇴</td><td>75</td><td>82</td><td>95</td><td>76</td><td>68</td><td>78</td></tr>
+            <tr><td style="min-width:180px !important;";>Switzerland 🇨🇭</td><td>81</td><td>84</td><td>88</td><td>75</td><td>67</td><td>81</td></tr>
+            <tr><td style="min-width:180px !important;";>Denmark 🇩🇰</td><td>60</td><td>81</td><td>92</td><td>78</td><td>58</td><td>78</td></tr>
+            <tr><td style="min-width:180px !important;";>Iceland 🇮🇸</td><td>52</td><td>83</td><td>95</td><td>75</td><td>55</td><td>68</td></tr>
+            <tr><td style="min-width:180px !important;";>Netherlands 🇳🇱</td><td>53</td><td>82</td><td>93</td><td>74</td><td>58</td><td>76</td></tr>
+            <tr><td style="min-width:180px !important;";>Sweden 🇸🇪</td><td>51</td><td>83</td><td>94</td><td>73</td><td>63</td><td>78</td></tr>
+            <tr><td style="min-width:180px !important;";>Germany 🇩🇪</td><td>46</td><td>81</td><td>93</td><td>70</td><td>87</td><td>77</td></tr>
+            <tr><td style="min-width:180px !important;";>Canada 🇨🇦</td><td>46</td><td>82</td><td>92</td><td>72</td><td>61</td><td>72</td></tr>
+            <tr><td style="min-width:180px !important;";>Australia 🇦🇺</td><td>55</td><td>83</td><td>92</td><td>73</td><td>46</td><td>60</td></tr>
+            <tr><td style="min-width:180px !important;";>Japan 🇯🇵</td><td>39</td><td>85</td><td>85</td><td>59</td><td>54</td><td>65</td></tr>
+            <tr><td style="min-width:180px !important;";>South Korea 🇰🇷</td><td>31</td><td>83</td><td>85</td><td>58</td><td>64</td><td>63</td></tr>
+            <tr><td style="min-width:180px !important;";>United Kingdom 🇬🇧</td><td>42</td><td>81</td><td>90</td><td>70</td><td>59</td><td>58</td></tr>
+            <tr><td style="min-width:180px !important;";>France 🇫🇷</td><td>40</td><td>83</td><td>88</td><td>66</td><td>54</td><td>80</td></tr>
+            <tr><td style="min-width:180px !important;";>Belgium 🇧🇪</td><td>47</td><td>82</td><td>89</td><td>69</td><td>50</td><td>73</td></tr>
+            <tr><td style="min-width:180px !important;";>Austria 🇦🇹</td><td>48</td><td>81</td><td>91</td><td>71</td><td>45</td><td>79</td></tr>
         </tbody>
     </table>
-    <p class="text-sm text-gray-500">Source: Normalized national development data used for heatmap visualization.</p>
+    <p class="text-sm text-gray-500">Source: United Nations Development Programme, World Bank, OECD, WIPO, and World Happiness Report, compiled and normalized (2024–2025)</p>
 </details>
 ```
 
@@ -501,6 +501,10 @@ Since not only the 100m men world record, but also most of the world records (wh
 
 > This example demonstrates how multiple quantitative components relate across different entities. The heatmap reveals patterns, clusters, and trade-offs that emerge from multi-dimensional data without incorrectly connecting nominal categories.
 
+
+The y-axis is sorted by GDP per capita, descending.
+{: .alert .alert-info .alert-soft}
+
 ```yaml
 f_type: "codex_"
 height_in_px: 800
@@ -554,6 +558,7 @@ inline: |
     plt.show()
 
 ```
+
 
 
 

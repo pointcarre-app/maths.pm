@@ -5,3 +5,77 @@
     <div id="toc" class="p-4 flex-none text-left text-base-content/80">{{ pm.toc.html | safe }}</div>
   </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toc = document.getElementById('toc');
+        if (!toc) return;
+
+        // Get all TOC links
+        const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+
+        // Get all sections (h2+ only, excluding h1)
+        const sections = Array.from(document.querySelectorAll('.fragment[data-f_type^="h"]'))
+            .filter(el => el.getAttribute('data-f_type') !== 'h1_' && el.id);
+
+        if (!sections.length) return;
+
+        // Add styles for active state
+        const style = document.createElement('style');
+        style.textContent = '.toc-active { color: var(--color-primary) !important; font-weight: 900 !important; text-decoration: underline !important; text-decoration-color: color-mix(in oklab, var(--color-primary) 40%, transparent) !important; text-underline-offset: 0.2em !important; }';
+        document.head.appendChild(style);
+
+        let ticking = false;
+
+        function updateActiveSection() {
+            // Reference point: 100px from top of viewport
+            const scrollY = window.scrollY + 100;
+            const windowBottom = window.scrollY + window.innerHeight;
+
+            let activeSection = null;
+
+            // Find the section that contains our reference point
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                const rect = section.getBoundingClientRect();
+                const sectionTop = window.scrollY + rect.top;
+                const sectionBottom = sectionTop + rect.height;
+
+                // Check if section is on screen or has been passed
+                if (scrollY >= sectionTop && sectionTop < windowBottom) {
+                    activeSection = section;
+                    break;
+                }
+            }
+
+            // Update active link
+            links.forEach(link => link.classList.remove('toc-active'));
+            if (activeSection) {
+                const activeLink = links.find(link =>
+                    link.getAttribute('href') === `#${activeSection.id}`
+                );
+                if (activeLink) {
+                    activeLink.classList.add('toc-active');
+                }
+            }
+
+            ticking = false;
+        }
+
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(updateActiveSection);
+                ticking = true;
+            }
+        }
+
+        // Listen to scroll events
+        window.addEventListener('scroll', onScroll, {
+            passive: true
+        });
+
+        // Initial check
+        updateActiveSection();
+    });
+</script>

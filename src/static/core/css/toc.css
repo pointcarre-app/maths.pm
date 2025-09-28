@@ -3,7 +3,7 @@
 .sidebar-fixed {
   position: fixed;
   top: 12vh;
-  left: 2rem;
+  left: 1rem;
   /* height: auto; */
   max-height: 60vh;
   overflow-y: scroll;
@@ -13,11 +13,7 @@
 
 
 
-@media (max-width: 1400px) {
-  .sidebar-fixed {
-    left: 1rem;
-  }
-}
+
 
 /* TOC Styling */
 #toc {
@@ -37,13 +33,6 @@
   margin-bottom: 1rem !important;
   margin-top: 1rem !important;
 } */
-
-#toc > ul > li > a {
-  /* color: hsl(var(--bc) / 0.85) !important; */
-  font-weight: 500 !important;
-  /* font-size: 0.9rem !important; */
-}
-
 
 
 #toc > ul > ul {
@@ -115,11 +104,19 @@
 }
 
 
-#toc > ul > li > ul > li > ul > li > a:last-child {
+#toc > ul > li > ul > li > ul > li > a{
   font-size: 0.75rem !important;
   padding-left: 0.5rem !important;
   margin-bottom: 1.5rem !important;
   font-weight: 300 !important;
+
+}
+
+
+/* Third level links - smaller and lighter */
+#toc > ul > li > ul > li > ul > li > ul > li {
+  /* padding-left: 0.5rem !important; */
+  display: none !important;
 
 }
 
@@ -140,3 +137,16 @@
   left: -0.25rem !important;
   color: hsl(var(--bc) / 0.3) !important;
 } */
+
+
+#toc > ul > li > a {
+  /* color: hsl(var(--bc) / 0.85) !important; */
+  font-weight: 700 !important;
+  /* font-size: 0.9rem !important; */
+  /* text-decoration: marquee !important; */
+  /* margin-bottom: 1rem !important; */
+  /* text-decoration: underline !important; */
+  /* border-bottom: 1px solid var(--color-base-300) !important; */
+
+}
+

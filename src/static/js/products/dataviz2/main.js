@@ -76,11 +76,11 @@
         const uiContainer = document.createElement('div');
         uiContainer.className = 'dataviz2-execution-ui';
         uiContainer.innerHTML = `
-            <div class="btn-group mb-4">
-                <button class="dataviz2-execute-btn btn btn-secondary btn-soft btn-sm">
+            <div class="btn-group mb-4 mt-[-0.5rem]">
+                <button class="dataviz2-execute-btn btn btn-secondary btn-soft btn-sm sm:btn-md">
                     ▶ Execute
                 </button>
-                <button class="dataviz2-clear-btn btn btn-soft btn-sm">
+                <button class="dataviz2-clear-btn btn btn-soft btn-sm sm:btn-md">
                     Clear Output
                 </button>
             </div>
@@ -174,7 +174,7 @@
                     warningContainer.style.marginTop = '0.5rem';
 
                     const warningButton = document.createElement('button');
-                    warningButton.className = 'btn btn-sm btn-outline btn-warning';
+                    warningButton.className = 'btn btn-sm sm:btn-md btn-outline btn-warning';
                     warningButton.textContent = 'Show warnings';
 
                     const warningDetails = document.createElement('pre');
@@ -371,10 +371,10 @@
             uiContainer.className = 'dataviz2-execution-ui';
             uiContainer.innerHTML = `
                 <div class="btn-group mb-4">
-                    <button class="dataviz2-execute-btn btn btn-secondary btn-soft btn-sm">
+                    <button class="dataviz2-execute-btn btn btn-secondary btn-soft btn-sm sm:btn-md">
                         ▶ Execute
                     </button>
-                    <button class="dataviz2-clear-btn btn btn-soft btn-sm">
+                    <button class="dataviz2-clear-btn btn btn-soft btn-sm sm:btn-md">
                         Clear Output
                     </button>
                 </div>
@@ -465,7 +465,7 @@
                         warningContainer.style.marginTop = '0.5rem';
                         
                         const warningButton = document.createElement('button');
-                        warningButton.className = 'btn btn-sm btn-outline btn-warning';
+                        warningButton.className = 'btn btn-sm sm:btn-md btn-outline btn-warning';
                         warningButton.textContent = 'Show warnings';
                         
                         const warningDetails = document.createElement('pre');
