@@ -96,6 +96,8 @@ The evaluation consists on a data vizualisation project. The students will have 
 
 - [**Course overview**](00_plan.md) *(i.e. the file you're currently reading)*
 - [**Graphic Semiology Fundamentals**](session_1_a.md)
+    - [1.3. An example from a research paper: Shannon Entropy](session_1_a0_shannon.md)
+    - [4. Visual Variables](session_1_a1_visual.md)
 
 
 #### Hour 2: Python: installation and philosophy
