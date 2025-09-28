@@ -1,5 +1,15 @@
 # Computing Shannon Entropy for Information Density (ID)
 
+Notes for [Graphic Semiology Fundamentals](session_1_a.md) from Session 1
+{: .pm-subtitle}
+
+
+
+## Notes
+
+- 1️⃣ Session 1: [Graphic Semiology Fundamentals](session_1_a.md) 
+  - <span class="font-heading sm:text-lg">1.3. An example from a research paper</span>
+  - Research paper: [Different languages, similar encoding efficiency: Comparable information rates across the human communicative niche](https://www.science.org/doi/10.1126/sciadv.aaw2594) by Christophe Coupé, Yoon Mi Oh, Dan Dediu, and François Pellegrino.
 
 
 [TOC]
@@ -32,7 +42,7 @@ In the study, **Shannon entropy** is used to estimate the **Information Density 
      - $p(x)$: Probability of syllable $x$.
      - This measures the average uncertainty or information content per syllable, ignoring context.
 
-### 3. Second-Order Entropy (ID)
+### 3. Second-Order Entropy ($ID$)
    - Compute the **conditional entropy** to account for syllable dependencies (bigrams within words):
      $$
      ID = -\sum_{x, y} p(x, y) \cdot \log_2\left(\frac{p(x, y)}{p(x)}\right)
@@ -41,7 +51,7 @@ In the study, **Shannon entropy** is used to estimate the **Information Density 
      - $\dfrac{p(x, y)}{p(x)}$: Conditional probability $p(y|x)$, the likelihood of $y$ given $x$.
      - This reflects the information content per syllable, considering the context of the previous syllable, making it a more accurate measure of linguistic information.
 
-### 4. Information Rate (IR)
+### 4. Information Rate ($IR$)
    - Multiply the ID (bits per syllable) by the **Speech Rate (SR)** (syllables per second):
      $$
      IR = ID \cdot SR
@@ -50,7 +60,7 @@ In the study, **Shannon entropy** is used to estimate the **Information Density 
 
 
 
-## Key Notes:
+## Key Notes
 - **Data Source**: Large written corpora provide syllable frequencies, while spoken corpora ($170$ speakers, $17$ languages, $\sim 240,000$ syllables) provide $SR$.
 - **Why Conditional Entropy?**: It accounts for syllable predictability within words, reducing redundancy compared to first-order entropy ($ShE$), which assumes syllables are independent.
 - **Result**: Across $17$ languages, $ID$ varies (e.g., $4.8$ bits/syllable for Basque to $8.0$ for Vietnamese), but $IR$ converges around $\sim 39$ bits/s due to a trade-off between $ID$ and $SR$.

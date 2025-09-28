@@ -72,7 +72,8 @@
 {: .max-w-[550px] .mx-auto .my-6}
 
 
-> More explanations detailed on [here](session_1_ashannon.md).
+More detailed explanations are available [here: Computing Shannon Entropy for Information Density](session_1_a0_shannon.md).
+{: .alert .alert-success .alert-soft}
 
 
 
@@ -694,127 +695,11 @@ inline: |
 
 
 
-## 4. Visual (Retinal) Variables
-
-### 4.1. The Eight Visual Variables
-
-> Bertin identifies eight key visual variables used to encode data in 2D graphics.
-
-| Variable     | Description                          | Example Use                        |
-| ------------ | ------------------------------------ | ---------------------------------- |
-| Position     | $X$/$Y$ coordinates                  | Maps, scatter plots                |
-| Size         | Magnitude (length, area, volume)     | Bubble charts                      |
-| Value        | Lightness/darkness                   | Heatmaps, shading                  |
-| Texture      | Pattern density                      | Map hatching                       |
-| Color (Hue)  | Color spectrum distinction           | Categorical maps/charts            |
-| Orientation  | Angle/direction                      | Wind maps, texture direction       |
-| Shape        | Icon/form                            | Markers, diagram symbols           |
-| Grain        | Fineness or coarseness of texture    | (Often non-standard, overlaps above)|
-
-### 4.2. Properties of Visual Variables
-
-- **Selectivity:** Can similar symbols be rapidly and preattentively recognized?
-- **Associativity:** Can variables be grouped and compared without interference from others?
-- **Order:** Can the variable sensibly convey progression or ranking?
-- **Quantification:** Can the variable indicate measurable differences?
-
-Associativity is crucial for design: some variables interfere with others (disassociativity), making layering complex data less clear.
+## 4. Visual  Variables
 
 
-
-### 4.3. 💾 Datasets used in the following examples
-
-
-We'll use some panel data: gdp (nominal) per year and per country. The dataset and its documentation are available [here](https://github.com/datasets/gdp).
-
-
-
-### 4.4. Illustration of Bertin's Visual Variables
-
-
-
-
-```yaml
-f_type: "codex_"
-height_in_px: 1000
-inline: |
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    import numpy as np
-    from pyodide.http import open_url
-
-    # Load data
-    url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
-    df = pd.read_csv(open_url(url))
-
-    # World average GDP per year 1960+
-    world_gdp = df.groupby('Year')['Value'].mean().reset_index()
-    world_gdp = world_gdp[world_gdp['Year'] >= 1960].copy()
-    world_gdp['GDP (Trillions)'] = world_gdp['Value'] / 1e12
-    world_gdp['Trend'] = world_gdp['GDP (Trillions)'].diff().fillna(0)
-    world_gdp['Opacity'] = np.where(world_gdp['Trend'] >= 0, 1.0, 0.3)
-
-    # Latest year
-    latest_year = df['Year'].max()
-    df_latest = df[df['Year'] == latest_year]
-
-    # Select top 10 and bottom 10 countries by GDP in latest year
-    top10 = df_latest.nlargest(10, 'Value')['Country Name'].tolist()
-    bottom10 = df_latest.nsmallest(10, 'Value')['Country Name'].tolist()
-    selected_countries = top10 + bottom10
-
-    # Filter main dataframe for selected countries from 1960
-    df_filtered = df[(df['Country Name'].isin(selected_countries)) & (df['Year'] >= 1960)].copy()
-    df_filtered['GDP (Trillions)'] = df_filtered['Value'] / 1e12
-
-    fig, ax = plt.subplots(figsize=(16, 9))
-
-    # Plot world GDP bars with opacity per trend
-    for idx, row in world_gdp.iterrows():
-        ax.bar(row['Year'], row['GDP (Trillions)'], color='grey', alpha=row['Opacity'], width=0.7,
-            label='World Avg GDP' if idx == 0 else "")
-
-    # Assign distinct colors for countries
-    colors = plt.cm.tab20.colors  # A colormap with many distinct colors
-
-    # Plot country GDP lines with opacity limited
-    for i, country in enumerate(selected_countries):
-        country_data = df_filtered[df_filtered['Country Name'] == country]
-        gdp_vals = country_data['GDP (Trillions)'].values
-        trend = np.diff(gdp_vals, prepend=gdp_vals[0])
-        alphas = np.clip(0.5 + (trend / np.max(np.abs(trend))), 0.5, 1.0)  # opacity between 0.5-1.0
-
-        # Plot line segments
-        for j in range(len(country_data) - 1):
-            ax.plot(country_data['Year'].iloc[j:j + 2], gdp_vals[j:j + 2], color=colors[i % len(colors)],
-                    alpha=(alphas[j] + alphas[j + 1]) / 2, linewidth=2)
-        # Plot markers
-        for j, yr in enumerate(country_data['Year']):
-            ax.scatter(yr, gdp_vals[j], color=colors[i % len(colors)], alpha=alphas[j], edgecolor='black',
-                    s=40, zorder=5)
-
-    # Title with multiline describing selection
-    title_text = ("GDP Trends 1960 - Latest Year\n"
-                "Top 10 and Bottom 10 Countries by GDP in {}\n"
-                "With World Average GDP Bars (Opacity Indicates Growth/Decline)").format(latest_year)
-
-    ax.set_title(title_text, fontsize=18, weight='bold')
-    ax.set_xlabel('Year', fontsize=16)
-    ax.set_ylabel('GDP (Trillions USD)', fontsize=16)
-    ax.legend(selected_countries + ['World Avg GDP'], fontsize=10, bbox_to_anchor=(1.05, 1), loc='upper left')
-    ax.tick_params(axis='both', which='major', labelsize=14)
-    ax.set_xlim(1960, latest_year)
-    plt.xticks(rotation=45)
-    ax.grid(axis='y', linestyle='--', alpha=0.7)
-
-    plt.tight_layout(rect=[0, 0, 0.85, 1])  # Make room for legend on right
-    plt.show()
-
-
-```
-
-
-
+This part of the lecture is available [here: Visual Variables](session_1_a1_visual.md).
+{: .alert .alert-success .alert-soft}
 
 
 ## 5. Graphic Rules and Grammar
