@@ -248,22 +248,16 @@ We'll use some panel data: gdp (nominal) per year and per country. The dataset a
 
 
 
-About the graph below: This interactive visualization demonstrates Jacques Bertin's fundamental visual variables using real GDP data. Each subplot shows how the same data can be encoded differently to communicate information.
+**About this visualization:** We demonstrate Bertin's six visual variables using GDP data from a carefully selected mix of countries representing different economic realities - major economies (US, China, Germany, Japan), emerging markets (Brazil, India, Mexico, South Korea), wealthy small nations (Switzerland, Netherlands, Sweden, Norway), and developing economies (Nigeria, Bangladesh, Vietnam, Kenya). This diversity ensures our visual encodings work across the full spectrum of values, not just extremes.
 {: .alert .alert-info .alert-soft}
 
-The visualization below explores **Bertin's six primary visual variables** through practical examples:
-
-1. **POSITION** - The most fundamental variable, using X and Y coordinates to place data points in space. This is how we create traditional scatter plots and line charts.
-
-2. **SIZE** - Varying the area or volume of graphical elements to represent quantitative differences. Larger circles represent larger GDP values, making comparisons intuitive.
-
-3. **VALUE** (Lightness/Darkness) - Using grayscale intensity from light to dark to show magnitude. Darker bars represent higher GDP values, creating a natural ordering.
-
-4. **COLOR (Hue)** - Different colors to categorize or classify data. Here, red represents the highest GDPs, transitioning through orange, yellow, green, to blue for the lowest.
-
-5. **ORIENTATION** - The angle or direction of graphical elements. The GDP evolution curves for European countries show different line orientations (solid, dashed, dotted) to distinguish between countries while showing trends.
-
-6. **SHAPE** - Different symbols to represent categorical distinctions. Each continent gets its own marker shape, making it easy to identify geographic patterns in the data.
+**The six visual variables in action:**
+    - **Position** (x,y) → scatter plot coordinates
+    - **Size** → circle areas proportional to GDP  
+    - **Value** → grayscale intensity (darker = higher GDP)
+    - **Color** → hue categories (red=highest to blue=lowest)
+    - **Orientation** → line styles showing GDP trends over time
+    - **Shape** → markers representing continents
 
 
 ```yaml
