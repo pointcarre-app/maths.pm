@@ -103,7 +103,7 @@ We'll rely on the built-in `venv` module to create a virtual environment. The fo
 # Creating the virtual environment
 # using the absolute path to the python binary
 # that we previously installed with pyenv
- ~/.pyenv/versions/3.15.3/bin/python -m venv env
+ ~/.pyenv/versions/3.13.5/bin/python -m venv env
 ```
 
 
