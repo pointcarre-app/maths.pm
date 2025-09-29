@@ -507,9 +507,9 @@ Wealth, deprivation, league tables, constituency election results
 #### Bump
 - Effective for showing changing ranks through multiple stages
 
-#### Matplotlib implementation examples
+### Matplotlib implementation examples
 
-> See the examples from *The Financial Times Guide* and [**Practical work with `matplotlib` (2/2)**](01_session_2_b.md).
+> See the examples from *The Financial Times Guide* and [Practical work with `matplotlib` (2/2)](session_2_b.md).
 
 ## Distribution
 > Show values in a dataset and how often they occur. The shape (or 'skew') of a distribution can be a memorable way of highlighting the lack of uniformity or equality in the data.
@@ -1685,6 +1685,14 @@ Locator maps, regional/country maps, office locations, natural resource location
 - Grid-based data values mapped with an intensity colour scale. As choropleth map - but not snapped to an admin/political unit
 
 
+### Geopandas implementation examples
+
+`Matplotlib` is the library used by `geopandas` to build its plots. However, `geopandas` provided a high-level API to build maps, with a lot of customization options. In most cases, it is enough to only interact with the `geopandas` API to build maps.
+{: .alert .alert-success .alert-soft}
+
+- [`geopandas` User Guide - mapping and plotting tools](https://geopandas.org/en/stable/docs/user_guide/mapping.html)
+
+
 
 ## Flow
 > Show the reader volumes or intensity of movement between two or more states or conditions. These might be logical sequences or geographical locations.
@@ -1710,7 +1718,7 @@ Movement of funds, trade, migrants, lawsuits, information, relationships
 
 ### Matplotlib implementation examples
 
-- [Sankey](https://matplotlib.org/stable/api/sankey_api.html)
+- [`matplotlib.sankey`](https://matplotlib.org/stable/api/sankey_api.html)
 
 
 ### Examples using other libraries
