@@ -122,7 +122,7 @@ Any issue related to the proper execution of code on your machine must be solved
 
 #### Hour 1 & 2: Static graphical representation panorama
 
-- [**`matplotlib` as the Python reference**](01_session_2_a.md)
+- [**`matplotlib` as the Python reference for building graphs**](session_2_a.md)
 - [**Practical work with `matplotlib`**](01_session_2_b.md)
 <!-- Proposer en groupe -->
 

@@ -1,6 +1,8 @@
 
 # Matplotlib
 
+`matplotlib` is the Python reference for building graphs. Therefore, it is one of the most used library for data visualization in Python.
+{: .pm-subtitle}
 
 ## Matplotlib Configuration Best Practices
 
