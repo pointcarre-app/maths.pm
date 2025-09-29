@@ -1,5 +1,4 @@
-
-# Groups constitution and project data requirements
+# Data Visualization Project
 
 
 
@@ -38,3 +37,16 @@ The dataset must be relevant in order to use the concepts and the different data
 
 
 
+## Step by step guide
+
+| Step | Session | Milestone | Deliverable |
+|------|---------|-----------|-------------|
+| 1 | Session 1 | **Group formation** | Groups of 3-4 students formed | 
+| 2 | Session 2 | **Dataset selection** | Initial dataset chosen by group | 
+| 3 | Session 2 | **Project planning** | Project planning (**ask teacher's opinion**) | 
+| 4 | Session 3 | **Data validation** | Dataset **approved by teacher** | 
+| 5 | Session 3 | **Story scripting** | Preliminary story outline & key insights identified | 
+| 6 | Session 3-4 | **First graphs** | Initial visualizations with `matplotlib` | 
+| 7 | Session 4 | **Advanced visualizations** | Interactive graphs with `bokeh` | 
+| 8 | Session 5 | **Final polish** | Complete notebook + one-page report | 
+| 9 | Session 5 | **Presentation** | Project presentation to class | 

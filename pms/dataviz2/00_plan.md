@@ -89,13 +89,13 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 #### Hour 2
 
-- [**Bokeh presentation and basic usage**](01_session_3_b.md)
+- [**Bokeh presentation and basic usage**](session_3_a.md)
 
 
 #### Hour 3
 
 - [**Data Visualization Project**](session_1_e.md) : Story scripting & first graphs
-
+- [**Data Visualization Project**](session_1_e.md) : Advanced visualizations
 
 ### 4️⃣ Session 4: Practical Work
 

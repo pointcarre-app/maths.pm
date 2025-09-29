@@ -5,6 +5,8 @@ js_dependencies:
   - "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.6.2.min.js"
 ---
 
+
+[TOC]
 # DataViz2 Sandbox - Bokeh Interactive Visualizations
 
 Test interactive Bokeh plots with Python execution in the browser.
