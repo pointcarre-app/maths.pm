@@ -1,8 +1,26 @@
 {# TOC Sidebar Include #}
-<div class="sidebar-fixed hidden xl:block bg-base-100 shadow-sm"
+<div id="toc-sidebar"
+     class="sidebar-fixed hidden xl:block bg-base-100 shadow-sm"
      style="border-radius: var(--radius-box)">
   <div class="w-72 flex flex-col card">
-    <div id="toc" class="p-4 flex-none text-left text-base-content/80">{{ pm.toc.html | safe }}</div>
+    <div class="relative">
+      <button id="toc-close-btn"
+              class="absolute top-2 right-2 z-10 w-6 h-6 flex items-center justify-center rounded bg-base-200 hover:bg-base-300 text-base-content/60 hover:text-base-content transition-colors"
+              title="Hide table of contents">
+        <svg width="12"
+             height="12"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div id="toc" class="p-4 flex-none text-left text-base-content/80">{{ pm.toc.html | safe }}</div>
+    </div>
   </div>
 </div>
 
@@ -10,7 +28,15 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const toc = document.getElementById('toc');
-        if (!toc) return;
+        const tocSidebar = document.getElementById('toc-sidebar');
+        const closeBtn = document.getElementById('toc-close-btn');
+
+        if (!toc || !tocSidebar || !closeBtn) return;
+
+        // Handle close button click
+        closeBtn.addEventListener('click', () => {
+            tocSidebar.style.display = 'none';
+        });
 
         // Get all TOC links
         const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
