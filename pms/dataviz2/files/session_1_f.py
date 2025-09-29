@@ -157,13 +157,118 @@ def exercise_2_bar_chart():
     plt.subplots_adjust(left=0.16)  # Add extra space on left for country names
     plt.show()
 
+
+
+
 # =============================================================================
-# EXERCISE 3: Multi-Panel Dashboard
+# EXERCISE 3: Working with ordinal data
 # =============================================================================
 
-def exercise_3_dashboard():
+
+def exercise_3_ordinal_data():
     """
-    Create a 2x2 subplot dashboard showing different aspects of global economy.
+    Create a stacked bar chart showing the distribution of countries 
+    across different GDP categories over time.
+    """
+    # Select years for comparison
+    years = [2000, 2010, 2019]
+    
+    # Filter data for selected years
+    df_years = df_countries[df_countries['Year'].isin(years)].copy()
+    df_years = df_years.dropna(subset=['Value'])
+    
+    # Convert to billions for easier interpretation
+    df_years['GDP_Billions'] = df_years['Value'] / 1e9
+    
+    # Define GDP categories using pd.cut()
+    bins = [0, 100, 500, 2000, float('inf')]
+    labels = ['Small\n(< $100B)', 'Medium\n($100B-$500B)', 
+              'Large\n($500B-$2T)', 'Very Large\n(> $2T)']
+    
+    df_years['GDP_Category'] = pd.cut(df_years['GDP_Billions'], 
+                                      bins=bins, labels=labels, right=False)
+    
+    # Count countries in each category by year
+    category_counts = df_years.groupby(['Year', 'GDP_Category']).size().unstack(fill_value=0)
+    
+    # Calculate percentages for labels
+    category_percentages = category_counts.div(category_counts.sum(axis=1), axis=0) * 100
+    
+    # Create stacked bar chart
+    fig, ax = plt.subplots(figsize=(10, 6))
+    
+    # Colors for each category (using a categorical palette)
+    category_colors = ['#FFB3BA', '#BAFFC9', '#BAE1FF', '#FFFFBA']
+    
+    # Create stacked bars
+    bottom = np.zeros(len(years))
+    bars = []
+    
+    for i, category in enumerate(labels):
+        if category in category_counts.columns:
+            values = category_counts[category].values
+            bar = ax.bar(years, values, bottom=bottom, 
+                        color=category_colors[i], label=category, 
+                        alpha=0.8, edgecolor='white', linewidth=1)
+            bars.append(bar)
+            
+            # Add percentage labels on each segment
+            for j, (year, value, perc) in enumerate(zip(years, values, 
+                                                       category_percentages[category].values)):
+                if value > 0:  # Only add label if segment exists
+                    ax.text(year, bottom[j] + value/2, f'{perc:.1f}%', 
+                           ha='center', va='center', fontweight='bold', 
+                           fontsize=10, color='black')
+            
+            bottom += values
+    
+    # Customize the plot
+    ax.set_xlabel('Year', fontweight='bold', fontsize=12)
+    ax.set_ylabel('Number of Countries', fontweight='bold', fontsize=12)
+    ax.set_title('Evolution of Global Economy Distribution', 
+                 fontsize=16, fontweight='bold', pad=20)
+    
+    # Set x-axis ticks
+    ax.set_xticks(years)
+    ax.set_xticklabels(years)
+    
+    # Add grid
+    ax.grid(True, alpha=0.3, axis='y')
+    ax.set_axisbelow(True)
+    
+    # Legend positioned outside the plot area
+    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', 
+              frameon=True, fancybox=True, shadow=True)
+    
+    # Add total count labels on top of each bar
+    for i, year in enumerate(years):
+        total = category_counts.loc[year].sum()
+        ax.text(year, total + 2, f'Total: {total}', 
+               ha='center', va='bottom', fontweight='bold', fontsize=11)
+    
+    plt.tight_layout()
+    plt.show()
+    
+    # Print summary statistics
+    print("\nSummary of GDP Category Distribution:")
+    print("=" * 50)
+    for year in years:
+        print(f"\n{year}:")
+        year_data = category_counts.loc[year]
+        year_percentages = category_percentages.loc[year]
+        for category in labels:
+            if category in year_data.index:
+                count = year_data[category]
+                percentage = year_percentages[category]
+                print(f"  {category.replace(chr(10), ' ')}: {count} countries ({percentage:.1f}%)")
+
+# =============================================================================
+# EXERCISE 4: Subplots
+# =============================================================================
+
+def exercise_4_subplots():
+    """
+    Create a 2x2 subplot showing different aspects of global economy.
     """
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(16, 12))
     
@@ -254,11 +359,16 @@ if __name__ == "__main__":
     print("EXERCISE 2: Bar Chart")
     print("=" * 60)
     exercise_2_bar_chart()
+
+    print("\n" + "=" * 60)
+    print("EXERCISE 3: Working with ordinal data")
+    print("=" * 60)
+    exercise_3_ordinal_data()
     
     print("\n" + "=" * 60)
-    print("EXERCISE 3: Multi-Panel Dashboard")
+    print("EXERCISE 4: Sublopts")
     print("=" * 60)
-    exercise_3_dashboard()
+    exercise_4_subplots()
     
     print("\n" + "=" * 60)
     print("All exercises completed successfully!")
