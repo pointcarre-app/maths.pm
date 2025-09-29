@@ -288,6 +288,7 @@ df = pd.DataFrame(data)
 ```
 
 The original data values are based on open international datasets and aggregate statistics from sources like the World Bank, OECD, United Nations, Eurostat, and compilations by Our World in Data. For robust research or publication, refer directly to these organizations' portals or download raw datasets from their official sites.
+{: .alert .alert-warning .alert-soft}
 
 ```yaml
 f_type: "codex_"
@@ -1340,12 +1341,13 @@ df_g7 = pd.DataFrame(data_g7)
 print(df_g7)
 df_g7 = pd.DataFrame(data_g7)
 
-# Market capitalizations of top tech companies (2024, in billions USD)
+```
+
+<!-- # Market capitalizations of top tech companies (2024, in billions USD)
 tech_companies = {
     "Apple": 3450, "Microsoft": 3100, "NVIDIA": 2900, "Amazon": 1850, 
     "Google": 2150, "Meta": 1300, "Tesla": 800, "TSMC": 650
-}
-```
+} -->
 
 GDP values are in trillions USD, Population in millions, Exports/Imports in trillions USD. Market capitalizations as of Q4 2024.
 
@@ -1539,11 +1541,13 @@ inline: |
     
     # Create bullet chart data (actual trade balance and targets)
     countries_bullet = ['USA', 'Germany', 'Japan', 'France', 'UK']
+    # IMPORTANT: Reorder the dataframe to match the order in countries_bullet
     df_bullet = df[df['Country'].isin(countries_bullet)]
+    df_bullet = df_bullet.set_index('Country').reindex(countries_bullet).reset_index()
     
     # Calculate trade balance (Exports - Imports)
     trade_balance = df_bullet['Exports'] - df_bullet['Imports']
-    targets = np.array([0, 0.5, 0.2, 0, -0.05])  # Target balances
+    targets = np.array([0, 0.2, 0, -0.05, -0.1])  # Target balances matching the order
     
     y_pos = np.arange(len(countries_bullet))
     

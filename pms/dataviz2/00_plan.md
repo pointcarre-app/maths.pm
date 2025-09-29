@@ -39,7 +39,7 @@
 #### Hours 3: Data types & first graphs
 
 - [**Data Types Classification and introduction to `matplotlib`**](session_1_d.md)
-- [**Groups consitution and project data requirements**](session_1_e.md)
+- [**Data Visualization Project**](session_1_e.md) : Groups consitution and project data requirements
 - [**Practical work with `matplotlib` (1/2)**](session_1_f.md)
 
 
@@ -60,7 +60,8 @@ Any issue related to the proper execution of code on your machine must be solved
 
 #### Hours 3: Group work: project setup
 
-- [**Data selection & project planning**](01_session_2_c.md)
+- [**Data Visualization Project**](session_1_e.md) : Data selection & project planning
+
 
 <!-- Precise deilverable -->
 
