@@ -134,11 +134,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 
 
-
-
-
-
-## Data
+## Datasets
 
 
 - [**GDP dataset**](/files/gdp.csv)
@@ -165,11 +161,11 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
     - [05_linked_plots.py](files/bokeh_server_apps/05_linked_plots.py)<br>
     - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/05_linked_plots.py" download>Download link</a><br>
     - [06_interactive_presentation.py](files/bokeh_server_apps/06_interactive_presentation.py)<br>
-        - [Image from FT used in the application](files/bokeh_server_apps/visual-vocabulary-ft.png)<br>
+        - [Image from FT used in the application 06](files/bokeh_server_apps/visual-vocabulary-ft.png)<br>
         - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/visual-vocabulary-ft.png" download>Download link</a><br>
 - [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
     - [**Correction**](files/covid-graphs-correction.ipynb)
-    - Download: <a href="/pm/dataviz2/files/covid-graphs-statement.ipynb" download>Download link</a>
+    - Download: <a href="/pm/dataviz2/files/covid-graphs-correction.ipynb" download>Download link</a>
 - [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb.md)
     - [**Correction**](files/covid-maps-correction.ipynb)
     - Download: <a href="/pm/dataviz2/files/covid-maps-correction.ipynb" download>Download link</a>
