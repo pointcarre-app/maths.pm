@@ -252,12 +252,13 @@ We'll use some panel data: GDP (nominal) per year and per country. The dataset a
 {: .alert .alert-info .alert-soft}
 
 **The six visual variables in action:**
-    - **Position** (x,y) → scatter plot coordinates
-    - **Size** → circle areas proportional to GDP  
-    - **Value** → grayscale intensity (darker = higher GDP)
-    - **Color** → hue categories (red=highest to blue=lowest)
-    - **Orientation** → line styles showing GDP trends over time
-    - **Shape** → markers representing continents
+
+- **Position** (x,y) → scatter plot coordinates
+- **Size** → circle areas proportional to GDP  
+- **Value** → grayscale intensity (darker = higher GDP)
+- **Color** → hue categories (red=highest to blue=lowest)
+- **Orientation** → line styles showing GDP trends over time
+- **Shape** → markers representing continents
 
 
 ```yaml
