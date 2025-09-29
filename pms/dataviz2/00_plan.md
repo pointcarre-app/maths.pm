@@ -101,8 +101,8 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 #### Hours 1 & 2
 
-- [**Practical work: COVID 19 in the US**](01_session_4_a.md)
-- [**Practical work: COVID 19 in the US: cartographic representation**](01_session_4_b.md)
+- [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
+- [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb)
 
 
 
@@ -131,3 +131,19 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 
 
+
+
+## Corrections 
+
+
+
+- [**Practical work with `matplotlib` (1/2)**](session_1_f.md)
+    - lala
+- [**Practical work with `matplotlib` (2/2)**](session_2_c.md)
+    - lala
+- [**Practical work with `bokeh` server applications**](session_3_b.md) 
+    - lala
+- [**Practical work: COVID 19 in the US**](01_session_4_a.md)
+    - lala
+- [**Practical work: COVID 19 in the US: cartographic representation**](01_session_4_b.md)
+    - lala
