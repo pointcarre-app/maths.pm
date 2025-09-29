@@ -102,7 +102,6 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 #### Hours 1 & 2
 
 - [**Practical work: COVID 19 in the US**](01_session_4_a.md)
-
 - [**Practical work: COVID 19 in the US: cartographic representation**](01_session_4_b.md)
 
 
