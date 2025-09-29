@@ -1,5 +1,7 @@
 
-# Practical work with `matplotlib` (2/2)
+# Practical work with `matplotlib` (2/2) - correction
+
+
 
 
 
@@ -98,7 +100,6 @@ non_country_entities = [
     ['World', 'WLD']
 ]
 ```
-
 
 ## Setup Code (Run First)
 

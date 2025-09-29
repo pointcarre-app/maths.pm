@@ -162,10 +162,19 @@ print(f"Dataset loaded: {df_countries.shape[0]} rows, {df_countries['Country Nam
 
 
 
-This exercise illustrates the Ranking section of the [**Visual Vocabulary - Financial Times Guide**](session_2_a.md).
+The exercises illustrate the Ranking section of the [**Visual Vocabulary - Financial Times Guide**](session_2_a.md).
 {: .alert .alert-info .alert-soft}
 
+
 > Ranking visualizations are essential for showing order and hierarchy in data. They help readers quickly identify leaders, laggards, and relative positions. In this exercise, you'll explore different ways to visualize rankings using GDP data.
+
+
+
+🏗️ Code for data preprocessing, comments proposing steps to follow, and commented code giving clues have been provided for you in the snippets below.
+{: .alert .alert-success .alert-soft}
+
+
+
 
 ### Exercise 1.1: Ordered Bar Chart
 
@@ -216,36 +225,25 @@ inline: |
   fig, ax = plt.subplots(figsize=(12, 8))
   
   # Create color gradient
-  colors = plt.cm.viridis(np.linspace(0.3, 0.9, len(df_2019)))
+  ...
   
   # Create horizontal bar chart
-  bars = ax.barh(range(len(df_2019)), df_2019['Value'].values / 1e12, 
-                 color=colors, edgecolor='white', linewidth=1)
+  ...
   
   # Customize axes with rank labels included in country names
-  ax.set_yticks(range(len(df_2019)))
+  ...
+
   # Create labels with rank and country name combined
-  labels = [f"{name} ({i+1})" for i, name in enumerate(df_2019['Country Name'].values)]
-  ax.set_yticklabels(labels, fontsize=11)
-  ax.set_xlabel('GDP (Trillions USD)', fontsize=12, fontweight='bold')
-  ax.set_title('Top 15 Economies by GDP (2019)', fontsize=14, fontweight='bold', pad=20)
+  ...
   
   # Add value labels
-  for i, (bar, value) in enumerate(zip(bars, df_2019['Value'].values)):
-      ax.text(value/1e12 + 0.1, bar.get_y() + bar.get_height()/2, 
-              f'${value/1e12:.1f}T', 
-              va='center', fontsize=10, color='#333333')
+  ...
   
   # Style improvements
-  ax.grid(True, axis='x', alpha=0.3, linestyle='--')
-  ax.set_axisbelow(True)
-  ax.spines['top'].set_visible(False)
-  ax.spines['right'].set_visible(False)
-  ax.spines['left'].set_linewidth(0.5)
-  ax.spines['bottom'].set_linewidth(0.5)
+  ...
   
-  plt.tight_layout()
-  plt.show()
+  # plt.tight_layout()
+  # plt.show()
   
   print("💡 Ordered bar charts are ideal for comparing values and showing clear rankings")
 ```
@@ -321,63 +319,31 @@ inline: |
   fig, ax = plt.subplots(figsize=(14, 7))
   
   # Plot lollipops
-  y_positions = np.arange(len(df_g7))
+  # y_positions = np.arange(len(df_g7))
   
   # Draw lines
-  for i, row in enumerate(df_g7.itertuples()):
-      ax.plot([row.Value_2010/1e12, row.Value_2019/1e12], [i, i], 
-              'gray', alpha=0.5, linewidth=2, zorder=1)
+  ...
   
   # Draw circles for 2010 with stronger color
-  ax.scatter(df_g7['Value_2010']/1e12, y_positions, 
-            s=180, color='#E74C3C', edgecolor='darkred', linewidth=2, 
-            zorder=2, label='2010', alpha=1.0)
+  ...
   
   # Draw circles for 2019 with stronger color
-  ax.scatter(df_g7['Value_2019']/1e12, y_positions, 
-            s=180, color='#27AE60', edgecolor='darkgreen', linewidth=2, 
-            zorder=2, label='2019', alpha=1.0)
+  ...
   
   # Customize axes with short labels
-  ax.set_yticks(y_positions)
-  ax.set_yticklabels(df_g7['Short_Name'].values, fontsize=12, fontweight='bold')
-  ax.set_xlabel('GDP (Trillions USD)', fontsize=12, fontweight='bold')
-  ax.set_title('G7 Countries: GDP Evolution 2010 vs 2019', 
-              fontsize=14, fontweight='bold', pad=20)
+  ...
   
   # Add value labels with stronger colors and smart positioning
-  for i, row in enumerate(df_g7.itertuples()):
-      # Check if values are close or if 2019 < 2010 (decrease)
-      if row.Value_2019 < row.Value_2010:
-          # For decreasing values, swap the label positions
-          ax.text(row.Value_2019/1e12 - 0.3, i, f'${row.Value_2019/1e12:.1f}T', 
-                  ha='right', va='center', fontsize=10, color='#1E8449', fontweight='bold')
-          ax.text(row.Value_2010/1e12 + 0.3, i, f'${row.Value_2010/1e12:.1f}T', 
-                  ha='left', va='center', fontsize=10, color='#C0392B', fontweight='bold')
-      else:
-          # Normal positioning for increasing values
-          ax.text(row.Value_2010/1e12 - 0.3, i, f'${row.Value_2010/1e12:.1f}T', 
-                  ha='right', va='center', fontsize=10, color='#C0392B', fontweight='bold')
-          ax.text(row.Value_2019/1e12 + 0.3, i, f'${row.Value_2019/1e12:.1f}T', 
-                  ha='left', va='center', fontsize=10, color='#1E8449', fontweight='bold')
+  ...
   
   # Style improvements
-  ax.grid(True, axis='x', alpha=0.3, linestyle=':')
-  ax.set_axisbelow(True)
-  ax.spines['top'].set_visible(False)
-  ax.spines['right'].set_visible(False)
-  ax.legend(loc='lower right', fontsize=11, framealpha=0.95)
+  ...
   
   # Add growth arrows
-  for i, row in enumerate(df_g7.itertuples()):
-      growth = (row.Value_2019 - row.Value_2010) / row.Value_2010 * 100
-      mid_point = (row.Value_2010/1e12 + row.Value_2019/1e12) / 2
-      ax.text(mid_point, i + 0.3, f'+{growth:.0f}%', 
-              ha='center', va='bottom', fontsize=8, 
-              color='green' if growth > 0 else 'red', fontweight='bold')
+  ...
   
-  plt.tight_layout()
-  plt.show()
+  # plt.tight_layout()
+  # plt.show()
   
   print("📊 Lollipop charts elegantly show changes between two time points")
 ```
@@ -448,65 +414,25 @@ inline: |
   fig, ax = plt.subplots(figsize=(14, 10))
   
   # Plot lines
-  for _, row in df_merged.iterrows():
-      # Determine color based on rank change
-      if row['Rank_2019'] < row['Rank_2000']:
-          color = '#2ECC71'  # Green for improvement
-          linewidth = 2.5
-      elif row['Rank_2019'] > row['Rank_2000']:
-          color = '#E74C3C'  # Red for decline
-          linewidth = 2.5
-      else:
-          color = '#95A5A6'  # Gray for no change
-          linewidth = 1.5
-      
-      # Draw line
-      ax.plot([0, 1], [row['Rank_2000'], row['Rank_2019']], 
-              color=color, linewidth=linewidth, alpha=0.7)
-      
-      # Add markers
-      ax.scatter(0, row['Rank_2000'], s=100, color=color, zorder=3, alpha=0.9)
-      ax.scatter(1, row['Rank_2019'], s=100, color=color, zorder=3, alpha=0.9)
-      
-      # Add country labels with rank always closest to axis
-      ax.text(-0.05, row['Rank_2000'], f"{row['Country Name']} ({int(row['Rank_2000'])})", 
-              ha='right', va='center', fontsize=10, fontweight='bold')
-      ax.text(1.05, row['Rank_2019'], f"({int(row['Rank_2019'])}) {row['Country Name']}", 
-              ha='left', va='center', fontsize=10, fontweight='bold')
+  ...
   
   # Customize axes - adjust y-limits to show all ranks
-  max_rank = max(df_merged['Rank_2000'].max(), df_merged['Rank_2019'].max())
-  ax.set_xlim(-0.3, 1.3)
-  ax.set_ylim(max_rank + 1, 0)  # Invert y-axis so rank 1 is at top
-  ax.set_xticks([0, 1])
-  ax.set_xticklabels(['2000', '2019'], fontsize=14, fontweight='bold')
-  ax.set_ylabel('Rank', fontsize=12, fontweight='bold')
-  ax.set_title('Top 10 Economies: Ranking Changes 2000-2019', 
-              fontsize=16, fontweight='bold', pad=20)
+  ...
   
   # Remove spines
-  ax.spines['top'].set_visible(False)
-  ax.spines['bottom'].set_visible(False)
-  ax.spines['left'].set_visible(False)
-  ax.spines['right'].set_visible(False)
+  ...
   
   # Add vertical lines at x positions
-  ax.axvline(0, color='black', linewidth=1, alpha=0.3)
-  ax.axvline(1, color='black', linewidth=1, alpha=0.3)
+  ...
   
   # Add legend
-  from matplotlib.lines import Line2D
-  legend_elements = [Line2D([0], [0], color='#2ECC71', lw=3, label='Improved ranking'),
-                     Line2D([0], [0], color='#E74C3C', lw=3, label='Declined ranking'),
-                     Line2D([0], [0], color='#95A5A6', lw=2, label='No change')]
-  ax.legend(handles=legend_elements, loc='lower center', 
-           bbox_to_anchor=(0.5, -0.1), ncol=3, frameon=False)
+  ...
   
   # Remove y-axis ticks
-  ax.set_yticks([])
+  ...
   
-  plt.tight_layout()
-  plt.show()
+  # plt.tight_layout()
+  # plt.show()
   
   print("📈 Slope charts effectively show ranking changes over time")
 ```
@@ -523,7 +449,7 @@ inline: |
 
 ```yaml
 f_type: "codex_"
-height_in_px: 500
+height_in_px: 1000
 inline: |
 
   import matplotlib.pyplot as plt
@@ -807,75 +733,26 @@ inline: |
   region_colors = plt.cm.Set3(np.linspace(0, 1, len(regions)))
   
   # Plot dots for each region
-  y_offset = 0
-  y_labels = []
-  y_positions = []
-  
-  for i, region in enumerate(regions):
-      region_data = df_2019_selected[df_2019_selected['Region'] == region]
-      
-      # Sort values within region
-      region_data = region_data.sort_values('Value_normalized')
-      
-      # Plot dots
-      x_values = region_data['Value_normalized'].values
-      y_values = [y_offset] * len(x_values)
-      
-      ax.scatter(x_values, y_values, s=120, color=region_colors[i], 
-                alpha=0.7, edgecolor='white', linewidth=1.5, zorder=3)
-      
-      # Add country label for max value only
-      # Find the maximum country
-      max_idx = region_data['Value_normalized'].idxmax()
-      max_country = region_data.loc[max_idx, 'Country Name']
-      max_value = region_data.loc[max_idx, 'Value_normalized']
-      
-      # Label only the maximum country - positioned slightly to the right
-      ax.text(max_value + 20, y_offset, max_country, 
-             ha='left', va='center', fontsize=8, rotation=0)
-      
-      # Calculate and plot median
-      median_val = np.median(x_values)
-      ax.plot([median_val, median_val], [y_offset - 0.2, y_offset + 0.2], 
-             color='black', linewidth=2, zorder=4)
-      
-      # Add region label
-      y_labels.append(region)
-      y_positions.append(y_offset)
-      
-      # Add range line
-      ax.plot([x_values.min(), x_values.max()], [y_offset, y_offset], 
-             color='gray', alpha=0.3, linewidth=1, zorder=1)
-      
-      y_offset += 1
+  ...
   
   # Customize axes
-  ax.set_yticks(y_positions)
-  ax.set_yticklabels(y_labels, fontsize=12, fontweight='bold')
-  ax.set_xlabel('GDP (Billions USD)', fontsize=12, fontweight='bold')
-  ax.set_title('GDP Distribution by Region (2019)', 
-              fontsize=14, fontweight='bold', pad=20)
+  ...
   
   # Style improvements
-  ax.grid(True, axis='x', alpha=0.3, linestyle=':')
-  ax.set_axisbelow(True)
-  ax.spines['top'].set_visible(False)
-  ax.spines['right'].set_visible(False)
-  ax.spines['left'].set_linewidth(0.5)
-  ax.spines['bottom'].set_linewidth(0.5)
+  ...
   
   # Add legend for median and labeled countries
-  from matplotlib.lines import Line2D
-  from matplotlib.patches import Patch
-  legend_elements = [
-      Line2D([0], [0], color='black', lw=2, label='Median GDP'),
-      Patch(facecolor='none', edgecolor='none', label='Labels show largest economy per region')
-  ]
-  ax.legend(handles=legend_elements, loc='upper right', frameon=True, framealpha=0.95, 
-           fontsize=10)
+  # from matplotlib.lines import Line2D
+  # from matplotlib.patches import Patch
+  # legend_elements = [
+  #     Line2D([0], [0], color='black', lw=2, label='Median GDP'),
+  #     Patch(facecolor='none', edgecolor='none', label='Labels show largest # economy per region')
+  # ]
+  # ax.legend(handles=legend_elements, loc='upper right', frameon=True, # # framealpha=0.95, 
+  #         fontsize=10)
   
-  plt.tight_layout()
-  plt.show()
+  #plt.tight_layout()
+  # plt.show()
   
   print("🔵 Dot strip plots show distributions and individual data points clearly")
 ```
@@ -950,46 +827,25 @@ inline: |
   colors = plt.cm.tab10(np.linspace(0, 1, len(countries_to_track)))
   
   # Plot lines for each country
-  for i, (country, ranks) in enumerate(rankings_data.items()):
-      # Remove None values for plotting
-      valid_years = [y for y, r in zip(years, ranks) if r is not None]
-      valid_ranks = [r for r in ranks if r is not None]
-      
-      # Plot line with markers
-      ax.plot(valid_years, valid_ranks, 'o-', color=colors[i], 
-             linewidth=2.5, markersize=8, label=country, alpha=0.8)
-      
-      # Add country name at the end
-      if len(valid_ranks) > 0:
-          ax.text(valid_years[-1] + 0.1, valid_ranks[-1], country, 
-                 va='center', fontsize=10, color=colors[i], fontweight='bold')
+  ...
   
   # Customize axes
-  ax.set_xlim(2009.5, 2020.5)
-  ax.set_ylim(12, 0.5)  # Invert y-axis
-  ax.set_xlabel('Year', fontsize=12, fontweight='bold')
-  ax.set_ylabel('Global GDP Rank', fontsize=12, fontweight='bold')
-  ax.set_title('Economic Ranking Evolution 2010-2019', 
-              fontsize=14, fontweight='bold', pad=20)
+  ...
   
   # Set x-axis ticks
-  ax.set_xticks(years)
-  ax.set_xticklabels(years, rotation=45)
+  ...
   
   # Set y-axis ticks
-  ax.set_yticks(range(1, 13))
-  ax.set_yticklabels([f'{i}' for i in range(1, 13)])
+  ...
   
   # Add grid
-  ax.grid(True, alpha=0.3, linestyle=':')
-  ax.set_axisbelow(True)
+  ...
   
   # Style improvements
-  ax.spines['top'].set_visible(False)
-  ax.spines['right'].set_visible(False)
+  ...
   
-  plt.tight_layout()
-  plt.show()
+  # plt.tight_layout()
+  # plt.show()
   
   print("📊 Bump charts excel at showing ranking changes across multiple time periods")
 ```
@@ -1066,68 +922,46 @@ inline: |
   colors = [color_map[cat] for cat in df_growth['Size_Category']]
   
   # Plot bubbles
-  scatter = ax.scatter(df_growth['Growth_Rate'], 
-                      range(len(df_growth)), 
-                      s=sizes, c=colors, alpha=0.6, 
-                      edgecolor='white', linewidth=2)
+  ...
   
   # Add country labels
-  for i, row in enumerate(df_growth.itertuples()):
-      # Only label large economies or high growth
-      if row.Value_2019 > 2e12 or row.Growth_Rate > 200:
-          # Note: itertuples() uses Index attribute for 'Country Name' column
-          country_name = df_growth.iloc[i]['Country Name']
-          ax.text(row.Growth_Rate, i, country_name, 
-                 fontsize=9, ha='center', va='center')
+  ...
   
   # Customize axes
-  ax.set_xlabel('GDP Growth Rate 2010-2019 (%)', fontsize=12, fontweight='bold')
-  ax.set_ylabel('Countries (ordered by 2019 GDP)', fontsize=12, fontweight='bold')
-  ax.set_title('GDP Size and Growth Rate (2010-2019)', 
-              fontsize=14, fontweight='bold', pad=20)
+  ...
   
   # Remove y-axis labels
-  ax.set_yticks([])
+  ...
   
   # Add vertical line at 0% growth
-  ax.axvline(0, color='gray', linestyle='--', alpha=0.5)
+  ...
   
   # Add vertical line at 100% growth
-  ax.axvline(100, color='green', linestyle=':', alpha=0.3)
-  ax.text(100, ax.get_ylim()[1] * 0.95, 'Doubled GDP', 
-         ha='center', fontsize=9, color='green')
+  ...
   
   # Grid
-  ax.grid(True, axis='x', alpha=0.3, linestyle=':')
-  ax.set_axisbelow(True)
+  ...
   
   # Style
-  ax.spines['top'].set_visible(False)
-  ax.spines['right'].set_visible(False)
-  ax.spines['left'].set_visible(False)
+  ...
   
   # Legend
-  from matplotlib.patches import Circle
-  legend_elements = [Circle((0, 0), 1, fc=color, alpha=0.6, 
-                           edgecolor='white', linewidth=2, 
-                           label=label) 
-                    for label, color in color_map.items()]
-  
-  legend1 = ax.legend(handles=legend_elements, loc='upper left', 
-                     title='GDP Size (2019)', framealpha=0.95)
+  ...
   
   # Size legend
-  size_legend_elements = [
-      Circle((0, 0), np.sqrt(500/np.pi), fc='gray', alpha=0.3, label='Small'),
-      Circle((0, 0), np.sqrt(1500/np.pi), fc='gray', alpha=0.3, label='Medium'),
-      Circle((0, 0), np.sqrt(3000/np.pi), fc='gray', alpha=0.3, label='Large')
-  ]
-  ax.add_artist(legend1)  # Add first legend back
-  ax.legend(handles=size_legend_elements, loc='upper right', 
-           title='Relative GDP', framealpha=0.95)
+  ...
   
-  plt.tight_layout()
-  plt.show()
+  # plt.tight_layout()
+  # plt.show()
   
   print("⭕ Proportional symbols effectively show multiple dimensions of ranking data")
 ```
+
+
+
+
+## Correction
+
+
+[Accéder à la correction](session_2_c0correction.md)
+{: .alert .alert-success .alert-soft}
