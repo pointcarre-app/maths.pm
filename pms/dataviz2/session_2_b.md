@@ -1086,6 +1086,7 @@ inline: |
 Matplotlib uses backends to render figures. The backend determines how plots are displayed and what features are available. When running locally (not in a browser-based environment), you can choose backends that support advanced features like LaTeX rendering.
 
 **Key backend types:**
+
 - **Interactive backends**: Qt5Agg, TkAgg, MacOSX - for GUI windows
 - **Non-interactive backends**: Agg, PDF, PS, SVG - for file output only
 - **Notebook backends**: notebook, widget - for Jupyter environments
