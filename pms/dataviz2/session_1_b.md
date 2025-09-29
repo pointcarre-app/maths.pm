@@ -2,7 +2,7 @@
 
 # Installing Python, the clean way
 
-We'll focus on `pyenv` for python version management. The following instructions are valid for MacOS and Linux. For Windows, please refer to the specific `pyenv` installation instructions. Also, we'll detail h
+We'll focus on `pyenv` for python version management. The following instructions are valid for MacOS and Linux. For Windows, please refer to the specific `pyenv` installation instructions.
 {: .pm-subtitle}
 
 
@@ -23,7 +23,7 @@ We'll focus on `pyenv` for python version management. The following instructions
 
 > `conda` is a tool that we don't recommend to use, as it's more complex to manage than `pyenv`.
 
-**Kind remainder**: it's always a bad idea to interact with the system Python version. Python is used by most of the OS, updating some libraries (or any other operation)might break the system.
+**Kind reminder**: it's always a bad idea to interact with the system Python version. Python is used by most of the OS, updating some libraries (or any other operation)might break the system.
 {: .alert .alert-warning .alert-soft}
 
 
@@ -61,7 +61,7 @@ Use the `pyenv-win` installer. The instructions are available on Github, in the 
 
 > It's preferable to install this version, as it's important for the students to use the same version as the one used in the course, in particular, using different versions in the same course could lead to unexpected errors and issues, **with the risk of being very time consuming to solve**. If **you're very familiar** with Python installation and version management, feel free to do as you're used to.
 
-`3.13.5` is the last stable version as of 2025/06/11.  In a terminal, just run: 
+`3.13.5` is the latest stable version as of 2025/06/11.  In a terminal, just run: 
 
 ```bash
 pyenv install 3.13.5
@@ -70,7 +70,7 @@ pyenv install 3.13.5
 
 
 
-Nevertheless, independently of your ease with Python installation, you should use a version statisfying `>=3.12`, and preferably `>=3.13`. **Not following those rules could lead to unexpected errors and issues, with the risk of being very time consuming to solve.**
+Nevertheless, independently of your ease with Python installation, you should use a version satisfying `>=3.12`, and preferably `>=3.13`. **Not following those rules could lead to unexpected errors and issues, with the risk of being very time consuming to solve.**
 {: .alert .alert-warning .alert-soft}
 
 
@@ -102,7 +102,7 @@ We'll rely on the built-in `venv` module to create a virtual environment. The fo
 ```bash
 # Creating the virtual environment
 # using the absolute path to the python binary
-# that we previously installed with Python
+# that we previously installed with pyenv
  ~/.pyenv/versions/3.15.3/bin/python -m venv env
 ```
 
@@ -130,7 +130,7 @@ deactivate
 
 ## Aliases & defensive programming
 
-You should run those command from the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment. The goal is to ensure that the correct `pip3` / `pip` / `python3` / `python` are used (i.e. that the aliases are correct).
+You should run these commands from the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment. The goal is to ensure that the correct `pip3` / `pip` / `python3` / `python` are used (i.e. that the aliases are correct).
 
 
 ### Is `pip3` alias correct ?
@@ -168,9 +168,9 @@ Finally, because *Defensive programming* is our best friend:
 
 
 ```bash
-which python3
+which python
 # path should be from the just installed and activated environment: this was the last one!
-# example: /Users/elliot/repos/dataviz-course/env/bin/python3
+# example: /Users/elliot/repos/dataviz-course/env/bin/python
 ```
 
 
@@ -188,7 +188,7 @@ brew install jupyterlab
 
 ### Linux
 
-Below, different instructions for different Linux distributions are listed. Using Ubuntu, we recommand to use the 2️⃣ method.
+Below, different instructions for different Linux distributions are listed. Using Ubuntu, we recommend to use the 2️⃣ method.
 {: .alert .alert-warning .alert-soft}
 
 1️⃣ Using pip with the pyenv-managed Python:
@@ -214,7 +214,7 @@ pip3 install --user jupyterlab
 
 ### Windows
 
-We recommand following the instruction from the [official repository](https://github.com/jupyterlab/jupyterlab-desktop). Also the official JupyterLab installation documentation for version `4.4.x` is available [here](https://jupyterlab.readthedocs.io/en/stable/install/installation.html) (last stable version as of 2025/09/15).
+We recommend following the instructions from the [official repository](https://github.com/jupyterlab/jupyterlab-desktop). Also the official JupyterLab installation documentation for version `4.4.x` is available [here](https://jupyterlab.readthedocs.io/en/stable/install/installation.html) (last stable version as of 2025/09/15).
 
 ## Register the virtual env
 

@@ -39,7 +39,7 @@
 Associativity is crucial for design: some variables interfere with others (disassociativity), making layering complex data less clear.
 
 
-*Ticktockmaths* collections such [Bad Graphs](https://ticktockmaths.co.uk/badgraphs/). You will notice in some of those examples that those properties can be instrumentalized to influence our perception.
+*Ticktockmaths* collections such as [Bad Graphs](https://ticktockmaths.co.uk/badgraphs/). You will notice in some of those examples that those properties can be instrumentalized to influence our perception.
 {: .alert .alert-danger .alert-soft}
 
 

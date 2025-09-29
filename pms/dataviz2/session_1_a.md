@@ -77,7 +77,7 @@ More detailed explanations are available [here: Computing Shannon Entropy for In
 
 
 
-### 1.4. [An adapation](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others) from The Economist
+### 1.4. [An adaptation](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others) from The Economist
 
 
 > This graph comes from the article: *Why are some languages spoken faster than others?* by The Economist (Sep 28th 2019). [Link](https://www.economist.com/graphic-detail/2019/09/28/why-are-some-languages-spoken-faster-than-others)
@@ -94,7 +94,7 @@ More detailed explanations are available [here: Computing Shannon Entropy for In
 - What are the signifiers ?
 - What are the signified ?
 - What can we conclude from those graphs ?
-- How to they compare in terms of visual unity ?
+- How do they compare in terms of visual unity?
 
 
 
@@ -274,7 +274,7 @@ inline: |
 - What are the signifiers ?
 - What are the signified ?
 - What can we conclude from those graphs ?
-- How to they compare in terms of readability and visual unity ?
+- How do they compare in terms of readability and visual unity?
 
 
 ## 3. Relationships
@@ -494,7 +494,7 @@ inline: |
     
 
 
-Since not only the 100m men world record, but also most of the world records (whatever the sport) have been improved continuously during the last century, what can we conclude about the evolution in the field of athletics?
+Since not only has the 100m men world record, but also most world records (whatever the sport), been improved continuously during the last century, what can we conclude about the evolution in the field of athletics?
 {: .alert .alert-info .alert-soft}
 
 
@@ -688,7 +688,7 @@ inline: |
 - What are the signifiers ?
 - What are the signified ?
 - What can we conclude from those graphs ?
-- How to they compare in terms of readability and visual unity ?
+- How do they compare in terms of readability and visual unity?
 - **Big findings?** Are we this sure ? (<span class="italic">For some heatmap values from 3.4, once the economical context of those countries is known, the analysis is pretty clear. But for some others, it's not so obvious.</span>)
 
 

@@ -1,282 +1,293 @@
-# Hour 1: Course Introduction & Visual Variables
 
-## Course Overview and Evaluation Criteria
 
-This course focuses on the fundamental principles of data visualization, combining theoretical foundations with practical applications. Students will learn to create effective visual representations of data by understanding the relationship between human perception and graphic design principles.
+# Installing Python, the clean way
 
-### Learning Objectives
-- Master the theoretical foundations of graphic semiology
-- Understand visual variables and their perceptual properties
-- Apply perceptual mathematics to visualization design
-- Create effective mappings between data types and visual channels
+We'll focus on `pyenv` for python version management. The following instructions are valid for MacOS and Linux. For Windows, please refer to the specific `pyenv` installation instructions.
+{: .pm-subtitle}
 
-### Evaluation Components
-- Theoretical understanding of visual perception principles
-- Practical application of visual variables in data representation
-- Critical analysis of existing visualizations
-- Design and implementation of data visualizations
 
-## Graphic Semiology Fundamentals
 
-### Jacques Bertin's Framework
-Jacques Bertin (1918-2010) revolutionized data visualization through his systematic approach to graphic representation. His seminal work "Semiology of Graphics" (1967) established the theoretical foundation for modern data visualization.
+[TOC]
 
-**Key Principles:**
-- **Graphic**: Visual representation that uses position on a plane to express relationships
-- **Sign**: Basic unit of graphic communication consisting of location and marking
-- **Variable**: Perceptual dimension that can be systematically varied to encode information
 
-### The Communication Model
-Bertin's framework treats visualization as a communication system:
+
+
+
+## Installing `pyenv` 
+
+
+### Why installing `pyenv` ?
+
+> `pyenv` is a tool to manage multiple Python versions, while maintaining a consistent and clean installation process. The source code is available [here](https://github.com/pyenv/pyenv).
+
+
+> `conda` is a tool that we don't recommend to use, as it's more complex to manage than `pyenv`.
+
+**Kind reminder**: it's always a bad idea to interact with the system Python version. Python is used by most of the OS, updating some libraries (or any other operation)might break the system.
+{: .alert .alert-warning .alert-soft}
+
+
+### MacOS
+
+In a terminal, run the following commands: 
+
+```bash
+brew update
+brew install pyenv
 ```
-Data → Encoding → Graphic → Decoding → Information
+
+
+### Linux
+
+- ℹ️ **FYI:** Informations about the installation available on the official [Github page](https://github.com/pyenv/pyenv).
+- 💡 **Recommendation:** Following the [Berkeley tutorial](https://ggkbase-help.berkeley.edu/how-to/install-pyenv/)
+
+
+
+### Windows
+
+Use the `pyenv-win` installer. The instructions are available on Github, in the [repository page](https://github.com/pyenv-win/pyenv-win).
+
+### After the OS specific installation
+
+
+
+- A folder at root level named `.pyenv` should have been created
+- To refer this folder you, can use `~/.pyenv` (**and you should**)
+
+
+
+## `Python 3.13.5` using `pyenv`
+
+> It's preferable to install this version, as it's important for the students to use the same version as the one used in the course, in particular, using different versions in the same course could lead to unexpected errors and issues, **with the risk of being very time consuming to solve**. If **you're very familiar** with Python installation and version management, feel free to do as you're used to.
+
+`3.13.5` is the latest stable version as of 2025/06/11.  In a terminal, just run: 
+
+```bash
+pyenv install 3.13.5
 ```
 
-### Levels of Reading
-1. **Elementary Level**: Individual marks and their immediate properties
-2. **Intermediate Level**: Groups and patterns within the visualization
-3. **Overall Level**: Global structure and main message
 
-## Visual Variables
 
-Bertin identified seven fundamental visual variables that can be used to encode information:
 
-### 1. Position
-**Definition**: Location of marks in 2D space (x, y coordinates)
+Nevertheless, independently of your ease with Python installation, you should use a version satisfying `>=3.12`, and preferably `>=3.13`. **Not following those rules could lead to unexpected errors and issues, with the risk of being very time consuming to solve.**
+{: .alert .alert-warning .alert-soft}
 
-**Properties:**
-- **Selective**: Easily distinguishable categories
-- **Associative**: Can group similar elements
-- **Quantitative**: Supports ordered and ratio comparisons
-- **Length**: No practical limit to variations
 
-**Applications:**
-- Scatterplots (x, y position for two quantitative variables)
-- Maps (geographic positioning)
-- Time series (temporal positioning)
+## Virtual env setup (UNIX based OS)
 
-### 2. Size
-**Definition**: Variation in the physical dimensions of marks
 
-**Properties:**
-- **Selective**: Good for a limited number of categories (≤7)
-- **Associative**: Moderate grouping ability
-- **Quantitative**: Strong support for ordered comparisons
-- **Length**: Limited by visual resolution and display constraints
+We'll rely on the built-in `venv` module to create a virtual environment. The following instructions are valid for UNIX based OS (such as MacOS and Linux). If you use Windows, please refer to the [specific instructions](https://docs.python.org/3/library/venv.html) from the official Python documentation.
 
-**Applications:**
-- Bubble charts (circle area for quantitative data)
-- Proportional symbol maps
-- Bar chart heights
+### Folder creation
 
-### 3. Shape
-**Definition**: Geometric form or symbol type
+- Create a new folder for the virtual environment and `cd` into it. In this example, the folder is called `dataviz-course`.
 
-**Properties:**
-- **Selective**: Excellent for categorical distinctions
-- **Associative**: Can create visual groups through similar shapes
-- **Quantitative**: No inherent order
-- **Length**: Limited by recognition capacity (~12 distinct shapes)
 
-**Applications:**
-- Scatter plot point types for categories
-- Icon-based visualizations
-- Network node types
-
-### 4. Value (Lightness)
-**Definition**: Variation from light to dark (grayscale intensity)
-
-**Properties:**
-- **Selective**: Limited discrimination (3-5 levels reliably)
-- **Associative**: Creates natural groupings
-- **Quantitative**: Strong ordered perception
-- **Length**: Continuous but perceptually limited
-
-**Applications:**
-- Choropleth maps
-- Heatmaps
-- Grayscale encodings for ordinal data
-
-### 5. Color (Hue)
-**Definition**: Spectral wavelength variation (red, blue, green, etc.)
-
-**Properties:**
-- **Selective**: Excellent for categories (≤10 distinct hues)
-- **Associative**: Moderate grouping through color families
-- **Quantitative**: No natural order (except through cultural conventions)
-- **Length**: Limited by color discrimination abilities
-
-**Applications:**
-- Categorical color coding
-- Multi-class visualizations
-- Qualitative differentiation
-
-### 6. Orientation
-**Definition**: Angular rotation or directional alignment
-
-**Properties:**
-- **Selective**: Good for limited categories (4-8 orientations)
-- **Associative**: Can group through similar angles
-- **Quantitative**: Natural circular ordering
-- **Length**: Limited by angular resolution
-
-**Applications:**
-- Wind direction visualization
-- Flow charts with directional arrows
-- Glyph-based representations
-
-### 7. Texture
-**Definition**: Surface pattern or visual texture variation
-
-**Properties:**
-- **Selective**: Moderate categorical distinction
-- **Associative**: Creates pattern-based groupings
-- **Quantitative**: Limited ordered perception
-- **Length**: Constrained by pattern recognition
-
-**Applications:**
-- Pattern fills in maps
-- Accessible alternatives to color
-- Layered information encoding
-
-## Mapping Data Types to Visual Channels
-
-### Data Types Classification
-
-**Nominal (Categorical)**
-- No inherent order
-- Examples: Country names, product categories, species
-- Best visual variables: Shape, Color (hue), Position (separate groups)
-
-**Ordinal**
-- Natural ordering without meaningful intervals
-- Examples: Education levels, satisfaction ratings, size categories
-- Best visual variables: Value, Size, Position (ordered arrangement)
-
-**Interval**
-- Equal intervals, no true zero
-- Examples: Temperature in Celsius, calendar dates
-- Best visual variables: Position, Size (with care for zero point)
-
-**Ratio**
-- Equal intervals with meaningful zero point
-- Examples: Height, weight, count, income
-- Best visual variables: Position, Size, Value
-
-### Effectiveness Ranking
-
-**For Quantitative Data (Ordered):**
-1. Position along common scale
-2. Position along non-aligned scale
-3. Length
-4. Angle/Slope
-5. Area
-6. Volume
-7. Color saturation/value
-
-**For Categorical Data:**
-1. Position (spatial separation)
-2. Color hue
-3. Shape
-4. Texture/Pattern
-5. Orientation
-
-## Perceptual Mathematics
-
-### Weber-Fechner Law
-
-**Statement**: The perceived intensity of a stimulus is proportional to the logarithm of the physical intensity.
-
-**Mathematical Expression:**
+```bash
+ mkdir dataviz-course
+ cd dataviz-course
 ```
-P = k × log(S/S₀)
+
+
+### Creating the virtual environment
+
+- We will create a specific virtual environment with the specified version in the `dataviz-course` folder. 
+- The trick is that we will use an absolute path to the python binary to create the virtual environment: therefore there cannot be any ambiguity about the interpreter used to create the virtual environment.
+- The newly created environment will be called `env` and created thank to the built-in `venv` module.
+
+> This usage of absolute path is 100% consistent with *The Zen of Python*: *In the face of ambiguity, refuse the temptation to guess.*
+
+
+```bash
+# Creating the virtual environment
+# using the absolute path to the python binary
+# that we previously installed with pyenv
+ ~/.pyenv/versions/3.15.3/bin/python -m venv env
 ```
-Where:
-- P = Perceived intensity
-- S = Physical stimulus intensity
-- S₀ = Threshold stimulus intensity
-- k = Constant
 
-**Implications for Visualization:**
-- Linear increases in data may not be perceived linearly
-- Logarithmic scales may better represent perception
-- Small differences at low values are more noticeable than at high values
 
-**Applications:**
-- Audio visualization (decibel scales)
-- Financial data (log scales for stock prices)
-- Scientific data spanning multiple orders of magnitude
+## Interacting with the virtual env
 
-### Stevens' Power Law
 
-**Statement**: Perceived magnitude is proportional to the physical intensity raised to a power.
+The two following commands should be run from the folder containing the virtual environment, i.e. containing the `env` folder.
+{: .alert .alert-success .alert-soft}
 
-**Mathematical Expression:**
+### Activating the virtual env
+
+
+```bash
+source env/bin/activate
 ```
-P = k × Sⁿ
+
+
+### Deactivating the virtual env
+
+```bash
+deactivate
 ```
-Where:
-- P = Perceived magnitude
-- S = Physical stimulus intensity
-- k = Scaling constant
-- n = Perceptual exponent (varies by stimulus type)
 
-**Common Exponents:**
-- **Brightness**: n ≈ 0.33 (sublinear - perceived brightness increases slower than physical intensity)
-- **Length**: n ≈ 1.0 (linear - accurate perception)
-- **Area**: n ≈ 0.7 (sublinear - areas appear smaller than they are)
-- **Volume**: n ≈ 0.57 (sublinear - volumes significantly underestimated)
 
-**Design Implications:**
+## Aliases & defensive programming
 
-**For Area Encodings:**
-- Bubble chart areas are systematically underestimated
-- Consider using radius instead of area for magnitude encoding
-- Apply perceptual correction: use √(data) for radius to encode data in area
+You should run these commands from the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment. The goal is to ensure that the correct `pip3` / `pip` / `python3` / `python` are used (i.e. that the aliases are correct).
 
-**For Brightness/Value:**
-- Exponential data scaling may be needed for linear perception
-- Consider gamma correction in color encodings
 
-**For Length:**
-- Most reliable visual variable for quantitative data
-- Linear relationship between data and perception
-- Foundation for bar charts and position encodings
+### Is `pip3` alias correct ?
 
-### Practical Applications
+```bash
+which pip3 
+# path should be from the just installed and activated environment
+# example: /Users/elliot/repos/dataviz-course/env/bin/pip3
+```
 
-**Scale Selection:**
-- Use linear scales for data following normal distributions
-- Apply logarithmic scales for data spanning multiple orders of magnitude
-- Consider square root transformations for count data with extreme values
+### Is `pip` alias correct ?
 
-**Visual Variable Choice:**
-- Prefer position and length for precise quantitative comparisons
-- Use area encodings cautiously, with perceptual corrections
-- Avoid volume encodings for precise quantitative tasks
+Also for an extra security: 
 
-**Accessibility Considerations:**
-- Provide multiple encodings for critical information
-- Consider perceptual variations across populations
-- Test visualizations with representative users
+```bash
+which pip
+# path should be from the just installed and activated environment
+# example: /Users/elliot/repos/dataviz-course/env/bin/pip
+```
 
-## Summary and Next Steps
+### Is `python3` alias correct ?
 
-This foundational hour establishes the theoretical framework for effective data visualization. Key takeaways:
+Still a bit more of extra security:
 
-1. **Bertin's semiology provides systematic approach** to graphic design
-2. **Seven visual variables** offer different perceptual properties
-3. **Data type determines appropriate visual encoding** strategies
-4. **Human perception is non-linear** and must be considered in design
-5. **Effectiveness hierarchies guide** optimal visual variable selection
+```bash
+which python3
+# path should be from the just installed and activated environment
+# example: /Users/elliot/repos/dataviz-course/env/bin/python3
+```
 
-**Preparation for Hour 2:**
-- Review visual variable examples in existing visualizations
-- Identify data types in provided datasets
-- Practice mapping data attributes to visual channels
-- Consider perceptual limitations in current visualization tools
 
-**Recommended Reading:**
-- Bertin, J. (1983). Semiology of Graphics: Diagrams, Networks, Maps
-- Cleveland, W. S. (1985). The Elements of Graphing Data
-- Ware, C. (2012). Information Visualization: Perception for Design
+### Is `python` alias correct ?
+
+Finally, because *Defensive programming* is our best friend:
+
+
+```bash
+which python
+# path should be from the just installed and activated environment: this was the last one!
+# example: /Users/elliot/repos/dataviz-course/env/bin/python
+```
+
+
+
+## Installing JupyterLab globally
+
+
+We'll install JupyterLab globally so it's available across all projects (also because it's easier to manage).
+
+### MacOS
+
+```bash
+brew install jupyterlab
+```
+
+### Linux
+
+Below, different instructions for different Linux distributions are listed. Using Ubuntu, we recommend to use the 2️⃣ method.
+{: .alert .alert-warning .alert-soft}
+
+1️⃣ Using pip with the pyenv-managed Python:
+
+```bash
+~/.pyenv/versions/3.13.5/bin/pip install jupyterlab
+```
+
+2️⃣ Alternatively, on Ubuntu/Debian:
+
+```bash
+sudo apt update
+sudo apt install python3-pip
+pip3 install --user jupyterlab
+```
+
+3️⃣ On Fedora/RHEL/CentOS:
+
+```bash
+sudo dnf install python3-pip
+pip3 install --user jupyterlab
+```
+
+### Windows
+
+We recommend following the instructions from the [official repository](https://github.com/jupyterlab/jupyterlab-desktop). Also the official JupyterLab installation documentation for version `4.4.x` is available [here](https://jupyterlab.readthedocs.io/en/stable/install/installation.html) (last stable version as of 2025/09/15).
+
+## Register the virtual env
+
+**We need to register the virtual environment with JupyterLab to be able to use it in JupyterLab.**
+
+### Ensuring we are in the correct folder
+
+**You need to access the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment.**
+
+```bash
+# Make sure to be in the folder containing the virtual environment
+# by running the following command:
+cd dataviz-course
+```
+
+### Ensuring we are in the correct folder
+
+```bash
+# Make sure your virtual environment is activated 
+# by running the following command:
+source env/bin/activate
+```
+
+### Installing `ipykernel`
+
+
+```bash
+# Install `ipykernel`
+pip3 install ipykernel==6.30.1
+```
+
+
+### Registering the virtual environment with JupyterLab
+
+```bash
+# Register the environment as a kernel
+python -m ipykernel install --user --name=env --display-name="datavize-env"
+```
+
+
+
+After installing `ipykernel` in your virtual environment, register it as a kernel for JupyterLab:
+Now you can start JupyterLab from anywhere and select the `dataviz-env` kernel to use your project's virtual environment.
+
+```bash
+# Start JupyterLab 
+jupyter lab 
+```
+
+This command should also work:
+
+```bash
+jupyter-lab
+```
+
+
+
+## Installing the libraries for the course
+
+**Make sure to be in the folder containing the virtual environment, i.e. containing the `env` folder, after activating the virtual environment.**
+
+```bash
+# ensuring to be in the correct folder
+cd dataviz-course
+# activating the virtual environment
+source env/bin/activate
+# installing the libraries
+pip3 install matplotlib==3.10.5
+pip3 install ipykernel==6.30.1
+pip3 install numpy==2.3.2
+pip3 install pandas==2.3.2
+pip3 install matplotlib==3.10.5
+pip3 install bokeh==3.8.0
+```
+
+

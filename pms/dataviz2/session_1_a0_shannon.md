@@ -61,7 +61,7 @@ In the study, **Shannon entropy** is used to estimate the **Information Density 
 
 
 ## Key Notes
-- **Data Source**: Large written corpora provide syllable frequencies, while spoken corpora ($170$ speakers, $17$ languages, $\sim 240,000$ syllables) provide $SR$.
+- **The data source**: Large written corpora provide syllable frequencies, while spoken corpora ($170$ speakers, $17$ languages, $\sim 240,000$ syllables) provide $SR$.
 - **Why Conditional Entropy?**: It accounts for syllable predictability within words, reducing redundancy compared to first-order entropy ($ShE$), which assumes syllables are independent.
 - **Result**: Across $17$ languages, $ID$ varies (e.g., $4.8$ bits/syllable for Basque to $8.0$ for Vietnamese), but $IR$ converges around $\sim 39$ bits/s due to a trade-off between $ID$ and $SR$.
 

@@ -18,7 +18,7 @@ inline: |
 ```
 
 
-> It's not an Easter Egg, it's a list of principles that guide Python's design and coding practices. As we deal with very high level abstraction when building data visualisation tools, this list is a good guide to write Pythonic code.
+> It's not an Easter Egg, it's a list of principles that guide Python's design and coding practices. As we deal with a very high level of abstraction when building data visualisation tools, this list is a good guide to write Pythonic code.
 
 ## Code Examples
 

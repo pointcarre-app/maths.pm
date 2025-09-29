@@ -111,7 +111,7 @@ The evaluation consists on a data vizualisation project. The students will have 
 
 - [**Data Types Classification and introduction to `matplotlib`**](session_1_d.md)
 - [**Groups consitution and project data requirements**](session_1_e.md)
-- [**Practical work with `matplotlib`**](01_session_1_f.md)
+- [**Practical work with `matplotlib`**](session_1_f.md)
 
 
 ### 2️⃣ Session 2: Static data vizualisation panorama

@@ -103,15 +103,15 @@ The evaluation consists on a data vizualisation project. The students will have 
 #### Hour 2: Python: installation and philosophy
 
 
-- <span class="text-base-content/60"> [Recommended] [**Installing Python, the clean way**](01_installing_python.md) </span>
-- [**The Zen of Python**](02_zen_of_python.md)
+- <span class="text-base-content/60"> [Recommended] [**Installing Python, the clean way**](session_1_b.md) </span>
+- [**The Zen of Python**](session_1_c.md)
 
 
 #### Hours 3: Data types & first graphs
 
-- [**Data Types Classification and introduction to `matplotlib`**](session_1_h_23.md)
-- [**Groups consitution and project data requirements**](01_session_1_b.md)
-- [**Practical work with `matplotlib`**](01_session_1_c.md)
+- [**Data Types Classification and introduction to `matplotlib`**](session_1_d.md)
+- [**Groups consitution and project data requirements**](session_1_e.md)
+- [**Practical work with `matplotlib`**](session_1_f.md)
 
 
 ### 2️⃣ Session 2: Static data vizualisation panorama
