@@ -1,5 +1,5 @@
 
-# Practical work with `matplotlib` (1/2)
+# Practical work with `matplotlib`
 
 
 [TOC]
@@ -138,8 +138,6 @@ print(f"Dataset loaded: {df_countries.shape[0]} rows, {df_countries['Country Nam
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-
-df = pd.read_csv("gdp.csv")
 
 # Exclude non-country entities (regions, income groups)
 non_country_entities  = {

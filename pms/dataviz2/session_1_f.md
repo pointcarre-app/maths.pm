@@ -139,6 +139,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+# Load data
+df = pd.read_csv("gdp.csv")
+
 # Exclude non-country entities (regions, income groups)
 non_country_entities  = {
     'AFE', 'AFW', 'ARB', 'CSS', 'CEB', 'CHI', 'EAR', 'EAS', 'TEA', 'EAP', 
