@@ -82,24 +82,24 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 
 
-#### Hour 1: More advanced static data vizualisation 
+#### Hour 1
 
 - [**Practical work with `matplotlib` (2/2)**](session_2_c.md) - Exercises 4 to 6
 <!-- Include geojson here -->
 
-#### Hour 2: Interactive data vizualisation
+#### Hour 2
 
 - [**Bokeh presentation and basic usage**](01_session_3_b.md)
 
 
-#### Hour 3: Group work: data validation
+#### Hour 3
 
 - [**Data Visualization Project**](session_1_e.md) : Story scripting & first graphs
 
 
 ### 4️⃣ Session 4: Practical Work
 
-#### Hours 1 & 2: Practical work
+#### Hours 1 & 2
 
 - [**Practical work: COVID 19 in the US**](01_session_4_a.md)
 
@@ -107,7 +107,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 
 
-#### Hour 3: Group work: advanced data vizualisation
+#### Hour 3
 
 - [**Data Visualization Project**](session_1_e.md) : Advanced visualizations
 
@@ -117,17 +117,13 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 
 
-#### Hour 1: Some other Python libraries
+#### Hour 1
 
 - [**`networkx` and `seaborn`**](01_session_5_a.md)
 
-<!-- ?? To see if seaborn is viable -->
-
-#### Hour 2: Group work: final project polishing
-
-- [**Practical work per group: final project**](01_session_5_a.md)
 
 
-#### Hour 3: Group work: final project presentation 
+#### Hour 2 & 3
 
-- [**Practical work per group: final project**](01_session_5_c.md)
+- [**Data Visualization Project**](session_1_e.md) : final polish
+- [**Data Visualization Project**](session_1_e.md) : presentation
