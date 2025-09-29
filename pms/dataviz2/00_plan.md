@@ -102,7 +102,9 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 #### Hours 1 & 2
 
 - [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
+    - Download: <a href="/pms/dataviz2/files/covid-graphs-statement.ipynb" download>Download link</a>
 - [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb)
+    - Download: <a href="/pms/dataviz2/files/covid-maps-statement.ipynb" download>Download link</a>
 
 
 
@@ -138,12 +140,19 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 
 - [**Practical work with `matplotlib` (1/2)**](session_1_f.md)
-    - lala
+    - [**Correction**](files/session_1_f.py)
+    - Download: <a href="/pms/dataviz2/files/session_1_f.py" download>Download link</a>
 - [**Practical work with `matplotlib` (2/2)**](session_2_c.md)
-    - lala
+    - [**Correction**](session_2_c0correction.md)
 - [**Practical work with `bokeh` server applications**](session_3_b.md) 
-    - lala
-- [**Practical work: COVID 19 in the US**](01_session_4_a.md)
-    - lala
-- [**Practical work: COVID 19 in the US: cartographic representation**](01_session_4_b.md)
-    - lala
+    - [01_simple_slider.py](files/bokeh_server_apps/01_simple_slider.py)
+    - [03_real_time_streaming.py](files/bokeh_server_apps/03_real_time_streaming.py)
+    - [05_linked_plots.py](files/bokeh_server_apps/05_linked_plots.py)
+    - [06_interactive_presentation.py](files/bokeh_server_apps/06_interactive_presentation.py)
+        - [Image from FT used in the application](files/bokeh_server_apps/visual-vocabulary-ft.png)
+- [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
+    - [**Correction**](files/covid-graphs-correction.ipynb)
+    - Download: <a href="/pms/dataviz2/files/covid-graphs-statement.ipynb" download>Download link</a>
+- [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb.md)
+    - [**Correction**](files/covid-maps-correction.ipynb)
+    - Download: <a href="/pms/dataviz2/files/covid-maps-correction.ipynb" download>Download link</a>
