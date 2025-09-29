@@ -102,9 +102,9 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 #### Hours 1 & 2
 
 - [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
-    - Download: <a href="/pms/dataviz2/files/covid-graphs-statement.ipynb" download>Download link</a>
+    - Download: <a href="/pm/dataviz2/files/covid-graphs-statement.ipynb" download>Download link</a>
 - [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb)
-    - Download: <a href="/pms/dataviz2/files/covid-maps-statement.ipynb" download>Download link</a>
+    - Download: <a href="/pm/dataviz2/files/covid-maps-statement.ipynb" download>Download link</a>
 
 
 
@@ -141,7 +141,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 - [**Practical work with `matplotlib` (1/2)**](session_1_f.md)
     - [**Correction**](files/session_1_f.py)
-    - Download: <a href="/pms/dataviz2/files/session_1_f.py" download>Download link</a>
+    - Download: <a href="/pm/dataviz2/files/session_1_f.py" download>Download link</a>
 - [**Practical work with `matplotlib` (2/2)**](session_2_c.md)
     - [**Correction**](session_2_c0correction.md)
 - [**Practical work with `bokeh` server applications**](session_3_b.md) 
@@ -152,7 +152,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
         - [Image from FT used in the application](files/bokeh_server_apps/visual-vocabulary-ft.png)
 - [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
     - [**Correction**](files/covid-graphs-correction.ipynb)
-    - Download: <a href="/pms/dataviz2/files/covid-graphs-statement.ipynb" download>Download link</a>
+    - Download: <a href="/pm/dataviz2/files/covid-graphs-statement.ipynb" download>Download link</a>
 - [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb.md)
     - [**Correction**](files/covid-maps-correction.ipynb)
-    - Download: <a href="/pms/dataviz2/files/covid-maps-correction.ipynb" download>Download link</a>
+    - Download: <a href="/pm/dataviz2/files/covid-maps-correction.ipynb" download>Download link</a>
