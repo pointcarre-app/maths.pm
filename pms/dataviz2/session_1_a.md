@@ -87,7 +87,7 @@ More detailed explanations are available [here: Computing Shannon Entropy for In
 
 
 
-### 1.5.  💬 Discussion
+### 1.5. Discussion
 
 **Looking at the two above graphs:**
 
@@ -286,7 +286,7 @@ inline: |
 
 
 
-### 3.2. 💾 Datasets used in the following examples
+### 3.2. Datasets used in the following examples
 
 
 ```html
@@ -681,7 +681,7 @@ inline: |
 ```
 
 
-### 3.7.  💬 Discussion
+### 3.7.  Discussion
 
 **Looking at the above graph:**
 
