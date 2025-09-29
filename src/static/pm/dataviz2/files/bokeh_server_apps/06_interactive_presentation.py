@@ -3,50 +3,131 @@
 Interactive Presentation App with Bokeh
 Run with: bokeh serve 06_interactive_presentation.py
 Then open: http://localhost:5006/06_interactive_presentation
+
+=== BOKEH SERVER ARCHITECTURE ===
+Bokeh Server creates a bidirectional websocket connection between Python and the browser.
+This allows:
+1. Python callbacks to run on the server (not in JavaScript)
+2. Real-time updates from server to client
+3. Stateful applications with server-side logic
+4. Multiple clients connecting to the same app instance
 """
 
+# === CORE BOKEH IMPORTS ===
+# figure: The main plotting interface - creates a Plot object with axes, grids, tools
+# curdoc: Current document - represents the Bokeh document that will be synchronized to the browser
 from bokeh.plotting import figure, curdoc
+
+# === BOKEH MODELS ===
+# Models are the building blocks of Bokeh applications
+# Each model represents a component that can be rendered in the browser
 from bokeh.models import (
-    Div,
-    Button,
-    Slider,
-    Select,
-    ColumnDataSource,
-    HoverTool,
-    LinearColorMapper,
-    ColorBar,
-    BasicTicker,
-    PrintfTickFormatter,
+    # === WIDGETS ===
+    Div,  # HTML div element for custom HTML/CSS content
+    Button,  # Interactive button widget - triggers Python callbacks on click
+    Slider,  # Numeric slider widget - triggers callbacks on value change
+    Select,  # Dropdown selection widget - triggers callbacks on selection
+    # === DATA HANDLING ===
+    ColumnDataSource,  # CRITICAL: Bokeh's fundamental data structure
+    # - Holds columnar data (like a DataFrame)
+    # - Automatically syncs between Python and JavaScript
+    # - Updates to .data property trigger re-rendering
+    # - Enables streaming, patching, and efficient updates
+    # === TOOLS ===
+    HoverTool,  # Interactive hover tooltips - shows data on mouse hover
+    # - Can use @ prefix to reference column names
+    # - Supports custom HTML formatting
+    # === COLOR MAPPING ===
+    LinearColorMapper,  # Maps numeric values to colors linearly
+    # - Used for heatmaps, choropleth maps
+    # - Requires palette (list of colors) and low/high range
+    ColorBar,  # Visual legend for color mappers
+    # - Shows the color scale with numeric labels
+    # === FORMATTING ===
+    BasicTicker,  # Controls tick mark locations on axes
+    PrintfTickFormatter,  # Formats tick labels using printf-style strings
 )
-from bokeh.layouts import column, row, layout
-from bokeh.palettes import RdYlBu11, Category20
-from bokeh.transform import factor_cmap
+
+# === LAYOUT SYSTEM ===
+# Bokeh uses a responsive layout system similar to CSS flexbox
+from bokeh.layouts import (
+    column,  # Vertical layout - stacks elements top to bottom
+    row,  # Horizontal layout - places elements side by side
+    layout,  # Grid layout - accepts nested lists for complex layouts
+    # Example: layout([[plot1, plot2], [plot3]]) creates 2 rows
+)
+
+# === COLOR PALETTES ===
+# Bokeh provides pre-defined color palettes for consistent styling
+from bokeh.palettes import (
+    RdYlBu11,  # Red-Yellow-Blue diverging palette with 11 colors
+    # Good for showing positive/negative values
+    Category20,  # Categorical palette with up to 20 distinct colors
+    # Dictionary with keys for different numbers of colors (3,4,5...20)
+)
+
+# === TRANSFORMS ===
+# Transforms are client-side operations that happen in the browser
+from bokeh.transform import (
+    factor_cmap,  # Maps categorical factors to colors
+    # More efficient than manually assigning colors
+)
+
+# Standard Python libraries
 import numpy as np
 import pandas as pd
-import base64
+import base64  # For encoding images as base64 strings to embed in HTML
 import os
 
 
 class InteractivePresentation:
-    def __init__(self):
-        self.current_slide = 0
-        self.total_slides = 7
-        self.slides = []
-        self.auto_play = False
-        self.auto_play_callback = None
+    """
+    Main application class for the Bokeh presentation system.
 
-        # Create all slides
+    === BOKEH APPLICATION PATTERN ===
+    This follows the Object-Oriented pattern for Bokeh apps:
+    1. Initialize state variables
+    2. Create UI components (widgets, plots)
+    3. Set up callbacks (event handlers)
+    4. Compose layout
+    5. Add to document
+
+    The class encapsulates all presentation logic and state.
+    """
+
+    def __init__(self):
+        # === STATE MANAGEMENT ===
+        # Bokeh server apps are stateful - these variables persist across callbacks
+        self.current_slide = 0  # Track which slide is currently displayed
+        self.total_slides = 7  # Total number of slides in presentation
+        self.slides = []  # Will hold Bokeh layout objects for each slide
+        self.auto_play = False  # Flag for auto-advance mode
+        self.auto_play_callback = None  # Reference to periodic callback for cleanup
+
+        # === INITIALIZATION ORDER MATTERS ===
+        # 1. Create slides first (generates all content)
         self.create_slides()
 
-        # Create navigation
+        # 2. Create navigation (needs to know about slides)
         self.create_navigation()
 
-        # Create main layout
+        # 3. Create main layout (combines slides + navigation)
         self.create_layout()
 
     def create_navigation(self):
-        """Create navigation controls"""
-        # Navigation buttons
+        """Create navigation controls
+
+        === BOKEH WIDGETS ===
+        Widgets are interactive components that trigger Python callbacks.
+        Unlike JavaScript frameworks, these callbacks run on the SERVER.
+        """
+
+        # === BUTTON WIDGETS ===
+        # Button constructor parameters:
+        # - label: Text displayed on button (supports Unicode emoji)
+        # - button_type: Bootstrap-style types ("default", "primary", "success", "warning", "danger")
+        # - width/height: Size in pixels (responsive by default if not set)
+        # - disabled: Boolean to enable/disable interaction
         self.prev_button = Button(label="◀ Previous", button_type="primary", width=100)
         self.next_button = Button(label="Next ▶", button_type="primary", width=100)
         self.home_button = Button(label="🏠 Home", button_type="warning", width=100)
@@ -55,21 +136,46 @@ class InteractivePresentation:
         self.play_button = Button(label="▶ Auto Play", button_type="success", width=100)
         self.stop_button = Button(label="⏸ Stop", button_type="danger", width=100)
 
-        # Slide selector
+        # === SELECT WIDGET ===
+        # Select creates a dropdown menu
+        # Options format: List of tuples (value, label)
+        # - value: What gets stored in widget.value (usually string)
+        # - label: What user sees in dropdown
         slide_options = [
             (str(i), f"Slide {i + 1}: {self.get_slide_title(i)}") for i in range(self.total_slides)
         ]
-        self.slide_select = Select(title="Jump to:", value="0", options=slide_options, width=300)
+        self.slide_select = Select(
+            title="Jump to:",  # Label above dropdown
+            value="0",  # Initial selection (must match a value from options)
+            options=slide_options,  # List of (value, label) tuples
+            width=300,
+        )
 
-        # Progress indicator
-        self.progress_div = Div(text=self.get_progress_html(), width=200)
+        # === DIV WIDGET ===
+        # Div renders arbitrary HTML/CSS
+        # SECURITY NOTE: Bokeh sanitizes HTML to prevent XSS attacks
+        # Supports inline styles and basic HTML tags
+        self.progress_div = Div(
+            text=self.get_progress_html(),  # HTML string
+            width=200,  # Width in pixels
+        )
 
-        # Attach callbacks
+        # === CALLBACK ATTACHMENT ===
+        # CRITICAL CONCEPT: Callbacks in Bokeh Server
+        # These callbacks run in PYTHON on the SERVER, not JavaScript in browser
+        # When user clicks button → browser sends message → server runs Python function → updates sent back
+
+        # Button callbacks: .on_click(function)
+        # Function receives no arguments (for buttons)
         self.prev_button.on_click(self.prev_slide)
         self.next_button.on_click(self.next_slide)
         self.home_button.on_click(self.go_home)
         self.play_button.on_click(self.start_auto_play)
         self.stop_button.on_click(self.stop_auto_play)
+
+        # Property change callbacks: .on_change("property_name", function)
+        # Function receives (attr, old_value, new_value)
+        # Common properties: "value", "active", "data"
         self.slide_select.on_change("value", self.jump_to_slide)
 
     def get_slide_title(self, index):
@@ -111,29 +217,87 @@ class InteractivePresentation:
         ]
 
     def create_slide_1_welcome(self):
-        """Slide 1: Welcome and Introduction"""
-        # Title and intro
+        """Slide 1: Welcome and Introduction
+
+        === SLIDE CREATION PATTERN ===
+        Each slide method returns a Bokeh layout object.
+        Slides can contain:
+        - Static content (Div with HTML)
+        - Interactive plots (figure objects)
+        - Widgets (buttons, sliders, etc.)
+        - Nested layouts (rows, columns)
+        """
+
+        # === HTML CONTENT IN DIV ===
+        # Div widget renders HTML content
+        # Triple quotes allow multi-line strings
+        # Bokeh sanitizes HTML but allows:
+        # - Basic tags: h1-h6, p, div, span, ul, ol, li, table, etc.
+        # - Inline styles via style attribute
+        # - CSS classes (but need external CSS for definitions)
         title = Div(
             text="""
         <h1 style="text-align: center; color: #2c3e50;">
             📊 Interactive Data Presentation with Bokeh
         </h1>
         """,
-            width=800,
-            height=80,
+            width=800,  # Fixed width in pixels
+            height=80,  # Fixed height in pixels
         )
 
-        # Animated scatter plot
+        # === PREPARING DATA FOR BOKEH ===
+        # Generate random data for demonstration
         n_points = 100
-        x = np.random.randn(n_points)
+        x = np.random.randn(n_points)  # Random normal distribution
         y = np.random.randn(n_points)
         colors = np.random.choice(["red", "green", "blue", "yellow", "purple"], n_points)
-        sizes = np.random.randint(10, 30, n_points)
+        sizes = np.random.randint(10, 30, n_points)  # Random sizes 10-30 pixels
 
-        source = ColumnDataSource(data=dict(x=x, y=y, colors=colors, sizes=sizes))
+        # === COLUMNDATASOURCE - BOKEH'S DATA MODEL ===
+        # ColumnDataSource is FUNDAMENTAL to Bokeh:
+        # 1. Holds data in columnar format (like a DataFrame)
+        # 2. Synchronizes between Python and JavaScript automatically
+        # 3. Enables efficient updates (only changed data is sent)
+        # 4. All glyphs reference columns by name using strings
+        #
+        # Data format: dict with column names as keys, arrays/lists as values
+        # All columns must have same length!
+        source = ColumnDataSource(
+            data=dict(
+                x=x,  # Column "x" with x-coordinates
+                y=y,  # Column "y" with y-coordinates
+                colors=colors,  # Column "colors" with color values
+                sizes=sizes,  # Column "sizes" with size values
+            )
+        )
 
+        # === CREATING FIGURES ===
+        # figure() creates a Plot with default axes, grids, and tools
+        # Common parameters:
+        # - width/height: Size in pixels
+        # - title: Plot title
+        # - x_range/y_range: Data ranges (auto-calculated if not specified)
+        # - tools: String of tool names or list of Tool objects
+        # - toolbar_location: "above", "below", "left", "right", None
         p = figure(width=600, height=400, title="Welcome to Interactive Visualization")
-        p.scatter("x", "y", size="sizes", color="colors", alpha=0.6, source=source)
+
+        # === ADDING GLYPHS ===
+        # Glyphs are the visual elements (circles, lines, bars, etc.)
+        # scatter() is a convenience method that creates circle glyphs
+        #
+        # CRITICAL: Column references use STRINGS not actual data!
+        # - "x", "y" refer to column names in the source
+        # - "sizes", "colors" also reference column names
+        #
+        # When source updates, plot automatically re-renders
+        p.scatter(
+            "x",
+            "y",  # Position columns (required)
+            size="sizes",  # Size column (can be scalar or column name)
+            color="colors",  # Color column (can be scalar or column name)
+            alpha=0.6,  # Transparency (0=transparent, 1=opaque)
+            source=source,  # Data source (ColumnDataSource)
+        )
 
         # Info panels
         features = Div(
@@ -173,16 +337,50 @@ class InteractivePresentation:
         # Animate button
         animate_btn = Button(label="🎨 Shuffle Data", button_type="success")
 
+        # === UPDATING DATA IN BOKEH ===
+        # This callback demonstrates the key pattern for updating plots
         def animate():
+            # Generate new random data
             new_x = np.random.randn(n_points)
             new_y = np.random.randn(n_points)
             new_colors = np.random.choice(["red", "green", "blue", "yellow", "purple"], n_points)
             new_sizes = np.random.randint(10, 30, n_points)
+
+            # === CRITICAL: How to update ColumnDataSource ===
+            # Option 1: Replace entire .data dictionary (used here)
+            # This triggers a full update of the plot
             source.data = dict(x=new_x, y=new_y, colors=new_colors, sizes=new_sizes)
 
+            # Option 2: Update individual columns (not shown)
+            # source.data["x"] = new_x  # DON'T do this - won't trigger update
+            #
+            # Option 3: Use .patch() for partial updates (not shown)
+            # source.patch({"x": [(slice(5, 10), new_x[5:10])]})
+            #
+            # Option 4: Use .stream() to append data (not shown)
+            # source.stream({"x": [1, 2], "y": [3, 4], ...})
+
+        # Attach callback - will run on server when button clicked
         animate_btn.on_click(animate)
 
-        return layout([[title], [column(p, animate_btn), column(features, instructions)]])
+        # === LAYOUT COMPOSITION ===
+        # layout() accepts nested lists to create grid layouts
+        # Each list is a row, items in list are columns
+        #
+        # Structure here:
+        # Row 1: [title] - single item spans full width
+        # Row 2: [column(plot, button), column(features, instructions)]
+        #        Creates 2 columns side by side
+        #
+        # column() stacks items vertically
+        # row() places items horizontally
+        # layout() creates responsive grid from nested lists
+        return layout(
+            [
+                [title],  # Row 1: Title
+                [column(p, animate_btn), column(features, instructions)],  # Row 2: Two columns
+            ]
+        )
 
     def create_slide_2_visual_vocabulary(self):
         """Slide 2: Visual Vocabulary - FT Guide"""
@@ -199,13 +397,25 @@ class InteractivePresentation:
             height=100,
         )
 
-        # Load and encode the image as base64
+        # === EMBEDDING IMAGES IN BOKEH ===
+        # Since Bokeh apps run on a server, image paths can be tricky
+        # Solution: Encode image as base64 and embed directly in HTML
+        #
+        # This ensures image displays regardless of server configuration
         image_path = os.path.join(os.path.dirname(__file__), "visual-vocabulary-ft.png")
         image_html = ""
 
         if os.path.exists(image_path):
+            # Read image file as binary
             with open(image_path, "rb") as img_file:
+                # Encode to base64 string
                 encoded_string = base64.b64encode(img_file.read()).decode()
+
+                # === DATA URI SCHEME ===
+                # Format: data:[<mediatype>][;base64],<data>
+                # This embeds the entire image in the HTML
+                # Pros: No external file dependencies
+                # Cons: Larger HTML size
                 image_html = f"""
         <div style="text-align: center; margin: 20px auto;">
             <img src="data:image/png;base64,{encoded_string}" 
@@ -280,10 +490,14 @@ class InteractivePresentation:
         categories = ["Product A", "Product B", "Product C", "Product D", "Product E"]
         years = ["2020", "2021", "2022", "2023", "2024"]
 
-        # Bar chart data
+        # === USING PANDAS WITH BOKEH ===
+        # ColumnDataSource can be created directly from DataFrames
+        # Column names become the keys in the data dictionary
         bar_data = pd.DataFrame(
             {"categories": categories, "values": np.random.randint(50, 200, len(categories))}
         )
+        # Creating ColumnDataSource from DataFrame
+        # Bokeh automatically converts DataFrame columns to dict format
         bar_source = ColumnDataSource(bar_data)
 
         # Line chart data
@@ -298,20 +512,39 @@ class InteractivePresentation:
 
         # Create plots
         # 1. Bar chart
+        # === CATEGORICAL AXES ===
+        # When x_range is a list of strings, Bokeh creates categorical axis
+        # Each category gets equal space on the axis
         p1 = figure(
-            x_range=categories,
+            x_range=categories,  # List of category names for x-axis
             width=400,
             height=300,
             title="Sales by Product",
-            toolbar_location="above",
+            toolbar_location="above",  # Position of pan/zoom tools
         )
+
+        # === VBAR GLYPH ===
+        # vbar creates vertical bars (use hbar for horizontal)
+        # Parameters:
+        # - x: Category or numeric x-coordinate
+        # - top: Height of bar (y-value at top)
+        # - bottom: Base of bar (default 0)
+        # - width: Bar width (0-1 for categories, pixels for numeric)
         p1.vbar(
-            x="categories",
-            top="values",
-            width=0.8,
+            x="categories",  # Column name for x-positions
+            top="values",  # Column name for bar heights
+            width=0.8,  # 80% of category width
             source=bar_source,
-            color=factor_cmap("categories", palette=Category20[5], factors=categories),
+            # === FACTOR_CMAP TRANSFORM ===
+            # Maps categorical values to colors
+            # Runs in browser (client-side) for efficiency
+            color=factor_cmap(
+                "categories",  # Column to map
+                palette=Category20[5],  # List of colors
+                factors=categories,  # List of unique values
+            ),
         )
+        # Ensure bars start at 0 (not auto-ranged)
         p1.y_range.start = 0
 
         # 2. Line chart
@@ -320,9 +553,16 @@ class InteractivePresentation:
         p2.circle("x", "y", source=line_source, size=5, color="navy", alpha=0.5)
 
         # 3. Heatmap
+        # === PREPARING DATA FOR HEATMAPS ===
+        # Heatmaps need:
+        # 1. Two categorical dimensions (x and y)
+        # 2. A value for each (x,y) combination
+        # 3. Data in "long" format (one row per cell)
         months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
         days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
 
+        # Generate data in long format
+        # Each tuple is (x_category, y_category, value)
         heatmap_data = []
         for month in months:
             for day in days:
@@ -345,17 +585,40 @@ class InteractivePresentation:
             toolbar_location="above",
         )
 
-        mapper = LinearColorMapper(palette=RdYlBu11[::-1], low=0, high=100)
+        # === COLOR MAPPING FOR HEATMAPS ===
+        # LinearColorMapper maps numeric values to colors
+        # - palette: List of colors (here reversed RdYlBu11 for red=high)
+        # - low/high: Range of values to map
+        # Values outside range are clamped to endpoints
+        mapper = LinearColorMapper(
+            palette=RdYlBu11[::-1],  # [::-1] reverses list (red for high values)
+            low=0,  # Minimum value
+            high=100,  # Maximum value
+        )
+
+        # === RECT GLYPH FOR HEATMAP ===
+        # rect creates rectangles (perfect for heatmap cells)
         p3.rect(
-            x="months",
-            y="days",
-            width=1,
-            height=1,
+            x="months",  # X-coordinate (categorical)
+            y="days",  # Y-coordinate (categorical)
+            width=1,  # Width (1 = full category width)
+            height=1,  # Height (1 = full category height)
             source=hm_source,
+            # === TRANSFORM SYNTAX ===
+            # Dictionary with "field" and "transform" keys
+            # Tells Bokeh to apply mapper to values from "values" column
             fill_color={"field": "values", "transform": mapper},
         )
 
-        color_bar = ColorBar(color_mapper=mapper, width=8, location=(0, 0))
+        # === ADDING COLOR BAR LEGEND ===
+        # ColorBar shows the color scale with numeric labels
+        color_bar = ColorBar(
+            color_mapper=mapper,  # The mapper to visualize
+            width=8,  # Width in pixels
+            location=(0, 0),  # Position within plot (0,0 = auto)
+        )
+        # add_layout adds the color bar to the plot
+        # Position can be "left", "right", "above", "below"
         p3.add_layout(color_bar, "right")
 
         # Statistics panel
@@ -379,7 +642,16 @@ class InteractivePresentation:
         return layout([[title], [p1, p2], [p3, stats]])
 
     def create_slide_4_interactive(self):
-        """Slide 4: Interactive Analysis with Controls"""
+        """Slide 4: Interactive Analysis with Controls
+
+        === INTERACTIVE PATTERN ===
+        This slide demonstrates the key pattern for interactive Bokeh apps:
+        1. Create data source
+        2. Create plot using data source
+        3. Create control widgets
+        4. Define update function that modifies data source
+        5. Attach update function to widget callbacks
+        """
         title = Div(
             text="""
         <h2 style="color: #2c3e50;">🎮 Interactive Data Explorer</h2>
@@ -388,30 +660,57 @@ class InteractivePresentation:
             width=800,
         )
 
-        # Create data
+        # === INSTANCE VARIABLES FOR CROSS-METHOD ACCESS ===
+        # Using self. makes this source accessible to callback functions
+        # Start with empty data - will be populated by update function
         self.slide4_source = ColumnDataSource(data=dict(x=[], y=[]))
 
         # Create plot
         p = figure(width=600, height=400, title="Interactive Function Plotter")
         self.slide4_line = p.line("x", "y", source=self.slide4_source, line_width=2, color="blue")
 
-        # Controls
+        # === CONTROL WIDGETS ===
+        # Each widget that affects the visualization
+
+        # Select widget for dropdown choices
         self.func_select = Select(
-            title="Function:", value="sin", options=["sin", "cos", "exp", "log", "polynomial"]
+            title="Function:",  # Label
+            value="sin",  # Initial selection
+            options=["sin", "cos", "exp", "log", "polynomial"],  # Available choices
         )
-        self.param_slider = Slider(start=0.1, end=5, value=1, step=0.1, title="Parameter")
+
+        # === SLIDER WIDGETS ===
+        # Sliders for continuous numeric input
+        # Parameters:
+        # - start/end: Range of values
+        # - value: Initial value
+        # - step: Increment when dragging
+        # - title: Label displayed above slider
+        self.param_slider = Slider(
+            start=0.1,  # Minimum value
+            end=5,  # Maximum value
+            value=1,  # Initial value
+            step=0.1,  # Step size
+            title="Parameter",  # Label
+        )
         self.points_slider = Slider(start=50, end=500, value=100, step=50, title="Number of Points")
         self.noise_slider = Slider(start=0, end=1, value=0, step=0.05, title="Noise Level")
 
-        # Update function
+        # === UPDATE CALLBACK FUNCTION ===
+        # This function is called whenever a widget value changes
+        # It reads widget values, computes new data, and updates the plot
         def update_slide4():
-            func = self.func_select.value
-            param = self.param_slider.value
-            n_points = int(self.points_slider.value)
-            noise = self.noise_slider.value
+            # === READING WIDGET VALUES ===
+            # Access current value through .value property
+            func = self.func_select.value  # String from Select
+            param = self.param_slider.value  # Float from Slider
+            n_points = int(self.points_slider.value)  # Convert to int
+            noise = self.noise_slider.value  # Float from Slider
 
+            # Generate x-coordinates
             x = np.linspace(0, 10, n_points)
 
+            # Calculate y-values based on selected function
             if func == "sin":
                 y = np.sin(param * x)
             elif func == "cos":
@@ -423,16 +722,30 @@ class InteractivePresentation:
             else:  # polynomial
                 y = param * x**2 - 2 * x + 1
 
-            # Add noise
+            # Add noise if requested
             if noise > 0:
                 y += np.random.normal(0, noise, len(y))
 
+            # === UPDATING THE DATA SOURCE ===
+            # Replace entire data dictionary to trigger re-render
+            # Bokeh automatically updates the plot when source.data changes
             self.slide4_source.data = dict(x=x, y=y)
 
-            # Update plot title
+            # === UPDATING PLOT PROPERTIES ===
+            # Can also update plot properties directly
+            # Changes are automatically synchronized to browser
             p.title.text = f"{func.upper()} Function (param={param:.1f}, noise={noise:.1f})"
 
-        # Attach callbacks
+        # === ATTACHING CALLBACKS TO WIDGETS ===
+        # .on_change(property, callback) monitors property changes
+        #
+        # Callback signature: func(attr, old, new)
+        # - attr: Name of changed attribute (e.g., "value")
+        # - old: Previous value
+        # - new: New value
+        #
+        # Using lambda to ignore parameters since update_slide4 doesn't need them
+        # Lambda wraps update_slide4() to match expected signature
         self.func_select.on_change("value", lambda a, o, n: update_slide4())
         self.param_slider.on_change("value", lambda a, o, n: update_slide4())
         self.points_slider.on_change("value", lambda a, o, n: update_slide4())
@@ -508,16 +821,27 @@ class InteractivePresentation:
         p.legend.location = "top_left"
         p.legend.click_policy = "hide"
 
-        # Add hover tool
+        # === HOVER TOOL CONFIGURATION ===
+        # HoverTool shows tooltips when hovering over data
         hover = HoverTool(
+            # === TOOLTIP SYNTAX ===
+            # List of (label, value) tuples
+            # @ prefix references column names in data source
+            # {format} specifies formatting:
+            # - {0.00} = 2 decimal places
+            # - {%F} = datetime format (requires formatter)
             tooltips=[
-                ("Date", "@dates{%F}"),
-                ("Value", "@values{0.00}"),
-                ("7-day MA", "@ma7{0.00}"),
-                ("30-day MA", "@ma30{0.00}"),
+                ("Date", "@dates{%F}"),  # Date with datetime formatting
+                ("Value", "@values{0.00}"),  # Value with 2 decimals
+                ("7-day MA", "@ma7{0.00}"),  # Moving average
+                ("30-day MA", "@ma30{0.00}"),  # Moving average
             ],
+            # === FORMATTERS ===
+            # Special formatting for datetime/custom types
+            # Key is column reference (@column), value is format type
             formatters={"@dates": "datetime"},
         )
+        # Add tool to existing plot
         p.add_tools(hover)
 
         # Statistics
@@ -603,8 +927,13 @@ class InteractivePresentation:
             line_color="white",
         )
 
-        # Configure hover
-        p.hover.tooltips = [("Variables", "@var1 - @var2"), ("Correlation", "@corr{0.00}")]
+        # === CONFIGURING HOVER AFTER CREATION ===
+        # When tools="hover" is in figure(), can access via p.hover
+        # Set tooltips property directly
+        p.hover.tooltips = [
+            ("Variables", "@var1 - @var2"),  # Combine two columns in display
+            ("Correlation", "@corr{0.00}"),  # Format correlation to 2 decimals
+        ]
 
         # Add color bar
         color_bar = ColorBar(
@@ -742,20 +1071,37 @@ class InteractivePresentation:
         return layout([[title], [card1, card2], [card3, card4], [thanks]])
 
     def update_slide(self):
-        """Update the current slide display"""
-        # Update navigation state
+        """Update the current slide display
+
+        === CENTRAL UPDATE PATTERN ===
+        This method is called whenever slide changes.
+        Updates all UI elements to reflect new state.
+        """
+
+        # === WIDGET STATE MANAGEMENT ===
+        # Disable navigation buttons at boundaries
+        # Setting .disabled property grays out button and prevents clicks
         self.prev_button.disabled = self.current_slide == 0
         self.next_button.disabled = self.current_slide == self.total_slides - 1
 
-        # Update progress
+        # === UPDATING DIV CONTENT ===
+        # Changing .text property updates HTML content
+        # Bokeh automatically syncs to browser
         self.progress_div.text = self.get_progress_html()
 
-        # Update selector
+        # === UPDATING SELECT WIDGET ===
+        # Setting .value changes selection
+        # Must be string matching one of the option values
         self.slide_select.value = str(self.current_slide)
 
-        # Update main content
+        # === UPDATING LAYOUT CHILDREN ===
+        # CRITICAL: This is how to swap content in Bokeh!
+        # Layout.children is a list of child elements
+        # Replacing the list changes what's displayed
+        # Bokeh handles all DOM updates automatically
         self.main_content.children = [self.slides[self.current_slide]]
 
+        # Server-side logging (appears in terminal, not browser)
         print(f"Showing slide {self.current_slide + 1}: {self.get_slide_title(self.current_slide)}")
 
     def prev_slide(self):
@@ -785,13 +1131,26 @@ class InteractivePresentation:
         self.update_slide()
 
     def start_auto_play(self):
-        """Start auto-play mode"""
+        """Start auto-play mode
+
+        === PERIODIC CALLBACKS IN BOKEH ===
+        Bokeh can run functions periodically (like setInterval in JavaScript)
+        """
         if not self.auto_play:
             self.auto_play = True
+
+            # === ADD_PERIODIC_CALLBACK ===
+            # Schedules function to run repeatedly
+            # Returns callback ID for later removal
+            # Parameters:
+            # - callback function (no arguments)
+            # - period in milliseconds
             self.auto_play_callback = curdoc().add_periodic_callback(
-                self.auto_advance,
-                5000,  # 5 seconds per slide
+                self.auto_advance,  # Function to call
+                5000,  # Period: 5000ms = 5 seconds
             )
+
+            # Update button appearance to show state
             self.play_button.label = "⏸ Pause"
             self.play_button.button_type = "warning"
             print("Auto-play started")
@@ -800,8 +1159,14 @@ class InteractivePresentation:
         """Stop auto-play mode"""
         if self.auto_play:
             self.auto_play = False
+
+            # === REMOVE_PERIODIC_CALLBACK ===
+            # Stop the periodic execution
+            # Important: Must remove callbacks to prevent memory leaks
             if self.auto_play_callback:
                 curdoc().remove_periodic_callback(self.auto_play_callback)
+
+            # Reset button appearance
             self.play_button.label = "▶ Auto Play"
             self.play_button.button_type = "success"
             print("Auto-play stopped")
@@ -811,8 +1176,18 @@ class InteractivePresentation:
         self.next_slide()
 
     def create_layout(self):
-        """Create the main layout"""
-        # Navigation bar
+        """Create the main layout
+
+        === LAYOUT HIERARCHY ===
+        Bokeh layouts are composable:
+        - row() for horizontal arrangement
+        - column() for vertical arrangement
+        - layout() for grid (nested lists)
+        - Spacer() for empty space (not used here)
+        """
+
+        # === NAVIGATION BAR ===
+        # row() places all navigation elements horizontally
         nav_bar = row(
             self.prev_button,
             self.home_button,
@@ -823,21 +1198,47 @@ class InteractivePresentation:
             self.progress_div,
         )
 
-        # Main content area
+        # === MAIN CONTENT AREA ===
+        # This will hold the current slide
+        # Starting with first slide (index 0)
         self.main_content = column(self.slides[0])
 
-        # Full layout
-        self.layout = column(nav_bar, Div(text="<hr>", width=1200, height=10), self.main_content)
+        # === FULL APPLICATION LAYOUT ===
+        # Vertical stack:
+        # 1. Navigation bar
+        # 2. Horizontal rule (separator)
+        # 3. Main content (current slide)
+        self.layout = column(
+            nav_bar,  # Navigation controls
+            Div(text="<hr>", width=1200, height=10),  # Visual separator
+            self.main_content,  # Slide content
+        )
 
-        # Initial update
+        # Initialize display with first slide
         self.update_slide()
 
 
-# Create and run the presentation
+# === BOKEH SERVER APPLICATION ENTRY POINT ===
+# This code runs when Bokeh server starts the application
+
+# Create instance of our presentation class
 presentation = InteractivePresentation()
+
+# === ADDING TO DOCUMENT ===
+# curdoc() returns the current Bokeh document
+# This document is synchronized with the browser
+# add_root() adds our layout as the root element
+# Everything in the layout will be rendered in the browser
 curdoc().add_root(presentation.layout)
+
+# === DOCUMENT PROPERTIES ===
+# Set browser tab title
 curdoc().title = "Interactive Presentation"
 
+# === SERVER-SIDE LOGGING ===
+# These print statements appear in the terminal where bokeh serve is running
+# Useful for debugging and monitoring server state
+# Note: Users won't see these in their browser
 print("=" * 50)
 print("Interactive Presentation App Started!")
 print("=" * 50)
@@ -845,3 +1246,24 @@ print("Navigate through slides using controls")
 print("All visualizations are interactive")
 print("Try Auto Play for presentation mode")
 print("=" * 50)
+
+# === HOW BOKEH SERVER WORKS ===
+# 1. User navigates to http://localhost:5006/06_interactive_presentation
+# 2. Bokeh server creates new session for that user
+# 3. This Python script runs, creating the document
+# 4. Document is serialized and sent to browser
+# 5. BokehJS renders the document in browser
+# 6. User interactions trigger websocket messages to server
+# 7. Server runs Python callbacks
+# 8. Document updates are sent back to browser
+# 9. BokehJS updates the display
+#
+# === IMPORTANT NOTES ===
+# - Each user gets their own session (isolated state)
+# - Python callbacks run on server (can access databases, files, etc.)
+# - All data updates happen through ColumnDataSource
+# - Layouts can be dynamically modified by changing .children
+# - Widget states (.value, .disabled, etc.) auto-sync
+# - Server maintains state between callbacks
+# - Use print() for server-side debugging
+# - Use Div with HTML for user-visible messages

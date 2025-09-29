@@ -101,8 +101,13 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 #### Hours 1 & 2
 
-- [**Practical work: COVID 19 in the US**](01_session_4_a.md)
-- [**Practical work: COVID 19 in the US: cartographic representation**](01_session_4_b.md)
+
+- [Dataset: **COVID-19 in the US dataset**](files/us-states.csv)
+    - Download: <a href="/pm/dataviz2/files/us-states.csv" download>Download link</a><br>
+- [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
+    - Download: <a href="/pm/dataviz2/files/covid-graphs-statement.ipynb" download>Download link</a>
+- [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb)
+    - Download: <a href="/pm/dataviz2/files/covid-maps-statement.ipynb" download>Download link</a>
 
 
 
@@ -129,5 +134,38 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 
 
+## Datasets
 
 
+- [**GDP dataset**](/files/gdp.csv)
+    - Download: <a href="/pm/dataviz2/files/gdp.csv" download>Download link</a><br>
+
+- [**COVID-19 in the US dataset**](/files/us-states.csv)
+    - Download: <a href="/pm/dataviz2/files/us-states.csv" download>Download link</a><br>
+
+
+## Corrections 
+
+
+
+- [**Practical work with `matplotlib` (1/2)**](session_1_f.md)
+    - [**Correction**](files/session_1_f.py)
+    - Download: <a href="/pm/dataviz2/files/session_1_f.py" download>Download link</a>
+- [**Practical work with `matplotlib` (2/2)**](session_2_c.md)
+    - [**Correction**](session_2_c0correction.md)
+- [**Practical work with `bokeh` server applications**](session_3_b.md) 
+    - [01_simple_slider.py](files/bokeh_server_apps/01_simple_slider.py)<br>
+    - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/01_simple_slider.py" download>Download link</a><br>
+    - [03_real_time_streaming.py](files/bokeh_server_apps/03_real_time_streaming.py)<br>
+    - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/03_real_time_streaming.py" download>Download link</a><br>
+    - [05_linked_plots.py](files/bokeh_server_apps/05_linked_plots.py)<br>
+    - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/05_linked_plots.py" download>Download link</a><br>
+    - [06_interactive_presentation.py](files/bokeh_server_apps/06_interactive_presentation.py)<br>
+        - [Image from FT used in the application 06](files/bokeh_server_apps/visual-vocabulary-ft.png)<br>
+        - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/visual-vocabulary-ft.png" download>Download link</a><br>
+- [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
+    - [**Correction**](files/covid-graphs-correction.ipynb)
+    - Download: <a href="/pm/dataviz2/files/covid-graphs-correction.ipynb" download>Download link</a>
+- [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb.md)
+    - [**Correction**](files/covid-maps-correction.ipynb)
+    - Download: <a href="/pm/dataviz2/files/covid-maps-correction.ipynb" download>Download link</a>

@@ -207,13 +207,13 @@ A complete presentation framework demonstrating the full power of Bokeh server a
 - **Auto-play mode** for hands-free presentation (5 seconds per slide)
 - **Progress bar** and slide selector dropdown
 - **Multiple visualizations per slide**:
-  - Welcome: Animated scatter plot with shuffle button
-  - Visual Vocabulary: Financial Times chart selection guide (embedded as base64 image)
-  - Data Overview: Dashboard with bar chart, line chart, and heatmap
-  - Interactive Explorer: Function plotter with multiple controls
-  - Time Series: Moving averages with hover tooltips
-  - Correlation Matrix: Interactive heatmap with color mapping
-  - Conclusions: Summary cards with key takeaways
+    - Welcome: Animated scatter plot with shuffle button
+    - Visual Vocabulary: Financial Times chart selection guide (embedded as base64 image)
+    - Data Overview: Dashboard with bar chart, line chart, and heatmap
+    - Interactive Explorer: Function plotter with multiple controls
+    - Time Series: Moving averages with hover tooltips
+    - Correlation Matrix: Interactive heatmap with color mapping
+    - Conclusions: Summary cards with key takeaways
 
 **Key concepts demonstrated:**
 

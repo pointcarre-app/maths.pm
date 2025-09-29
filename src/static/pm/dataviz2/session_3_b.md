@@ -37,10 +37,16 @@ If you follow the above installation instructions, you should have the libraries
 ### Accessing the `.py` example files
 
 - [01_simple_slider.py](files/bokeh_server_apps/01_simple_slider.py)
+    - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/01_simple_slider.py" download>Download link</a><br>
 - [03_real_time_streaming.py](files/bokeh_server_apps/03_real_time_streaming.py)
+    - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/03_real_time_streaming.py" download>Download link</a><br>
 - [05_linked_plots.py](files/bokeh_server_apps/05_linked_plots.py)
+    - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/05_linked_plots.py" download>Download link</a><br>
 - [06_interactive_presentation.py](files/bokeh_server_apps/06_interactive_presentation.py)
-    - [Image from FT used in the application](files/bokeh_server_apps/visual-vocabulary-ft.png)
+    - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/06_interactive_presentation.py" download>Download link</a><br>
+- [Image from FT used in the application 06](files/bokeh_server_apps/visual-vocabulary-ft.png)
+    - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/visual-vocabulary-ft.png" download>Download link</a><br>
+
 
 
 
@@ -201,13 +207,13 @@ A complete presentation framework demonstrating the full power of Bokeh server a
 - **Auto-play mode** for hands-free presentation (5 seconds per slide)
 - **Progress bar** and slide selector dropdown
 - **Multiple visualizations per slide**:
-  - Welcome: Animated scatter plot with shuffle button
-  - Visual Vocabulary: Financial Times chart selection guide (embedded as base64 image)
-  - Data Overview: Dashboard with bar chart, line chart, and heatmap
-  - Interactive Explorer: Function plotter with multiple controls
-  - Time Series: Moving averages with hover tooltips
-  - Correlation Matrix: Interactive heatmap with color mapping
-  - Conclusions: Summary cards with key takeaways
+    - Welcome: Animated scatter plot with shuffle button
+    - Visual Vocabulary: Financial Times chart selection guide (embedded as base64 image)
+    - Data Overview: Dashboard with bar chart, line chart, and heatmap
+    - Interactive Explorer: Function plotter with multiple controls
+    - Time Series: Moving averages with hover tooltips
+    - Correlation Matrix: Interactive heatmap with color mapping
+    - Conclusions: Summary cards with key takeaways
 
 **Key concepts demonstrated:**
 
