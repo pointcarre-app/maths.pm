@@ -288,6 +288,8 @@ pip3 install numpy==2.3.2
 pip3 install pandas==2.3.2
 pip3 install matplotlib==3.10.5
 pip3 install bokeh==3.8.0
+pip3 install geopandas==1.1.1
+pip3 install statsmodels==0.14.5
 ```
 
 
