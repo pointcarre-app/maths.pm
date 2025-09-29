@@ -53,7 +53,7 @@ Any issue related to the proper execution of code on your machine must be solved
 
 - [**Visual Vocabulary - Financial Times Guide**](session_2_a.md)
 - [**`matplotlib` as the Python reference for building graphs**](session_2_b.md)
-- [**Practical work with `matplotlib` (2/2)**](session_2_c.md)
+- [**Practical work with `matplotlib` (2/2)**](session_2_c.md) - Exercises 1 to 3
 <!-- Proposer en groupe -->
 
 
@@ -82,9 +82,9 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 
 
-#### Hour 1: Advanced static data vizualisation 
+#### Hour 1: More advanced static data vizualisation 
 
-- [**Advanced static data vizualisation**](01_session_3_a.md)
+- [**Practical work with `matplotlib` (2/2)**](session_2_c.md) - Exercises 4 to 6
 <!-- Include geojson here -->
 
 #### Hour 2: Interactive data vizualisation
@@ -94,7 +94,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 #### Hour 3: Group work: data validation
 
-- [**Practical work per group: data refinement & first graphs**](01_session_3_c.md)
+- [**Data Visualization Project**](session_1_e.md) : Story scripting & first graphs
 
 
 ### 4️⃣ Session 4: Practical Work
@@ -109,7 +109,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 #### Hour 3: Group work: advanced data vizualisation
 
-- [**Practical work per group: advanced data vizualisation**](01_session_4_c.md)
+- [**Data Visualization Project**](session_1_e.md) : Advanced visualizations
 
 
 
