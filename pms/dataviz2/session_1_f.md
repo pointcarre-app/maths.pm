@@ -1,5 +1,5 @@
 
-# Practical work with `matplotlib`
+# Practical work with `matplotlib` (1/2)
 
 
 [TOC]
@@ -215,10 +215,10 @@ print(f"Dataset loaded: {df_countries.shape[0]} rows, {df_countries['Country Nam
 
 - Use 2000, 2010, and 2019 data for comparison
 - Create 4 GDP categories using `pd.cut()` or `pd.qcut()`:
-    - "Small" (< $100B)
-    - "Medium" ($100B - $500B) 
-    - "Large" ($500B - $2T)
-    - "Very Large" (> $2T)
+    - "Small" (< 100B dollars)
+    - "Medium" (100B - 500B dollars) 
+    - "Large" (500B - 2T dollars)
+    - "Very Large" (> 2T dollars)
 - Create a stacked bar chart showing count of countries in each category by year
 - Use distinct colors for each category (suggest using a categorical colormap)
 - Add percentage labels on each stack segment

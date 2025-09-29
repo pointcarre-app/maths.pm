@@ -55,3 +55,11 @@ for key, value in data.items():
         // Inject seed
         const seedInjection = `\nimport random\nrandom.seed(${seed})\n\n# Override the default SEED\nimport teachers.defaults\nteachers.defaults.SEED = ${seed}\n\n`;
      ```
+
+
+
+## Medium
+
+
+- dataviz2:
+     - Pie plot GDP : colors and country names

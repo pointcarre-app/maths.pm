@@ -53,7 +53,7 @@ Any issue related to the proper execution of code on your machine must be solved
 
 - [**Visual Vocabulary - Financial Times Guide**](session_2_a.md)
 - [**`matplotlib` as the Python reference for building graphs**](session_2_b.md)
-- [**Practical work with `matplotlib` (2/2)**](01_session_2_b.md)
+- [**Practical work with `matplotlib` (2/2)**](session_2_c.md)
 <!-- Proposer en groupe -->
 
 
