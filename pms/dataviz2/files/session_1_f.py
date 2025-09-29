@@ -292,8 +292,13 @@ def exercise_4_subplots():
     pie_values = list(top_8['Value']) + [others_value]
     pie_labels = list(top_8['Country Name'].str[:10]) + ['Others']
     
-    wedges, texts, autotexts = ax2.pie(pie_values, labels=pie_labels, autopct='%1.1f%%',
-                                       colors=colors_accent, startangle=90)
+    # Create autopct function to show percentage only for values > 16%
+    def autopct_format(pct):
+        return f'{pct:.1f}%' if pct > 16 else ''
+
+    wedges, texts, autotexts = ax2.pie(pie_values, labels=pie_labels,
+                                    autopct=autopct_format,
+                                    colors=colors_accent, startangle=90)
     ax2.set_title('GDP Share Distribution (2019)', fontweight='bold', fontsize=14)
     
     # 3. Bottom-left: GDP volatility (std dev 2010-2019) for top 10 economies
@@ -326,9 +331,12 @@ def exercise_4_subplots():
     ax4.set_ylabel('Number of Countries', fontweight='bold')
     ax4.grid(True, alpha=0.3)
     
+    # Set consistent ticks for both axes
+    log_ticks = [9, 10, 11, 12, 13, 14]
+    ax4.set_xticks(log_ticks)
+    
     # Add log scale labels for better interpretation
     ax4_twin = ax4.twiny()
-    log_ticks = [9, 10, 11, 12, 13, 14]
     ax4_twin.set_xlim(ax4.get_xlim())
     ax4_twin.set_xticks(log_ticks)
     ax4_twin.set_xticklabels([f'${10**x/1e12:.1f}T' if x >= 12 else f'${10**x/1e9:.0f}B' for x in log_ticks])
