@@ -40,10 +40,6 @@ If you follow the above installation instructions, you should have the libraries
 - [03_real_time_streaming.py](files/bokeh_server_apps/03_real_time_streaming.py)
 - [05_linked_plots.py](files/bokeh_server_apps/05_linked_plots.py)
 - [06_interactive_presentation.py](files/bokeh_server_apps/06_interactive_presentation.py)
-    - [Image from FT used in the application](files/bokeh_server_apps/visual-vocabulary-ft.png)
-
-
-
 
 ### Running an application individually
 
@@ -53,18 +49,10 @@ source env/bin/activate
 bokeh serve 01_simple_slider.py
 ```
 
-
-Be sure to have the [image](files/bokeh_server_apps/visual-vocabulary-ft.png) in the current directory when running : 
-
-```
-bokeh serve 06_interactive_presentation.py
-```
-
-
 Then open your browser to: `http://localhost:5006/01_simple_slider`
 
 
-### Running multiple apps simultaneously
+#### Running multiple apps simultaneously
 
 You can serve multiple apps at once:
 ```bash
@@ -79,7 +67,7 @@ This will make all apps available at their respective URLs:
 - `http://localhost:5006/06_interactive_presentation`
 
 
-### Run with custom options
+#### Method 3: Run with custom options
 
 To allow external connections:
 ```bash
@@ -271,21 +259,12 @@ Choose Bokeh server applications when you need:
 
 
 
-## Exercises
+## exercises
+
+1. **Explore the source code**: Each app is well-commented
+2. **Modify existing apps**: Change parameters, add features
+3. **Build your own**: Start with simple examples and expand
 
 
 Remember: These apps require an active Bokeh server connection. Closing the browser doesn't stop the server - use `Ctrl+C` in the terminal.
 {: .alert .alert-warning .alert-soft}
-
-
-
-1. **Explore the source code**: Each app is well-commented
-2. **Modify existing apps**: Change parameters, you can even add features
-3. **Build your own**: Start with simple examples and expand, in particular starting from `01_simple_slider.py` and `05_linked_plots.py` and adapting them to your project
-
-
-
-Adapting the `06_interactive_presentation.py` application with your own data is a great way to practice and prepare for your final project: <strong>and it could actually be your final project</strong>.
-{: .alert .alert-success .alert-soft}
-
-

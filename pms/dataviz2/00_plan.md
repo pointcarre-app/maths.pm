@@ -90,12 +90,12 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 #### Hour 2
 
 - [**Bokeh presentation and basic usage**](session_3_a.md)
-- [**Bokeh server application**](session_3_b.md) 
+- [**Practical work with `bokeh` server applications**](session_3_b.md) 
 
 #### Hour 3
 
 - [**Data Visualization Project**](session_1_e.md) : Story scripting & first graphs
-- [**Data Visualization Project**](session_1_e.md) : Advanced visualizations
+- [**Data Visualization Project**](session_1_e.md) : Advanced visualizations (`bokeh`)
 
 ### 4️⃣ Session 4: Practical Work
 
@@ -109,7 +109,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 #### Hour 3
 
-- [**Data Visualization Project**](session_1_e.md) : Advanced visualizations
+- [**Data Visualization Project**](session_1_e.md) : Advanced visualizations (`bokeh`)
 
 
 
@@ -119,7 +119,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 #### Hour 1
 
-- [**`networkx` and `seaborn`**](01_session_5_a.md)
+- [**Practical work with `bokeh` server applications**](session_3_b.md) 
 
 
 
@@ -127,3 +127,8 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 - [**Data Visualization Project**](session_1_e.md) : final polish
 - [**Data Visualization Project**](session_1_e.md) : presentation
+
+
+
+
+

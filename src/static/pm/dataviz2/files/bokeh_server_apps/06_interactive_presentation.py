@@ -23,12 +23,14 @@ from bokeh.palettes import RdYlBu11, Category20
 from bokeh.transform import factor_cmap
 import numpy as np
 import pandas as pd
+import base64
+import os
 
 
 class InteractivePresentation:
     def __init__(self):
         self.current_slide = 0
-        self.total_slides = 6
+        self.total_slides = 7
         self.slides = []
         self.auto_play = False
         self.auto_play_callback = None
@@ -74,6 +76,7 @@ class InteractivePresentation:
         """Get title for each slide"""
         titles = [
             "Welcome",
+            "Visual Vocabulary",
             "Data Overview",
             "Interactive Analysis",
             "Time Series Trends",
@@ -99,11 +102,12 @@ class InteractivePresentation:
         """Create all presentation slides"""
         self.slides = [
             self.create_slide_1_welcome(),
-            self.create_slide_2_overview(),
-            self.create_slide_3_interactive(),
-            self.create_slide_4_timeseries(),
-            self.create_slide_5_correlation(),
-            self.create_slide_6_conclusions(),
+            self.create_slide_2_visual_vocabulary(),
+            self.create_slide_3_overview(),
+            self.create_slide_4_interactive(),
+            self.create_slide_5_timeseries(),
+            self.create_slide_6_correlation(),
+            self.create_slide_7_conclusions(),
         ]
 
     def create_slide_1_welcome(self):
@@ -180,8 +184,90 @@ class InteractivePresentation:
 
         return layout([[title], [column(p, animate_btn), column(features, instructions)]])
 
-    def create_slide_2_overview(self):
-        """Slide 2: Data Overview with Multiple Charts"""
+    def create_slide_2_visual_vocabulary(self):
+        """Slide 2: Visual Vocabulary - FT Guide"""
+        title = Div(
+            text="""
+        <h1 style="text-align: center; color: #2c3e50;">
+            📊 Visual Vocabulary - Financial Times Guide
+        </h1>
+        <p style="text-align: center; font-size: 16px;">
+            A comprehensive guide to selecting the right chart type for your data story
+        </p>
+        """,
+            width=1200,
+            height=100,
+        )
+
+        # Load and encode the image as base64
+        image_path = os.path.join(os.path.dirname(__file__), "visual-vocabulary-ft.png")
+        image_html = ""
+
+        if os.path.exists(image_path):
+            with open(image_path, "rb") as img_file:
+                encoded_string = base64.b64encode(img_file.read()).decode()
+                image_html = f"""
+        <div style="text-align: center; margin: 20px auto;">
+            <img src="data:image/png;base64,{encoded_string}" 
+                 style="max-width: 100%; height: auto; max-height: 600px; border: 2px solid #ddd; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"
+                 alt="Visual Vocabulary - Financial Times">
+        </div>
+        """
+        else:
+            # Fallback if image not found
+            image_html = """
+        <div style="text-align: center; margin: 20px auto; padding: 50px; background-color: #f0f0f0; border-radius: 10px;">
+            <h3>Visual Vocabulary Image</h3>
+            <p>Image file not found: visual-vocabulary-ft.png</p>
+            <p>Please ensure the image is in the same directory as this script.</p>
+        </div>
+        """
+
+        # Main image display
+        image_div = Div(
+            text=image_html,
+            width=1200,
+            height=650,
+        )
+
+        # Information panel
+        info_panel = Div(
+            text="""
+        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+            <h3>📌 About the Visual Vocabulary</h3>
+            <p>The Financial Times Visual Vocabulary is a poster and guide that helps you select the most appropriate chart type based on the story you want to tell with your data.</p>
+            <div style="display: flex; justify-content: space-around; margin-top: 15px;">
+                <div style="flex: 1; margin: 0 10px;">
+                    <h4>Categories Include:</h4>
+                    <ul style="font-size: 14px;">
+                        <li><b>Deviation</b> - Emphasize variations</li>
+                        <li><b>Correlation</b> - Show relationships</li>
+                        <li><b>Ranking</b> - Show order</li>
+                        <li><b>Distribution</b> - Show frequency</li>
+                        <li><b>Change over Time</b> - Show trends</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; margin: 0 10px;">
+                    <h4>More Categories:</h4>
+                    <ul style="font-size: 14px;">
+                        <li><b>Magnitude</b> - Show size comparisons</li>
+                        <li><b>Part-to-whole</b> - Show components</li>
+                        <li><b>Spatial</b> - Show geographical data</li>
+                        <li><b>Flow</b> - Show transfers</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top: 15px; font-style: italic;">💡 <b>Tip:</b> Use this guide when deciding how to visualize your data. Consider what story you want to tell and find the appropriate category and chart type.</p>
+        </div>
+        """,
+            width=1200,
+            height=250,
+        )
+
+        return layout([[title], [image_div], [info_panel]])
+
+    def create_slide_3_overview(self):
+        """Slide 3: Data Overview with Multiple Charts"""
         title = Div(
             text="""
         <h2 style="color: #2c3e50;">📈 Data Overview Dashboard</h2>
@@ -292,8 +378,8 @@ class InteractivePresentation:
 
         return layout([[title], [p1, p2], [p3, stats]])
 
-    def create_slide_3_interactive(self):
-        """Slide 3: Interactive Analysis with Controls"""
+    def create_slide_4_interactive(self):
+        """Slide 4: Interactive Analysis with Controls"""
         title = Div(
             text="""
         <h2 style="color: #2c3e50;">🎮 Interactive Data Explorer</h2>
@@ -303,11 +389,11 @@ class InteractivePresentation:
         )
 
         # Create data
-        self.slide3_source = ColumnDataSource(data=dict(x=[], y=[]))
+        self.slide4_source = ColumnDataSource(data=dict(x=[], y=[]))
 
         # Create plot
         p = figure(width=600, height=400, title="Interactive Function Plotter")
-        self.slide3_line = p.line("x", "y", source=self.slide3_source, line_width=2, color="blue")
+        self.slide4_line = p.line("x", "y", source=self.slide4_source, line_width=2, color="blue")
 
         # Controls
         self.func_select = Select(
@@ -318,7 +404,7 @@ class InteractivePresentation:
         self.noise_slider = Slider(start=0, end=1, value=0, step=0.05, title="Noise Level")
 
         # Update function
-        def update_slide3():
+        def update_slide4():
             func = self.func_select.value
             param = self.param_slider.value
             n_points = int(self.points_slider.value)
@@ -341,19 +427,19 @@ class InteractivePresentation:
             if noise > 0:
                 y += np.random.normal(0, noise, len(y))
 
-            self.slide3_source.data = dict(x=x, y=y)
+            self.slide4_source.data = dict(x=x, y=y)
 
             # Update plot title
             p.title.text = f"{func.upper()} Function (param={param:.1f}, noise={noise:.1f})"
 
         # Attach callbacks
-        self.func_select.on_change("value", lambda a, o, n: update_slide3())
-        self.param_slider.on_change("value", lambda a, o, n: update_slide3())
-        self.points_slider.on_change("value", lambda a, o, n: update_slide3())
-        self.noise_slider.on_change("value", lambda a, o, n: update_slide3())
+        self.func_select.on_change("value", lambda a, o, n: update_slide4())
+        self.param_slider.on_change("value", lambda a, o, n: update_slide4())
+        self.points_slider.on_change("value", lambda a, o, n: update_slide4())
+        self.noise_slider.on_change("value", lambda a, o, n: update_slide4())
 
         # Initial update
-        update_slide3()
+        update_slide4()
 
         # Info panel
         info = Div(
@@ -379,8 +465,8 @@ class InteractivePresentation:
 
         return layout([[title], [p, controls]])
 
-    def create_slide_4_timeseries(self):
-        """Slide 4: Time Series Analysis"""
+    def create_slide_5_timeseries(self):
+        """Slide 5: Time Series Analysis"""
         title = Div(
             text="""
         <h2 style="color: #2c3e50;">📅 Time Series Analysis</h2>
@@ -456,8 +542,8 @@ class InteractivePresentation:
 
         return layout([[title], [p], [stats]])
 
-    def create_slide_5_correlation(self):
-        """Slide 5: Correlation Matrix Explorer"""
+    def create_slide_6_correlation(self):
+        """Slide 6: Correlation Matrix Explorer"""
         title = Div(
             text="""
         <h2 style="color: #2c3e50;">🔗 Correlation Analysis</h2>
@@ -551,8 +637,8 @@ class InteractivePresentation:
 
         return layout([[title], [p, guide]])
 
-    def create_slide_6_conclusions(self):
-        """Slide 6: Conclusions and Summary"""
+    def create_slide_7_conclusions(self):
+        """Slide 7: Conclusions and Summary"""
         title = Div(
             text="""
         <h1 style="text-align: center; color: #2c3e50;">
