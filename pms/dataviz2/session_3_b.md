@@ -69,11 +69,6 @@ This will make all apps available at their respective URLs:
 
 #### Method 3: Run with custom options
 
-For development with auto-reload:
-```bash
-bokeh serve --dev 01_simple_slider.py
-```
-
 To allow external connections:
 ```bash
 bokeh serve --allow-websocket-origin="*" 01_simple_slider.py
@@ -182,6 +177,9 @@ This pattern is essential for building interactive data exploration tools where 
 
 ### [06_interactive_presentation.py](files/bokeh_server_apps/06_interactive_presentation.py) - Full presentation system 🆕
 
+This application showcases how Bokeh can be used to create professional, interactive presentations that go far beyond static slides.
+{: .alert .alert-error .alert-soft}
+
 A complete presentation framework demonstrating the full power of Bokeh server applications.
 
 **Features:**
@@ -217,8 +215,7 @@ class InteractivePresentation:
         self.create_navigation()
 ```
 
-This application showcases how Bokeh can be used to create professional, interactive presentations that go far beyond static slides.
-{: .alert .alert-error .alert-soft}
+
 
 
 ## Practical applications
@@ -252,9 +249,13 @@ Choose Bokeh server applications when you need:
 |-------|----------|
 | **Port already in use** | Kill existing Bokeh server with `Ctrl+C` or use different port with `--port` |
 | **Module not found** | Ensure all packages installed: `pip install bokeh pandas numpy` |
-| **No display in browser** | Check browser console for JavaScript errors |
+| **No display in browser 1️⃣** | Check browser console for JavaScript errors |
+| **No display in browser 2️⃣** | <span style="color: var(--color-error);">Just be nice with yourself, don't try make it work in the browser, use the `.py` files instead</span> |
 | **Slow updates** | Adjust update rates in streaming apps, optimize data processing |
-| **Connection refused** | Check firewall settings, use `--allow-websocket-origin` for remote access |
+| **Connection refused 1️⃣** | Check firewall settings, use `--allow-websocket-origin` for remote access |
+| **Connection refused 2️⃣** | <span style="color: var(--color-success);">You shouldn't have this issue if you use only local files (not HTTP requests)</span> |
+
+
 
 
 ## Next steps
