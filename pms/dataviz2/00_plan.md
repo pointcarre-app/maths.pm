@@ -102,7 +102,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 #### Hours 1 & 2
 
 
-- [Dataset: **COVID-19 in the US dataset**](/files/us-states.csv)
+- [Dataset: **COVID-19 in the US dataset**](files/us-states.csv)
     - Download: <a href="/pm/dataviz2/files/us-states.csv" download>Download link</a><br>
 - [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
     - Download: <a href="/pm/dataviz2/files/covid-graphs-statement.ipynb" download>Download link</a>
