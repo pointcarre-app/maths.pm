@@ -90,7 +90,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 #### Hour 2
 
 - [**Bokeh presentation and basic usage**](session_3_a.md)
-
+- [**Bokeh server application**](session_3_b.md) 
 
 #### Hour 3
 

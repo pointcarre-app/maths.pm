@@ -31,8 +31,15 @@ The dataset must be relevant in order to use the concepts and the different data
 
 ## Deliverable
 
+
+- <span style="color: green;">A bokeh server application</span> <strong>(this is the recommended option)</strong>
 - <span>A notebook with the code and the visualizations</span>
 - <span>A one page report of the project</span>
+
+
+
+Bokeh server applications seem to be the easiest to implement. Indeed, interactions with JupyterLab (or any browser based environment for execution or rendering) implies implementing by hand the logic of update when using widgets. Therefore, without this very low level logic implementation, bokeh looses some very interesting features. 
+{: .alert .alert-error .alert-soft}
 
 
 
