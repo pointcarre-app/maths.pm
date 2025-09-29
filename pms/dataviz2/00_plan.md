@@ -111,7 +111,7 @@ The evaluation consists on a data vizualisation project. The students will have 
 
 - [**Data Types Classification and introduction to `matplotlib`**](session_1_d.md)
 - [**Groups consitution and project data requirements**](session_1_e.md)
-- [**Practical work with `matplotlib`**](session_1_f.md)
+- [**Practical work with `matplotlib` (1/2)**](session_1_f.md)
 
 
 ### 2️⃣ Session 2: Static data vizualisation panorama
@@ -122,8 +122,9 @@ Any issue related to the proper execution of code on your machine must be solved
 
 #### Hour 1 & 2: Static graphical representation panorama
 
-- [**`matplotlib` as the Python reference for building graphs**](session_2_a.md)
-- [**Practical work with `matplotlib`**](01_session_2_b.md)
+- [**Visual Vocabulary - Financial Times Guide**](session_2_a.md)
+- [**`matplotlib` as the Python reference for building graphs**](session_2_b.md)
+- [**Practical work with `matplotlib` (2/2)**](01_session_2_b.md)
 <!-- Proposer en groupe -->
 
 

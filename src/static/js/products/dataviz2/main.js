@@ -15,7 +15,7 @@
         naginiVersion: 'v0.0.24',
         naginiUrl: 'https://esm.sh/gh/pointcarre-app/nagini@v0.0.24/src/nagini.js?bundle',
         pyodideWorkerUrl: 'https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.24/src/pyodide/worker/worker-dist.js',
-        preloadPackages: ['matplotlib', 'pandas', 'numpy', 'bokeh'],
+        preloadPackages: ['matplotlib', 'pandas', 'scipy', 'numpy', 'bokeh'],
     };
     
     let naginiManager = null;
