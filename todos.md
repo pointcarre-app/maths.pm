@@ -5,6 +5,13 @@
 
 
 
+- [] Prepare possible backend interactions
+     - [] Login
+     - [] Store
+     - [] Stats
+     - [] Next
+
+
 - []  Fix this for code_
      - [] Test
 - [] Ensure it doesnt break "codex_" (CodeMirror should do some stuff on it's own)
@@ -61,5 +68,11 @@ for key, value in data.items():
 ## Medium
 
 
+
+- pm system:
+     - Consider the case of the folders if scenario is static deployment
+
 - dataviz2:
      - Pie plot GDP : colors and country names
+
+

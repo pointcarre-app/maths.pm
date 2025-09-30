@@ -132,6 +132,20 @@
           fill: #3d139c;
       }
 
+      /* Pulsating logo animation (no opacity change) */
+      .pulsating-logo-animation-solid {
+          animation: pulse-scale-solid 1.5s ease-in-out infinite;
+          transform-origin: center;
+      }
+
+      .pulsating-logo-animation-solid rect {
+          stroke: #3d139c;
+      }
+
+      .pulsating-logo-animation-solid circle {
+          fill: #3d139c;
+      }
+
       /* Keyframe animations */
       @keyframes spin {
           0% {
@@ -152,6 +166,24 @@
           50% {
               transform: scale(1.3);
               opacity: 0.7;
+          }
+
+          100% {
+              transform: scale(1);
+              opacity: 1;
+          }
+      }
+
+      @keyframes pulse-scale-solid {
+          0% {
+              transform: scale(1);
+              opacity: 1;
+          }
+
+          50% {
+              transform: scale(1.3);
+              opacity: 1;
+              /* keep fully opaque */
           }
 
           100% {
@@ -481,7 +513,7 @@
       <div class="flex justify-start items-start mb-8 -mx-8">
         <!-- Spinning Gabriel Logo Animation -->
         <div class="animation-container">
-          <h2 class="text-lg font-semibold mb-4">Spinning Gabriel</h2>
+          <h2 class="text-lg font-semibold mb-12">Spinning Gabriel</h2>
           <svg xmlns="http://www.w3.org/2000/svg"
                class="spinning-logo-animation"
                viewBox="0 0 100 100"
@@ -494,9 +526,22 @@
 
         <!-- Pulsating Gabriel Logo Animation -->
         <div class="animation-container">
-          <h2 class="text-lg font-semibold mb-4">Pulsating Gabriel</h2>
+          <h2 class="text-lg font-semibold mb-12">Pulsating Gabriel</h2>
           <svg xmlns="http://www.w3.org/2000/svg"
                class="pulsating-logo-animation"
+               viewBox="0 0 100 100"
+               height="100"
+               width="100">
+            <rect x="7" y="7" width="86" height="86" fill="transparent" stroke-width="14" rx="14" ry="14" stroke-linejoin="round" />
+            <circle cx="50" cy="50" r="14"></circle>
+          </svg>
+        </div>
+
+        <!-- Pulsating Gabriel (No Fade) -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-12">Pulsating Gabriel (No Fade)</h2>
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="pulsating-logo-animation-solid"
                viewBox="0 0 100 100"
                height="100"
                width="100">
@@ -510,29 +555,41 @@
       <div class="flex justify-start items-start mb-8 -mx-8">
         <!-- Spinning Zélie Logo Animation -->
         <div class="animation-container">
-          <h2 class="text-lg font-semibold mb-4">Spinning Zélie</h2>
+          <h2 class="text-lg font-semibold mb-12">Spinning Zélie</h2>
           <div class="spinning-logo-animation">{% include "base/logo-zelie-primary.html" %}</div>
         </div>
 
         <!-- Pulsating Zélie Logo Animation -->
         <div class="animation-container">
-          <h2 class="text-lg font-semibold mb-4">Pulsating Zélie</h2>
+          <h2 class="text-lg font-semibold mb-12">Pulsating Zélie</h2>
           <div class="pulsating-logo-animation">{% include "base/logo-zelie-primary.html" %}</div>
+        </div>
+
+        <!-- Pulsating Zélie (No Fade) -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-12">Pulsating Zélie (No Fade)</h2>
+          <div class="pulsating-logo-animation-solid">{% include "base/logo-zelie-primary.html" %}</div>
         </div>
       </div>
 
-      <h2 class="text-2xl font-bold mb-4">Loading Animations - Logo Jules</h2>
+      <h2 class="text-2xl font-bold mb-4 mt-14">Loading Animations - Logo Jules</h2>
       <div class="flex justify-start items-start mb-8 -mx-8">
         <!-- Spinning Jules Logo Animation -->
         <div class="animation-container">
-          <h2 class="text-lg font-semibold mb-4">Spinning Jules</h2>
+          <h2 class="text-lg font-semibold mb-12">Spinning Jules</h2>
           <div class="spinning-logo-animation">{% include "base/logo-jules-primary.html" %}</div>
         </div>
 
         <!-- Pulsating Jules Logo Animation -->
         <div class="animation-container">
-          <h2 class="text-lg font-semibold mb-4">Pulsating Jules</h2>
+          <h2 class="text-lg font-semibold mb-12">Pulsating Jules</h2>
           <div class="pulsating-logo-animation">{% include "base/logo-jules-primary.html" %}</div>
+        </div>
+
+        <!-- Pulsating Jules (No Fade) -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-12">Pulsating Jules (No Fade)</h2>
+          <div class="pulsating-logo-animation-solid">{% include "base/logo-jules-primary.html" %}</div>
         </div>
       </div>
 
@@ -540,14 +597,20 @@
       <div class="flex justify-start items-start mb-8 -mx-8">
         <!-- Spinning Abel Logo Animation -->
         <div class="animation-container">
-          <h2 class="text-lg font-semibold mb-4">Spinning Abel</h2>
+          <h2 class="text-lg font-semibold mb-12">Spinning Abel</h2>
           <div class="spinning-logo-animation">{% include "base/logo-abel-primary.html" %}</div>
         </div>
 
         <!-- Pulsating Abel Logo Animation -->
         <div class="animation-container">
-          <h2 class="text-lg font-semibold mb-4">Pulsating Abel</h2>
+          <h2 class="text-lg font-semibold mb-12">Pulsating Abel</h2>
           <div class="pulsating-logo-animation">{% include "base/logo-abel-primary.html" %}</div>
+        </div>
+
+        <!-- Pulsating Abel (No Fade) -->
+        <div class="animation-container">
+          <h2 class="text-lg font-semibold mb-12">Pulsating Abel (No Fade)</h2>
+          <div class="pulsating-logo-animation-solid">{% include "base/logo-abel-primary.html" %}</div>
         </div>
       </div>
 
