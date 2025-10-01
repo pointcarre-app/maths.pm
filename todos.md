@@ -3,8 +3,6 @@
 
 ## High 
 
-
-
 - [] Prepare possible backend interactions
      - [] Login
      - [] Store
@@ -76,3 +74,15 @@ for key, value in data.items():
      - Pie plot GDP : colors and country names
 
 
+
+
+
+## Low
+
+```
+    format: str = Query(
+        "html", description="Response format (json or html)", pattern="^(json|html)$"
+    ),
+```
+
+- pattern or regex ? both works ?

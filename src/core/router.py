@@ -796,7 +796,7 @@ async def get_pm(
     request: Request,
     origin: str,
     format: str = Query(
-        "html", description="Response format (json or html)", regex="^(json|html)$"
+        "html", description="Response format (json or html)", pattern="^(json|html)$"
     ),
     debug: bool = Query(False, description="Debug mode"),
     disable_product_settings_warning: bool = Query(
@@ -983,7 +983,7 @@ async def get_pm_from_url(
         None, description="GitHub personal access token for private repositories"
     ),
     format: str = Query(
-        "html", description="Response format (json or html)", regex="^(json|html)$"
+        "html", description="Response format (json or html)", pattern="^(json|html)$"
     ),
     debug: bool = Query(False, description="Debug mode"),
 ) -> Response:
