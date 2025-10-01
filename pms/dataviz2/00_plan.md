@@ -137,10 +137,10 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 ## Datasets
 
 
-- [**GDP dataset**](/files/gdp.csv)
+- [**GDP dataset**](files/gdp.csv)
     - Download: <a href="/pm/dataviz2/files/gdp.csv" download>Download link</a><br>
 
-- [**COVID-19 in the US dataset**](/files/us-states.csv)
+- [**COVID-19 in the US dataset**](files/us-states.csv)
     - Download: <a href="/pm/dataviz2/files/us-states.csv" download>Download link</a><br>
 
 
