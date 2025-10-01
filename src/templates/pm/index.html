@@ -21,10 +21,43 @@
 {% endblock title %}
 
 {% block extra_head %}
+
+  {# Load Product-specific CSS dependencies from backend_settings #}
+  {% if product_settings and product_settings.product and product_settings.product.backend_settings %}
+    {% if product_settings.product.backend_settings.css_dependencies %}
+      <!-- Product CSS dependencies ({{ product_settings.product.name }}) -->
+      {% for css_dep in product_settings.product.backend_settings.css_dependencies %}
+        <link rel="stylesheet" href="{{ css_dep }}" />
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+
+  {# Load PM-specific CSS dependencies (from PM metadata) if they exist #}
+  {% if pm and pm.css_dependencies %}
+    <!-- PM-specific CSS dependencies (from markdown metadata) -->
+    {% for css_dep in pm.css_dependencies %}<link rel="stylesheet" href="{{ css_dep }}" />{% endfor %}
+  {% endif %}
+
+  {# Load Product-specific JS dependencies from backend_settings #}
+  {% if product_settings and product_settings.product and product_settings.product.backend_settings %}
+    {% if product_settings.product.backend_settings.js_dependencies %}
+      <!-- Product JS dependencies ({{ product_settings.product.name }}) -->
+      {% for js_dep in product_settings.product.backend_settings.js_dependencies %}
+        <script src="{{ js_dep }}"></script>
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+
+  {# Load PM-specific JS dependencies (from PM metadata) if they exist #}
+  {% if pm and pm.js_dependencies %}
+    <!-- PM-specific JS dependencies (from markdown metadata) -->
+    {% for js_dep in pm.js_dependencies %}<script src="{{ js_dep }}"></script>{% endfor %}
+  {% endif %}
+
   {# Include all PM head resources - simplified version available #}
   {# You can also use: {% include "pm-include/head-resources.html" %} #}
-  <link rel="stylesheet" href="{{ request.url_for('static', path='core/css/pm.css') }}" />
-  <link rel="stylesheet" href="{{ request.url_for('static', path='core/css/toc.css') }}" />
+  {# <link rel="stylesheet" href="{{ request.url_for('static', path='core/css/pm.css') }}" /> #}
+  {# <link rel="stylesheet" href="{{ request.url_for('static', path='core/css/toc.css') }}" /> #}
   <!-- MathLive for LaTeX (if needed later) -->
   <script src="https://cdn.jsdelivr.net/npm/mathlive@0.105.2/mathlive.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/mathlive@0.105.2/mathlive-static.min.css" rel="stylesheet" />
@@ -45,24 +78,12 @@
   {# Todo: Ensure stability cross domains  / producs #}
 
   {# Include PM metatags logic #}
-  {% include 'pm/includes/metatags.html' %}
-
-  {# Load PM-specific CSS dependencies #}
-  {% if pm and pm.css_dependencies %}
-    <!-- PM CSS dependencies -->
-    {% for css_dep in pm.css_dependencies %}<link rel="stylesheet" href="{{ css_dep }}" />{% endfor %}
-  {% endif %}
-
-  {# Load PM-specific JS dependencies BEFORE other scripts for availability #}
-  {% if pm and pm.js_dependencies %}
-    <!-- PM JS dependencies (Bokeh, etc.) -->
-    {% for js_dep in pm.js_dependencies %}<script src="{{ js_dep }}"></script>{% endfor %}
-    <!-- PM JS dependencies automatically include Bokeh detector when needed -->
-  {% endif %}
+  {% include "pm/includes/metatags.html" %}
 
 {% endblock extra_head %}
 
 {% block content %}
+
   {# This entire block can be replaced with: {% include "pm-include/render-full.html" %} #}
 
   {% include "pm/includes/toc-sidebar.html" %}

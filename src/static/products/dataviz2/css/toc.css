@@ -1,0 +1,152 @@
+
+/* Sidebar (TOC) */
+.sidebar-fixed {
+  position: fixed;
+  top: 12vh;
+  left: 1rem;
+  /* height: auto; */
+  max-height: 60vh;
+  overflow-y: scroll;
+  z-index: 10;
+  font-family: var(--font-heading);
+}
+
+
+
+
+
+/* TOC Styling */
+#toc {
+  padding: 1rem !important;
+  font-size: 0.9rem !important;
+  font-weight: 400 !important;
+}
+
+
+#toc ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+
+/* #toc ul > li > ul > li:first-child {
+  margin-bottom: 1rem !important;
+  margin-top: 1rem !important;
+} */
+
+
+#toc > ul > ul {
+  padding-left: 0rem !important;
+  /* margin-top: 0.75rem !important; */
+}
+
+#toc > ul > ul > ul {
+  padding-left: 0rem !important;
+  margin-bottom: 1.75rem !important;
+}
+
+/* #toc ul ul ul {
+  padding-left: 0rem !important;
+} */
+
+#toc li {
+  margin-bottom: 0.rem !important;
+}
+
+
+
+#toc a:hover {
+  /* color: hsl(var(--bc) / 1) !important; */
+  /* padding-left: 0.25rem !important; */
+  color: var(--color-info) !important;
+  cursor: pointer !important;
+  text-decoration: underline !important;
+  text-decoration-color: color-mix(in oklab, var(--color-info) 40%, transparent) !important;
+  text-underline-offset: 0.2em !important;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease, text-underline-offset 0.2s ease !important;
+}
+
+
+/* Second level links */
+#toc > ul > li > ul > li  {
+  padding-left: 0rem !important;
+  /* margin-bottom: 0.25rem !important; */
+}
+
+
+/* #toc > ul > li > ul > li > a {
+  color: hsl(var(--bc) / 0.7) !important;
+  text-decoration: none !important;
+  line-height: 1.25rem !important;
+  display: block !important;
+  transition: color 0.2s ease, padding-left 0.2s ease !important;
+} */
+
+
+
+/* Second level links */
+/* #toc > ul > li > ul > li > a {
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+} */
+
+
+/* Third level links - smaller and lighter */
+#toc > ul > li > ul > li > ul > li > {
+  padding-left: 0.5rem !important;
+  margin-bottom: 0rem !important;
+}
+
+/* Third level links - smaller and lighter */
+#toc > ul > li > ul > li > ul > li > a {
+  padding-left: 0.5rem !important;
+
+}
+
+
+#toc > ul > li > ul > li > ul > li > a{
+  font-size: 0.75rem !important;
+  padding-left: 0.5rem !important;
+  margin-bottom: 1.5rem !important;
+  font-weight: 300 !important;
+
+}
+
+
+/* Third level links - smaller and lighter */
+#toc > ul > li > ul > li > ul > li > ul > li {
+  /* padding-left: 0.5rem !important; */
+  display: none !important;
+
+}
+
+/* Active section highlighting (optional) */
+#toc a.active {
+  /* color: hsl(var(--p)) !important; */
+  font-weight: 600 !important;
+}
+
+/* Visual indicators for nested levels */
+/* #toc ul ul li {
+  position: relative !important;
+} */
+
+/* #toc ul ul li::before {
+  content: "–" !important;
+  position: absolute !important;
+  left: -0.25rem !important;
+  color: hsl(var(--bc) / 0.3) !important;
+} */
+
+
+#toc > ul > li > a {
+  /* color: hsl(var(--bc) / 0.85) !important; */
+  font-weight: 700 !important;
+  /* font-size: 0.9rem !important; */
+  /* text-decoration: marquee !important; */
+  /* margin-bottom: 1rem !important; */
+  /* text-decoration: underline !important; */
+  /* border-bottom: 1px solid var(--color-base-300) !important; */
+
+}
+

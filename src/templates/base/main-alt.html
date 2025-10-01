@@ -87,75 +87,81 @@ if no product-specific metatags are provided #}
 
     {% endif %}
 
-    <!-- 🎯 Smart Product Dependency Loader -->
+    {# Smart Product Dependency Loader - Fixed to handle js_dependencies and css_dependencies arrays #}
     {# Only load if not already provided by product template #}
-    {% if not
-      product_backend_settings %}
-      {% set path_segments = request.url.path.strip('/').split('/') %} {% set current_route = path_segments[0] if path_segments and path_segments[0] else '' %}
-      {% if
-        current_route %}
+    {% if not product_backend_settings %}
+      {% set path_segments = request.url.path.strip('/').split('/') %}
+      {% set current_route = path_segments[0] if path_segments and path_segments[0] else '' %}
 
+      {% if current_route %}
         {% for product in products %}
-
-          {% if product.name ==
-            current_route and product.backend_settings %}
+          {% if product.name == current_route and product.backend_settings %}
             <!-- Auto-loading {{ product.name }} dependencies (route: /{{ current_route }}) -->
+
+            {# Load CSS dependencies if they exist #}
+            {% if product.backend_settings.css_dependencies %}
+              {% for css_dep in product.backend_settings.css_dependencies %}
+                <link rel="stylesheet" href="{{ css_dep }}" />
+              {% endfor %}
+            {% endif %}
+
+            {# Load JS dependencies if they exist #}
+            {% if product.backend_settings.js_dependencies %}
+              {% for js_dep in product.backend_settings.js_dependencies %}
+                <script src="{{ js_dep }}"></script>
+              {% endfor %}
+            {% endif %}
+
+            {# Also support legacy format with individual settings having js_url/css_url #}
             {% for setting_key, setting_value in product.backend_settings.items() %}
-              {%
-              if setting_value.js_url %}
-              <script src="{{ setting_value.js_url }}"></script>
-            {% endif %}
-
-            {% if setting_value.css_url %}
-              <link rel="stylesheet" href="{{ setting_value.css_url }}" />
-            {% endif %}
-
-          {% endfor %}
-
-        {% endif %}
-
-      {% endfor %}
-
+              {% if setting_value is mapping %}
+                {% if setting_value.js_url %}<script src="{{ setting_value.js_url }}"></script>{% endif %}
+                {% if setting_value.css_url %}
+                  <link rel="stylesheet" href="{{ setting_value.css_url }}" />
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
     {% endif %}
 
-  {% endif %}
+    <script>
+        // Set backend settings as a global JS object
+        // ... existing code ...
+    </script>
 
-  <script>
-      // Set backend settings as a global JS object
-      // ... existing code ...
-  </script>
+    {% block extra_head %}
 
-  {% block extra_head %}
+    {% endblock extra_head %}
+  </head>
 
-  {% endblock extra_head %}
-</head>
+  {% include "base/bg.html" %}
 
-{% include "base/bg.html" %}
+  <body class="text-base-content font-sans min-h-screen">
+    {% include "base/data-brick.html" %}
 
-<body class="text-base-content font-sans min-h-screen">
-  {% include "base/data-brick.html" %}
-
-  {% include "base/navbar-alt.html" %}
-  {#
+    {% include "base/navbar-alt.html" %}
+    {#
 {% include "base/below-navbar.html" %} #}
-  {% include "sujets0/drawer.html"
-  %}
+    {% include "sujets0/drawer.html"
+    %}
 
-  <main class="mx-auto">
-    {% block content %}
+    <main class="mx-auto">
+      {% block content %}
 
-    {% endblock content %}
-  </main>
+      {% endblock content %}
+    </main>
 
-  <!-- Navbar active state management -->
-  <script src="{{ request.url_for('static', path='js/navbar-active-state.js') }}"></script>
+    <!-- Navbar active state management -->
+    <script src="{{ request.url_for('static', path='js/navbar-active-state.js') }}"></script>
 
-  {% block footers %}
+    {% block footers %}
 
-    {% include DOMAIN_CONFIG['templating']['footer_template'] %}
+      {% include DOMAIN_CONFIG['templating']['footer_template'] %}
 
-  {% endblock footers %}
-</body>
+    {% endblock footers %}
+  </body>
 </html>
 
 <!-- Subscription Call-to-Action

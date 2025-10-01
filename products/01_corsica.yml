@@ -24,6 +24,18 @@ owner_url: "https://pointcarre.app"
 
 
 
+backend_settings:
+  # JavaScript dependencies to load for this product
+  # js_dependencies:
+    # - "/static/js/pm/bokeh-detector.js"
+    # - "/static/js/products/dataviz2/main.js"
+  css_dependencies:
+    - "/static/core/css/pm.css"
+    - "/static/core/css/toc.css"
+
+
+
+
 # backend_settings:
 #   nagini:
 #     lib_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/"

@@ -4,29 +4,41 @@
               color: var(--color-primary) !important">
     <div class="max-w-3xl mx-auto py-12">
       <div class="mb-8">
-        <span class="font-handwritten text-3xl sm:text-3xl md:text-5xl">Maths.pm</span><span class="font-base text-lg sm:text-xl md:text-3xl">&nbsp;ne collecte aucune donnée.</span>
+        <span class="font-handwritten text-3xl sm:text-3xl md:text-5xl">Maths.pm</span>
+        <span class="font-base text-lg sm:text-xl md:text-3xl italic">&nbsp;ne collecte aucune donnée.</span>
       </div>
 
       <div class="text-lg text-left mb-6 font-light">
         {# <span class="font-handwritten text-xl">Maths.pm</span> ne collecte
-pas aucune donnée - <span class="italic"></span>. #}Aucun cookie collecté, aucune ligne de log d'écrite, pas l'ombre d'une base de données distante - <span class="italic">nihil omnino</span>.
-        <br />
-        Toutes les exécutions de code se font localement. Nous expliquons notre démarche sur cette
-        <a class="underline underline-offset-2 hover:underline-offset-4 font-light"
-           href="{{ request.url_for('get_pm_root') }}">page</a>.
+pas aucune donnée - <span class="italic"></span>. #}
+        <ul class="list-disc list-inside">
+          <li>Aucun cookie collecté</li>
+          <li>Aucune ligne de log d'écrite</li>
+          <li>Pas l'ombre d'une base de données distante</li>
+          <li>
+            <span class="italic font-medium">nihil omnino</span>
+          </li>
+        </ul>
       </div>
-      <div></div>
 
-      <hr class="my-8 bd-base-content" />
+      <span class="text-lg text-left mb-6 font-light">Ni par nous, ni par notre hébergeur, ni par aucun service tiers, nihil omnino</span>.</span>
 
-      <div>
+      <br />
+      <span class="text-lg text-left mb-6 font-light"></span>Toutes les exécutions de code se font localement. Nous expliquons notre démarche sur cette
+      <a class="underline underline-offset-2 hover:underline-offset-4 font-light"
+         href="{{ request.url_for('get_pm_root') }}">page</a>.</span>
+
+
+    <hr class="my-8 bd-base-content" />
+
+    {# <div>
         <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-3" href="/about">Limites de confidentialité (impact de l'hébergeur)</a>
-      </div>
-      <div>
-        <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-3" href="/about">Aspects technologiques</a>
-      </div>
+      </div> #}
+    <div>
+      <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-3" href="/about">Aspects technologiques</a>
     </div>
   </div>
+</div>
 </div>
 
 <div class="mt-12 mb-12">

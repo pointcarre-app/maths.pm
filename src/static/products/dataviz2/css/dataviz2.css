@@ -1,0 +1,63 @@
+/**
+ * DataViz2 Product-Specific Styles
+ * =================================
+ */
+
+/* Execution UI Styles */
+.dataviz2-execution-ui {
+    margin-top: 1rem;
+}
+
+.dataviz2-output {
+    margin-top: 1rem;
+}
+
+.dataviz2-output-content {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Bokeh container styles */
+.bokeh-container {
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Button group styling */
+.dataviz2-execution-ui .btn-group {
+    gap: 0.5rem;
+}
+
+/* Output divider */
+.dataviz2-output .divider {
+    margin: 1rem 0;
+}
+
+/* Code execution states */
+.dataviz2-execute-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Figure cards */
+.dataviz2-output .card figure img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Warning details */
+.dataviz2-output pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Interactive plot labels */
+.bokeh-plot-label {
+    font-size: 0.875rem;
+    color: var(--color-base-content);
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+}
