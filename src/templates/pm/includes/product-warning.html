@@ -1,5 +1,5 @@
 {# Product Settings Warning Include #}
-{% if product_settings %}
+{% if product_settings  or disable_warning %}
   {# {{ product_settings.name }} #}
 {% else %}
   <div class="bg-warning text-warning-content text-center p-6 mb-12">

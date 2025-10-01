@@ -799,6 +799,9 @@ async def get_pm(
         "html", description="Response format (json or html)", regex="^(json|html)$"
     ),
     debug: bool = Query(False, description="Debug mode"),
+    disable_product_settings_warning: bool = Query(
+        False, description="Disable the missing product settings warking"
+    ),
 ) -> Response:
     """Get a PM from a markdown file.
 
@@ -964,6 +967,7 @@ async def get_pm(
                     "product_description": product_settings.description,
                     "product_backend_settings": product_settings.backend_settings,
                     "is_product_enabled": product_settings.is_enabled,
+                    "disable_product_settings_warning": disable_product_settings_warning,
                 }
             )
 
