@@ -798,6 +798,7 @@ async def get_pm(
     format: str = Query(
         "html", description="Response format (json or html)", pattern="^(json|html)$"
     ),
+    # TODO : could add a debugging section in json mode
     debug: bool = Query(False, description="Debug mode"),
     disable_product_settings_warning: bool = Query(
         False, description="Disable the missing product settings warking"
@@ -905,6 +906,8 @@ async def get_pm(
         context = {
             "request": request,
             "debug": debug,
+            # Flag
+            "disable_product_settings_warning": disable_product_settings_warning,  # only important in html
             "pm": pm,
             "pm_json": pm_json,
             "origin": origin,
@@ -959,6 +962,7 @@ async def get_pm(
         context["pm_metatags"] = pm_metatags
 
         # Add product-specific context if settings are available
+
         if product_settings:
             context.update(
                 {
@@ -967,7 +971,6 @@ async def get_pm(
                     "product_description": product_settings.description,
                     "product_backend_settings": product_settings.backend_settings,
                     "is_product_enabled": product_settings.is_enabled,
-                    "disable_product_settings_warning": disable_product_settings_warning,
                 }
             )
 
@@ -986,6 +989,9 @@ async def get_pm_from_url(
         "html", description="Response format (json or html)", pattern="^(json|html)$"
     ),
     debug: bool = Query(False, description="Debug mode"),
+    disable_product_settings_warning: bool = Query(
+        False, description="Disable the missing product settings warning"
+    ),
 ) -> Response:
     """Get a PM from a distant URL containing a markdown file.
 
@@ -1108,6 +1114,7 @@ async def get_pm_from_url(
         context = {
             "request": request,
             "debug": debug,
+            "disable_product_settings_warning": disable_product_settings_warning,
             "pm": pm,
             "pm_json": pm_json,
             "origin": url,  # Use URL as origin for template
