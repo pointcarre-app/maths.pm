@@ -62,12 +62,19 @@ metatags:
 # Backend settings specific to Nagini
 # TODO : thinking about which ones you really need
 backend_settings:
+
+  css_dependencies:
+    - "/static/core/css/pm.css"
+    - "/static/core/css/toc.css"
+  
   nagini:
     # Using esm.sh CDN which properly handles ES module imports
     endpoint: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.21/"
     js_url: "https://esm.sh/gh/pointcarre-app/nagini@v0.0.21/src/nagini.js"
     pyodide_worker_url: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.21/src/pyodide/worker/worker-dist.js"
-  
+
+
+
   # Generator difficulty levels for Sujets0
   # Maps each generator to its appropriate education level (2DE or 1ERE)
   generator_levels:

@@ -1,7 +1,5 @@
-<div class="mt-12 sm:mt-24">
-  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 sm:p-8 max-w-4xl mx-auto md:card"
-       style="background-color: var(--color-primary-ghost) !important;
-              color: var(--color-primary) !important">
+{# <div class="mt-12 sm:mt-24">
+  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 sm:p-8 max-w-4xl mx-auto" style="background-color: var(--color-primary-ghost) !important; color: var(--color-primary) !important; border-radius: var(--radius-box) !important">
     <div class="max-w-3xl mx-auto py-12">
       <div class="mb-8">
         <span class="font-handwritten text-3xl sm:text-3xl md:text-5xl">Maths.pm</span>
@@ -9,39 +7,36 @@
       </div>
 
       <div class="text-lg text-left mb-6 font-light">
-        {# <span class="font-handwritten text-xl">Maths.pm</span> ne collecte
-pas aucune donnée - <span class="italic"></span>. #}
         <ul class="list-disc list-inside">
           <li>Aucun cookie collecté</li>
           <li>Aucune ligne de log d'écrite</li>
           <li>Pas l'ombre d'une base de données distante</li>
           <li>
-            <span class="italic font-medium">nihil omnino</span>
+            <span class="font-medium">nihil omnino</span>
           </li>
         </ul>
+
+        <div class="mt-4">Ni par nous, ni par notre hébergeur, ni par aucun service tiers.</div>
       </div>
 
-      <span class="text-lg text-left mb-6 font-light">Ni par nous, ni par notre hébergeur, ni par aucun service tiers, nihil omnino</span>.</span>
 
-      <br />
-      <span class="text-lg text-left mb-6 font-light"></span>Toutes les exécutions de code se font localement. Nous expliquons notre démarche sur cette
-      <a class="underline underline-offset-2 hover:underline-offset-4 font-light"
-         href="{{ request.url_for('get_pm_root') }}">page</a>.</span>
+      <hr class="my-8 bd-base-content" />
 
+      <div class="text-lg text-left mb-6 font-light">
 
-    <hr class="my-8 bd-base-content" />
+        <br />
+        <span>Toutes les exécutions de code se font localement. Nous expliquons notre démarche sur cette
+          <a class="underline underline-offset-2 hover:underline-offset-4 font-light" href="{{ request.url_for('get_pm_root') }}">page</a>.</span>
 
-    {# <div>
-        <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-3" href="/about">Limites de confidentialité (impact de l'hébergeur)</a>
-      </div> #}
-    <div>
-      <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-3" href="/about">Aspects technologiques</a>
+      </div>
+      <div>
+        <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-3" href="/about">Aspects technologiques</a>
+      </div>
     </div>
   </div>
-</div>
-</div>
+</div> #}
 
-<div class="mt-12 mb-12">
+{# <div class="mt-12 mb-12">
   <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto md:card bg-base-200 shadow">
     <div class="max-w-3xl mx-auto py-12">
       <div class="mb-8">
@@ -49,10 +44,8 @@ pas aucune donnée - <span class="italic"></span>. #}
           Chez
           <span class="text-xl sm:text-2xl md:text-4xl font-heading"><span class="">Pointcarre</span>.app</span>,
           nous nous engageons en faveur des
-          <a class="underline underline-offset-2 hover:underline-offset-4"
-             href="{{ request.url_for('get_pm_root') }}">communs numériques</a>.</span>
+          <a class="underline underline-offset-2 hover:underline-offset-4" href="{{ request.url_for('get_pm_root') }}">communs numériques</a>.</span>
       </div>
-      {# <hr class="my-8 bd-base-content" /> #}
       <div>
         <a class="text-xs sm:text-base underline underline-offset-1 hover:underline-offset-4" href="/about">Ressources pédagogiques</a>
       </div>
@@ -67,10 +60,10 @@ pas aucune donnée - <span class="italic"></span>. #}
       {% include "base/licenses.html" %}
     </div>
   </div>
-</div>
+</div> #}
 
 
-<div class="flex items-center justify-center flex-col my-12 py-12">
+{# <div class="flex items-center justify-center flex-col my-12 py-12">
   <div class="font-handwritten text-4xl mb-3 mt-[-0.5rem]">Maths.pm, par</div>
   <div>
     <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
@@ -80,25 +73,14 @@ pas aucune donnée - <span class="italic"></span>. #}
       </p>
     </a>
   </div>
-</div>
+</div> #}
 
-
+{# 
 <div class="bg-base-200 px-8 sm:px-4">
 
 
   <footer class="text-base-content max-w-3xl mx-auto py-12 sticky max-w-[680px] sm:max-w-[760px] md:max-w-[840px] lg:max-w-[920px] top-[100vh] grid grid-cols-1 sm:grid-cols-3 gap-4">
     <!-- Logo Section -->
-
-
-    {# <aside class="">
-      <div class="font-handwritten text-4xl mb-4 mt-[-0.5rem]">Maths.pm, par</div>
-      <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
-        <p class="w-10 h-10">{% include "base/logo-zelie-primary.html" %}</p>
-        <p class="font-heading">
-          <span class="text-2xl"><span class="">pointcarre</span>.app</span>
-        </p>
-      </a>
-</aside> #}
 
     <!-- Navigation Menu -->
     <nav class="flex flex-col space-y-2 mb-4 sm:mb-0">
@@ -127,6 +109,141 @@ pas aucune donnée - <span class="italic"></span>. #}
       <a href="/privacy" class="link link-hover">Mentions légales</a>
       <a href="/privacy" class="link link-hover">RGPD & Confidentialité</a>
 
+    </nav>
+  </footer>
+</div> #}
+
+
+<!-- Section 1 : Engagement vie privée -->
+<div class="mt-12 sm:mt-24">
+  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto"
+       style="background-color: var(--color-primary-ghost) !important;
+              color: var(--color-primary) !important;
+              border-radius: var(--radius-box) !important">
+    <div class="max-w-3xl mx-auto py-10">
+      <div class="mb-6 sm:mb-12">
+        <span class="font-handwritten text-3xl sm:text-3xl md:text-5xl">Maths.pm</span>
+        <span class="font-base text-lg sm:text-xl md:text-3xl italic">&nbsp;ne collecte aucune donnée.</span>
+      </div>
+      <div class="text-base sm:text-lg text-left mb-6 font-light">
+        <ul class="list-disc list-inside">
+          <li>Aucun cookie collecté</li>
+          <li>Aucune ligne de log écrite</li>
+          <li>Pas l'ombre d'une base de données distante</li>
+          <li>
+            <span class="font-medium">nihil omnino</span>
+          </li>
+        </ul>
+      </div>
+      <hr class="my-10 border-dashed border-base-content/30" />
+
+      <div class="text-base sm:text-lg text-left mt-4  font-light">
+        <ul class="list-disc list-inside">
+          <li>Ni par nous</li>
+          <li>Ni par notre hébergeur</li>
+          <li>Ni par aucun service tiers</li>
+        </ul>
+      </div>
+
+
+      <hr class="my-10 border-dashed border-base-content/30" />
+
+
+      <p class="mt-4 text-lg text-left font-light">
+        Nous expliquons notre démarche <span class="italic">zéro donnée conservée</span> sur cette <a class="underline underline-offset-2 hover:underline-offset-4 font-light"
+    href="{{ request.url_for('get_pm_root') }}">page</a>.
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<!-- Section 2 : Communs numériques -->
+<div class="mt-12 mb-12">
+  <div class="bg-base-200/80 text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto md:card"
+       style="border-radius: var(--radius-box) !important">
+    <div class="max-w-3xl mx-auto py-10">
+      <!-- Titre principal -->
+      <div class="mb-10">
+        <span class="text-lg sm:text-xl md:text-3xl">
+          Chez
+          <span class="text-xl sm:text-2xl md:text-4xl font-heading">
+            <span class="">Pointcarre</span>.app,
+          </span>
+          nous nous engageons en faveur des
+          <a class="underline underline-offset-2 hover:underline-offset-4 font-light"
+             href="{{ request.url_for('get_pm_root') }}">communs numériques</a>.
+        </span>
+      </div>
+
+      <!-- Liste des ressources -->
+      <div class="text-base sm:text-lg text-left mb-6 font-light">
+        <ul class="list-disc list-inside">
+          <li class="mb-2">
+            <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight"
+               href="/ressources#secondaire">Ressources pédagogiques (secondaire)</a>
+          </li>
+          <li class="mb-2">
+            <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight"
+               href="/ressources#superieur">Ressources pédagogiques (supérieur)</a>
+          </li>
+          <li class="mb-2">
+            <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight"
+               href="/ressources#logiciels-libres">Logiciels Libres & Infrastructure 🇫🇷</a>
+          </li>
+          <li class="mb-2">
+            <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight"
+               href="/about#licences">Licences AGPL-3.0 & CC 4.0 BY-NC-SA</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Section 3 : Signature -->
+<div class="flex items-center justify-center flex-col my-12 py-12">
+  <div class="font-handwritten text-4xl mb-3 mt-[-0.5rem]">Maths.pm, par</div>
+  <div>
+    <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
+      <p class="w-10 h-10">{% include "base/logo-zelie-primary.html" %}</p>
+      <p class="font-heading">
+        <span style="font-size: 2rem;"><span class="">pointcarre</span>.app</span>
+      </p>
+    </a>
+  </div>
+</div>
+
+<!-- Section 4 : Footer principal -->
+<div class="bg-base-200 px-8 sm:px-4">
+  <footer class="text-base-content max-w-3xl mx-auto py-12 grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <!-- Navigation -->
+    <nav class="flex flex-col space-y-2 mb-3">
+      <h6 class="footer-title font-body text-base-content/70">Navigation</h6>
+      <a class="link link-hover" href="/">Accueil</a>
+      <a class="link link-hover" href="/sitemap-display">Plan du site</a>
+      <a class="link link-hover" href="/calendar">Calendrier</a>
+      <a class="link link-hover" href="/contact">Contact</a>
+    </nav>
+
+    <!-- Ressources -->
+    <nav class="flex flex-col space-y-2 mb-3">
+      <h6 class="footer-title font-body text-base-content/70">Ressources</h6>
+      <a class="link link-hover" href="/ressources#secondaire">Secondaire</a>
+      <a class="link link-hover" href="/ressources#superieur">Supérieur</a>
+      <a class="link link-hover" href="/ressources#logiciels-libres">Logiciels libres</a>
+      <a class="link link-hover" href="/ressources#logiciels-libres-tiers">Logiciels tiers</a>
+    </nav>
+
+    <!-- Légal -->
+    <nav class="flex flex-col space-y-2 mb-3">
+      <h6 class="footer-title font-body text-base-content/70">À Propos</h6>
+      <a class="link link-hover" href="/privacy#mission">Notre mission</a>
+      <a class="link link-hover" href="/privacy#engagements">Engagements</a>
+      <a class="link link-hover" href="/licenses"><span class="italic">Open Source</span></a>
+      <a class="link link-hover" href="/privacy#mentions">Mentions légales</a>
+      <a class="link link-hover" href="/privacy#rgpd">RGPD & Confidentialité</a>
     </nav>
   </footer>
 </div>

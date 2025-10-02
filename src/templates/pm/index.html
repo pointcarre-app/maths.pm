@@ -86,7 +86,11 @@
 
   {# This entire block can be replaced with: {% include "pm-include/render-full.html" %} #}
 
-  {% include "pm/includes/toc-sidebar.html" %}
+
+  {# Should be dealt at the ressources config level ie yaml + settings #}
+  {% if product_settings.name != "sujets0" %}
+    {% include "pm/includes/toc-sidebar.html" %}
+  {% endif %}
 
   <div class="pm-container lg:text-lg w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto">
     <div class="bg-base-100 shadow-xl mt-12 px-4 py-4 xl:px-24">

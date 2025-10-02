@@ -3,12 +3,17 @@
 
 ## High 
 
+- [] ⛔️ careful links in 00_plan.md start with  of  et file used in the end (locally: may use root / static deploy: may use static)
+
 - [] Prepare possible backend interactions
      - [] Login
      - [] Store
      - [] Stats
      - [] Next
 
+
+
+- [] staging static deployment: i.e. with other url for 
 
 - []  Fix this for code_
      - [] Test
