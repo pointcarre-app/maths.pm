@@ -17,7 +17,7 @@ local_path: /pm/dataviz2/00_plan.md
 
 # source_link: "/pm/dataviz2"
 color: success
-# figure_svg: dataviz-figure-svg.html
+figure_svg: python-fast-track-figure-svg.html
 classes_formatted:
   - "Master"
 tags:
