@@ -1,15 +1,17 @@
 name: corpus
-product_type: "draft"
+product_type: "secondaire"
 title_html: Corpus
-hidden: true
 is_beta: true
 subtitle_html: Base de données des programmes officiels
-description: "Une base de données contenant les programmes officiels de mathématiques du secondaire, structurée et accessible via API."
+description: "Une base de données contenant les référentiels et programmes officiels de mathématiques, structurée et accessible sous de multiples formats."
 local_path: /corpus
 color: primary
 figure_svg: corpus-figure-svg.html
 classes_formatted:
-  - "📚"
+  - "3<sup>ème</sup>"
+  - "2<sup>nde</sup>"
+  - "1<sup>ère</sup>"
+  - "T<sup>le</sup>"
 tags:
   - education
   - curriculum

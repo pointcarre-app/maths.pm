@@ -1,0 +1,86 @@
+name: pyly
+product_type: "secondaire"
+title_html: Python lycée
+# is_hidden: true
+is_beta: true
+subtitle_html: Python lycée
+# description: "Dans le contexte d'une formation à forte composante mathématiques, apprendre à représenter des données en utilisant les librairies Python : Matplotlib et Bokeh, et une librairie JS : D3.js."
+# description: "This course, taught within a program with a strong mathematical component, introduces students to data visualization using Python libraries such as Matplotlib and Bokeh, combining theoretical principles with practical, interactive applications."
+# description: This course introduces data visualization with Python libraries such as Matplotlib. The only prerequisites are basics on Python and statistics.
+description: "Cours complet de Python couvrant le programme de mathématiques de tronc commun, d'enseignement spécifique et de spécialité."
+# TODO sel: Document: this is OK even for static generation cause update at the right moment
+# of the .md (but when ?)
+# TODO sel: make anchor compatible 
+# #detailed-plan-and-organization-of-the-course
+# if this is added, .md remains and isnt transformed into .html
+# (when static deploy ofc)
+local_path: /pm/dataviz1/00_plan.md
+
+# source_link: "/pm/dataviz2"
+color: success
+figure_svg: python-figure-svg.html
+classes_formatted:
+  - "2<sup>nde</sup>"
+  - "1<sup>ère</sup>"
+  - "T<sup>le</sup>"
+tags:
+  - education
+  - maths
+  - exam
+  - generator
+  - exercises
+domains:
+  - maths.pm
+
+owner_rdb: "SAS POINTCARRE.APP"
+owner_url: "https://pointcarre.app"
+
+# Backend settings for DataViz2 product
+# backend_settings:
+#   # JavaScript dependencies to load for this product
+#   js_dependencies:
+#     - "/static/products/dataviz2/js/bokeh-detector.js"
+#     - "/static/products/dataviz2/js/main.js"
+#   css_dependencies:
+#     - "/static/products/dataviz2/css/pm.css"
+#     - "/static/products/dataviz2/css/toc.css"
+#     - "/static/products/dataviz2/css/dataviz2.css"
+
+  # Enable executable codex fragments (use quotes for proper bool handling)
+  # codex_executable: "true"
+  # codex_editable: "true"
+
+# # Product-specific metatags
+# metatags:
+#   # SEO metatags
+#   title: "Sujets 0 - Générateur d'exercices pour l'épreuve anticipée de 1ère"
+#   description: "Générez automatiquement des exercices similaires aux sujets 0 de l'épreuve anticipée de mathématiques. Valeurs aléatoires, corrigés détaillés."
+#   keywords: "sujets 0, épreuve anticipée, première, mathématiques, exercices, générateur, QCM, automatismes"
+#   robots: "index, follow"
+  
+#   # Open Graph metatags
+#   og:title: "Sujets 0 - Exercices mathématiques 1ère"
+#   og:description: "Générateur automatique d'exercices pour l'épreuve anticipée de mathématiques en première. Entraînement avec corrigés."
+#   og:image: "https://maths.pm/static/images/sujets0-preview.jpg"
+#   og:type: "website"
+#   og:url: "https://maths.pm/sujets0"
+  
+#   # Twitter Card metatags
+#   twitter:card: "summary_large_image"
+#   twitter:title: "Sujets 0 - Générateur d'exercices"
+#   twitter:description: "Préparez l'épreuve anticipée avec des exercices générés automatiquement"
+#   twitter:image: "https://maths.pm/static/images/sujets0-twitter.jpg"
+  
+#   # Dublin Core metatags
+#   DC.title: "Générateur de sujets 0 pour l'épreuve anticipée"
+#   DC.creator: "Maths.pm Sujets0"
+#   DC.subject: "Mathématiques, Éducation, Évaluation"
+#   DC.description: "Outil de génération d'exercices mathématiques"
+  
+#   # Additional metatags
+#   topic: "Évaluation et exercices mathématiques"
+#   category: "Éducation, Mathématiques, Première"
+#   revised: "2025-01-15"
+#   pagename: "Sujets 0 - Générateur"
+
+

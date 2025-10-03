@@ -5,86 +5,110 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container mx-auto px-4 py-12 max-w-4xl">
-    <!-- Header -->
-    <div class="text-center mb-10">
-      <h1 class="text-3xl font-bold mb-2">Plan du site</h1>
-      <p class="text-base-content/60">Navigation rapide vers toutes les sections</p>
+  <div class="container mx-auto px-4 py-8 sm:py-12 max-w-4xl">
+    <!-- Minimalistic Header -->
+    <h1 class="text-2xl sm:text-3xl font-bold mb-12">Plan du site</h1>
+
+    <!-- Resources Section (Separate) -->
+    <div class="mb-12">
+      <h2 class="text-xl sm:text-2xl font-semibold mb-6">Ressources</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        {% if sitemap.ressources.secondaire %}
+          <div>
+            <h3 class="text-base sm:text-lg font-semibold mb-3">Pour le secondaire</h3>
+            <ul class="space-y-2">
+              {% for item in sitemap.ressources.secondaire %}
+                <li>
+                  <a href="{{ item.path }}" class="link link-hover">{{ item.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        {% if sitemap.ressources.superieur %}
+          <div>
+            <h3 class="text-base sm:text-lg font-semibold mb-3">Pour le supérieur</h3>
+            <ul class="space-y-2">
+              {% for item in sitemap.ressources.superieur %}
+                <li>
+                  <a href="{{ item.path }}" class="link link-hover">{{ item.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        {% if sitemap.ressources.logiciels_libres %}
+          <div>
+            <h3 class="text-base sm:text-lg font-semibold mb-3">Logiciels libres</h3>
+            <ul class="space-y-2">
+              {% for item in sitemap.ressources.logiciels_libres %}
+                <li>
+                  <a href="{{ item.path }}" class="link link-hover">{{ item.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        {% if sitemap.ressources.logiciels_tiers %}
+          <div>
+            <h3 class="font-semibold mb-3">Logiciels de tiers</h3>
+            <ul class="space-y-2">
+              {% for item in sitemap.ressources.logiciels_tiers %}
+                <li>
+                  <a href="{{ item.path }}" class="link link-hover">{{ item.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
     </div>
 
-    <!-- Main grid layout -->
-    <div class="grid md:grid-cols-3 gap-8">
 
-      <!-- Main Sections Column -->
-      <div class="space-y-4">
-        <h2 class="text-xl font-semibold border-b-2 border-primary pb-2 mb-4">Sections principales</h2>
-        <ul class="space-y-3">
-          {% for item in sitemap.main_sections %}
+    <!-- Two column grid for Navigation and À Propos -->
+    {# <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+
+      <!-- Navigation Column -->
+      <div>
+        <h2 class="footer-title font-body text-base-content/70 mb-4">Navigation</h2>
+        <ul class="space-y-2">
+          {% for item in sitemap.navigation %}
             <li>
-              <a href="{{ item.path }}" class="flex items-center gap-2 hover:text-primary transition-colors">
-                <span class="text-lg">{{ item.icon }}</span>
-                <span class="link link-hover">{{ item.title }}</span>
+              <a href="{{ item.path }}" class="link link-hover">{{ item.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- À Propos Column -->
+      <div>
+        <h2 class="footer-title font-body text-base-content/70 mb-4">À Propos</h2>
+        <ul class="space-y-2">
+          {% for item in sitemap.a_propos %}
+            <li>
+              <a href="{{ item.path }}" class="link link-hover">
+                {% if "Open Source" in item.title %}
+                  <span class="italic">{{ item.title }}</span>
+                {% else %}
+                  {{ item.title }}
+                {% endif %}
               </a>
             </li>
           {% endfor %}
         </ul>
       </div>
 
-      <!-- Products Column -->
-      <div class="space-y-4">
-        <h2 class="text-xl font-semibold border-b-2 border-secondary pb-2 mb-4">Ressources</h2>
-        <ul class="space-y-3">
-          {% for item in sitemap.products %}
-            <li>
-              <a href="{{ item.path }}" class="flex items-center gap-2 hover:text-secondary transition-colors">
-                <span class="text-lg">{{ item.icon }}</span>
-                <span class="link link-hover">{{ item.title }}</span>
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+</div> #}
 
-      <!-- Resources Column -->
-      <div class="space-y-4">
-        <h2 class="text-xl font-semibold border-b-2 border-accent pb-2 mb-4">Développeur</h2>
-        <ul class="space-y-3">
-          {% for item in sitemap.resources %}
-            <li>
-              <a href="{{ item.path }}" class="flex items-center gap-2 hover:text-accent transition-colors">
-                <span class="text-lg">{{ item.icon }}</span>
-                <span class="link link-hover">{{ item.title }}</span>
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-
-    </div>
-
-    <!-- Footer with quick actions -->
+    <!-- Minimalistic footer -->
     <div class="mt-12 pt-8 border-t border-base-300">
-      <div class="flex flex-wrap justify-center gap-4">
+      <div class="flex justify-center">
         <a href="/" class="btn btn-primary btn-sm">Retour à l'accueil</a>
-        <a href="/sitemap-readable" class="btn btn-ghost btn-sm">Vue détaillée du sitemap</a>
-        <a href="/sitemap.xml" class="btn btn-ghost btn-sm">Sitemap XML (SEO)</a>
-      </div>
-    </div>
-
-    <!-- Info box -->
-    <div class="mt-8">
-      <div class="alert alert-info">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             fill="none"
-             viewBox="0 0 24 24"
-             class="stroke-current shrink-0 w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-          </path>
-        </svg>
-        <span>
-          Ce plan du site présente les principales sections. Pour une vue complète avec tous les documents, consultez le
-          <a href="/sitemap-readable" class="link font-semibold">sitemap détaillé</a>.
-        </span>
       </div>
     </div>
   </div>

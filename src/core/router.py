@@ -372,50 +372,57 @@ async def sitemap_readable(request: Request):
 
 @core_router.get("/sitemap-display", response_class=HTMLResponse)
 async def plan_du_site(request: Request):
-    """Simple sitemap for footer link - clean and minimal presentation."""
+    """Simple sitemap matching footer structure - clean and minimal."""
 
-    # Organize URLs by category (simpler structure)
-    sitemap_simple = {
-        "main_sections": [],
-        "products": [],
-        "resources": [],
+    # Organize exactly like footer in footers.html
+    sitemap = {
+        "navigation": [
+            {"path": "/", "title": "Accueil"},
+            {"path": "/sitemap-display", "title": "Plan du site"},
+            {"path": "/calendar", "title": "Calendrier"},
+            {"path": "/contact", "title": "Contact"},
+        ],
+        "ressources": {
+            "secondaire": [],
+            "superieur": [],
+            "logiciels_libres": [],
+            "logiciels_tiers": [],
+        },
+        "a_propos": [
+            {"path": "/privacy#mission", "title": "Notre mission"},
+            {"path": "/privacy#engagements", "title": "Engagements"},
+            {"path": "/licenses", "title": "Open Source"},
+            {"path": "/privacy#mentions", "title": "Mentions légales"},
+            {"path": "/privacy#rgpd", "title": "RGPD & Confidentialité"},
+        ],
     }
 
-    # Main sections
-    sitemap_simple["main_sections"] = [
-        {"path": "/", "title": "Accueil", "icon": "🏠"},
-        {"path": "/ressources", "title": "Ressources", "icon": "📚"},
-        {"path": "/pm", "title": "Accès aux documents PM", "icon": "📖"},
-    ]
-
-    # Products (only visible ones)
+    # Group products by type as in ressources.html
     for product in settings.products:
         if not product.is_hidden:
-            product_title = (
-                product.display_name if hasattr(product, "display_name") else product.name.title()
-            )
-            sitemap_simple["products"].append(
-                {
-                    "path": f"/{product.name}",
-                    "title": product_title,
-                    "icon": "🔧" if product.name in ["cubrick", "nagini", "estafette"] else "📝",
-                }
-            )
+            product_entry = {
+                "path": product.local_path or f"/{product.name}",
+                "title": product.title_html,
+                "description": product.description[:80] + "..."
+                if len(product.description) > 80
+                else product.description,
+            }
 
-    # Additional resources
-    sitemap_simple["resources"] = [
-        {"path": "/readme", "title": "README", "icon": "📄"},
-        {"path": "/settings", "title": "Configuration", "icon": "⚙️"},
-        {"path": "/docs", "title": "API Docs", "icon": "🔌"},
-        {"path": "/sitemap.xml", "title": "Sitemap XML", "icon": "🗺️"},
-        {"path": "/sitemap-readable", "title": "Sitemap détaillé", "icon": "📋"},
-    ]
+            if product.product_type == "secondaire":
+                sitemap["ressources"]["secondaire"].append(product_entry)
+            elif product.product_type == "superieur":
+                sitemap["ressources"]["superieur"].append(product_entry)
+            elif product.product_type in ["repo", "lib_from_mathspm"]:
+                sitemap["ressources"]["logiciels_libres"].append(product_entry)
+            elif product.product_type == "repo_from_other_org":
+                sitemap["ressources"]["logiciels_tiers"].append(product_entry)
 
     return settings.templates.TemplateResponse(
         "core/plan-du-site.html",
         {
             "request": request,
-            "sitemap": sitemap_simple,
+            "sitemap": sitemap,
+            "page": {"title": "Plan du site"},
         },
     )
 

@@ -87,9 +87,37 @@ if no product-specific metatags are provided #}
 
     {% endif %}
 
-    {# Smart Product Dependency Loader - Fixed to handle js_dependencies and css_dependencies arrays #}
-    {# Only load if not already provided by product template #}
-    {% if not product_backend_settings %}
+    {# Smart Product Dependency Loader - Handles both auto-detection and explicit settings #}
+    {% if product_backend_settings %}
+      {# Use explicitly provided backend settings (e.g., from corsica router) #}
+      <!-- Loading dependencies from product_backend_settings -->
+
+      {# Load CSS dependencies if they exist #}
+      {% if product_backend_settings.css_dependencies %}
+        {% for css_dep in product_backend_settings.css_dependencies %}
+          <link rel="stylesheet" href="{{ css_dep }}" />
+        {% endfor %}
+      {% endif %}
+
+      {# Load JS dependencies if they exist #}
+      {% if product_backend_settings.js_dependencies %}
+        {% for js_dep in product_backend_settings.js_dependencies %}
+          <script src="{{ js_dep }}"></script>
+        {% endfor %}
+      {% endif %}
+
+      {# Also support legacy format with individual settings having js_url/css_url #}
+      {% for setting_key, setting_value in product_backend_settings.items() %}
+        {% if setting_value is mapping %}
+          {% if setting_value.js_url %}<script src="{{ setting_value.js_url }}"></script>{% endif %}
+          {% if setting_value.css_url %}
+            <link rel="stylesheet" href="{{ setting_value.css_url }}" />
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+    {% else %}
+      {# Auto-detect based on URL route #}
       {% set path_segments = request.url.path.strip('/').split('/') %}
       {% set current_route = path_segments[0] if path_segments and path_segments[0] else '' %}
 

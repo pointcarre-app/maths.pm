@@ -1,0 +1,87 @@
+name: alsace
+product_type: "secondaire"
+hidden: true
+title_html: Maths.Alsace
+font_class: "font-handwritten"
+subtitle_html: Maths & Alsace
+description: "Quelques applications mathématiques pour les classes de 3<sup>ème</sup> et 2<sup>nde</sup> autour de Alsace : statistiques, fonctions et algorithmie."
+local_path: /alsace
+# source_link: 
+color: accent
+figure_svg: alsace-figure.html
+classes_formatted:
+  - "3<sup>ème</sup>"
+  - "2<sup>nde</sup>"
+  
+tags:
+  - Education
+domains:
+  - maths.pm
+
+
+owner_rdb: "SAS POINTCARRE.APP"
+owner_url: "https://pointcarre.app"
+
+
+
+
+backend_settings:
+  # JavaScript dependencies to load for this product
+  # js_dependencies:
+    # - "/static/js/pm/bokeh-detector.js"
+    # - "/static/js/products/dataviz2/main.js"
+  css_dependencies:
+    - "/static/core/css/pm.css"
+    - "/static/core/css/toc.css"
+
+
+
+
+# backend_settings:
+#   nagini:
+#     lib_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/"
+#     entrypoint_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js"
+#     worker_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js" 
+#   v4pyjs:
+#     lib_url: https://cdn.jsdelivr.net/gh/your-org/v4.py.js@v0.0.4-unstable/
+
+# Product-specific metatags that override domain defaults
+metatags:
+  # PAGE-SPECIFIC META TAGS
+  title: "Maths.Alsace - Exercices mathématiques autour de la Alsace"
+  description: "Exercices de mathématiques inspirés de la géographie Alsace : trigonométrie, géométrie, Python. Niveaux troisième et seconde."
+  keywords: "mathématiques, alsace, géométrie, trigonométrie, python, collège, lycée, exercices"
+  
+  # SEO SPECIFIC
+  robots: "index, follow"
+  revised: "Dec. 1, 2024, 10:00 am"
+  abstract: "Ressources pédagogiques mathématiques utilisant la géographie de la Alsace comme contexte d'apprentissage."
+  topic: "Mathématiques appliquées à la géographie"
+  summary: "Découvrez les mathématiques à travers la géographie alsace : calculs de distances, triangulation, statistiques avec Python."
+  pagename: "Maths.Alsace - Exercices géographiques"
+  category: "Education, Mathématiques"
+  subtitle: "Apprendre les maths avec la Alsace"
+  
+  # DUBLIN CORE
+  "DC.title": "Maths.Alsace - Mathématiques et géographie de la Alsace"
+  "DC.creator": "Maths.pm, contact@pointcarre.app"
+  "DC.subject": "Mathématiques, Géographie, Alsace, Python, Education"
+  
+  # SCHEMA.ORG
+  "itemprop-name": "Maths.Alsace - Exercices mathématiques"
+  
+  # OPEN GRAPH - SOCIAL MEDIA
+  "og:title": "Maths.Alsace - Exercices mathématiques autour de la Alsace"
+  "og:description": "Exercices de maths inspirés de la Alsace : trigonométrie pour calculer des distances, Python pour analyser des données géographiques."
+  "og:image": "https://maths.pm/static/images/alsace-social-card.jpg"
+  "og:type": "website"
+  "og:url": "https://maths.pm/pm/alsace/"
+  
+  # TWITTER CARDS
+  "twitter:card": "summary_large_image"
+  "twitter:creator": "@mathspm"
+  "twitter:title": "Maths.Alsace - La Alsace en mathématiques"
+  "twitter:description": "Exercices mathématiques inspirés de la géographie alsace pour collège et lycée."
+  "twitter:image": "https://maths.pm/static/images/alsace-twitter-card.jpg"
+  # "twitter:image:alt": "Carte de la Alsace avec formules mathématiques"
+  "twitter:url": "https://maths.pm/pm/alsace/"

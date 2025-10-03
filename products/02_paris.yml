@@ -1,0 +1,86 @@
+name: paris
+product_type: "secondaire"
+title_html: Maths.Paris
+font_class: "font-handwritten"
+subtitle_html: Maths & Paris
+description: "Quelques applications mathématiques pour les classes de 3<sup>ème</sup> et 2<sup>nde</sup> autour de Paris : statistiques, fonctions et algorithmie."
+local_path: /paris
+# source_link: 
+color: accent
+figure_svg: paris-figure.html
+classes_formatted:
+  - "3<sup>ème</sup>"
+  - "2<sup>nde</sup>"
+  
+tags:
+  - Education
+domains:
+  - maths.pm
+
+
+owner_rdb: "SAS POINTCARRE.APP"
+owner_url: "https://pointcarre.app"
+
+
+
+
+backend_settings:
+  # JavaScript dependencies to load for this product
+  # js_dependencies:
+    # - "/static/js/pm/bokeh-detector.js"
+    # - "/static/js/products/dataviz2/main.js"
+  css_dependencies:
+    - "/static/core/css/pm.css"
+    - "/static/core/css/toc.css"
+
+
+
+
+# backend_settings:
+#   nagini:
+#     lib_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/"
+#     entrypoint_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/nagini.js"
+#     worker_url: "https://cdn.jsdelivr.net/gh/your-org/nagini@0.0.17/src/pyodide/worker/worker-dist.js" 
+#   v4pyjs:
+#     lib_url: https://cdn.jsdelivr.net/gh/your-org/v4.py.js@v0.0.4-unstable/
+
+# Product-specific metatags that override domain defaults
+metatags:
+  # PAGE-SPECIFIC META TAGS
+  title: "Maths.Paris - Exercices mathématiques autour de la Paris"
+  description: "Exercices de mathématiques inspirés de la géographie Paris : trigonométrie, géométrie, Python. Niveaux troisième et seconde."
+  keywords: "mathématiques, paris, géométrie, trigonométrie, python, collège, lycée, exercices"
+  
+  # SEO SPECIFIC
+  robots: "index, follow"
+  revised: "Dec. 1, 2024, 10:00 am"
+  abstract: "Ressources pédagogiques mathématiques utilisant la géographie de la Paris comme contexte d'apprentissage."
+  topic: "Mathématiques appliquées à la géographie"
+  summary: "Découvrez les mathématiques à travers la géographie paris : calculs de distances, triangulation, statistiques avec Python."
+  pagename: "Maths.Paris - Exercices géographiques"
+  category: "Education, Mathématiques"
+  subtitle: "Apprendre les maths avec la Paris"
+  
+  # DUBLIN CORE
+  "DC.title": "Maths.Paris - Mathématiques et géographie de la Paris"
+  "DC.creator": "Maths.pm, contact@pointcarre.app"
+  "DC.subject": "Mathématiques, Géographie, Paris, Python, Education"
+  
+  # SCHEMA.ORG
+  "itemprop-name": "Maths.Paris - Exercices mathématiques"
+  
+  # OPEN GRAPH - SOCIAL MEDIA
+  "og:title": "Maths.Paris - Exercices mathématiques autour de la Paris"
+  "og:description": "Exercices de maths inspirés de la Paris : trigonométrie pour calculer des distances, Python pour analyser des données géographiques."
+  "og:image": "https://maths.pm/static/images/paris-social-card.jpg"
+  "og:type": "website"
+  "og:url": "https://maths.pm/pm/paris/"
+  
+  # TWITTER CARDS
+  "twitter:card": "summary_large_image"
+  "twitter:creator": "@mathspm"
+  "twitter:title": "Maths.Paris - La Paris en mathématiques"
+  "twitter:description": "Exercices mathématiques inspirés de la géographie paris pour collège et lycée."
+  "twitter:image": "https://maths.pm/static/images/paris-twitter-card.jpg"
+  # "twitter:image:alt": "Carte de la Paris avec formules mathématiques"
+  "twitter:url": "https://maths.pm/pm/paris/"

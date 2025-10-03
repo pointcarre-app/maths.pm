@@ -1,0 +1,125 @@
+name: arpege
+product_type: "secondaire"
+title_html: Arpège 
+# is_hidden: true
+is_beta: true
+subtitle_html: Épreuve anticipée de 1ère
+description: Système de répétitions espacées pour couvrir tous les calculs qu'un élève peut rencontrer de la troisième à la première (inspiré de <span class="italic">Duolingo HalfLife Regression</span>).
+local_path: /arpege
+source_link: ""
+color: success
+figure_svg: arpege-figure-svg.html
+classes_formatted:
+  - 3<sup>ème</sup>
+  - 2<sup>nde</sup>
+  - 1<sup>ère</sup>
+tags:
+  - education
+  - maths
+  - exam
+  - generator
+  - exercises
+domains:
+  - maths.pm
+
+owner_rdb: "SAS POINTCARRE.APP"
+owner_url: "https://pointcarre.app"
+
+# Product-specific metatags
+# metatags:
+#   # SEO metatags
+#   title: "Sujets 0 - Générateur d'exercices pour l'épreuve anticipée de 1ère"
+#   description: "Générez automatiquement des exercices similaires aux sujets 0 de l'épreuve anticipée de mathématiques. Valeurs aléatoires, corrigés détaillés."
+#   keywords: "sujets 0, épreuve anticipée, première, mathématiques, exercices, générateur, QCM, automatismes"
+#   robots: "index, follow"
+  
+#   # Open Graph metatags
+#   og:title: "Sujets 0 - Exercices mathématiques 1ère"
+#   og:description: "Générateur automatique d'exercices pour l'épreuve anticipée de mathématiques en première. Entraînement avec corrigés."
+#   og:image: "https://maths.pm/static/images/sujets0-preview.jpg"
+#   og:type: "website"
+#   og:url: "https://maths.pm/sujets0"
+  
+#   # Twitter Card metatags
+#   twitter:card: "summary_large_image"
+#   twitter:title: "Sujets 0 - Générateur d'exercices"
+#   twitter:description: "Préparez l'épreuve anticipée avec des exercices générés automatiquement"
+#   twitter:image: "https://maths.pm/static/images/sujets0-twitter.jpg"
+  
+#   # Dublin Core metatags
+#   DC.title: "Générateur de sujets 0 pour l'épreuve anticipée"
+#   DC.creator: "Maths.pm Sujets0"
+#   DC.subject: "Mathématiques, Éducation, Évaluation"
+#   DC.description: "Outil de génération d'exercices mathématiques"
+  
+#   # Additional metatags
+#   topic: "Évaluation et exercices mathématiques"
+#   category: "Éducation, Mathématiques, Première"
+#   revised: "2025-01-15"
+#   pagename: "Sujets 0 - Générateur"
+
+
+
+# Backend settings specific to Nagini
+# TODO : thinking about which ones you really need
+# backend_settings:
+
+#   css_dependencies:
+#     - "/static/core/css/pm.css"
+#     - "/static/core/css/toc.css"
+  
+#   nagini:
+#     # Using esm.sh CDN which properly handles ES module imports
+#     endpoint: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.21/"
+#     js_url: "https://esm.sh/gh/pointcarre-app/nagini@v0.0.21/src/nagini.js"
+#     pyodide_worker_url: "https://cdn.jsdelivr.net/gh/pointcarre-app/nagini@v0.0.21/src/pyodide/worker/worker-dist.js"
+
+
+  # # Add the script paths back
+  # arpege_generator_script_paths:
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_01_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_02_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_03_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_04_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_05_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_06_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_07_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_08_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_09_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_10_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_11_question.py"
+  #   - "/static/py/services/sujets0/spe_sujet1_auto_12_question.py"
+  
+  # teachers_files_to_load:
+  #   # Empty list - no teacher files needed for now
+
+
+
+# # Backend settings specific to Sujets0
+# backend_settings:
+#   # Local script paths for Arpege generator
+#   arpege_generator_script_paths:
+#     - "/static/py/services/sujets0/spe_sujet1_auto_01_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_02_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_03_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_04_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_05_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_06_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_07_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_08_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_09_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_10_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_11_question.py"
+#     - "/static/py/services/sujets0/spe_sujet1_auto_12_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_01_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_02_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_03_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_04_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_05_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_06_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_07_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_08_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_09_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_10_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_11_question.py"
+#     - "/static/py/services/sujets0/spe_sujet2_auto_12_question.py" 

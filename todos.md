@@ -13,7 +13,7 @@
 
 
 
-- [] staging static deployment: i.e. with other url for 
+- [] staging static deployment: i.e. with other url 
 
 - []  Fix this for code_
      - [] Test
