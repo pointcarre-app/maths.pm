@@ -1,6 +1,12 @@
 # CHANGELOG.md
 
 
+
+## [v0.0.6]
+
+- Isolation dependencies for products logic done + dataviz2
+
+
 ## [v0.0.5]
 
 - Sujets0:

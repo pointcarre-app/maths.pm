@@ -1,6 +1,19 @@
 
 
 
+# Critical
+
+
+
+- [] Isolation products: replicate strategy dataviz2 for other products 
+     - [] and check in html itself (scenery / mad ?)
+
+
+- [] Simplify :
+     - [] : no need for domains configuration (should be a matching based on a product and a url) 
+
+
+
 ## High 
 
 - [] ⛔️ careful links in 00_plan.md start with  of  et file used in the end (locally: may use root / static deploy: may use static)
