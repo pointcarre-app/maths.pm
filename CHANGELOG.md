@@ -3,7 +3,10 @@
 
 
 
-## [v0.0.10] size of repo 50Mb
+## [v0.0.10] size of repo < 50Mb
+
+
++ redeployed
 
 
 ```bash
