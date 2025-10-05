@@ -6,6 +6,11 @@
 
 ## Git manip
 
+- Removed "cubrick" folder at root (anims + videos movs for roll one, twice, thrice) etc..
+
+
+## Git manip
+
 - Deleted branches `origin/mad-2025-09-16`
 - Deleted all local branches (cause all merged):
     - `sel-dataviz2-stable-isolation-and-backend`
