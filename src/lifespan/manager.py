@@ -462,12 +462,14 @@ async def lifespan_manager(app: FastAPI):
             await download_safari_css_files(force_download=True)
         except Exception as e:
             logger.warning(f"⚠️  Safari CSS download failed (non-critical): {e}")
-    else:
-        logger.info("💻 Local environment: Checking Safari CSS files...")
-        try:
-            await download_safari_css_files(force_download=False)
-        except Exception as e:
-            logger.warning(f"⚠️  Safari CSS check/download failed (non-critical): {e}")
+
+    # sel: 2025-10-05 : not needed anymore
+    # else:
+    #     logger.info("💻 Local environment: Checking Safari CSS files...")
+    #     try:
+    #         await download_safari_css_files(force_download=False)
+    #     except Exception as e:
+    #         logger.warning(f"⚠️  Safari CSS check/download failed (non-critical): {e}")
 
     try:
         pms_dir = settings.base_dir / "pms"
