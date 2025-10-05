@@ -3,6 +3,10 @@
 #############################################
 
 
+
+# size of repo!
+src/static/pm
+
 # Custom
 src/corsica/get_block_migration
 
