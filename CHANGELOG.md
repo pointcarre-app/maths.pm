@@ -3,6 +3,27 @@
 
 
 
+## [v0.0.10] size of repo 50Mb
+
+
+```bash
+git clone --depth 1 https://github.com/pointcarre-app/maths.pm temp-check
+
+# Cloning into 'temp-check'...
+# remote: Enumerating objects: 771, done.
+# remote: Counting objects: 100% (771/771), done.
+# remote: Compressing objects: 100% (668/668), done.
+# remote: Total 771 (delta 124), reused 490 (delta 72), pack-reused 0 (from 0)
+# Receiving objects: 100% (771/771), 15.82 MiB | 31.70 MiB/s, done.
+# Resolving deltas: 100% (124/124), done.
+```
+
+```bash
+du -sh temp-check
+# 45M	temp-check
+```
+
+
 
 ## Git manip
 
@@ -17,7 +38,7 @@
     - `bac-main`
 
 
-## [v0.0.6]
+## [v0.0.9]
 
 - Isolation dependencies for products logic done + dataviz2
 
