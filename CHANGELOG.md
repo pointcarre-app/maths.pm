@@ -2,6 +2,16 @@
 
 
 
+
+
+## Git manip
+
+- Deleted branches `origin/mad-2025-09-16`
+- Deleted all local branches (cause all merged):
+    - `sel-dataviz2-stable-isolation-and-backend`
+    - `bac-main`
+
+
 ## [v0.0.6]
 
 - Isolation dependencies for products logic done + dataviz2
