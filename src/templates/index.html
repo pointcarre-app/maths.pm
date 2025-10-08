@@ -56,7 +56,7 @@
         <div class="border-base-300 bg-base-100/40 border-0 shadow-xl mx-4 sm:mx-20 md:mx-30 lg:mx-0"
              style="border-radius: var(--radius-box)">
           {# <div class="relative text-center">Objectif</div> #}
-          <div class="flex justify-end scale-100 lg:scale-85">
+          <div class="flex justify-end scale-100 lg:scale-90">
             {% include "products/workflow-figure-svg.html" %}
           </div>
         </div>
@@ -65,7 +65,7 @@
   </section>
 
 
-  <section class="py-8 text-center"
+  <section class="py-14 text-center"
            style="background-color: var(--color-primary-soft) !important;
                   color: var(--color-primary) !important">
     <p class="text-lg italic">
@@ -73,13 +73,13 @@
     </p>
   </section>
 
-  <section class="py-16 bg-base-300/20">
+  <section class="py-20 bg-base-100/40">
     <div class="max-w-4xl mx-auto px-4 sm:px-8">
       <h2 class="text-3xl font-bold text-center mb-12">
         Une architecture <span class="text-secondary italic">zero-data</span>
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="border-base-300 bg-base-200/40 border-0 shadow mx-4 sm:mx-20 md:mx-30 lg:mx-0"
+        <div class="border-base-300 bg-base-100/40 border-0 shadow mx-4 sm:mx-20 md:mx-30 lg:mx-0"
              style="border-radius: var(--radius-box)">
           {% include "products/zero-data-svg.html" %}
         </div>
@@ -187,13 +187,12 @@
 </section> #}
 
 
-  <section class="py-16 bg-base-100">
+  {# <section class="py-20 bg-base-100/40">
     <div class="max-w-4xl mx-auto px-4 sm:px-8">
-      <h2 class=" text-center text-3xl font-bold mb-8">
+      <h2 class="text-center text-3xl font-bold mb-8">
         Engagés pour les <span class="text-primary">communs numériques</span>
       </h2>
-      <div class="text-left text-lg mb-12 max-w-2xl mx-auto sm:p-10 sm:bg-base-200"
-           style="border-radius: var(--radius-box)">
+      <div class="text-left text-lg max-w-2xl mx-auto sm:p-10 sm:bg-base-200" style="border-radius: var(--radius-box)">
         Chez <span class="font-heading text-xl">Pointcarre.app</span>, nous croyons en l'importance des logiciels libres,
         de l'interopérabilité et de la souveraineté numérique. Toutes nos ressources sont publiées sous licences
         <a href="https://www.gnu.org/licenses/agpl-3.0.fr.html" class="link link-primary">AGPL-3.0</a> ou
@@ -203,12 +202,9 @@
           <a href="/mission" class="btn btn-outline btn-primary">Notre mission</a>
           <a href="/licenses" class="btn btn-outline btn-secondary">Licences</a>
         </div>
-
-
       </div>
-
     </div>
-  </section>
+</section> #}
 
 
   {# <section class="py-16 bg-base-200">
@@ -243,16 +239,17 @@
 </section> #}
 
 
-  <section class="py-16 bg-primary text-primary-content">
+  <section class="py-16 bg-base-200">
     <div class="max-w-3xl mx-auto px-4 sm:px-8 text-center">
       {# <h2 class="text-3xl font-bold mb-6">Rejoignez la communauté des communs numériques éducatifs</h2> #}
       <p class="text-lg mb-8">
         Vous êtes enseignant, développeur ou simplement passionné par l'éducation libre ?
-        <strong>Contribuez à Maths.pm</strong> ou utilisez nos ressources en classe !
+        <strong>Contribuez à <span class="font-handwritten text-2xl">Maths.pm</span></strong> ou utilisez nos ressources en classe !
       </p>
       <div class="flex gap-4 justify-center">
         <a href="/contact" class="btn btn-secondary btn-lg">Nous contacter</a>
-        <a href="https://github.com/pointcarre" class="btn btn-outline btn-lg">Voir le code</a>
+        {# TODO: sel: add from config in frama key to control multiple remotes #}
+        <a href="https://framagit.org/pointcarre.app" class="btn btn-outline btn-lg">Voir le code</a>
       </div>
     </div>
   </section>
