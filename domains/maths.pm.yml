@@ -149,7 +149,7 @@ index_view_specific_metatags:
 templating:
   base_template: "base/main-alt.html"
   footer_template: "domains/maths-pm/footers.html"
-  navbar_title: "Maths.pm"
+  navbar_title: "<span class='text-primary'>Maths</span>.pm"
   button_primary_text: "Ressources"
   button_primary_href: "/ressources"
   button_ghost_text: "Contact"

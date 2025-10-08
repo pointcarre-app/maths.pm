@@ -267,6 +267,16 @@ h6 {
   fill: var(--color-primary) !important;
 }
 
+
+.stroke-primary-soft {
+  stroke: var(--color-primary-soft) !important;
+}
+
+.fill-primary-soft {
+  fill: var(--color-primary-soft) !important;
+}
+
+
 /********* Primary content *********/
 .stroke-primary-content {
   stroke: var(--color-primary-content) !important;
@@ -276,6 +286,7 @@ h6 {
   fill: var(--color-primary-content) !important;
 }
 
+
 /********* Secondary *********/
 
 .stroke-secondary {
@@ -284,6 +295,15 @@ h6 {
 
 .fill-secondary {
   fill: var(--color-secondary) !important;
+}
+
+
+.stroke-secondary-soft {
+  stroke: var(--color-secondary-soft) !important;
+}
+
+.fill-secondary-soft {
+  fill: var(--color-secondary-soft) !important;
 }
 
 
@@ -300,7 +320,7 @@ h6 {
 
 
 
-
+/* Legacy error */
 /********* Primary ghost *********/
 .stroke-primary-ghost {
   stroke: var(--color-primary-ghost) !important;
@@ -309,6 +329,7 @@ h6 {
 .fill-primary-ghost {
   fill: var(--color-primary-ghost) !important;
 }
+
 
 
 
@@ -336,6 +357,17 @@ h6 {
   fill: var(--color-accent) !important;
 }
 
+
+.stroke-accent-soft {
+  stroke: var(--color-accent-soft) !important;
+}
+
+.fill-accent-soft {
+  fill: var(--color-accent-soft) !important;
+}
+
+
+
 /********* Accent content *********/
 
 
@@ -346,6 +378,8 @@ h6 {
 .fill-accent-content {
   fill: var(--color-accent-content) !important;
 }
+
+
 
 /********* Base 100 *********/
 
@@ -385,6 +419,73 @@ h6 {
 
 .fill-base-content {
   fill: var(--color-base-content) !important;
+}
+
+
+
+/* ********* Info *********/
+.stroke-info {
+  stroke: var(--color-info) !important;
+}
+.fill-info {
+  fill: var(--color-info) !important;
+}
+
+.stroke-info-soft {
+  stroke: var(--color-info-soft) !important;
+}
+.fill-info-soft {
+  fill: var(--color-info-soft) !important;
+}
+
+
+
+/********* Success *********/
+.stroke-success {
+  stroke: var(--color-success) !important;
+}
+.fill-success {
+  fill: var(--color-success) !important;
+}
+
+
+.stroke-success-soft {
+  stroke: var(--color-success-soft) !important;
+}
+.fill-success-soft {
+  fill: var(--color-success-soft) !important;
+}
+
+/* ********* Warning *********/
+.stroke-warning {
+  stroke: var(--color-warning) !important;
+}
+.fill-warning {
+  fill: var(--color-warning) !important;
+}
+
+.stroke-warning-soft {
+  stroke: var(--color-warning-soft) !important;
+}
+.fill-warning-soft {
+  fill: var(--color-warning-soft) !important;
+}
+
+
+
+/* ********* Error *********/
+.stroke-error {
+  stroke: var(--color-error) !important;
+}
+.fill-error {
+  fill: var(--color-error) !important;
+}
+
+.stroke-error-soft {
+  stroke: var(--color-error-soft) !important;
+}
+.fill-error-soft {
+  fill: var(--color-error-soft) !important;
 }
 
 /********* Backgrounds *********/

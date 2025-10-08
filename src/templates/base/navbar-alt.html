@@ -4,13 +4,11 @@
       {% include "base/logo-zelie-primary.html" %}
     </a>
     <!-- Mobile title shown next to logo on small screens -->
-    <a href="/" class="navbar-alt-title-mobile">{{ DOMAIN_CONFIG['templating']['navbar_title'] }}</a>
+    <a href="/" class="navbar-alt-title-mobile">{{ DOMAIN_CONFIG['templating']['navbar_title'] | safe }}</a>
   </div>
   <div class="navbar-center">
     <div class="text-xl sm:text-3xl">
-      {% block navbar_title %}
-        <a href="/" class="font-handwritten">{{ DOMAIN_CONFIG['templating']['navbar_title'] }}</a>
-      {% endblock navbar_title %}
+      <a href="/" class="font-handwritten">{{ DOMAIN_CONFIG['templating']['navbar_title']  | safe }}</a>
     </div>
   </div>
   <div class="navbar-end gap-2 sm:pl-18">

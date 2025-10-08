@@ -1,5 +1,262 @@
 {% extends "base/main-alt.html" %}
 
-{% block navbar_title %}
-  <div class="navbar-alt-title">Maths.pm</div>
-{% endblock navbar_title %}
+
+{% block content %}
+  <section class="hero min-h-[60vh] bg-base-200">
+    <div class="hero-content text-center max-w-3xl">
+      <div>
+        <h1 class="text-5xl font-bold font-handwritten">
+          <span class="text-primary">Maths</span>.pm
+        </h1>
+        <p class="py-6 text-xl font-light italic">
+          Une plateforme de ressources mathématiques <span class="font-medium">libres</span>, <span class="font-medium">sans collecte de données</span>, pour les élèves et les enseignants.
+        </p>
+        <div class="flex gap-4 justify-center mt-8">
+          <a href="#ressources" class="btn btn-primary btn-lg">Explorer les ressources</a>
+          <a href="/about" class="btn btn-ghost btn-lg">Notre démarche</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Notre workflow pédagogique -->
+  <section class="py-16 bg-base-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <!-- Colonne de gauche : Notre objectif -->
+        <div class="order-2 lg:order-1">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-6">
+            NOTRE <span class="text-primary">OBJECTIF</span>
+          </h2>
+          <div class="space-y-6 text-lg">
+            <p>
+              Créer un <strong>écosystème pédagogique libre</strong> où :
+            </p>
+            <ul class="list-disc list-inside space-y-3 ml-4">
+              <li>
+                Les <span class="text- font-semibold">enseignants</span> créent librement leur contenu pédagogique
+              </li>
+              <li>
+                <span class="text- font-semibold">Pointcarre.app</span> développe l'infrastructure technique open source
+              </li>
+              <li>
+                Un <span class="text- font-semibold">hébergeur français</span> garantit zéro collecte de données
+              </li>
+              <li>
+                Le <span class="text- font-semibold">ministère</span> valide le code (pas le contenu - liberté pédagogique)
+              </li>
+              <li>
+                Les <span class="text- font-semibold">élèves</span> accèdent aux ressources en toute sécurité
+              </li>
+            </ul>
+            <div class="pt-4">
+              <p class="text-base opacity-80 italic">
+                Un cercle vertueux où la technologie sert la pédagogie, dans le respect absolu de la vie privée.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne de droite : SVG du workflow -->
+        <div class="order-1 lg:order-2">
+          <div class="bg-base-100 border-2 border-base-200 bg-base-200/40 shadow"
+               style="border-radius: var(--radius-box)">
+            {% include "products/workflow-figure-svg.html" %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-base-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        Une architecture <span class="text-secondary">zero-data</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="mockup-code">
+          <pre><code class="text-sm">// Exemple de code statique
+function solve(x) {
+  return Math.sqrt(x);
+}
+console.log(solve(225)); // 15</code></pre>
+        </div>
+        <div class="space-y-4">
+          <p class="text-lg">
+            Notre plateforme repose sur des <strong>sites statiques</strong>, des <strong>standards ouverts</strong> et une
+            <strong>architecture zero-data</strong> pour garantir :
+          </p>
+          <ul class="list-disc list-inside">
+            <li>
+              Une conformité RGPD <strong>stricte</strong>.
+            </li>
+            <li>
+              Une <strong>interopérabilité</strong> maximale.
+            </li>
+            <li>
+              Une <strong>maintenance rigoureuse</strong>.
+            </li>
+          </ul>
+          <p class="text-lg mt-4">
+            Nous privilégions les hébergeurs et APIs <strong>français 🇫🇷</strong> pour renforcer la souveraineté numérique.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="ressources" class="py-16 bg-base-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Ressources pédagogiques</h2>
+      <div class="tabs tabs-boxed justify-center mb-8">
+        <a class="tab tab-lg" href="#secondaire">Secondaire</a>
+        <a class="tab tab-lg" href="#superieur">Supérieur</a>
+        <a class="tab tab-lg" href="#logiciels">Logiciels Libres</a>
+      </div>
+
+      <!-- Contenu Secondaire -->
+      <div id="secondaire" class="tab-content">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title">
+                Arpège <span class="badge badge-secondary">3ème → 1ère</span>
+              </h3>
+              <p>Système de répétitions espacées pour couvrir tous les calculs du collège au lycée.</p>
+              <div class="card-actions justify-end">
+                <a href="/ressources#arpège" class="btn btn-sm btn-primary">Découvrir</a>
+              </div>
+            </div>
+          </div>
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title">
+                Sujets 0 <span class="badge badge-accent">2nde → 1ère</span>
+              </h3>
+              <p>Générateur d'exercices inspirés des sujets 0 pour l'épreuve anticipée du bac.</p>
+              <div class="card-actions justify-end">
+                <a href="/ressources#sujets0" class="btn btn-sm btn-primary">Essayer</a>
+              </div>
+            </div>
+          </div>
+          <!-- Ajoutez d'autres cartes pour Maths.Corsica, Maths.Paris, etc. -->
+        </div>
+      </div>
+
+      <!-- Contenu Supérieur -->
+      <div id="superieur" class="tab-content hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title">
+                Python Fast Track <span class="badge badge-secondary">Master</span>
+              </h3>
+              <p>Cours intensif de Python pour étudiants en mathématiques.</p>
+              <div class="card-actions justify-end">
+                <a href="/ressources#python-fast-track" class="btn btn-sm btn-primary">En savoir plus</a>
+              </div>
+            </div>
+          </div>
+          <!-- Ajoutez d'autres cartes pour Data Viz 2, Stats, etc. -->
+        </div>
+      </div>
+
+      <!-- Contenu Logiciels Libres -->
+      <div id="logiciels" class="tab-content hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title">
+                Pedagogical Message <span class="badge badge-accent">Open Source</span>
+              </h3>
+              <p>Moteur de contenu pédagogique basé sur Markdown et QCM.</p>
+              <div class="card-actions justify-end">
+                <a href="/logiciels#pedagogical-message" class="btn btn-sm btn-primary">Voir le code</a>
+              </div>
+            </div>
+          </div>
+          <!-- Ajoutez d'autres cartes pour Cubrick, Nagini, etc. -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-16 bg-base-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-8">
+        Engagés pour les <span class="text-primary">communs numériques</span>
+      </h2>
+      <p class="text-lg mb-12 max-w-2xl mx-auto">
+        Chez <span class="font-heading text-xl">Pointcarre.app</span>, nous croyons en l'importance des logiciels libres,
+        de l'interopérabilité et de la souveraineté numérique. Toutes nos ressources sont publiées sous licences
+        <a href="https://www.gnu.org/licenses/agpl-3.0.fr.html" class="link link-primary">AGPL-3.0</a> ou
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="link link-primary">CC BY-NC-SA 4.0</a>.
+      </p>
+      <div class="flex justify-center gap-4">
+        <a href="/about" class="btn btn-outline btn-primary">Notre mission</a>
+        <a href="/licenses" class="btn btn-outline btn-secondary">Licences</a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-16 bg-base-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        Une architecture <span class="text-secondary">zero-data</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="mockup-code">
+          <pre><code class="text-sm">// Exemple de code statique
+function solve(x) {
+  return Math.sqrt(x);
+}
+console.log(solve(225)); // 15</code></pre>
+        </div>
+        <div class="space-y-4">
+          <p class="text-lg">
+            Notre plateforme repose sur des <strong>sites statiques</strong>, des <strong>standards ouverts</strong> et une
+            <strong>architecture zero-data</strong> pour garantir :
+          </p>
+          <ul class="list-disc list-inside">
+            <li>
+              Une conformité RGPD <strong>stricte</strong>.
+            </li>
+            <li>
+              Une <strong>interopérabilité</strong> maximale.
+            </li>
+            <li>
+              Une <strong>maintenance rigoureuse</strong>.
+            </li>
+          </ul>
+          <p class="text-lg mt-4">
+            Nous privilégions les hébergeurs et APIs <strong>français 🇫🇷</strong> pour renforcer la souveraineté numérique.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-16 bg-primary text-primary-content">
+    <div class="max-w-3xl mx-auto px-4 sm:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-6">Rejoignez la communauté des communs numériques éducatifs</h2>
+      <p class="text-lg mb-8">
+        Vous êtes enseignant, développeur ou simplement passionné par l'éducation libre ?
+        <strong>Contribuez à Maths.pm</strong> ou utilisez nos ressources en classe !
+      </p>
+      <div class="flex gap-4 justify-center">
+        <a href="/contact" class="btn btn-secondary btn-lg">Nous contacter</a>
+        <a href="https://github.com/pointcarre" class="btn btn-outline btn-lg">Voir le code</a>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock content %}
+
+
+<span class="text-primary">Maths</span>.pm

@@ -1,12 +1,12 @@
 name: python
 product_type: "superieur"
-title_html: Python Fast Track
+title_html: Python Fast Track (EN)
 # is_hidden: true
 is_beta: true
 subtitle_html: Get fluent in Python, fast
 # description: "Dans le contexte d'une formation à forte composante mathématiques, apprendre à représenter des données en utilisant les librairies Python : Matplotlib et Bokeh, et une librairie JS : D3.js."
 # description: "This course, taught within a program with a strong mathematical component, introduces students to data visualization using Python libraries such as Matplotlib and Bokeh, combining theoretical principles with practical, interactive applications."
-description: <strong>This course is intensive and a very good understanding of highschool mathematics would significantly help.</strong> It introduces Python and goes far enough to give you an intermediate level of competence.
+description: <strong>Python intensive course. A very good understanding of highschool mathematics is highly recommended.</strong> The course goes far enough to give to students an intermediate level of competence.
 # TODO sel: Document: this is OK even for static generation cause update at the right moment
 # of the .md (but when ?)
 # TODO sel: make anchor compatible 
