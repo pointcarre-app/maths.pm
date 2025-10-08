@@ -4,8 +4,8 @@
 {% block content %}
 
   <section class="hero min-h-[80vh] bg-base-100">
-    <div class="hero-content max-w-6xl mx-auto px-4 sm:px-12">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-20 items-center">
+    <div class="hero-content max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-[50%_50%] gap-12  items-center py-8">
         <!-- Colonne de gauche : Contenu textuel -->
         <div class="">
           <h1 class="text-center lg:text-left  text-5xl font-bold font-handwritten mb-4">
@@ -58,7 +58,7 @@
         <!-- Colonne de droite : SVG du workflow -->
         <div class="">
           {# <div class="relative text-center">Objectif</div> #}
-          <div class="sm:p-6 border-base-300  bg-base-200/40 border-2 shadow"
+          <div class="sm:p-6 border-base-300 max-w-[500px] mx-auto  bg-base-200/40 border-2 shadow"
                style="border-radius: var(--radius-box)">
             {% include "products/workflow-figure-svg.html" %}
           </div>
@@ -68,53 +68,10 @@
   </section>
 
 
-  <!-- Notre workflow pédagogique -->
-  <section class="py-16 bg-base-100">
-    <div class="max-w-6xl mx-auto px-4 sm:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-        <!-- Colonne de gauche : Notre objectif -->
-        <div class="order-2 lg:order-1">
-          <h2 class="text-3xl lg:text-4xl font-bold mb-6">
-            NOTRE <span class="text-primary">OBJECTIF</span>
-          </h2>
-          <div class="space-y-6 text-lg">
-            <p>
-              Créer un <strong>écosystème pédagogique libre</strong> où :
-            </p>
-            <ul class="list-disc list-inside space-y-3 ml-4">
-              <li>
-                Les <span class="text- font-semibold">enseignants</span> créent librement leur contenu pédagogique
-              </li>
-              <li>
-                <span class="text- font-semibold">Pointcarre.app</span> développe l'infrastructure technique open source
-              </li>
-              <li>
-                Un <span class="text- font-semibold">hébergeur français</span> garantit zéro collecte de données
-              </li>
-              <li>
-                Le <span class="text- font-semibold">Ministère</span> valide le code (pas le contenu - liberté pédagogique)
-              </li>
-              <li>
-                Les <span class="text- font-semibold">élèves</span> accèdent aux ressources en toute sécurité
-              </li>
-            </ul>
-            <div class="pt-4">
-              <p class="text-base opacity-80 italic">
-                Un cercle vertueux où la technologie sert la pédagogie, dans le respect absolu de la vie privée.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Colonne de droite : SVG du workflow -->
-        <div class="order-1 lg:order-2">
-          <div class="bg-base-100 border-2 border-base-200 bg-base-200/40 shadow"
-               style="border-radius: var(--radius-box)">
-            {% include "products/workflow-figure-svg.html" %}
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class="bg-primary text-primary-content py-6 text-center">
+    <p class="text-base opacity-80 italic">
+      Un cercle vertueux où la technologie sert la pédagogie, dans le respect absolu de la vie privée.
+    </p>
   </section>
 
   <section class="py-16 bg-base-200">
