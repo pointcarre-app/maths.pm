@@ -3,36 +3,39 @@
 
 {% block content %}
 
-  <section class="hero min-h-[80vh] bg-base-100">
-    <div class="hero-content max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-[50%_50%] gap-12  items-center py-8">
+
+  {# TODO: recycle #}
+  {# <div class="bg-base-100 rounded-box">{% include "products/simple-math-flow-svg.html" %}</div> #}
+
+  <section class="hero min-h-[80vh]">
+    <div class="hero-content max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-8">
         <!-- Colonne de gauche : Contenu textuel -->
         <div class="">
           <h1 class="text-center lg:text-left  text-5xl font-bold font-handwritten mb-4">
             <span class="text-primary">Maths</span>.pm
           </h1>
-          <p class="text-center lg:text-left text-xl font-light italic mb-6">
+          <p class="text-center lg:text-left text-xl font-light italic mb-6 text-base-content/80">
             Une plateforme de ressources mathématiques <span class="font-medium">libres</span>, <span class="font-medium">sans collecte de données</span>, pour les élèves et les enseignants.
           </p>
-
-
-          <div class="bg-base-200 p-8 mt-8 max-w-[520px] sm:max-w-full">
+          <div class="bg-base-200/40 border-1 border-base-content/10 p-6 mt-8 sm:p-10"
+               style="border-radius: var(--radius-box)">
             <h2 class="text-xl lg:text-2xl font-semibold mb-4">
               Notre <span class="text-primary">objectif</span>
             </h2>
             <div class="space-y-4 text-base">
-              <p class="underline underline-offset-4">
-                Créer un <strong>écosystème pédagogique libre</strong> où :
+              <p class="">
+                Créer un <strong class=" underline underline-offset-4">écosystème pédagogique libre</strong> où :
               </p>
               <ul class="list-disc list-inside space-y-2 ml-0">
                 <li>
                   Les <strong>enseignants</strong> créent librement leur contenu pédagogique
                 </li>
                 <li>
-                  <strong>Pointcarre.app</strong> développe l'infrastructure technique <span class="italic">Open Source</span></span>
+                  <strong>Pointcarre.app</strong> développe et maintient <span class="font-handwritten text-xl">Maths.pm</span>
                 </li>
                 <li>
-                  Un <strong>hébergeur français</strong> garantit zéro collecte de données
+                  Un <strong>hébergeur</strong> garantit zéro collecte de données
                 </li>
                 <li>
                   Le <strong>ministère</strong> valide le code et l'hébergeur
@@ -43,25 +46,17 @@
               </ul>
             </div>
           </div>
-
-
           <div class="flex gap-4 justify-center lg:justify-end mt-8">
-            <a href="#ressources" class="btn btn-primary btn-medium">Explorer les ressources</a>
+            <a href="/ressources" class="btn btn-primary btn-medium">Explorer les ressources</a>
             <a href="/about" class="btn btn-ghost btn-outline btn-medium">Notre démarche</a>
           </div>
-
-
           {# <hr class="my-8 border-base-300" /> #}
-
-
         </div>
         <!-- Colonne de droite : SVG du workflow -->
-        <div class="">
+        <div class="border-base-300 bg-base-100/40 border-0 shadow-xl mx-4 sm:mx-20 md:mx-30 lg:mx-0"
+             style="border-radius: var(--radius-box)">
           {# <div class="relative text-center">Objectif</div> #}
-          <div class="sm:p-6 border-base-300 max-w-[500px] mx-auto  bg-base-200/40 border-2 shadow"
-               style="border-radius: var(--radius-box)">
-            {% include "products/workflow-figure-svg.html" %}
-          </div>
+          <div class="flex justify-end">{% include "products/workflow-figure-svg.html" %}</div>
         </div>
       </div>
     </div>
@@ -77,18 +72,15 @@
   <section class="py-16 bg-base-200">
     <div class="max-w-4xl mx-auto px-4 sm:px-8">
       <h2 class="text-3xl font-bold text-center mb-12">
-        Une architecture <span class="text-secondary">zero-data</span>
+        Une architecture <span class="text-secondary italic">zero-data</span>
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="mockup-code">
-          <pre><code class="text-sm">// Exemple de code statique
-function solve(x) {
-  return Math.sqrt(x);
-}
-console.log(solve(225)); // 15</code></pre>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="border-base-300 bg-base-200/40 border-0 shadow mx-4 sm:mx-20 md:mx-30 lg:mx-0"
+             style="border-radius: var(--radius-box)">
+          {% include "products/zero-data-svg.html" %}
         </div>
         <div class="space-y-4">
-          <p class="text-lg">
+          <p class="text-base">
             Notre plateforme repose sur des <strong>sites statiques</strong>, des <strong>standards ouverts</strong> et une
             <strong>architecture zero-data</strong> pour garantir :
           </p>
@@ -103,8 +95,10 @@ console.log(solve(225)); // 15</code></pre>
               Une <strong>maintenance rigoureuse</strong>.
             </li>
           </ul>
-          <p class="text-lg mt-4">
-            Nous privilégions les hébergeurs et APIs <strong>français 🇫🇷</strong> pour renforcer la souveraineté numérique.
+          <p class="text-base mt-4">
+
+            Pour en savoir plus au sujet de notre démarche et des choix d'hébergements, <a href="/about" class="link link-primary">consultez notre page à ce sujet</a>.
+            {# Nous privilégions les hébergeurs et APIs <strong>français 🇫🇷</strong> pour renforcer la souveraineté numérique. #}
           </p>
         </div>
       </div>
@@ -112,7 +106,7 @@ console.log(solve(225)); // 15</code></pre>
   </section>
 
 
-  <section id="ressources" class="py-16 bg-base-200">
+  {# <section id="ressources" class="py-16 bg-base-200">
     <div class="max-w-4xl mx-auto px-4 sm:px-8">
       <h2 class="text-3xl font-bold text-center mb-12">Ressources pédagogiques</h2>
       <div class="tabs tabs-boxed justify-center mb-8">
@@ -186,7 +180,7 @@ console.log(solve(225)); // 15</code></pre>
         </div>
       </div>
     </div>
-  </section>
+</section> #}
 
 
   <section class="py-16 bg-base-100">
@@ -201,26 +195,20 @@ console.log(solve(225)); // 15</code></pre>
         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="link link-primary">CC BY-NC-SA 4.0</a>.
       </p>
       <div class="flex justify-center gap-4">
-        <a href="/about" class="btn btn-outline btn-primary">Notre mission</a>
+        <a href="/mission" class="btn btn-outline btn-primary">Notre mission</a>
         <a href="/licenses" class="btn btn-outline btn-secondary">Licences</a>
       </div>
     </div>
   </section>
 
 
-  <section class="py-16 bg-base-200">
+  {# <section class="py-16 bg-base-200">
     <div class="max-w-4xl mx-auto px-4 sm:px-8">
       <h2 class="text-3xl font-bold text-center mb-12">
         Une architecture <span class="text-secondary">zero-data</span>
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="mockup-code">
-          <pre><code class="text-sm">// Exemple de code statique
-function solve(x) {
-  return Math.sqrt(x);
-}
-console.log(solve(225)); // 15</code></pre>
-        </div>
+
         <div class="space-y-4">
           <p class="text-lg">
             Notre plateforme repose sur des <strong>sites statiques</strong>, des <strong>standards ouverts</strong> et une
@@ -243,12 +231,12 @@ console.log(solve(225)); // 15</code></pre>
         </div>
       </div>
     </div>
-  </section>
+</section> #}
 
 
   <section class="py-16 bg-primary text-primary-content">
     <div class="max-w-3xl mx-auto px-4 sm:px-8 text-center">
-      <h2 class="text-3xl font-bold mb-6">Rejoignez la communauté des communs numériques éducatifs</h2>
+      {# <h2 class="text-3xl font-bold mb-6">Rejoignez la communauté des communs numériques éducatifs</h2> #}
       <p class="text-lg mb-8">
         Vous êtes enseignant, développeur ou simplement passionné par l'éducation libre ?
         <strong>Contribuez à Maths.pm</strong> ou utilisez nos ressources en classe !
@@ -256,24 +244,6 @@ console.log(solve(225)); // 15</code></pre>
       <div class="flex gap-4 justify-center">
         <a href="/contact" class="btn btn-secondary btn-lg">Nous contacter</a>
         <a href="https://github.com/pointcarre" class="btn btn-outline btn-lg">Voir le code</a>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="hero min-h-[60vh] bg-base-200">
-    <div class="hero-content text-center max-w-3xl">
-      <div>
-        <h1 class="text-5xl font-bold font-handwritten">
-          <span class="text-primary">Maths</span>.pm
-        </h1>
-        <p class="py-6 text-xl font-light italic">
-          Une plateforme de ressources mathématiques <span class="font-medium">libres</span>, <span class="font-medium">sans collecte de données</span>, pour les élèves et les enseignants.
-        </p>
-        <div class="flex gap-4 justify-center mt-8">
-          <a href="#ressources" class="btn btn-primary btn-lg">Explorer les ressources</a>
-          <a href="/about" class="btn btn-ghost btn-lg">Notre démarche</a>
-        </div>
       </div>
     </div>
   </section>
