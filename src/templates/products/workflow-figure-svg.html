@@ -34,6 +34,9 @@
     <!-- Ministère to Teachers (validation loop) -->
     <line x1="150" y1="50" x2="75" y2="90" class="stroke-base-content" stroke-width="0.8" opacity="0.3" />
 
+    <!-- Ministère to Pointcarre (validation loop)-->
+    <line x1="150" y1="50" x2="150" y2="165" class="stroke-base-content" stroke-width="0.8" opacity="0.3" />
+
     <!-- Pointcarre to Students - stopping at edge of circles -->
     <!-- To center student (primary) -->
     <line x1="150" y1="178" x2="150" y2="254" class="stroke-secondary" stroke-width="1.2" opacity="0.5" marker-end="url(#arrow-middle)" />
@@ -43,6 +46,47 @@
 
     <!-- To right student (accent) -->
     <line x1="162" y1="178" x2="220" y2="256" class="stroke-secondary" stroke-width="1.2" opacity="0.5" marker-end="url(#arrow-right)" />
+
+    <!-- Flow dots animation - placed here so they appear above lines but below nodes -->
+    <!-- Path 1: Teachers → Pointcarre → Students -->
+    <circle r="1.5" class="fill-primary" opacity="0">
+    <animate attributeName="opacity" values="0;0.7" dur="0.1s" begin="0s" fill="freeze" />
+    <animateMotion dur="6s" repeatCount="indefinite">
+    <mpath href="#flow-path-1" />
+    </animateMotion>
+    </circle>
+
+    <!-- Path 2: Pointcarre → Hébergeur → Ministère -->
+    <circle r="1.5" class="fill-primary" opacity="0">
+    <animate attributeName="opacity" values="0;0.7" dur="0.1s" begin="7s" fill="freeze" />
+    <animateMotion dur="5s" begin="7s" repeatCount="indefinite">
+    <mpath href="#flow-path-2" />
+    </animateMotion>
+    </circle>
+
+    <!-- Path 3: Ministère → Pointcarre → Students -->
+    <circle r="1.5" class="fill-primary" opacity="0">
+    <animate attributeName="opacity" values="0;0.7" dur="0.1s" begin="15s" fill="freeze" />
+    <animateMotion dur="4.5s" begin="15s" repeatCount="indefinite">
+    <mpath href="#flow-path-3" />
+    </animateMotion>
+    </circle>
+
+    <!-- Path 4: Full cycle -->
+    <circle r="1.5" class="fill-primary" opacity="0">
+    <animate attributeName="opacity" values="0;0.7" dur="0.1s" begin="22s" fill="freeze" />
+    <animateMotion dur="7s" begin="22s" repeatCount="indefinite">
+    <mpath href="#flow-path-4" />
+    </animateMotion>
+    </circle>
+
+    <!-- Path 5: Just to students -->
+    <circle r="1.5" class="fill-primary" opacity="0">
+    <animate attributeName="opacity" values="0;0.7" dur="0.1s" begin="30s" fill="freeze" />
+    <animateMotion dur="3s" begin="30s" repeatCount="indefinite">
+    <mpath href="#flow-path-5" />
+    </animateMotion>
+    </circle>
 
     <!-- 1. ENSEIGNANTS (left) -->
     <g id="teachers">
@@ -55,8 +99,8 @@
     <circle cx="10" cy="7" r="4" class="stroke-accent" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </g>
     <!-- Label -->
-    <text x="75" y="115" text-anchor="middle" class="fill-base-content" font-size="10" font-weight="600">Enseignants</text>
-    <text x="75" y="126" text-anchor="middle" class="fill-base-content" font-size="8" opacity="0.6">créent</text>
+    <text x="75" y="117" text-anchor="middle" class="fill-base-content" font-size="10" font-weight="500">Enseignants</text>
+    <text x="75" y="128" text-anchor="middle" class="fill-base-content" font-size="8" opacity="0.6">créent</text>
     </g>
 
     <!-- 2. POINTCARRE (center) - larger as central hub -->
@@ -70,9 +114,10 @@
     <path d="M14 2v4a2 2 0 0 0 2 2h4" class="stroke-primary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" class="stroke-primary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </g>
-    <!-- Label -->
-    <text x="150" y="205" text-anchor="middle" class="fill-base-content" font-size="18" font-weight="500" style="font-family: var(--font-handwritten)">
-    Maths.pm
+    <!-- Label with background -->
+    <rect x="110" y="194" width="80" height="24" rx="4" class="fill-primary-soft stroke-primary" stroke-width="0.2" style="rx: var(--radius-box)" />
+    <text x="150" y="211" text-anchor="middle" font-size="18" font-weight="500" style="font-family: var(--font-handwritten)">
+    <tspan class="fill-primary">Maths</tspan><tspan class="fill-base-content">.pm</tspan>
     </text>
     <!-- <text x="150" y="211" text-anchor="middle" class="fill-base-content" font-size="8" opacity="0.6"></text>-->
 
@@ -87,11 +132,11 @@
     <rect x="220" y="89" width="10" height="2.5" rx="0.5" class="fill-base-content" opacity="0.7" />
     <rect x="220" y="93" width="10" height="2.5" rx="0.5" class="fill-base-content" opacity="0.5" />
     <circle cx="222.5" cy="86" r="0.8" class="fill-success" />
-    <!-- 🇫🇷 emoji or text -->
-    <text x="225" y="78" text-anchor="middle" font-size="10"></text>
+    <!-- 🇫🇷 emoji or text <text x="225" y="78" text-anchor="middle" font-size="10"></text> 🇫🇷-->
+
     <!-- Label -->
-    <text x="225" y="115" text-anchor="middle" class="fill-base-content" font-size="10" font-weight="600">Hébergeur 🇫🇷</text>
-    <text x="225" y="126" text-anchor="middle" class="fill-base-content" font-size="8" opacity="0.6">zéro donnée</text>
+    <text x="225" y="117" text-anchor="middle" class="fill-base-content" font-size="10" font-weight="500">Hébergeur </text>
+    <text x="225" y="128" text-anchor="middle" class="fill-base-content" font-size="8" opacity="0.6">zéro donnée</text>
     </g>
 
     <!-- 4. MINISTÈRE (top) -->
@@ -109,7 +154,7 @@
     </g>
 
     <!-- Label -->
-    <text x="150" y="22" text-anchor="middle" class="fill-base-content" font-size="10" font-weight="500">Ministère</text>
+    <text x="150" y="22" text-anchor="middle" class="fill-base-content" font-size="10" font-weight="500">Ministère E.N.</text>
     <text x="150" y="32" text-anchor="middle" class="fill-base-content" font-size="8" opacity="0.6">valide</text>
     </g>
 
@@ -141,31 +186,22 @@
     </g>
 
     <!-- Shared label -->
-    <text x="150" y="300" text-anchor="middle" class="fill-base-content" font-size="10" font-weight="600">Élèves</text>
+    <text x="150" y="300" text-anchor="middle" class="fill-base-content" font-size="10" font-weight="500">Élèves</text>
     <text x="150" y="311" text-anchor="middle" class="fill-base-content" font-size="8" opacity="0.6">utilisent</text>
     </g>
 
     <!-- Subtle pulse animation on central node -->
     <circle cx="150" cy="165" r="22" class="fill-none stroke-primary" stroke-width="1" opacity="0">
-    <animate attributeName="r" values="22;32;22" dur="4s" repeatCount="indefinite" />
-    <animate attributeName="opacity" values="0.6;0;0.6" dur="4s" repeatCount="indefinite" />
+    <animate attributeName="r" values="22;28;22" dur="4s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.6;0.1;0.6" dur="3s" repeatCount="indefinite" />
     </circle>
 
-    <!-- Flow dots animation -->
-    <circle r="2" class="fill-primary" opacity="0.6">
-    <animateMotion dur="5s" repeatCount="indefinite">
-    <mpath href="#flow-path" />
-    </animateMotion>
-    </circle>
-
-    <circle r="2" class="fill-accent" opacity="0.6">
-    <animateMotion dur="5s" begin="1.5s" repeatCount="indefinite">
-    <mpath href="#flow-path" />
-    </animateMotion>
-    </circle>
-
-    <!-- Define animation path -->
-    <path id="flow-path" d="M 75 90 L 150 165 L 225 90 L 150 50 L 75 90" fill="none" opacity="0" />
+    <!-- Define animation paths -->
+    <path id="flow-path-1" d="M 75 90 L 150 165 L 150 270" fill="none" opacity="0" />
+    <path id="flow-path-2" d="M 150 165 L 225 90 L 150 50" fill="none" opacity="0" />
+    <path id="flow-path-3" d="M 150 50 L 150 165 L 75 270" fill="none" opacity="0" />
+    <path id="flow-path-4" d="M 75 90 L 150 165 L 225 90 L 150 50 L 75 90" fill="none" opacity="0" />
+    <path id="flow-path-5" d="M 150 165 L 225 270" fill="none" opacity="0" />
 
   </svg>
 </figure>
