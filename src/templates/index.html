@@ -2,18 +2,66 @@
 
 
 {% block content %}
-  <section class="hero min-h-[60vh] bg-base-200">
-    <div class="hero-content text-center max-w-3xl">
-      <div>
-        <h1 class="text-5xl font-bold font-handwritten">
-          <span class="text-primary">Maths</span>.pm
-        </h1>
-        <p class="py-6 text-xl font-light italic">
-          Une plateforme de ressources mathématiques <span class="font-medium">libres</span>, <span class="font-medium">sans collecte de données</span>, pour les élèves et les enseignants.
-        </p>
-        <div class="flex gap-4 justify-center mt-8">
-          <a href="#ressources" class="btn btn-primary btn-lg">Explorer les ressources</a>
-          <a href="/about" class="btn btn-ghost btn-lg">Notre démarche</a>
+
+  <section class="hero min-h-[80vh] bg-base-100">
+    <div class="hero-content max-w-6xl mx-auto px-4 sm:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-20 items-center">
+        <!-- Colonne de gauche : Contenu textuel -->
+        <div class="">
+          <h1 class="text-center lg:text-left  text-5xl font-bold font-handwritten mb-4">
+            <span class="text-primary">Maths</span>.pm
+          </h1>
+          <p class="text-center lg:text-left text-xl font-light italic mb-6">
+            Une plateforme de ressources mathématiques <span class="font-medium">libres</span>, <span class="font-medium">sans collecte de données</span>, pour les élèves et les enseignants.
+          </p>
+
+
+          <div class="bg-base-200 p-8 mt-8 max-w-[520px] sm:max-w-full">
+            <h2 class="text-xl lg:text-2xl font-semibold mb-4">
+              Notre <span class="text-primary">objectif</span>
+            </h2>
+            <div class="space-y-4 text-base">
+              <p class="underline underline-offset-4">
+                Créer un <strong>écosystème pédagogique libre</strong> où :
+              </p>
+              <ul class="list-disc list-inside space-y-2 ml-0">
+                <li>
+                  Les <strong>enseignants</strong> créent librement leur contenu pédagogique
+                </li>
+                <li>
+                  <strong>Pointcarre.app</strong> développe l'infrastructure technique <span class="italic">Open Source</span></span>
+                </li>
+                <li>
+                  Un <strong>hébergeur français</strong> garantit zéro collecte de données
+                </li>
+                <li>
+                  Le <strong>ministère</strong> valide le code et l'hébergeur
+                </li>
+                <li>
+                  Les <strong>élèves</strong> accèdent aux ressources en toute sécurité
+                </li>
+              </ul>
+            </div>
+          </div>
+
+
+          <div class="flex gap-4 justify-center lg:justify-end mt-8">
+            <a href="#ressources" class="btn btn-primary btn-medium">Explorer les ressources</a>
+            <a href="/about" class="btn btn-ghost btn-outline btn-medium">Notre démarche</a>
+          </div>
+
+
+          {# <hr class="my-8 border-base-300" /> #}
+
+
+        </div>
+        <!-- Colonne de droite : SVG du workflow -->
+        <div class="">
+          {# <div class="relative text-center">Objectif</div> #}
+          <div class="sm:p-6 border-base-300  bg-base-200/40 border-2 shadow"
+               style="border-radius: var(--radius-box)">
+            {% include "products/workflow-figure-svg.html" %}
+          </div>
         </div>
       </div>
     </div>
@@ -251,6 +299,24 @@ console.log(solve(225)); // 15</code></pre>
       <div class="flex gap-4 justify-center">
         <a href="/contact" class="btn btn-secondary btn-lg">Nous contacter</a>
         <a href="https://github.com/pointcarre" class="btn btn-outline btn-lg">Voir le code</a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero min-h-[60vh] bg-base-200">
+    <div class="hero-content text-center max-w-3xl">
+      <div>
+        <h1 class="text-5xl font-bold font-handwritten">
+          <span class="text-primary">Maths</span>.pm
+        </h1>
+        <p class="py-6 text-xl font-light italic">
+          Une plateforme de ressources mathématiques <span class="font-medium">libres</span>, <span class="font-medium">sans collecte de données</span>, pour les élèves et les enseignants.
+        </p>
+        <div class="flex gap-4 justify-center mt-8">
+          <a href="#ressources" class="btn btn-primary btn-lg">Explorer les ressources</a>
+          <a href="/about" class="btn btn-ghost btn-lg">Notre démarche</a>
+        </div>
       </div>
     </div>
   </section>
