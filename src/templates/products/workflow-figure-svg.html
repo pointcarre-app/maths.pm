@@ -7,16 +7,16 @@
 
     <!-- Define arrow markers -->
     <defs>
-    <marker id="arrow" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto" class="fill-base-content" opacity="0.5">
+    <marker id="arrow" markerWidth="4" markerHeight="4" refX="1" refY="2" orient="auto" class="fill-base-content" opacity="0.8">
     <polygon points="0 0, 4 2, 0 4" />
     </marker>
-    <marker id="arrow-primary" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto" class="fill-primary" opacity="0.6">
+    <marker id="arrow-middle" markerWidth="4" markerHeight="4" refX="1" refY="2" orient="auto" class="fill-secondary" opacity="1">
     <polygon points="0 0, 4 2, 0 4" />
     </marker>
-    <marker id="arrow-secondary" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto" class="fill-secondary" opacity="0.6">
+    <marker id="arrow-left" markerWidth="4" markerHeight="4" refX="2" refY="2" orient="auto" class="fill-secondary" opacity="1">
     <polygon points="0 0, 4 2, 0 4" />
     </marker>
-    <marker id="arrow-accent" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto" class="fill-accent" opacity="0.6">
+    <marker id="arrow-right" markerWidth="4" markerHeight="4" refX="2" refY="2" orient="auto" class="fill-secondary" opacity="1">
     <polygon points="0 0, 4 2, 0 4" />
     </marker>
     </defs>
@@ -36,18 +36,18 @@
 
     <!-- Pointcarre to Students - stopping at edge of circles -->
     <!-- To center student (primary) -->
-    <line x1="150" y1="178" x2="150" y2="254" class="stroke-primary" stroke-width="1.2" opacity="0.5" marker-end="url(#arrow-primary)" />
+    <line x1="150" y1="178" x2="150" y2="254" class="stroke-secondary" stroke-width="1.2" opacity="0.5" marker-end="url(#arrow-middle)" />
 
     <!-- To left student (secondary) -->
-    <line x1="138" y1="178" x2="80" y2="256" class="stroke-secondary" stroke-width="1.2" opacity="0.5" marker-end="url(#arrow-secondary)" />
+    <line x1="138" y1="178" x2="80" y2="256" class="stroke-secondary" stroke-width="1.2" opacity="0.5" marker-end="url(#arrow-left)" />
 
     <!-- To right student (accent) -->
-    <line x1="162" y1="178" x2="220" y2="256" class="stroke-accent" stroke-width="1.2" opacity="0.5" marker-end="url(#arrow-accent)" />
+    <line x1="162" y1="178" x2="220" y2="256" class="stroke-secondary" stroke-width="1.2" opacity="0.5" marker-end="url(#arrow-right)" />
 
     <!-- 1. ENSEIGNANTS (left) -->
     <g id="teachers">
     <circle cx="75" cy="90" r="15" class="fill-accent-soft" />
-    <circle cx="75" cy="90" r="15" class="stroke-accent fill-none" stroke-width="2" opacity="0.8" />
+    <circle cx="75" cy="90" r="15" class="stroke-accent fill-none" stroke-width="1" opacity="0.8" />
     <!-- User-pen icon scaled to fit -->
     <g transform="translate(67, 82) scale(0.66)">
     <path d="M11.5 15H7a4 4 0 0 0-4 4v2" class="stroke-accent" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -62,7 +62,7 @@
     <!-- 2. POINTCARRE (center) - larger as central hub -->
     <g id="code">
     <circle cx="150" cy="165" r="18" class="fill-primary-soft" />
-    <circle cx="150" cy="165" r="18" class="stroke-primary fill-none" stroke-width="2.5" opacity="0.9" />
+    <circle cx="150" cy="165" r="18" class="stroke-primary fill-none" stroke-width="1" opacity="0.9" />
     <!-- File-code icon scaled to fit -->
     <g transform="translate(140.5, 155.5) scale(0.8)">
     <path d="M10 12.5 8 15l2 2.5" class="stroke-primary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -80,13 +80,13 @@
 
     <!-- 3. HÉBERGEUR (right) -->
     <g id="host">
-    <circle cx="225" cy="90" r="15" class="fill-info-soft" />
-    <circle cx="225" cy="90" r="15" class="stroke-info fill-none" stroke-width="2" opacity="0.8" />
+    <circle cx="225" cy="90" r="15" class="fill-base-300" />
+    <circle cx="225" cy="90" r="15" class="stroke-base-content fill-none" stroke-width="1" opacity="0.8" />
     <!-- Minimal server icon -->
-    <rect x="221" y="86" width="8" height="2.5" rx="0.5" class="fill-info" opacity="0.9" />
-    <rect x="221" y="89" width="8" height="2.5" rx="0.5" class="fill-info" opacity="0.8" />
-    <rect x="221" y="92" width="8" height="2.5" rx="0.5" class="fill-info" opacity="0.7" />
-    <circle cx="222.5" cy="87" r="0.8" class="fill-success" />
+    <rect x="220" y="85" width="10" height="2.5" rx="0.5" class="fill-base-content" opacity="0.9" />
+    <rect x="220" y="89" width="10" height="2.5" rx="0.5" class="fill-base-content" opacity="0.7" />
+    <rect x="220" y="93" width="10" height="2.5" rx="0.5" class="fill-base-content" opacity="0.5" />
+    <circle cx="222.5" cy="86" r="0.8" class="fill-success" />
     <!-- 🇫🇷 emoji or text -->
     <text x="225" y="78" text-anchor="middle" font-size="10"></text>
     <!-- Label -->
@@ -96,16 +96,16 @@
 
     <!-- 4. MINISTÈRE (top) -->
     <g id="ministry">
-    <circle cx="150" cy="50" r="14" class="fill-secondary-soft" />
-    <circle cx="150" cy="50" r="14" class="stroke-secondary fill-none" stroke-width="2" opacity="0.8" />
+    <circle cx="150" cy="50" r="14" class="fill-info-soft" />
+    <circle cx="150" cy="50" r="14" class="stroke-info fill-none" stroke-width="1" opacity="0.8" />
     <!-- Landmark icon scaled to fit -->
     <g transform="translate(143, 43) scale(0.58)">
-    <path d="M10 18v-7" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M14 18v-7" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M18 18v-7" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M3 22h18" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M6 18v-7" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M10 18v-7" class="stroke-info" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z" class="stroke-info" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M14 18v-7" class="stroke-info" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M18 18v-7" class="stroke-info" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M3 22h18" class="stroke-info" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M6 18v-7" class="stroke-info" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </g>
 
     <!-- Label -->
@@ -124,20 +124,20 @@
     <circle cx="12" cy="7" r="4" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </g>
 
-    <circle cx="150" cy="270" r="12" class="fill-primary" opacity="0.15" />
-    <circle cx="150" cy="270" r="12" class="stroke-primary fill-none" stroke-width="1.5" opacity="0.7" />
+    <circle cx="150" cy="270" r="12" class="fill-secondary" opacity="0.15" />
+    <circle cx="150" cy="270" r="12" class="stroke-secondary fill-none" stroke-width="1.5" opacity="0.7" />
     <!-- User icon scaled -->
     <g transform="translate(143.5, 263.5) scale(0.54)">
-    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" class="stroke-primary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    <circle cx="12" cy="7" r="4" class="stroke-primary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="12" cy="7" r="4" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </g>
 
-    <circle cx="225" cy="270" r="12" class="fill-accent" opacity="0.15" />
-    <circle cx="225" cy="270" r="12" class="stroke-accent fill-none" stroke-width="1.5" opacity="0.7" />
+    <circle cx="225" cy="270" r="12" class="fill-secondary" opacity="0.15" />
+    <circle cx="225" cy="270" r="12" class="stroke-secondary fill-none" stroke-width="1.5" opacity="0.7" />
     <!-- User icon scaled -->
     <g transform="translate(218.5, 263.5) scale(0.54)">
-    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" class="stroke-accent" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    <circle cx="12" cy="7" r="4" class="stroke-accent" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="12" cy="7" r="4" class="stroke-secondary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </g>
 
     <!-- Shared label -->
