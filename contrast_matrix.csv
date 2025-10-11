@@ -1,0 +1,19 @@
+Foreground/Background,--color-accent,--color-base-100,--color-base-200,--color-base-300,--color-base-content,--color-error,--color-info,--color-neutral,--color-primary,--color-secondary,--color-success,--color-warning
+# RGAA 4.0 Compliance Matrix,,,,,,,,,,,,
+--color-accent,0,1,1,1,0,0,0,0,0,0,0,0
+--color-accent-content,1,0,0,0,0,0,0,0,0,0,0,0
+--color-base-content,0,1,1,1,0,0,0,0,0,0,0,0
+--color-error,0,1,1,1,0,0,0,0,0,0,0,0
+--color-error-content,0,0,0,0,0,1,0,0,0,0,0,0
+--color-info,0,1,1,1,0,0,0,0,0,0,0,0
+--color-info-content,0,0,0,0,0,0,1,0,0,0,0,0
+--color-neutral,0,1,1,1,0,0,0,0,0,0,0,0
+--color-neutral-content,0,0,0,0,0,0,0,1,0,0,0,0
+--color-primary,0,1,1,1,0,0,0,0,0,0,0,0
+--color-primary-content,0,0,0,0,0,0,0,0,1,0,0,0
+--color-secondary,0,1,1,1,0,0,0,0,0,0,0,0
+--color-secondary-content,0,0,0,0,0,0,0,0,0,1,0,0
+--color-success,0,1,1,1,0,0,0,0,0,0,0,0
+--color-success-content,0,0,0,0,0,0,0,0,0,0,1,0
+--color-warning,0,1,1,1,0,0,0,0,0,0,0,0
+--color-warning-content,0,0,0,0,0,0,0,0,0,0,0,1

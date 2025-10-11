@@ -1,34 +1,27 @@
-<style>
-    @media (max-width: 639px) {
-        #left-sidebar {
-            border-right: none !important;
-        }
-    }
-</style>
-
 <!-- Toast container for notifications -->
+{# TODO: sel ? still useful ? #}
 <div id="toast-container" class="toast toast-top toast-center"></div>
 
 <!-- Toggle buttons -->
-<style>
-    @keyframes spin-then-scale {
-        0% {
-            transform: rotate(0deg) scale(1);
-        }
+{# <style>
+     @keyframes spin-then-scale {
+         0% {
+             transform: rotate(0deg) scale(1);
+         }
 
-        50% {
-            transform: rotate(360deg) scale(1);
-        }
+         50% {
+             transform: rotate(360deg) scale(1);
+         }
 
-        100% {
-            transform: rotate(360deg) scale(1.2);
-        }
-    }
+         100% {
+             transform: rotate(360deg) scale(1.2);
+         }
+     }
 
-    .spin-scale-hover:hover {
-        animation: spin-then-scale 1s ease-in-out forwards;
-    }
-</style>
+     .spin-scale-hover:hover {
+         animation: spin-then-scale 1s ease-in-out forwards;
+     }
+ </style> #}
 
 {# <button class="btn btn-sm md:btn-md  btn-neutral btn-outline btn-active" data-tab="generate">
   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden sm:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -69,6 +62,8 @@
 
 <div class="fixed left-0 top-0 h-screen w-[calc(260px+1.5rem)] bg-base-100 text-base-content z-40 transition-transform duration-300 shadow -translate-x-full"
      id="left-sidebar">
+
+
   <ul class="menu p-4 min-h-full mt-12" style="width: 260px !important">
     {# <li>
       <a href="/sujets0" class="flex justify-between items-center" style="width: 100% !important">
@@ -105,8 +100,8 @@
       <div class="text-sm font-semibold mb-2">Largeur</div>
       <ul class="">
         <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left width-btn"
-                  data-width="640px"
+          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
+                  data-width-selector="640px"
                   style="margin-bottom: 0.25rem;
                          padding-left: 0.75rem;
                          justify-content: flex-start;
@@ -114,8 +109,8 @@
                          font-size: 0.875rem">📱 Petit (640px)</button>
         </li>
         <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left width-btn"
-                  data-width="768px"
+          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
+                  data-width-selector="768px"
                   style="margin-bottom: 0.25rem;
                          padding-left: 0.75rem;
                          justify-content: flex-start;
@@ -123,8 +118,8 @@
                          font-size: 0.875rem">📄 Moyen (768px)</button>
         </li>
         <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left width-btn"
-                  data-width="1024px"
+          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
+                  data-width-selector="1024px"
                   style="margin-bottom: 0.25rem;
                          padding-left: 0.75rem;
                          justify-content: flex-start;
@@ -137,115 +132,14 @@
       </ul>
     </li>
 
-    <li class="mt-6">
-      <div class="text-sm font-semibold mb-2">Thèmes</div>
-      <ul class="">
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'anchor')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">⚓️ Anchor</button>
-        </li>
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'purple')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">
-            🟪 <span class="hidden sm:inline">Purple</span>
-          </button>
-        </li>
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'dark-black')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">⚫️ DarkBlack</button>
-        </li>
+    {% include "base/themes-selectable-list.html" %}
 
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'night')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">🌒 Night</button>
-        </li>
-
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'light')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">Light</button>
-        </li>
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'dark')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">Dark</button>
-        </li>
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'zelie')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">Zelie</button>
-        </li>
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'cyberpunk')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">Cyberpunk</button>
-        </li>
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'dracula')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">Dracula</button>
-        </li>
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'emerald')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">Emerald</button>
-        </li>
-        <li>
-          <button class="btn btn-sm btn-outline hover:bg-primary hover:text-primary-content w-full text-left"
-                  onclick="document.documentElement.setAttribute('data-theme', 'nord')"
-                  style="margin-bottom: 0.25rem;
-                         padding-left: 0.75rem;
-                         justify-content: flex-start;
-                         font-weight: 300;
-                         font-size: 0.875rem">Nord</button>
-        </li>
-      </ul>
+    <li class="mt-auto">
+      <div class="join font-mono">
+        <span class="badge join-item badge-neutral">1<sup>ère</sup></span>
+        <span class="badge join-item badge-secondary badge-soft">Spé. Maths</span>
+      </div>
     </li>
-
   </ul>
 
 
@@ -364,6 +258,24 @@
   <span style ="font-size: 0.95rem;font-weight: 300;font-family: var(--font-mono)">Menu</span>
 </button>
 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Sidebar toggle functionality (independent of accessibility manager)
+        const leftSidebar = document.getElementById("left-sidebar");
+        const leftToggle = document.getElementById("left-toggle");
+
+        if (leftToggle && leftSidebar) {
+            leftToggle.addEventListener("click", () => {
+                leftSidebar.classList.toggle("-translate-x-full");
+            });
+        }
+
+        // Note: The accessibility manager (themes, fonts, widths) is handled by 
+        // accessibility-manager.js which should be loaded in the base template
+        // This keeps the drawer.html focused only on drawer-specific functionality
+    });
+</script>
 {# <div class="fixed right-0 top-0 h-screen w-[calc(250px+1rem)] bg-base-200/90 backdrop-blur text-base-content z-40 transition-transform duration-300 overflow-y-auto translate-x-full" id="right-sidebar">
   <ul class="menu p-4 min-h-full mt-12" style="width: 250px !important">
     <li>
@@ -482,157 +394,3 @@
     <circle cx="12" cy="12" r="3" />
   </svg>
 </button> #}
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Sidebar toggle
-        const leftSidebar = document.getElementById("left-sidebar");
-        const rightSidebar = document.getElementById("right-sidebar");
-        const leftToggle = document.getElementById("left-toggle");
-        const rightToggle = document.getElementById("right-toggle");
-
-        try {
-            leftToggle.addEventListener("click", () => {
-                leftSidebar.classList.toggle("-translate-x-full");
-            });
-        } catch (e) {
-            console.log("no leftsidebar found");
-            console.error(e);
-        }
-
-        //try {
-        //rightToggle.addEventListener("click", () => {
-        //rightSidebar.classList.toggle("translate-x-full");
-        //});
-        //} catch (e) {
-        //console.log("no rightsidebar found");
-        //console.error(e);
-        //}
-
-        // Width management
-        function setWidth(width) {
-            const pmWrapper = document.getElementById('pm-wrapper-max-width');
-            if (pmWrapper) {
-                pmWrapper.style.maxWidth = width;
-                localStorage.setItem("pm-width", width);
-            }
-        }
-
-        function initializeWidth() {
-            const savedWidth = localStorage.getItem("pm-width");
-            if (savedWidth) {
-                setWidth(savedWidth);
-            } else {
-                setWidth('640px'); // Default width
-            }
-        }
-
-        // Theme management
-        function setTheme(theme) {
-            document.documentElement.setAttribute("data-theme", theme);
-            localStorage.setItem("theme", theme);
-        }
-
-        function initializeTheme() {
-            const savedTheme = localStorage.getItem("theme");
-            if (savedTheme) {
-                setTheme(savedTheme);
-            } else {
-                const prefersDark = window.matchMedia(
-                    "(prefers-color-scheme: dark)"
-                ).matches;
-                setTheme(prefersDark ? "dark" : "light");
-            }
-        }
-
-        initializeTheme();
-        initializeWidth();
-
-        // Add event listeners to width buttons
-        const widthButtons = document.querySelectorAll(".width-btn");
-        widthButtons.forEach((button) => {
-            const width = button.getAttribute("data-width");
-            button.addEventListener("click", function() {
-                setWidth(width);
-            });
-        });
-
-        // Add event listeners to theme buttons - updated for new button structure
-        const themeButtons = document.querySelectorAll(
-            "button[onclick*='data-theme']"
-        );
-        themeButtons.forEach((button) => {
-            const originalOnClick = button.getAttribute("onclick");
-            button.removeAttribute("onclick");
-            const themeMatch = originalOnClick.match(/data-theme', '([^']+)'/);
-            const themeName = themeMatch ? themeMatch[1] : "light";
-            button.addEventListener("click", function() {
-                setTheme(themeName);
-            });
-        });
-
-        // Listen for system theme changes
-        window
-            .matchMedia("(prefers-color-scheme: dark)")
-            .addEventListener("change", (e) => {
-                if (!localStorage.getItem("theme")) {
-                    setTheme(e.matches ? "dark" : "light");
-                }
-            });
-
-        // Check if the current path is '/sujets0'
-        if (window.location.pathname === '/sujets0' || window.location.pathname === '/sujets0/teacher_manifest' || window.location.pathname === '/maths.pm/sujets0/' || window.location.pathname === '/maths.pm/sujets0/teacher_manifest') {
-            // Get current theme before changing it
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-
-            // Set theme to 'anchor'
-            setTheme('anchor');
-
-            // Disable theme buttons
-            themeButtons.forEach((button) => {
-                button.disabled = true;
-            });
-
-            // Only show toast if theme wasn't already 'anchor'
-            if (currentTheme !== 'anchor') {
-                // Show a toast notification using daisyUI
-                const toastContainer = document.getElementById('toast-container');
-
-                // Clear any existing toasts
-                toastContainer.innerHTML = '';
-
-                const alert = document.createElement('div');
-                alert.className = 'alert alert-info';
-
-                const message = document.createElement('span');
-                message.textContent = 'Le thème pour la génération de PDF est forcément anchor.';
-
-                alert.appendChild(message);
-                toastContainer.appendChild(alert);
-
-                // Remove the toast after 3 seconds
-                setTimeout(() => {
-                    toastContainer.innerHTML = '';
-                }, 3000);
-            }
-
-            // Set up mutation observer to keep theme as 'anchor'
-            const observeTheme = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.attributeName === 'data-theme') {
-                        const newTheme = document.documentElement.getAttribute('data-theme');
-                        if (newTheme !== 'anchor') {
-                            setTheme('anchor');
-                            console.log('Theme forcé à anchor pour la génération de PDF');
-                        }
-                    }
-                });
-            });
-
-            // Start observing theme changes
-            observeTheme.observe(document.documentElement, {
-                attributes: true
-            });
-        }
-    });
-</script>

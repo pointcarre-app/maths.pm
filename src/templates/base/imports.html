@@ -9,6 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
       rel="stylesheet" />
 
+
+{# Open Dyslexic #}
+<link href="https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.min.css"
+      rel="stylesheet" />
+
+
 {# Cdns #}
 <script>
     // Suppress Tailwind production warning for development
@@ -32,6 +38,9 @@
 <link rel="stylesheet" href="{{ request.url_for('static', path='css/root.css') }}" />
 <link rel="stylesheet" href="{{ request.url_for('static', path='css/styles.css') }}" />
 <link rel="stylesheet" href="{{ request.url_for('static', path='css/styles-alt.css') }}" />
+
+{# Accessibility Manager - Centralized theme, font, and UI state management #}
+<script src="{{ request.url_for('static', path='js/accessibility-manager.js') }}"></script>
 
 
 {# Katex #}

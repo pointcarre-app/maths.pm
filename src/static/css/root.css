@@ -15,6 +15,7 @@
     /* New ones */
   --font-lexend: "Lexend", sans-serif;
   --font-playfair: "Playfair Display", serif;
+  --font-opendyslexic-regular: "OpenDyslexicRegular", sans-serif;
 
 
 
@@ -70,7 +71,6 @@
 
 
 
-/**************** Custom DaisyUI Theme - Excellent Light=anchor (DaisyUI v5 format) ****************/
 [data-theme="anchor"] {
   color-scheme: light;
   
@@ -99,8 +99,12 @@
   /* Ensures maximum contrast against dark purple background */
   --color-primary-content: oklch(97% 0.02 285); /* Nearly white with purple hint */
   
+  --color-secondary: oklch(0.563 0.2 340.55);
+
+
   /* --color-secondary: oklch(0.563 0.2 340.55); */
   /* --color-secondary: oklch(0.25 0.2 340.55);   */
+  --color-secondary: oklch(0.4 0.4 340.55);
   --color-secondary-content: oklch(97% 0.02 240); /* Nearly white with blue hint */
   
   /* (Rich gold) */
@@ -131,16 +135,23 @@
   --color-info: oklch(45% 0.35 255);           /* Vibrant, stronger blue */
   --color-info-content: oklch(100% 0 0);       /* Pure white for maximum contrast */
   
-  /* Success green - positive and encouraging */
-  --color-success: oklch(62% 0.22 140);        /* Positive success green */
+  /* After cubrick update*/
+  --color-success: oklch(0.5 0.1607 142.5);
+  /* --color-success: oklch(62% 0.22 140); */
+          /* Positive success green */
   --color-success-content: oklch(97% 0.02 140); /* Nearly white for success text */
   
   /* Warning yellow - attention-grabbing with strong contrast on white */
-  --color-warning: oklch(60% 0.30 65);         /* Strong yellow-amber warning color */
-  --color-warning-content: oklch(15% 0.05 65); /* Dark text for warning (better readability) */
+  /* After cubrick update*/
+  /* --color-warning: oklch(0.57 0.1534 73.37); */
+  --color-warning: oklch(56% 0.25 70);
+  --color-warning-content: oklch(97% 0.02 70);
+           /* Strong yellow-amber warning color */
+  /* --color-warning-content: oklch(15% 0.05 65);  */
+  /* Dark text for warning (better readability) */
   
   /* Error red - clear danger indication */
-  --color-error: oklch(62% 0.22 15);           /* Strong error red */
+  --color-error: oklch(0.51 0.22 15);           /* Strong error red */
   --color-error-content: oklch(97% 0.02 15);   /* Nearly white for error text */
   
   /* ===== COMPONENT STYLING VARIABLES ===== */
@@ -157,6 +168,136 @@
   /* Optional: Depth and visual effects */
   --depth: 2;                     /* Shadow depth multiplier */
   --noise: 0;                     /* Texture noise (disabled for clean look) */
+
+  /* ===== CUSTOM THEMED COLORS ===== */
+  --color-teal-themed: oklch(50% 0.15 180);      /* A balanced teal */
+  --color-teal-themed-content: oklch(95% 0.01 180); /* Light text on teal */
+
+  --color-pink-themed: oklch(65% 0.18 340);      /* A soft, vibrant pink */
+  --color-pink-themed-content: oklch(20% 0.02 340); /* Dark text on pink */
+
+  --color-vermillion-themed: oklch(55% 0.20 30); /* A bright, deep vermillion */
+  --color-vermillion-themed-content: oklch(97% 0.02 30); /* Light text on vermillion */
+
+  --color-brown-themed: oklch(40% 0.10 60);      /* A rich, earthy brown */
+  --color-brown-themed-content: oklch(90% 0.02 60); /* Light text on brown */
+
+  --color-lime-themed: oklch(70% 0.25 110);      /* A fresh, bright lime green */
+  --color-lime-themed-content: oklch(25% 0.05 110); /* Dark text on lime */
+
+  --color-indigo-themed: oklch(40% 0.15 270);    /* A deep, calm indigo */
+  --color-indigo-themed-content: oklch(95% 0.02 270); /* Light text on indigo */
+
+  --color-gold-themed: oklch(75% 0.15 85);      /* A classic, warm gold */
+  --color-gold-themed-content: oklch(20% 0.05 85); /* Dark text on gold */
+
+  --color-cyan-themed: oklch(60% 0.20 200);      /* A clear, vibrant cyan */
+  --color-cyan-themed-content: oklch(90% 0.01 200); /* Light text on cyan */
+
+  --color-olive-themed: oklch(50% 0.10 100);     /* A muted, sophisticated olive */
+  --color-olive-themed-content: oklch(95% 0.01 100); /* Light text on olive */
+
+  --color-lavender-themed: oklch(75% 0.10 300);  /* A soft, gentle lavender */
+  --color-lavender-themed-content: oklch(20% 0.02 300); /* Dark text on lavender */
+}
+
+
+
+[data-theme="reinforced-contrast"] {
+  color-scheme: light;
+  
+  /* ===== BASE COLORS (BACKGROUNDS) ===== */
+  --color-base-100: oklch(100% 0 0);           /* Pure white background */
+  --color-base-200: oklch(98% 0.001 240);      /* Very light gray */
+  --color-base-300: oklch(92% 0.002 240);      /* Light gray for borders */
+  --color-base-content: oklch(10% 0.01 240);   /* Nearly black text */
+  
+  /* ===== PRIMARY COLORS ===== */
+  --color-primary: oklch(28% 0.20 275);        /* Deep vibrant purple */
+  --color-primary-content: oklch(99% 0.01 275); /* Nearly white */
+  
+  /* ===== SECONDARY COLORS ===== */
+  --color-secondary: oklch(30% 0.25 340);      /* Deep vibrant magenta */
+  --color-secondary-content: oklch(99% 0.01 340); /* Nearly white */
+  
+  /* ===== ACCENT COLORS ===== */
+  --color-accent: oklch(35% 0.18 80);          /* Deep vibrant gold */
+  --color-accent-content: oklch(99% 0.01 80);  /* Nearly white */
+  
+  /* ===== NEUTRAL COLORS ===== */
+  --color-neutral: oklch(15% 0.01 240);        /* Very dark gray */
+  --color-neutral-content: oklch(99% 0.01 240); /* Nearly white */
+  
+  /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
+  --color-info: oklch(32% 0.25 240);           /* Deep vibrant blue */
+  --color-info-content: oklch(99% 0.01 240);   /* Nearly white */
+  
+  --color-success: oklch(28% 0.22 145);        /* Deep vibrant green */
+  --color-success-content: oklch(99% 0.01 145); /* Nearly white */
+  
+  --color-warning: oklch(38% 0.20 65);         /* Deep vibrant orange */
+  --color-warning-content: oklch(99% 0.01 65); /* Nearly white */
+  
+  --color-error: oklch(35% 0.28 15);           /* Deep vibrant red */
+  --color-error-content: oklch(99% 0.01 15);   /* Nearly white */
+  
+  /* ===== COMPONENT STYLING VARIABLES ===== */
+  --radius-box: 0;           /* No rounding */
+  --radius-field: 0;         /* No rounding */
+  --radius-selector: 0;      /* No rounding */
+  --size-field: 0.25rem;     /* Field border width */
+  --size-selector: 0.25rem;  /* Selector border width */
+  --border: 1px;             /* Standard border width */
+  --depth: 2;                /* Shadow depth multiplier */
+  --noise: 0;                /* Texture noise disabled */
+}
+
+
+
+[data-theme="inversed-contrast"] {
+  color-scheme: dark;
+
+  /* ===== BASE COLORS (BACKGROUNDS) ===== */
+  --color-base-100: oklch(25% 0.15 264);    /* Navy blue #000080 */
+  --color-base-200: oklch(22% 0.15 264);    /* Slightly darker navy */
+  --color-base-300: oklch(28% 0.15 264);    /* Lighter navy for borders */
+  --color-base-content: oklch(97% 0.20 100); /* Bright yellow #FFFF00 */
+
+  /* ===== PRIMARY COLORS ===== */
+  --color-primary: oklch(97% 0.20 100);        /* Bright yellow #FFFF00 */
+  --color-primary-content: oklch(25% 0.15 264); /* Navy blue text */
+
+  /* ===== SECONDARY COLORS ===== */
+  --color-secondary: oklch(95% 0.25 330);       /* Bright magenta/pink */
+  --color-secondary-content: oklch(25% 0.15 264); /* Navy blue text */
+
+  /* ===== ACCENT COLORS ===== */
+  --color-accent: oklch(95% 0.30 180);          /* Bright cyan/aqua */
+  --color-accent-content: oklch(25% 0.15 264); /* Navy blue text */
+
+  /* ===== NEUTRAL COLORS ===== */
+  --color-neutral: oklch(30% 0.15 264);        /* Navy gray */
+  --color-neutral-content: oklch(97% 0.20 100); /* Yellow text */
+
+  /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
+  --color-info: oklch(90% 0.25 240);           /* Bright blue */
+  --color-info-content: oklch(25% 0.15 264);   /* Navy text */
+  --color-success: oklch(90% 0.25 145);        /* Bright lime green */
+  --color-success-content: oklch(25% 0.15 264); /* Navy text */
+  --color-warning: oklch(95% 0.22 60);         /* Bright orange */
+  --color-warning-content: oklch(25% 0.15 264); /* Navy text */
+  --color-error: oklch(85% 0.30 25);           /* Bright red */
+  --color-error-content: oklch(25% 0.15 264);   /* Navy text */
+
+  /* ===== COMPONENT STYLING VARIABLES ===== */
+  --radius-box: 0;           /* No rounding */
+  --radius-field: 0.05rem;   /* Very minimal rounding for input fields */
+  --radius-selector: 0;      /* No rounding for buttons */
+  --size-field: 0.25rem;     /* Field border width */
+  --size-selector: 0.25rem;  /* Selector border width */
+  --border: 1px;             /* Standard border width */
+  --depth: 2;                /* Shadow depth multiplier */
+  --noise: 0;                /* Texture noise disabled */
 }
 
 
@@ -319,13 +460,23 @@
   color-scheme: dark;
 
   /* ===== BASE COLORS (BACKGROUNDS) ===== */
+  /*--color-base-100: oklch(20% 0.01 240);     Very dark gray with slight blue undertone */
+  /*--color-base-200: oklch(25% 0.01 240);     Slightly lighter dark gray */
+  /*--color-base-300: oklch(30% 0.015 240);    Even lighter for borders */
+  /*--color-base-content: red;  Light gray for text on dark backgrounds */
+
+
+    /* ===== BASE COLORS (BACKGROUNDS) ===== */
   --color-base-100: oklch(20% 0.01 240);    /* Very dark gray with slight blue undertone */
   --color-base-200: oklch(25% 0.01 240);    /* Slightly lighter dark gray */
   --color-base-300: oklch(30% 0.015 240);   /* Even lighter for borders */
-  --color-base-content: red; /* Light gray for text on dark backgrounds */
+  --color-base-content: oklch(65% 0.25 15); /* Readable reddish text */
 
-  /* ===== PRIMARY COLORS (PURPLE THEME) ===== */
-  --color-primary: oklch(55% 0.18 285);        /* Rich purple, adjusted for dark theme */
+
+  --color-green: oklch(65% 0.19 145);
+
+  /* ===== PRIMARY COLORS Very Flashy Green ===== */
+  --color-primary: var(--color-green);        /* Rich purple, adjusted for dark theme */
   --color-primary-content: oklch(97% 0.02 285); /* Nearly white with purple hint */
 
   /* ===== SECONDARY COLORS (GOLD THEME) ===== */
@@ -483,3 +634,279 @@
   --size-selector: 0.25rem;
   --border: 1px;
 }
+
+
+
+
+
+/**************** Custom DaisyUI Theme - Light Opt (DaisyUI v5 format) ****************/
+
+[data-theme="light-opt"] {
+  color-scheme: light;
+
+  /* ===== BASE COLORS (BACKGROUNDS) ===== */
+  --color-base-100: oklch(99% 0.002 120);    /* Nearly pure white */
+  --color-base-200: oklch(96% 0.005 120);    /* Very light warm gray */
+  --color-base-300: oklch(90% 0.01 155);     /* Light warm gray */
+  --color-base-content: oklch(22% 0.015 240); /* Deep charcoal for text */
+
+  /* ===== PRIMARY COLORS (PURPLE THEME) ===== */
+  --color-primary: oklch(60% 0.22 300);     /* Vibrant purple */
+  --color-primary-content: oklch(98% 0.02 300); /* Near-white with purple hint */
+
+  /* ===== SECONDARY COLORS (TEAL THEME) ===== */
+  --color-secondary: oklch(55% 0.18 190);   /* Deep teal */
+  --color-secondary-content: oklch(98% 0.02 190); /* Near-white with teal hint */
+
+  /* ===== ACCENT COLORS (GOLD THEME) ===== */
+  --color-accent: oklch(75% 0.15 80);       /* Warm gold */
+  --color-accent-content: oklch(15% 0.05 80); /* Dark text for gold */
+
+  /* ===== NEUTRAL COLORS ===== */
+  --color-neutral: oklch(25% 0.01 240);     /* Dark gray for neutral elements */
+  --color-neutral-content: oklch(95% 0.01 240); /* Light gray for text on neutral */
+
+  /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
+  --color-info: oklch(65% 0.20 300);        /* Purple for info (aligned with primary) */
+  --color-info-content: oklch(98% 0.02 300);  /* Near-white for info text */
+
+  --color-success: oklch(65% 0.18 140);     /* Soft green for success */
+  --color-success-content: oklch(98% 0.02 140); /* Near-white for success text */
+
+  --color-warning: oklch(65% 0.12 60);      /* Soft yellow for warning (less aggressive) */
+  --color-warning-content: oklch(25% 0.05 60); /* Dark text for warning */
+
+  --color-error: oklch(65% 0.20 20);        /* Soft red for error (less aggressive) */
+  --color-error-content: oklch(98% 0.02 20); /* Near-white for error text */
+
+  /* ===== COMPONENT STYLING ===== */
+  --radius-box: 0.5rem;
+  --radius-field: 0.25rem;
+  --radius-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --size-selector: 0.25rem;
+  --border: 1px;
+  --depth: 2;
+  --noise: 0;
+}
+
+/**************** Custom DaisyUI Theme - Dark Opt (DaisyUI v5 format) ****************/
+
+[data-theme="dark-opt"] {
+  color-scheme: dark;
+
+  /* ===== BASE COLORS (BACKGROUNDS) ===== */
+  --color-base-100: oklch(18% 0.02 240);    /* Deep dark blue-gray */
+  --color-base-200: oklch(22% 0.02 240);    /* Slightly lighter dark gray */
+  --color-base-300: oklch(26% 0.02 240);    /* Even lighter for borders/dividers */
+  --color-base-content: oklch(72% 0.25 20); /* Soft light gray for text */
+
+  /* ===== PRIMARY COLORS (PURPLE THEME) ===== */
+  --color-primary: oklch(60% 0.22 300);     /* Vibrant purple */
+  --color-primary-content: oklch(98% 0.02 300); /* Near-white with purple hint */
+
+  /* ===== SECONDARY COLORS (TEAL THEME) ===== */
+  --color-secondary: oklch(55% 0.18 190);   /* Deep teal */
+  --color-secondary-content: oklch(98% 0.02 190); /* Near-white with teal hint */
+
+  /* ===== ACCENT COLORS (GOLD THEME) ===== */
+  --color-accent: oklch(75% 0.15 80);       /* Warm gold */
+  --color-accent-content: oklch(15% 0.05 80); /* Dark text for gold */
+
+  /* ===== NEUTRAL COLORS ===== */
+  --color-neutral: oklch(25% 0.01 240);     /* Dark gray for neutral elements */
+  --color-neutral-content: oklch(95% 0.01 240); /* Light gray for text on neutral */
+
+  /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
+  --color-info: oklch(65% 0.20 300);        /* Purple for info (aligned with primary) */
+  --color-info-content: oklch(98% 0.02 300);  /* Near-white for info text */
+
+  --color-success: oklch(65% 0.18 140);     /* Soft green for success */
+  --color-success-content: oklch(98% 0.02 140); /* Near-white for success text */
+
+  --color-warning: oklch(65% 0.12 60);      /* Soft yellow for warning (less aggressive) */
+  --color-warning-content: oklch(25% 0.05 60); /* Dark text for warning */
+
+  --color-error: oklch(65% 0.20 20);        /* Soft red for error (less aggressive) */
+  --color-error-content: oklch(98% 0.02 20); /* Near-white for error text */
+
+  /* ===== COMPONENT STYLING ===== */
+  --radius-box: 0.5rem;
+  --radius-field: 0.25rem;
+  --radius-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --size-selector: 0.25rem;
+  --border: 1px;
+  --depth: 2;
+  --noise: 0;
+}
+
+
+
+
+
+
+
+
+
+[data-theme="inversed-contrast"] {
+  color-scheme: dark;
+
+  /* ===== BASE COLORS (BACKGROUNDS) ===== */
+  --color-base-100: oklch(25% 0.15 264);    /* Navy blue #000080 */
+  --color-base-200: oklch(22% 0.15 264);    /* Slightly darker navy */
+  --color-base-300: oklch(28% 0.15 264);    /* Lighter navy for borders */
+  --color-base-content: oklch(97% 0.20 100); /* Bright yellow #FFFF00 */
+
+  /* ===== PRIMARY COLORS ===== */
+  --color-primary: oklch(97% 0.20 100);        /* Yellow */
+  --color-primary-content: oklch(25% 0.15 264); /* Navy blue text */
+
+  /* ===== SECONDARY COLORS ===== */
+  --color-secondary: oklch(85% 0.18 110);       /* Light yellow-green */
+  --color-secondary-content: oklch(25% 0.15 264); /* Navy blue text */
+
+  /* ===== ACCENT COLORS ===== */
+  --color-accent: oklch(90% 0.22 90);          /* Bright lime yellow */
+  --color-accent-content: oklch(25% 0.15 264); /* Navy blue text */
+
+  /* ===== NEUTRAL COLORS ===== */
+  --color-neutral: oklch(30% 0.15 264);        /* Navy gray */
+  --color-neutral-content: oklch(97% 0.20 100); /* Yellow text */
+
+  /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
+  --color-info: oklch(75% 0.18 240);           /* Lighter blue */
+  --color-info-content: oklch(25% 0.15 264);   /* Navy text */
+  --color-success: oklch(80% 0.20 140);        /* Bright green */
+  --color-success-content: oklch(25% 0.15 264); /* Navy text */
+  --color-warning: oklch(85% 0.18 80);         /* Bright orange-yellow */
+  --color-warning-content: oklch(25% 0.15 264); /* Navy text */
+  --color-error: oklch(70% 0.25 25);           /* Bright red */
+  --color-error-content: oklch(97% 0.20 100);   /* Yellow text */
+
+  /* ===== COMPONENT STYLING VARIABLES ===== */
+  --radius-box: 0;           /* No rounding for cards, containers */
+  --radius-field: 0.05rem;   /* Very minimal rounding for input fields */
+  --radius-selector: 0;      /* No rounding for buttons */
+  --size-field: 0.25rem;     /* Field border width */
+  --size-selector: 0.25rem;  /* Selector border width */
+  --border: 1px;             /* Standard border width */
+  --depth: 2;                /* Shadow depth multiplier */
+  --noise: 0;                /* Texture noise (disabled for clean look) */
+}
+
+
+
+
+
+/* NOT USED */
+
+
+
+/* Not used: palette type autumn nice but contrast not good enough */
+
+[data-theme="light-readable"] {
+  color-scheme: light;
+
+  /* ===== BASE COLORS (BACKGROUNDS) ===== */
+  --color-base-100: oklch(99% 0.002 190);      /* Near-white with slight cool tint */
+  --color-base-200: oklch(96% 0.005 190);      /* Very light gray for cards/modals */
+  --color-base-300: oklch(90% 0.01 190);       /* Light gray for borders/dividers */
+  --color-base-content: oklch(20% 0.02 220);   /* Dark charcoal for text, high contrast */
+
+  /* ===== PRIMARY COLORS (TEAL THEME) ===== */
+  --color-primary: oklch(55% 0.18 190);        /* Rich teal, accessible */
+  --color-primary-content: oklch(97% 0.01 190); /* Near-white text for contrast */
+
+  /* ===== SECONDARY COLORS (CORAL THEME) ===== */
+  --color-secondary: oklch(65% 0.15 20);       /* Warm coral */
+  --color-secondary-content: oklch(97% 0.01 20); /* Near-white text */
+
+  /* ===== ACCENT COLORS (GOLD THEME) ===== */
+  --color-accent: oklch(75% 0.12 80);          /* Soft gold for highlights */
+  --color-accent-content: oklch(20% 0.02 80);  /* Dark text for contrast */
+
+  /* ===== NEUTRAL COLORS ===== */
+  --color-neutral: oklch(30% 0.01 220);        /* Medium gray for neutral elements */
+  --color-neutral-content: oklch(95% 0.01 220); /* Light gray text on neutral */
+
+  /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
+  --color-info: oklch(60% 0.20 220);           /* Info blue */
+  --color-info-content: oklch(97% 0.01 220);   /* Near-white text */
+
+  --color-success: oklch(60% 0.18 150);        /* Success green */
+  --color-success-content: oklch(97% 0.01 150); /* Near-white text */
+
+  --color-warning: oklch(65% 0.25 70);         /* Yellow-amber warning */
+  --color-warning-content: oklch(20% 0.02 70); /* Dark text for contrast */
+
+  --color-error: oklch(65% 0.22 15);           /* Error red */
+  --color-error-content: oklch(97% 0.01 15);   /* Near-white text */
+
+  /* ===== COMPONENT STYLING VARIABLES ===== */
+  --radius-box: 0.5rem;          /* Moderate rounding for cards */
+  --radius-field: 0.3rem;        /* Slightly rounded inputs */
+  --radius-selector: 0.3rem;     /* Rounded buttons */
+  --size-field: 0.25rem;         /* Field border width */
+  --size-selector: 0.25rem;      /* Selector border width */
+  --border: 1px;                 /* Standard border */
+  --depth: 2;                    /* Shadow depth */
+  --noise: 0;                    /* No texture noise */
+}
+
+/**************** Custom DaisyUI Theme - Dark RD (DaisyUI v5 format) ****************/
+
+[data-theme="dark-readable"] {
+  color-scheme: dark;
+
+  /* ===== BASE COLORS (BACKGROUNDS) ===== */
+  --color-base-100: oklch(18% 0.01 220);      /* Dark gray with cool undertone */
+  --color-base-200: oklch(22% 0.01 220);      /* Slightly lighter dark gray */
+  --color-base-300: oklch(28% 0.015 220);     /* Lighter gray for borders */
+  --color-base-content: oklch(95% 0.01 220);  /* Light gray text, high contrast */
+
+  /* ===== PRIMARY COLORS (TEAL THEME) ===== */
+  --color-primary: oklch(55% 0.18 190);        /* Rich teal, same as light theme */
+  --color-primary-content: oklch(97% 0.01 190); /* Near-white text */
+
+  /* ===== SECONDARY COLORS (CORAL THEME) ===== */
+  --color-secondary: oklch(65% 0.15 20);       /* Warm coral, same as light theme */
+  --color-secondary-content: oklch(97% 0.01 20); /* Near-white text */
+
+  /* ===== ACCENT COLORS (GOLD THEME) ===== */
+  --color-accent: oklch(75% 0.12 80);          /* Soft gold, same as light theme */
+  --color-accent-content: oklch(20% 0.02 80);  /* Dark text for contrast */
+
+  /* ===== NEUTRAL COLORS ===== */
+  --color-neutral: oklch(25% 0.01 220);        /* Dark gray for neutral elements */
+  --color-neutral-content: oklch(95% 0.01 220); /* Light gray text on neutral */
+
+  /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
+  --color-info: oklch(60% 0.20 220);           /* Info blue */
+  --color-info-content: oklch(97% 0.01 220);   /* Near-white text */
+
+  --color-success: oklch(60% 0.18 150);        /* Success green */
+  --color-success-content: oklch(97% 0.01 150); /* Near-white text */
+
+  --color-warning: oklch(65% 0.25 70);         /* Yellow-amber warning */
+  --color-warning-content: oklch(20% 0.02 70); /* Dark text for contrast */
+
+  --color-error: oklch(65% 0.22 15);           /* Error red */
+  --color-error-content: oklch(97% 0.01 15);   /* Near-white text */
+
+  /* ===== COMPONENT STYLING VARIABLES ===== */
+  --radius-box: 0.5rem;          /* Moderate rounding for cards */
+  --radius-field: 0.3rem;        /* Slightly rounded inputs */
+  --radius-selector: 0.3rem;     /* Rounded buttons */
+  --size-field: 0.25rem;         /* Field border width */
+  --size-selector: 0.25rem;      /* Selector border width */
+  --border: 1px;                 /* Standard border */
+  --depth: 2;                    /* Shadow depth */
+  --noise: 0;                    /* No texture noise */
+}
+
+
+
+
+
+
