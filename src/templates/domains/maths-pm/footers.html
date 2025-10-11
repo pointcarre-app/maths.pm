@@ -132,53 +132,55 @@
 </section> #}
 
 
-<!-- Section 1 : Engagement vie privée -->
-<div class="mt-12 sm:mt-24">
-  <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto"
-       style="background-color: var(--color-primary-ghost) !important;
-              color: var(--color-primary) !important;
-              border-radius: var(--radius-box) !important">
-    <div class="max-w-3xl mx-auto py-10">
-      <div class="mb-6 sm:mb-12">
-        <span class="font-handwritten text-3xl sm:text-3xl md:text-5xl">Maths.pm</span>
-        <span class="font-base text-lg sm:text-xl md:text-3xl italic">&nbsp;ne collecte aucune donnée.</span>
-      </div>
-      <div class="text-base sm:text-lg text-left mb-6 font-light">
-        <ul class="list-disc list-inside">
-          <li>Aucun cookie collecté</li>
-          <li>Aucune ligne de log écrite</li>
-          <li>Pas l'ombre d'une base de données distante</li>
-          <li>
-            <span class="font-medium">nihil omnino</span>
-          </li>
-        </ul>
-      </div>
-      <hr class="my-10 border-dashed border-base-content/30" />
+{# Section 1 : Engagement vie privée  #}
+{% if request.path != "/" %}
+  <div class="mt-12 sm:mt-24">
+    <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto"
+         style="background-color: var(--color-primary-ghost) !important;
+                color: var(--color-primary) !important;
+                border-radius: var(--radius-box) !important">
+      <div class="max-w-3xl mx-auto py-10">
+        <div class="mb-6 sm:mb-12">
+          <span class="font-handwritten text-3xl sm:text-3xl md:text-5xl">Maths.pm</span>
+          <span class="font-base text-lg sm:text-xl md:text-3xl italic">&nbsp;ne collecte aucune donnée.</span>
+        </div>
+        <div class="text-base sm:text-lg text-left mb-6 font-light">
+          <ul class="list-disc list-inside">
+            <li>Aucun cookie collecté</li>
+            <li>Aucune ligne de log écrite</li>
+            <li>Pas l'ombre d'une base de données distante</li>
+            <li>
+              <span class="font-medium">nihil omnino</span>
+            </li>
+          </ul>
+        </div>
+        <hr class="my-10 border-dashed border-base-content/30" />
 
-      <div class="text-base sm:text-lg text-left mt-4  font-light">
-        <ul class="list-disc list-inside">
-          <li>
-            Ni par   <span class="font-heading text-lg sm:text-xl">pointcarre.app</span></span>
-          </li>
-          <li>Ni par notre hébergeur</li>
-          <li>Ni par aucun service tiers</li>
-        </ul>
-      </div>
-
-
-      <hr class="my-10 border-dashed border-base-content/30" />
+        <div class="text-base sm:text-lg text-left mt-4  font-light">
+          <ul class="list-disc list-inside">
+            <li>
+              Ni par   <span class="font-heading text-lg sm:text-xl">pointcarre.app</span></span>
+            </li>
+            <li>Ni par notre hébergeur</li>
+            <li>Ni par aucun service tiers</li>
+          </ul>
+        </div>
 
 
-      <p class="mt-4 text-lg text-left font-light">
-        Nous expliquons notre démarche <span class="italic">zéro donnée conservée</span> sur cette <a class="underline underline-offset-2 hover:underline-offset-4 font-light"
+        <hr class="my-10 border-dashed border-base-content/30" />
+
+
+        <p class="mt-4 text-lg text-left font-light">
+          Nous expliquons notre démarche <span class="italic">zéro donnée conservée</span> sur cette <a class="underline underline-offset-2 hover:underline-offset-4 font-light"
     href="{{ request.url_for('get_pm_root') }}">page</a>.
-      </p>
+        </p>
 
+      </div>
     </div>
   </div>
-</div>
+{% endif %}
 
-<!-- Section 2 : Communs numériques -->
+{# Section 2 : Communs numériques  #}
 <div class="mt-12 mb-12">
   <div class="bg-base-200/80 text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto md:card"
        style="border-radius: var(--radius-box) !important">
@@ -222,7 +224,7 @@
 </div>
 
 
-<!-- Section 3 : Signature -->
+{# Section 3 : Signature  #}
 <div class="flex items-center justify-center flex-col my-12 py-12">
   <div class="font-handwritten text-4xl mb-3 mt-[-0.5rem]">Maths.pm, par</div>
   <div>

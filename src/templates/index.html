@@ -9,19 +9,19 @@
 
   <section class="hero min-h-[60vh]">
     <div class="hero-content">
-      <div class="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-4 items-end py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-0 items-end py-8">
         <!-- Colonne de gauche : Contenu textuel -->
         <div class="sm:px-6">
-          <h1 class="text-center lg:text-left text-5xl font-bold font-handwritten">
+          <h1 class="text-center lg:text-left text-5xl font-bold font-handwritten mb-6">
             <span class="text-primary">Maths</span>.pm
           </h1>
-          <br />
           <p class="">
-            <div class="text-center lg:text-left font-light italic text-base-content mb-2">
+            {# <div class="text-center lg:text-left font-light italic text-base-content mb-2">
               Une plateforme de ressources mathématiques <span class="font-medium">libres</span>, <span class="font-medium">sans collecte de données</span>, pour les élèves et les enseignants.
-            </div>
-            <div class="text-center lg:text-left font-light italic text-base-content mb-4">
-              Notre <span class="text-primary">objectif</span> est de créer un <span class="font-medium">écosystème pédagogique libre</span>, qui met en jeu différents intervenants et seraitvalidé par le Ministère de l'Éducation Nationale :
+            </div> #}
+            <div class="text-center lg:text-left font-light italic text-base-content mb-6">
+              Notre mission : construire une plateforme de ressources mathématiques libre et sans collecte de données, formant un écosystème pédagogique ouvert et respectueux de la vie privée.
+              {# Notre <span class="text-primary">mission</span> est de bâtir une plateforme de ressources pour l'enseignement des mathématiques sous la forme d'un <span class="font-medium">écosystème pédagogique libre et sans collecte de données</span> : #}
             </div>
           </p>
           {# bg-base-200/80 p-4 sm:p-6 #}
@@ -90,7 +90,7 @@
                   <div>
                     <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="rounded-box">
                       <g>
-                      <circle cx="20" cy="20" r="18" class="fill-base-300" />
+                      <circle cx="20" cy="20" r="18" class="fill-base-200" />
                       <circle cx="20" cy="20" r="18" class="stroke-base-content fill-none" stroke-width="0.5" opacity="0.8" />
                       <rect x="15" y="15" width="10" height="2.5" rx="0.5" class="fill-base-content" opacity="0.9" />
                       <rect x="15" y="19" width="10" height="2.5" rx="0.5" class="fill-base-content" opacity="0.7" />
@@ -128,7 +128,9 @@
                     <div>
                       <strong>Ministère E.N.</strong>
                     </div>
-                    <div class="text-sm opacity-60">valide le code et l'hébergeur</div>
+                    <div class="text-sm opacity-60">
+                      valide le code et l'hébergeur (aucune implication sur ministère pour le moment) - <strong>nous échangeons avec le ministère et mettrons à jour cette information</strong>
+                    </div>
                   </div>
                 </li>
 
@@ -158,12 +160,9 @@
           {# <hr class="my-8 border-base-300" /> #}
         </div>
         <!-- Colonne de droite : SVG du workflow -->
-        <div class="bg-base-100/70 border-0 shadow-lg mx-4 sm:mx-20 md:mx-30 lg:mx-1"
-             style="border-radius: var(--radius-box)">
+        <div class="mx-4 sm:mx-20 md:mx-30 lg:mx-1 py-10 lg:py-0" style="border-radius: var(--radius-box)">
           {# <div class="relative text-center">Objectif</div> #}
-          <div class="flex justify-end scale-100 lg:scale-90 xl:scale-87">
-            {% include "products/workflow-figure-svg.html" %}
-          </div>
+          <div class="flex justify-end scale-100">{% include "products/workflow-figure-svg.html" %}</div>
         </div>
       </div>
     </div>
@@ -173,11 +172,11 @@
   <section class="py-14 text-center"
            style="background-color: var(--color-primary-soft) !important;
                   color: var(--color-primary) !important">
-    <p class="text-lg italic mb-4">
+    <p class="text-lg italic mb-8">
       Un cercle vertueux où la technologie sert la pédagogie, dans le respect absolu de la vie privée.
     </p>
 
-    <div class="">
+    <div class="flex gap-6 justify-center">
       <a href="/ressources" class="btn btn-primary btn-medium">Explorer les ressources</a>
       <a href="/about" class="btn btn-medium">Notre démarche</a>
     </div>
@@ -189,12 +188,12 @@
       <h2 class="text-3xl font-bold text-center mb-12">
         Une architecture <span class="text-secondary italic">zero-data</span>
       </h2>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div class="border-base-300 bg-base-100/70 border-0 mx-4 sm:mx-20 md:mx-30 lg:mx-0"
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-12">
+        <div class="border-base-300 bg-base-100/70 border-0 mx-4 sm:mx-15 md:mx-20 lg:mx-25 xl:mx-0"
              style="border-radius: var(--radius-box)">
           {% include "products/zero-data-svg.html" %}
         </div>
-        <div class="space-y-4">
+        <div class="space-y-4 mx-4 sm:mx-20 md:mx-25 lg:mx-30 xl:mx-0">
           <p class="text-base">
             Notre plateforme repose sur des <strong>sites statiques</strong>, des <strong>standards ouverts</strong> et une
             <strong>architecture zero-data</strong> pour garantir :
@@ -214,6 +213,88 @@
             Pour en savoir plus au sujet de notre démarche et des choix d'hébergements, <a href="/about" class="link link-primary">consultez notre page à ce sujet</a>.
             {# Nous privilégions les hébergeurs et APIs <strong>français 🇫🇷</strong> pour renforcer la souveraineté numérique. #}
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-base-200/50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        Les <span class="text-primary">communs numériques</span> : un optimum économique
+      </h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="space-y-4 order-2 lg:order-1">
+          <p class="text-base">
+            Le modèle des <strong>communs numériques éducatifs</strong> représente un <strong>optimum économique</strong>
+            par rapport aux solutions propriétaires :
+          </p>
+
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <div class="mt-1">
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                  <circle cx="12" cy="12" r="10" class="fill-accent-soft stroke-accent" stroke-width="0.5" />
+                  <text x="12" y="16" text-anchor="middle" class="fill-accent" font-size="8" font-weight="600">1×</text>
+                </svg>
+              </div>
+              <div>
+                <strong>Rédaction unique</strong>
+                <div class="text-sm opacity-75">
+                  Les enseignants créent le contenu une seule fois, il profite à tous
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1">
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                  <circle cx="12" cy="12" r="10" class="fill-primary-soft stroke-primary" stroke-width="0.5" />
+                  <text x="12" y="16" text-anchor="middle" class="fill-primary" font-size="8" font-weight="600">1×</text>
+                </svg>
+              </div>
+              <div>
+                <strong>Développement mutualisé</strong>
+                <div class="text-sm opacity-75">L'interface est créée une fois et partagée librement</div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1">
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                  <circle cx="12" cy="12" r="10" class="fill-success" opacity="0.2" />
+                  <circle cx="12" cy="12" r="10" class="stroke-success fill-none" stroke-width="0.5" stroke-dasharray="2,2" />
+                  <text x="12" y="16" text-anchor="middle" class="fill-success" font-size="10" font-weight="600">0€</text>
+                </svg>
+              </div>
+              <div>
+                <strong>Coût marginal nul</strong>
+                <div class="text-sm opacity-75">
+                  Sites statiques = pas de serveurs, pas de données, pas de coûts récurrents
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-success mt-6">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="stroke-current shrink-0 h-6 w-6"
+                 fill="none"
+                 viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <div class="font-bold">Résultat :</div>
+              <div class="text-sm">
+                Un même investissement initial bénéficie à un nombre illimité d'élèves, sans coût supplémentaire.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-base-300 bg-base-100/70 border-0 mx-4 sm:mx-20 md:mx-30 lg:mx-0 order-1 lg:order-2"
+             style="border-radius: var(--radius-box)">
+          {% include "products/commons-economics-flow-svg.html" %}
         </div>
       </div>
     </div>
