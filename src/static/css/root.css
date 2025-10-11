@@ -254,31 +254,26 @@
 
 
 
+
 [data-theme="inversed-contrast"] {
   color-scheme: dark;
-
   /* ===== BASE COLORS (BACKGROUNDS) ===== */
   --color-base-100: oklch(25% 0.15 264);    /* Navy blue #000080 */
   --color-base-200: oklch(22% 0.15 264);    /* Slightly darker navy */
   --color-base-300: oklch(28% 0.15 264);    /* Lighter navy for borders */
   --color-base-content: oklch(97% 0.20 100); /* Bright yellow #FFFF00 */
-
   /* ===== PRIMARY COLORS ===== */
   --color-primary: oklch(97% 0.20 100);        /* Bright yellow #FFFF00 */
   --color-primary-content: oklch(25% 0.15 264); /* Navy blue text */
-
   /* ===== SECONDARY COLORS ===== */
-  --color-secondary: oklch(95% 0.25 330);       /* Bright magenta/pink */
+  --color-secondary: oklch(98% 0.35 330);       /* Ultra bright magenta/pink */
   --color-secondary-content: oklch(25% 0.15 264); /* Navy blue text */
-
   /* ===== ACCENT COLORS ===== */
-  --color-accent: oklch(95% 0.30 180);          /* Bright cyan/aqua */
+  --color-accent: oklch(98% 0.35 180);          /* Ultra bright cyan/aqua */
   --color-accent-content: oklch(25% 0.15 264); /* Navy blue text */
-
   /* ===== NEUTRAL COLORS ===== */
   --color-neutral: oklch(30% 0.15 264);        /* Navy gray */
   --color-neutral-content: oklch(97% 0.20 100); /* Yellow text */
-
   /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
   --color-info: oklch(90% 0.25 240);           /* Bright blue */
   --color-info-content: oklch(25% 0.15 264);   /* Navy text */
@@ -288,18 +283,16 @@
   --color-warning-content: oklch(25% 0.15 264); /* Navy text */
   --color-error: oklch(85% 0.30 25);           /* Bright red */
   --color-error-content: oklch(25% 0.15 264);   /* Navy text */
-
   /* ===== COMPONENT STYLING VARIABLES ===== */
   --radius-box: 0;           /* No rounding */
-  --radius-field: 0.05rem;   /* Very minimal rounding for input fields */
-  --radius-selector: 0;      /* No rounding for buttons */
+  --radius-field: 0;         /* No rounding */
+  --radius-selector: 0;      /* No rounding */
   --size-field: 0.25rem;     /* Field border width */
   --size-selector: 0.25rem;  /* Selector border width */
   --border: 1px;             /* Standard border width */
   --depth: 2;                /* Shadow depth multiplier */
   --noise: 0;                /* Texture noise disabled */
 }
-
 
 
 
@@ -694,106 +687,59 @@
 
 [data-theme="dark-opt"] {
   color-scheme: dark;
-
+  
   /* ===== BASE COLORS (BACKGROUNDS) ===== */
-  --color-base-100: oklch(18% 0.02 240);    /* Deep dark blue-gray */
-  --color-base-200: oklch(22% 0.02 240);    /* Slightly lighter dark gray */
-  --color-base-300: oklch(26% 0.02 240);    /* Even lighter for borders/dividers */
-  --color-base-content: oklch(72% 0.25 20); /* Soft light gray for text */
-
-  /* ===== PRIMARY COLORS (PURPLE THEME) ===== */
-  --color-primary: oklch(60% 0.22 300);     /* Vibrant purple */
-  --color-primary-content: oklch(98% 0.02 300); /* Near-white with purple hint */
-
-  /* ===== SECONDARY COLORS (TEAL THEME) ===== */
-  --color-secondary: oklch(55% 0.18 190);   /* Deep teal */
-  --color-secondary-content: oklch(98% 0.02 190); /* Near-white with teal hint */
-
-  /* ===== ACCENT COLORS (GOLD THEME) ===== */
-  --color-accent: oklch(75% 0.15 80);       /* Warm gold */
-  --color-accent-content: oklch(15% 0.05 80); /* Dark text for gold */
-
+  --color-base-100: oklch(15% 0.015 240);    /* Very dark background */
+  --color-base-200: oklch(18% 0.015 240);    /* Slightly lighter dark */
+  --color-base-300: oklch(25% 0.020 240);    /* Lighter for borders */
+  --color-base-content: oklch(95% 0.010 240); /* Very light text */
+  
+  /* ===== PRIMARY COLORS (BRIGHT PURPLE) ===== */
+  --color-primary: oklch(75% 0.20 285);        /* Bright purple for readability */
+  --color-primary-content: oklch(15% 0.02 285); /* Dark text on bright bg */
+  
+  /* ===== SECONDARY COLORS (BRIGHT PINK) ===== */
+  --color-secondary: oklch(72% 0.25 340);       /* Bright pink/magenta */
+  --color-secondary-content: oklch(15% 0.02 340); /* Dark text on bright bg */
+  
+  /* ===== ACCENT COLORS (BRIGHT GOLD) ===== */
+  --color-accent: oklch(78% 0.15 80);          /* Bright gold */
+  --color-accent-content: oklch(15% 0.02 80);  /* Dark text on bright bg */
+  
   /* ===== NEUTRAL COLORS ===== */
-  --color-neutral: oklch(25% 0.01 240);     /* Dark gray for neutral elements */
-  --color-neutral-content: oklch(95% 0.01 240); /* Light gray for text on neutral */
-
+  --color-neutral: oklch(22% 0.015 240);       /* Dark neutral */
+  --color-neutral-content: oklch(95% 0.010 240); /* Light text on neutral */
+  
   /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
-  --color-info: oklch(65% 0.20 300);        /* Purple for info (aligned with primary) */
-  --color-info-content: oklch(98% 0.02 300);  /* Near-white for info text */
-
-  --color-success: oklch(65% 0.18 140);     /* Soft green for success */
-  --color-success-content: oklch(98% 0.02 140); /* Near-white for success text */
-
-  --color-warning: oklch(65% 0.12 60);      /* Soft yellow for warning (less aggressive) */
-  --color-warning-content: oklch(25% 0.05 60); /* Dark text for warning */
-
-  --color-error: oklch(65% 0.20 20);        /* Soft red for error (less aggressive) */
-  --color-error-content: oklch(98% 0.02 20); /* Near-white for error text */
-
-  /* ===== COMPONENT STYLING ===== */
-  --radius-box: 0.5rem;
-  --radius-field: 0.25rem;
-  --radius-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --size-selector: 0.25rem;
-  --border: 1px;
-  --depth: 2;
-  --noise: 0;
-}
-
-
-
-
-
-
-
-
-
-[data-theme="inversed-contrast"] {
-  color-scheme: dark;
-
-  /* ===== BASE COLORS (BACKGROUNDS) ===== */
-  --color-base-100: oklch(25% 0.15 264);    /* Navy blue #000080 */
-  --color-base-200: oklch(22% 0.15 264);    /* Slightly darker navy */
-  --color-base-300: oklch(28% 0.15 264);    /* Lighter navy for borders */
-  --color-base-content: oklch(97% 0.20 100); /* Bright yellow #FFFF00 */
-
-  /* ===== PRIMARY COLORS ===== */
-  --color-primary: oklch(97% 0.20 100);        /* Yellow */
-  --color-primary-content: oklch(25% 0.15 264); /* Navy blue text */
-
-  /* ===== SECONDARY COLORS ===== */
-  --color-secondary: oklch(85% 0.18 110);       /* Light yellow-green */
-  --color-secondary-content: oklch(25% 0.15 264); /* Navy blue text */
-
-  /* ===== ACCENT COLORS ===== */
-  --color-accent: oklch(90% 0.22 90);          /* Bright lime yellow */
-  --color-accent-content: oklch(25% 0.15 264); /* Navy blue text */
-
-  /* ===== NEUTRAL COLORS ===== */
-  --color-neutral: oklch(30% 0.15 264);        /* Navy gray */
-  --color-neutral-content: oklch(97% 0.20 100); /* Yellow text */
-
-  /* ===== STATE COLORS (SEMANTIC FEEDBACK) ===== */
-  --color-info: oklch(75% 0.18 240);           /* Lighter blue */
-  --color-info-content: oklch(25% 0.15 264);   /* Navy text */
-  --color-success: oklch(80% 0.20 140);        /* Bright green */
-  --color-success-content: oklch(25% 0.15 264); /* Navy text */
-  --color-warning: oklch(85% 0.18 80);         /* Bright orange-yellow */
-  --color-warning-content: oklch(25% 0.15 264); /* Navy text */
-  --color-error: oklch(70% 0.25 25);           /* Bright red */
-  --color-error-content: oklch(97% 0.20 100);   /* Yellow text */
-
+  --color-info: oklch(70% 0.25 240);           /* Bright blue */
+  --color-info-content: oklch(15% 0.02 240);   /* Dark text on bright bg */
+  
+  --color-success: oklch(75% 0.22 145);        /* Bright green */
+  --color-success-content: oklch(15% 0.02 145); /* Dark text on bright bg */
+  
+  --color-warning: oklch(80% 0.20 70);         /* Bright orange/yellow */
+  --color-warning-content: oklch(15% 0.02 70); /* Dark text on bright bg */
+  
+  --color-error: oklch(72% 0.25 15);           /* Bright red */
+  --color-error-content: oklch(15% 0.02 15);   /* Dark text on bright bg */
+  
   /* ===== COMPONENT STYLING VARIABLES ===== */
-  --radius-box: 0;           /* No rounding for cards, containers */
-  --radius-field: 0.05rem;   /* Very minimal rounding for input fields */
-  --radius-selector: 0;      /* No rounding for buttons */
-  --size-field: 0.25rem;     /* Field border width */
-  --size-selector: 0.25rem;  /* Selector border width */
-  --border: 1px;             /* Standard border width */
-  --depth: 2;                /* Shadow depth multiplier */
-  --noise: 0;                /* Texture noise (disabled for clean look) */
+  --radius-box: 0.25rem;           /* Cards, containers */
+  --radius-field: 0.15rem;         /* Input fields */
+  --radius-selector: 0.15rem;      /* Buttons */
+  --size-field: 0.25rem;           /* Field border width */
+  --size-selector: 0.25rem;        /* Selector border width */
+  --border: 1px;                   /* Standard border width */
+  --depth: 2;                      /* Shadow depth multiplier */
+  --noise: 0;                      /* Texture noise disabled */
 }
+
+
+
+
+
+
+
 
 
 

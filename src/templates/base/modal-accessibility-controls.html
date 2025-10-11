@@ -5,7 +5,7 @@
       <input id="contrast-default"
              type="radio"
              name="contrast-radio"
-             class="radio radio-primary radio-sm"
+             class="radio radio-secondary radio-sm"
              data-theme-selector="anchor"
              data-contrast-option="true" />
       <label for="contrast-default" class="w-full text-sm font-medium text-base-content ml-3">
@@ -18,7 +18,7 @@
       <input id="contrast-reinforced"
              type="radio"
              name="contrast-radio"
-             class="radio radio-primary radio-sm"
+             class="radio radio-secondary radio-sm"
              data-theme-selector="reinforced-contrast"
              data-contrast-option="true" />
       <label for="contrast-reinforced" class="w-full text-sm font-medium text-base-content ml-3">
@@ -31,7 +31,7 @@
       <input id="contrast-inversed"
              type="radio"
              name="contrast-radio"
-             class="radio radio-primary radio-sm"
+             class="radio radio-secondary radio-sm"
              data-theme-selector="inversed-contrast"
              data-contrast-option="true" />
       <label for="contrast-inversed" class="w-full text-sm font-medium text-base-content ml-3">
@@ -44,11 +44,11 @@
       <input id="contrast-other-theme"
              type="radio"
              name="contrast-radio"
-             class="radio radio-primary radio-sm"
+             class="radio radio-secondary radio-sm"
              disabled
              data-contrast-other="true" />
       <label for="contrast-other-theme" class="w-full text-sm font-medium text-base-content ml-3 opacity-75">
-        Thème sélectionné (3️⃣)
+        Thème sélectionné
       </label>
     </div>
   </li>
@@ -61,7 +61,7 @@
       <input id="font-default"
              type="radio"
              name="font-radio"
-             class="radio radio-primary radio-sm"
+             class="radio radio-secondary radio-sm"
              data-font-selector="default" />
       <label for="font-default" class="w-full text-sm font-medium text-base-content ml-3">Défaut</label>
     </div>
@@ -71,7 +71,7 @@
       <input id="font-dyslexic"
              type="radio"
              name="font-radio"
-             class="radio radio-primary radio-sm"
+             class="radio radio-secondary radio-sm"
              data-font-selector="dyslexic" />
       <label for="font-dyslexic" class="w-full text-sm font-medium text-base-content ml-3">
         Adapter
@@ -81,12 +81,12 @@
 </ul>
 
 
-<h3 class="text-lg mb-2 font-semibold text-base-content mt-4">Choisir un thème</h3>
+<h3 class="text-base sm:text-lg mb-2 font-semibold text-base-content mt-4">Choisir un thème</h3>
 
-<button class="btn btn-sm btn-outline"
+<button class="btn btn-sm btn-soft btn-secondary w-full"
         onclick="this.nextElementSibling.classList.toggle('max-h-0'); this.nextElementSibling.classList.toggle('max-h-[500px]'); this.querySelector('span').textContent = this.nextElementSibling.classList.contains('max-h-0') ? 'Afficher les thèmes' : 'Masquer les thèmes'">
   <span>Afficher les thèmes</span>
 </button>
 <div class="overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
-  <div class="mt-2 p-4 bg-base-200">{% include "base/themes-selectable-list.html" %}</div>
+  <div class="mt-2">{% include "base/themes-selectable-list.html" %}</div>
 </div>
