@@ -12,11 +12,17 @@
       <div class="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-4 items-end py-8">
         <!-- Colonne de gauche : Contenu textuel -->
         <div class="sm:px-6">
-          <h1 class="text-center lg:text-left text-5xl font-bold font-handwritten mb-4">
+          <h1 class="text-center lg:text-left text-5xl font-bold font-handwritten">
             <span class="text-primary">Maths</span>.pm
           </h1>
-          <p class="text-center lg:text-left text-lg font-light italic mb-6 text-base-content/80">
-            Une plateforme de ressources mathématiques <span class="font-medium">libres</span>, <span class="font-medium">sans collecte de données</span>, pour les élèves et les enseignants. Notre <span class="text-primary">objectif</span> est de créer un <span class="font-medium">écosystème pédagogique libre</span>, qui sera validé par le Ministère de l'Éducation Nationale et met en jeu différents intervenants :
+          <br />
+          <p class="">
+            <div class="text-center lg:text-left font-light italic text-base-content mb-2">
+              Une plateforme de ressources mathématiques <span class="font-medium">libres</span>, <span class="font-medium">sans collecte de données</span>, pour les élèves et les enseignants.
+            </div>
+            <div class="text-center lg:text-left font-light italic text-base-content mb-4">
+              Notre <span class="text-primary">objectif</span> est de créer un <span class="font-medium">écosystème pédagogique libre</span>, qui met en jeu différents intervenants et seraitvalidé par le Ministère de l'Éducation Nationale :
+            </div>
           </p>
           {# bg-base-200/80 p-4 sm:p-6 #}
           <div class="" style="border-radius: var(--radius-box)">
@@ -28,7 +34,6 @@
             <div class="font-light italic mb-6 text-base-content/80">
               Créer un <strong class=" underline underline-offset-4">écosystème pédagogique libre</strong> où :
 </div> #}
-
 
             <div class="text-sm mb-0">
 
@@ -180,12 +185,12 @@
   </section>
 
   <section class="py-20 bg-base-100/70">
-    <div class="max-w-4xl mx-auto px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8">
       <h2 class="text-3xl font-bold text-center mb-12">
         Une architecture <span class="text-secondary italic">zero-data</span>
       </h2>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div class="border-base-300 bg-base-100/70 border-0 shadow mx-4 sm:mx-20 md:mx-30 lg:mx-0"
+        <div class="border-base-300 bg-base-100/70 border-0 mx-4 sm:mx-20 md:mx-30 lg:mx-0"
              style="border-radius: var(--radius-box)">
           {% include "products/zero-data-svg.html" %}
         </div>
@@ -206,7 +211,6 @@
             </li>
           </ul>
           <p class="text-base mt-4">
-
             Pour en savoir plus au sujet de notre démarche et des choix d'hébergements, <a href="/about" class="link link-primary">consultez notre page à ce sujet</a>.
             {# Nous privilégions les hébergeurs et APIs <strong>français 🇫🇷</strong> pour renforcer la souveraineté numérique. #}
           </p>
