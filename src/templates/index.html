@@ -7,15 +7,15 @@
   {# TODO: recycle #}
   {# <div class="bg-base-100 rounded-box">{% include "products/simple-math-flow-svg.html" %}</div> #}
 
-  <section class="hero min-h-[60vh]">
+  <section class="hero min-h-[50vh]">
     <div class="hero-content">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center  py-6">
+      <div class="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-4 items-end py-4">
         <!-- Colonne de gauche : Contenu textuel -->
-        <div class="">
+        <div class="sm:px-6">
           <h1 class="text-center lg:text-left text-5xl font-bold font-handwritten mb-4">
             <span class="text-primary">Maths</span>.pm
           </h1>
-          <p class="text-center lg:text-left text-xl font-light italic mb-6 text-base-content/80">
+          <p class="text-center lg:text-left text-lg font-light italic mb-6 text-base-content/80">
             Une plateforme de ressources mathématiques <span class="font-medium">libres</span>, <span class="font-medium">sans collecte de données</span>, pour les élèves et les enseignants.
           </p>
           {# bg-base-200/80 p-4 sm:p-6 #}
@@ -30,9 +30,9 @@
             </div>
 
 
-            <div class="text-sm mb-2">
+            <div class="text-sm mb-0">
 
-              <ul class="list bg-base-100 rounded-box shadow-md">
+              <ul class="list bg-base-100/70 border-0 shadow-lg">
 
                 <li class="list-row">
                   <div>
@@ -153,10 +153,10 @@
           {# <hr class="my-8 border-base-300" /> #}
         </div>
         <!-- Colonne de droite : SVG du workflow -->
-        <div class="border-base-300 bg-base-100/40 border-0 shadow-xl mx-4 sm:mx-20 md:mx-30 lg:mx-0"
+        <div class="bg-base-100/70 border-0 shadow-lg mx-4 sm:mx-20 md:mx-30 lg:mx-1"
              style="border-radius: var(--radius-box)">
           {# <div class="relative text-center">Objectif</div> #}
-          <div class="flex justify-end scale-100 lg:scale-90 xl:scale-80">
+          <div class="flex justify-end scale-100 lg:scale-90 xl:scale-87">
             {% include "products/workflow-figure-svg.html" %}
           </div>
         </div>
@@ -165,29 +165,27 @@
   </section>
 
 
-  <section class="py-14 text-center">
+  <section class="py-14 text-center"
+           style="background-color: var(--color-primary-soft) !important;
+                  color: var(--color-primary) !important">
+    <p class="text-lg italic mb-4">
+      Un cercle vertueux où la technologie sert la pédagogie, dans le respect absolu de la vie privée.
+    </p>
+
     <div class="">
       <a href="/ressources" class="btn btn-primary btn-medium">Explorer les ressources</a>
       <a href="/about" class="btn btn-medium">Notre démarche</a>
     </div>
+
   </section>
 
-
-  <section class="py-14 text-center"
-           style="background-color: var(--color-primary-soft) !important;
-                  color: var(--color-primary) !important">
-    <p class="text-lg italic">
-      Un cercle vertueux où la technologie sert la pédagogie, dans le respect absolu de la vie privée.
-    </p>
-  </section>
-
-  <section class="py-20 bg-base-100/40">
+  <section class="py-20 bg-base-100/70">
     <div class="max-w-4xl mx-auto px-4 sm:px-8">
       <h2 class="text-3xl font-bold text-center mb-12">
         Une architecture <span class="text-secondary italic">zero-data</span>
       </h2>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div class="border-base-300 bg-base-100/40 border-0 shadow mx-4 sm:mx-20 md:mx-30 lg:mx-0"
+        <div class="border-base-300 bg-base-100/70 border-0 shadow mx-4 sm:mx-20 md:mx-30 lg:mx-0"
              style="border-radius: var(--radius-box)">
           {% include "products/zero-data-svg.html" %}
         </div>
@@ -295,7 +293,7 @@
 </section> #}
 
 
-  {# <section class="py-20 bg-base-100/40">
+  {# <section class="py-20 bg-base-100/70">
     <div class="max-w-4xl mx-auto px-4 sm:px-8">
       <h2 class="text-center text-3xl font-bold mb-8">
         Engagés pour les <span class="text-primary">communs numériques</span>
