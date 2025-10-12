@@ -180,7 +180,6 @@
       <a href="/ressources" class="btn btn-primary btn-medium">Explorer les ressources</a>
       <a href="/about" class="btn btn-medium">Notre démarche</a>
     </div>
-
   </section>
 
 
@@ -192,34 +191,45 @@
       <p class="text-base bg-base-200 p-4 mb-12" style="border-radius: var(--radius-box)">
         Le modèle des communs numériques éducatifs offre une alternative économique, pérenne et souveraine aux solutions propriétaires. Quatre avantages concrets le distinguent :
       </p>
-      <div class="grid grid-cols-1 md:grid-cols-[60%_40%] gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-[60%_40%] gap-12 md:items-center">
         <div class="space-y-4 order-2 md:order-1 mx-2 sm:mx-20 md:mx-4 xl:mx-0">
 
 
           <div class="space-y-5">
-            <div class="flex items-start gap-3">
-              <div class="mt-1">
+            <div class="flex items-center gap-3">
+              <div class="">
                 <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
                   <circle cx="15" cy="15" r="12" class="fill-accent-soft" />
                   <circle cx="15" cy="15" r="12" class="stroke-accent fill-none" stroke-width="0.5" opacity="0.8" />
                   <!-- Pen icon -->
                   <g transform="translate(9, 9) scale(0.5)" class="stroke-accent">
                   <path d="M11.5 15H7a4 4 0 0 0-4 4v2"  fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"  fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a .5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"  fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   <circle cx="10" cy="7" r="4"  fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </g>
                 </svg>
               </div>
-              <div>
-                <strong>Création unique, partage illimité</strong>
-                <div class="text-sm opacity-75">
-                  Les enseignants créent une fois des ressources pédagogiques de qualité, qui profitent ensuite à tous, sans restriction ni dépendance à des acteurs externes.
+              <div class="flex-1">
+                <div class="cursor-pointer select-none flex items-center justify-between group"
+                     onclick="this.nextElementSibling.classList.toggle('max-h-0'); this.nextElementSibling.classList.toggle('max-h-20'); this.querySelector('.collapse-icon').classList.toggle('rotate-180')">
+                  <strong class="group-hover:text-accent transition-colors">Création unique, partage illimité</strong>
+                  <svg class="collapse-icon w-5 h-5 transition-transform duration-200 text-accent opacity-80 group-hover:opacity-100 ml-2"
+                       fill="none"
+                       stroke="currentColor"
+                       viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+                <div class="overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+                  <div class="text-sm opacity-75 pt-2">
+                    Les enseignants créent une fois des ressources pédagogiques de qualité, qui profitent ensuite à tous, sans restriction ni dépendance à des acteurs externes.
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="flex items-start gap-3">
-              <div class="mt-1">
+            <div class="flex items-center gap-3">
+              <div class="">
                 <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
                   <circle cx="15" cy="15" r="12" class="fill-primary-soft" />
                   <circle cx="15" cy="15" r="12" class="stroke-primary fill-none" stroke-width="0.5" opacity="0.9" />
@@ -232,16 +242,27 @@
                   </g>
                 </svg>
               </div>
-              <div>
-                <strong>Développement mutualisé et ouvert</strong>
-                <div class="text-sm opacity-75">
-                  L’infrastructure est développée une seule fois et partagée librement, ce qui réduit les coûts et renforce l’autonomie des établissements.
+              <div class="flex-1">
+                <div class="cursor-pointer select-none flex items-center justify-between group"
+                     onclick="this.nextElementSibling.classList.toggle('max-h-0'); this.nextElementSibling.classList.toggle('max-h-20'); this.querySelector('.collapse-icon').classList.toggle('rotate-180')">
+                  <strong class="group-hover:text-primary transition-colors">Développement mutualisé et ouvert</strong>
+                  <svg class="collapse-icon w-5 h-5 transition-transform duration-200 text-primary opacity-80 group-hover:opacity-100 ml-2"
+                       fill="none"
+                       stroke="currentColor"
+                       viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+                <div class="overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+                  <div class="text-sm opacity-75 pt-2">
+                    L'infrastructure est développée une seule fois et partagée librement, ce qui réduit les coûts et renforce l'autonomie des établissements.
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="flex items-start gap-3">
-              <div class="mt-1">
+            <div class="flex items-center gap-3">
+              <div class="">
                 <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
                   <circle cx="15" cy="15" r="12" class="fill-base-200" />
                   <circle cx="15" cy="15" r="12" class="stroke-base-content fill-none" stroke-width="0.5" opacity="0.8" />
@@ -252,42 +273,61 @@
                   <circle cx="12.5" cy="12" r="0.7" class="fill-success" />
                 </svg>
               </div>
-              <div>
-                <strong>Hébergement statique et maîtrisé</strong>
-                <div class="text-sm opacity-75">
-                  Les ressources, sous forme de sites statiques, peuvent être hébergées sur des infrastructures françaises ou publiques (lorsque disponibles). Cela assure rapidité, fiabilité et maîtrise totale des données, sans dépendre de solutions étrangères.
+              <div class="flex-1">
+                <div class="cursor-pointer select-none flex items-center justify-between group"
+                     onclick="this.nextElementSibling.classList.toggle('max-h-0'); this.nextElementSibling.classList.toggle('max-h-24'); this.querySelector('.collapse-icon').classList.toggle('rotate-180')">
+                  <strong class="group-hover:text-base-content transition-colors">Hébergement statique et maîtrisé</strong>
+                  <svg class="collapse-icon w-5 h-5 transition-transform duration-200 text-base-content opacity-80 group-hover:opacity-100 ml-2"
+                       fill="none"
+                       stroke="currentColor"
+                       viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+                <div class="overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+                  <div class="text-sm opacity-75 pt-2">
+                    Les ressources, sous forme de sites statiques, peuvent être hébergées sur des infrastructures françaises ou publiques (lorsque disponibles). Cela assure rapidité, fiabilité et maîtrise totale des données, sans dépendre de solutions étrangères.
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="flex items-start gap-3">
-              <div class="mt-1">
+            <div class="flex items-center gap-3">
+              <div class="">
                 <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
                   <circle cx="15" cy="15" r="12" class="fill-success" opacity="0.1" />
                   <circle cx="15" cy="15" r="12" class="stroke-success fill-none" stroke-width="0.6" opacity="0.6" />
                   <text x="15" y="19" text-anchor="middle" class="fill-success" font-size="11" font-weight="500">0€</text>
                 </svg>
               </div>
-              <div>
-                <strong>Coût marginal nul</strong>
-                <div class="text-sm opacity-75">
-                  Pas de serveurs coûteux, pas de collecte de données, pas de frais récurrents : un investissement initial unique permet de servir un nombre illimité d’élèves, sans surcoût.
+              <div class="flex-1">
+                <div class="cursor-pointer select-none flex items-center justify-between group"
+                     onclick="this.nextElementSibling.classList.toggle('max-h-0'); this.nextElementSibling.classList.toggle('max-h-20'); this.querySelector('.collapse-icon').classList.toggle('rotate-180')">
+                  <strong class="group-hover:text-success transition-colors">Coût marginal nul</strong>
+                  <svg class="collapse-icon w-5 h-5 transition-transform duration-200 text-success opacity-80 group-hover:opacity-100 ml-2"
+                       fill="none"
+                       stroke="currentColor"
+                       viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+                <div class="overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+                  <div class="text-sm opacity-75 pt-2">
+                    Pas de serveurs coûteux, pas de collecte de données, pas de frais récurrents : un investissement initial unique permet de servir un nombre illimité d'élèves, sans surcoût.
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="border-base-300 border-0 max-w-[300px] md:w-full order-1 md:order-2 mx-auto md:mx-0"
+        <div class="border-base-300 border-0 max-w-[280px] md:w-full order-1 md:order-2 mx-auto md:mx-0"
              style="border-radius: var(--radius-box)">
           {% include "products/commons-economics-flow-svg.html" %}
         </div>
       </div>
     </div>
-
-
   </section>
-
 
   <section class="pb-20">
     <div class="max-w-5xl mx-auto px-2 sm:px-8">
