@@ -3,7 +3,7 @@ product_type: "repo"
 title_html: Doppel
 subtitle_html: Synchronisation navigateur-serveur
 description: Système garantissant que l'exécution dans le navigateur avec Nagini et l'exécution côté serveur FastAPI produisent des résultats identiques.
-local_path: /pm/doppel
+local_path: /pm/doppel/a_load_generator.md
 # source_link: https://github.com/pointcarre-app/doppel
 color: warning
 figure_svg: doppel-figure-svg.html
