@@ -19,6 +19,7 @@ local_path: /pm/dataviz2/00_plan.md
 color: success
 figure_svg: python-fast-track-figure-svg.html
 classes_formatted:
+  - "Licence" 
   - "Master"
 tags:
   - education

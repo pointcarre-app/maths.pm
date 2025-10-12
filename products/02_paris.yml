@@ -3,6 +3,7 @@ product_type: "secondaire"
 title_html: Maths.Paris
 font_class: "font-handwritten"
 subtitle_html: Maths & Paris
+is_beta: true
 description: "Quelques applications mathématiques pour les classes de 3<sup>ème</sup> et 2<sup>nde</sup> autour de Paris : statistiques, fonctions et algorithmie."
 local_path: /paris
 # source_link: 

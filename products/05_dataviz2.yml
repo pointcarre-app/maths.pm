@@ -2,7 +2,7 @@ name: dataviz2
 product_type: "superieur"
 title_html: Data Viz 2 (EN)
 # is_hidden: true
-is_beta: true
+is_beta: false
 subtitle_html: Représentation de données avec Python
 # description: "Dans le contexte d'une formation à forte composante mathématiques, apprendre à représenter des données en utilisant les librairies Python : Matplotlib et Bokeh, et une librairie JS : D3.js."
 # description: "This course, taught within a program with a strong mathematical component, introduces students to data visualization using Python libraries such as Matplotlib and Bokeh, combining theoretical principles with practical, interactive applications."

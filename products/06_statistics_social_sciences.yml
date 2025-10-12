@@ -19,7 +19,7 @@ local_path: /pm/dataviz2/00_plan.md
 color: success
 figure_svg: stats-humanities-figure-svg.html
 classes_formatted:
-  - "Licence 1 & 2"
+  - "Licence"
 tags:
   - education
   - maths

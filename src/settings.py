@@ -237,6 +237,8 @@ class Settings(BaseSettings):
             title = product.title_html[:40] if product.title_html else "No title"
             logger.info(f"   ✅ {product.name:<20} - {title}")
 
+        loaded_products = sorted(loaded_products, key=lambda x: x.is_beta)
+
         self._products_cache = loaded_products
         return loaded_products
 

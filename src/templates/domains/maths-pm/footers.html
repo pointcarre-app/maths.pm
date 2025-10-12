@@ -180,8 +180,8 @@
   </div>
 
   {# Section 2 : Communs numériques  #}
-  <div class="mt-12 mb-12">
-    <div class="bg-base-200/80 text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto md:card"
+  <div class="mt-12">
+    <div class="bg-base-200/80 p-4 sm:p-8 max-w-4xl mx-auto"
          style="border-radius: var(--radius-box) !important">
       <div class="max-w-3xl mx-auto py-10">
         <!-- Titre principal -->
@@ -196,7 +196,6 @@
                href="{{ request.url_for('get_pm_root') }}">communs numériques</a>.
           </span>
         </div>
-
         <!-- Liste des ressources -->
         <div class="text-base sm:text-lg text-left mb-6 font-light">
           <ul class="list-disc list-inside">
@@ -224,7 +223,7 @@
 {% endif %}
 
 {# Section 3 : Signature  #}
-<div class="flex items-center justify-center flex-col my-12 py-12">
+<div class="flex items-center justify-center flex-col mt-18">
   <div class="font-handwritten text-4xl mb-3 mt-[-0.5rem]">Maths.pm, par</div>
   <div>
     <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
@@ -235,6 +234,9 @@
     </a>
   </div>
 </div>
+
+
+<div class="mt-12 mb-18">{% include "base/licenses.html" %}</div>
 
 <!-- Section 4 : Footer principal -->
 <div class="bg-base-200 px-8 sm:px-4">

@@ -3,7 +3,7 @@ product_type: "secondaire"
 title_html: Python lycée
 # is_hidden: true
 is_beta: true
-subtitle_html: Python lycée
+subtitle_html: Python en maths
 # description: "Dans le contexte d'une formation à forte composante mathématiques, apprendre à représenter des données en utilisant les librairies Python : Matplotlib et Bokeh, et une librairie JS : D3.js."
 # description: "This course, taught within a program with a strong mathematical component, introduces students to data visualization using Python libraries such as Matplotlib and Bokeh, combining theoretical principles with practical, interactive applications."
 # description: This course introduces data visualization with Python libraries such as Matplotlib. The only prerequisites are basics on Python and statistics.
@@ -20,9 +20,7 @@ local_path: /pm/dataviz1/00_plan.md
 color: success
 figure_svg: python-figure-svg.html
 classes_formatted:
-  - "2<sup>nde</sup>"
-  - "1<sup>ère</sup>"
-  - "T<sup>le</sup>"
+  - "Lycée"
 tags:
   - education
   - maths

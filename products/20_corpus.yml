@@ -9,9 +9,7 @@ color: primary
 figure_svg: corpus-figure-svg.html
 classes_formatted:
   - "3<sup>ème</sup>"
-  - "2<sup>nde</sup>"
-  - "1<sup>ère</sup>"
-  - "T<sup>le</sup>"
+  - "Lycée"
 tags:
   - education
   - curriculum

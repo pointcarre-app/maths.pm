@@ -1,0 +1,55 @@
+name: doppel
+product_type: "repo"
+title_html: Doppel
+subtitle_html: Synchronisation navigateur-serveur
+description: Système garantissant que l'exécution dans le navigateur avec Nagini et l'exécution côté serveur FastAPI produisent des résultats identiques.
+local_path: /pm/doppel
+source_link: https://github.com/pointcarre-app/doppel
+color: warning
+figure_svg: doppel-figure-svg.html
+classes_formatted:
+  - "Open Source"
+tags:
+  - python
+  - synchronization
+  - browser
+  - fastapi
+  - nagini
+  - testing
+  - validation
+domains:
+  - maths.pm
+
+owner_rdb: "SAS POINTCARRE.APP"
+owner_url: "https://pointcarre.app"
+
+# Backend settings specific to Doppel
+backend_settings:
+  doppel:
+    endpoint: "https://cdn.jsdelivr.net/gh/pointcarre-app/doppel@0.0.1/"
+    js_url: "https://cdn.jsdelivr.net/gh/pointcarre-app/doppel@0.0.1/src/doppel.js"
+    validation_endpoint: "/api/doppel/validate"
+    sync_check_interval: 1000
+
+# Product-specific metatags
+metatags:
+  title: "Doppel - Synchronisation navigateur-serveur pour Python"
+  description: "Garantit la cohérence entre l'exécution Python dans le navigateur (Nagini) et sur le serveur (FastAPI). Validation automatique des résultats."
+  keywords: "python, synchronisation, navigateur, serveur, fastapi, nagini, validation, testing"
+  
+  # SEO
+  robots: "index, follow"
+  topic: "Synchronisation d'exécution Python"
+  summary: "Outil de validation garantissant l'identité des résultats entre navigateur et serveur."
+  category: "Développement, Testing, Validation"
+  
+  # Open Graph
+  "og:title": "Doppel - Synchronisation navigateur-serveur"
+  "og:description": "Système de validation garantissant la cohérence entre l'exécution Python navigateur et serveur."
+  "og:type": "website"
+  "og:url": "https://maths.pm/doppel/"
+  
+  # Twitter
+  "twitter:card": "summary"
+  "twitter:title": "Doppel - Synchronisation navigateur-serveur"
+  "twitter:description": "Validation automatique de la cohérence entre exécution Python navigateur et serveur."

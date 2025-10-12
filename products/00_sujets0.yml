@@ -2,7 +2,7 @@ name: sujets0
 product_type: "secondaire"
 title_html: Sujets 0
 # is_hidden: true
-is_beta: true
+is_beta: false
 subtitle_html: Épreuve anticipée de 1ère
 description: Générer des séries d'exercices inspirées des sujets 0 pour l'épreuve anticipée du bac en classe de 1<sup>ère</sup>, avec des valeurs différentes pour chaque copie.
 local_path: /sujets0/form
