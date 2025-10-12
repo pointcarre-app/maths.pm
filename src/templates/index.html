@@ -9,9 +9,9 @@
 
   <section class="hero min-h-[60vh]">
     <div class="hero-content">
-      <div class="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-0 items-end py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-0 items-end pt-0 pb-4 sm:py-8">
         <!-- Colonne de gauche : Contenu textuel -->
-        <div class="sm:px-6">
+        <div class="sm:px-6 order-2 lg:order-1 ">
           <h1 class="text-center lg:text-left text-5xl font-bold font-handwritten mb-6">
             <span class="text-primary">Maths</span>.pm
           </h1>
@@ -160,7 +160,8 @@
           {# <hr class="my-8 border-base-300" /> #}
         </div>
         <!-- Colonne de droite : SVG du workflow -->
-        <div class="mx-4 sm:mx-20 md:mx-30 lg:mx-1 py-10 lg:py-0" style="border-radius: var(--radius-box)">
+        <div class="mx-0 sm:mx-20 md:mx-30 lg:mx-1 py-4 lg:py-0 order-1 lg:order-2"
+             style="border-radius: var(--radius-box)">
           {# <div class="relative text-center">Objectif</div> #}
           <div class="flex justify-end scale-100">{% include "products/workflow-figure-svg.html" %}</div>
         </div>
@@ -169,31 +170,179 @@
   </section>
 
 
-  <section class="py-14 text-center"
+  <section class="py-20 text-center px-4 sm:px-8"
            style="background-color: var(--color-primary-soft) !important;
                   color: var(--color-primary) !important">
-    <p class="text-lg italic mb-8">
+    <p class="text-lg italic mb-6">
       Un cercle vertueux où la technologie sert la pédagogie, dans le respect absolu de la vie privée.
     </p>
-
-    <div class="flex gap-6 justify-center">
+    <div class="flex gap-4 justify-center flex-wrap">
       <a href="/ressources" class="btn btn-primary btn-medium">Explorer les ressources</a>
       <a href="/about" class="btn btn-medium">Notre démarche</a>
     </div>
 
   </section>
 
-  <section class="py-20 bg-base-100/70">
+
+  <section class="pt-20 pb-15">
+    <div class="max-w-5xl mx-auto px-4 sm:px-8">
+      <h2 class="text-3xl font-bold text-center mb-10">
+        Les <span class="text-secondary italic">communs numériques éducatifs</span> : une solution efficace et souveraine
+      </h2>
+      <p class="text-base bg-base-200 p-4 mb-12" style="border-radius: var(--radius-box)">
+        Le modèle des communs numériques éducatifs offre une alternative économique, pérenne et souveraine aux solutions propriétaires. Quatre avantages concrets le distinguent :
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-[60%_40%] gap-12">
+        <div class="space-y-4 order-2 md:order-1 mx-2 sm:mx-20 md:mx-4 xl:mx-0">
+
+
+          <div class="space-y-5">
+            <div class="flex items-start gap-3">
+              <div class="mt-1">
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                  <circle cx="15" cy="15" r="12" class="fill-accent-soft" />
+                  <circle cx="15" cy="15" r="12" class="stroke-accent fill-none" stroke-width="0.5" opacity="0.8" />
+                  <!-- Pen icon -->
+                  <g transform="translate(9, 9) scale(0.5)" class="stroke-accent">
+                  <path d="M11.5 15H7a4 4 0 0 0-4 4v2"  fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"  fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <circle cx="10" cy="7" r="4"  fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </g>
+                </svg>
+              </div>
+              <div>
+                <strong>Création unique, partage illimité</strong>
+                <div class="text-sm opacity-75">
+                  Les enseignants créent une fois des ressources pédagogiques de qualité, qui profitent ensuite à tous, sans restriction ni dépendance à des acteurs externes.
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1">
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                  <circle cx="15" cy="15" r="12" class="fill-primary-soft" />
+                  <circle cx="15" cy="15" r="12" class="stroke-primary fill-none" stroke-width="0.5" opacity="0.9" />
+                  <!-- Code icon -->
+                  <g transform="translate(8, 8) scale(0.6)">
+                  <path d="M10 12.5 8 15l2 2.5" class="stroke-primary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="m14 12.5 2 2.5-2 2.5" class="stroke-primary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M14 2v4a2 2 0 0 0 2 2h4" class="stroke-primary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" class="stroke-primary" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </g>
+                </svg>
+              </div>
+              <div>
+                <strong>Développement mutualisé et ouvert</strong>
+                <div class="text-sm opacity-75">
+                  L’infrastructure est développée une seule fois et partagée librement, ce qui réduit les coûts et renforce l’autonomie des établissements.
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1">
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                  <circle cx="15" cy="15" r="12" class="fill-base-200" />
+                  <circle cx="15" cy="15" r="12" class="stroke-base-content fill-none" stroke-width="0.5" opacity="0.8" />
+                  <!-- Server icon -->
+                  <rect x="11" y="11" width="8" height="2" rx="0.5" class="fill-base-content" opacity="0.9" />
+                  <rect x="11" y="14" width="8" height="2" rx="0.5" class="fill-base-content" opacity="0.7" />
+                  <rect x="11" y="17" width="8" height="2" rx="0.5" class="fill-base-content" opacity="0.5" />
+                  <circle cx="12.5" cy="12" r="0.7" class="fill-success" />
+                </svg>
+              </div>
+              <div>
+                <strong>Hébergement statique et maîtrisé</strong>
+                <div class="text-sm opacity-75">
+                  Les ressources, sous forme de sites statiques, peuvent être hébergées sur des infrastructures françaises ou publiques (lorsque disponibles). Cela assure rapidité, fiabilité et maîtrise totale des données, sans dépendre de solutions étrangères.
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1">
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                  <circle cx="15" cy="15" r="12" class="fill-success" opacity="0.1" />
+                  <circle cx="15" cy="15" r="12" class="stroke-success fill-none" stroke-width="0.6" opacity="0.6" />
+                  <text x="15" y="19" text-anchor="middle" class="fill-success" font-size="11" font-weight="500">0€</text>
+                </svg>
+              </div>
+              <div>
+                <strong>Coût marginal nul</strong>
+                <div class="text-sm opacity-75">
+                  Pas de serveurs coûteux, pas de collecte de données, pas de frais récurrents : un investissement initial unique permet de servir un nombre illimité d’élèves, sans surcoût.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-base-300 border-0 max-w-[300px] md:w-full order-1 md:order-2 mx-auto md:mx-0"
+             style="border-radius: var(--radius-box)">
+          {% include "products/commons-economics-flow-svg.html" %}
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+
+  <section class="pb-20">
+    <div class="max-w-5xl mx-auto px-2 sm:px-8">
+      <div class="text-center mb-2 sm:mb-8">
+        <button class="btn btn-medium btn-success sm:btn-lg w-full sm:w-auto sm:px-8"
+                onclick="this.parentElement.nextElementSibling.classList.toggle('max-h-0'); this.parentElement.nextElementSibling.classList.toggle('max-h-[500px]'); this.querySelector('span').textContent = this.parentElement.nextElementSibling.classList.contains('max-h-0') ? 'Pourquoi ce modèle est-il si économique ?' : '🔼 Réduire'">
+          <span>Pourquoi ce modèle est-il si économique ?</span>
+        </button>
+      </div>
+      <div class="overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+        <div class="mt-2">
+          <div class="alert alert-success alert-soft"
+               style="border-radius: var(--radius-box);
+                      border: 1px solid var(--color-success)">
+            {# <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg> #}
+            <div>
+              <div class="p-2 sm:p-6">
+                <div class="font-heading text-lg md:text-xl">Un investissement unique, un impact illimité</div>
+                <hr class="border-success my-3 sm:my-5" />
+                <div class="text-sm md:text-base">
+                  Grâce à ce modèle, un seul budget initial permet de fournir des ressources pédagogiques de qualité à tous les élèves, sans frais supplémentaires, tout en assurant souveraineté technologique et simplicité d'utilisation. Une solution économiquement optimale pour l'Éducation nationale et les établissements.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="text-center py-20 px-4 sm:px-8"
+           style="background-color: var(--color-primary-soft) !important;
+                  color: var(--color-primary) !important">
+    <p class="text-lg mb-6 max-w-3xl mx-auto">
+      Vous êtes enseignant, développeur ou simplement passionné par l'éducation libre ?
+      <strong>Contribuez à <span class="font-handwritten text-2xl">Maths.pm</span></strong> ou utilisez nos ressources en classe !
+    </p>
+    <div class="flex gap-4 justify-center flex-wrap">
+      <a href="/ressources" class="btn btn-primary btn-medium">Explorer les ressources</a>
+      <a href="https://framagit.org/pointcarre.app" class="btn btn-secondary btn-medium">Voir le code</a>
+      <a href="/contact" class="btn btn-medium">Nous contacter</a>
+    </div>
+  </section>
+
+
+  <section class="py-20 border-b border-base-content/40 mb-20">
     <div class="max-w-6xl mx-auto px-4 sm:px-8">
       <h2 class="text-3xl font-bold text-center mb-12">
         Une architecture <span class="text-secondary italic">zero-data</span>
       </h2>
-      <div class="grid grid-cols-1 xl:grid-cols-2 gap-12">
-        <div class="border-base-300 bg-base-100/70 border-0 mx-4 sm:mx-15 md:mx-20 lg:mx-25 xl:mx-0"
-             style="border-radius: var(--radius-box)">
-          {% include "products/zero-data-svg.html" %}
-        </div>
-        <div class="space-y-4 mx-4 sm:mx-20 md:mx-25 lg:mx-30 xl:mx-0">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="space-y-4 mx-4 sm:mx-20 md:mx-25 lg:mx-10 xl:mx-0">
           <p class="text-base">
             Notre plateforme repose sur des <strong>sites statiques</strong>, des <strong>standards ouverts</strong> et une
             <strong>architecture zero-data</strong> pour garantir :
@@ -214,87 +363,9 @@
             {# Nous privilégions les hébergeurs et APIs <strong>français 🇫🇷</strong> pour renforcer la souveraineté numérique. #}
           </p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-20 bg-base-200/50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-8">
-      <h2 class="text-3xl font-bold text-center mb-12">
-        Les <span class="text-primary">communs numériques</span> : un optimum économique
-      </h2>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div class="space-y-4 order-2 lg:order-1">
-          <p class="text-base">
-            Le modèle des <strong>communs numériques éducatifs</strong> représente un <strong>optimum économique</strong>
-            par rapport aux solutions propriétaires :
-          </p>
-
-          <div class="space-y-3">
-            <div class="flex items-start gap-3">
-              <div class="mt-1">
-                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
-                  <circle cx="12" cy="12" r="10" class="fill-accent-soft stroke-accent" stroke-width="0.5" />
-                  <text x="12" y="16" text-anchor="middle" class="fill-accent" font-size="8" font-weight="600">1×</text>
-                </svg>
-              </div>
-              <div>
-                <strong>Rédaction unique</strong>
-                <div class="text-sm opacity-75">
-                  Les enseignants créent le contenu une seule fois, il profite à tous
-                </div>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-3">
-              <div class="mt-1">
-                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
-                  <circle cx="12" cy="12" r="10" class="fill-primary-soft stroke-primary" stroke-width="0.5" />
-                  <text x="12" y="16" text-anchor="middle" class="fill-primary" font-size="8" font-weight="600">1×</text>
-                </svg>
-              </div>
-              <div>
-                <strong>Développement mutualisé</strong>
-                <div class="text-sm opacity-75">L'interface est créée une fois et partagée librement</div>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-3">
-              <div class="mt-1">
-                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
-                  <circle cx="12" cy="12" r="10" class="fill-success" opacity="0.2" />
-                  <circle cx="12" cy="12" r="10" class="stroke-success fill-none" stroke-width="0.5" stroke-dasharray="2,2" />
-                  <text x="12" y="16" text-anchor="middle" class="fill-success" font-size="10" font-weight="600">0€</text>
-                </svg>
-              </div>
-              <div>
-                <strong>Coût marginal nul</strong>
-                <div class="text-sm opacity-75">
-                  Sites statiques = pas de serveurs, pas de données, pas de coûts récurrents
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="alert alert-success mt-6">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="stroke-current shrink-0 h-6 w-6"
-                 fill="none"
-                 viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div>
-              <div class="font-bold">Résultat :</div>
-              <div class="text-sm">
-                Un même investissement initial bénéficie à un nombre illimité d'élèves, sans coût supplémentaire.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="border-base-300 bg-base-100/70 border-0 mx-4 sm:mx-20 md:mx-30 lg:mx-0 order-1 lg:order-2"
+        <div class="border-base-300 border-0 mx-4 sm:mx-15 md:mx-20 lg:mx-0 xl:mx-0"
              style="border-radius: var(--radius-box)">
-          {% include "products/commons-economics-flow-svg.html" %}
+          {% include "products/zero-data-svg.html" %}
         </div>
       </div>
     </div>
@@ -428,22 +499,6 @@
       </div>
     </div>
 </section> #}
-
-
-  <section class="py-16 bg-base-200">
-    <div class="max-w-3xl mx-auto px-4 sm:px-8 text-center">
-      {# <h2 class="text-3xl font-bold mb-6">Rejoignez la communauté des communs numériques éducatifs</h2> #}
-      <p class="text-lg mb-8">
-        Vous êtes enseignant, développeur ou simplement passionné par l'éducation libre ?
-        <strong>Contribuez à <span class="font-handwritten text-2xl">Maths.pm</span></strong> ou utilisez nos ressources en classe !
-      </p>
-      <div class="flex gap-4 justify-center">
-        <a href="/contact" class="btn btn-secondary btn-lg">Nous contacter</a>
-        {# TODO: sel: add from config in frama key to control multiple remotes #}
-        <a href="https://framagit.org/pointcarre.app" class="btn btn-outline btn-lg">Voir le code</a>
-      </div>
-    </div>
-  </section>
 
 
 {% endblock content %}
