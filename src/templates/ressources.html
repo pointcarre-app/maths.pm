@@ -6,14 +6,13 @@
   <div class="padding-alt-security">
     <div class="mt-12 md:mt-28  max-w-4xl mx-auto mb-14">
       <div class="max-w-[450px] md:max-w-full mx-auto">
-        <h2 id="secondaire" class="text-xl sm:text-2xl md:text-4xl font-bold mb-2 md:mb-4">
+        <h2 id="secondaire" class="text-xl sm:text-2xl md:text-4xl font-bold mb-2 md:mb-6">
           Ressources pour le secondaire
         </h2>
-        <div class="text-sm sm:text-base mb-6 text-base-content/70 md:p-6 md:bg-base-100 md:border-base-200 md:border-1"
-             style="border-radius: var(--radius-box)">
+        {# <div class="text-sm sm:text-base mb-6 text-base-content/70 md:p-6 md:bg-base-100 md:border-base-200 md:border-1" style="border-radius: var(--radius-box)">
           Ces ressources ont été dévéloppées par Pointcarre.app et leurs codes sont sous licence <a class="link link-primary" href="https://www.gnu.org/licenses/agpl-3.0.fr.html">AGPL-3.0</a>.
           Les contenus (générés automatiquement ou créés manuellement) sont sous licence <a class="link link-primary" href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.fr">Creative Commons BY-NC-SA 4.0</a>.
-        </div>
+        </div> #}
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 xl:gap-14">
         {% for product in products %}
@@ -26,14 +25,9 @@
 
     <div class="mt-12 md:mt-28  max-w-4xl mx-auto mb-14">
       <div class="max-w-[450px] md:max-w-full mx-auto">
-        <h2 id="superieur" class="text-xl sm:text-2xl md:text-4xl font-bold mb-2 md:mb-4">
+        <h2 id="superieur" class="text-xl sm:text-2xl md:text-4xl font-bold mb-2 md:mb-6">
           Ressources pour le supérieur
         </h2>
-        <div class="text-sm sm:text-base mb-6 text-base-content/70 md:p-6 md:bg-base-100 md:border-base-200 md:border-1"
-             style="border-radius: var(--radius-box)">
-          Ces ressources ont été dévéloppées par Pointcarre.app et leurs codes sont sous licence <a class="link link-primary" href="https://www.gnu.org/licenses/agpl-3.0.fr.html">AGPL-3.0</a>.
-          Les contenus (générés automatiquement ou non) sont sous licence <a class="link link-primary" href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.fr">Creative Commons BY-NC-SA 4.0</a>.
-        </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 xl:gap-14">
         {% for product in products %}
@@ -47,11 +41,13 @@
 
     <div class="mt-12 md:mt-28  max-w-4xl mx-auto mb-14">
       <div class="max-w-[450px] md:max-w-full mx-auto">
-        <h2 id="logiciels-libres" class="text-xl sm:text-2xl md:text-4xl font-bold mb-2 md:mb-4">
+        <h2 id="logiciels-libres" class="text-xl sm:text-2xl md:text-4xl font-bold mb-2 md:mb-6">
           Logiciels libres <span class="text-base-content/70 font-heading">(Pointcarre.app)</span>
         </h2>
         <div class="text-sm sm:text-base mb-6 text-base-content/70 md:p-6 md:bg-base-100 md:border-base-200 md:border-1"
-             style="border-radius: var(--radius-box)">
+             style="border-radius: var(--radius-box);
+                    background-color: var(--color-primary-soft);
+                    color: var(--color-primary)">
           Ces logiciels ont été développés par Pointcarre.app et sont libres (<span class="italic">i.e. open source</span>).
           Ils sont publiés sous licences <a class="link link-primary" href="https://www.gnu.org/licenses/agpl-3.0.fr.html">AGPL-3.0</a> ou <a class="link link-primary" href="https://opensource.org/license/MIT">MIT</a>, selon les projets.
           Lorsqu’un hébergement ou une API externe est utilisé, nous optons systématiquement pour des prestataires français 🇫🇷.
@@ -74,7 +70,7 @@
         </h2>
         <div class="text-sm sm:text-base mb-6 text-base-content/70 md:p-6 md:bg-base-100 md:border-base-200 md:border-1"
              style="border-radius: var(--radius-box)">
-          Ces logiciels ont été dévéloppés par des tiers et sont accessibles sur maths.pm. Les licenses utilisées sont <a class="link link-primary" href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause License</a>
+          Ces logiciels ont été dévéloppés par des tiers et sont accessibles sur Maths.pm. Les licenses utilisées sont <a class="link link-primary" href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause License</a>
           ou <a class="link link-primary" href="https://opensource.org/licenses/MIT">MIT</a>.
         </div>
       </div>

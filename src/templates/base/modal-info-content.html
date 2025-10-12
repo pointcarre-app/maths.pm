@@ -3,21 +3,31 @@
     <h2 class="text-2xl font-bold mb-2">Licences et droits d'usage</h2>
   </div>
 
+
+  <div class="text-sm sm:text-base mb-6 text-base-content/70 md:p-6 md:bg-base-100 md:border-base-200 md:border-1"
+       style="border-radius: var(--radius-box)">
+    Ces ressources ont été dévéloppées par Pointcarre.app et leurs <span class="text-primary font-heading">Codes Sources</span> sont sous licence <a class="link link-primary" href="https://www.gnu.org/licenses/agpl-3.0.fr.html">AGPL-3.0</a>.
+  </div>
+
+
+  <div class="text-sm sm:text-base mb-6 text-base-content/70 md:p-6 md:bg-base-100 md:border-base-200 md:border-1"
+       style="border-radius: var(--radius-box)">
+    Les <span class="text-primary font-heading">Contenus</span> (générés automatiquement ou créés manuellement) sont sous licence <a class="link link-primary" href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.fr">Creative Commons BY-NC-SA 4.0</a>.
+  </div>
+
+
   <div class="bg-base-100 rounded-lg border border-base-300 p-2 sm:p-6 mb-6">
     {% include "base/licenses.html" %}
   </div>
 
-  <details class="p-0">
+
+  {# <details class="p-0">
     <summary class="cursor-pointer hover:bg-base-100 rounded-lg text-sm">
       <span class="select-none">Codes sources : AGPLv3</span>
     </summary>
     <div class="px-4 pb-4 pt-4 text-sm leading-relaxed">
       <div class="flex justify-center mb-4">
-        <img class="w-24 h-auto"
-             src="{{ request.url_for('static', path='icons/licenses/AGPLv3_Logo.svg') }}"
-             alt="Logo licence AGPLv3"
-             width="96"
-             height="96" />
+        <img class="w-24 h-auto" src="{{ request.url_for('static', path='icons/licenses/AGPLv3_Logo.svg') }}" alt="Logo licence AGPLv3" width="96" height="96" />
       </div>
       <p>
         Tous les codes sources des ressources référencées sur ce site et créées
@@ -30,19 +40,15 @@
         la même licence.
       </p>
     </div>
-  </details>
+</details> #}
 
-  <details class="p-0">
+  {# <details class="p-0">
     <summary class="cursor-pointer hover:bg-base-100 rounded-lg text-sm">
       <span class="select-none">Contenus : CC BY-NC-SA 4.0</span>
     </summary>
     <div class="px-4 pb-4 pt-4 text-sm leading-relaxed">
       <div class="flex justify-center mb-4">
-        <img class="w-24 h-auto"
-             src="{{ request.url_for('static', path='icons/licenses/CC_BY-NC-SA.svg') }}"
-             alt="Logo licence Creative Commons BY-NC-SA"
-             width="96"
-             height="96" />
+        <img class="w-24 h-auto" src="{{ request.url_for('static', path='icons/licenses/CC_BY-NC-SA.svg') }}" alt="Logo licence Creative Commons BY-NC-SA" width="96" height="96" />
       </div>
       <p>
         Tous les contenus référencés sur ce site et créés par la SAS
@@ -55,7 +61,8 @@
         commercial, en citant la source et en conservant la même licence.
       </p>
     </div>
-  </details>
+</details> #}
+
 
   <div class="modal-action"></div>
   <div class="text-right">

@@ -1,6 +1,10 @@
-<div class="card p-0 mx-auto shadow-lg" style="max-width: 450px;">
+<div class="card p-0 mx-auto shadow-lg" style="max-width: 450px;border-radius: var(--radius-box);">
   <!-- Safari-compatible fixed height container -->
-  <div class="bg-base-200/50" style="height: 120px; position: relative;border-radius: var(--radius-box);">
+  <div class="bg-base-200/80"
+       style="height: 120px;
+              position: relative;
+              border-top-left-radius: var(--radius-box);
+              border-top-right-radius: var(--radius-box)">
     {% if product.figure_png %}
       <figure class="m-0 p-0 rounded-none bg-white"
               style="width: 100%;
@@ -26,7 +30,9 @@
   </div>
 
   <hr class="border-base-200" />
-  <div class="card-body bg-base-100 py-8">
+  <div class="card-body bg-base-100 py-8"
+       style="border-bottom-left-radius: var(--radius-box);
+              border-bottom-right-radius: var(--radius-box)">
     <div class="flex flex-row items-center justify-between mb-3">
       <h2 class="card-title text-2xl gap-0 {{ product.font_class }}">{{ product.title_html|safe }}</h2>
       <div>
@@ -64,8 +70,7 @@
             <span>Code source</span>
           </a>
         {% else %}
-          <a href="{{ product.local_path }}"
-             class="btn cursor-pointer btn-sm btn-soft btn-primary shadow-none w-full">
+          <a href="{{ product.local_path }}" class="btn cursor-pointer btn-sm btn-soft btn-primary w-full">
             <svg aria-label="GitHub logo"
                  width="16"
                  height="16"
