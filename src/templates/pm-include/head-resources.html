@@ -33,15 +33,6 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
 {% endif %}
 
-{# Import map for JS namespace aliases #}
-<script type="importmap">
-    {
-        "imports": {
-            "@js/": "{{ request.url_for('static', path='js/') }}"
-        }
-    }
-</script>
-
 {# Include PM metatags if provided #}
 {% if pm_metatags or product_settings %}
   {% include 'pm/includes/metatags.html' %}

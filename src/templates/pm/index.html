@@ -66,14 +66,6 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
-  <!-- Import map for JS namespace aliases -->
-  <script type="importmap">
-      {
-          "imports": {
-              "@js/": "{{ request.url_for('static', path='js/') }}"
-          }
-      }
-  </script>
 
   {# Todo: Ensure stability cross domains  / producs #}
 

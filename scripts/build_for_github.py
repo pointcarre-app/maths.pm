@@ -102,8 +102,16 @@ async def fetch_and_save(client, route, output_dir, base_path="/maths.pm", moder
                 content = content.replace('import "/static/', f'import "{base_path}/static/')
                 content = content.replace("from '/static/", f"from '{base_path}/static/")
                 content = content.replace('from "/static/', f'from "{base_path}/static/')
-                content = content.replace("from '@js/", f"from '{base_path}/static/js/")
-                content = content.replace('from "@js/', f'from "{base_path}/static/js/')
+
+                # Fix PMRuntime import specifically
+                content = content.replace(
+                    "import PMRuntime from '/static/js/",
+                    f"import PMRuntime from '{base_path}/static/js/",
+                )
+                content = content.replace(
+                    'import PMRuntime from "/static/js/',
+                    f'import PMRuntime from "{base_path}/static/js/',
+                )
             # Modern deployment (maths.pm): keep original paths
             # No transformations needed - paths stay as /sujets0/form, /static/css/main.css, etc.
 
