@@ -1,7 +1,7 @@
 name: arpege
 product_type: "secondaire"
 title_html: Arpège 
-# is_hidden: true
+is_hidden: true
 is_beta: true
 subtitle_html: Épreuve anticipée de 1ère
 description: Système de répétitions espacées pour couvrir tous les calculs qu'un élève peut rencontrer de la troisième à la première (inspiré de <span class="italic">Duolingo HalfLife Regression</span>).
