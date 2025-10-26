@@ -151,25 +151,28 @@ dataviz2/
 This product (`dataviz2`) loads the following external dependencies in the HTML `<head>`:
 
 #### 1. Fonts
+
 - **Google Fonts** (multiple families):
-  - Comfortaa (300-700)
-  - Cormorant Garamond (300-700, italic variants)
-  - Dancing Script (400-700)
-  - EB Garamond (400-800, italic variants)
-  - Inter (100-900, variable font)
-  - JetBrains Mono (100-800, italic variants)
-  - Lora (400-700, italic variants)
-  - Playfair Display (400-900, italic variants)
-  - Source Serif 4 (200-900, variable font, italic variants)
-  - Spectral (200-800, italic variants)
-  - Lexend (100-900)
+    - Comfortaa (300-700)
+    - Cormorant Garamond (300-700, italic variants)
+    - Dancing Script (400-700)
+    - EB Garamond (400-800, italic variants)
+    - Inter (100-900, variable font)
+    - JetBrains Mono (100-800, italic variants)
+    - Lora (400-700, italic variants)
+    - Playfair Display (400-900, italic variants)
+    - Source Serif 4 (200-900, variable font, italic variants)
+    - Spectral (200-800, italic variants)
+    - Lexend (100-900)
 - **Open Dyslexic** v1.0.3 (accessibility font)
 
 #### 2. CSS Frameworks
+
 - **Tailwind CSS** v4.1.16 (browser version via CDN)
 - **DaisyUI** v5 (component library)
 
 #### 3. Custom Stylesheets
+
 - `/static/css/root.css` (domain-level root styles)
 - `/static/css/styles.css` (domain-level styles)
 - `/static/css/styles-alt.css` (domain-level alternative styles)
@@ -180,20 +183,25 @@ This product (`dataviz2`) loads the following external dependencies in the HTML 
 #### 4. JavaScript Libraries
 
 **Accessibility:**
+
 - `/static/js/accessibility-manager.js` (custom accessibility manager)
 
 **Math Rendering:**
+
 - **KaTeX** v0.16.9 (CSS + JS + auto-render extension)
 - **MathLive** v0.105.2 (interactive LaTeX editor)
 
 **Code Editor:**
+
 - **CodeMirror** v5.65.16 (CSS + JS + Python mode)
 
 **Product-specific:**
+
 - `/static/products/dataviz2/js/bokeh-detector.js` (Bokeh plot detection)
 - `/static/products/dataviz2/js/main.js` (product main script)
 
 #### 5. Configuration Notes
+
 - Tailwind is configured with typography plugin
 - KaTeX delimiters: `$$...$$` (display), `$...$` (inline)
 - Math rendering can be delayed and triggered via `render-math-now` event
@@ -213,6 +221,7 @@ js_dependencies:
 ```
 
 These dependencies are loaded only when the specific page is rendered, allowing for:
+
 - **Conditional loading** of heavy libraries (like Bokeh)
 - **Performance optimization** by avoiding global loading of page-specific dependencies
 - **Flexibility** for different pages to require different JavaScript libraries
