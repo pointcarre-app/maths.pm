@@ -232,5 +232,5 @@ Even though data modeling is not the scope of this course, preliminary knowledge
 ## Tree view & accessing all files
 
 
-[All files are available here](03_tree_view.md)
+[All files are available here](03_technical_doc.md)
 {: .alert .alert-info .alert-soft}

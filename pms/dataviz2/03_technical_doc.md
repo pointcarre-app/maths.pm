@@ -1,9 +1,9 @@
-# Tree view and accessing all files
+# Technical documentation
 
 
 [TOC]
 
-Tree view of the Data Visualization 2 course
+Tree view of the Data Visualization 2 course, files list and developer notes.
 {: .pm-subtitle}
 
 
@@ -18,14 +18,13 @@ Tree view of the Data Visualization 2 course
 dataviz2/
 ├── 01_plan_cards.md
 ├── 02_covid_us_stats_analysis.md
-├── 03_tree_view.md
+├── 03_technical_doc.md
 ├── 99_sandbox.md
 ├── 99_sandbox_bokeh.md
 ├── session_0.md
 ├── session_1_a.md
 ├── session_1_a0_shannon.md
 ├── session_1_a1_visual.md
-├── session_1_az_old.md
 ├── session_1_b.md
 ├── session_1_c.md
 ├── session_1_d.md
@@ -82,14 +81,13 @@ dataviz2/
 
 - 01_plan_cards.md — [**Plan Cards**](01_plan_cards.md)
 - 02_covid_us_stats_analysis.md — [**COVID-19 US Stats Analysis**](02_covid_us_stats_analysis.md)
-- 03_tree_view.md — [**Tree View**](03_tree_view.md)
+- 03_technical_doc.md — [**Technical Documentation**](03_technical_doc.md)
 - 99_sandbox.md — [**Sandbox**](99_sandbox.md)
 - 99_sandbox_bokeh.md — [**Sandbox Bokeh**](99_sandbox_bokeh.md)
 - session_0.md — [**Session 0**](session_0.md)
 - session_1_a.md — [**Session 1a**](session_1_a.md)
 - session_1_a0_shannon.md — [**Session 1a0: Shannon**](session_1_a0_shannon.md)
 - session_1_a1_visual.md — [**Session 1a1: Visual**](session_1_a1_visual.md)
-- session_1_az_old.md — [**Session 1az (old)**](session_1az_old.md)
 - session_1_b.md — [**Session 1b**](session_1_b.md)
 - session_1_c.md — [**Session 1c**](session_1_c.md)
 - session_1_d.md — [**Session 1d**](session_1_d.md)
@@ -139,3 +137,82 @@ dataviz2/
         - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/run_presentation.sh" download>run_presentation.sh</a>
         - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/test_import.py" download>test_import.py</a>
         - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/visual-vocabulary-ft.png" download>visual-vocabulary-ft.png</a>
+
+
+
+
+
+
+
+## Developer notes
+
+### Frontend Dependencies
+
+This product (`dataviz2`) loads the following external dependencies in the HTML `<head>`:
+
+#### 1. Fonts
+- **Google Fonts** (multiple families):
+  - Comfortaa (300-700)
+  - Cormorant Garamond (300-700, italic variants)
+  - Dancing Script (400-700)
+  - EB Garamond (400-800, italic variants)
+  - Inter (100-900, variable font)
+  - JetBrains Mono (100-800, italic variants)
+  - Lora (400-700, italic variants)
+  - Playfair Display (400-900, italic variants)
+  - Source Serif 4 (200-900, variable font, italic variants)
+  - Spectral (200-800, italic variants)
+  - Lexend (100-900)
+- **Open Dyslexic** v1.0.3 (accessibility font)
+
+#### 2. CSS Frameworks
+- **Tailwind CSS** v4.1.16 (browser version via CDN)
+- **DaisyUI** v5 (component library)
+
+#### 3. Custom Stylesheets
+- `/static/css/root.css` (domain-level root styles)
+- `/static/css/styles.css` (domain-level styles)
+- `/static/css/styles-alt.css` (domain-level alternative styles)
+- `/static/products/dataviz2/css/pm.css` (product-specific styles)
+- `/static/products/dataviz2/css/toc.css` (table of contents styles)
+- `/static/products/dataviz2/css/dataviz2.css` (product-specific styles)
+
+#### 4. JavaScript Libraries
+
+**Accessibility:**
+- `/static/js/accessibility-manager.js` (custom accessibility manager)
+
+**Math Rendering:**
+- **KaTeX** v0.16.9 (CSS + JS + auto-render extension)
+- **MathLive** v0.105.2 (interactive LaTeX editor)
+
+**Code Editor:**
+- **CodeMirror** v5.65.16 (CSS + JS + Python mode)
+
+**Product-specific:**
+- `/static/products/dataviz2/js/bokeh-detector.js` (Bokeh plot detection)
+- `/static/products/dataviz2/js/main.js` (product main script)
+
+#### 5. Configuration Notes
+- Tailwind is configured with typography plugin
+- KaTeX delimiters: `$$...$$` (display), `$...$` (inline)
+- Math rendering can be delayed and triggered via `render-math-now` event
+- Metadata includes SEO, OpenGraph, and Twitter card properties
+
+#### 6. Page-Specific Dependencies (Dynamic Loading)
+
+Some markdown files include frontmatter that triggers additional JavaScript dependencies to be loaded dynamically. Example from `session_3_a.md`:
+
+```yaml
+---
+js_dependencies:
+  - "https://cdn.bokeh.org/bokeh/release/bokeh-3.6.2.min.js"
+  - "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.6.2.min.js"
+  - "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.6.2.min.js"
+---
+```
+
+These dependencies are loaded only when the specific page is rendered, allowing for:
+- **Conditional loading** of heavy libraries (like Bokeh)
+- **Performance optimization** by avoiding global loading of page-specific dependencies
+- **Flexibility** for different pages to require different JavaScript libraries
