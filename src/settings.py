@@ -45,6 +45,7 @@ class ProductType(str, Enum):
     SECONDAIRE = "secondaire"
     SUPERIEUR = "superieur"
     DRAFT = "draft"
+    PCA = "pca"
 
 
 # Global constants - defined once and used throughout

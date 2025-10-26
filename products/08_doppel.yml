@@ -1,6 +1,7 @@
 name: doppel
 product_type: "repo"
 title_html: Doppel
+is_beta: true
 subtitle_html: Synchronisation navigateur-serveur
 description: Garantir que les exécutions de code Python dans le navigateur avec Nagini (pour la production) et côté serveur (pour le développement) coïncident.
 local_path: /pm/doppel/a_load_generator.md

@@ -1,7 +1,7 @@
 name: pyly
 product_type: "secondaire"
 title_html: Python lycée
-# is_hidden: true
+is_hidden: true
 is_beta: true
 subtitle_html: Python en maths
 # description: "Dans le contexte d'une formation à forte composante mathématiques, apprendre à représenter des données en utilisant les librairies Python : Matplotlib et Bokeh, et une librairie JS : D3.js."

@@ -1,0 +1,37 @@
+name: pca
+product_type: "pca"
+title_html: PCA 
+# is_hidden: true
+is_beta: true
+subtitle_html: PCA
+description: PCA
+local_path: /pm/pca/0.md
+source_link: ""
+color: success
+# figure_svg: arpege-figure-svg.html
+# classes_formatted:
+#   - 3<sup>ème</sup>
+#   - 2<sup>nde</sup>
+#   - 1<sup>ère</sup>
+# tags:
+#   - education
+#   - maths
+#   - exam
+#   - generator
+#   - exercises
+domains:
+  - maths.pm
+
+owner_rdb: "SAS POINTCARRE.APP"
+owner_url: "https://pointcarre.app"
+
+
+
+backend_settings:
+  # JavaScript dependencies to load for this product
+  # js_dependencies:
+    # - "/static/js/pm/bokeh-detector.js"
+    # - "/static/js/products/dataviz2/main.js"
+  css_dependencies:
+    - "/static/core/css/pm.css"
+    - "/static/core/css/toc.css"
