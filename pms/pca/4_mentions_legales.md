@@ -108,7 +108,7 @@ Pour plus d'informations sur notre engagement en matière de protection des donn
 
 Pour toute question relative aux mentions légales, à la propriété intellectuelle ou à la protection des données, vous pouvez nous contacter à l'adresse suivante :
 
-**Email :** contact@pointcarre.app
+**Email :** contact(@)pointcarre.app
 
 **Adresse postale :**  
 Société POINTCARRE.APP  
