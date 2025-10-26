@@ -56,7 +56,7 @@ In the study, **Shannon entropy** is used to estimate the **Information Density 
      $$
      IR = ID \cdot SR
      $$
-     - $SR$ is calculated as the number of syllables ($NS$) divided by the duration of speech (in seconds, excluding pauses >$150$ ms).
+     - $SR$ is calculated as the number of syllables ($NS$) divided by the duration of speech (in seconds, excluding pauses > $150$ ms).
 
 
 

@@ -6,7 +6,7 @@
 
 
 
-## Groups constitution
+## Group constitution
 
 
 Most of the students will be working in groups of 3. If the number of students is not a multiple of 3, we will also form groups of 4 (as few as possible).
@@ -38,7 +38,7 @@ The dataset must be relevant in order to use the concepts and the different data
 
 
 
-Bokeh server applications seem to be the easiest to implement. Indeed, interactions with JupyterLab (or any browser based environment for execution or rendering) implies implementing by hand the logic of update when using widgets. Therefore, without this very low level logic implementation, bokeh looses some very interesting features. 
+Bokeh server applications seem to be the easiest to implement. Indeed, interactions with JupyterLab (or any browser based environment for execution or rendering) implies implementing by hand the logic of update when using widgets. Therefore, without this very low level logic implementation, Bokeh loses some very interesting features. 
 {: .alert .alert-error .alert-soft}
 
 
@@ -48,12 +48,12 @@ Bokeh server applications seem to be the easiest to implement. Indeed, interacti
 
 | Step | Session | Milestone | Deliverable |
 |------|---------|-----------|-------------|
-| 1 | Session 1 | **Group formation** | Groups of 3-4 students formed | 
-| 2 | Session 2 | **Dataset selection** | Initial dataset chosen by group | 
-| 3 | Session 2 | **Project planning** | Project planning (**ask teacher's opinion**) | 
-| 4 | Session 3 | **Data validation** | Dataset **approved by teacher** | 
-| 5 | Session 3 | **Story scripting** | Preliminary story outline & key insights identified | 
-| 6 | Session 3-4 | **First graphs** | Initial visualizations with `matplotlib` | 
-| 7 | Session 4 | **Advanced visualizations** | Interactive graphs with `bokeh` | 
-| 8 | Session 5 | **Final polish** | Complete notebook + one-page report | 
-| 9 | Session 5 | **Presentation** | Project presentation to class | 
+| 1 |  1 | **Group formation** | Groups of 3-4 students formed | 
+| 2 |  2 | **Dataset selection** | Initial dataset chosen by group | 
+| 3 |  2 | **Project planning** | Project planning (**ask teacher's opinion**) | 
+| 4 |  3 | **Data validation** | Dataset **approved by teacher** | 
+| 5 |  3 | **Story scripting** | Preliminary story outline & key insights identified | 
+| 6 |  3-4 | **First graphs** | Initial visualizations with `matplotlib` | 
+| 7 |  4 | **Advanced visualizations** | Interactive graphs with `bokeh` | 
+| 8 |  5 | **Final polish** | Complete notebook + one-page report | 
+| 9 |  5 | **Presentation** | Project presentation to class | 

@@ -15,10 +15,10 @@ We'll use some panel data: GDP (nominal) per year and per country. The dataset a
 
 ### Objective
 
-### Apply what you have learned during this session: 
+Apply what you have learned during this session: 
 
 
-- [**Course overview**](00_plan.md) 
+- [**Course overview**](01_plan_cards.md) 
 - [**Graphic Semiology Fundamentals**](session_1_a.md)
     - [4. Visual Variables](session_1_a1_visual.md)
 - <span class="text-base-content/60"> [**Installing Python, the clean way**](session_1_b.md) </span>

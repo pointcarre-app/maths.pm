@@ -1,5 +1,9 @@
 # COVID-19 Deaths Analysis
-Comprehensive Analysis with Official CDC Data examining the differences between D. Trump and J. Biden Presidential responses
+
+
+[TOC]
+
+Comprehensive Analysis with Official CDC Data examining the differences between D. Trump and J. Biden presidential responses
 {: .pm-subtitle}
 
 > CDC stands for **Centers for Disease Control and Prevention**.
@@ -32,10 +36,9 @@ The complete article from **Reuters** is available [here](https://www.reuters.co
 | Year | Deaths | President | Days in Office During Pandemic |
 |---|---|---|---|
 | **2020** | 384,536 | Trump | 366 days (leap year)|
-| **2021** |  | Biden (full year) | 365 days |
 | **2021** | 462,193 | Biden (full year) | 365 days |
 | **2022** | 244,986 | Biden (full year) | 365 days |
-| **Total** | 1,091,715 | Combined | 1,036 days |
+| **Total** | 1,091,715 | Combined | 1,096 days |
 
 *Sources: [CDC MMWR 2023](https://www.cdc.gov/mmwr/volumes/72/wr/mm7218a4.htm), [Statista](https://www.statista.com/statistics/1382334/number-covid-deaths-us-by-year/)*
 
@@ -94,7 +97,7 @@ The complete article from **Reuters** is available [here](https://www.reuters.co
 ### Biden Administration Challenges
 | Factor | Impact |
 |---|---|
-| **Inherited Peak** | "Inheriting a trendline that showed 3,000 deaths per day" |
+| **Inherited Peak** | "Inheriting a trendline that showed 3,000 deaths/day" |
 | **Vaccine Hesitancy** | Political resistance to vaccination |
 | **New Variants** | Delta and Omicron surges despite vaccines |
 | **Longer Duration** | More time periods with elevated deaths |
@@ -103,7 +106,7 @@ The complete article from **Reuters** is available [here](https://www.reuters.co
 
 | Factor | Trump Era | Biden Era | Assessment | Key Dates & Sources |
 |---|---|---|---|---|
-| **Medical Knowledge** | Limited understanding of transmission, treatment protocols developing | Extensive knowledge of virus behavior, established treatment protocols | Biden had advantage | **Trump**: March 2020 WHO declares pandemic; **Biden**: January 2021 monoclonal antibodies, remdesivir protocols established |
+| **Medical Knowledge** | Limited understanding of transmission, and treatment protocols were developing | Extensive knowledge of virus behavior, established treatment protocols | Biden had advantage | **Trump**: March 2020 WHO declares pandemic; **Biden**: January 2021 monoclonal antibodies, remdesivir protocols established |
 | **Vaccine Availability** | None available | Pfizer/Moderna vaccines available | Biden had advantage | **Trump**: No vaccines through January 2021; **Biden**: December 14, 2020 first vaccines, January 20, 2021 ~1M doses/day at inauguration |
 | **Variant Challenges** | Original SARS-CoV-2 strain | Delta (summer 2021) + Omicron (winter 2021-22) variants | Trump had simpler challenge | **Trump**: Single original strain March 2020-Jan 2021; **Biden**: Delta surge July-September 2021, Omicron surge December 2021-February 2022 |
 | **Political Climate** | Initial bipartisan crisis unity, later politicization | Highly polarized from day one, vaccine resistance | Trump had initial advantage | **Trump**: March-May 2020 bipartisan support, June 2020+ mask politicization; **Biden**: January 2021+ vaccine mandates faced immediate political resistance |

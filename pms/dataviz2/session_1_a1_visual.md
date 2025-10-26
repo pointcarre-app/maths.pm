@@ -1,4 +1,4 @@
-# 4. Visual  Variables
+# 4. Visual Variables
 
 
 <span class="font-heading">4. Visual Variables <br>For [Graphic Semiology Fundamentals](session_1_a.md) from Session 1</span>

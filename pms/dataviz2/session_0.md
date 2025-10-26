@@ -21,9 +21,11 @@ To better understand this chart and the conclusion we can draw, more details are
 - Duration: 
     - 15 hours lectures and tutorials (i.e. $3\\times 5h= 15h$)
     - 10 hours personal work  
-- Teaching material: [*See below*](#detailed-plan-and-organization-of-the-course)
+- Teaching material: [*See the plan of the course*](01_plan_cards.md)
     - *"Slides"*
-    - Exercises
+    - Practical work
+    - Working examples
+    - Corrections
 
 
 
@@ -40,13 +42,18 @@ To better understand this chart and the conclusion we can draw, more details are
 ### 🛠️ Technologies used in this course
 
 
-**Software:** Python 
+**Programming language:** Python 
 
 **Focus on the libraries:**
 
 - Matplotlib
 - Bokeh
 
+
+**Other recommended technologies:**  
+
+- Pyenv
+- Jupyter Notebook
 
 ### 📊 Learning Outcomes
 
@@ -61,14 +68,7 @@ To better understand this chart and the conclusion we can draw, more details are
 
 
 
-
-
-<!-- 
-**📖 Course Materials:**
-- **[Introduction & Interactive Notebooks](01_introduction.md)** - Getting started with Jupyter environments and code fragments
-- **[Jupyter Launcher](jupyter_launcher.md)** - Direct access to interactive Python environments -->
-
 &nbsp;
 
 ### 📝 Evaluation
-The evaluation consists of a data visualization project. The students will have *to build a website* based on Bokeh library. As this course doesn't include any web development concepts and tools, the students will have the right to use a `Jupyter Notebook`. Hence, Bokeh interactivity will be available in the notebook format.
+The evaluation consists of a data visualization project where students will create interactive visualizations using the Bokeh library. While building a *Bokeh-based website* is the **recommended approach**, students may alternatively use a `Jupyter Notebook` format, though this option offers only partial Bokeh interactivity. Since this course does not cover web development concepts, students should note that Bokeh makes website creation straightforward and accessible, even without prior web development experience.

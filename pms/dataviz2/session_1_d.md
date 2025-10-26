@@ -72,7 +72,7 @@ Understanding data types and basic visualization with matplotlib
 {: .alert .alert-success .alert-soft}
 
 
-**In particular, a lot of the complexity related to the the building of the layout of the plot is handled by `matplotlib`, without us having to worry about it.**<br>
+**In particular, a lot of the complexity related to the building of the layout of the plot is handled by `matplotlib`, without us having to worry about it.**<br>
 {: .alert .alert-success .alert-soft}
 
 **However, if more control is needed, we can always use the `matplotlib` API to customize a plot.**
@@ -475,7 +475,7 @@ inline: |
     url = "https://raw.githubusercontent.com/datasets/gdp/master/data/gdp.csv"
     df = pd.read_csv(open_url(url))
     
-    # Pick Turkiye	 - a country with high economic volatility
+    # Pick Turkiye - a country with high economic volatility
     country = 'Turkiye'
     country_data = df[df['Country Name'] == country].copy()
     country_data = country_data.sort_values('Year')

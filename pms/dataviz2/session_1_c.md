@@ -18,7 +18,7 @@ inline: |
 ```
 
 
-> It's not an Easter Egg, it's a list of principles that guide Python's design and coding practices. As we deal with a very high level of abstraction when building data visualisation tools, this list is a good guide to write Pythonic code.
+> It is not an Easter Egg, it is a list of principles that guide Python's design and coding practices. As we deal with a very high level of abstraction when building data visualization tools, this list is a good guide to write Pythonic code.
 
 ## Code Examples
 
@@ -87,7 +87,7 @@ height_in_px: 220
 inline: |
     # Not Pythonic - overcomplicated logic
     def is_valid_string(s):
-        if s != None:
+        if s is not None:
             if len(s) > 0:
                 return True if s.strip() != "" else False
         return False

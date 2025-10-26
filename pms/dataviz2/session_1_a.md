@@ -291,7 +291,7 @@ inline: |
 
 ```html
 <details class="my-2 sm:p-4 sm:bg-base-200" style="border-radius: var(--radius-box);overflow-x: scroll;">
-    <summary>100m men world record progression</summary>
+    <summary>100m men's world record progression</summary>
     <table class="table p-4 mt-2" style="border-radius: var(--radius-box);">
         <thead>
             <tr>
@@ -356,7 +356,7 @@ inline: |
           </tr>
       </tbody>
     </table>
-    <p class="text-sm text-gray-500">Source: Wikipedia / World Athletics (as of September 2025)</p>
+    <p class="text-sm text-gray-500">Source: Wikipedia / World Athletics (as of October 2025)</p>
 </details>
 ```
 
@@ -396,10 +396,10 @@ inline: |
 ### 3.3. An example with a scatter plot 
 
 
-> Here we add a regression line to the scatter plot to show the trend of the data. It show how to combine lines and points in the same plot.
+> Here we add a regression line to the scatter plot to show the trend of the data. It shows how to combine lines and points in the same plot.
 
 
-Look carefully at the axis: the $y$ axis is inverted, because the faster times are better. This is a common practice in data visualization, it's not mandatory, but it helps to make the plot more readable.
+Look carefully at the axis: the $y$ axis is inverted, because the faster times are better. This is a common practice in data visualization, it is not mandatory, but it helps to make the plot more readable.
 {: .alert .alert-warning .alert-soft}
 
 
@@ -459,9 +459,9 @@ inline: |
     plt.xlabel('Date', fontsize=13)
     plt.ylabel('Time (seconds)', fontsize=13)
     plt.title(
-        '100m Men World Record Progression\n'
+        '100m Men\'s World Record Progression\n'
         'Relationship: Athletic Performance vs Time\n'
-        'Source: Wikipedia / World Athletics (as of September 2025)',
+        'Source: Wikipedia / World Athletics (as of October 2025)',
         fontsize=15,
         pad=18,
         fontweight='bold'
@@ -494,7 +494,7 @@ inline: |
     
 
 
-Since not only has the 100m men world record, but also most world records (whatever the sport), been improved continuously during the last century, what can we conclude about the evolution in the field of athletics?
+Since not only the 100m men's world record, but also most world records (whatever the sport), have been improved continuously during the last century, what can we conclude about the evolution in the field of athletics?
 {: .alert .alert-info .alert-soft}
 
 
@@ -689,13 +689,13 @@ inline: |
 - What are the signified ?
 - What can we conclude from those graphs ?
 - How do they compare in terms of readability and visual unity?
-- **Big findings?** Are we this sure ? (<span class="italic">For some heatmap values from 3.4, once the economical context of those countries is known, the analysis is pretty clear. But for some others, it's not so obvious.</span>)
+- **Big findings?** Are we this sure? (<span class="italic">For some heatmap values from 3.4, once the economic context of those countries is known, the analysis is pretty clear. But for some others, it is not so obvious.</span>)
 
 
 
 
 
-## 4. Visual  Variables
+## 4. Visual Variables
 
 
 This part of the lecture is available [here: Visual Variables](session_1_a1_visual.md).
