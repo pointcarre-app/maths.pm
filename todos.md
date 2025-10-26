@@ -4,6 +4,9 @@
 # Critical
 
 
+- [] Constrast inversed: issues with pm-subtitles hence some colors from daisyUI (still gray, not big contrast)
+
+
 - [] Better .gitignore
 
 
