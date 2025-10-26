@@ -46,10 +46,10 @@ Contrairement aux plateformes traditionnelles, **Maths.pm** repose sur des **sit
 
 - **Tout s'exécute localement** : Les exercices interactifs, les corrections automatiques et les parcours personnalisés fonctionnent **sans connexion à un serveur**.
 - **Avantages clés** :
-  - **Rapidité** : Chargement instantané, réactivité optimale.
-  - **Fiabilité** : Pas de pannes serveur, disponibilité permanente.
-  - **Confidentialité** : Impossibilité technique de collecter des données.
-  - **Souveraineté** : Hébergement sur une infrastructure publique française (Forge des Communs Numériques).
+    - **Rapidité** : Chargement instantané, réactivité optimale.
+    - **Fiabilité** : Pas de pannes serveur, disponibilité permanente.
+    - **Confidentialité** : Impossibilité technique de collecter des données.
+    - **Souveraineté** : Hébergement sur une infrastructure publique française (Forge des Communs Numériques).
 
 ### Une interactivité locale avancée
 
@@ -145,14 +145,14 @@ Ils bénéficient d'un accès :
 - **Accessibilité universelle** : Conformité progressive au RGAA, ergonomie adaptée et compatibilité multi-supports.
 
 
-## Notre vision pour demain
+## Notre vision à 2 ans
 
 Nous aspirons à :
 
 - **Élargir notre offre** : Étendre nos ressources à d'autres niveaux (collège, lycée) et disciplines (physique-chimie, informatique).
 - **Renforcer la communauté** : Faciliter les contributions des enseignants et chercheurs.
 - **Partager nos innovations** : Rendre nos briques techniques réutilisables par d'autres projets éducatifs.
-- **Rayonner à l'international** : Adapter nos contenus pour les pays francophones.
+- **Rayonner à l'international** : Adapter nos contenus pour les pays francophones, anglophones, germanophones et hispanophones.
 
 &nbsp;
 

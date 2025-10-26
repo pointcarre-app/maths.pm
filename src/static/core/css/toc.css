@@ -3,7 +3,7 @@
 .sidebar-fixed {
   position: fixed;
   top: 12vh;
-  left: 1rem;
+  right: 1rem;
   /* height: auto; */
   max-height: 60vh;
   overflow-y: scroll;
@@ -11,6 +11,11 @@
   font-family: var(--font-heading);
 }
 
+
+@media (min-height: 768px) {
+  .sidebar-fixed {
+    max-height: 80vh;
+}
 
 
 
