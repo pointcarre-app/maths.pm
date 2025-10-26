@@ -14,7 +14,7 @@ This document outlines all the issues that need to be addressed before releasing
 
 ### Internal References and URLs
 - [ ] **Company Email and Contact Information** in `/domains/maths.pm.yml`:
-  - Lines 14, 17, 57, 121: References to `contact@pointcarre.app`
+  - Lines 14, 17, 57, 121: References to `contact(at)pointcarre.app`
   - Lines 11, 16-18: References to "SAS POINTCARRE.APP"
   - Lines 63-67: Office location details for Paris
 - [ ] **Company Domain References**:

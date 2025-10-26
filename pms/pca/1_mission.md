@@ -16,6 +16,7 @@ Notre ambition ? Créer un **cercle vertueux** où la collaboration entre enseig
 ### 1. Liberté et partage
 
 Nous plaçons la **transparence** et la **collaboration** au cœur de notre démarche :
+
 - **Des ressources libres** : Tous nos contenus sont publiés sous licence **CC BY-NC-SA 4.0**, pour encourager leur réutilisation et adaptation par la communauté éducative.
 - **Un code ouvert** : Notre infrastructure est développée sous licence **AGPL v3**, garantissant une **auditabilité totale** et une **pérennité collective**.
 - **Des standards universels** : Nous utilisons des formats ouverts (HTML, CSS, JavaScript, Markdown, Python) pour assurer une **interopérabilité maximale** et éviter toute dépendance technologique.
@@ -23,6 +24,7 @@ Nous plaçons la **transparence** et la **collaboration** au cœur de notre dém
 ### 2. Protection absolue de la vie privée
 
 Parce que la confiance est essentielle, nous avons conçu **Maths.pm** pour qu'il soit **nativement respectueux des données** :
+
 - **Zéro collecte** : Aucune donnée personnelle n'est jamais enregistrée, stockée ou transmise.
 - **Conformité RGPD intégrée** : Notre architecture élimine, par conception, tout risque lié à la protection des données.
 - **Transparence radicale** : Notre code ouvert permet à chacun de vérifier nos engagements.
@@ -30,6 +32,7 @@ Parce que la confiance est essentielle, nous avons conçu **Maths.pm** pour qu'i
 ### 3. Accessibilité pour tous
 
 Nous refusons les barrières à l'éducation :
+
 - **Gratuité totale** : Aucun coût, aucune inscription, aucun compte requis.
 - **Accès universel** : Nos ressources sont disponibles **sans restriction** pour les élèves, enseignants et établissements publics.
 - **Coût marginal nul** : Notre infrastructure permet de servir **un nombre illimité d'utilisateurs** sans surcoût.
@@ -40,6 +43,7 @@ Nous refusons les barrières à l'éducation :
 ### Des sites statiques pour une expérience fluide et sécurisée
 
 Contrairement aux plateformes traditionnelles, **Maths.pm** repose sur des **sites statiques** :
+
 - **Tout s'exécute localement** : Les exercices interactifs, les corrections automatiques et les parcours personnalisés fonctionnent **sans connexion à un serveur**.
 - **Avantages clés** :
   - **Rapidité** : Chargement instantané, réactivité optimale.
@@ -50,6 +54,7 @@ Contrairement aux plateformes traditionnelles, **Maths.pm** repose sur des **sit
 ### Une interactivité locale avancée
 
 Nos ressources offrent une expérience **riche et immersive** :
+
 - **Calcul formel** : Reconnaissance des formes mathématiques, simplification symbolique et validation intelligente des réponses.
 - **Exécution de code Python** : Les élèves peuvent coder et tester directement dans leur navigateur, sans installation.
 - **Personnalisation adaptative** : Des algorithmes de répétition espacée optimisent l'apprentissage en fonction des besoins de chaque élève.
@@ -90,6 +95,7 @@ Nos ressources offrent une expérience **riche et immersive** :
 ### Les enseignants : créateurs et innovateurs
 
 Au cœur de notre projet, les enseignants disposent d'outils pour :
+
 - Créer des contenus interactifs (calcul formel, code exécutable, visualisations).
 - Structurer leurs ressources avec une **documentation complète** et des métadonnées alignées sur les programmes officiels.
 - Adapter et réutiliser librement les ressources existantes.
@@ -97,12 +103,14 @@ Au cœur de notre projet, les enseignants disposent d'outils pour :
 ### Le Ministère de l'Éducation Nationale
 
 Un partenaire clé qui fournit :
+
 - La **Forge des Communs Numériques Éducatifs**, une infrastructure publique, souveraine et fiable.
 - Une validation de notre engagement pour des **ressources libres et sans collecte de données**.
 
 ### Pointcarre.app : développement et accompagnement
 
 Nous assurons :
+
 - Le développement technique (sites statiques, calcul formel, algorithmes adaptatifs).
 - La maintenance du code open-source et l'innovation pédagogique.
 - L'accompagnement de la communauté éducative.
@@ -110,6 +118,7 @@ Nous assurons :
 ### Les élèves : au cœur de notre mission
 
 Ils bénéficient d'un accès :
+
 - **Sécurisé** : Interface intuitive, sans collecte de données.
 - **Interactif** : Ressources dynamiques et personnalisées.
 - **Universel** : Compatible avec tous les appareils, même hors ligne.
@@ -139,6 +148,7 @@ Ils bénéficient d'un accès :
 ## Notre vision pour demain
 
 Nous aspirons à :
+
 - **Élargir notre offre** : Étendre nos ressources à d'autres niveaux (collège, lycée) et disciplines (physique-chimie, informatique).
 - **Renforcer la communauté** : Faciliter les contributions des enseignants et chercheurs.
 - **Partager nos innovations** : Rendre nos briques techniques réutilisables par d'autres projets éducatifs.
