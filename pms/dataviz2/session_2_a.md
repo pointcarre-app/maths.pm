@@ -4,13 +4,13 @@
 A comprehensive guide to choosing the right chart for your data story using the *FT Data Visualization Guide*
 {: .pm-subtitle}
 
-This work is an adaptation from the [*FT Data Visualization Guide*](https://github.com/Financial-Times/chart-doctor/tree/main/visual-vocabulary) from *the Financial Times*. This work is licenced under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This work is an adaptation from the [*FT Data Visualization Guide*](https://github.com/Financial-Times/chart-doctor/tree/main/visual-vocabulary) from *the Financial Times*. This work is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 {: .alert .alert-success .alert-soft}
 
 
 
-This ressource has been made available by [The official portal for European data](https://data.europa.eu/apps/data-visualisation-guide/visual-vocabulary), i.e. [data.europa.eu](https://data.europa.eu).
-{.alert .alert-info .alert-soft}
+This resource has been made available by [The official portal for European data](https://data.europa.eu/apps/data-visualisation-guide/visual-vocabulary), i.e. [data.europa.eu](https://data.europa.eu).
+{: .alert .alert-info .alert-soft}
 
 
 [TOC]
@@ -19,10 +19,10 @@ This ressource has been made available by [The official portal for European data
 ## The FT Data Visualization Guide
 
 
-![Visual Vocabulary - FT Data Visualization Guide](files/visual-vocabulary-ft.png)
+![Visual Vocabulary - FT Data Visualization Guide](files/bokeh_server_apps/visual-vocabulary-ft.png)
 
-License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- Link to download the image in high resolution: <a href="/pm/dataviz2/files/bokeh_server_apps/visual-vocabulary-ft.png" download>Download link</a><br>
 
 
 ## Deviation
@@ -254,7 +254,7 @@ Inflation & unemployment, income & life expectancy
 - The standard way to show the relationship between two continuous variables, each of which has its own axis
 
 #### Column + line (dual axis)
-- A chart which allows you to look at the relationship between two scaled axis. TAKE CARE: this axis is very easy to manipulate to show nothing or anything
+- A chart which allows you to look at the relationship between two scaled axes. TAKE CARE: this technique is very easy to manipulate to show nothing or anything
 
 #### Connected scatterplot
 - Usually used to show how the relationship between 2 variables has changed over time
@@ -470,7 +470,7 @@ inline: |
 
 
 - Strong positive correlation between: Income and Life Expectancy
-- Phillips Curve visible: Higher: unemployment with lower inflation 
+- Phillips Curve visible: Higher unemployment with lower inflation 
 - South Africa: high unemployment (32%) (could be considered as an outlier depending on the context)
 - USA: Highest income but not highest life expectancy
 - Japan: Highest life expectancy with moderate income
@@ -1337,9 +1337,7 @@ data_g7 = [
 ]
 
 df_g7 = pd.DataFrame(data_g7)
-
 print(df_g7)
-df_g7 = pd.DataFrame(data_g7)
 
 ```
 

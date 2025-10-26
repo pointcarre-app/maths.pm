@@ -601,7 +601,7 @@ inline: |
 ## Interactive Widgets and Controls
 
 
-There may be problems with the update of the plot when using the widgets in the browser. Use the `.py` files available at  folder.
+There may be problems with the update of the plot when using the widgets in the browser. Use the `.py` files available in the Bokeh server apps folder (see [Practical work with `bokeh` server applications](session_3_b.md)).
 {: .alert .alert-error .alert-soft}
 
 <br>

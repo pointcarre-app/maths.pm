@@ -746,12 +746,12 @@ inline: |
   # from matplotlib.patches import Patch
   # legend_elements = [
   #     Line2D([0], [0], color='black', lw=2, label='Median GDP'),
-  #     Patch(facecolor='none', edgecolor='none', label='Labels show largest # economy per region')
+  #     Patch(facecolor='none', edgecolor='none', label='Labels show largest economy per region')
   # ]
-  # ax.legend(handles=legend_elements, loc='upper right', frameon=True, # # framealpha=0.95, 
+  # ax.legend(handles=legend_elements, loc='upper right', frameon=True, framealpha=0.95, 
   #         fontsize=10)
   
-  #plt.tight_layout()
+  # plt.tight_layout()
   # plt.show()
   
   print("🔵 Dot strip plots show distributions and individual data points clearly")
@@ -963,5 +963,5 @@ inline: |
 ## Correction
 
 
-[Accéder à la correction](session_2_c0correction.md)
+[Access the correction](session_2_c0correction.md)
 {: .alert .alert-success .alert-soft}

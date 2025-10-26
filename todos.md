@@ -36,6 +36,9 @@
 - [] Ensure it doesnt break "codex_" (CodeMirror should do some stuff on it's own)
      - [] Test (like with pandas &, | and also < and >)
 
+
+- better logic / UI management of table of contents
+
 ```bash
 brew update && brew install pyenv
 ```

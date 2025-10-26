@@ -28,7 +28,7 @@ These server applications demonstrate features **NOT available** in static noteb
 
 ### Prerequisites
 
-Make sure you have the libraries installed listed in :  [**Installing Python, the clean way**](session_1_b.md) (in the last section: *Installing the libraries for the course*)
+Make sure you have the libraries listed in [**Installing Python, the clean way**](session_1_b.md) (in the last section: *Installing the libraries for the course*)
 
 If you follow the above installation instructions, you should have the libraries installed in the virtual environment. Try not to forget to activate the virtual environment before running the applications.
 {: .alert .alert-success .alert-soft}
@@ -269,7 +269,7 @@ Choose Bokeh server applications when you need:
 | **Port already in use** | Kill existing Bokeh server with `Ctrl+C` or use different port with `--port` |
 | **Module not found** | Ensure all packages installed: `pip install bokeh pandas numpy` |
 | **No display in browser 1️⃣** | Check browser console for JavaScript errors |
-| **No display in browser 2️⃣** | <span style="color: var(--color-error);">Just be nice with yourself, don't try make it work in the browser, use the `.py` files instead</span> |
+| **No display in browser 2️⃣** | <span style="color: var(--color-error);">Just be nice with yourself, do not try to make it work in the browser, use the `.py` files instead</span> |
 | **Slow updates** | Adjust update rates in streaming apps, optimize data processing |
 | **Connection refused 1️⃣** | Check firewall settings, use `--allow-websocket-origin` for remote access |
 | **Connection refused 2️⃣** | <span style="color: var(--color-success);">You shouldn't have this issue if you use only local files (not HTTP requests)</span> |
@@ -286,7 +286,7 @@ Remember: These apps require an active Bokeh server connection. Closing the brow
 
 
 1. **Explore the source code**: Each app is well-commented
-2. **Modify existing apps**: Change parameters, you can even add features
+2. **Modify existing apps**: Change parameters; you can even add features
 3. **Build your own**: Start with simple examples and expand, in particular starting from `01_simple_slider.py` and `05_linked_plots.py` and adapting them to your project
 
 

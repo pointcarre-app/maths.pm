@@ -163,7 +163,7 @@ print(f"Dataset loaded: {df_countries.shape[0]} rows, {df_countries['Country Nam
 
 
 
-This exercise illustrates the Ranking section of the [**Visual Vocabulary - Financial Times Guide**](session_2_a.md).
+The exercises illustrate the Ranking section of the [**Visual Vocabulary - Financial Times Guide**](session_2_a.md).
 {: .alert .alert-info .alert-soft}
 
 > Ranking visualizations are essential for showing order and hierarchy in data. They help readers quickly identify leaders, laggards, and relative positions. In this exercise, you'll explore different ways to visualize rankings using GDP data.

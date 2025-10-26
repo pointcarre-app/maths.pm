@@ -205,3 +205,23 @@ Even though data modeling is not the scope of this course, preliminary knowledge
 - [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb)
     - [**Correction**](files/covid-maps-correction.ipynb)
     - Download: <a href="/pm/dataviz2/files/covid-maps-correction.ipynb" download>Download link</a>
+- **Practical work: COVID 19 in the US - Python scripts (matplotlib)**
+    - [covid_data_prep.py](files/covid_data_prep.py) - Data preparation module<br>
+    - Download: <a href="/pm/dataviz2/files/covid_data_prep.py" download>Download link</a><br>
+    - [covid_matplotlib_01.py](files/covid_matplotlib_01.py) - Cumulative deaths by administration<br>
+    - Download: <a href="/pm/dataviz2/files/covid_matplotlib_01.py" download>Download link</a><br>
+    - [covid_matplotlib_02.py](files/covid_matplotlib_02.py) - Top 5 states (small multiples)<br>
+    - Download: <a href="/pm/dataviz2/files/covid_matplotlib_02.py" download>Download link</a><br>
+    - [covid_matplotlib_03.py](files/covid_matplotlib_03.py) - Cases vs deaths scatter<br>
+    - Download: <a href="/pm/dataviz2/files/covid_matplotlib_03.py" download>Download link</a><br>
+    - [covid_matplotlib_04.py](files/covid_matplotlib_04.py) - Death rate distributions<br>
+    - Download: <a href="/pm/dataviz2/files/covid_matplotlib_04.py" download>Download link</a><br>
+    - [covid_matplotlib_12.py](files/covid_matplotlib_12.py) - Time-lagged correlation<br>
+    - Download: <a href="/pm/dataviz2/files/covid_matplotlib_12.py" download>Download link</a><br>
+- **Practical work: COVID 19 in the US - Python scripts (bokeh server)**
+    - [covid_bokeh_10.py](files/covid_bokeh_10.py) - Interactive state explorer<br>
+    - Download: <a href="/pm/dataviz2/files/covid_bokeh_10.py" download>Download link</a><br>
+    - [covid_bokeh_11.py](files/covid_bokeh_11.py) - Trend decomposition dashboard<br>
+    - Download: <a href="/pm/dataviz2/files/covid_bokeh_11.py" download>Download link</a><br>
+
+
