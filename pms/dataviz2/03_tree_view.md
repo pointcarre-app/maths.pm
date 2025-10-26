@@ -1,4 +1,4 @@
-# Tree view & accessing all files
+# Tree view and accessing all files
 
 
 [TOC]

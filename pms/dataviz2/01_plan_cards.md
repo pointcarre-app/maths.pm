@@ -229,8 +229,8 @@ Even though data modeling is not the scope of this course, preliminary knowledge
 
 
 
-## Tree view
+## Tree view & accessing all files
 
 
-[Access the correction](03_tree_view.md)
-{: .alert .alert-info .alert-soft .my-8}
+[All files are available here](03_tree_view.md)
+{: .alert .alert-info .alert-soft}

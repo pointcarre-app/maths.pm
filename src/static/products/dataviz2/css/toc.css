@@ -3,7 +3,7 @@
 .sidebar-fixed {
   position: fixed;
   top: 12vh;
-  left: 1rem;
+  right: 1rem;
   /* height: auto; */
   max-height: 60vh;
   overflow-y: scroll;

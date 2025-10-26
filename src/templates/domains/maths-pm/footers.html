@@ -134,11 +134,8 @@
 
 {% if request.path != "/" %}
   {# Section 1 : Engagement vie privée  #}
-  <div class="mt-12 sm:mt-24">
-    <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto"
-         style="background-color: var(--color-primary-ghost) !important;
-                color: var(--color-primary) !important;
-                border-radius: var(--radius-box) !important">
+  {# <div class="mt-12 sm:mt-24">
+    <div class="text-left border-b border-base-content/10 p-4 sm:p-8 max-w-4xl mx-auto" style="background-color: var(--color-primary-ghost) !important; color: var(--color-primary) !important; border-radius: var(--radius-box) !important">
       <div class="max-w-3xl mx-auto py-10">
         <div class="mb-6 sm:mb-12">
           <span class="font-handwritten text-3xl sm:text-3xl md:text-5xl">Maths.pm</span>
@@ -169,18 +166,16 @@
         <hr class="my-10 border-dashed border-base-content/30" />
 
         <p class="mt-4 text-lg text-left font-light">
-          Nous expliquons notre démarche <span class="italic">zéro donnée conservée</span> sur cette <a class="underline underline-offset-2 hover:underline-offset-4 font-light"
-    href="{{ request.url_for('get_pm_root') }}">page</a>.
+          Nous expliquons notre démarche <span class="italic">zéro donnée conservée</span> sur cette <a class="underline underline-offset-2 hover:underline-offset-4 font-light" href="{{ request.url_for('get_pm_root') }}">page</a>.
         </p>
 
       </div>
     </div>
-  </div>
+</div> #}
 
   {# Section 2 : Communs numériques  #}
-  <div class="mt-12">
-    <div class="bg-base-200/80 p-4 sm:p-8 max-w-4xl mx-auto"
-         style="border-radius: var(--radius-box) !important">
+  {# <div class="mt-12">
+    <div class="bg-base-200/80 p-4 sm:p-8 max-w-4xl mx-auto" style="border-radius: var(--radius-box) !important">
       <div class="max-w-3xl mx-auto py-10">
         <!-- Titre principal -->
         <div class="mb-10">
@@ -190,38 +185,33 @@
               <span class="">Pointcarre</span>.app,
             </span>
             nous nous engageons en faveur des
-            <a class="underline underline-offset-2 hover:underline-offset-4 font-light"
-               href="{{ request.url_for('get_pm_root') }}">communs numériques</a>.
+            <a class="underline underline-offset-2 hover:underline-offset-4 font-light" href="{{ request.url_for('get_pm_root') }}">communs numériques</a>.
           </span>
         </div>
         <!-- Liste des ressources -->
         <div class="text-base sm:text-lg text-left mb-6 font-light">
           <ul class="list-disc list-inside">
             <li class="mb-2">
-              <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight"
-                 href="/ressources#secondaire">Ressources pédagogiques (secondaire)</a>
+              <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight" href="/ressources#secondaire">Ressources pédagogiques (secondaire)</a>
             </li>
             <li class="mb-2">
-              <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight"
-                 href="/ressources#superieur">Ressources pédagogiques (supérieur)</a>
+              <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight" href="/ressources#superieur">Ressources pédagogiques (supérieur)</a>
             </li>
             <li class="mb-2">
-              <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight"
-                 href="/ressources#logiciels-libres">Logiciels Libres & Infrastructure 🇫🇷</a>
+              <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight" href="/ressources#logiciels-libres">Logiciels Libres & Infrastructure 🇫🇷</a>
             </li>
             <li class="mb-2">
-              <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight"
-                 href="/about#licences">Licences AGPL-3.0 & CC 4.0 BY-NC-SA</a>
+              <a class="underline decoration-1 underline-offset-2 hover:underline-offset-4 font-extralight" href="/about#licences">Licences AGPL-3.0 & CC 4.0 BY-NC-SA</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
-  </div>
+  </div> #}
 {% endif %}
 
 {# Section 3 : Signature  #}
-<div class="max-w-3xl bg-base-100 shadow-lg p-4 mx-auto mb-18" style="border-radius: var(--radius-box)">
+<div class="max-w-3xl bg-base-100 shadow-lg p-4 mx-auto my-18" style="border-radius: var(--radius-box)">
   <div class="flex items-center justify-center flex-col mt-12">
     <div class="font-handwritten text-4xl mb-3 mt-[-0.5rem]">Maths.pm, par</div>
     <div>

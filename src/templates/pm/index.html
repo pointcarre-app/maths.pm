@@ -78,17 +78,27 @@
 
   {# This entire block can be replaced with: {% include "pm-include/render-full.html" %} #}
 
-
   {# Should be dealt at the ressources config level ie yaml + settings #}
   {% if product_settings and product_settings.name != "sujets0" %}
     {% include "pm/includes/toc-sidebar.html" %}
   {% endif %}
 
-  <div class="pm-container lg:text-lg w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto">
-    <div class="bg-base-100 shadow-xl mt-12 px-4 py-4 xl:px-24">
+  <div class="pm-container lg:text-lg w-full mx-auto">
+    <div id="pm-background-container"
+         class="bg-base-100 shadow-xl mt-12 px-3 sm:px-10 md:px-12 lg:px-14 py-4 sm:py-8 md:py-10 lg:py-12 mx-auto transition-all duration-300">
+
+      <div class="breadcrumbs text-sm">
+        <ul>
+          <li>
+            <a class="btn btn-sm btn-outline" href="{{ product_settings.local_path }}">{{ product_settings.title|safe }}</a>
+          </li>
+          <li>{{ pm.title | safe }}</li>
+        </ul>
+      </div>
 
       <!-- Main Content -->
-      <div id="pm-wrapper-max-width" class="max-w-[640px] mx-auto md:py-12 bg-base-100">
+      <div id="pm-wrapper-max-width" class="max-w-[640px] mx-auto md:pb-12 bg-base-100">
+
         {# Include product warning message #}
         {% include "pm/includes/product-warning.html" %}
 
@@ -147,6 +157,45 @@
               const originalBg = button.style.background;
               button.style.background = '#10b981';
               setTimeout(() => button.style.background = originalBg, 1000);
+          }
+      });
+  </script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          // Width selector functionality
+          const widthButtons = document.querySelectorAll('[data-width-selector]');
+          const pmWrapper = document.getElementById('pm-wrapper-max-width');
+          const backgroundContainer = document.getElementById('pm-background-container');
+
+          function setWidth(width) {
+              if (pmWrapper && backgroundContainer) {
+                  // Update content wrapper max-width
+                  pmWrapper.style.maxWidth = width;
+
+                  // Update background container with wider spacing (128px extra for breathing room)
+                  const widthValue = parseInt(width);
+                  const containerWidth = widthValue + 128;
+                  backgroundContainer.style.maxWidth = containerWidth + 'px';
+              }
+          }
+
+          widthButtons.forEach(button => {
+              button.addEventListener('click', function() {
+                  const selectedWidth = this.getAttribute('data-width-selector');
+                  setWidth(selectedWidth);
+
+                  // Update button states (visual feedback)
+                  widthButtons.forEach(btn => btn.classList.remove('btn-active'));
+                  this.classList.add('btn-active');
+              });
+          });
+
+          // Set initial state for 640px (default)
+          setWidth('640px');
+          const defaultButton = document.querySelector('[data-width-selector="640px"]');
+          if (defaultButton) {
+              defaultButton.classList.add('btn-active');
           }
       });
   </script>
