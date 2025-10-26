@@ -1,4 +1,5 @@
 <h2 id="{{ fragment.slug if fragment.slug else fragment.data.id_href if fragment.data and fragment.data.id_href is defined }}"
-    class="fragment text-xl sm:text-2xl md:text-2xl"
+    class="fragment text-2xl sm:text-2xl md:text-2xl"
     data-f_type="{{ fragment.f_type.value }}"
-    style="font-weight: 500">{{ fragment.html | safe }}</h2>
+    style="font-weight: 500;
+           line-height: 1.1">{{ fragment.html | safe }}</h2>

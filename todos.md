@@ -4,6 +4,8 @@
 # Critical
 
 
+- [] Better .gitignore
+
 
 - [] https://cdn.jsdelivr.net/gh/pointcarre-app/maths.pm@v0.0.9/
      - Package size exceeded the configured limit of 50 MB. Try https://github.com/pointcarre-app/maths.pm/tree/v0.0.9/ instead.

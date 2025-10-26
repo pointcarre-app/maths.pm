@@ -1039,6 +1039,7 @@ inline: |
 ### When to Use Bokeh
 
 ✅ **Use Bokeh when you need:**
+
 - Interactive exploration of data
 - Web-based visualizations
 - Real-time data updates
@@ -1046,6 +1047,7 @@ inline: |
 - Hover tooltips and selection tools
 
 ❌ **Consider alternatives when:**
+
 - Creating static publication figures (use Matplotlib)
 - Need 3D visualizations (use Plotly)
 - Simple quick plots (use Matplotlib)

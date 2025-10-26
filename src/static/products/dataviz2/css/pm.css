@@ -1188,7 +1188,7 @@ pm-number-input button.btn-soft:hover {
 /* Second level nested ordered lists - lower alpha */
 .fragment-wrapper[data-f_type="ol_"] li ol {
   list-style: lower-alpha !important;
-  font-size: 0.9em; /* Makes the numbers smaller */
+  font-size: 0.95em; /* Makes the numbers smaller */
   margin-bottom: 0.25rem !important;
   padding-left: 1rem !important;
 }
