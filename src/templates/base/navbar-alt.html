@@ -33,11 +33,17 @@
        style="padding: 0.5rem 0.75rem;
               box-shadow: none !important;
               font-weight:300">{{ DOMAIN_CONFIG['templating']['button_primary_text'] }}</a>
-    <a href="{{ DOMAIN_CONFIG['templating']['button_ghost_href'] }}"
+
+
+    {# <a href="{{ DOMAIN_CONFIG['templating']['button_ghost_href'] }}" class="btn btn-sm sm:btn-md btn-outline" style="padding: 0.5rem 0.75rem; box-shadow: none !important; font-weight:300">{{ DOMAIN_CONFIG['templating']['button_ghost_text'] }}</a> #}
+
+    <a href="/pm/pca/6_contact.md"
        class="btn btn-sm sm:btn-md btn-outline"
        style="padding: 0.5rem 0.75rem;
               box-shadow: none !important;
-              font-weight:300">{{ DOMAIN_CONFIG['templating']['button_ghost_text'] }}</a>
+              font-weight:300">Contact</a>
+
+
     <button class="btn btn-square"
             onclick="my_modal_licenses.showModal()"
             style="box-shadow: none !important;
