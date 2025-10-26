@@ -10,7 +10,7 @@
 ## About this course
 - [**Organizational aspects, syllabus and evaluation criteria**](session_0.md)
 
-## Session 1️⃣ - Foundations & Graphic Semiology (3 hours)
+## Session 1️⃣ - Foundations & Graphic Semiology 
 
 
 
@@ -225,3 +225,12 @@ Even though data modeling is not the scope of this course, preliminary knowledge
     - Download: <a href="/pm/dataviz2/files/covid_bokeh_11.py" download>Download link</a><br>
 
 
+
+
+
+
+## Tree view
+
+
+[Access the correction](03_tree_view.md)
+{: .alert .alert-info .alert-soft .my-8}

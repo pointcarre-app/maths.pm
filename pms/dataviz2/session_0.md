@@ -8,7 +8,7 @@
 ![COVID-19 Mortality in the US](files/covid-2timeseries-us-presidency.jpg)
 
 > Can we make bold statements about the time-series of numbers of COVID-19 deaths in the US? Do we need more data? The complete article from **Reuters** is available [here](https://www.reuters.com/world/us/biden-marks-1-million-americans-dead-covid-2022-05-12/).
-To better understand this chart and the conclusion we can draw, more details are provided [here](80_covid_us_stats_analysis.md).
+To better understand this chart and the conclusion we can draw, more details are provided [here](02_covid_us_stats_analysis.md).
 
 
 
