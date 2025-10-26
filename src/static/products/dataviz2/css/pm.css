@@ -935,7 +935,7 @@ html:not(.pm-ready) [id^="number-feedback-"] {
 
 
 .fragment-wrapper[data-f_type="p_"].alert {
-  font-size: 1rem !important;
+  font-size: 0.95rem !important;
   margin-bottom: 0.75rem !important;
 }
 

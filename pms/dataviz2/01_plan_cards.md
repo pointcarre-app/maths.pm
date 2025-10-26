@@ -3,22 +3,23 @@
 
 [TOC]
 
-[Organizational aspects, syllabus and evaluation criteria](#detailed-plan-and-organization-of-the-course)
-{: .pm-subtitle}
+<!-- [Organizational aspects, syllabus and evaluation criteria](#detailed-plan-and-organization-of-the-course)
+{: .pm-subtitle} -->
 
 
-## Detailed plan and organization of the course
-
-### About this course
+## About this course
 - [**Organizational aspects, syllabus and evaluation criteria**](session_0.md)
 
-### 1️⃣ Session 1: Foundations & Graphic Semiology (3 hours)
+## Session 1️⃣ - Foundations & Graphic Semiology (3 hours)
 
-<div class="card bg-base-100 shadow-xl mb-4">
+
+
+
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
     <h4 class="card-title">Hour 1: Course Introduction & Visual Variables</h4>
     <ul class="list-disc list-inside">
-      <li><a href="00_plan.md"><strong>Course overview</strong></a> <em>(i.e. the file you're currently reading)</em></li>
+      <li><a href="01_plan_cards.md"><strong>Course overview</strong></a> <em>(i.e. the file you're currently reading)</em></li>
       <li><a href="session_1_a.md"><strong>Graphic Semiology Fundamentals</strong></a>
         <ul class="list-disc list-inside pl-5">
           <li><a href="session_1_a0_shannon.md">1.3. An example from a research paper: Shannon Entropy</a></li>
@@ -29,7 +30,9 @@
   </div>
 </div>
 
-<div class="card bg-base-100 shadow-xl mb-4">
+
+
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
     <h4 class="card-title">Hour 2: Python: installation and philosophy</h4>
     <ul class="list-disc list-inside">
@@ -39,9 +42,10 @@
   </div>
 </div>
 
-<div class="card bg-base-100 shadow-xl mb-4">
+
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
-    <h4 class="card-title">Hours 3: Data types & first graphs</h4>
+    <h4 class="card-title">Hour 3: Data types & first graphs</h4>
     <ul class="list-disc list-inside">
       <li><a href="session_1_d.md"><strong>Data Types Classification and introduction to <code>matplotlib</code></strong></a></li>
       <li><a href="session_1_e.md"><strong>Data Visualization Project</strong></a> : Group constitution and project data requirements</li>
@@ -50,12 +54,13 @@
   </div>
 </div>
 
-### 2️⃣ Session 2: Static data visualization panorama
+
+## Session 2️⃣ - Static data visualization panorama
 
 Any issue related to the proper execution of code on your machine must be solved during this session. **Feel free to ask for help.**
 {: .alert .alert-error .alert-soft}
 
-<div class="card bg-base-100 shadow-xl mb-4">
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
     <h4 class="card-title">Hours 1 & 2: Static graphical representation panorama</h4>
     <ul class="list-disc list-inside">
@@ -66,16 +71,16 @@ Any issue related to the proper execution of code on your machine must be solved
   </div>
 </div>
 
-<div class="card bg-base-100 shadow-xl mb-4">
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
-    <h4 class="card-title">Hours 3: Group work: project setup</h4>
+    <h4 class="card-title">Hour 3: Group work: project setup</h4>
     <ul class="list-disc list-inside">
       <li><a href="session_1_e.md"><strong>Data Visualization Project</strong></a> : Data selection & project planning</li>
     </ul>
   </div>
 </div>
 
-### 3️⃣ Session 3: Advanced data visualization
+## Session 3️⃣ - Advanced data visualization
 
 Each group must have selected a dataset and a project scope during Hour 3.
 {: .alert .alert-warning .alert-soft}
@@ -86,7 +91,7 @@ It's good practice to think about the story you want to tell with your data. Com
 Even though data modeling is not the scope of this course, preliminary knowledge of the correlations and/or causations and *"forces at play"* can help a lot to build a statistically defensible story.
 {: .alert .alert-success .alert-soft}
 
-<div class="card bg-base-100 shadow-xl mb-4">
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
     <h4 class="card-title">Hour 1</h4>
     <ul class="list-disc list-inside">
@@ -95,7 +100,7 @@ Even though data modeling is not the scope of this course, preliminary knowledge
   </div>
 </div>
 
-<div class="card bg-base-100 shadow-xl mb-4">
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
     <h4 class="card-title">Hour 2</h4>
     <ul class="list-disc list-inside">
@@ -105,7 +110,7 @@ Even though data modeling is not the scope of this course, preliminary knowledge
   </div>
 </div>
 
-<div class="card bg-base-100 shadow-xl mb-4">
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
     <h4 class="card-title">Hour 3</h4>
     <ul class="list-disc list-inside">
@@ -115,9 +120,9 @@ Even though data modeling is not the scope of this course, preliminary knowledge
   </div>
 </div>
 
-### 4️⃣ Session 4: Practical Work
+## Session 4️⃣ - Practical Work
 
-<div class="card bg-base-100 shadow-xl mb-4">
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
     <h4 class="card-title">Hours 1 & 2</h4>
     <ul class="list-disc list-inside">
@@ -140,7 +145,7 @@ Even though data modeling is not the scope of this course, preliminary knowledge
   </div>
 </div>
 
-<div class="card bg-base-100 shadow-xl mb-4">
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
     <h4 class="card-title">Hour 3</h4>
     <ul class="list-disc list-inside">
@@ -149,9 +154,9 @@ Even though data modeling is not the scope of this course, preliminary knowledge
   </div>
 </div>
 
-### 5️⃣ Session 5: Final session & project presentations
+## Session 5️⃣ - Final session & project presentations
 
-<div class="card bg-base-100 shadow-xl mb-4">
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
     <h4 class="card-title">Hour 1</h4>
     <ul class="list-disc list-inside">
@@ -160,9 +165,9 @@ Even though data modeling is not the scope of this course, preliminary knowledge
   </div>
 </div>
 
-<div class="card bg-base-100 shadow-xl mb-4">
+<div class="card bg-base-100 shadow mb-4">
   <div class="card-body">
-    <h4 class="card-title">Hour 2 & 3</h4>
+    <h4 class="card-title">Hours 2 & 3</h4>
     <ul class="list-disc list-inside">
       <li><a href="session_1_e.md"><strong>Data Visualization Project</strong></a> : final polish</li>
       <li><a href="session_1_e.md"><strong>Data Visualization Project</strong></a> : presentation</li>
@@ -197,6 +202,6 @@ Even though data modeling is not the scope of this course, preliminary knowledge
 - [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
     - [**Correction**](files/covid-graphs-correction.ipynb)
     - Download: <a href="/pm/dataviz2/files/covid-graphs-correction.ipynb" download>Download link</a>
-- [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb.md)
+- [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb)
     - [**Correction**](files/covid-maps-correction.ipynb)
     - Download: <a href="/pm/dataviz2/files/covid-maps-correction.ipynb" download>Download link</a>
