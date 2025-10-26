@@ -221,20 +221,22 @@
 {% endif %}
 
 {# Section 3 : Signature  #}
-<div class="flex items-center justify-center flex-col mt-18">
-  <div class="font-handwritten text-4xl mb-3 mt-[-0.5rem]">Maths.pm, par</div>
-  <div>
-    <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
-      <p class="w-10 h-10">{% include "base/logo-zelie-primary.html" %}</p>
-      <p class="font-heading mt-[-0.15rem]">
-        <span style="font-size: 2rem;"><span class="">pointcarre</span>.app</span>
-      </p>
-    </a>
+<div class="max-w-3xl bg-base-100 shadow-lg p-4 mx-auto mb-18" style="border-radius: var(--radius-box)">
+  <div class="flex items-center justify-center flex-col mt-12">
+    <div class="font-handwritten text-4xl mb-3 mt-[-0.5rem]">Maths.pm, par</div>
+    <div>
+      <a href="/" class="flex items-center gap-1 sm:gap-2 bg-transparent">
+        <p class="w-10 h-10">{% include "base/logo-zelie-primary.html" %}</p>
+        <p class="font-heading mt-[-0.15rem]">
+          <span style="font-size: 2rem;"><span class="">pointcarre</span>.app</span>
+        </p>
+      </a>
+    </div>
   </div>
+  <div class="my-12">{% include "base/licenses.html" %}</div>
+
 </div>
 
-
-<div class="mt-12 mb-18">{% include "base/licenses.html" %}</div>
 
 <!-- Section 4 : Footer principal -->
 <div class="bg-base-200/60 px-8 sm:px-4">
