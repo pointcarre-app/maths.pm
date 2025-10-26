@@ -44,20 +44,20 @@
     <h4 class="card-title">Hours 3: Data types & first graphs</h4>
     <ul class="list-disc list-inside">
       <li><a href="session_1_d.md"><strong>Data Types Classification and introduction to <code>matplotlib</code></strong></a></li>
-      <li><a href="session_1_e.md"><strong>Data Visualization Project</strong></a> : Groups consitution and project data requirements</li>
+      <li><a href="session_1_e.md"><strong>Data Visualization Project</strong></a> : Group constitution and project data requirements</li>
       <li><a href="session_1_f.md"><strong>Practical work with <code>matplotlib</code> (1/2)</strong></a></li>
     </ul>
   </div>
 </div>
 
-### 2️⃣ Session 2: Static data vizualisation panorama
+### 2️⃣ Session 2: Static data visualization panorama
 
 Any issue related to the proper execution of code on your machine must be solved during this session. **Feel free to ask for help.**
 {: .alert .alert-error .alert-soft}
 
 <div class="card bg-base-100 shadow-xl mb-4">
   <div class="card-body">
-    <h4 class="card-title">Hour 1 & 2: Static graphical representation panorama</h4>
+    <h4 class="card-title">Hours 1 & 2: Static graphical representation panorama</h4>
     <ul class="list-disc list-inside">
       <li><a href="session_2_a.md"><strong>Visual Vocabulary - Financial Times Guide</strong></a></li>
       <li><a href="session_2_b.md"><strong><code>matplotlib</code> as the Python reference for building graphs</strong></a></li>
@@ -75,15 +75,15 @@ Any issue related to the proper execution of code on your machine must be solved
   </div>
 </div>
 
-### 3️⃣ Session 3: Advanced data vizualisation
+### 3️⃣ Session 3: Advanced data visualization
 
-Each group must have selected a dataset and a project scope during hour 3.
+Each group must have selected a dataset and a project scope during Hour 3.
 {: .alert .alert-warning .alert-soft}
 
 It's good practice to think about the story you want to tell with your data. Combined with the characteristics of your data, **this will help you to choose the relevant graph types.** 
 {: .alert .alert-success .alert-soft}
 
-Even though data modeling is not the scope of this course, prelaminary knowledge of the correlations and or causations and *"forces at play"* can help a lot to build story statistically defended.
+Even though data modeling is not the scope of this course, preliminary knowledge of the correlations and/or causations and *"forces at play"* can help a lot to build a statistically defensible story.
 {: .alert .alert-success .alert-soft}
 
 <div class="card bg-base-100 shadow-xl mb-4">
@@ -126,12 +126,12 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
           <li>Download: <a download="" href="/pm/dataviz2/files/us-states.csv">Download link</a><br></li>
         </ul>
       </li>
-      <li><a href="files/covid-graphs-statement.ipynb"><strong>Practical work: COVID 19 in the US</strong></a>
+      <li><a href="files/covid-graphs-statement.ipynb"><strong>Practical work: COVID-19 in the US</strong></a>
         <ul class="list-disc list-inside pl-5">
           <li>Download: <a download="" href="/pm/dataviz2/files/covid-graphs-statement.ipynb">Download link</a></li>
         </ul>
       </li>
-      <li><a href="files/covid-maps-statement.ipynb"><strong>Practical work: COVID 19 in the US: cartographic representation</strong></a>
+      <li><a href="files/covid-maps-statement.ipynb"><strong>Practical work: COVID-19 in the US: cartographic representation</strong></a>
         <ul class="list-disc list-inside pl-5">
           <li>Download: <a download="" href="/pm/dataviz2/files/covid-maps-statement.ipynb">Download link</a></li>
         </ul>
@@ -149,7 +149,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
   </div>
 </div>
 
-### 5️⃣ Session 5: Finale session & project presentations
+### 5️⃣ Session 5: Final session & project presentations
 
 <div class="card bg-base-100 shadow-xl mb-4">
   <div class="card-body">

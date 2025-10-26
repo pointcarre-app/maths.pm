@@ -39,17 +39,17 @@
 #### Hours 3: Data types & first graphs
 
 - [**Data Types Classification and introduction to `matplotlib`**](session_1_d.md)
-- [**Data Visualization Project**](session_1_e.md) : Groups consitution and project data requirements
+- [**Data Visualization Project**](session_1_e.md) : Group constitution and project data requirements
 - [**Practical work with `matplotlib` (1/2)**](session_1_f.md)
 
 
-### 2️⃣ Session 2: Static data vizualisation panorama
+### 2️⃣ Session 2: Static data visualization panorama
 
 
 Any issue related to the proper execution of code on your machine must be solved during this session. **Feel free to ask for help.**
 {: .alert .alert-error .alert-soft}
 
-#### Hour 1 & 2: Static graphical representation panorama
+#### Hours 1 & 2: Static graphical representation panorama
 
 - [**Visual Vocabulary - Financial Times Guide**](session_2_a.md)
 - [**`matplotlib` as the Python reference for building graphs**](session_2_b.md)
@@ -58,7 +58,7 @@ Any issue related to the proper execution of code on your machine must be solved
 
 
 
-#### Hours 3: Group work: project setup
+#### Hour 3: Group work: project setup
 
 - [**Data Visualization Project**](session_1_e.md) : Data selection & project planning
 
@@ -67,7 +67,7 @@ Any issue related to the proper execution of code on your machine must be solved
 
 
 
-### 3️⃣ Session 3: Advanced data vizualisation
+### 3️⃣ Session 3: Advanced data visualization
 
 
 
@@ -77,7 +77,7 @@ Each group must have selected a dataset and a project scope during hour 3.
 It's good practice to think about the story you want to tell with your data. Combined with the characteristics of your data, **this will help you to choose the relevant graph types.** 
 {: .alert .alert-success .alert-soft}
 
-Even though data modeling is not the scope of this course, prelaminary knowledge of the correlations and or causations and *"forces at play"* can help a lot to build story statistically defended.
+Even though data modeling is not the scope of this course, preliminary knowledge of the correlations and/or causations and *"forces at play"* can help a lot to build a statistically defensible story.
 {: .alert .alert-success .alert-soft}
 
 
@@ -104,9 +104,9 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 - [Dataset: **COVID-19 in the US dataset**](files/us-states.csv)
     - Download: <a href="/pm/dataviz2/files/us-states.csv" download>Download link</a><br>
-- [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
+- [**Practical work: COVID-19 in the US**](files/covid-graphs-statement.ipynb)
     - Download: <a href="/pm/dataviz2/files/covid-graphs-statement.ipynb" download>Download link</a>
-- [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb)
+- [**Practical work: COVID-19 in the US: cartographic representation**](files/covid-maps-statement.ipynb)
     - Download: <a href="/pm/dataviz2/files/covid-maps-statement.ipynb" download>Download link</a>
 
 
@@ -117,7 +117,7 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
 
 
 
-### 5️⃣ Session 5: Finale session & project presentations
+### 5️⃣ Session 5: Final session & project presentations
 
 
 
@@ -163,9 +163,9 @@ Even though data modeling is not the scope of this course, prelaminary knowledge
     - [06_interactive_presentation.py](files/bokeh_server_apps/06_interactive_presentation.py)<br>
         - [Image from FT used in the application 06](files/bokeh_server_apps/visual-vocabulary-ft.png)<br>
         - Download: <a href="/pm/dataviz2/files/bokeh_server_apps/visual-vocabulary-ft.png" download>Download link</a><br>
-- [**Practical work: COVID 19 in the US**](files/covid-graphs-statement.ipynb)
+- [**Practical work: COVID-19 in the US**](files/covid-graphs-statement.ipynb)
     - [**Correction**](files/covid-graphs-correction.ipynb)
     - Download: <a href="/pm/dataviz2/files/covid-graphs-correction.ipynb" download>Download link</a>
-- [**Practical work: COVID 19 in the US: cartographic representation**](files/covid-maps-statement.ipynb.md)
+- [**Practical work: COVID-19 in the US: cartographic representation**](files/covid-maps-statement.ipynb.md)
     - [**Correction**](files/covid-maps-correction.ipynb)
     - Download: <a href="/pm/dataviz2/files/covid-maps-correction.ipynb" download>Download link</a>
