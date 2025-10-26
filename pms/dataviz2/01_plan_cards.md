@@ -8,11 +8,23 @@
 
 
 ## About this course
-- [**Organizational aspects, syllabus and evaluation criteria**](session_0.md)
+
+<div class="card bg-base-100 shadow mb-4">
+  <div class="card-body">
+      <ul class="list-disc list-inside">
+      <li><a href="session_0.md"><strong>Organizational aspects, syllabus and evaluation criteria</strong></a>
+        <ul class="list-disc list-inside pl-5">
+          <li><a href="02_covid_us_stats_analysis.md">A first example from Reuters: COVID-19 Deaths Analysis</a></li>
+        </ul>
+      </li>
+  </div>
+</div>
+
+
+
+
 
 ## Session 1️⃣ - Foundations & Graphic Semiology 
-
-
 
 
 <div class="card bg-base-100 shadow mb-4">
